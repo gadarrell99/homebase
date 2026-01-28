@@ -316,6 +316,85 @@ async def get_recent_errors(hours: int = 24):
     return {"errors": errors, "count": len(errors)}
 
 
+
+
+# ============== PULSE MONITORING ==============
+
+from services.pulse_monitor import init_pulse_monitor, pulse_monitor
+
+# Initialize pulse monitor when startup runs
+_pulse_init_done = False
+
+@app.on_event("startup")
+async def init_pulse():
+    global _pulse_init_done
+    if not _pulse_init_done:
+        init_pulse_monitor(SERVERS)
+        _pulse_init_done = True
+
+@app.get("/api/pulse/status")
+async def get_pulse_status():
+    """Get current pulse monitoring status."""
+    from services.pulse_monitor import pulse_monitor
+    if not pulse_monitor:
+        raise HTTPException(status_code=503, detail="Pulse monitor not initialized")
+    return pulse_monitor.get_status()
+
+@app.post("/api/pulse/check")
+async def run_pulse_check():
+    """Trigger a health check on all servers."""
+    from services.pulse_monitor import pulse_monitor
+    if not pulse_monitor:
+        raise HTTPException(status_code=503, detail="Pulse monitor not initialized")
+    results = await pulse_monitor.run_health_check()
+    return {"success": True, "results": results}
+
+@app.get("/api/pulse/alerts")
+async def get_pulse_alerts(acknowledged: Optional[bool] = None):
+    """Get monitoring alerts."""
+    from services.pulse_monitor import pulse_monitor
+    if not pulse_monitor:
+        raise HTTPException(status_code=503, detail="Pulse monitor not initialized")
+    alerts = pulse_monitor.get_alerts(acknowledged)
+    return {"alerts": alerts, "count": len(alerts)}
+
+@app.post("/api/pulse/alerts/{alert_id}/acknowledge")
+async def acknowledge_pulse_alert(alert_id: str):
+    """Acknowledge an alert."""
+    from services.pulse_monitor import pulse_monitor
+    if not pulse_monitor:
+        raise HTTPException(status_code=503, detail="Pulse monitor not initialized")
+    success = pulse_monitor.acknowledge_alert(alert_id)
+    if not success:
+        raise HTTPException(status_code=404, detail="Alert not found")
+    return {"success": True}
+
+@app.get("/api/pulse/dashboard")
+async def get_pulse_dashboard():
+    """Get dashboard summary for pulse monitoring."""
+    from services.pulse_monitor import pulse_monitor
+    if not pulse_monitor:
+        raise HTTPException(status_code=503, detail="Pulse monitor not initialized")
+    
+    status = pulse_monitor.get_status()
+    alerts = pulse_monitor.get_alerts(acknowledged=False)
+    
+    return {
+        "last_check": status["last_check"],
+        "servers": {
+            "monitored": status["servers_monitored"],
+            "online": status["last_health"].get("summary", {}).get("online", 0),
+            "offline": status["last_health"].get("summary", {}).get("offline", 0)
+        },
+        "alerts": {
+            "total": status["total_alerts"],
+            "unacknowledged": status["unacknowledged_alerts"],
+            "critical": status["critical_alerts"]
+        },
+        "recent_alerts": alerts[:5]
+    }
+
+
 # ============== STATIC FILES ==============
 
 FRONTEND_DIR = "/home/cobaltadmin/homebase/frontend/dist"
