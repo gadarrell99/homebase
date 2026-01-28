@@ -1,4 +1,4 @@
-# Homebase
+# Homebase - Central Command
 
 Infrastructure & Project Dashboard for Rize Technologies.
 
@@ -6,7 +6,7 @@ Infrastructure & Project Dashboard for Rize Technologies.
 
 ## Overview
 
-Homebase is a real-time server monitoring dashboard that provides visibility into the Rize Technologies infrastructure. It displays server status, system metrics, and quick-access links for all servers in the fleet.
+Homebase is the **Central Command** for Rize Technologies infrastructure. It provides real-time server monitoring, project discovery across all servers, security monitoring, centralized credential management, and log aggregation.
 
 ## Features
 
@@ -17,44 +17,72 @@ Homebase is a real-time server monitoring dashboard that provides visibility int
 - Memory usage (used/total)
 - Disk usage (used/total)
 - Uptime tracking
+- Hyper-V VM status (Windows support)
+
+### Project Auto-Discovery (v0.2.0)
+- Automatic scanning of all servers for projects
+- Detection via package.json, requirements.txt, docker-compose, .git
+- Version tracking from VERSION files or package.json
+- Git remote URL extraction
+- README description parsing
+
+### Security Monitoring (v0.2.0)
+- OS update checking (apt list --upgradable)
+- Critical security update alerts
+- Failed SSH authentication monitoring
+- Fail2ban integration
+- Per-server security status dashboard
+
+### Key Management (v0.2.0)
+- Encrypted credential storage (Fernet encryption)
+- Support for SSH keys, API keys, passwords, tokens
+- Credential rotation with audit logging
+- Access logging for all credential operations
+- Server-specific credential association
+
+### Log Aggregation (v0.2.0)
+- Remote log fetching via SSH
+- Support for journalctl and PM2 logs
+- Error pattern detection (errors, exceptions, crashes)
+- Log snapshot storage
+- Recent error querying
 
 ### User Interface
 - Clean, dark-themed dashboard
+- Multi-page navigation (Servers, Security, Discovery)
 - Server status cards with color-coded indicators
-- One-click Web UI access
-- One-click SSH access (via browser)
+- Security overview table with alerts
+- Project discovery grid with metadata
+- One-click Web UI and SSH access
 - Auto-refresh every 30 seconds
 - Responsive design
 
-### Infrastructure
-- FastAPI backend with async SSH
-- React 18 frontend with Vite
-- PM2 process management
-- Cloudflare Tunnel for secure access
-
 ## Server Matrix
 
-| Server | IP Address | Admin User | Web URL | SSH URL |
-|--------|------------|------------|---------|---------|
-| Cobalt | 192.168.65.243 | cobaltadmin | homebase.rize.bm | cobalt-ssh.rize.bm |
-| Relay | 192.168.65.248 | relayadmin | relay.rize.bm | relay-ssh.rize.bm |
-| BPS AI | 192.168.65.246 | bpsaiadmin | bpsai.rize.bm | bpsai-ssh.rize.bm |
-| Context Hub | 192.168.65.247 | contextadmin | context.rize.bm | context-ssh.rize.bm |
-| Dockyard | 192.168.65.252 | dockyardadmin | dockyard-admin.rize.bm | dockyard-ssh.rize.bm |
-| Vector | 192.168.65.249 | betadmin | app.bet.bm | vector-ssh.bet.bm |
-| Claude Code | 192.168.65.245 | claudedevadmin | - | claude-dev-ssh.rize.bm |
-| Hyper-V | 192.168.65.253 | Administrator | - | - |
+| Server | IP Address | Admin User | Web URL | SSH URL | Purpose |
+|--------|------------|------------|---------|---------|---------|
+| Cobalt | 192.168.65.243 | cobaltadmin | homebase.rize.bm | cobalt-ssh.rize.bm | Homebase Dashboard |
+| Relay | 192.168.65.248 | relayadmin | relay.rize.bm | relay-ssh.rize.bm | AI Orchestration |
+| BPS AI | 192.168.65.246 | bpsaiadmin | bpsai.rize.bm | bpsai-ssh.rize.bm | Police Case Mgmt |
+| Context Hub | 192.168.65.247 | contextadmin | context.rize.bm | context-ssh.rize.bm | IT Support Platform |
+| Dockyard | 192.168.65.252 | dockyardadmin | dockyard-admin.rize.bm | dockyard-ssh.rize.bm | WiFi Captive Portal |
+| Vector | 192.168.65.249 | betadmin | app.bet.bm | vector-ssh.bet.bm | BET Transport |
+| Claude Code | 192.168.65.245 | claudedevadmin | - | claude-dev-ssh.rize.bm | AI Worker Host |
+| Hyper-V | 192.168.65.253 | Administrator | - | hyperv-ssh.rize.bm | VM Host (Windows) |
 
 ## Tech Stack
 
 ### Backend
 - **Framework:** FastAPI
 - **SSH Client:** asyncssh (async SSH connections)
+- **Database:** SQLite (migrating to PostgreSQL)
+- **Encryption:** cryptography (Fernet)
 - **ASGI Server:** Uvicorn
 - **Python:** 3.12+
 
 ### Frontend
 - **Framework:** React 18
+- **Routing:** React Router v7
 - **Build Tool:** Vite
 - **Styling:** Tailwind CSS
 - **Language:** JavaScript/JSX
@@ -66,33 +94,75 @@ Homebase is a real-time server monitoring dashboard that provides visibility int
 
 ## API Endpoints
 
+### Health & Servers
 | Endpoint | Method | Description |
 |----------|--------|-------------|
-| `/api/health` | GET | Health check with timestamp |
+| `/api/health` | GET | Health check with version and timestamp |
 | `/api/servers` | GET | All servers with current metrics |
-| `/*` | GET | SPA fallback (serves React app) |
 
-### Example Response
+### Discovery
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/discovery/scan` | GET | Check server reachability |
+| `/api/discovery/projects` | GET | Discover all projects |
+| `/api/discovery/projects/{ip}` | GET | Discover projects on specific server |
+| `/api/discovery/registered` | GET | Get registered projects |
 
-```json
-{
-  "servers": [
-    {
-      "name": "Cobalt",
-      "ip": "192.168.65.243",
-      "web_url": "homebase.rize.bm",
-      "ssh_url": "cobalt-ssh.rize.bm",
-      "status": "online",
-      "uptime": "5 days, 3 hours",
-      "memory_used": 2048,
-      "memory_total": 8192,
-      "disk_used": 25,
-      "disk_total": 100,
-      "cpu_percent": 12.5
-    }
-  ],
-  "timestamp": 1706400000.0
-}
+### Security
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/security/scan` | GET | Full security scan all servers |
+| `/api/security/updates/{ip}` | GET | Check OS updates on server |
+| `/api/security/auth-logs/{ip}` | GET | Get auth logs for server |
+| `/api/security/service/{ip}/{service}` | GET | Check service status |
+
+### Credentials
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/credentials` | GET | List all credentials (no values) |
+| `/api/credentials` | POST | Store new credential |
+| `/api/credentials/{name}` | GET | Retrieve credential value |
+| `/api/credentials/{id}/rotate` | PUT | Rotate credential |
+| `/api/credentials/{name}` | DELETE | Delete credential |
+| `/api/credentials/logs` | GET | Get access logs |
+
+### Logs
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/logs/{ip}/{service}` | GET | Fetch service logs |
+| `/api/logs/{ip}/{service}/analyze` | GET | Analyze logs for errors |
+| `/api/logs/errors/recent` | GET | Get recent errors |
+
+## Project Structure
+
+```
+homebase/
+├── backend/
+│   ├── main.py              # FastAPI application
+│   ├── homebase.db          # SQLite database
+│   ├── requirements.txt     # Python dependencies
+│   ├── services/
+│   │   ├── database.py      # Database schema & queries
+│   │   ├── discovery.py     # Project auto-discovery
+│   │   ├── security.py      # Security monitoring
+│   │   ├── keyManager.py    # Credential encryption
+│   │   └── logCollector.py  # Log aggregation
+│   └── venv/                # Virtual environment
+├── frontend/
+│   ├── src/
+│   │   ├── App.jsx          # Main app with routing
+│   │   └── ...
+│   ├── dist/                # Production build
+│   └── package.json
+├── docs/
+│   ├── API.md
+│   ├── ARCHITECTURE.md
+│   └── DEPLOYMENT.md
+├── ecosystem.config.cjs
+├── README.md
+├── CHANGELOG.md
+├── TODO.md
+└── PROJECT_PLAN.md
 ```
 
 ## Quick Start
@@ -126,103 +196,26 @@ cd ..
 pm2 start ecosystem.config.cjs
 ```
 
-### Development Mode
-
-```bash
-# Backend (with auto-reload)
-cd backend
-source venv/bin/activate
-uvicorn main:app --host 0.0.0.0 --port 8000 --reload
-
-# Frontend (with HMR)
-cd frontend
-npm run dev
-```
-
-## Project Structure
-
-```
-homebase/
-├── backend/
-│   ├── main.py              # FastAPI application
-│   ├── requirements.txt     # Python dependencies
-│   └── venv/                # Virtual environment
-├── frontend/
-│   ├── src/                 # React source code
-│   ├── dist/                # Production build
-│   ├── package.json         # Node dependencies
-│   ├── vite.config.js       # Vite configuration
-│   └── tailwind.config.js   # Tailwind configuration
-├── docs/
-│   ├── API.md               # API documentation
-│   ├── ARCHITECTURE.md      # System architecture
-│   └── DEPLOYMENT.md        # Deployment guide
-├── ecosystem.config.cjs     # PM2 configuration
-├── README.md                # This file
-├── CHANGELOG.md             # Version history
-└── TODO.md                  # Planned features
-```
-
 ## PM2 Commands
 
 ```bash
-# View status
-pm2 status
-
-# View logs
-pm2 logs
-
-# Restart services
-pm2 restart all
-
-# Stop services
-pm2 stop all
+pm2 status           # View status
+pm2 logs             # View logs
+pm2 restart all      # Restart services
+pm2 save             # Save process list
 ```
 
-## Documentation
+## Security Notes
 
-- [API Reference](docs/API.md) - Detailed API documentation
-- [Architecture](docs/ARCHITECTURE.md) - System design and diagrams
-- [Deployment](docs/DEPLOYMENT.md) - Full deployment guide
+- Encryption keys stored in `.homebase_key` (chmod 600)
+- Credentials encrypted at rest using Fernet
+- All credential access is logged
+- SSH connections use key-based auth only
 
-## Adding a New Server
+## Roadmap
 
-1. Edit `backend/main.py`
-2. Add entry to `SERVERS` list:
-   ```python
-   {"name": "ServerName", "ip": "192.168.65.XXX", "user": "admin", "web_url": "domain.rize.bm", "ssh_url": "ssh.rize.bm"},
-   ```
-3. Ensure SSH key access is configured
-4. Restart: `pm2 restart homebase-api`
-
-## Troubleshooting
-
-### Server Shows Offline
-- Verify SSH key access: `ssh user@ip`
-- Check network connectivity
-- Review PM2 logs: `pm2 logs homebase-api`
-
-### High CPU on Dashboard
-- Check if asyncssh connections are timing out
-- Verify SSH timeout setting (default: 5s)
-
-### Frontend Not Loading
-- Verify build exists: `ls frontend/dist`
-- Rebuild: `cd frontend && npm run build`
-- Check PM2 status: `pm2 status`
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make changes
-4. Test locally
-5. Submit a pull request
+See [TODO.md](TODO.md) for planned features.
 
 ## License
 
 MIT License - Rize Technologies
-
-## Support
-
-For issues or questions, contact the Rize Technologies infrastructure team.

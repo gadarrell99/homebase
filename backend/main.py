@@ -1,14 +1,20 @@
 import asyncio
 import asyncssh
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
+from pydantic import BaseModel
 from typing import Optional
 import time
 import os
 
-app = FastAPI(title="Homebase API")
+# Import services
+from services.database import init_database, seed_servers, get_all_servers, get_server_by_ip
+from services import discovery, security, logCollector
+from services import keyManager
+
+app = FastAPI(title="Homebase API", version="0.2.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -17,6 +23,12 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Initialize database on startup
+@app.on_event("startup")
+async def startup():
+    init_database()
+    seed_servers()
 
 SERVERS = [
     {"name": "Cobalt", "ip": "192.168.65.243", "user": "cobaltadmin", "web_url": "homebase.rize.bm", "ssh_url": "cobalt-ssh.rize.bm", "os": "linux"},
@@ -56,19 +68,14 @@ async def get_server_stats(server: dict) -> dict:
             connect_timeout=10
         ) as conn:
             if server_os == "windows":
-                # Windows-specific commands for Hyper-V
-
-                # Get hostname to verify connection
                 hostname_result = await conn.run("hostname", check=False)
                 if hostname_result.exit_status != 0:
                     raise Exception("Could not get hostname")
 
-                # Get uptime via PowerShell
                 uptime_result = await conn.run('powershell -Command "(Get-Date) - (Get-CimInstance Win32_OperatingSystem).LastBootUpTime | ForEach-Object { \'{0}d {1}h {2}m\' -f $_.Days, $_.Hours, $_.Minutes }"', check=False)
                 if uptime_result.exit_status == 0:
                     result["uptime"] = uptime_result.stdout.strip()
 
-                # Get memory via PowerShell (in MB)
                 mem_result = await conn.run('powershell -Command "$os = Get-CimInstance Win32_OperatingSystem; $total = [math]::Round($os.TotalVisibleMemorySize/1024); $free = [math]::Round($os.FreePhysicalMemory/1024); Write-Output (\'{0} {1}\' -f $total, ($total - $free))"', check=False)
                 if mem_result.exit_status == 0:
                     parts = mem_result.stdout.strip().split()
@@ -76,7 +83,6 @@ async def get_server_stats(server: dict) -> dict:
                         result["memory_total"] = int(parts[0])
                         result["memory_used"] = int(parts[1])
 
-                # Get disk usage (C: drive) via PowerShell (in GB)
                 disk_result = await conn.run('powershell -Command "$d = Get-PSDrive C; $total = [math]::Round(($d.Used + $d.Free)/1GB); $used = [math]::Round($d.Used/1GB); Write-Output (\'{0} {1}\' -f $total, $used)"', check=False)
                 if disk_result.exit_status == 0:
                     parts = disk_result.stdout.strip().split()
@@ -84,7 +90,6 @@ async def get_server_stats(server: dict) -> dict:
                         result["disk_total"] = int(parts[0])
                         result["disk_used"] = int(parts[1])
 
-                # Get CPU via PowerShell
                 cpu_result = await conn.run('powershell -Command "(Get-CimInstance Win32_Processor | Measure-Object -Property LoadPercentage -Average).Average"', check=False)
                 if cpu_result.exit_status == 0:
                     try:
@@ -92,7 +97,6 @@ async def get_server_stats(server: dict) -> dict:
                     except:
                         pass
 
-                # Get VM status for Hyper-V
                 vm_result = await conn.run('powershell -Command "Get-VM | Select-Object Name, State | ForEach-Object { \'{0}:{1}\' -f $_.Name, $_.State }"', check=False)
                 if vm_result.exit_status == 0 and vm_result.stdout.strip():
                     vms = []
@@ -104,13 +108,10 @@ async def get_server_stats(server: dict) -> dict:
                     result["vms"] = vms
 
             else:
-                # Linux commands (existing logic)
-                # Get uptime
                 uptime_result = await conn.run("uptime -p", check=False)
                 if uptime_result.exit_status == 0:
                     result["uptime"] = uptime_result.stdout.strip().replace("up ", "")
 
-                # Get memory
                 mem_result = await conn.run("free -m | awk 'NR==2{print $2,$3}'", check=False)
                 if mem_result.exit_status == 0:
                     parts = mem_result.stdout.strip().split()
@@ -118,7 +119,6 @@ async def get_server_stats(server: dict) -> dict:
                         result["memory_total"] = int(parts[0])
                         result["memory_used"] = int(parts[1])
 
-                # Get disk
                 disk_result = await conn.run("df -BG / | awk 'NR==2{gsub(/G/,\"\"); print $2,$3}'", check=False)
                 if disk_result.exit_status == 0:
                     parts = disk_result.stdout.strip().split()
@@ -126,7 +126,6 @@ async def get_server_stats(server: dict) -> dict:
                         result["disk_total"] = int(parts[0])
                         result["disk_used"] = int(parts[1])
 
-                # Get CPU
                 cpu_result = await conn.run("top -bn1 | grep 'Cpu(s)' | awk '{print $2}' | cut -d'%' -f1", check=False)
                 if cpu_result.exit_status == 0:
                     try:
@@ -141,9 +140,12 @@ async def get_server_stats(server: dict) -> dict:
 
     return result
 
+
+# ============== HEALTH & SERVERS ==============
+
 @app.get("/api/health")
 async def health():
-    return {"status": "ok", "timestamp": time.time()}
+    return {"status": "ok", "version": "0.2.0", "timestamp": time.time()}
 
 @app.get("/api/servers")
 async def get_servers():
@@ -151,7 +153,171 @@ async def get_servers():
     results = await asyncio.gather(*tasks)
     return {"servers": results, "timestamp": time.time()}
 
-# Serve static files from frontend/dist
+
+# ============== DISCOVERY ==============
+
+@app.get("/api/discovery/scan")
+async def scan_servers():
+    """Check which servers are reachable."""
+    results = await discovery.scan_servers()
+    return {"servers": results, "timestamp": time.time()}
+
+@app.get("/api/discovery/projects")
+async def discover_projects():
+    """Discover all projects across all servers."""
+    projects = await discovery.discover_all_projects()
+    return {"projects": projects, "count": len(projects), "timestamp": time.time()}
+
+@app.get("/api/discovery/projects/{server_ip}")
+async def discover_server_projects(server_ip: str):
+    """Discover projects on a specific server."""
+    server = get_server_by_ip(server_ip)
+    if not server:
+        raise HTTPException(status_code=404, detail="Server not found")
+    
+    projects = await discovery.detect_projects(server_ip, server["username"])
+    return {"server": server_ip, "projects": projects, "count": len(projects)}
+
+@app.get("/api/discovery/registered")
+async def get_registered_projects():
+    """Get all registered projects."""
+    projects = discovery.get_registered_projects()
+    return {"projects": projects, "count": len(projects)}
+
+
+# ============== SECURITY ==============
+
+@app.get("/api/security/scan")
+async def scan_all_security():
+    """Run security scan on all servers."""
+    results = await security.scan_all_servers_security()
+    return {"servers": results, "timestamp": time.time()}
+
+@app.get("/api/security/updates/{server_ip}")
+async def check_server_updates(server_ip: str):
+    """Check for OS updates on a specific server."""
+    server = get_server_by_ip(server_ip)
+    if not server:
+        raise HTTPException(status_code=404, detail="Server not found")
+    
+    updates = await security.check_os_updates(server_ip, server["username"])
+    critical = await security.get_critical_updates(server_ip, server["username"])
+    return {
+        "server": server_ip,
+        "updates": updates,
+        "critical": critical
+    }
+
+@app.get("/api/security/auth-logs/{server_ip}")
+async def get_auth_logs(server_ip: str):
+    """Get authentication logs for a server."""
+    server = get_server_by_ip(server_ip)
+    if not server:
+        raise HTTPException(status_code=404, detail="Server not found")
+    
+    logs = await security.scan_auth_logs(server_ip, server["username"])
+    return {"server": server_ip, "auth_logs": logs}
+
+@app.get("/api/security/service/{server_ip}/{service_name}")
+async def check_service(server_ip: str, service_name: str):
+    """Check status of a service on a server."""
+    server = get_server_by_ip(server_ip)
+    if not server:
+        raise HTTPException(status_code=404, detail="Server not found")
+    
+    status = await security.check_service_status(server_ip, server["username"], service_name)
+    return status
+
+
+# ============== CREDENTIALS ==============
+
+class CredentialCreate(BaseModel):
+    name: str
+    type: str  # ssh_key, api_key, password, token
+    value: str
+    server_id: Optional[int] = None
+    description: Optional[str] = None
+
+class CredentialRotate(BaseModel):
+    new_value: str
+
+@app.get("/api/credentials")
+async def list_credentials():
+    """List all credentials (without values)."""
+    credentials = keyManager.list_credentials()
+    return {"credentials": credentials, "count": len(credentials)}
+
+@app.post("/api/credentials")
+async def store_credential(cred: CredentialCreate):
+    """Store a new credential."""
+    if cred.type not in ['ssh_key', 'api_key', 'password', 'token']:
+        raise HTTPException(status_code=400, detail="Invalid credential type")
+    
+    result = keyManager.store_credential(
+        cred.name, cred.type, cred.value, cred.server_id, cred.description
+    )
+    return result
+
+@app.get("/api/credentials/{name}")
+async def get_credential(name: str):
+    """Retrieve a credential value (authorized access only)."""
+    value = keyManager.get_credential(name)
+    if value is None:
+        raise HTTPException(status_code=404, detail="Credential not found")
+    return {"name": name, "value": value}
+
+@app.put("/api/credentials/{cred_id}/rotate")
+async def rotate_credential(cred_id: int, rotation: CredentialRotate):
+    """Rotate a credential with a new value."""
+    result = keyManager.rotate_credential(cred_id, rotation.new_value)
+    return result
+
+@app.delete("/api/credentials/{name}")
+async def delete_credential(name: str):
+    """Delete a credential."""
+    success = keyManager.delete_credential(name)
+    if not success:
+        raise HTTPException(status_code=404, detail="Credential not found")
+    return {"deleted": name}
+
+@app.get("/api/credentials/logs")
+async def get_credential_logs(credential_id: Optional[int] = None, limit: int = 100):
+    """Get credential access logs."""
+    logs = keyManager.get_credential_access_logs(credential_id, limit)
+    return {"logs": logs, "count": len(logs)}
+
+
+# ============== LOGS ==============
+
+@app.get("/api/logs/{server_ip}/{service}")
+async def fetch_service_logs(server_ip: str, service: str, lines: int = 100):
+    """Fetch logs from a service."""
+    server = get_server_by_ip(server_ip)
+    if not server:
+        raise HTTPException(status_code=404, detail="Server not found")
+    
+    logs = await logCollector.fetch_logs(server_ip, server["username"], service, lines)
+    return logs
+
+@app.get("/api/logs/{server_ip}/{service}/analyze")
+async def analyze_service_logs(server_ip: str, service: str, lines: int = 200):
+    """Fetch and analyze logs for errors."""
+    server = get_server_by_ip(server_ip)
+    if not server:
+        raise HTTPException(status_code=404, detail="Server not found")
+    
+    analysis = await logCollector.analyze_logs(server_ip, server["username"], service, lines)
+    return analysis
+
+@app.get("/api/logs/errors/recent")
+async def get_recent_errors(hours: int = 24):
+    """Get recent errors from stored logs."""
+    errors = logCollector.get_recent_errors(hours)
+    return {"errors": errors, "count": len(errors)}
+
+
+# ============== STATIC FILES ==============
+
 FRONTEND_DIR = "/home/cobaltadmin/homebase/frontend/dist"
 
 if os.path.exists(FRONTEND_DIR):

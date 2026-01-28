@@ -14,3 +14,6 @@ dist/
 # IDE
 .vscode/
 .idea/
+backend/.homebase_key
+backend/.homebase_salt
+backend/homebase.db
