@@ -9,6 +9,13 @@
 - [x] Auto-refresh (30s)
 - [x] Hyper-V Windows support
 
+## Phase 4 - Metrics Charts (v0.3.1) ✅
+- [x] Recharts line chart for CPU/Memory/Disk
+- [x] Time range selector (6h/24h/48h/7d)
+- [x] Server selector tabs
+- [x] Summary cards with avg/max values
+- [x] Color coding (blue=CPU, green=Memory, yellow=Disk)
+
 ## Phase 3 - Historical Metrics (v0.3.0) ✅
 - [x] Metrics history database table
 - [x] Historical metrics API endpoints

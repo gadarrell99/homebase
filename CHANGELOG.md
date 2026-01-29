@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.3.1] - 2026-01-29
+
+### Verified
+- **Metrics Charts Working**
+  - Recharts-based line charts for CPU, Memory, Disk
+  - Time range selector: 6h, 24h, 48h, 7 days
+  - Server tabs to switch between servers
+  - Summary cards with avg/max values
+  - Color-coded lines: blue=CPU, green=Memory, yellow=Disk
+
+### Technical
+- Confirmed frontend metrics page fully functional
+- Fixed timestamp queries in backend (v0.3.0)
+- Charts auto-load data from /api/metrics/history
+
 ## [0.3.0] - 2026-01-29
 
 ### Added
