@@ -76,3 +76,7 @@
 - React frontend with Tailwind CSS
 - PM2 process management
 - Cloudflare tunnel integration
+
+## v0.2.2 - January 29, 2026
+- Configured SMTP for email alerts (smtp.office365.com)
+- Tested email delivery successfully

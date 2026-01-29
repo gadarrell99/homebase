@@ -66,3 +66,5 @@
 - Slack bot for status queries
 - Integration with Relay for AI-driven alerts
 - Terraform/Ansible integration for infrastructure management
+
+- [x] Email alerts configured and tested (Jan 29, 2026)

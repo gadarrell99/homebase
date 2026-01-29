@@ -10,7 +10,7 @@ from email.mime.multipart import MIMEMultipart
 from datetime import datetime
 
 # Configuration
-SMTP_HOST = os.getenv('SMTP_HOST', 'smtp.office365.com')
+SMTP_SERVER = os.getenv('SMTP_SERVER', 'smtp.office365.com')
 SMTP_PORT = int(os.getenv('SMTP_PORT', '587'))
 SMTP_USER = os.getenv('SMTP_USER', 'aidev@rize.bm')
 SMTP_PASS = os.getenv('SMTP_PASS', '')
@@ -68,7 +68,7 @@ def send_alert(server_name: str, ip: str, new_status: str, details: str = None):
     msg.attach(MIMEText(html, 'html'))
     
     try:
-        with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as server:
+        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
             server.starttls()
             server.login(SMTP_USER, SMTP_PASS)
             server.send_message(msg)
