@@ -436,6 +436,45 @@ async def cleanup_metrics(days: int = 30):
 
 # ============== STATIC FILES ==============
 
+# ============== PROJECT DOCS SYNC ==============
+
+from services import projectSyncService
+
+@app.get("/api/projects")
+async def get_projects():
+    """Get all projects with summary stats."""
+    projects = projectSyncService.get_all_projects()
+    health = projectSyncService.get_overall_health()
+    return {"projects": projects, "health": health, "timestamp": time.time()}
+
+@app.get("/api/projects/health")
+async def get_projects_health():
+    """Get overall health summary."""
+    health = projectSyncService.get_overall_health()
+    return health
+
+@app.get("/api/projects/{project_name}")
+async def get_project_detail(project_name: str):
+    """Get full details for a project."""
+    project = projectSyncService.get_project_detail(project_name)
+    if not project:
+        raise HTTPException(status_code=404, detail="Project not found")
+    return project
+
+@app.get("/api/projects/{project_name}/todos")
+async def get_project_todos(project_name: str):
+    """Get parsed TODO items for a project."""
+    todos = projectSyncService.get_project_todos(project_name)
+    return {"project": project_name, "todos": todos, "count": len(todos)}
+
+@app.post("/api/projects/sync")
+async def sync_projects():
+    """Trigger a full sync of all project docs."""
+    results = await projectSyncService.sync_all_projects()
+    return {"success": True, "synced": results, "count": len(results), "timestamp": time.time()}
+
+# ============== STATIC FILES ==============
+
 FRONTEND_DIR = "/home/cobaltadmin/homebase/frontend/dist"
 
 if os.path.exists(FRONTEND_DIR):
@@ -452,8 +491,3 @@ if os.path.exists(FRONTEND_DIR):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
-
-
-# ============== METRICS HISTORY ==============
-
-from services import metrics_history
