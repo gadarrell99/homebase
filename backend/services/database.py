@@ -188,3 +188,99 @@ def get_all_servers() -> list[dict]:
 if not os.path.exists(DB_PATH):
     init_database()
     seed_servers()
+
+
+# Uptime Events Table
+def init_uptime_tables():
+    """Initialize uptime tracking tables"""
+    conn = sqlite3.connect(str(DB_PATH))
+    cursor = conn.cursor()
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS uptime_events (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            server_name TEXT NOT NULL,
+            server_ip TEXT NOT NULL,
+            status TEXT NOT NULL,
+            recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
+
+    cursor.execute('''
+        CREATE INDEX IF NOT EXISTS idx_uptime_server_time
+        ON uptime_events(server_name, recorded_at)
+    ''')
+
+    conn.commit()
+    conn.close()
+    print('[Uptime] Tables initialized')
+
+
+def record_uptime_event(server_name: str, server_ip: str, status: str):
+    """Record a status change event"""
+    conn = sqlite3.connect(str(DB_PATH))
+    cursor = conn.cursor()
+
+    # Check last status
+    cursor.execute('''
+        SELECT status FROM uptime_events
+        WHERE server_name = ?
+        ORDER BY recorded_at DESC LIMIT 1
+    ''', (server_name,))
+    row = cursor.fetchone()
+    last_status = row[0] if row else None
+
+    # Only record if status changed
+    if last_status != status:
+        cursor.execute('''
+            INSERT INTO uptime_events (server_name, server_ip, status)
+            VALUES (?, ?, ?)
+        ''', (server_name, server_ip, status))
+        conn.commit()
+        print(f'[Uptime] {server_name}: {last_status} -> {status}')
+
+    conn.close()
+
+
+def get_uptime_percentage(server_name: str, hours: int = 24) -> float:
+    """Calculate uptime percentage for a server"""
+    conn = sqlite3.connect(str(DB_PATH))
+    cursor = conn.cursor()
+
+    cutoff = (datetime.now() - timedelta(hours=hours)).strftime('%Y-%m-%d %H:%M:%S')
+
+    cursor.execute('''
+        SELECT status, recorded_at FROM uptime_events
+        WHERE server_name = ? AND recorded_at > ?
+        ORDER BY recorded_at ASC
+    ''', (server_name, cutoff))
+
+    events = cursor.fetchall()
+    conn.close()
+
+    if not events:
+        return 100.0  # No events = assume online
+
+    # Calculate uptime from events
+    total_time = timedelta(hours=hours)
+    downtime = timedelta()
+    last_offline = None
+
+    for status, timestamp in events:
+        event_time = datetime.strptime(timestamp, '%Y-%m-%d %H:%M:%S')
+        if status == 'offline' and last_offline is None:
+            last_offline = event_time
+        elif status == 'online' and last_offline is not None:
+            downtime += event_time - last_offline
+            last_offline = None
+
+    # If still offline
+    if last_offline:
+        downtime += datetime.now() - last_offline
+
+    uptime_seconds = total_time.total_seconds() - downtime.total_seconds()
+    return max(0, min(100, (uptime_seconds / total_time.total_seconds()) * 100))
+
+
+# Initialize on import
+init_uptime_tables()

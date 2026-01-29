@@ -14,7 +14,7 @@ from services.database import init_database, seed_servers, get_all_servers, get_
 from services import discovery, security, logCollector
 from services import keyManager
 
-app = FastAPI(title="Homebase API", version="0.3.2")
+app = FastAPI(title="Homebase API", version="0.3.3")
 
 app.add_middleware(
     CORSMiddleware,
@@ -146,7 +146,7 @@ async def get_server_stats(server: dict) -> dict:
 
 @app.get("/api/health")
 async def health():
-    return {"status": "ok", "version": "0.3.2", "timestamp": time.time()}
+    return {"status": "ok", "version": "0.3.3", "timestamp": time.time()}
 
 @app.get("/api/servers")
 async def get_servers():

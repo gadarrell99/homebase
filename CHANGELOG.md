@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.3] - 2026-01-29
+
+### Added
+- **Uptime Tracking** (backend/services/database.py)
+  - uptime_events table to log status changes
+  - record_uptime_event() - logs up/down transitions
+  - get_uptime_percentage() - calculates uptime % for time period
+
 ## [0.3.2] - 2026-01-29
 
 ### Added
