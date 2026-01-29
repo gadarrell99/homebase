@@ -395,6 +395,44 @@ async def get_pulse_dashboard():
     }
 
 
+
+
+# ============== METRICS HISTORY ==============
+
+from services import metrics_history
+
+@app.get("/api/metrics/history/{server_name}")
+async def get_server_history(server_name: str, hours: int = 24, interval: int = 30):
+    """Get historical metrics for a specific server."""
+    metrics = metrics_history.get_server_metrics(server_name, hours, interval)
+    return {"server": server_name, "hours": hours, "metrics": metrics, "count": len(metrics)}
+
+@app.get("/api/metrics/history")
+async def get_all_history(hours: int = 24, interval: int = 30):
+    """Get historical metrics for all servers."""
+    all_metrics = metrics_history.get_all_servers_metrics(hours, interval)
+    return {"hours": hours, "servers": all_metrics, "timestamp": time.time()}
+
+@app.get("/api/metrics/summary")
+async def get_metrics_summary(hours: int = 24):
+    """Get metrics summary (avg, max) for all servers."""
+    summary = metrics_history.get_metrics_summary(hours)
+    return {"hours": hours, "summary": summary, "timestamp": time.time()}
+
+@app.post("/api/metrics/record")
+async def record_current_metrics():
+    """Record current metrics (typically called by scheduler)."""
+    tasks = [get_server_stats(s) for s in SERVERS]
+    results = await asyncio.gather(*tasks)
+    count = metrics_history.record_metrics(results)
+    return {"recorded": count, "timestamp": time.time()}
+
+@app.delete("/api/metrics/cleanup")
+async def cleanup_metrics(days: int = 7):
+    """Remove old metrics data."""
+    deleted = metrics_history.cleanup_old_metrics(days)
+    return {"deleted": deleted, "older_than_days": days}
+
 # ============== STATIC FILES ==============
 
 FRONTEND_DIR = "/home/cobaltadmin/homebase/frontend/dist"
@@ -413,3 +451,8 @@ if os.path.exists(FRONTEND_DIR):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
+
+# ============== METRICS HISTORY ==============
+
+from services import metrics_history
