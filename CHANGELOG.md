@@ -80,3 +80,7 @@
 ## v0.2.2 - January 29, 2026
 - Configured SMTP for email alerts (smtp.office365.com)
 - Tested email delivery successfully
+
+## v0.2.3 - January 29, 2026
+- Added Relay 2.0 (port 8001) to monitored servers
+- Now monitoring 9 servers total

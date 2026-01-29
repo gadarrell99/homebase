@@ -68,3 +68,5 @@
 - Terraform/Ansible integration for infrastructure management
 
 - [x] Email alerts configured and tested (Jan 29, 2026)
+
+- [x] Added Relay 2.0 to server monitoring (Jan 29, 2026)

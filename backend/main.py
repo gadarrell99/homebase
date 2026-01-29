@@ -33,6 +33,7 @@ async def startup():
 SERVERS = [
     {"name": "Cobalt", "ip": "192.168.65.243", "user": "cobaltadmin", "web_url": "homebase.rize.bm", "ssh_url": "cobalt-ssh.rize.bm", "os": "linux"},
     {"name": "Relay", "ip": "192.168.65.248", "user": "relayadmin", "web_url": "relay.rize.bm", "ssh_url": "relay-ssh.rize.bm", "os": "linux"},
+    {"name": "Relay-v2", "ip": "192.168.65.248", "port": 8001, "user": "relayadmin", "web_url": "relay.rize.bm/v2", "ssh_url": "relay-ssh.rize.bm", "os": "linux", "health_endpoint": "/api/v2/health"},
     {"name": "BPS AI", "ip": "192.168.65.246", "user": "bpsaiadmin", "web_url": "bpsai.rize.bm", "ssh_url": "bpsai-ssh.rize.bm", "os": "linux"},
     {"name": "Context Hub", "ip": "192.168.65.247", "user": "contextadmin", "web_url": "context.rize.bm", "ssh_url": "context-ssh.rize.bm", "os": "linux"},
     {"name": "Dockyard", "ip": "192.168.65.252", "user": "dockyardadmin", "web_url": "dockyard-admin.rize.bm", "ssh_url": "dockyard-ssh.rize.bm", "os": "linux"},
