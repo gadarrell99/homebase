@@ -9,6 +9,13 @@
 - [x] Auto-refresh (30s)
 - [x] Hyper-V Windows support
 
+## Phase 3 - Historical Metrics (v0.3.0) ✅
+- [x] Metrics history database table
+- [x] Historical metrics API endpoints
+- [x] Metrics recording via cron (every 5 min)
+- [x] 30-day data retention with daily cleanup
+- [x] Fixed timestamp format in queries
+
 ## Phase 2 - Central Command Foundation (v0.2.0) ✅
 - [x] Project auto-discovery service
   - [x] Scan all servers for projects

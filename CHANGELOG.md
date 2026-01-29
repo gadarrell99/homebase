@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.3.0] - 2026-01-29
+
+### Added
+- **Historical Metrics Storage**
+  - Database table for storing server metrics over time
+  - API endpoints: GET /api/metrics/history/{server}, GET /api/metrics/history
+  - GET /api/metrics/summary for aggregated stats
+  - POST /api/metrics/record for manual recording
+  - DELETE /api/metrics/cleanup for data retention
+
+### Changed
+- **Metrics Recording Automation**
+  - Cron job records metrics every 5 minutes
+  - Daily cleanup of records older than 30 days
+  - Fixed timestamp format mismatch in queries
+
+### Technical
+- metrics_history.py service with SQLite storage
+- Timestamp query format fixed (space vs T separator)
+
 ## [0.2.0] - 2026-01-28
 
 ### Added

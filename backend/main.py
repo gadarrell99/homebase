@@ -14,7 +14,7 @@ from services.database import init_database, seed_servers, get_all_servers, get_
 from services import discovery, security, logCollector
 from services import keyManager
 
-app = FastAPI(title="Homebase API", version="0.2.0")
+app = FastAPI(title="Homebase API", version="0.3.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -146,7 +146,7 @@ async def get_server_stats(server: dict) -> dict:
 
 @app.get("/api/health")
 async def health():
-    return {"status": "ok", "version": "0.2.0", "timestamp": time.time()}
+    return {"status": "ok", "version": "0.3.0", "timestamp": time.time()}
 
 @app.get("/api/servers")
 async def get_servers():
@@ -429,7 +429,7 @@ async def record_current_metrics():
     return {"recorded": count, "timestamp": time.time()}
 
 @app.delete("/api/metrics/cleanup")
-async def cleanup_metrics(days: int = 7):
+async def cleanup_metrics(days: int = 30):
     """Remove old metrics data."""
     deleted = metrics_history.cleanup_old_metrics(days)
     return {"deleted": deleted, "older_than_days": days}

@@ -104,7 +104,7 @@ def get_server_metrics(server_name: str, hours: int = 24, interval_minutes: int 
         WHERE server_name = ?
         AND recorded_at > ?
         ORDER BY recorded_at ASC
-    ''', (server_name, cutoff.isoformat()))
+    ''', (server_name, cutoff.strftime('%Y-%m-%d %H:%M:%S')))
     
     rows = cursor.fetchall()
     conn.close()
@@ -169,7 +169,7 @@ def get_metrics_summary(hours: int = 24) -> Dict:
         FROM metrics_history
         WHERE recorded_at > ?
         GROUP BY server_name
-    ''', (cutoff.isoformat(),))
+    ''', (cutoff.strftime('%Y-%m-%d %H:%M:%S'),))
     
     rows = cursor.fetchall()
     conn.close()
@@ -195,7 +195,7 @@ def cleanup_old_metrics(days: int = 7):
     cursor = conn.cursor()
     
     cutoff = datetime.now() - timedelta(days=days)
-    cursor.execute('DELETE FROM metrics_history WHERE recorded_at < ?', (cutoff.isoformat(),))
+    cursor.execute('DELETE FROM metrics_history WHERE recorded_at < ?', (cutoff.strftime('%Y-%m-%d %H:%M:%S'),))
     
     deleted = cursor.rowcount
     conn.commit()
