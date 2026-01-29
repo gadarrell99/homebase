@@ -10,11 +10,11 @@ import os
 import json
 
 # SMTP Configuration
-SMTP_HOST = 'smtp.office365.com'
-SMTP_PORT = 587
-SMTP_USER = 'aidev@rize.bm'
-SMTP_PASS = 'mbnrrxvdwmmszpzg'
-DEFAULT_RECIPIENT = 'artiedarrell@gmail.com'
+SMTP_HOST = os.environ.get('SMTP_HOST', 'smtp.office365.com')
+SMTP_PORT = int(os.environ.get('SMTP_PORT', '587'))
+SMTP_USER = os.environ.get('SMTP_USER', '')
+SMTP_PASS = os.environ.get('SMTP_PASS', '')
+DEFAULT_RECIPIENT = os.environ.get('ALERT_RECIPIENT', 'artiedarrell@gmail.com')
 
 # Alert cooldown tracking (in memory - persists per process)
 COOLDOWN_FILE = os.path.join(os.path.dirname(__file__), 'alert_cooldowns.json')
