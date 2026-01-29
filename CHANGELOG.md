@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.3.2] - 2026-01-29
+
+### Added
+- **Critical Alert Service** (backend/services/alerts.py)
+  - Email alerts for CPU/Memory/Disk > 90%
+  - Offline server notifications
+  - 15-minute cooldown to prevent spam
+  - Test email sent successfully
+
 ## [0.3.1] - 2026-01-29
 
 ### Verified
