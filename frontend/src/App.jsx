@@ -26,7 +26,7 @@ function NavLink({ to, children }) {
 }
 
 function Layout({ children }) {
-  return <div className="min-h-screen bg-slate-900 text-white"><nav className="bg-slate-800 border-b border-slate-700"><div className="max-w-7xl mx-auto px-6 py-4"><div className="flex items-center justify-between"><Link to="/" className="text-xl font-bold">Homebase</Link><div className="flex gap-2"><NavLink to="/">Servers</NavLink><NavLink to="/projects">Projects</NavLink><NavLink to="/metrics">Metrics</NavLink><NavLink to="/security">Security</NavLink><NavLink to="/discovery">Discovery</NavLink><NavLink to="/settings">Settings</NavLink></div></div></div></nav><main className="max-w-7xl mx-auto p-6">{children}</main></div>;
+  return <div className="min-h-screen bg-slate-900 text-white"><nav className="bg-slate-800 border-b border-slate-700"><div className="max-w-7xl mx-auto px-6 py-4"><div className="flex items-center justify-between"><Link to="/" className="text-xl font-bold">Homebase</Link><div className="flex gap-2"><NavLink to="/">Servers</NavLink><NavLink to="/projects">Projects</NavLink><NavLink to="/metrics">Metrics</NavLink><NavLink to="/security">Security</NavLink><NavLink to="/discovery">Discovery</NavLink><NavLink to="/credentials">Credentials</NavLink><NavLink to="/settings">Settings</NavLink></div></div></div></nav><main className="max-w-7xl mx-auto p-6">{children}</main></div>;
 }
 
 function ServerCard({ server }) {
@@ -261,6 +261,149 @@ function DiscoveryPage() {
   return <div><div className="flex justify-between items-center mb-6"><div><h1 className="text-2xl font-bold">Discovery</h1><p className="text-gray-400">Auto-discovered projects</p></div><div className="flex gap-4 items-center"><span className="text-gray-400">{projects.length} projects</span><button onClick={fetchProjects} disabled={loading} className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-800 px-4 py-2 rounded text-sm">{loading ? "Scanning..." : "Scan All"}</button></div></div>{loading && projects.length === 0 ? <div className="text-center py-20"><div className="animate-spin text-4xl mb-4">*</div><p className="text-gray-400">Discovering projects...</p></div> : error ? <div className="text-center py-20"><p className="text-red-400">{error}</p><button onClick={fetchProjects} className="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">Retry</button></div> : projects.length === 0 ? <div className="text-center py-20 bg-slate-800 rounded-lg border border-slate-700"><p className="text-gray-400 mb-4">No projects discovered yet</p><button onClick={fetchProjects} className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">Start Discovery</button></div> : <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">{projects.map((project, idx) => <div key={project.server + project.path + idx} className="bg-slate-800 rounded-lg p-5 border border-slate-700 hover:border-slate-600"><div className="flex justify-between items-start mb-3"><div><h3 className="text-lg font-bold text-white">{project.name}</h3><p className="text-gray-500 text-sm">{project.server_name || project.server}</p></div>{project.version && <span className="bg-slate-700 text-gray-300 px-2 py-1 rounded text-xs">v{project.version}</span>}</div>{project.description && <p className="text-gray-400 text-sm mb-3">{project.description}</p>}<div className="text-xs text-gray-500"><code className="bg-slate-900 px-1 rounded">{project.path}</code></div></div>)}</div>}{lastUpdate && <p className="text-center text-gray-500 text-sm mt-6">Last scan: {lastUpdate.toLocaleTimeString()}</p>}</div>;
 }
 
+function CredentialsPage() {
+  const [credentials, setCredentials] = useState([]);
+  const [projects, setProjects] = useState([]);
+  const [logs, setLogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [authError, setAuthError] = useState(false);
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [showLogs, setShowLogs] = useState(false);
+  const [revealedCreds, setRevealedCreds] = useState({});
+  const [selectedProject, setSelectedProject] = useState('all');
+  const [newCred, setNewCred] = useState({ name: '', type: 'api_key', value: '', project: 'Other', description: '' });
+
+  const fetchCredentials = async () => {
+    try {
+      setLoading(true);
+      const token = localStorage.getItem('session_token');
+      if (!token) {
+        setAuthError(true);
+        setError('Please login and enable 2FA to access credentials');
+        setLoading(false);
+        return;
+      }
+      const res = await fetch('/api/credentials', { headers: { 'Authorization': 'Bearer ' + token } });
+      if (res.status === 401 || res.status === 403) {
+        setAuthError(true);
+        setError(res.status === 403 ? '2FA must be enabled to access credentials' : 'Please login to access credentials');
+        setLoading(false);
+        return;
+      }
+      const data = await res.json();
+      setCredentials(data.credentials || []);
+      setProjects(data.projects || []);
+      setAuthError(false);
+      setError(null);
+    } catch (err) {
+      setError('Failed to fetch credentials');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchLogs = async () => {
+    try {
+      const token = localStorage.getItem('session_token');
+      const res = await fetch('/api/credentials/logs?limit=50', { headers: { 'Authorization': 'Bearer ' + token } });
+      const data = await res.json();
+      setLogs(data.logs || []);
+    } catch (err) {
+      console.error('Failed to fetch logs');
+    }
+  };
+
+  useEffect(() => { fetchCredentials(); }, []);
+
+  const revealCredential = async (name) => {
+    try {
+      const token = localStorage.getItem('session_token');
+      const res = await fetch('/api/credentials/' + encodeURIComponent(name), { headers: { 'Authorization': 'Bearer ' + token } });
+      const data = await res.json();
+      setRevealedCreds(prev => ({ ...prev, [name]: data.value }));
+      // Auto-hide after 10 seconds
+      setTimeout(() => setRevealedCreds(prev => { const updated = { ...prev }; delete updated[name]; return updated; }), 10000);
+    } catch (err) {
+      alert('Failed to retrieve credential');
+    }
+  };
+
+  const copyToClipboard = async (name) => {
+    const value = revealedCreds[name];
+    if (value) {
+      await navigator.clipboard.writeText(value);
+      alert('Copied to clipboard');
+    } else {
+      // Reveal first then copy
+      try {
+        const token = localStorage.getItem('session_token');
+        const res = await fetch('/api/credentials/' + encodeURIComponent(name), { headers: { 'Authorization': 'Bearer ' + token } });
+        const data = await res.json();
+        await navigator.clipboard.writeText(data.value);
+        alert('Copied to clipboard');
+      } catch (err) {
+        alert('Failed to copy credential');
+      }
+    }
+  };
+
+  const addCredential = async (e) => {
+    e.preventDefault();
+    try {
+      const token = localStorage.getItem('session_token');
+      const res = await fetch('/api/credentials', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+        body: JSON.stringify(newCred)
+      });
+      if (!res.ok) throw new Error('Failed to add credential');
+      setShowAddForm(false);
+      setNewCred({ name: '', type: 'api_key', value: '', project: 'Other', description: '' });
+      fetchCredentials();
+    } catch (err) {
+      alert('Failed to add credential');
+    }
+  };
+
+  const deleteCredential = async (name) => {
+    if (!confirm('Are you sure you want to delete "' + name + '"?')) return;
+    try {
+      const token = localStorage.getItem('session_token');
+      await fetch('/api/credentials/' + encodeURIComponent(name), { method: 'DELETE', headers: { 'Authorization': 'Bearer ' + token } });
+      fetchCredentials();
+    } catch (err) {
+      alert('Failed to delete credential');
+    }
+  };
+
+  const filteredCreds = selectedProject === 'all' ? credentials : credentials.filter(c => c.project === selectedProject);
+  const groupedCreds = filteredCreds.reduce((acc, cred) => {
+    const project = cred.project || 'Other';
+    if (!acc[project]) acc[project] = [];
+    acc[project].push(cred);
+    return acc;
+  }, {});
+
+  const typeIcons = { ssh_key: '🔑', api_key: '🔐', password: '••••', token: '🎫' };
+
+  if (authError) {
+    return <div className="text-center py-20"><div className="text-6xl mb-4">🔒</div><h2 className="text-2xl font-bold mb-4">Authentication Required</h2><p className="text-gray-400 mb-6">{error}</p><a href="/" className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded text-white">Go to Login</a></div>;
+  }
+
+  return <div><div className="flex justify-between items-center mb-6"><div><h1 className="text-2xl font-bold">Credentials</h1><p className="text-gray-400">Secure credential storage (2FA required)</p></div><div className="flex gap-2"><button onClick={() => { fetchLogs(); setShowLogs(!showLogs); }} className="bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded text-sm">{showLogs ? 'Hide Logs' : 'View Audit Log'}</button><button onClick={() => setShowAddForm(true)} className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-sm">+ Add Credential</button></div></div>
+
+{showAddForm && <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"><div className="bg-slate-800 rounded-lg p-6 w-full max-w-md border border-slate-700"><h3 className="text-lg font-bold mb-4">Add Credential</h3><form onSubmit={addCredential}><div className="space-y-4"><div><label className="block text-sm text-gray-400 mb-1">Name</label><input type="text" value={newCred.name} onChange={e => setNewCred({...newCred, name: e.target.value})} className="w-full bg-slate-700 border border-slate-600 rounded px-3 py-2" required /></div><div><label className="block text-sm text-gray-400 mb-1">Type</label><select value={newCred.type} onChange={e => setNewCred({...newCred, type: e.target.value})} className="w-full bg-slate-700 border border-slate-600 rounded px-3 py-2"><option value="api_key">API Key</option><option value="ssh_key">SSH Key</option><option value="password">Password</option><option value="token">Token</option></select></div><div><label className="block text-sm text-gray-400 mb-1">Project</label><select value={newCred.project} onChange={e => setNewCred({...newCred, project: e.target.value})} className="w-full bg-slate-700 border border-slate-600 rounded px-3 py-2">{projects.map(p => <option key={p} value={p}>{p}</option>)}</select></div><div><label className="block text-sm text-gray-400 mb-1">Value</label><textarea value={newCred.value} onChange={e => setNewCred({...newCred, value: e.target.value})} className="w-full bg-slate-700 border border-slate-600 rounded px-3 py-2 h-24 font-mono text-sm" required /></div><div><label className="block text-sm text-gray-400 mb-1">Description (optional)</label><input type="text" value={newCred.description} onChange={e => setNewCred({...newCred, description: e.target.value})} className="w-full bg-slate-700 border border-slate-600 rounded px-3 py-2" /></div></div><div className="flex gap-2 mt-6"><button type="button" onClick={() => setShowAddForm(false)} className="flex-1 bg-slate-700 hover:bg-slate-600 py-2 rounded">Cancel</button><button type="submit" className="flex-1 bg-blue-600 hover:bg-blue-700 py-2 rounded">Save</button></div></form></div></div>}
+
+<div className="flex gap-2 mb-6 flex-wrap"><button onClick={() => setSelectedProject('all')} className={"px-3 py-1 rounded text-sm " + (selectedProject === 'all' ? "bg-blue-600" : "bg-slate-700 hover:bg-slate-600")}>All ({credentials.length})</button>{projects.map(p => { const count = credentials.filter(c => c.project === p).length; return count > 0 ? <button key={p} onClick={() => setSelectedProject(p)} className={"px-3 py-1 rounded text-sm " + (selectedProject === p ? "bg-blue-600" : "bg-slate-700 hover:bg-slate-600")}>{p} ({count})</button> : null; })}</div>
+
+{loading ? <div className="text-center py-20"><div className="animate-spin text-4xl mb-4">*</div><p className="text-gray-400">Loading credentials...</p></div> : error ? <div className="text-center py-20"><p className="text-red-400">{error}</p></div> : filteredCreds.length === 0 ? <div className="text-center py-20 bg-slate-800 rounded-lg border border-slate-700"><p className="text-gray-400 mb-4">No credentials stored yet</p><button onClick={() => setShowAddForm(true)} className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">Add First Credential</button></div> : 
+<div className="space-y-6">{Object.entries(groupedCreds).map(([project, creds]) => <div key={project} className="bg-slate-800 rounded-lg border border-slate-700 overflow-hidden"><div className="bg-slate-700 px-4 py-2 font-medium">{project}</div><div className="divide-y divide-slate-700">{creds.map(cred => <div key={cred.id} className="p-4 hover:bg-slate-700/50"><div className="flex justify-between items-start"><div><div className="flex items-center gap-2"><span className="text-lg">{typeIcons[cred.type]}</span><span className="font-medium text-white">{cred.name}</span><span className="text-xs bg-slate-600 px-2 py-0.5 rounded">{cred.type}</span></div>{cred.description && <p className="text-sm text-gray-400 mt-1">{cred.description}</p>}<div className="text-xs text-gray-500 mt-2">{cred.last_used_at ? 'Last used: ' + new Date(cred.last_used_at).toLocaleString() : 'Never used'}</div></div><div className="flex gap-2">{revealedCreds[cred.name] ? <div className="flex gap-2 items-center"><code className="bg-slate-900 px-3 py-1 rounded text-sm font-mono max-w-xs overflow-hidden text-ellipsis">{revealedCreds[cred.name]}</code><button onClick={() => copyToClipboard(cred.name)} className="bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-sm">Copy</button></div> : <><button onClick={() => revealCredential(cred.name)} className="bg-slate-600 hover:bg-slate-500 px-3 py-1 rounded text-sm">Reveal (10s)</button><button onClick={() => copyToClipboard(cred.name)} className="bg-slate-600 hover:bg-slate-500 px-3 py-1 rounded text-sm">Copy</button></>}<button onClick={() => deleteCredential(cred.name)} className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-sm">Delete</button></div></div></div>)}</div></div>)}</div>}
+
+{showLogs && <div className="mt-8 bg-slate-800 rounded-lg border border-slate-700 overflow-hidden"><div className="bg-slate-700 px-4 py-2 font-medium flex justify-between"><span>Audit Log</span><button onClick={() => setShowLogs(false)} className="text-gray-400 hover:text-white">×</button></div><div className="max-h-96 overflow-y-auto"><table className="w-full"><thead className="bg-slate-700/50 sticky top-0"><tr><th className="text-left px-4 py-2 text-sm">Time</th><th className="text-left px-4 py-2 text-sm">Credential</th><th className="text-left px-4 py-2 text-sm">Action</th><th className="text-left px-4 py-2 text-sm">User</th><th className="text-left px-4 py-2 text-sm">IP</th></tr></thead><tbody className="divide-y divide-slate-700">{logs.map(log => <tr key={log.id}><td className="px-4 py-2 text-sm text-gray-400">{new Date(log.created_at).toLocaleString()}</td><td className="px-4 py-2 text-sm">{log.credential_name}</td><td className="px-4 py-2 text-sm"><span className={"px-2 py-0.5 rounded text-xs " + (log.action === 'retrieve' ? 'bg-yellow-600' : log.action === 'delete' ? 'bg-red-600' : 'bg-blue-600')}>{log.action}</span></td><td className="px-4 py-2 text-sm">{log.user || '-'}</td><td className="px-4 py-2 text-sm text-gray-500">{log.ip_address || '-'}</td></tr>)}</tbody></table></div></div>}</div>;
+}
+
+
 function SettingsPage() {
   const [settings, setSettings] = useState({
     cpu_threshold: 90,
@@ -388,7 +531,8 @@ function SettingsPage() {
 }
 
 function App() {
-  return (<BrowserRouter><Layout><Routes><Route path="/" element={<ServersPage />} /><Route path="/projects" element={<ProjectsPage />} /><Route path="/metrics" element={<MetricsPage />} /><Route path="/security" element={<SecurityPage />} /><Route path="/discovery" element={<DiscoveryPage />} /><Route path="/settings" element={<SettingsPage />} /></Routes></Layout></BrowserRouter>);
+  return (<BrowserRouter><Layout><Routes><Route path="/" element={<ServersPage />} /><Route path="/projects" element={<ProjectsPage />} /><Route path="/metrics" element={<MetricsPage />} /><Route path="/security" element={<SecurityPage />} /><Route path="/discovery" element={<DiscoveryPage />} /><Route path="/credentials" element={<CredentialsPage />} />
+          <Route path="/settings" element={<SettingsPage />} /></Routes></Layout></BrowserRouter>);
 }
 
 export default App;

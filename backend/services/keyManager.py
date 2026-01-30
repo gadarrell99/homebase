@@ -1,6 +1,7 @@
 """
 Key Management Service
 Secure credential storage using Fernet encryption.
+Enhanced with project categorization and audit logging.
 """
 
 import os
@@ -67,7 +68,25 @@ def decrypt_value(encrypted: str) -> str:
     return decrypted.decode('utf-8')
 
 
-def store_credential(name: str, cred_type: str, value: str, server_id: Optional[int] = None, description: Optional[str] = None) -> dict:
+def init_credential_tables():
+    """Initialize credential tables with project support."""
+    with get_connection() as conn:
+        cursor = conn.cursor()
+        
+        # Check if project column exists
+        cursor.execute("PRAGMA table_info(credentials)")
+        columns = [row[1] for row in cursor.fetchall()]
+        
+        if 'project' not in columns:
+            cursor.execute("ALTER TABLE credentials ADD COLUMN project TEXT DEFAULT 'Other'")
+            print("[KeyManager] Added project column to credentials")
+        
+        conn.commit()
+
+
+def store_credential(name: str, cred_type: str, value: str, server_id: Optional[int] = None, 
+                     description: Optional[str] = None, user: str = "system", 
+                     ip_address: str = None, project: str = "Other") -> dict:
     """
     Store a new credential with encryption.
     
@@ -77,6 +96,9 @@ def store_credential(name: str, cred_type: str, value: str, server_id: Optional[
         value: The secret value to store
         server_id: Optional server association
         description: Optional description
+        user: User performing the action
+        ip_address: IP address of the user
+        project: Project category
     
     Returns:
         The stored credential metadata (without the value)
@@ -94,40 +116,45 @@ def store_credential(name: str, cred_type: str, value: str, server_id: Optional[
             # Update existing
             cursor.execute('''
                 UPDATE credentials 
-                SET encrypted_value = ?, type = ?, server_id = ?, description = ?, 
+                SET encrypted_value = ?, type = ?, server_id = ?, description = ?, project = ?,
                     updated_at = CURRENT_TIMESTAMP, last_rotated_at = CURRENT_TIMESTAMP
                 WHERE name = ?
-            ''', (encrypted_value, cred_type, server_id, description, name))
+            ''', (encrypted_value, cred_type, server_id, description, project, name))
             cred_id = existing['id']
+            action = "update"
         else:
             # Insert new
             cursor.execute('''
-                INSERT INTO credentials (name, type, encrypted_value, server_id, description)
-                VALUES (?, ?, ?, ?, ?)
-            ''', (name, cred_type, encrypted_value, server_id, description))
+                INSERT INTO credentials (name, type, encrypted_value, server_id, description, project)
+                VALUES (?, ?, ?, ?, ?, ?)
+            ''', (name, cred_type, encrypted_value, server_id, description, project))
             cred_id = cursor.lastrowid
+            action = "store"
         
         conn.commit()
         
         # Log the access
-        log_credential_access(cred_id, "store", "system")
+        log_credential_access(cred_id, action, user, ip_address)
         
         return {
             "id": cred_id,
             "name": name,
             "type": cred_type,
+            "project": project,
             "server_id": server_id,
             "description": description,
             "stored_at": datetime.utcnow().isoformat()
         }
 
 
-def get_credential(name: str) -> Optional[str]:
+def get_credential(name: str, user: str = "system", ip_address: str = None) -> Optional[str]:
     """
     Retrieve and decrypt a credential by name.
     
     Args:
         name: The credential name
+        user: User performing the action
+        ip_address: IP address of the user
     
     Returns:
         The decrypted value, or None if not found
@@ -146,20 +173,22 @@ def get_credential(name: str) -> Optional[str]:
             conn.commit()
             
             # Log the access
-            log_credential_access(row['id'], "retrieve", "system")
+            log_credential_access(row['id'], "retrieve", user, ip_address)
             
             return decrypt_value(row['encrypted_value'])
         
         return None
 
 
-def rotate_credential(cred_id: int, new_value: str) -> dict:
+def rotate_credential(cred_id: int, new_value: str, user: str = "system", ip_address: str = None) -> dict:
     """
     Rotate a credential with a new value.
     
     Args:
         cred_id: The credential ID
         new_value: The new secret value
+        user: User performing the action
+        ip_address: IP address of the user
     
     Returns:
         Updated credential metadata
@@ -181,7 +210,7 @@ def rotate_credential(cred_id: int, new_value: str) -> dict:
         conn.commit()
         
         # Log the rotation
-        log_credential_access(cred_id, "rotate", "system")
+        log_credential_access(cred_id, "rotate", user, ip_address)
         
         return {
             "id": cred_id,
@@ -201,18 +230,18 @@ def list_credentials() -> list[dict]:
     with get_connection() as conn:
         cursor = conn.cursor()
         cursor.execute('''
-            SELECT c.id, c.name, c.type, c.server_id, c.description,
+            SELECT c.id, c.name, c.type, c.server_id, c.description, c.project,
                    c.last_rotated_at, c.last_used_at, c.created_at,
                    s.name as server_name
             FROM credentials c
             LEFT JOIN servers s ON c.server_id = s.id
-            ORDER BY c.name
+            ORDER BY c.project, c.name
         ''')
         
         return [dict(row) for row in cursor.fetchall()]
 
 
-def delete_credential(name: str) -> bool:
+def delete_credential(name: str, user: str = "system", ip_address: str = None) -> bool:
     """Delete a credential by name."""
     with get_connection() as conn:
         cursor = conn.cursor()
@@ -222,7 +251,7 @@ def delete_credential(name: str) -> bool:
         row = cursor.fetchone()
         
         if row:
-            log_credential_access(row['id'], "delete", "system")
+            log_credential_access(row['id'], "delete", user, ip_address)
             cursor.execute("DELETE FROM credentials WHERE name = ?", (name,))
             conn.commit()
             return True
@@ -236,7 +265,7 @@ def log_credential_access(credential_id: int, action: str, user: str, ip_address
     
     Args:
         credential_id: The credential ID
-        action: The action performed (store, retrieve, rotate, delete)
+        action: The action performed (store, retrieve, rotate, delete, update)
         user: The user or system that accessed
         ip_address: Optional IP address
     """
@@ -282,3 +311,7 @@ def get_credential_access_logs(credential_id: Optional[int] = None, limit: int =
             ''', (limit,))
         
         return [dict(row) for row in cursor.fetchall()]
+
+
+# Initialize on import
+init_credential_tables()

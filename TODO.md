@@ -1,6 +1,6 @@
 # Homebase TODO
 
-**Current Version:** 0.5.0
+**Current Version:** 0.5.1
 
 ---
 
@@ -40,7 +40,7 @@
 - [x] Email alerts configured and tested
 - [x] Added Relay 2.0 to server monitoring
 
-## Phase 5 - Authentication & Security (v0.5.0) - COMPLETE
+## Phase 5 - Authentication & Security (v0.5.1) - COMPLETE
 - [x] TOTP-based 2FA authentication
 - [x] QR code generation for authenticator apps
 - [x] Backup codes (10 one-time use)

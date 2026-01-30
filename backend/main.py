@@ -1,6 +1,6 @@
 import asyncio
 import asyncssh
-from fastapi import FastAPI, HTTPException, Query, BackgroundTasks
+from fastapi import FastAPI, HTTPException, Query, BackgroundTasks, Depends, Header, Cookie, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
@@ -13,8 +13,9 @@ import os
 from services.database import init_database, seed_servers, get_all_servers, get_server_by_ip
 from services import discovery, security, logCollector
 from services import keyManager
+from services import auth as authService
 
-app = FastAPI(title="Homebase API", version="0.5.0")
+app = FastAPI(title="Homebase API", version="0.5.1")
 
 # ============== SERVER CACHE ==============
 # Cache server states to enable instant page loads
@@ -33,6 +34,48 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# ============== AUTH HELPERS ==============
+
+def get_client_info(request: Request) -> tuple:
+    """Extract client IP and user agent."""
+    ip = request.client.host if request.client else None
+    forwarded = request.headers.get('X-Forwarded-For')
+    if forwarded:
+        ip = forwarded.split(',')[0].strip()
+    user_agent = request.headers.get('User-Agent', '')
+    return ip, user_agent
+
+
+async def get_current_user(
+    request: Request,
+    authorization: str = Header(None),
+    session_token: str = Cookie(None)
+):
+    """Dependency to get current authenticated user."""
+    token = None
+    if authorization and authorization.startswith('Bearer '):
+        token = authorization[7:]
+    elif session_token:
+        token = session_token
+    if token:
+        return authService.validate_session(token)
+    return None
+
+
+async def require_auth(user: dict = Depends(get_current_user)):
+    """Dependency that requires authentication."""
+    if not user:
+        raise HTTPException(status_code=401, detail="Authentication required")
+    return user
+
+
+async def require_2fa(user: dict = Depends(require_auth)):
+    """Dependency that requires 2FA to be enabled."""
+    if not user.get('totp_enabled'):
+        raise HTTPException(status_code=403, detail="2FA must be enabled to access this resource")
+    return user
+
 
 # Initialize database on startup
 @app.on_event("startup")
@@ -306,12 +349,19 @@ async def check_service(server_ip: str, service_name: str):
     return status
 
 
-# ============== CREDENTIALS ==============
+# ============== CREDENTIALS (2FA REQUIRED) ==============
+
+# Available projects for credential categorization
+CREDENTIAL_PROJECTS = [
+    "BPS", "Context Hub", "Dockyard", "Property.Rize", 
+    "Vector-BET", "Homebase", "Relay", "Infrastructure", "Other"
+]
 
 class CredentialCreate(BaseModel):
     name: str
     type: str  # ssh_key, api_key, password, token
     value: str
+    project: Optional[str] = "Other"
     server_id: Optional[int] = None
     description: Optional[str] = None
 
@@ -319,47 +369,52 @@ class CredentialRotate(BaseModel):
     new_value: str
 
 @app.get("/api/credentials")
-async def list_credentials():
-    """List all credentials (without values)."""
+async def list_credentials(user: dict = Depends(require_2fa)):
+    """List all credentials (without values). Requires 2FA."""
     credentials = keyManager.list_credentials()
-    return {"credentials": credentials, "count": len(credentials)}
+    return {"credentials": credentials, "count": len(credentials), "projects": CREDENTIAL_PROJECTS}
 
 @app.post("/api/credentials")
-async def store_credential(cred: CredentialCreate):
-    """Store a new credential."""
+async def store_credential(request: Request, cred: CredentialCreate, user: dict = Depends(require_2fa)):
+    """Store a new credential. Requires 2FA."""
     if cred.type not in ['ssh_key', 'api_key', 'password', 'token']:
         raise HTTPException(status_code=400, detail="Invalid credential type")
     
+    ip, _ = get_client_info(request)
     result = keyManager.store_credential(
-        cred.name, cred.type, cred.value, cred.server_id, cred.description
+        cred.name, cred.type, cred.value, cred.server_id, cred.description, 
+        user.get('username'), ip, cred.project
     )
     return result
 
 @app.get("/api/credentials/{name}")
-async def get_credential(name: str):
-    """Retrieve a credential value (authorized access only)."""
-    value = keyManager.get_credential(name)
+async def get_credential(request: Request, name: str, user: dict = Depends(require_2fa)):
+    """Retrieve a credential value. Requires 2FA. Logs access."""
+    ip, _ = get_client_info(request)
+    value = keyManager.get_credential(name, user.get('username'), ip)
     if value is None:
         raise HTTPException(status_code=404, detail="Credential not found")
     return {"name": name, "value": value}
 
 @app.put("/api/credentials/{cred_id}/rotate")
-async def rotate_credential(cred_id: int, rotation: CredentialRotate):
-    """Rotate a credential with a new value."""
-    result = keyManager.rotate_credential(cred_id, rotation.new_value)
+async def rotate_credential(request: Request, cred_id: int, rotation: CredentialRotate, user: dict = Depends(require_2fa)):
+    """Rotate a credential with a new value. Requires 2FA."""
+    ip, _ = get_client_info(request)
+    result = keyManager.rotate_credential(cred_id, rotation.new_value, user.get('username'), ip)
     return result
 
 @app.delete("/api/credentials/{name}")
-async def delete_credential(name: str):
-    """Delete a credential."""
-    success = keyManager.delete_credential(name)
+async def delete_credential(request: Request, name: str, user: dict = Depends(require_2fa)):
+    """Delete a credential. Requires 2FA."""
+    ip, _ = get_client_info(request)
+    success = keyManager.delete_credential(name, user.get('username'), ip)
     if not success:
         raise HTTPException(status_code=404, detail="Credential not found")
     return {"deleted": name}
 
 @app.get("/api/credentials/logs")
-async def get_credential_logs(credential_id: Optional[int] = None, limit: int = 100):
-    """Get credential access logs."""
+async def get_credential_logs(credential_id: Optional[int] = None, limit: int = 100, user: dict = Depends(require_2fa)):
+    """Get credential access logs. Requires 2FA."""
     logs = keyManager.get_credential_access_logs(credential_id, limit)
     return {"logs": logs, "count": len(logs)}
 
@@ -596,12 +651,7 @@ async def get_single_setting(key: str):
 
 # ============== AUTHENTICATION ==============
 
-from services import auth as authService
-from fastapi import Depends, Header, Cookie, Request, Response
-from fastapi.security import HTTPBearer
-from typing import Optional
-
-# Request/Response models
+# Request/Response models for authentication
 class LoginRequest(BaseModel):
     username: str
     password: str
@@ -617,51 +667,6 @@ class Setup2FAVerify(BaseModel):
 class PasswordChangeRequest(BaseModel):
     current_password: str
     new_password: str
-
-
-def get_client_info(request: Request) -> tuple:
-    """Extract client IP and user agent."""
-    ip = request.client.host if request.client else None
-    # Try X-Forwarded-For for proxy
-    forwarded = request.headers.get('X-Forwarded-For')
-    if forwarded:
-        ip = forwarded.split(',')[0].strip()
-    user_agent = request.headers.get('User-Agent', '')
-    return ip, user_agent
-
-
-async def get_current_user(
-    request: Request,
-    authorization: Optional[str] = Header(None),
-    session_token: Optional[str] = Cookie(None)
-) -> Optional[dict]:
-    """Dependency to get current authenticated user."""
-    token = None
-    
-    # Try Authorization header first
-    if authorization and authorization.startswith('Bearer '):
-        token = authorization[7:]
-    # Fall back to cookie
-    elif session_token:
-        token = session_token
-    
-    if token:
-        return authService.validate_session(token)
-    return None
-
-
-async def require_auth(user: dict = Depends(get_current_user)):
-    """Dependency that requires authentication."""
-    if not user:
-        raise HTTPException(status_code=401, detail="Authentication required")
-    return user
-
-
-async def require_2fa(user: dict = Depends(require_auth)):
-    """Dependency that requires 2FA to be enabled."""
-    if not user.get('totp_enabled'):
-        raise HTTPException(status_code=403, detail="2FA must be enabled to access this resource")
-    return user
 
 
 @app.post("/api/auth/login")

@@ -1,3 +1,24 @@
+## [0.5.1] - 2026-01-30
+
+### Added
+- Secure Credential Storage (2FA required to access)
+- Credentials page in frontend UI
+- Project-based credential categorization (BPS, Context Hub, Dockyard, etc.)
+- Credential reveal with auto-hide (10 seconds)
+- Copy to clipboard functionality
+- Enhanced audit logging (user, IP, timestamp)
+- Credential search/filter by project
+
+### Changed
+- Credentials API endpoints now require 2FA authentication
+- Enhanced keyManager service with project support
+- Updated navigation to include Credentials link
+
+### Security
+- All credential operations logged with user and IP
+- Credentials masked by default, reveal is time-limited
+- Access restricted to 2FA-enabled users only
+
 ## [0.5.0] - 2026-01-30
 
 ### Added
