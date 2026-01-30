@@ -38,7 +38,7 @@
 - [x] Extract version from CHANGELOG.md
 - [x] Projects dashboard page
 - [x] Email alerts configured and tested
-- [x] Added Relay 2.0 to server monitoring
+- [x] Added Relay to server monitoring
 
 ## Phase 5 - Authentication & Security (v0.5.1) - COMPLETE
 - [x] TOTP-based 2FA authentication
