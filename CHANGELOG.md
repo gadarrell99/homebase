@@ -1,4 +1,12 @@
 # Changelog
+## [0.4.4] - 2026-01-30
+
+### Added
+- **Acronym Legend/Tooltips on Projects Page**
+  - Doc badges now show descriptive tooltips on hover
+  - Added visible legend at bottom: C=CHANGELOG, R=README, T=TODO, P=PROJECT_PLAN, AI=CLAUDE
+  - Hover over any badge to see full description
+
 ## [0.4.1] - 2026-01-30
 
 ### Fixed

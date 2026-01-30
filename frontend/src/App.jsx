@@ -142,6 +142,13 @@ function SecurityPage() {
 
 function ProjectCard({ project, onClick }) {
   const docIcons = { README: "R", TODO: "T", CHANGELOG: "C", PROJECT_PLAN: "P", CLAUDE: "AI" };
+  const docDescriptions = {
+    README: "README.md - Project overview and quickstart",
+    TODO: "TODO.md - Open tasks and roadmap items",
+    CHANGELOG: "CHANGELOG.md - Version history and changes",
+    PROJECT_PLAN: "PROJECT_PLAN.md - Detailed project roadmap",
+    CLAUDE: "CLAUDE.md - AI development instructions"
+  };
   return (
     <div className="bg-slate-800 rounded-lg p-5 shadow-lg border border-slate-700 hover:border-blue-500 transition-colors cursor-pointer" onClick={onClick}>
       <div className="flex justify-between items-start mb-3">
@@ -152,7 +159,7 @@ function ProjectCard({ project, onClick }) {
         </div>
       </div>
       <div className="flex gap-1 mb-3 flex-wrap">
-        {project.docs && project.docs.map(doc => (<span key={doc} className="bg-slate-700 text-gray-300 px-2 py-0.5 rounded text-xs" title={doc}>{docIcons[doc] || doc}</span>))}
+        {project.docs && project.docs.map(doc => (<span key={doc} className="bg-slate-700 text-gray-300 px-2 py-0.5 rounded text-xs cursor-help" title={docDescriptions[doc] || doc}>{docIcons[doc] || doc}</span>))}
       </div>
       <div className="flex justify-between items-center text-sm">
         <div><span className="text-gray-400">Open:</span><span className={`ml-1 font-bold ${project.todo_open > 10 ? "text-red-400" : project.todo_open > 5 ? "text-yellow-400" : "text-green-400"}`}>{project.todo_open}</span></div>
@@ -214,6 +221,14 @@ function ProjectsPage() {
       ) : projects.length === 0 ? (<div className="text-center py-20 bg-slate-800 rounded-lg border border-slate-700"><p className="text-gray-400 mb-4">No projects synced yet</p><button onClick={syncProjects} disabled={syncing} className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">{syncing ? "Syncing..." : "Sync Now"}</button></div>
       ) : (<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">{projects.map(project => (<ProjectCard key={project.project} project={project} onClick={() => fetchProjectDetail(project.project)} />))}</div>)}
       {health.last_sync && (<p className="text-center text-gray-500 text-sm mt-6">Last sync: {new Date(health.last_sync).toLocaleString()} | {health.total_open_todos} open TODOs across {health.total_projects} projects</p>)}
+      <div className="mt-4 text-center text-xs text-gray-600">
+        <span className="mr-3">Doc Legend:</span>
+        <span className="bg-slate-700 px-1.5 py-0.5 rounded mr-1">C</span>=CHANGELOG
+        <span className="bg-slate-700 px-1.5 py-0.5 rounded mx-1 ml-3">R</span>=README
+        <span className="bg-slate-700 px-1.5 py-0.5 rounded mx-1 ml-3">T</span>=TODO
+        <span className="bg-slate-700 px-1.5 py-0.5 rounded mx-1 ml-3">P</span>=PROJECT_PLAN
+        <span className="bg-slate-700 px-1.5 py-0.5 rounded mx-1 ml-3">AI</span>=CLAUDE
+      </div>
     </div>
   );
 }
