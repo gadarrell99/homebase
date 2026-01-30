@@ -1,6 +1,6 @@
 # Homebase TODO
 
-**Current Version:** 0.4.4
+**Current Version:** 0.4.5
 
 ---
 

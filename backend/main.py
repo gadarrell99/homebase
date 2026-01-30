@@ -14,7 +14,7 @@ from services.database import init_database, seed_servers, get_all_servers, get_
 from services import discovery, security, logCollector
 from services import keyManager
 
-app = FastAPI(title="Homebase API", version="0.4.1")
+app = FastAPI(title="Homebase API", version="0.4.5")
 
 # ============== SERVER CACHE ==============
 # Cache server states to enable instant page loads
@@ -177,7 +177,7 @@ async def get_server_stats(server: dict) -> dict:
 
 @app.get("/api/health")
 async def health():
-    return {"status": "ok", "version": "0.4.1", "timestamp": time.time()}
+    return {"status": "ok", "version": "0.4.5", "timestamp": time.time()}
 
 async def refresh_server_cache():
     """Background task to refresh server cache."""
@@ -552,6 +552,47 @@ async def sync_projects():
     """Trigger a full sync of all project docs."""
     results = await projectSyncService.sync_all_projects()
     return {"success": True, "synced": results, "count": len(results), "timestamp": time.time()}
+
+# ============== SETTINGS ==============
+
+from services import settings as settingsService
+
+class SettingsUpdate(BaseModel):
+    cpu_threshold: Optional[int] = None
+    memory_threshold: Optional[int] = None
+    disk_threshold: Optional[int] = None
+    cooldown_minutes: Optional[int] = None
+    alert_recipients: Optional[str] = None
+    alerts_enabled: Optional[bool] = None
+
+@app.get("/api/settings")
+async def get_settings():
+    """Get all alert settings."""
+    all_settings = settingsService.get_all_settings()
+    return {"settings": all_settings, "timestamp": time.time()}
+
+@app.put("/api/settings")
+async def update_settings(updates: SettingsUpdate):
+    """Update alert settings."""
+    # Convert to dict, filter out None values
+    update_dict = {k: v for k, v in updates.dict().items() if v is not None}
+
+    if not update_dict:
+        raise HTTPException(status_code=400, detail="No settings to update")
+
+    success = settingsService.update_settings(update_dict)
+    if not success:
+        raise HTTPException(status_code=500, detail="Failed to update settings")
+
+    return {"success": True, "updated": list(update_dict.keys()), "timestamp": time.time()}
+
+@app.get("/api/settings/{key}")
+async def get_single_setting(key: str):
+    """Get a single setting by key."""
+    value = settingsService.get_setting(key)
+    if value is None:
+        raise HTTPException(status_code=404, detail="Setting not found")
+    return {"key": key, "value": value}
 
 # ============== STATIC FILES ==============
 

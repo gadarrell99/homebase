@@ -26,7 +26,7 @@ function NavLink({ to, children }) {
 }
 
 function Layout({ children }) {
-  return <div className="min-h-screen bg-slate-900 text-white"><nav className="bg-slate-800 border-b border-slate-700"><div className="max-w-7xl mx-auto px-6 py-4"><div className="flex items-center justify-between"><Link to="/" className="text-xl font-bold">Homebase</Link><div className="flex gap-2"><NavLink to="/">Servers</NavLink><NavLink to="/projects">Projects</NavLink><NavLink to="/metrics">Metrics</NavLink><NavLink to="/security">Security</NavLink><NavLink to="/discovery">Discovery</NavLink></div></div></div></nav><main className="max-w-7xl mx-auto p-6">{children}</main></div>;
+  return <div className="min-h-screen bg-slate-900 text-white"><nav className="bg-slate-800 border-b border-slate-700"><div className="max-w-7xl mx-auto px-6 py-4"><div className="flex items-center justify-between"><Link to="/" className="text-xl font-bold">Homebase</Link><div className="flex gap-2"><NavLink to="/">Servers</NavLink><NavLink to="/projects">Projects</NavLink><NavLink to="/metrics">Metrics</NavLink><NavLink to="/security">Security</NavLink><NavLink to="/discovery">Discovery</NavLink><NavLink to="/settings">Settings</NavLink></div></div></div></nav><main className="max-w-7xl mx-auto p-6">{children}</main></div>;
 }
 
 function ServerCard({ server }) {
@@ -261,8 +261,134 @@ function DiscoveryPage() {
   return <div><div className="flex justify-between items-center mb-6"><div><h1 className="text-2xl font-bold">Discovery</h1><p className="text-gray-400">Auto-discovered projects</p></div><div className="flex gap-4 items-center"><span className="text-gray-400">{projects.length} projects</span><button onClick={fetchProjects} disabled={loading} className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-800 px-4 py-2 rounded text-sm">{loading ? "Scanning..." : "Scan All"}</button></div></div>{loading && projects.length === 0 ? <div className="text-center py-20"><div className="animate-spin text-4xl mb-4">*</div><p className="text-gray-400">Discovering projects...</p></div> : error ? <div className="text-center py-20"><p className="text-red-400">{error}</p><button onClick={fetchProjects} className="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">Retry</button></div> : projects.length === 0 ? <div className="text-center py-20 bg-slate-800 rounded-lg border border-slate-700"><p className="text-gray-400 mb-4">No projects discovered yet</p><button onClick={fetchProjects} className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">Start Discovery</button></div> : <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">{projects.map((project, idx) => <div key={project.server + project.path + idx} className="bg-slate-800 rounded-lg p-5 border border-slate-700 hover:border-slate-600"><div className="flex justify-between items-start mb-3"><div><h3 className="text-lg font-bold text-white">{project.name}</h3><p className="text-gray-500 text-sm">{project.server_name || project.server}</p></div>{project.version && <span className="bg-slate-700 text-gray-300 px-2 py-1 rounded text-xs">v{project.version}</span>}</div>{project.description && <p className="text-gray-400 text-sm mb-3">{project.description}</p>}<div className="text-xs text-gray-500"><code className="bg-slate-900 px-1 rounded">{project.path}</code></div></div>)}</div>}{lastUpdate && <p className="text-center text-gray-500 text-sm mt-6">Last scan: {lastUpdate.toLocaleTimeString()}</p>}</div>;
 }
 
+function SettingsPage() {
+  const [settings, setSettings] = useState({
+    cpu_threshold: 90,
+    memory_threshold: 90,
+    disk_threshold: 90,
+    cooldown_minutes: 15,
+    alert_recipients: '',
+    alerts_enabled: true
+  });
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [message, setMessage] = useState(null);
+
+  const fetchSettings = async () => {
+    try {
+      const res = await fetch("/api/settings");
+      const data = await res.json();
+      setSettings(data.settings || {});
+    } catch (err) {
+      setMessage({ type: 'error', text: 'Failed to load settings' });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const saveSettings = async () => {
+    try {
+      setSaving(true);
+      const res = await fetch("/api/settings", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(settings)
+      });
+      if (res.ok) {
+        setMessage({ type: 'success', text: 'Settings saved successfully' });
+        setTimeout(() => setMessage(null), 3000);
+      } else {
+        throw new Error('Failed to save');
+      }
+    } catch (err) {
+      setMessage({ type: 'error', text: 'Failed to save settings' });
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  useEffect(() => { fetchSettings(); }, []);
+
+  const updateSetting = (key, value) => {
+    setSettings(prev => ({ ...prev, [key]: value }));
+  };
+
+  return (
+    <div>
+      <div className="flex justify-between items-center mb-6">
+        <div><h1 className="text-2xl font-bold">Settings</h1><p className="text-gray-400">Configure alert thresholds and notifications</p></div>
+        <button onClick={saveSettings} disabled={saving} className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-800 px-6 py-2 rounded font-medium">{saving ? "Saving..." : "Save Settings"}</button>
+      </div>
+
+      {message && (
+        <div className={`mb-6 p-4 rounded ${message.type === 'success' ? 'bg-green-900 border border-green-700 text-green-300' : 'bg-red-900 border border-red-700 text-red-300'}`}>
+          {message.text}
+        </div>
+      )}
+
+      {loading ? (
+        <div className="text-center py-20"><div className="animate-spin text-4xl mb-4">*</div><p className="text-gray-400">Loading settings...</p></div>
+      ) : (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="bg-slate-800 rounded-lg p-6 border border-slate-700">
+            <h2 className="text-lg font-bold mb-4">Alert Thresholds</h2>
+            <p className="text-gray-400 text-sm mb-6">Alerts are triggered when resource usage exceeds these percentages</p>
+
+            <div className="space-y-6">
+              <div>
+                <div className="flex justify-between mb-2"><label className="text-gray-300">CPU Threshold</label><span className="text-blue-400 font-bold">{settings.cpu_threshold}%</span></div>
+                <input type="range" min="50" max="100" step="5" value={settings.cpu_threshold} onChange={e => updateSetting('cpu_threshold', parseInt(e.target.value))} className="w-full accent-blue-500" />
+              </div>
+
+              <div>
+                <div className="flex justify-between mb-2"><label className="text-gray-300">Memory Threshold</label><span className="text-green-400 font-bold">{settings.memory_threshold}%</span></div>
+                <input type="range" min="50" max="100" step="5" value={settings.memory_threshold} onChange={e => updateSetting('memory_threshold', parseInt(e.target.value))} className="w-full accent-green-500" />
+              </div>
+
+              <div>
+                <div className="flex justify-between mb-2"><label className="text-gray-300">Disk Threshold</label><span className="text-yellow-400 font-bold">{settings.disk_threshold}%</span></div>
+                <input type="range" min="50" max="100" step="5" value={settings.disk_threshold} onChange={e => updateSetting('disk_threshold', parseInt(e.target.value))} className="w-full accent-yellow-500" />
+              </div>
+
+              <div>
+                <div className="flex justify-between mb-2"><label className="text-gray-300">Alert Cooldown</label><span className="text-gray-300">{settings.cooldown_minutes} minutes</span></div>
+                <input type="range" min="5" max="60" step="5" value={settings.cooldown_minutes} onChange={e => updateSetting('cooldown_minutes', parseInt(e.target.value))} className="w-full" />
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-slate-800 rounded-lg p-6 border border-slate-700">
+            <h2 className="text-lg font-bold mb-4">Notification Settings</h2>
+            <p className="text-gray-400 text-sm mb-6">Configure who receives alert notifications</p>
+
+            <div className="space-y-6">
+              <div>
+                <label className="block text-gray-300 mb-2">Alert Recipients</label>
+                <input type="text" value={settings.alert_recipients} onChange={e => updateSetting('alert_recipients', e.target.value)} placeholder="email1@example.com, email2@example.com" className="w-full bg-slate-900 border border-slate-600 rounded px-4 py-2 text-white focus:border-blue-500 focus:outline-none" />
+                <p className="text-gray-500 text-xs mt-1">Separate multiple emails with commas</p>
+              </div>
+
+              <div className="flex items-center justify-between p-4 bg-slate-900 rounded">
+                <div>
+                  <label className="text-gray-300 font-medium">Enable Alerts</label>
+                  <p className="text-gray-500 text-sm">Toggle all email notifications</p>
+                </div>
+                <button onClick={() => updateSetting('alerts_enabled', !settings.alerts_enabled)} className={`w-14 h-7 rounded-full relative transition-colors ${settings.alerts_enabled ? 'bg-blue-600' : 'bg-slate-600'}`}>
+                  <span className={`absolute top-1 w-5 h-5 bg-white rounded-full transition-transform ${settings.alerts_enabled ? 'left-8' : 'left-1'}`}></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <p className="text-center text-gray-500 text-sm mt-8">Changes take effect immediately after saving</p>
+    </div>
+  );
+}
+
 function App() {
-  return (<BrowserRouter><Layout><Routes><Route path="/" element={<ServersPage />} /><Route path="/projects" element={<ProjectsPage />} /><Route path="/metrics" element={<MetricsPage />} /><Route path="/security" element={<SecurityPage />} /><Route path="/discovery" element={<DiscoveryPage />} /></Routes></Layout></BrowserRouter>);
+  return (<BrowserRouter><Layout><Routes><Route path="/" element={<ServersPage />} /><Route path="/projects" element={<ProjectsPage />} /><Route path="/metrics" element={<MetricsPage />} /><Route path="/security" element={<SecurityPage />} /><Route path="/discovery" element={<DiscoveryPage />} /><Route path="/settings" element={<SettingsPage />} /></Routes></Layout></BrowserRouter>);
 }
 
 export default App;

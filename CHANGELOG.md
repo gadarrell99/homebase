@@ -1,4 +1,24 @@
 # Changelog
+## [0.4.5] - 2026-01-30
+
+### Added
+- **Settings Page for Alerts**
+  - New /settings route with alert configuration UI
+  - Slider controls for CPU, Memory, Disk thresholds (50-100%)
+  - Cooldown period configuration (5-60 minutes)
+  - Alert recipients email field (comma-separated)
+  - Enable/disable alerts toggle
+  - Settings stored in SQLite database
+
+- **Settings API Endpoints**
+  - GET /api/settings - retrieve all settings
+  - PUT /api/settings - update settings
+  - GET /api/settings/{key} - get single setting
+
+- **Settings Service** (backend/services/settings.py)
+  - SQLite settings table with default values
+  - get_setting(), get_all_settings(), update_setting() functions
+
 ## [0.4.4] - 2026-01-30
 
 ### Added
