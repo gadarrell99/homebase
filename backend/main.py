@@ -14,7 +14,7 @@ from services.database import init_database, seed_servers, get_all_servers, get_
 from services import discovery, security, logCollector
 from services import keyManager
 
-app = FastAPI(title="Homebase API", version="0.4.5")
+app = FastAPI(title="Homebase API", version="0.5.0")
 
 # ============== SERVER CACHE ==============
 # Cache server states to enable instant page loads
@@ -177,7 +177,7 @@ async def get_server_stats(server: dict) -> dict:
 
 @app.get("/api/health")
 async def health():
-    return {"status": "ok", "version": "0.4.5", "timestamp": time.time()}
+    return {"status": "ok", "version": "0.5.0", "timestamp": time.time()}
 
 async def refresh_server_cache():
     """Background task to refresh server cache."""
@@ -593,6 +593,274 @@ async def get_single_setting(key: str):
     if value is None:
         raise HTTPException(status_code=404, detail="Setting not found")
     return {"key": key, "value": value}
+
+# ============== AUTHENTICATION ==============
+
+from services import auth as authService
+from fastapi import Depends, Header, Cookie, Request, Response
+from fastapi.security import HTTPBearer
+from typing import Optional
+
+# Request/Response models
+class LoginRequest(BaseModel):
+    username: str
+    password: str
+
+class TwoFactorRequest(BaseModel):
+    user_id: int
+    code: str
+    trust_device: bool = False
+
+class Setup2FAVerify(BaseModel):
+    code: str
+
+class PasswordChangeRequest(BaseModel):
+    current_password: str
+    new_password: str
+
+
+def get_client_info(request: Request) -> tuple:
+    """Extract client IP and user agent."""
+    ip = request.client.host if request.client else None
+    # Try X-Forwarded-For for proxy
+    forwarded = request.headers.get('X-Forwarded-For')
+    if forwarded:
+        ip = forwarded.split(',')[0].strip()
+    user_agent = request.headers.get('User-Agent', '')
+    return ip, user_agent
+
+
+async def get_current_user(
+    request: Request,
+    authorization: Optional[str] = Header(None),
+    session_token: Optional[str] = Cookie(None)
+) -> Optional[dict]:
+    """Dependency to get current authenticated user."""
+    token = None
+    
+    # Try Authorization header first
+    if authorization and authorization.startswith('Bearer '):
+        token = authorization[7:]
+    # Fall back to cookie
+    elif session_token:
+        token = session_token
+    
+    if token:
+        return authService.validate_session(token)
+    return None
+
+
+async def require_auth(user: dict = Depends(get_current_user)):
+    """Dependency that requires authentication."""
+    if not user:
+        raise HTTPException(status_code=401, detail="Authentication required")
+    return user
+
+
+async def require_2fa(user: dict = Depends(require_auth)):
+    """Dependency that requires 2FA to be enabled."""
+    if not user.get('totp_enabled'):
+        raise HTTPException(status_code=403, detail="2FA must be enabled to access this resource")
+    return user
+
+
+@app.post("/api/auth/login")
+async def login(request: Request, login_data: LoginRequest):
+    """Step 1: Authenticate with username/password."""
+    ip, user_agent = get_client_info(request)
+    
+    success, user_info = authService.authenticate_password(
+        login_data.username, 
+        login_data.password,
+        ip,
+        user_agent
+    )
+    
+    if not success:
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+    
+    # Check if device is trusted (skip 2FA)
+    device_token = request.cookies.get('device_token')
+    if device_token and user_info['totp_enabled']:
+        if authService.check_trusted_device(user_info['id'], device_token):
+            # Create session directly - device is trusted
+            session_token = authService.create_session(
+                user_info['id'], ip, user_agent
+            )
+            return {
+                "success": True,
+                "requires_2fa": False,
+                "session_token": session_token,
+                "user": {
+                    "id": user_info['id'],
+                    "username": user_info['username']
+                }
+            }
+    
+    return {
+        "success": True,
+        "requires_2fa": user_info['requires_2fa'],
+        "user_id": user_info['id'],
+        "username": user_info['username']
+    }
+
+
+@app.post("/api/auth/verify-2fa")
+async def verify_2fa(request: Request, response: Response, twofa_data: TwoFactorRequest):
+    """Step 2: Verify 2FA code."""
+    ip, user_agent = get_client_info(request)
+    
+    success, session_token, device_token = authService.authenticate_2fa(
+        twofa_data.user_id,
+        twofa_data.code,
+        ip,
+        user_agent,
+        twofa_data.trust_device
+    )
+    
+    if not success:
+        raise HTTPException(status_code=401, detail="Invalid 2FA code")
+    
+    # Send new device notification
+    existing_device = request.cookies.get('device_token')
+    if not existing_device:
+        authService.send_new_device_notification(twofa_data.user_id, ip, user_agent)
+    
+    result = {
+        "success": True,
+        "session_token": session_token
+    }
+    
+    # Set device token cookie if trusting device
+    if device_token:
+        response.set_cookie(
+            key="device_token",
+            value=device_token,
+            max_age=30 * 24 * 3600,  # 30 days
+            httponly=True,
+            secure=True,
+            samesite="lax"
+        )
+    
+    return result
+
+
+@app.post("/api/auth/logout")
+async def logout(
+    authorization: Optional[str] = Header(None),
+    session_token: Optional[str] = Cookie(None)
+):
+    """Logout and invalidate session."""
+    token = None
+    if authorization and authorization.startswith('Bearer '):
+        token = authorization[7:]
+    elif session_token:
+        token = session_token
+    
+    if token:
+        authService.logout(token)
+    
+    return {"success": True}
+
+
+@app.get("/api/auth/me")
+async def get_me(user: dict = Depends(require_auth)):
+    """Get current user info."""
+    return {
+        "user": user,
+        "authenticated": True
+    }
+
+
+@app.post("/api/auth/setup-2fa")
+async def setup_2fa(user: dict = Depends(require_auth)):
+    """Initialize 2FA setup - returns QR code and backup codes."""
+    result = authService.setup_2fa(user['user_id'])
+    return {
+        "qr_code": result['qr_code'],
+        "secret": result['secret'],
+        "backup_codes": result['backup_codes'],
+        "message": "Scan QR code with authenticator app, then verify with code"
+    }
+
+
+@app.post("/api/auth/verify-2fa-setup")
+async def verify_2fa_setup(verify_data: Setup2FAVerify, user: dict = Depends(require_auth)):
+    """Verify 2FA setup with initial code."""
+    success = authService.verify_2fa_setup(user['user_id'], verify_data.code)
+    
+    if not success:
+        raise HTTPException(status_code=400, detail="Invalid verification code")
+    
+    return {
+        "success": True,
+        "message": "2FA enabled successfully"
+    }
+
+
+@app.get("/api/auth/backup-codes")
+async def get_backup_codes(user: dict = Depends(require_2fa)):
+    """Regenerate backup codes (requires 2FA)."""
+    codes = authService.regenerate_backup_codes(user['user_id'])
+    return {
+        "backup_codes": codes,
+        "message": "Save these codes securely. Each can only be used once."
+    }
+
+
+@app.get("/api/auth/devices")
+async def get_devices(user: dict = Depends(require_auth)):
+    """Get user's trusted devices."""
+    devices = authService.get_user_devices(user['user_id'])
+    return {"devices": devices}
+
+
+@app.delete("/api/auth/devices/{device_id}")
+async def revoke_device(device_id: int, user: dict = Depends(require_auth)):
+    """Revoke a trusted device."""
+    success = authService.revoke_device(user['user_id'], device_id)
+    if not success:
+        raise HTTPException(status_code=404, detail="Device not found")
+    return {"success": True}
+
+
+@app.get("/api/auth/logs")
+async def get_auth_logs(user: dict = Depends(require_auth), limit: int = 50):
+    """Get authentication logs for current user."""
+    logs = authService.get_auth_logs(user['user_id'], limit)
+    return {"logs": logs}
+
+
+@app.post("/api/auth/change-password")
+async def change_password(request: Request, pwd_data: PasswordChangeRequest, user: dict = Depends(require_auth)):
+    """Change password."""
+    ip, user_agent = get_client_info(request)
+    
+    # Verify current password
+    success, _ = authService.authenticate_password(user['username'], pwd_data.current_password)
+    if not success:
+        raise HTTPException(status_code=401, detail="Current password is incorrect")
+    
+    # Update password
+    with authService.get_connection() as conn:
+        cursor = conn.cursor()
+        new_hash = authService.hash_password(pwd_data.new_password)
+        cursor.execute("UPDATE users SET password_hash = ? WHERE id = ?", (new_hash, user['user_id']))
+        conn.commit()
+    
+    authService.log_auth_action(user['user_id'], user['username'], "password_changed", True, ip, user_agent)
+    
+    return {"success": True, "message": "Password changed successfully"}
+
+
+# Initialize admin on startup
+@app.on_event("startup")
+async def init_admin():
+    default_pwd = authService.ensure_admin_exists()
+    if default_pwd:
+        print(f"[Homebase] IMPORTANT: Default admin password: {default_pwd}")
+
+
 
 # ============== STATIC FILES ==============
 

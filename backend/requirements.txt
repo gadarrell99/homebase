@@ -18,3 +18,8 @@ cryptography>=42.0.0
 
 # Data validation
 pydantic>=2.5.0
+
+# 2FA Authentication
+pyotp>=2.9.0
+qrcode[pil]>=8.0
+

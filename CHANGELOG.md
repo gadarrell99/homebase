@@ -1,3 +1,37 @@
+## [0.5.0] - 2026-01-30
+
+### Added
+- TOTP-based 2FA authentication (Google Authenticator/Authy compatible)
+- QR code generation for authenticator app setup
+- Backup codes (10 one-time use codes)
+- Encrypted TOTP secret storage (Fernet encryption)
+- Login flow: Password → 2FA code → Access
+- 'Remember this device for 30 days' option with device tokens
+- Email notification on new device login
+- Session management with JWT-style tokens
+- Auth logging for security auditing
+- User authentication endpoints:
+  - POST /api/auth/login - Password authentication
+  - POST /api/auth/verify-2fa - 2FA code verification
+  - POST /api/auth/setup-2fa - Initialize 2FA
+  - POST /api/auth/verify-2fa-setup - Complete 2FA setup
+  - GET /api/auth/me - Get current user
+  - POST /api/auth/logout - Logout
+  - GET /api/auth/devices - List trusted devices
+  - DELETE /api/auth/devices/{id} - Revoke device
+  - GET /api/auth/logs - View auth logs
+  - POST /api/auth/change-password - Change password
+
+### Changed
+- Version updated to 0.5.0
+
+### Security
+- Default admin account created on first run with random password
+- Password hashing using PBKDF2-SHA256 with salt
+- Secure session tokens (64 bytes urlsafe)
+- Device trust tokens (48 bytes urlsafe)
+
+
 # Changelog
 ## [0.4.5] - 2026-01-30
 

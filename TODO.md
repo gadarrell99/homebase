@@ -1,6 +1,6 @@
 # Homebase TODO
 
-**Current Version:** 0.4.5
+**Current Version:** 0.5.0
 
 ---
 
@@ -40,22 +40,33 @@
 - [x] Email alerts configured and tested
 - [x] Added Relay 2.0 to server monitoring
 
+## Phase 5 - Authentication & Security (v0.5.0) - COMPLETE
+- [x] TOTP-based 2FA authentication
+- [x] QR code generation for authenticator apps
+- [x] Backup codes (10 one-time use)
+- [x] Encrypted TOTP secret storage
+- [x] Login flow: Password → 2FA code → Access
+- [x] "Remember device for 30 days" option
+- [x] Email notification on new device login
+- [x] Session management
+- [x] Auth logging for security auditing
+
 ---
 
-## Phase 5 - Enhanced Alerts (v0.5.0) - NEXT
+## Phase 6 - Enhanced Alerts (v0.6.0) - NEXT
 - [ ] Slack/Discord webhook integration
 - [ ] Uptime percentage tracking
 - [ ] Response time monitoring
 - [ ] Alert thresholds configuration
 
-## Phase 6 - Automation & Integration (v0.6.0)
+## Phase 7 - Automation & Integration (v0.7.0)
 - [ ] GitHub integration (show recent commits)
 - [ ] One-click deployments (pm2 restart, git pull)
 - [ ] Scheduled security scans
 - [ ] Auto-remediation for common issues
 - [ ] Claude Code integration for automated fixes
 
-## Phase 7 - Advanced Features (v1.0.0)
+## Phase 8 - Advanced Features (v1.0.0)
 - [ ] Multi-tenancy support
 - [ ] Role-based access control
 - [ ] Cost tracking per server
@@ -76,4 +87,4 @@
 
 ---
 
-*Last Updated: 2026-01-29*
+*Last Updated: 2026-01-30*
