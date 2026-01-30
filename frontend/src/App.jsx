@@ -36,34 +36,40 @@ function ServerCard({ server }) {
 function ServersPage() {
   const [servers, setServers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [lastUpdate, setLastUpdate] = useState(null);
+  const [cacheAge, setCacheAge] = useState(0);
   const [error, setError] = useState(null);
 
-  const fetchServers = async () => {
+  const fetchServers = async (force = false) => {
     try {
-      const res = await fetch("/api/servers");
+      if (force) setRefreshing(true);
+      const url = force ? "/api/servers?force=true" : "/api/servers";
+      const res = await fetch(url);
       const data = await res.json();
       setServers(data.servers);
       setLastUpdate(new Date());
+      setCacheAge(data.cache_age || 0);
       setError(null);
-      fetch("/api/metrics/record", { method: "POST" }).catch(() => {});
+      if (!force) fetch("/api/metrics/record", { method: "POST" }).catch(() => {});
     } catch (err) {
       setError("Failed to fetch server data");
     } finally {
       setLoading(false);
+      setRefreshing(false);
     }
   };
 
   useEffect(() => {
     fetchServers();
-    const interval = setInterval(fetchServers, 30000);
+    const interval = setInterval(() => fetchServers(false), 30000);
     return () => clearInterval(interval);
   }, []);
 
   const onlineCount = servers.filter(s => s.status === "online").length;
   const totalCount = servers.filter(s => s.status !== "skip").length;
 
-  return <div><div className="flex justify-between items-center mb-6"><div><h1 className="text-2xl font-bold">Servers</h1><p className="text-gray-400">Infrastructure monitoring</p></div><div className="text-right"><div className="text-2xl font-bold text-green-400">{onlineCount}/{totalCount}</div><div className="text-gray-400 text-sm">servers online</div>{lastUpdate && <div className="text-gray-500 text-xs mt-1">Updated: {lastUpdate.toLocaleTimeString()}</div>}</div></div>{loading ? <div className="text-center py-20"><div className="animate-spin text-4xl mb-4">*</div><p className="text-gray-400">Loading server data...</p></div> : error ? <div className="text-center py-20"><p className="text-red-400">{error}</p><button onClick={fetchServers} className="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">Retry</button></div> : <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">{servers.map(server => <ServerCard key={server.name} server={server} />)}</div>}<p className="text-center text-gray-500 text-sm mt-8">Auto-refreshes every 30 seconds</p></div>;
+  return <div><div className="flex justify-between items-center mb-6"><div><h1 className="text-2xl font-bold">Servers</h1><p className="text-gray-400">Infrastructure monitoring</p></div><div className="flex items-center gap-4"><button onClick={() => fetchServers(true)} disabled={refreshing} className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-800 px-4 py-2 rounded text-sm">{refreshing ? "Refreshing..." : "Force Refresh"}</button><div className="text-right"><div className="text-2xl font-bold text-green-400">{onlineCount}/{totalCount}</div><div className="text-gray-400 text-sm">servers online</div>{lastUpdate && <div className="text-gray-500 text-xs mt-1">Updated: {lastUpdate.toLocaleTimeString()}{cacheAge > 0 && <span className="ml-1">(cached {cacheAge}s ago)</span>}</div>}</div></div></div>{loading ? <div className="text-center py-20"><div className="animate-spin text-4xl mb-4">*</div><p className="text-gray-400">Loading server data...</p></div> : error ? <div className="text-center py-20"><p className="text-red-400">{error}</p><button onClick={() => fetchServers(true)} className="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">Retry</button></div> : <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">{servers.map(server => <ServerCard key={server.name} server={server} />)}</div>}<p className="text-center text-gray-500 text-sm mt-8">Auto-refreshes every 30 seconds | Click Force Refresh for live data</p></div>;
 }
 
 function MetricsPage() {

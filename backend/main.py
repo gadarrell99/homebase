@@ -1,6 +1,6 @@
 import asyncio
 import asyncssh
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
@@ -14,7 +14,17 @@ from services.database import init_database, seed_servers, get_all_servers, get_
 from services import discovery, security, logCollector
 from services import keyManager
 
-app = FastAPI(title="Homebase API", version="0.3.3")
+app = FastAPI(title="Homebase API", version="0.4.1")
+
+# ============== SERVER CACHE ==============
+# Cache server states to enable instant page loads
+SERVER_CACHE = {
+    "data": [],
+    "timestamp": 0,
+    "refreshing": False
+}
+CACHE_MAX_AGE = 60  # seconds - serve cached data if less than this old
+SSH_TIMEOUT = 15  # seconds - timeout for individual SSH connections
 
 app.add_middleware(
     CORSMiddleware,
@@ -42,13 +52,34 @@ SERVERS = [
     {"name": "Hyper-V", "ip": "192.168.65.253", "user": "Administrator", "web_url": None, "ssh_url": "hyperv-ssh.rize.bm", "os": "windows"},
 ]
 
+async def get_server_stats_with_timeout(server: dict, timeout: int = SSH_TIMEOUT) -> dict:
+    """Wrapper to apply timeout to server stats collection."""
+    try:
+        return await asyncio.wait_for(get_server_stats(server), timeout=timeout)
+    except asyncio.TimeoutError:
+        return {
+            "name": server["name"],
+            "ip": server["ip"],
+            "web_url": server.get("web_url"),
+            "ssh_url": server.get("ssh_url"),
+            "status": "offline",
+            "error": "Connection timed out",
+            "uptime": None,
+            "memory_used": None,
+            "memory_total": None,
+            "disk_used": None,
+            "disk_total": None,
+            "cpu_percent": None,
+            "vms": None,
+        }
+
 async def get_server_stats(server: dict) -> dict:
     """SSH to server and get stats."""
     result = {
         "name": server["name"],
         "ip": server["ip"],
-        "web_url": server["web_url"],
-        "ssh_url": server["ssh_url"],
+        "web_url": server.get("web_url"),
+        "ssh_url": server.get("ssh_url"),
         "status": "offline",
         "uptime": None,
         "memory_used": None,
@@ -66,7 +97,7 @@ async def get_server_stats(server: dict) -> dict:
             server["ip"],
             username=server["user"],
             known_hosts=None,
-            connect_timeout=10
+            connect_timeout=8
         ) as conn:
             if server_os == "windows":
                 hostname_result = await conn.run("hostname", check=False)
@@ -146,13 +177,58 @@ async def get_server_stats(server: dict) -> dict:
 
 @app.get("/api/health")
 async def health():
-    return {"status": "ok", "version": "0.3.3", "timestamp": time.time()}
+    return {"status": "ok", "version": "0.4.1", "timestamp": time.time()}
+
+async def refresh_server_cache():
+    """Background task to refresh server cache."""
+    global SERVER_CACHE
+    if SERVER_CACHE["refreshing"]:
+        return  # Already refreshing
+
+    SERVER_CACHE["refreshing"] = True
+    try:
+        tasks = [get_server_stats_with_timeout(s) for s in SERVERS]
+        results = await asyncio.gather(*tasks)
+        SERVER_CACHE["data"] = results
+        SERVER_CACHE["timestamp"] = time.time()
+    finally:
+        SERVER_CACHE["refreshing"] = False
 
 @app.get("/api/servers")
-async def get_servers():
-    tasks = [get_server_stats(s) for s in SERVERS]
-    results = await asyncio.gather(*tasks)
-    return {"servers": results, "timestamp": time.time()}
+async def get_servers(background_tasks: BackgroundTasks, force: bool = Query(False)):
+    """
+    Get server status. Returns cached data for fast loading.
+    - Returns cached data immediately if available and fresh (< 60s old)
+    - Triggers background refresh if cache is stale
+    - Use ?force=true to bypass cache and wait for fresh data
+    """
+    global SERVER_CACHE
+    cache_age = time.time() - SERVER_CACHE["timestamp"]
+
+    # Force refresh - bypass cache entirely
+    if force or not SERVER_CACHE["data"]:
+        tasks = [get_server_stats_with_timeout(s) for s in SERVERS]
+        results = await asyncio.gather(*tasks)
+        SERVER_CACHE["data"] = results
+        SERVER_CACHE["timestamp"] = time.time()
+        return {
+            "servers": results,
+            "timestamp": time.time(),
+            "cached": False,
+            "cache_age": 0
+        }
+
+    # Return cached data, trigger background refresh if stale
+    if cache_age > CACHE_MAX_AGE and not SERVER_CACHE["refreshing"]:
+        background_tasks.add_task(refresh_server_cache)
+
+    return {
+        "servers": SERVER_CACHE["data"],
+        "timestamp": time.time(),
+        "cached": True,
+        "cache_age": int(cache_age),
+        "refreshing": SERVER_CACHE["refreshing"]
+    }
 
 
 # ============== DISCOVERY ==============
@@ -423,8 +499,12 @@ async def get_metrics_summary(hours: int = 24):
 @app.post("/api/metrics/record")
 async def record_current_metrics():
     """Record current metrics (typically called by scheduler)."""
-    tasks = [get_server_stats(s) for s in SERVERS]
+    tasks = [get_server_stats_with_timeout(s) for s in SERVERS]
     results = await asyncio.gather(*tasks)
+    # Also update the cache while we're at it
+    global SERVER_CACHE
+    SERVER_CACHE["data"] = results
+    SERVER_CACHE["timestamp"] = time.time()
     count = metrics_history.record_metrics(results)
     return {"recorded": count, "timestamp": time.time()}
 

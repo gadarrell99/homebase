@@ -1,4 +1,18 @@
 # Changelog
+## [0.4.1] - 2026-01-30
+
+### Fixed
+- **Servers Page Loading Performance**
+  - Added server cache for instant page loads
+  - Returns cached data immediately while refreshing in background
+  - Added Force Refresh button for live data
+  - Added SSH timeout wrapper (15s) to prevent hanging
+  - Cache shows age indicator (e.g., cached 30s ago)
+
+### Changed
+- Updated API version to 0.4.1
+- Metrics recording now also updates server cache
+
 
 ## [0.4.0] - 2026-01-29
 
