@@ -1,0 +1,125 @@
+{
+  "servers": [
+    {
+      "id": "talos",
+      "name": "Talos",
+      "ip": "192.168.65.237",
+      "type": "management",
+      "status": "online",
+      "ssh_user": "talosadmin",
+      "ram_gb": 8,
+      "description": "C2 hub, Claude Code, SSH gateway, Ollama"
+    },
+    {
+      "id": "agents",
+      "name": "Agents",
+      "ip": "192.168.65.241",
+      "type": "agent-host",
+      "status": "online",
+      "ssh_user": "agents",
+      "ram_gb": 8,
+      "description": "All AI agents (David Bishop, Treasurer, Watchman)"
+    },
+    {
+      "id": "rize-apps",
+      "name": "Rize-Apps",
+      "ip": "192.168.65.245",
+      "type": "production",
+      "status": "online",
+      "ssh_user": "rizeadmin",
+      "ssh_url": "https://rize-apps-ssh.rize.bm",
+      "ram_gb": 16,
+      "description": "Homebase, Sentinel, Property Rize, Nexus, Dockyard WiFi, Relay, OpenHands, PostgreSQL"
+    },
+    {
+      "id": "demos",
+      "name": "Demos",
+      "ip": "192.168.65.246",
+      "type": "production",
+      "status": "online",
+      "ssh_user": "demos",
+      "ssh_url": "https://bpsai-ssh.rize.bm",
+      "ram_gb": 8,
+      "description": "Best Shipping, BPS AI, Premier EMR, Helios"
+    },
+    {
+      "id": "vector",
+      "name": "Vector",
+      "ip": "192.168.65.249",
+      "type": "critical",
+      "status": "online",
+      "ssh_user": "betadmin",
+      "ram_gb": 3,
+      "description": "BET Air Ambulance (standalone production)"
+    },
+    {
+      "id": "hyper-v",
+      "name": "Hyper-V",
+      "ip": "192.168.65.253",
+      "type": "hypervisor",
+      "status": "online",
+      "ssh_user": "Administrator",
+      "description": "VM Host (Windows)"
+    },
+    {
+      "id": "premier-emr-old",
+      "name": "Premier-EMR (OLD)",
+      "ip": "192.168.65.239",
+      "type": "legacy",
+      "status": "decommissioned",
+      "ssh_user": "emradmin",
+      "migrated_to": "192.168.65.246",
+      "description": "Migrated to Demos (.246)"
+    },
+    {
+      "id": "helios-old",
+      "name": "Helios (OLD)",
+      "ip": "192.168.65.240",
+      "type": "legacy",
+      "status": "decommissioned",
+      "ssh_user": "heliosdev",
+      "migrated_to": "192.168.65.246",
+      "description": "Migrating to Demos (.246)"
+    },
+    {
+      "id": "cobalt-old",
+      "name": "Cobalt (OLD)",
+      "ip": "192.168.65.243",
+      "type": "legacy",
+      "status": "decommissioned",
+      "ssh_user": "cobaltadmin",
+      "migrated_to": "192.168.65.245",
+      "description": "Migrated to Rize-Apps (.245)"
+    },
+    {
+      "id": "nexus-old",
+      "name": "Nexus (OLD)",
+      "ip": "192.168.65.247",
+      "type": "legacy",
+      "status": "decommissioned",
+      "ssh_user": "nexusadmin",
+      "migrated_to": "192.168.65.245",
+      "description": "Migrated to Rize-Apps (.245)"
+    },
+    {
+      "id": "relay-old",
+      "name": "Relay (OLD)",
+      "ip": "192.168.65.248",
+      "type": "legacy",
+      "status": "decommissioned",
+      "ssh_user": "relayadmin",
+      "migrated_to": "192.168.65.245",
+      "description": "Migrated to Rize-Apps (.245)"
+    },
+    {
+      "id": "dockyard-old",
+      "name": "Dockyard (OLD)",
+      "ip": "192.168.65.252",
+      "type": "legacy",
+      "status": "decommissioned",
+      "ssh_user": "dockyardadmin",
+      "migrated_to": "192.168.65.245",
+      "description": "Migrated to Rize-Apps (.245)"
+    }
+  ]
+}

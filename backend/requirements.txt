@@ -1,0 +1,25 @@
+# Homebase Backend Dependencies
+# Python 3.12+
+
+# Web Framework
+fastapi>=0.109.0
+
+# ASGI Server
+uvicorn[standard]>=0.27.0
+
+# Async SSH Client
+asyncssh>=2.14.0
+
+# Type hints (optional, included with Python 3.12)
+typing-extensions>=4.9.0
+
+# Encryption for key management
+cryptography>=42.0.0
+
+# Data validation
+pydantic>=2.5.0
+
+# 2FA Authentication
+pyotp>=2.9.0
+qrcode[pil]>=8.0
+

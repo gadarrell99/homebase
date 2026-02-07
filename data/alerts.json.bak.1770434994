@@ -1,0 +1,905 @@
+{
+  "alerts": [
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 694 min",
+      "id": "ALT-2026-0207032510",
+      "timestamp": "2026-02-07T03:25:10.711973Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 689 min",
+      "id": "ALT-2026-0207032512",
+      "timestamp": "2026-02-07T03:25:10.711973Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 689 min",
+      "id": "ALT-2026-0207032010",
+      "timestamp": "2026-02-07T03:20:10.225162Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 684 min",
+      "id": "ALT-2026-0207032012",
+      "timestamp": "2026-02-07T03:20:10.225162Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 684 min",
+      "id": "ALT-2026-0207031508",
+      "timestamp": "2026-02-07T03:15:08.889894Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 679 min",
+      "id": "ALT-2026-0207031510",
+      "timestamp": "2026-02-07T03:15:08.889894Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 679 min",
+      "id": "ALT-2026-0207031010",
+      "timestamp": "2026-02-07T03:10:10.245094Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 674 min",
+      "id": "ALT-2026-0207031011",
+      "timestamp": "2026-02-07T03:10:10.245094Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 674 min",
+      "id": "ALT-2026-0207030510",
+      "timestamp": "2026-02-07T03:05:10.028371Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 669 min",
+      "id": "ALT-2026-0207030512",
+      "timestamp": "2026-02-07T03:05:10.028371Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 669 min",
+      "id": "ALT-2026-0207030010",
+      "timestamp": "2026-02-07T03:00:10.503905Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 664 min",
+      "id": "ALT-2026-0207030012",
+      "timestamp": "2026-02-07T03:00:10.503905Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 664 min",
+      "id": "ALT-2026-0207025511",
+      "timestamp": "2026-02-07T02:55:11.107956Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 659 min",
+      "id": "ALT-2026-0207025513",
+      "timestamp": "2026-02-07T02:55:11.107956Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 659 min",
+      "id": "ALT-2026-0207025010",
+      "timestamp": "2026-02-07T02:50:10.027332Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 654 min",
+      "id": "ALT-2026-0207025012",
+      "timestamp": "2026-02-07T02:50:10.027332Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 654 min",
+      "id": "ALT-2026-0207024510",
+      "timestamp": "2026-02-07T02:45:10.489282Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 649 min",
+      "id": "ALT-2026-0207024512",
+      "timestamp": "2026-02-07T02:45:10.489282Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 649 min",
+      "id": "ALT-2026-0207024011",
+      "timestamp": "2026-02-07T02:40:11.656707Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 644 min",
+      "id": "ALT-2026-0207024013",
+      "timestamp": "2026-02-07T02:40:11.656707Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 644 min",
+      "id": "ALT-2026-0207023511",
+      "timestamp": "2026-02-07T02:35:11.130287Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 639 min",
+      "id": "ALT-2026-0207023513",
+      "timestamp": "2026-02-07T02:35:11.130287Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 639 min",
+      "id": "ALT-2026-0207023009",
+      "timestamp": "2026-02-07T02:30:09.922306Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 634 min",
+      "id": "ALT-2026-0207023012",
+      "timestamp": "2026-02-07T02:30:09.922306Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 634 min",
+      "id": "ALT-2026-0207022511",
+      "timestamp": "2026-02-07T02:25:11.688382Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 629 min",
+      "id": "ALT-2026-0207022513",
+      "timestamp": "2026-02-07T02:25:11.688382Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 629 min",
+      "id": "ALT-2026-0207022010",
+      "timestamp": "2026-02-07T02:20:10.146749Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 624 min",
+      "id": "ALT-2026-0207022012",
+      "timestamp": "2026-02-07T02:20:10.146749Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 624 min",
+      "id": "ALT-2026-0207021511",
+      "timestamp": "2026-02-07T02:15:11.712765Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 619 min",
+      "id": "ALT-2026-0207021513",
+      "timestamp": "2026-02-07T02:15:11.712765Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 619 min",
+      "id": "ALT-2026-0207021010",
+      "timestamp": "2026-02-07T02:10:10.065059Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 614 min",
+      "id": "ALT-2026-0207021012",
+      "timestamp": "2026-02-07T02:10:10.065059Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 614 min",
+      "id": "ALT-2026-0207020509",
+      "timestamp": "2026-02-07T02:05:09.105321Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 609 min",
+      "id": "ALT-2026-0207020511",
+      "timestamp": "2026-02-07T02:05:09.105321Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 609 min",
+      "id": "ALT-2026-0207020011",
+      "timestamp": "2026-02-07T02:00:11.340360Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 604 min",
+      "id": "ALT-2026-0207020013",
+      "timestamp": "2026-02-07T02:00:11.340360Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 604 min",
+      "id": "ALT-2026-0207015510",
+      "timestamp": "2026-02-07T01:55:10.453202Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 599 min",
+      "id": "ALT-2026-0207015512",
+      "timestamp": "2026-02-07T01:55:10.453202Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 599 min",
+      "id": "ALT-2026-0207015011",
+      "timestamp": "2026-02-07T01:50:11.686652Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 594 min",
+      "id": "ALT-2026-0207015013",
+      "timestamp": "2026-02-07T01:50:11.686652Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 594 min",
+      "id": "ALT-2026-0207014509",
+      "timestamp": "2026-02-07T01:45:09.599752Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 589 min",
+      "id": "ALT-2026-0207014511",
+      "timestamp": "2026-02-07T01:45:09.599752Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 589 min",
+      "id": "ALT-2026-0207014012",
+      "timestamp": "2026-02-07T01:40:12.002143Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 584 min",
+      "id": "ALT-2026-0207014014",
+      "timestamp": "2026-02-07T01:40:12.002143Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 584 min",
+      "id": "ALT-2026-0207013510",
+      "timestamp": "2026-02-07T01:35:10.455569Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 579 min",
+      "id": "ALT-2026-0207013512",
+      "timestamp": "2026-02-07T01:35:10.455569Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 579 min",
+      "id": "ALT-2026-0207013009",
+      "timestamp": "2026-02-07T01:30:09.239146Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 574 min",
+      "id": "ALT-2026-0207013011",
+      "timestamp": "2026-02-07T01:30:09.239146Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 574 min",
+      "id": "ALT-2026-0207012510",
+      "timestamp": "2026-02-07T01:25:10.907257Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 569 min",
+      "id": "ALT-2026-0207012513",
+      "timestamp": "2026-02-07T01:25:10.907257Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 569 min",
+      "id": "ALT-2026-0207012009",
+      "timestamp": "2026-02-07T01:20:09.680130Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 564 min",
+      "id": "ALT-2026-0207012011",
+      "timestamp": "2026-02-07T01:20:09.680130Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 564 min",
+      "id": "ALT-2026-0207011510",
+      "timestamp": "2026-02-07T01:15:10.863182Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 559 min",
+      "id": "ALT-2026-0207011513",
+      "timestamp": "2026-02-07T01:15:10.863182Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 559 min",
+      "id": "ALT-2026-0207011011",
+      "timestamp": "2026-02-07T01:10:11.080136Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 554 min",
+      "id": "ALT-2026-0207011013",
+      "timestamp": "2026-02-07T01:10:11.080136Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 554 min",
+      "id": "ALT-2026-0207010509",
+      "timestamp": "2026-02-07T01:05:09.658915Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 549 min",
+      "id": "ALT-2026-0207010512",
+      "timestamp": "2026-02-07T01:05:09.658915Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 549 min",
+      "id": "ALT-2026-0207010010",
+      "timestamp": "2026-02-07T01:00:10.097670Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 544 min",
+      "id": "ALT-2026-0207010011",
+      "timestamp": "2026-02-07T01:00:10.097670Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 544 min",
+      "id": "ALT-2026-0207005510",
+      "timestamp": "2026-02-07T00:55:10.504994Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 539 min",
+      "id": "ALT-2026-0207005512",
+      "timestamp": "2026-02-07T00:55:10.504994Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 539 min",
+      "id": "ALT-2026-0207005010",
+      "timestamp": "2026-02-07T00:50:10.790433Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 534 min",
+      "id": "ALT-2026-0207005012",
+      "timestamp": "2026-02-07T00:50:10.790433Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 534 min",
+      "id": "ALT-2026-0207004510",
+      "timestamp": "2026-02-07T00:45:10.506208Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 529 min",
+      "id": "ALT-2026-0207004512",
+      "timestamp": "2026-02-07T00:45:10.506208Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 529 min",
+      "id": "ALT-2026-0207004011",
+      "timestamp": "2026-02-07T00:40:11.305984Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 524 min",
+      "id": "ALT-2026-0207004013",
+      "timestamp": "2026-02-07T00:40:11.305984Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 524 min",
+      "id": "ALT-2026-0207003510",
+      "timestamp": "2026-02-07T00:35:10.651560Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 519 min",
+      "id": "ALT-2026-0207003512",
+      "timestamp": "2026-02-07T00:35:10.651560Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 519 min",
+      "id": "ALT-2026-0207003010",
+      "timestamp": "2026-02-07T00:30:10.411076Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 514 min",
+      "id": "ALT-2026-0207003012",
+      "timestamp": "2026-02-07T00:30:10.411076Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 514 min",
+      "id": "ALT-2026-0207002510",
+      "timestamp": "2026-02-07T00:25:10.691283Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 509 min",
+      "id": "ALT-2026-0207002512",
+      "timestamp": "2026-02-07T00:25:10.691283Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 509 min",
+      "id": "ALT-2026-0207002010",
+      "timestamp": "2026-02-07T00:20:10.080010Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 504 min",
+      "id": "ALT-2026-0207002011",
+      "timestamp": "2026-02-07T00:20:10.080010Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 504 min",
+      "id": "ALT-2026-0207001510",
+      "timestamp": "2026-02-07T00:15:10.136095Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 499 min",
+      "id": "ALT-2026-0207001512",
+      "timestamp": "2026-02-07T00:15:10.136095Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 499 min",
+      "id": "ALT-2026-0207001010",
+      "timestamp": "2026-02-07T00:10:10.872329Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 494 min",
+      "id": "ALT-2026-0207001013",
+      "timestamp": "2026-02-07T00:10:10.872329Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 494 min",
+      "id": "ALT-2026-0207000510",
+      "timestamp": "2026-02-07T00:05:10.056276Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 489 min",
+      "id": "ALT-2026-0207000512",
+      "timestamp": "2026-02-07T00:05:10.056276Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 489 min",
+      "id": "ALT-2026-0207000011",
+      "timestamp": "2026-02-07T00:00:11.002172Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 484 min",
+      "id": "ALT-2026-0207000013",
+      "timestamp": "2026-02-07T00:00:11.002172Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 484 min",
+      "id": "ALT-2026-0206235509",
+      "timestamp": "2026-02-06T23:55:09.723422Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 479 min",
+      "id": "ALT-2026-0206235511",
+      "timestamp": "2026-02-06T23:55:09.723422Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 479 min",
+      "id": "ALT-2026-0206235009",
+      "timestamp": "2026-02-06T23:50:09.362624Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 474 min",
+      "id": "ALT-2026-0206235010",
+      "timestamp": "2026-02-06T23:50:09.362624Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 474 min",
+      "id": "ALT-2026-0206234510",
+      "timestamp": "2026-02-06T23:45:10.060122Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 469 min",
+      "id": "ALT-2026-0206234512",
+      "timestamp": "2026-02-06T23:45:10.060122Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 469 min",
+      "id": "ALT-2026-0206234008",
+      "timestamp": "2026-02-06T23:40:08.816054Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 464 min",
+      "id": "ALT-2026-0206234010",
+      "timestamp": "2026-02-06T23:40:08.816054Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "david-bishop",
+      "message": "Agent david-bishop no heartbeat for 460 min",
+      "id": "ALT-2026-0206233509",
+      "timestamp": "2026-02-06T23:35:09.747575Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "treasurer",
+      "message": "Agent treasurer no heartbeat for 464 min",
+      "id": "ALT-2026-0206233511",
+      "timestamp": "2026-02-06T23:35:09.747575Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "watchman",
+      "message": "Agent watchman no heartbeat for 459 min",
+      "id": "ALT-2026-0206233514",
+      "timestamp": "2026-02-06T23:35:09.747575Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "david-bishop",
+      "message": "Agent david-bishop no heartbeat for 455 min",
+      "id": "ALT-2026-0206233008",
+      "timestamp": "2026-02-06T23:30:08.962421Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "david-bishop",
+      "message": "Agent david-bishop no heartbeat for 450 min",
+      "id": "ALT-2026-0206232509",
+      "timestamp": "2026-02-06T23:25:09.028162Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "david-bishop",
+      "message": "Agent david-bishop no heartbeat for 445 min",
+      "id": "ALT-2026-0206232011",
+      "timestamp": "2026-02-06T23:20:11.432650Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "david-bishop",
+      "message": "Agent david-bishop no heartbeat for 440 min",
+      "id": "ALT-2026-0206231510",
+      "timestamp": "2026-02-06T23:15:10.686704Z",
+      "acknowledged": false
+    },
+    {
+      "severity": "critical",
+      "source": "agent",
+      "target": "david-bishop",
+      "message": "Agent david-bishop no heartbeat for 435 min",
+      "id": "ALT-2026-0206231008",
+      "timestamp": "2026-02-06T23:10:08.734111Z",
+      "acknowledged": false
+    }
+  ],
+  "last_generated": "2026-02-07T03:25:10.711973Z"
+}

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | Homebase</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+.main-nav { display: flex; align-items: center; padding: 0.75rem 1.5rem; background: #1e293b; border-bottom: 1px solid #334155; position: sticky; top: 0; z-index: 100; }
+.main-nav .logo { font-size: 1.1rem; font-weight: 600; color: #e2e8f0; margin-right: 2rem; text-decoration: none; }
+.main-nav .nav-links { display: flex; gap: 0.25rem; flex: 1; flex-wrap: wrap; align-items: center; }
+.main-nav .nav-links a { color: #94a3b8; padding: 0.5rem 0.75rem; border-radius: 0.375rem; font-size: 0.875rem; text-decoration: none; transition: all 0.15s; }
+.main-nav .nav-links a:hover, .main-nav .nav-links a.active { color: #e2e8f0; background: #334155; }
+
+        
+        
+        .nav-links { display: flex; gap: 1.5rem; }
+        .nav-links a { color: #94a3b8; text-decoration: none; transition: color 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: #60a5fa; }
+        .container { max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+        h1 { margin-bottom: 2rem; }
+        .card { background: #1e293b; border-radius: 0.5rem; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid #334155; }
+        .card h2 { color: #60a5fa; margin-bottom: 1rem; font-size: 1.2rem; }
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; color: #94a3b8; font-size: 0.9rem; }
+        .form-group input, .form-group select { width: 100%; padding: 0.75rem; background: #0f172a; border: 1px solid #334155; border-radius: 0.25rem; color: #e2e8f0; font-size: 1rem; }
+        .form-group input:focus, .form-group select:focus { outline: none; border-color: #60a5fa; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .checkbox-group { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .checkbox-group label { display: flex; align-items: center; gap: 0.5rem; background: #0f172a; padding: 0.5rem 1rem; border-radius: 0.25rem; cursor: pointer; }
+        .checkbox-group input { width: auto; }
+        .btn { background: #3b82f6; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.25rem; cursor: pointer; font-size: 1rem; transition: background 0.2s; }
+        .btn:hover { background: #2563eb; }
+        .btn-success { background: #22c55e; }
+        .status { padding: 1rem; border-radius: 0.25rem; margin-top: 1rem; display: none; }
+        .status.success { display: block; background: #166534; color: #bbf7d0; }
+        .status.error { display: block; background: #991b1b; color: #fecaca; }
+    /* Unified Navigation */
+
+.main-nav 
+
+@media (max-width: 900px) {   }
+
+</style>
+</head>
+<body>
+    <nav class="main-nav">
+    <a href="/" class="logo">Homebase</a>
+    <div class="nav-links">
+        <a href="/">Dashboard</a>
+        <a href="/fleet">Fleet</a>
+        <a href="/agents">Agents</a>
+        <a href="/sentinel">Sentinel</a>
+        <a href="/research">Research</a>
+        <a href="/infra">Infra Sheet</a>
+        <a href="/settings" class="active">Settings</a>
+        <a href="/backups">Backups</a>
+    </div>
+</nav>
+    
+    <div class="container">
+        <h1>Sentinel Settings</h1>
+        <div id="status" class="status"></div>
+        
+        <div class="card">
+            <h2>Alerting</h2>
+            <div class="form-group">
+                <label>Alert Email Recipients (comma-separated)</label>
+                <input type="text" id="alert_email" placeholder="email@example.com">
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Warning Threshold (minutes)</label>
+                    <input type="number" id="heartbeat_warn_minutes" min="1" max="60">
+                </div>
+                <div class="form-group">
+                    <label>Critical Threshold (minutes)</label>
+                    <input type="number" id="heartbeat_crit_minutes" min="1" max="120">
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Maintenance Window</h2>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Start Time (ADT = UTC-3)</label>
+                    <input type="time" id="maint_start_time" value="03:00">
+                </div>
+                <div class="form-group">
+                    <label>Duration (minutes)</label>
+                    <input type="number" id="maint_duration" min="15" max="240" value="60">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Days of Week</label>
+                <div class="checkbox-group" id="maint_days">
+                    <label><input type="checkbox" value="mon" checked> Mon</label>
+                    <label><input type="checkbox" value="tue" checked> Tue</label>
+                    <label><input type="checkbox" value="wed" checked> Wed</label>
+                    <label><input type="checkbox" value="thu" checked> Thu</label>
+                    <label><input type="checkbox" value="fri" checked> Fri</label>
+                    <label><input type="checkbox" value="sat" checked> Sat</label>
+                    <label><input type="checkbox" value="sun" checked> Sun</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label><input type="checkbox" id="maint_active" checked> Maintenance Window Enabled</label>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Research Scout</h2>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Frequency</label>
+                    <select id="research_frequency">
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="disabled">Disabled</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Digest Time (ADT = UTC-3)</label>
+                    <input type="time" id="digest_time_utc" value="08:00">
+                </div>
+            </div>
+        </div>
+
+        <button class="btn" onclick="saveSettings()">Save All Settings</button>
+    </div>
+
+    <script>
+        async function loadSettings() {
+            try {
+                const [settings, maint] = await Promise.all([
+                    fetch('/api/settings').then(r => r.json()),
+                    fetch('/api/maintenance').then(r => r.json())
+                ]);
+                document.getElementById('alert_email').value = settings.alert_email || '';
+                document.getElementById('heartbeat_warn_minutes').value = settings.heartbeat_warn_minutes || '10';
+                document.getElementById('heartbeat_crit_minutes').value = settings.heartbeat_crit_minutes || '30';
+                document.getElementById('research_frequency').value = settings.research_frequency || 'daily';
+                document.getElementById('digest_time_utc').value = settings.digest_time_utc || '08:00';
+                if (maint) {
+                    document.getElementById('maint_start_time').value = maint.start_time || '03:00';
+                    document.getElementById('maint_duration').value = maint.duration_minutes || 60;
+                    document.getElementById('maint_active').checked = maint.active == 1;
+                    const days = JSON.parse(maint.days_of_week || '[]');
+                    document.querySelectorAll('#maint_days input').forEach(cb => {
+                        cb.checked = days.includes(cb.value);
+                    });
+                }
+            } catch (e) { console.error('Load failed:', e); }
+        }
+        async function saveSettings() {
+            const status = document.getElementById('status');
+            try {
+                const settings = {
+                    alert_email: document.getElementById('alert_email').value,
+                    heartbeat_warn_minutes: document.getElementById('heartbeat_warn_minutes').value,
+                    heartbeat_crit_minutes: document.getElementById('heartbeat_crit_minutes').value,
+                    research_frequency: document.getElementById('research_frequency').value,
+                    digest_time_utc: document.getElementById('digest_time_utc').value
+                };
+                const days = Array.from(document.querySelectorAll('#maint_days input:checked')).map(cb => cb.value);
+                const maint = {
+                    start_time: document.getElementById('maint_start_time').value,
+                    duration_minutes: parseInt(document.getElementById('maint_duration').value),
+                    days_of_week: days,
+                    active: document.getElementById('maint_active').checked ? 1 : 0
+                };
+                await fetch('/api/settings', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(settings) });
+                await fetch('/api/maintenance', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(maint) });
+                status.className = 'status success';
+                status.textContent = 'Settings saved successfully!';
+            } catch (e) {
+                status.className = 'status error';
+                status.textContent = 'Failed to save: ' + e.message;
+            }
+        }
+        loadSettings();
+    </script>
+</body>
+</html>

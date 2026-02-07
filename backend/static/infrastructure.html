@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infrastructure | Homebase</title>
+    <style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+.main-nav { display: flex; align-items: center; padding: 0.75rem 1.5rem; background: #1e293b; border-bottom: 1px solid #334155; position: sticky; top: 0; z-index: 100; }
+.main-nav .logo { font-size: 1.1rem; font-weight: 600; color: #e2e8f0; margin-right: 2rem; text-decoration: none; }
+.main-nav .nav-links { display: flex; gap: 0.25rem; flex: 1; flex-wrap: wrap; align-items: center; }
+.main-nav .nav-links a { color: #94a3b8; padding: 0.5rem 0.75rem; border-radius: 0.375rem; font-size: 0.875rem; text-decoration: none; transition: all 0.15s; }
+.main-nav .nav-links a:hover, .main-nav .nav-links a.active { color: #e2e8f0; background: #334155; }
+
+a { color: #60a5fa; text-decoration: none; }
+
+.page-container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+.page-header { margin-bottom: 1.5rem; }
+.page-header h1 { font-size: 1.75rem; font-weight: 600; margin-bottom: 0.25rem; }
+.page-header p { color: #64748b; font-size: 0.875rem; }
+.section { background: #1e293b; border-radius: 0.5rem; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid #334155; }
+.section h2 { font-size: 1rem; margin-bottom: 1rem; color: #f1f5f9; display: flex; align-items: center; gap: 0.5rem; }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+.stat-card { background: #0f172a; padding: 1rem; border-radius: 0.5rem; text-align: center; }
+.stat-value { font-size: 2rem; font-weight: 700; color: #22c55e; }
+.stat-value.warning { color: #f59e0b; }
+.stat-label { font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; }
+table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid #334155; }
+th { color: #94a3b8; font-weight: 500; font-size: 0.75rem; text-transform: uppercase; }
+tr:hover { background: #334155; }
+.status-badge { display: inline-block; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.75rem; font-weight: 500; }
+.status-ok { background: #166534; color: #86efac; }
+.status-decom { background: #78350f; color: #fcd34d; }
+.mode-live { background: #166534; color: #86efac; }
+.mode-mock { background: #854d0e; color: #fcd34d; }
+.mode-active { background: #1e40af; color: #93c5fd; }
+.tier-badge { display: inline-block; padding: 0.125rem 0.375rem; border-radius: 0.25rem; font-size: 0.7rem; margin-left: 0.5rem; }
+.tier-core { background: #7e22ce; color: #e9d5ff; }
+.tier-production { background: #166534; color: #86efac; }
+.tier-demos { background: #0369a1; color: #bae6fd; }
+.domain-link { color: #60a5fa; text-decoration: none; font-size: 0.8rem; }
+.icon-cell { font-size: 1.25rem; }
+.updated { font-size: 0.75rem; color: #64748b; margin-top: 1rem; }
+.decom-section { opacity: 0.7; }
+.collapsible { cursor: pointer; user-select: none; }
+.collapsible::after { content: ' [+]'; color: #64748b; }
+.collapsible.open::after { content: ' [-]'; }
+.collapsed { display: none; }
+.cred-section { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #334155; }
+.cred-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; }
+.cred-header h3 { font-size: 0.9rem; color: #94a3b8; margin: 0; }
+.reveal-btn { background: #334155; color: #e2e8f0; border: none; padding: 0.4rem 0.75rem; border-radius: 0.25rem; cursor: pointer; font-size: 0.75rem; display: flex; align-items: center; gap: 0.25rem; }
+.reveal-btn:hover { background: #475569; }
+.cred-content { display: none; margin-top: 0.75rem; }
+.cred-content.visible { display: block; }
+.cred-table { width: 100%; }
+.cred-table td { padding: 0.5rem; font-family: monospace; font-size: 0.8rem; }
+.cred-table .label { color: #64748b; width: 30%; }
+.cred-table .value { color: #4ade80; }
+.cred-table .password { color: #fbbf24; }
+.copy-btn { background: #1e293b; color: #94a3b8; border: 1px solid #334155; padding: 0.2rem 0.5rem; border-radius: 0.25rem; cursor: pointer; font-size: 0.7rem; }
+.copy-btn:hover { background: #334155; color: #e2e8f0; }
+@media (max-width: 768px) { .page-container { padding: 1rem; } table { font-size: 0.75rem; } }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+    <a href="/" class="logo">Homebase</a>
+    <div class="nav-links">
+        <a href="/">Dashboard</a>
+        <a href="/fleet">Fleet</a>
+        <a href="/agents">Agents</a>
+        <a href="/sentinel">Sentinel</a>
+        <a href="/research">Research</a>
+        <a href="/infra" class="active">Infra Sheet</a>
+        <a href="/settings">Settings</a>
+        <a href="/backups">Backups</a>
+    </div>
+</nav>
+
+    <div class="page-container">
+        <div class="page-header">
+            <h1>Infrastructure Sheet</h1>
+            <p>Complete reference for servers, projects, agents, and credentials</p>
+        </div>
+        
+        <div class="section">
+            <h2>Fleet Overview</h2>
+            <div class="stats-grid">
+                <div class="stat-card"><div class="stat-value" id="active-count">-</div><div class="stat-label">Active Servers</div></div>
+                <div class="stat-card"><div class="stat-value warning" id="decom-count">-</div><div class="stat-label">Decommissioned</div></div>
+                <div class="stat-card"><div class="stat-value" id="project-count">-</div><div class="stat-label">Projects</div></div>
+                <div class="stat-card"><div class="stat-value" id="agent-count">-</div><div class="stat-label">Agents</div></div>
+            </div>
+            <div class="updated" id="last-updated"></div>
+        </div>
+
+        <div class="section">
+            <h2>Active Servers</h2>
+            <table><thead><tr><th></th><th>Hostname</th><th>IP</th><th>SSH User</th><th>Role</th><th>Disk</th><th>RAM</th></tr></thead>
+            <tbody id="active-servers"></tbody></table>
+        </div>
+
+        <div class="section decom-section">
+            <h2 class="collapsible" onclick="toggleDecom()">Decommissioned Servers</h2>
+            <table class="collapsed" id="decom-table"><thead><tr><th></th><th>Hostname</th><th>IP</th><th>Migrated To</th></tr></thead>
+            <tbody id="decom-servers"></tbody></table>
+        </div>
+
+        <div class="section">
+            <h2>Projects</h2>
+            <table><thead><tr><th>Name</th><th>Server</th><th>Ports</th><th>Domain</th><th>Stack</th></tr></thead>
+            <tbody id="projects-table"></tbody></table>
+        </div>
+
+        <div class="section">
+            <h2>AI Agents</h2>
+            <table><thead><tr><th>Name</th><th>Server</th><th>Mode</th><th>Ports</th><th>Channels</th></tr></thead>
+            <tbody id="agents-table"></tbody></table>
+        </div>
+
+        <div class="section">
+            <h2>Credentials</h2>
+            
+            <div class="cred-section">
+                <div class="cred-header">
+                    <h3>SSH Access</h3>
+                    <button class="reveal-btn" onclick="toggleCreds('ssh')">🔒 Reveal</button>
+                </div>
+                <div class="cred-content" id="ssh-creds">
+                    <table class="cred-table" id="ssh-table"></table>
+                </div>
+            </div>
+            
+            <div class="cred-section">
+                <div class="cred-header">
+                    <h3>Demo Application Logins</h3>
+                    <button class="reveal-btn" onclick="toggleCreds('demo')">🔒 Reveal</button>
+                </div>
+                <div class="cred-content" id="demo-creds">
+                    <table class="cred-table" id="demo-table"></table>
+                </div>
+            </div>
+            
+            <div class="cred-section">
+                <div class="cred-header">
+                    <h3>Cloudflare Tunnels</h3>
+                    <button class="reveal-btn" onclick="toggleCreds('tunnel')">🔒 Reveal</button>
+                </div>
+                <div class="cred-content" id="tunnel-creds">
+                    <table class="cred-table" id="tunnel-table"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    let infraData = null;
+    const serverMap = {};
+
+    async function loadData() {
+        try {
+            const res = await fetch('/api/infrastructure');
+            infraData = await res.json();
+            (infraData.servers || []).forEach(s => serverMap[s.id] = s);
+            renderStats();
+            renderServers();
+            renderProjects();
+            renderAgents();
+            renderCredentials();
+        } catch (e) { console.error('Failed:', e); }
+    }
+
+    function renderStats() {
+        const servers = infraData.servers || [];
+        document.getElementById('active-count').textContent = servers.filter(s => s.status === 'online').length;
+        document.getElementById('decom-count').textContent = servers.filter(s => s.status === 'decommissioned').length;
+        document.getElementById('project-count').textContent = (infraData.projects || []).length;
+        document.getElementById('agent-count').textContent = (infraData.agents || []).length;
+        if (infraData.meta?.updated) {
+            document.getElementById('last-updated').textContent = 'Last scan: ' + new Date(infraData.meta.updated).toLocaleString();
+        }
+    }
+
+    function renderServers() {
+        const servers = infraData.servers || [];
+        const active = servers.filter(s => s.status === 'online');
+        const decom = servers.filter(s => s.status === 'decommissioned');
+        
+        document.getElementById('active-servers').innerHTML = active.map(s => {
+            const live = s.live || {};
+            const tierClass = 'tier-' + (s.tier || 'core');
+            return '<tr><td class="icon-cell">' + (s.icon || '💻') + '</td>' +
+                '<td><strong>' + s.hostname + '</strong><span class="tier-badge ' + tierClass + '">' + (s.tier || '') + '</span></td>' +
+                '<td style="font-family:monospace">' + s.ip + '</td>' +
+                '<td style="font-family:monospace">' + (s.ssh_user || '-') + '</td>' +
+                '<td>' + (s.role || '-') + '</td>' +
+                '<td>' + (live.disk_pct || '-') + '%</td>' +
+                '<td>' + (s.ram_total || '-') + '</td></tr>';
+        }).join('');
+        
+        document.getElementById('decom-servers').innerHTML = decom.map(s => {
+            const mt = serverMap[s.migrated_to];
+            return '<tr><td class="icon-cell">' + (s.icon || '') + '</td><td>' + s.hostname + '</td><td style="text-decoration:line-through">' + s.ip + '</td><td>' + (mt ? mt.hostname : s.migrated_to) + '</td></tr>';
+        }).join('');
+    }
+
+    function renderProjects() {
+        document.getElementById('projects-table').innerHTML = (infraData.projects || []).map(p => {
+            const srv = serverMap[p.server] || {};
+            const domain = p.domain && p.domain !== 'None' ? '<a href="https://' + p.domain + '" target="_blank" class="domain-link">' + p.domain + '</a>' : '-';
+            return '<tr><td><strong>' + p.name + '</strong></td><td>' + (srv.hostname || p.server) + '</td><td style="font-family:monospace">' + ((p.ports || []).join(', ') || '-') + '</td><td>' + domain + '</td><td>' + (p.stack || '-') + '</td></tr>';
+        }).join('');
+    }
+
+    function renderAgents() {
+        document.getElementById('agents-table').innerHTML = (infraData.agents || []).map(a => {
+            const srv = serverMap[a.server] || {};
+            const modeClass = 'mode-' + (a.mode || 'mock');
+            return '<tr><td><strong>' + a.name + '</strong></td><td>' + (srv.hostname || a.server) + '</td><td><span class="status-badge ' + modeClass + '">' + (a.mode || 'mock').toUpperCase() + '</span></td><td style="font-family:monospace">' + ((a.ports || []).join(', ') || '-') + '</td><td>' + ((a.channels || []).join(', ') || '-') + '</td></tr>';
+        }).join('');
+    }
+
+    function renderCredentials() {
+        const creds = infraData.credentials || {};
+        const servers = (infraData.servers || []).filter(s => s.status === 'online');
+        const fallbackPw = creds.ssh_fallback || 'M00nshot2025!@#';
+        
+        // SSH table
+        let sshHtml = servers.map(s => {
+            const user = s.ssh_user || 'admin';
+            return '<tr><td class="label">' + s.hostname + '</td><td class="value">' + user + '@' + s.ip + '</td><td class="password">' + fallbackPw + '</td><td><button class="copy-btn" onclick="copyText(\'' + user + '@' + s.ip + '\')">Copy SSH</button></td></tr>';
+        }).join('');
+        document.getElementById('ssh-table').innerHTML = sshHtml;
+        
+        // Demo logins
+        const demos = creds.demo_logins || [];
+        let demoHtml = demos.map(d => 
+            '<tr><td class="label">' + d.app + '</td><td class="value">' + d.user + '</td><td class="password">' + d.pass + '</td><td><button class="copy-btn" onclick="copyText(\'' + d.pass + '\')">Copy</button></td></tr>'
+        ).join('');
+        document.getElementById('demo-table').innerHTML = demoHtml || '<tr><td colspan="4" style="color:#64748b">No demo logins configured</td></tr>';
+        
+        // Tunnels
+        let tunnelHtml = servers.filter(s => s.tunnel_uuid).map(s =>
+            '<tr><td class="label">' + s.hostname + '</td><td class="value" style="font-size:0.7rem">' + s.tunnel_uuid + '</td><td><button class="copy-btn" onclick="copyText(\'' + s.tunnel_uuid + '\')">Copy</button></td></tr>'
+        ).join('');
+        document.getElementById('tunnel-table').innerHTML = tunnelHtml || '<tr><td colspan="3" style="color:#64748b">No tunnels configured</td></tr>';
+    }
+
+    function toggleCreds(section) {
+        const content = document.getElementById(section + '-creds');
+        content.classList.toggle('visible');
+        const btn = content.previousElementSibling.querySelector('.reveal-btn');
+        btn.textContent = content.classList.contains('visible') ? '🔓 Hide' : '🔒 Reveal';
+    }
+
+    function toggleDecom() {
+        document.getElementById('decom-table').classList.toggle('collapsed');
+        document.querySelector('.collapsible').classList.toggle('open');
+    }
+
+    function copyText(text) {
+        navigator.clipboard.writeText(text);
+    }
+
+    loadData();
+    setInterval(loadData, 60000);
+    </script>
+</body>
+</html>

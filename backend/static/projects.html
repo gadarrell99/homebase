@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Homebase</title>
+    <style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+.main-nav { display: flex; align-items: center; padding: 0.75rem 1.5rem; background: #1e293b; border-bottom: 1px solid #334155; position: sticky; top: 0; z-index: 100; }
+.main-nav .logo { font-size: 1.1rem; font-weight: 600; color: #e2e8f0; margin-right: 2rem; text-decoration: none; }
+.main-nav .nav-links { display: flex; gap: 0.25rem; flex: 1; flex-wrap: wrap; align-items: center; }
+.main-nav .nav-links a { color: #94a3b8; padding: 0.5rem 0.75rem; border-radius: 0.375rem; font-size: 0.875rem; text-decoration: none; transition: all 0.15s; }
+.main-nav .nav-links a:hover, .main-nav .nav-links a.active { color: #e2e8f0; background: #334155; }
+
+a { color: #60a5fa; text-decoration: none; }
+a:hover { color: #93c5fd; }
+
+.page-container { padding: 1.5rem; max-width: 1400px; margin: 0 auto; }
+.page-header { margin-bottom: 1.5rem; }
+.page-header h1 { font-size: 1.75rem; font-weight: 600; margin-bottom: 0.25rem; }
+.page-header p { color: #64748b; font-size: 0.875rem; }
+.summary-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+.summary-card { background: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; text-align: center; }
+.summary-card .num { font-size: 2rem; font-weight: 700; color: #4ade80; }
+.summary-card .lbl { color: #94a3b8; font-size: 0.75rem; margin-top: 0.25rem; }
+.server-group { background: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; margin-bottom: 1.5rem; overflow: hidden; }
+.server-group-header { display: flex; align-items: center; gap: 0.75rem; padding: 1rem 1.25rem; background: #0f172a; border-bottom: 1px solid #334155; }
+.server-group-header .icon { font-size: 1.25rem; }
+.server-group-header .name { font-size: 1rem; font-weight: 600; }
+.server-group-header .ip { color: #64748b; font-size: 0.8rem; font-family: monospace; margin-left: 0.5rem; }
+.server-group-header .ssh { color: #64748b; font-size: 0.75rem; margin-left: auto; }
+.server-group-header .ssh a { color: #60a5fa; }
+.project-table { width: 100%; border-collapse: collapse; }
+.project-table th { text-align: left; padding: 0.75rem 1.25rem; color: #64748b; font-size: 0.75rem; font-weight: 500; text-transform: uppercase; border-bottom: 1px solid #334155; }
+.project-table td { padding: 0.75rem 1.25rem; border-bottom: 1px solid #1e293b; font-size: 0.875rem; }
+.project-table tr:last-child td { border-bottom: none; }
+.project-table tr:hover { background: #334155; }
+.project-name { font-weight: 500; }
+.project-ports { font-family: monospace; color: #94a3b8; font-size: 0.8rem; }
+.project-stack { color: #94a3b8; font-size: 0.8rem; }
+.project-links a { font-size: 0.75rem; padding: 0.25rem 0.5rem; background: #334155; border-radius: 0.25rem; color: #94a3b8; margin-right: 0.25rem; }
+.project-links a:hover { background: #475569; color: #e2e8f0; }
+.status { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 0.25rem; font-size: 0.7rem; font-weight: 600; }
+.status-running { background: #166534; color: #86efac; }
+.status-pending { background: #854d0e; color: #fcd34d; }
+@media (max-width: 768px) { .page-container { padding: 1rem; } .project-table { font-size: 0.8rem; } .project-table th, .project-table td { padding: 0.5rem; } }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+    <a href="/" class="logo">Homebase</a>
+    <div class="nav-links">
+        <a href="/">Dashboard</a>
+        <a href="/fleet">Fleet</a>
+        <a href="/agents">Agents</a>
+        <a href="/sentinel">Sentinel</a>
+        <a href="/research">Research</a>
+        <a href="/infra">Infra Sheet</a>
+        <a href="/settings">Settings</a>
+        <a href="/backups">Backups</a>
+    </div>
+</nav>
+
+    <div class="page-container">
+        <div class="page-header">
+            <h1>Projects</h1>
+            <p>All applications grouped by server</p>
+        </div>
+
+        <div class="summary-cards">
+            <div class="summary-card"><div class="num" id="project-count">-</div><div class="lbl">Total Projects</div></div>
+            <div class="summary-card"><div class="num" id="server-count">-</div><div class="lbl">Servers</div></div>
+            <div class="summary-card"><div class="num" id="running-count">-</div><div class="lbl">Running</div></div>
+        </div>
+
+        <div id="project-groups">Loading...</div>
+    </div>
+
+    <script>
+    async function loadProjects() {
+        try {
+            const res = await fetch('/api/infrastructure');
+            const infra = await res.json();
+            
+            const servers = infra.servers || [];
+            const projects = infra.projects || [];
+            const agents = infra.agents || [];
+            const serverMap = {};
+            servers.forEach(s => serverMap[s.id] = s);
+            
+            // Group projects by server
+            const groups = {};
+            projects.forEach(p => {
+                if (!groups[p.server]) groups[p.server] = [];
+                groups[p.server].push(p);
+            });
+            
+            // Also add agents to their server groups
+            agents.forEach(a => {
+                if (!groups[a.server]) groups[a.server] = [];
+                groups[a.server].push({
+                    name: a.name,
+                    ports: a.ports,
+                    domain: null,
+                    stack: 'Python Agent',
+                    status: a.mode === 'live' ? 'running' : 'mock',
+                    isAgent: true,
+                    channels: a.channels
+                });
+            });
+            
+            document.getElementById('project-count').textContent = projects.length;
+            document.getElementById('server-count').textContent = Object.keys(groups).length;
+            document.getElementById('running-count').textContent = projects.filter(p => p.status === 'running').length;
+            
+            // Render groups
+            const serverOrder = ['rize-apps', 'demos', 'agents', 'vector', 'talos'];
+            const sortedGroups = Object.keys(groups).sort((a, b) => {
+                const ia = serverOrder.indexOf(a);
+                const ib = serverOrder.indexOf(b);
+                return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+            });
+            
+            document.getElementById('project-groups').innerHTML = sortedGroups.map(serverId => {
+                const server = serverMap[serverId] || {hostname: serverId, ip: '?', ssh_user: '?', icon: '💻'};
+                const items = groups[serverId];
+                
+                return '<div class="server-group">' +
+                    '<div class="server-group-header">' +
+                    '<span class="icon">' + (server.icon || '💻') + '</span>' +
+                    '<span class="name">' + server.hostname + '</span>' +
+                    '<span class="ip">(' + server.ip + ')</span>' +
+                    '<span class="ssh"><a href="javascript:void(0)" onclick="copySSH(\'' + server.ssh_user + '@' + server.ip + '\')">SSH: ' + server.ssh_user + '@' + server.ip + '</a></span>' +
+                    '</div>' +
+                    '<table class="project-table">' +
+                    '<thead><tr><th>Name</th><th>Ports</th><th>Stack</th><th>Status</th><th>Links</th></tr></thead>' +
+                    '<tbody>' +
+                    items.map(p => {
+                        const statusClass = (p.status === 'running' || p.status === 'live') ? 'status-running' : 'status-pending';
+                        const statusText = p.isAgent ? (p.status === 'running' ? 'LIVE' : p.status.toUpperCase()) : (p.status || 'Running');
+                        const webLink = p.domain && p.domain !== 'None' ? '<a href="https://' + p.domain + '" target="_blank">🌐 Web</a>' : '';
+                        const sshLink = '<a href="javascript:void(0)" onclick="copySSH(\'' + server.ssh_user + '@' + server.ip + '\')">🔗 SSH</a>';
+                        const docsLink = '<a href="javascript:void(0)" onclick="showDocs(\'' + p.name + '\', \'' + (p.description || 'No description available').replace(/'/g, "\\'") + '\')" style="margin-left:8px">📄 Docs</a>';
+                        return '<tr>' +
+                            '<td class="project-name">' + p.name + (p.isAgent ? ' 🤖' : '') + '</td>' +
+                            '<td class="project-ports">' + ((p.ports || []).join(', ') || '-') + '</td>' +
+                            '<td class="project-stack">' + (p.stack || '-') + '</td>' +
+                            '<td><span class="status ' + statusClass + '">' + statusText + '</span></td>' +
+                            '<td class="project-links">' + webLink + sshLink + docsLink + '</td>' +
+                            '</tr>';
+                    }).join('') +
+                    '</tbody></table></div>';
+            }).join('');
+        } catch (e) {
+            document.getElementById('project-groups').innerHTML = '<div style="color:#f87171">Failed to load</div>';
+        }
+    }
+    
+    function copySSH(cmd) {
+        navigator.clipboard.writeText('ssh ' + cmd);
+        alert('Copied: ssh ' + cmd);
+    }
+    
+    function showDocs(name, description) {
+        // Create modal for docs
+        let modal = document.getElementById('docs-modal');
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'docs-modal';
+            modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:1000;';
+            modal.innerHTML = '<div id="docs-content" style="background:#1e293b;padding:24px;border-radius:12px;max-width:600px;width:90%;max-height:80vh;overflow-y:auto;"></div>';
+            modal.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+            document.body.appendChild(modal);
+        }
+        document.getElementById('docs-content').innerHTML = 
+            '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">' +
+            '<h2 style="margin:0;color:#e2e8f0;">📄 ' + name + '</h2>' +
+            '<button onclick="document.getElementById(\'docs-modal\').style.display=\'none\'" style="background:none;border:none;color:#94a3b8;font-size:24px;cursor:pointer;">&times;</button>' +
+            '</div>' +
+            '<div style="color:#94a3b8;line-height:1.6;">' + description + '</div>' +
+            '<div style="margin-top:20px;padding-top:16px;border-top:1px solid #334155;">' +
+            '<a href="/project-status" style="color:#60a5fa;">View full documentation on Status page →</a>' +
+            '</div>';
+        modal.style.display = 'flex';
+    }
+    
+    loadProjects();
+    </script>
+</body>
+</html>

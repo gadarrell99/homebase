@@ -1,0 +1,247 @@
+{
+  "generated": "2026-02-07T16:30:01Z",
+  "servers": [
+    {
+      "id": "helios",
+      "ip": "192.168.65.240",
+      "user": "heliosdev",
+      "path": "~/helios-ai",
+      "ssh_url": "https://helios-ssh.rize.bm",
+      "alive": false,
+      "version": "",
+      "uptime": "",
+      "disk": "",
+      "memory": "",
+      "services": ""
+    },
+    {
+      "id": "david",
+      "ip": "192.168.65.241",
+      "user": "david",
+      "path": "~/.openclaw",
+      "ssh_url": "",
+      "alive": true,
+      "version": "",
+      "uptime": "up 45 minutes",
+      "disk": "",
+      "memory": "",
+      "services": "0 0"
+    },
+    {
+      "id": "cobalt",
+      "ip": "192.168.65.243",
+      "user": "cobaltadmin",
+      "path": "~/homebase",
+      "ssh_url": "https://cobalt-ssh.rize.bm",
+      "alive": false,
+      "version": "",
+      "uptime": "",
+      "disk": "",
+      "memory": "",
+      "services": ""
+    },
+    {
+      "id": "claude-dev",
+      "ip": "192.168.65.245",
+      "user": "claudedevadmin",
+      "path": "~",
+      "ssh_url": "https://claude-dev-ssh.rize.bm",
+      "alive": true,
+      "version": "",
+      "uptime": "up 45 minutes",
+      "disk": "",
+      "memory": "",
+      "services": "0 0"
+    },
+    {
+      "id": "demos",
+      "ip": "192.168.65.246",
+      "user": "demos",
+      "path": "~/demos",
+      "ssh_url": "https://bpsai-ssh.rize.bm",
+      "alive": true,
+      "version": "",
+      "uptime": "up 45 minutes",
+      "disk": "",
+      "memory": "",
+      "services": "0 0"
+    },
+    {
+      "id": "nexus",
+      "ip": "192.168.65.247",
+      "user": "nexusadmin",
+      "path": "~/nexus",
+      "ssh_url": "https://nexus-ssh.rize.bm",
+      "alive": false,
+      "version": "",
+      "uptime": "",
+      "disk": "",
+      "memory": "",
+      "services": ""
+    },
+    {
+      "id": "relay",
+      "ip": "192.168.65.248",
+      "user": "relayadmin",
+      "path": "~/relay",
+      "ssh_url": "https://relay-ssh.rize.bm",
+      "alive": true,
+      "version": "v2.1.0",
+      "uptime": "up 45 minutes",
+      "disk": "",
+      "memory": "",
+      "services": "0 0"
+    },
+    {
+      "id": "vector",
+      "ip": "192.168.65.249",
+      "user": "betadmin",
+      "path": "~/bet",
+      "ssh_url": "https://vector-ssh.rize.bm",
+      "alive": true,
+      "version": "",
+      "uptime": "up 45 minutes",
+      "disk": "",
+      "memory": "",
+      "services": "0 0"
+    },
+    {
+      "id": "premier-emr",
+      "ip": "192.168.65.239",
+      "user": "emradmin",
+      "path": "~/premier-emr",
+      "ssh_url": "https://emr-ssh.rize.bm",
+      "alive": true,
+      "version": "",
+      "uptime": "up 45 minutes",
+      "disk": "",
+      "memory": "",
+      "services": "0 0"
+    },
+    {
+      "id": "dockyard",
+      "ip": "192.168.65.252",
+      "user": "dockyardadmin",
+      "path": "~/dockyard-wifi-portal",
+      "ssh_url": "https://dockyard-ssh.rize.bm",
+      "alive": true,
+      "version": "",
+      "uptime": "up 45 minutes",
+      "disk": "",
+      "memory": "",
+      "services": "0 0"
+    },
+    {
+      "id": "hyper-v",
+      "ip": "192.168.65.253",
+      "user": "Administrator",
+      "path": "",
+      "ssh_url": "",
+      "alive": false,
+      "version": "",
+      "uptime": "",
+      "disk": "",
+      "memory": "",
+      "services": ""
+    }
+  ],
+  "web_apps": [
+    {
+      "name": "homebase",
+      "url": "http://localhost:8000",
+      "http_code": 200,
+      "status": "up"
+    },
+    {
+      "name": "bpsai",
+      "url": "http://192.168.65.246:3000",
+      "http_code": 200,
+      "status": "up"
+    },
+    {
+      "name": "nexus",
+      "url": "http://192.168.65.247:3000",
+      "http_code": 0,
+      "status": "down"
+    },
+    {
+      "name": "relay",
+      "url": "http://192.168.65.248:8000",
+      "http_code": 200,
+      "status": "up"
+    },
+    {
+      "name": "vector",
+      "url": "http://192.168.65.249:3000",
+      "http_code": 0,
+      "status": "down"
+    },
+    {
+      "name": "dockyard",
+      "url": "http://192.168.65.252:3000",
+      "http_code": 200,
+      "status": "up"
+    },
+    {
+      "name": "david",
+      "url": "http://192.168.65.241:5000",
+      "http_code": 0,
+      "status": "down"
+    },
+    {
+      "name": "helios",
+      "url": "http://192.168.65.240:3800",
+      "http_code": 0,
+      "status": "down"
+    },
+    {
+      "name": "premier-emr",
+      "url": "http://192.168.65.239:3000",
+      "http_code": 200,
+      "status": "up"
+    }
+  ],
+  "status": {
+    "security_score": 0,
+    "active_alerts": 0,
+    "open_audit_items": 6
+  },
+  "deadlines": [
+    {
+      "item": "BPS Demo",
+      "date": "Early February (OVERDUE)",
+      "severity": "critical"
+    },
+    {
+      "item": "Infrastructure Hardware RFP",
+      "date": "February 20, 2026",
+      "severity": "warning"
+    },
+    {
+      "item": "Dockyard WiFi Launch",
+      "date": "February 28, 2026",
+      "severity": "warning"
+    }
+  ],
+  "waiting_on": [
+    "Martin \u2014 Authorize.net (Dockyard payments)",
+    "Abraham \u2014 Ubiquiti (Dockyard network)",
+    "Angel \u2014 Email templates (Dockyard)"
+  ],
+  "cobalt_crons": [
+    "*/5 * * * * curl -s -X POST http://localhost:8000/api/metrics/record > /dev/null 2>&1",
+    "0 0 * * * curl -s -X DELETE http://localhost:8000/api/metrics/cleanup?days=30 > /dev/null 2>&1",
+    "0 * * * * curl -s -X POST http://localhost:8000/api/projects/sync > /dev/null 2>&1",
+    "0 */6 * * * /home/rizeadmin/scripts/health-check.sh",
+    "0 3 * * * cd /home/rizeadmin/homebase && bash backend/scripts/nightly-scan.sh >> logs/nightly-scan.log 2>&1",
+    "*/5 * * * * cd /home/rizeadmin/homebase && bash backend/scripts/uptime-monitor.sh >> logs/uptime.log 2>&1",
+    "*/5 * * * * cd /home/rizeadmin/homebase && python3 -c 'import sys;sys.path.insert(0,\".\");from backend.services.alert_checker import check_all;check_all()' >> logs/alerts.log 2>&1",
+    "0 4 * * 0 cd /home/rizeadmin/homebase && bash backend/scripts/discovery-scan.sh >> logs/discovery.log 2>&1",
+    "0 * * * * cd /home/rizeadmin/homebase && bash backend/scripts/credential-scanner.sh >> logs/credential-scanner.log 2>&1",
+    "30 * * * * cd /home/rizeadmin/homebase && bash backend/scripts/generate-cheat-sheet.sh >> logs/cheat-sheet.log 2>&1",
+    "0 8 * * * bash /home/rizeadmin/homebase/backend/scripts/research-digest.sh >> /home/rizeadmin/homebase/logs/research.log 2>&1",
+    "*/5 * * * * /usr/bin/python3 /home/rizeadmin/homebase/backend/scripts/infra-scanner.py >> /home/rizeadmin/homebase/logs/scanner.log 2>&1",
+    "*/5 * * * * python3 /home/rizeadmin/homebase/backend/scripts/alert-generator.py >> /home/rizeadmin/homebase/logs/alerts.log 2>&1",
+    "*/5 * * * * python3 /home/rizeadmin/homebase/backend/scripts/project-status-scanner.py >> /home/rizeadmin/homebase/logs/project-status.log 2>&1"
+  ]
+}

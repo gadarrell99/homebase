@@ -1,0 +1,65 @@
+{
+  "items": [
+    {
+      "id": "AUD-001",
+      "project": "david-bishop",
+      "server": "agents",
+      "severity": "critical",
+      "category": "credentials",
+      "title": "Rotate Telegram botToken",
+      "status": "open",
+      "created": "2026-02-03"
+    },
+    {
+      "id": "AUD-002",
+      "project": "david-bishop",
+      "server": "agents",
+      "severity": "critical",
+      "category": "credentials",
+      "title": "Rotate MS Teams appPassword",
+      "status": "open",
+      "created": "2026-02-03"
+    },
+    {
+      "id": "AUD-003",
+      "project": "david-bishop",
+      "server": "agents",
+      "severity": "warning",
+      "category": "security",
+      "title": "Red team script syntax error line 82",
+      "status": "open",
+      "created": "2026-02-03"
+    },
+    {
+      "id": "AUD-010",
+      "project": "infrastructure",
+      "server": "claude-dev",
+      "severity": "warning",
+      "category": "config",
+      "title": "CLAUDE.md has wrong David IP",
+      "status": "open",
+      "created": "2026-02-04"
+    },
+    {
+      "id": "AUD-012",
+      "project": "demos",
+      "server": "demos",
+      "severity": "critical",
+      "category": "deployment",
+      "title": "pgvector extension missing",
+      "status": "open",
+      "created": "2026-02-03"
+    },
+    {
+      "id": "AUD-014",
+      "project": "dockyard",
+      "server": "dockyard",
+      "severity": "warning",
+      "category": "dependency",
+      "title": "Waiting on Martin \u2014 Authorize.net",
+      "status": "open",
+      "created": "2026-02-04"
+    }
+  ],
+  "updated": "2026-02-04T19:55:23.167992Z"
+}
