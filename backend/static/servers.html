@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖥️</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servers | Homebase</title>
+    <style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+.main-nav { display: flex; align-items: center; padding: 0.75rem 1.5rem; background: #1e293b; border-bottom: 1px solid #334155; position: sticky; top: 0; z-index: 100; }
+.main-nav .logo { font-size: 1.1rem; font-weight: 600; color: #e2e8f0; margin-right: 2rem; text-decoration: none; }
+.main-nav .nav-links { display: flex; gap: 0.25rem; flex: 1; flex-wrap: wrap; align-items: center; }
+.main-nav .nav-links a { color: #94a3b8; padding: 0.5rem 0.75rem; border-radius: 0.375rem; font-size: 0.875rem; text-decoration: none; transition: all 0.15s; }
+.main-nav .nav-links a:hover, .main-nav .nav-links a.active { color: #e2e8f0; background: #334155; }
+
+a { color: #60a5fa; text-decoration: none; }
+a:hover { color: #93c5fd; }
+
+.page-container { padding: 1.5rem; max-width: 1400px; margin: 0 auto; }
+.page-header { margin-bottom: 1.5rem; }
+.page-header h1 { font-size: 1.75rem; font-weight: 600; margin-bottom: 0.25rem; }
+.page-header p { color: #64748b; font-size: 0.875rem; }
+.summary-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+.summary-card { background: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; text-align: center; }
+.summary-card .num { font-size: 2rem; font-weight: 700; }
+.summary-card .num.green { color: #4ade80; }
+.summary-card .num.yellow { color: #fbbf24; }
+.summary-card .num.red { color: #f87171; }
+.summary-card .lbl { color: #94a3b8; font-size: 0.75rem; margin-top: 0.25rem; }
+.server-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 1rem; }
+.server-card { background: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1.25rem; }
+.server-card:hover { border-color: #475569; }
+.server-card.decom { opacity: 0.6; background: #1a1a2e; }
+.server-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
+.server-icon { font-size: 1.5rem; }
+.server-name { font-size: 1.1rem; font-weight: 600; flex: 1; }
+.server-hv { color: #64748b; font-size: 0.7rem; display: block; }
+.server-role { color: #94a3b8; font-size: 0.8rem; margin-bottom: 0.75rem; }
+.server-meta { display: flex; gap: 1rem; font-size: 0.75rem; color: #94a3b8; font-family: monospace; margin-bottom: 0.75rem; padding: 0.5rem; background: #0f172a; border-radius: 0.25rem; }
+.server-metrics { display: flex; gap: 0.75rem; font-size: 0.75rem; color: #64748b; margin-bottom: 0.75rem; flex-wrap: wrap; }
+.server-metrics span { background: #0f172a; padding: 0.25rem 0.5rem; border-radius: 0.25rem; }
+.server-metrics .good { color: #4ade80; }
+.server-metrics .warn { color: #fbbf24; }
+.server-metrics .bad { color: #f87171; }
+.project-list { border-top: 1px solid #334155; padding-top: 0.75rem; margin-top: 0.5rem; }
+.project-list-header { font-size: 0.75rem; color: #64748b; margin-bottom: 0.5rem; font-weight: 500; }
+.project-row { display: flex; align-items: center; padding: 0.4rem 0; font-size: 0.8rem; border-bottom: 1px solid #1e293b; }
+.project-row:last-child { border-bottom: none; }
+.project-name { flex: 1; color: #e2e8f0; }
+.project-links { display: flex; gap: 0.5rem; }
+.project-links a { font-size: 0.7rem; padding: 0.2rem 0.4rem; background: #334155; border-radius: 0.25rem; color: #94a3b8; }
+.project-links a:hover { background: #475569; color: #e2e8f0; }
+.status { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 0.25rem; font-size: 0.7rem; font-weight: 600; }
+.status-online { background: #166534; color: #86efac; }
+.status-offline { background: #991b1b; color: #fca5a5; }
+.status-decom { background: #78350f; color: #fcd34d; }
+.section-header { font-size: 1rem; color: #94a3b8; margin: 2rem 0 1rem; cursor: pointer; }
+.section-header::after { content: ' [+]'; color: #64748b; }
+.section-header.open::after { content: ' [-]'; }
+.hidden { display: none; }
+.last-scan { font-size: 0.65rem; color: #475569; margin-top: 0.5rem; }
+@media (max-width: 768px) { .page-container { padding: 1rem; } .server-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+    <a href="/" class="logo">Homebase</a>
+    <div class="nav-links">
+        <a href="/">Dashboard</a>
+        <a href="/fleet">Fleet</a>
+        <a href="/agents">Agents</a>
+        <a href="/sentinel">Sentinel</a>
+        <a href="/research">Research</a>
+        <a href="/infra">Infra Sheet</a>
+        <a href="/settings">Settings</a>
+        <a href="/backups">Backups</a>
+    </div>
+</nav>
+
+    <div class="page-container">
+        <div class="page-header">
+            <h1>Server Fleet</h1>
+            <p>Real-time status with project listings</p>
+        </div>
+
+        <div class="summary-cards">
+            <div class="summary-card"><div class="num green" id="active-count">-</div><div class="lbl">Active</div></div>
+            <div class="summary-card"><div class="num yellow" id="decom-count">-</div><div class="lbl">Decommissioned</div></div>
+            <div class="summary-card"><div class="num" id="project-count">-</div><div class="lbl">Projects</div></div>
+            <div class="summary-card"><div class="num red" id="disk-warn">-</div><div class="lbl">Disk >80%</div></div>
+        </div>
+
+        <div class="server-grid" id="active-grid"><div style="color:#64748b;padding:2rem">Loading...</div></div>
+        
+        <h2 class="section-header" onclick="toggleDecom()">Decommissioned Servers</h2>
+        <div class="server-grid hidden" id="decom-grid"></div>
+    </div>
+
+    <script>
+    let infraData = null;
+
+    async function loadData() {
+        try {
+            const res = await fetch('/api/infrastructure');
+            infraData = await res.json();
+            renderServers();
+        } catch (e) {
+            document.getElementById('active-grid').innerHTML = '<div style="color:#f87171">Failed to load</div>';
+        }
+    }
+
+    function getProjectsForServer(serverId) {
+        return (infraData.projects || []).filter(p => p.server === serverId);
+    }
+
+    function getAgentsForServer(serverId) {
+        return (infraData.agents || []).filter(a => a.server === serverId);
+    }
+
+    function renderServers() {
+        const servers = infraData.servers || [];
+        const active = servers.filter(s => s.status === 'online');
+        const decom = servers.filter(s => s.status === 'decommissioned');
+        
+        document.getElementById('active-count').textContent = active.length;
+        document.getElementById('decom-count').textContent = decom.length;
+        document.getElementById('project-count').textContent = (infraData.projects || []).length;
+        
+        const diskWarn = active.filter(s => parseInt(s.live?.disk_pct || '0') > 80).length;
+        document.getElementById('disk-warn').textContent = diskWarn;
+
+        document.getElementById('active-grid').innerHTML = active.map(s => renderActiveCard(s)).join('');
+        document.getElementById('decom-grid').innerHTML = decom.map(s => renderDecomCard(s)).join('');
+    }
+
+    function renderActiveCard(s) {
+        const live = s.live || {};
+        const statusClass = (s.status === 'online') ? 'status-online' : 'status-offline';
+        const diskPct = live.disk_pct || '-';
+        const diskClass = parseInt(diskPct) > 80 ? 'bad' : (parseInt(diskPct) > 60 ? 'warn' : 'good');
+        
+        const projects = getProjectsForServer(s.id);
+        const agents = getAgentsForServer(s.id);
+        const items = [...projects, ...agents.map(a => ({name: a.name, domain: null, ports: a.ports, isAgent: true}))];
+        
+        let projectsHtml = '';
+        if (items.length > 0) {
+            projectsHtml = '<div class="project-list"><div class="project-list-header">Services (' + items.length + ')</div>';
+            projectsHtml += items.map(p => {
+                const domain = p.domain;
+                const webLink = domain && domain !== 'None' ? '<a href="https://' + domain + '" target="_blank">🌐 Web</a>' : '';
+                const sshLink = '<a href="javascript:void(0)" onclick="copySSH(\'' + s.ssh_user + '@' + s.ip + '\')">🔗 SSH</a>';
+                const ports = (p.ports || []).join(',') || '-';
+                return '<div class="project-row"><span class="project-name">' + p.name + ' <span style="color:#64748b;font-size:0.7rem">:' + ports + '</span></span><div class="project-links">' + webLink + sshLink + '</div></div>';
+            }).join('');
+            projectsHtml += '</div>';
+        }
+        
+        return '<div class="server-card">' +
+            '<div class="server-header">' +
+            '<span class="server-icon">' + (s.icon || '💻') + '</span>' +
+            '<div><span class="server-name">' + s.hostname + '</span>' +
+            (s.hyperv_name ? '<span class="server-hv">HV: ' + s.hyperv_name + '</span>' : '') + '</div>' +
+            '<span class="status ' + statusClass + '">' + (live.status || 'Online') + '</span></div>' +
+            '<div class="server-role">' + (s.role || '') + '</div>' +
+            '<div class="server-meta"><span>' + s.ip + '</span><span>' + (s.ssh_user || '-') + '</span></div>' +
+            '<div class="server-metrics">' +
+            '<span class="' + diskClass + '">Disk: ' + diskPct + '%</span>' +
+            '<span>Mem: ' + (live.mem_used || '-') + '/' + (live.mem_total || '-') + 'MB</span>' +
+            '<span>Load: ' + (live.load || '-') + '</span></div>' +
+            projectsHtml +
+            (live.last_scan ? '<div class="last-scan">Scanned: ' + new Date(live.last_scan).toLocaleTimeString() + '</div>' : '') +
+            '</div>';
+    }
+
+    function renderDecomCard(s) {
+        const target = (infraData.servers || []).find(x => x.id === s.migrated_to);
+        return '<div class="server-card decom">' +
+            '<div class="server-header">' +
+            '<span class="server-icon">' + (s.icon || '📦') + '</span>' +
+            '<span class="server-name">' + s.hostname + '</span>' +
+            '<span class="status status-decom">Decommissioned</span></div>' +
+            '<div class="server-meta"><span style="text-decoration:line-through">' + s.ip + '</span></div>' +
+            '<div style="color:#fbbf24;font-size:0.8rem">Migrated to ' + (target ? target.hostname : s.migrated_to) + '</div></div>';
+    }
+
+    function toggleDecom() {
+        document.querySelector('.section-header').classList.toggle('open');
+        document.getElementById('decom-grid').classList.toggle('hidden');
+    }
+
+    function copySSH(cmd) {
+        navigator.clipboard.writeText('ssh ' + cmd);
+        alert('Copied: ssh ' + cmd);
+    }
+
+    loadData();
+    setInterval(loadData, 60000);
+    </script>
+</body>
+</html>

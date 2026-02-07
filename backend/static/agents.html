@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agents | Homebase</title>
+    <style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+.main-nav { display: flex; align-items: center; padding: 0.75rem 1.5rem; background: #1e293b; border-bottom: 1px solid #334155; position: sticky; top: 0; z-index: 100; }
+.main-nav .logo { font-size: 1.1rem; font-weight: 600; color: #e2e8f0; margin-right: 2rem; text-decoration: none; }
+.main-nav .nav-links { display: flex; gap: 0.25rem; flex: 1; flex-wrap: wrap; align-items: center; }
+.main-nav .nav-links a { color: #94a3b8; padding: 0.5rem 0.75rem; border-radius: 0.375rem; font-size: 0.875rem; text-decoration: none; transition: all 0.15s; }
+.main-nav .nav-links a:hover, .main-nav .nav-links a.active { color: #e2e8f0; background: #334155; }
+
+a { color: #60a5fa; text-decoration: none; }
+
+.page-container { padding: 1.5rem; max-width: 1200px; margin: 0 auto; }
+.page-header { margin-bottom: 1.5rem; }
+.page-header h1 { font-size: 1.75rem; font-weight: 600; margin-bottom: 0.25rem; }
+.page-header p { color: #64748b; font-size: 0.875rem; }
+.summary-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+.summary-card { background: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; text-align: center; }
+.summary-card .num { font-size: 2rem; font-weight: 700; }
+.summary-card .num.green { color: #4ade80; }
+.summary-card .num.yellow { color: #fbbf24; }
+.summary-card .num.blue { color: #60a5fa; }
+.summary-card .lbl { color: #94a3b8; font-size: 0.75rem; margin-top: 0.25rem; }
+.agent-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+@media (max-width: 1024px) { .agent-grid { grid-template-columns: 1fr; } }
+.agent-card { background: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; overflow: hidden; }
+.agent-card:hover { border-color: #475569; }
+.agent-header { display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: #0f172a; border-bottom: 1px solid #334155; }
+.agent-icon { font-size: 2.5rem; }
+.agent-title { flex: 1; }
+.agent-name { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.25rem; }
+.agent-server { font-size: 0.8rem; color: #64748b; }
+.mode-badge { padding: 0.4rem 0.75rem; border-radius: 0.375rem; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; }
+.mode-live { background: #166534; color: #86efac; }
+.mode-mock { background: #854d0e; color: #fcd34d; }
+.mode-active { background: #1e40af; color: #93c5fd; }
+.agent-body { padding: 1.25rem; }
+.agent-desc { color: #94a3b8; font-size: 0.9rem; line-height: 1.5; margin-bottom: 1rem; }
+.agent-section { margin-bottom: 1rem; }
+.agent-section-title { font-size: 0.75rem; color: #64748b; text-transform: uppercase; font-weight: 500; margin-bottom: 0.5rem; }
+.agent-meta { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.agent-meta-item { background: #0f172a; padding: 0.4rem 0.75rem; border-radius: 0.25rem; font-size: 0.8rem; }
+.agent-meta-item .label { color: #64748b; }
+.agent-meta-item .value { color: #e2e8f0; }
+.channel-badge { background: #312e81; color: #a5b4fc; padding: 0.3rem 0.6rem; border-radius: 0.25rem; font-size: 0.75rem; }
+.capability-list { list-style: none; }
+.capability-list li { padding: 0.25rem 0; font-size: 0.85rem; color: #94a3b8; }
+.capability-list li::before { content: '✓ '; color: #4ade80; }
+.guardrail-list { list-style: none; }
+.guardrail-list li { padding: 0.25rem 0; font-size: 0.85rem; color: #fbbf24; }
+.guardrail-list li::before { content: '⚠ '; }
+
+/* Phase */
+.phase-text { color: #94a3b8; font-size: 0.85rem; padding: 0.25rem 0; }
+
+/* Integrations */
+.integration-list { display: flex; flex-direction: column; gap: 0.4rem; }
+.integration-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; padding: 0.2rem 0; }
+.int-dot { font-size: 0.5rem; width: 1rem; text-align: center; }
+.int-connected { color: #4ade80; }
+.int-mock { color: #fbbf24; }
+.int-planned { color: #64748b; }
+.int-name { color: #e2e8f0; font-weight: 500; min-width: 100px; }
+.int-detail { color: #64748b; font-size: 0.75rem; }
+
+/* Doc Links */
+.doc-links { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.doc-btn { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.4rem 0.75rem; background: #0f172a; border: 1px solid #334155; border-radius: 0.375rem; color: #94a3b8; font-size: 0.8rem; text-decoration: none; transition: all 0.15s; }
+.doc-btn:hover { border-color: #60a5fa; color: #60a5fa; background: #1e293b; }
+
+@media (max-width: 768px) { .page-container { padding: 1rem; } }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+    <a href="/" class="logo">Homebase</a>
+    <div class="nav-links">
+        <a href="/">Dashboard</a>
+        <a href="/fleet">Fleet</a>
+        <a href="/agents" class="active">Agents</a>
+        <a href="/sentinel">Sentinel</a>
+        <a href="/research">Research</a>
+        <a href="/infra">Infra Sheet</a>
+        <a href="/settings">Settings</a>
+        <a href="/backups">Backups</a>
+    </div>
+</nav>
+
+    <div class="page-container">
+        <div class="page-header">
+            <h1>AI Agents</h1>
+            <p>Autonomous agents with guardrails and monitoring &nbsp;|&nbsp; <a href="/static/mindmap.html" style="color:#60a5fa;">🗺️ Agent Mind Map</a></p>
+        </div>
+
+        <div class="summary-cards">
+            <div class="summary-card"><div class="num green" id="live-count">-</div><div class="lbl">Live</div></div>
+            <div class="summary-card"><div class="num yellow" id="mock-count">-</div><div class="lbl">Mock</div></div>
+            <div class="summary-card"><div class="num blue" id="active-count">-</div><div class="lbl">Active</div></div>
+            <div class="summary-card"><div class="num" id="total-count">-</div><div class="lbl">Total</div></div>
+        </div>
+
+        <div class="agent-grid" id="agent-grid">Loading...</div>
+    </div>
+
+    <script>
+
+    // === PRE-CACHE PATTERN ===
+    const CACHE_KEY = "homebase_agents_cache";
+    const CACHE_TTL = 300000; // 5 minutes
+
+    function getCached() {
+        try {
+            const raw = sessionStorage.getItem(CACHE_KEY);
+            if (!raw) return null;
+            const { data, ts } = JSON.parse(raw);
+            if (Date.now() - ts > CACHE_TTL) return null;
+            return data;
+        } catch { return null; }
+    }
+
+    function setCache(data) {
+        try {
+            sessionStorage.setItem(CACHE_KEY, JSON.stringify({ data, ts: Date.now() }));
+        } catch {}
+    }
+
+    function showRefreshing(show) {
+        let indicator = document.getElementById("refresh-indicator");
+        if (!indicator) {
+            indicator = document.createElement("div");
+            indicator.id = "refresh-indicator";
+            indicator.style.cssText = "position:fixed;top:70px;right:20px;background:#1e293b;color:#60a5fa;padding:8px 16px;border-radius:6px;font-size:12px;z-index:1000;display:none;";
+            indicator.textContent = "🔄 Refreshing...";
+            document.body.appendChild(indicator);
+        }
+        indicator.style.display = show ? "block" : "none";
+    }
+    // === END PRE-CACHE PATTERN ===
+
+    const agentDetails = {
+        'David Bishop': {
+            description: 'AI security, email, and Teams agent. Monitors inbox at dbishop@rize.bm, triages messages, drafts responses, tracks deals, and routes communications to the right team member.',
+            capabilities: [
+                'Monitor and triage dbishop@rize.bm inbox',
+                'Draft email responses for CEO review',
+                'Track active deals and follow-ups',
+                'Route messages to Sarah/Mary/Ibrahim',
+                'Research companies and contacts via web search',
+                'Generate daily activity reports with delta tracking'
+            ],
+            guardrails: [
+                'No direct customer contact without CEO approval',
+                'Cannot offer discounts or modify pricing',
+                'Pricing deviations >20% require CEO sign-off',
+                'All outbound emails require human review',
+                'Cannot access financial systems directly'
+            ],
+            integrations: [
+                { name: 'Microsoft Teams', status: 'connected', detail: 'Webhook bot for team comms' },
+                { name: 'Email (SMTP)', status: 'connected', detail: 'dbishop@rize.bm via aidev relay' },
+                { name: 'Halo PSA', status: 'planned', detail: 'Deal and ticket integration' }
+            ],
+            daily_output: [
+                'Morning briefing email to CEO',
+                'Deal pipeline status with changes from previous day',
+                'Flagged messages requiring urgent attention',
+                'End-of-day activity summary'
+            ],
+            phase: 'Production — Live with guardrails',
+            communication: 'Teams: @DavidBishop | Email: dbishop@rize.bm | Reports to: artiedarrell@gmail.com'
+        },
+        'Apex': {
+            description: 'AI finance agent for revenue leakage detection. Analyzes Halo PSA timesheets against Xero invoices to find unbilled work, AYCE contract overages, and billing anomalies.',
+            capabilities: [
+                'Detect revenue leakage from Halo timesheets',
+                'Flag unbilled hours and overdue invoices',
+                'AYCE contract profitability analysis',
+                'Xero invoice reconciliation',
+                'Financial trend reporting',
+                'Daily/weekly financial digest to Mary and CEO'
+            ],
+            guardrails: [
+                'READ-ONLY — cannot modify any financial data',
+                'Mock mode — uses sample data until Xero OAuth configured',
+                'Cannot initiate payments or transfers',
+                'All findings require human verification before action',
+                'CEO approval needed to transition to Phase 2 (limited write)'
+            ],
+            integrations: [
+                { name: 'Xero', status: 'mock', detail: 'Awaiting OAuth — using sample invoices' },
+                { name: 'Halo PSA', status: 'mock', detail: 'Timesheet API ready, using sample data' },
+                { name: 'Mary spreadsheets', status: 'planned', detail: 'CSV ingestion pipeline' }
+            ],
+            daily_output: [
+                'Revenue leakage report (currently mock data)',
+                'Unbilled hours summary by client',
+                'Invoice aging alerts',
+                'AYCE contract profitability flags'
+            ],
+            phase: 'Phase 1 — Read-only / Mock data',
+            communication: 'Reports to: Homebase API | Alerts via: aidev@rize.bm → CEO'
+        },
+        'Aegis': {
+            description: 'AI infrastructure monitoring agent. Correlates PRTG network alerts with Halo PSA tickets to find patterns, predict failures, and recommend preventive maintenance.',
+            capabilities: [
+                'Correlate PRTG alerts with Halo tickets',
+                'Detect recurring infrastructure failure patterns',
+                'SSL certificate expiration tracking',
+                'Action1 patch compliance reporting',
+                'Predict potential failures from alert trend analysis',
+                'Daily infrastructure intelligence briefing'
+            ],
+            guardrails: [
+                'READ-ONLY — cannot modify any infrastructure',
+                'Mock mode — uses sample monitoring data',
+                'Cannot restart services or modify server configs',
+                'All recommendations require human approval',
+                'CEO approval needed for Phase 2 (limited operations)'
+            ],
+            integrations: [
+                { name: 'PRTG', status: 'mock', detail: 'Alert API ready, using sample alerts' },
+                { name: 'Halo PSA', status: 'mock', detail: 'Ticket API ready, using sample tickets' },
+                { name: 'Action1', status: 'planned', detail: 'Patch status integration' }
+            ],
+            daily_output: [
+                'Infrastructure health summary (currently mock)',
+                'Alert-to-ticket correlation report',
+                'SSL expiry warnings',
+                'Patch compliance status'
+            ],
+            phase: 'Phase 1 — Read-only / Mock data',
+            communication: 'Reports to: Homebase API | Alerts via: aidev@rize.bm → Ibrahim + CEO'
+        },
+        'Cortex': {
+            description: 'Fleet orchestration engine on Talos. Manages the build/audit pipeline, generates fleet manifests, coordinates Architect and Inquisitor audit jobs, and maintains the audit learning log.',
+            capabilities: [
+                'Generate fleet manifests from Homebase data',
+                'Run automated fleet audits on demand or via 3am cron',
+                'Launch Architect build/audit sessions',
+                'Launch Inquisitor verification sessions',
+                'Maintain audit history and learning log',
+                'Provide fleet status API for Homebase'
+            ],
+            guardrails: [
+                'Cannot modify agent guardrails or safety boundaries',
+                'Cannot deploy code to production servers',
+                'Audit results are advisory only — CEO approves changes',
+                'Cannot modify Sentinel configuration'
+            ],
+            integrations: [
+                { name: 'Homebase API', status: 'connected', detail: 'Fleet data source (infrastructure.json)' },
+                { name: 'Architect CLI', status: 'connected', detail: 'Claude Code build automation' },
+                { name: 'Inquisitor CLI', status: 'connected', detail: 'Audit verification & lie detection' },
+                { name: 'Cron (3am ADT)', status: 'connected', detail: 'Nightly fleet audit' }
+            ],
+            daily_output: [
+                '3am automated fleet audit report',
+                'Architect build/audit transcripts',
+                'Inquisitor verification reports',
+                'Fleet manifest generation'
+            ],
+            phase: 'Production — Active',
+            communication: 'cortex-fleet-router.py on Talos | Reports to: ~/audit-history/'
+        },
+        'Sentinel': {
+            description: 'Critical security oversight system. Monitors all AI agents, enforces guardrails, manages kill switches, and serves as the single alerting gateway to the CEO for agent-related issues.',
+            capabilities: [
+                'Monitor agent heartbeats every 5 minutes',
+                'Enforce guardrail compliance checks',
+                'Security vulnerability scanning',
+                'Agent kill switch with confirmation',
+                'Immutable audit trail for all agent actions',
+                'CEO alert gateway for critical security issues',
+                'Pipeline health monitoring (Cortex audit freshness)'
+            ],
+            guardrails: [
+                'Cannot modify its own guardrails',
+                'Cannot deploy new agent code',
+                'Kill switch requires confirmation — no auto-kill',
+                'Cannot access agent credentials or secrets',
+                'All security alerts logged immutably'
+            ],
+            integrations: [
+                { name: 'All Agents', status: 'connected', detail: 'Heartbeat monitoring every 5 min' },
+                { name: 'Cortex Pipeline', status: 'connected', detail: 'Audit review and pipeline health' },
+                { name: 'Email (SMTP)', status: 'connected', detail: 'CEO alerts via aidev@rize.bm' },
+                { name: 'agents.db', status: 'connected', detail: 'SQLite heartbeat storage' }
+            ],
+            daily_output: [
+                'Continuous agent health monitoring',
+                'Guardrail compliance checks',
+                'Security scan results',
+                'Pipeline audit reviews',
+                'CEO alerts for any anomalies'
+            ],
+            phase: 'Production — Active oversight',
+            communication: 'Sentinel page on Homebase | Alerts: aidev@rize.bm → CEO'
+        },
+        'Talos': {
+            description: 'Command and Control hub. Provides SSH gateway to all fleet servers, Claude Code execution via tmux, file management (Talos Drop), and web terminal (ttyd) for fleet administration.',
+            capabilities: [
+                'SSH gateway to all 5 fleet servers',
+                'Claude Code execution with --dangerously-skip-permissions',
+                'tmux sessions for parallel Claude Code jobs',
+                'Talos Drop — file upload/paste for quick transfers',
+                'ttyd web terminal for browser-based access',
+                'Transcript storage at /mnt/transcripts/'
+            ],
+            guardrails: [
+                'Never reboot during active Claude Code sessions',
+                'All changes logged in /mnt/transcripts/',
+                'CEO approval for infrastructure changes',
+                'No auto-deployment — all builds require review'
+            ],
+            integrations: [
+                { name: 'All Servers (SSH)', status: 'connected', detail: 'Key + password auth to .241/.245/.246/.249' },
+                { name: 'Claude Code', status: 'connected', detail: 'AI coding via tmux sessions' },
+                { name: 'Cloudflare Tunnel', status: 'connected', detail: 'talos.rize.bm external access' }
+            ],
+            daily_output: [
+                'Command execution transcripts',
+                'Claude Code session logs',
+                'File transfer audit trail'
+            ],
+            phase: 'Production — Active C2',
+            communication: 'SSH from Windows desktop | Web: talos.rize.bm | ttyd terminal'
+        }
+    };
+
+    // Render function that takes pre-fetched data
+    function renderAgents(infra) {
+        const agents = infra.agents || [];
+        const servers = {};
+        (infra.servers || []).forEach(s => servers[s.id] = s);
+
+        // Filter out CLI personas (Architect, Inquisitor) — only show real agents/services
+        const displayAgents = agents.filter(a => a.type !== 'cli_persona');
+
+        const live = displayAgents.filter(a => a.mode === 'live').length;
+        const mock = displayAgents.filter(a => a.mode === 'mock' || a.mode === 'readonly').length;
+        const active = displayAgents.filter(a => a.mode === 'active').length;
+
+        document.getElementById('live-count').textContent = live;
+        document.getElementById('mock-count').textContent = mock;
+        document.getElementById('active-count').textContent = active;
+        document.getElementById('total-count').textContent = displayAgents.length;
+
+        document.getElementById('agent-grid').innerHTML = displayAgents.map(a => {
+            const server = servers[a.server] || {};
+            const modeClass = (a.mode === 'readonly') ? 'mode-mock' : ('mode-' + (a.mode || 'mock'));
+            const modeLabel = (a.mode === 'readonly') ? 'READ-ONLY' : (a.mode || 'mock').toUpperCase();
+            const details = agentDetails[a.name] || {description: a.description || '', capabilities: [], guardrails: [], integrations: [], daily_output: []};
+            const agentId = a.id || a.name.toLowerCase().replace(/\s+/g, '-');
+
+            return '<div class="agent-card">' +
+                '<div class="agent-header">' +
+                '<span class="agent-icon">' + (a.icon || '🤖') + '</span>' +
+                '<div class="agent-title">' +
+                '<div class="agent-name">' + a.name + '</div>' +
+                '<div class="agent-server">' + (server.hostname || a.server) + ' (' + (server.ip || a.host || '?') + ')</div>' +
+                '</div>' +
+                '<span class="mode-badge ' + modeClass + '">' + modeLabel + '</span>' +
+                '</div>' +
+                '<div class="agent-body">' +
+                '<div class="agent-desc">' + details.description + '</div>' +
+                // Deployment Phase
+                '<div class="agent-section">' +
+                '<div class="agent-section-title">🚀 Deployment Phase</div>' +
+                '<div class="phase-text">' + (details.phase || a.phase || 'Unknown') + '</div>' +
+                '</div>' +
+                // Communication
+                '<div class="agent-section">' +
+                '<div class="agent-section-title">Communication</div>' +
+                '<div class="agent-meta">' +
+                (a.channels || []).map(c => '<span class="channel-badge">' + c + '</span>').join('') +
+                ((!a.channels || a.channels.length === 0) ? '<span style="color:#64748b">API only</span>' : '') +
+                '</div></div>' +
+                // Integrations
+                (details.integrations && details.integrations.length > 0 ?
+                '<div class="agent-section">' +
+                '<div class="agent-section-title">🔗 Integrations</div>' +
+                '<div class="integration-list">' +
+                details.integrations.map(function(i) {
+                    return '<div class="integration-item">' +
+                        '<span class="int-dot int-' + i.status + '">●</span>' +
+                        '<span class="int-name">' + i.name + '</span>' +
+                        '<span class="int-detail">' + i.detail + '</span>' +
+                    '</div>';
+                }).join('') +
+                '</div></div>' : '') +
+                // Capabilities
+                (details.capabilities.length > 0 ? '<div class="agent-section"><div class="agent-section-title">Capabilities</div><ul class="capability-list">' + details.capabilities.map(c => '<li>' + c + '</li>').join('') + '</ul></div>' : '') +
+                // Daily Output
+                (details.daily_output && details.daily_output.length > 0 ?
+                '<div class="agent-section">' +
+                '<div class="agent-section-title">📊 Daily Output</div>' +
+                '<ul class="capability-list">' +
+                details.daily_output.map(function(d) { return '<li>' + d + '</li>'; }).join('') +
+                '</ul></div>' : '') +
+                // Guardrails
+                (details.guardrails.length > 0 ? '<div class="agent-section"><div class="agent-section-title">Guardrails</div><ul class="guardrail-list">' + details.guardrails.map(g => '<li>' + g + '</li>').join('') + '</ul></div>' : '') +
+                // Documentation Links
+                '<div class="agent-section">' +
+                '<div class="agent-section-title">📄 Documentation</div>' +
+                '<div class="doc-links">' +
+                '<a href="/projects/' + agentId + '" class="doc-btn">📋 Project Detail</a>' +
+                '<a href="/projects/' + agentId + '#readme" class="doc-btn">📖 README</a>' +
+                '<a href="/projects/' + agentId + '#todo" class="doc-btn">📝 TODO</a>' +
+                '</div></div>' +
+                '</div></div>';
+        }).join('');
+    }
+
+    async function loadAgents() {
+        try {
+            const res = await fetch('/api/infrastructure');
+            const infra = await res.json();
+            setCache(infra);
+            renderAgents(infra);
+        } catch (e) {
+            document.getElementById('agent-grid').innerHTML = '<div style="color:#f87171">Failed to load</div>';
+        }
+    }
+
+    // Use cache-first pattern
+    const cached = getCached();
+    if (cached) {
+        renderAgents(cached);
+        console.log("Rendered from cache");
+    }
+    showRefreshing(true);
+    loadAgents().finally(() => showRefreshing(false));
+    </script>
+</body>
+</html>

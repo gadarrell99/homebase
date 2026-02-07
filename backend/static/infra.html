@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infra Sheet | Homebase</title>
+    <style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+.main-nav { display: flex; align-items: center; padding: 0.75rem 1.5rem; background: #1e293b; border-bottom: 1px solid #334155; position: sticky; top: 0; z-index: 100; }
+.main-nav .logo { font-size: 1.1rem; font-weight: 600; color: #e2e8f0; margin-right: 2rem; text-decoration: none; }
+.main-nav .nav-links { display: flex; gap: 0.25rem; flex: 1; flex-wrap: wrap; align-items: center; }
+.main-nav .nav-links a { color: #94a3b8; padding: 0.5rem 0.75rem; border-radius: 0.375rem; font-size: 0.875rem; text-decoration: none; transition: all 0.15s; }
+.main-nav .nav-links a:hover, .main-nav .nav-links a.active { color: #e2e8f0; background: #334155; }
+
+a { color: #60a5fa; text-decoration: none; }
+a:hover { color: #93c5fd; }
+
+.main-nav .nav-links > a { color: #94a3b8; padding: 0.5rem 0.75rem; border-radius: 0.375rem; font-size: 0.875rem; text-decoration: none; transition: all 0.15s; }
+.main-nav .nav-links > a:hover, .main-nav .nav-links > a.active { color: #e2e8f0; background: #334155; }
+
+.page-container { padding: 1.5rem; max-width: 1400px; margin: 0 auto; }
+.page-header { margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+.page-header h1 { font-size: 1.75rem; font-weight: 600; }
+.page-header .meta { color: #64748b; font-size: 0.875rem; }
+.section { background: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+.section-header { display: flex; align-items: center; padding: 1rem; cursor: pointer; background: #0f172a; border-bottom: 1px solid #334155; }
+.section-header:hover { background: #1a1a2e; }
+.section-header .arrow { margin-right: 0.75rem; transition: transform 0.2s; color: #64748b; }
+.section-header.open .arrow { transform: rotate(90deg); }
+.section-header h2 { font-size: 1rem; font-weight: 600; flex: 1; }
+.section-body { display: none; padding: 1rem; }
+.section-body.open { display: block; }
+table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+th, td { padding: 0.5rem 0.75rem; text-align: left; border-bottom: 1px solid #334155; }
+th { color: #94a3b8; font-weight: 500; background: #0f172a; }
+td { color: #e2e8f0; }
+tr:hover td { background: #1a1a2e; }
+.mono { font-family: monospace; font-size: 0.8rem; }
+.status-badge { display: inline-block; padding: 0.125rem 0.375rem; border-radius: 0.25rem; font-size: 0.7rem; font-weight: 600; }
+.status-online { background: #166534; color: #86efac; }
+.status-live { background: #166534; color: #86efac; }
+.status-mock { background: #854d0e; color: #fcd34d; }
+.status-active { background: #1e40af; color: #93c5fd; }
+.status-decom { background: #374151; color: #9ca3af; }
+.cred-value { font-family: monospace; cursor: pointer; padding: 0.25rem 0.5rem; background: #0f172a; border-radius: 0.25rem; }
+.cred-value.hidden::after { content: '••••••••'; }
+.cred-value.visible { color: #4ade80; }
+.show-btn { background: none; border: 1px solid #334155; color: #94a3b8; padding: 0.25rem 0.5rem; border-radius: 0.25rem; cursor: pointer; font-size: 0.7rem; margin-left: 0.5rem; }
+.show-btn:hover { background: #334155; color: #e2e8f0; }
+.updated { font-size: 0.7rem; color: #475569; text-align: right; margin-top: 1rem; }
+@media (max-width: 768px) { .page-container { padding: 1rem; } table { font-size: 0.75rem; } }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+    <a href="/" class="logo">Homebase</a>
+    <div class="nav-links">
+        <a href="/">Dashboard</a>
+        <a href="/fleet">Fleet</a>
+        <a href="/agents">Agents</a>
+        <a href="/sentinel">Sentinel</a>
+        <a href="/research">Research</a>
+        <a href="/infra" class="active">Infra Sheet</a>
+        <a href="/settings">Settings</a>
+        <a href="/backups">Backups</a>
+    </div>
+</nav>
+
+    <div class="page-container">
+        <div class="page-header">
+            <h1>Infrastructure Sheet</h1>
+            <span class="meta" id="last-updated">Loading...</span>
+        </div>
+
+        <!-- Fleet Topology -->
+        <div class="section">
+            <div class="section-header open" onclick="toggleSection(this)">
+                <span class="arrow">▸</span>
+                <h2>Fleet Topology</h2>
+            </div>
+            <div class="section-body open" id="fleet-topology"></div>
+        </div>
+
+        <!-- Port Map -->
+        <div class="section">
+            <div class="section-header open" onclick="toggleSection(this)">
+                <span class="arrow">▸</span>
+                <h2>Port Map</h2>
+            </div>
+            <div class="section-body open" id="port-map"></div>
+        </div>
+
+        <!-- AI Agents -->
+        <div class="section">
+            <div class="section-header open" onclick="toggleSection(this)">
+                <span class="arrow">▸</span>
+                <h2>AI Agents</h2>
+            </div>
+            <div class="section-body open" id="agents-section"></div>
+        </div>
+
+        <!-- DNS & Tunnels -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <span class="arrow">▸</span>
+                <h2>DNS & Tunnels</h2>
+            </div>
+            <div class="section-body" id="dns-tunnels"></div>
+        </div>
+
+        <!-- Credentials -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <span class="arrow">▸</span>
+                <h2>Credentials 🔒</h2>
+            </div>
+            <div class="section-body" id="credentials-section"></div>
+        </div>
+
+        <!-- Automation -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <span class="arrow">▸</span>
+                <h2>🔄 Build & Audit Pipeline (Cortex → Sentinel)</h2>
+            </div>
+            <div class="section-body" id="automation-section"></div>
+        </div>
+
+        <div class="updated" id="footer-updated"></div>
+    </div>
+
+    <script>
+    function toggleSection(header) {
+        header.classList.toggle('open');
+        header.nextElementSibling.classList.toggle('open');
+    }
+    
+    function toggleCred(el) {
+        el.classList.toggle('hidden');
+        el.classList.toggle('visible');
+        if (el.classList.contains('visible')) {
+            el.textContent = el.dataset.value;
+        } else {
+            el.textContent = '';
+        }
+    }
+    
+    async function loadInfra() {
+        try {
+            const res = await fetch('/api/infrastructure');
+            const data = await res.json();
+            
+            // Fleet Topology
+            const servers = data.servers || [];
+            const fleetHtml = `
+                <table>
+                    <tr><th>Server</th><th>IP</th><th>User</th><th>Role</th><th>Status</th></tr>
+                    ${servers.map(s => `
+                        <tr>
+                            <td>${s.icon || '💻'} ${s.hostname}</td>
+                            <td class="mono">.${s.ip.split('.').pop()}</td>
+                            <td class="mono">${s.ssh_user}</td>
+                            <td>${s.role || '-'}</td>
+                            <td><span class="status-badge status-${s.status === 'online' ? 'online' : 'decom'}">${s.status?.toUpperCase()}</span></td>
+                        </tr>
+                    `).join('')}
+                </table>
+            `;
+            document.getElementById('fleet-topology').innerHTML = fleetHtml;
+            
+            // Port Map
+            const projects = data.projects || [];
+            const portHtml = `
+                <table>
+                    <tr><th>Port</th><th>Service</th><th>Server</th><th>Status</th></tr>
+                    ${projects.filter(p => p.port || (p.ports && p.ports.length)).map(p => {
+                        const ports = p.ports || [p.port];
+                        const srv = servers.find(s => s.id === p.server) || {};
+                        return ports.map(port => `
+                            <tr>
+                                <td class="mono">${port}</td>
+                                <td>${p.name}</td>
+                                <td>${srv.hostname || p.server}</td>
+                                <td><span class="status-badge status-${p.status === 'running' ? 'online' : 'mock'}">${p.status?.toUpperCase() || 'UNKNOWN'}</span></td>
+                            </tr>
+                        `).join('');
+                    }).join('')}
+                </table>
+            `;
+            document.getElementById('port-map').innerHTML = portHtml;
+            
+            // AI Agents
+            const agents = data.agents || [];
+            const agentsHtml = `
+                <table>
+                    <tr><th>Agent</th><th>Port</th><th>Server</th><th>Mode</th><th>Channels</th></tr>
+                    ${agents.filter(a => a.type !== 'cli_persona').map(a => {
+                        const srv = servers.find(s => s.id === a.server) || {};
+                        return `
+                            <tr>
+                                <td>🤖 ${a.name}</td>
+                                <td class="mono">${a.port || '-'}</td>
+                                <td>${srv.hostname || a.server}</td>
+                                <td><span class="status-badge status-${a.mode}">${a.mode?.toUpperCase()}</span></td>
+                                <td>${(a.channels || []).join(', ') || '-'}</td>
+                            </tr>
+                        `;
+                    }).join('')}
+                </table>
+            `;
+            document.getElementById('agents-section').innerHTML = agentsHtml;
+            
+            // DNS & Tunnels (FIX 4: build from server.domains)
+            const domains = [];
+            (data.servers || []).forEach(s => {
+                if (s.domains && s.domains.length) {
+                    s.domains.forEach(d => {
+                        domains.push({
+                            domain: d,
+                            server: s.hostname,
+                            server_ip: s.ip,
+                            tunnel_uuid: s.tunnel_uuid || null
+                        });
+                    });
+                }
+            });
+            
+            const dnsHtml = domains.length ? '<table><tr><th>Domain</th><th>Server</th><th>Tunnel UUID</th></tr>' +
+                domains.map(d => '<tr><td><a href="https://' + d.domain + '" target="_blank" style="color:#60a5fa">' + d.domain + '</a></td><td class="mono">' + d.server + ' (.' + d.server_ip.split('.').pop() + ')</td><td class="mono">' + (d.tunnel_uuid ? d.tunnel_uuid.slice(0, 8) + '...' : '-') + '</td></tr>').join('') +
+                '</table>' : '<p style="color:#64748b">No domain records in infrastructure.json</p>';
+            document.getElementById('dns-tunnels').innerHTML = dnsHtml;
+            
+            // Credentials (FIX 3: field names + SSH fallback)
+            const creds = data.credentials || {};
+            const demoLogins = creds.demo_logins || [];
+            const sshFallback = creds.ssh_fallback || '';
+            
+            let credRows = '';
+            
+            // SSH credentials
+            if (sshFallback) {
+                credRows += '<tr><td colspan="3" style="color:#94a3b8;font-weight:600;padding-top:0.5rem;border:none">🔑 SSH Access</td></tr>';
+                credRows += '<tr><td>SSH Fallback (All Servers)</td><td class="mono">*admin</td><td><span class="cred-value hidden" data-value="' + sshFallback + '" onclick="toggleCred(this)"></span><button class="show-btn" onclick="toggleCred(this.previousElementSibling)">👁️ Show</button></td></tr>';
+                
+                (data.servers || []).filter(s => s.status === 'online').forEach(s => {
+                    credRows += '<tr><td>SSH ' + s.hostname + ' (.' + s.ip.split('.').pop() + ')</td><td class="mono">' + s.ssh_user + '</td><td><span class="cred-value hidden" data-value="' + sshFallback + '" onclick="toggleCred(this)"></span><button class="show-btn" onclick="toggleCred(this.previousElementSibling)">👁️ Show</button></td></tr>';
+                });
+            }
+            
+            // Demo logins
+            if (demoLogins.length) {
+                credRows += '<tr><td colspan="3" style="color:#94a3b8;font-weight:600;padding-top:1rem;border:none">🔐 Demo Credentials</td></tr>';
+                demoLogins.forEach(c => {
+                    credRows += '<tr><td>' + (c.app || c.service || '-') + '</td><td class="mono">' + (c.user || c.username || '-') + '</td><td><span class="cred-value hidden" data-value="' + (c.pass || c.password || '') + '" onclick="toggleCred(this)"></span><button class="show-btn" onclick="toggleCred(this.previousElementSibling)">👁️ Show</button></td></tr>';
+                });
+            }
+            
+            // API Keys
+            const apiKeys = creds.api_keys || [];
+            if (apiKeys.length) {
+                credRows += '<tr><td colspan="3" style="color:#94a3b8;font-weight:600;padding-top:1rem;border:none">🔑 API Keys & Integrations</td></tr>';
+                apiKeys.forEach(k => {
+                    credRows += '<tr><td>' + (k.service || '-') + '</td><td class="mono">' + (k.key_name || '-') + '</td><td style="color:#64748b;font-size:0.8rem">' + (k.location || '-') + ' — ' + (k.note || '') + '</td></tr>';
+                });
+            }
+            
+            // SMTP Relay
+            const smtp = creds.smtp || {};
+            if (smtp.relay_address) {
+                credRows += '<tr><td colspan="3" style="color:#94a3b8;font-weight:600;padding-top:1rem;border:none">📧 SMTP Relay</td></tr>';
+                credRows += '<tr><td>Relay Address</td><td class="mono">' + smtp.relay_address + '</td><td style="color:#64748b;font-size:0.8rem">' + (smtp.purpose || '-') + '</td></tr>';
+                credRows += '<tr><td>Agents Using</td><td colspan="2">' + (smtp.agents_using || []).join(', ') + '</td></tr>';
+            }
+            
+            // Server SSH
+            const serverSsh = creds.server_ssh || [];
+            if (serverSsh.length) {
+                credRows += '<tr><td colspan="3" style="color:#94a3b8;font-weight:600;padding-top:1rem;border:none">🖥️ Server SSH Access</td></tr>';
+                serverSsh.forEach(s => {
+                    credRows += '<tr><td>' + (s.server || '-') + '</td><td class="mono">' + (s.user || '-') + '</td><td>' + (s.auth || '-') + '</td></tr>';
+                });
+            }
+            
+            const credsHtml = credRows ? '<table><tr><th>Service</th><th>User</th><th>Details/Password</th></tr>' + credRows + '</table>' : '<p style="color:#64748b">No credentials configured</p>';
+            document.getElementById('credentials-section').innerHTML = credsHtml;
+            
+            // Automation (FIX 12: improved pipeline section)
+            const auto = data.automation || {};
+            let autoHtml = '';
+            
+            if (auto.description) {
+                autoHtml = '<p style="color:#94a3b8;margin-bottom:1rem">' + auto.description + '</p>';
+                autoHtml += '<table><tr><th>Role</th><th>Owner</th><th>Description</th></tr>';
+                autoHtml += '<tr><td>Execution</td><td class="mono">Cortex</td><td>Runs fleet audits, generates manifests, launches Architect/Inquisitor jobs</td></tr>';
+                autoHtml += '<tr><td>Review</td><td class="mono">Sentinel</td><td>Monitors pipeline health, flags failures, verifies audit freshness</td></tr>';
+                autoHtml += '<tr><td>Approval</td><td class="mono">CEO</td><td>Approves safety boundary changes and write operations</td></tr>';
+                autoHtml += '</table>';
+                
+                if (auto.cortex_endpoints) {
+                    autoHtml += '<h3 style="font-size:0.85rem;color:#94a3b8;margin-top:1rem;margin-bottom:0.5rem;">Cortex API Endpoints</h3>';
+                    autoHtml += '<table><tr><th>Endpoint</th><th>URL</th></tr>';
+                    Object.entries(auto.cortex_endpoints).filter(([k]) => k !== 'base_url').forEach(([k,v]) => {
+                        autoHtml += '<tr><td>' + k.replace(/_/g, ' ') + '</td><td class="mono">' + v + '</td></tr>';
+                    });
+                    autoHtml += '</table>';
+                }
+                
+                // CLI Personas (launched by Cortex)
+                const agents = data.agents || [];
+                const cliPersonas = agents.filter(a => a.type === 'cli_persona');
+                if (cliPersonas.length) {
+                    autoHtml += '<h3 style="font-size:0.85rem;color:#94a3b8;margin-top:1.5rem;margin-bottom:0.5rem;">🤖 CLI Personas (Launched by Cortex on Talos)</h3>';
+                    autoHtml += '<table><tr><th>Name</th><th>Purpose</th><th>Launched By</th></tr>';
+                    cliPersonas.forEach(p => {
+                        autoHtml += '<tr><td>' + (p.icon || '🔧') + ' ' + (p.name || '-') + '</td><td>' + (p.description || '-') + '</td><td>Cortex (automated) or CEO (manual)</td></tr>';
+                    });
+                    autoHtml += '</table>';
+                }
+            } else {
+                autoHtml = '<p style="color:#64748b">No automation pipeline configured</p>';
+            }
+            document.getElementById('automation-section').innerHTML = autoHtml;
+            
+            // Timestamp
+            const updated = data.meta?.updated ? new Date(data.meta.updated).toLocaleString() : new Date().toLocaleString();
+            document.getElementById('last-updated').textContent = 'Last updated: ' + updated;
+            document.getElementById('footer-updated').textContent = 'Data from infrastructure.json | ' + updated;
+        } catch (e) {
+            console.error('Infra load failed:', e);
+        }
+    }
+    
+    loadInfra();
+    setInterval(loadInfra, 120000);
+    </script>
+</body>
+</html>

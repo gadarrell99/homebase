@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.env
+
+# Node
+node_modules/
+dist/
+
+# PM2
+*.log
+
+# IDE
+.vscode/
+.idea/
+backend/.homebase_key
+backend/.homebase_salt
+backend/homebase.db
+.aider*

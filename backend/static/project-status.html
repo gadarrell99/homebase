@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Status | Homebase</title>
+    <script src="/static/js/marked.min.js"></script>
+    <style>
+:root {
+    --bg-body: #0f172a; --bg-nav: #1e293b; --bg-card: #1e293b; --bg-hover: #334155;
+    --text-main: #e2e8f0; --text-muted: #94a3b8; --border-color: #334155;
+    --link-color: #60a5fa; --link-hover: #93c5fd; --shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+[data-theme="light"] {
+    --bg-body: #f1f5f9; --bg-nav: #ffffff; --bg-card: #ffffff; --bg-hover: #e2e8f0;
+    --text-main: #0f172a; --text-muted: #64748b; --border-color: #cbd5e1;
+    --link-color: #2563eb; --link-hover: #1d4ed8; --shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg-body); color: var(--text-main); min-height: 100vh; transition: background 0.3s, color 0.3s; }
+.main-nav { display: flex; align-items: center; padding: 0.75rem 1.5rem; background: #1e293b; border-bottom: 1px solid #334155; position: sticky; top: 0; z-index: 100; }
+.main-nav .logo { font-size: 1.1rem; font-weight: 600; color: #e2e8f0; margin-right: 2rem; text-decoration: none; }
+.main-nav .nav-links { display: flex; gap: 0.25rem; flex: 1; flex-wrap: wrap; align-items: center; }
+.main-nav .nav-links a { color: #94a3b8; padding: 0.5rem 0.75rem; border-radius: 0.375rem; font-size: 0.875rem; text-decoration: none; transition: all 0.15s; }
+.main-nav .nav-links a:hover, .main-nav .nav-links a.active { color: #e2e8f0; background: #334155; }
+
+a { color: var(--link-color); text-decoration: none; }
+a:hover { color: var(--link-hover); }
+
+/* Nav */
+
+.main-nav 
+.theme-toggle, .print-btn { background: transparent; border: none; color: var(--text-muted); font-size: 1.2rem; cursor: pointer; padding: 0.5rem; border-radius: 0.375rem; transition: all 0.15s; }
+.theme-toggle:hover, .print-btn:hover { background: var(--bg-hover); color: var(--text-main); }
+
+/* Layout */
+.page-container { padding: 1.5rem; max-width: 1600px; margin: 0 auto; }
+.page-header { margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+.page-header h1 { font-size: 1.75rem; font-weight: 600; }
+.page-header p { color: var(--text-muted); font-size: 0.875rem; }
+.refresh-info { color: var(--text-muted); font-size: 0.75rem; }
+
+/* Summary Cards */
+.summary-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+.summary-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1rem; text-align: center; }
+.summary-card .num { font-size: 2rem; font-weight: 700; }
+.summary-card .lbl { color: var(--text-muted); font-size: 0.75rem; margin-top: 0.25rem; }
+.summary-card .num.green { color: #4ade80; }
+.summary-card .num.yellow { color: #fbbf24; }
+.summary-card .num.red { color: #f87171; }
+
+/* Project Grid */
+.project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+
+/* Project Card */
+.project-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 0.5rem; cursor: pointer; transition: all 0.2s; }
+.project-card:hover { border-color: var(--link-color); }
+.project-card.expanded { grid-column: 1 / -1; cursor: default; }
+.project-card-header { display: flex; align-items: center; gap: 0.75rem; padding: 1rem; }
+.project-card-header .icon { font-size: 1.5rem; }
+.project-card-header .info { flex: 1; }
+.project-card-header .name { font-size: 1rem; font-weight: 600; }
+.project-card-header .meta { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem; }
+.project-card-header .score { font-size: 1.25rem; font-weight: 700; }
+.project-card-header .score.green { color: #4ade80; }
+.project-card-header .score.yellow { color: #fbbf24; }
+.project-card-header .score.red { color: #f87171; }
+
+/* Status badges */
+.badge { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 0.25rem; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; margin-right: 0.25rem; }
+.badge-healthy { background: #166534; color: #86efac; }
+.badge-warning { background: #854d0e; color: #fcd34d; }
+.badge-critical { background: #991b1b; color: #fca5a5; }
+.badge-demo { background: #1e40af; color: #93c5fd; }
+.badge-agent { background: #7c3aed; color: #c4b5fd; }
+.badge-infra { background: #0f766e; color: #5eead4; }
+
+/* Quick Stats Row */
+.quick-stats { display: flex; gap: 1rem; padding: 0 1rem 1rem; font-size: 0.75rem; color: var(--text-muted); flex-wrap: wrap; }
+.quick-stat { display: flex; align-items: center; gap: 0.25rem; }
+.quick-stat .dot { width: 8px; height: 8px; border-radius: 50%; }
+.quick-stat .dot.green { background: #4ade80; }
+.quick-stat .dot.red { background: #f87171; }
+
+/* Expanded Content */
+.project-expanded { display: none; border-top: 1px solid var(--border-color); }
+.project-card.expanded .project-expanded { display: block; }
+
+/* Tabs */
+.tabs { display: flex; border-bottom: 1px solid var(--border-color); padding: 0 1rem; overflow-x: auto; }
+.tab { padding: 0.75rem 1rem; font-size: 0.875rem; color: var(--text-muted); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: all 0.15s; }
+.tab:hover { color: var(--text-main); }
+.tab.active { color: var(--link-color); border-bottom-color: var(--link-color); }
+
+/* Tab Content */
+.tab-content { display: none; padding: 1rem; max-height: 500px; overflow-y: auto; }
+.tab-content.active { display: block; }
+
+/* Markdown Content */
+.markdown-content { line-height: 1.6; }
+.markdown-content h1 { font-size: 1.5rem; margin: 1rem 0 0.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; }
+.markdown-content h2 { font-size: 1.25rem; margin: 1rem 0 0.5rem; }
+.markdown-content h3 { font-size: 1rem; margin: 0.75rem 0 0.375rem; }
+.markdown-content p { margin: 0.5rem 0; }
+.markdown-content ul, .markdown-content ol { margin: 0.5rem 0 0.5rem 1.5rem; }
+.markdown-content li { margin: 0.25rem 0; }
+.markdown-content code { background: var(--bg-hover); padding: 0.1rem 0.3rem; border-radius: 0.25rem; font-size: 0.85em; }
+.markdown-content pre { background: var(--bg-body); padding: 1rem; border-radius: 0.375rem; overflow-x: auto; margin: 0.5rem 0; }
+.markdown-content pre code { background: none; padding: 0; }
+.markdown-content blockquote { border-left: 3px solid var(--border-color); padding-left: 1rem; margin: 0.5rem 0; color: var(--text-muted); }
+.markdown-content table { border-collapse: collapse; width: 100%; margin: 0.5rem 0; }
+.markdown-content th, .markdown-content td { border: 1px solid var(--border-color); padding: 0.5rem; text-align: left; }
+.markdown-content th { background: var(--bg-hover); }
+
+/* Overview Tab */
+.overview-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+.overview-section { background: var(--bg-body); padding: 1rem; border-radius: 0.375rem; }
+.overview-section h4 { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.5rem; }
+.overview-item { display: flex; justify-content: space-between; font-size: 0.875rem; padding: 0.25rem 0; }
+.overview-item .label { color: var(--text-muted); }
+
+/* Git Status */
+.git-change { display: flex; gap: 0.5rem; font-size: 0.8rem; padding: 0.25rem 0; font-family: monospace; }
+.git-change .status { width: 20px; font-weight: 600; }
+.git-change .status.M { color: #fbbf24; }
+.git-change .status.A { color: #4ade80; }
+.git-change .status.D { color: #f87171; }
+.git-change .status.U { color: #60a5fa; }
+
+/* Files List */
+.files-list { font-family: monospace; font-size: 0.8rem; }
+.file-item { padding: 0.25rem 0; color: var(--text-muted); }
+.file-item:hover { color: var(--text-main); }
+
+/* Issues */
+.issue-item { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem; background: var(--bg-body); border-radius: 0.375rem; margin-bottom: 0.5rem; }
+.issue-item .severity { font-size: 1.25rem; }
+.issue-item .content { flex: 1; }
+.issue-item .project-name { font-size: 0.75rem; color: var(--text-muted); }
+.issue-item .message { font-size: 0.875rem; margin-top: 0.25rem; }
+
+/* Docs Checklist */
+.docs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.5rem; }
+.doc-item { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; background: var(--bg-body); border-radius: 0.25rem; font-size: 0.8rem; }
+.doc-item .icon { font-size: 1rem; }
+.doc-item.exists .icon { color: #4ade80; }
+.doc-item.missing .icon { color: #f87171; }
+
+/* Global Issues Section */
+.issues-section { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1rem; margin-top: 1.5rem; }
+.issues-section h3 { font-size: 1rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+.issues-section h3 .count { background: var(--bg-hover); padding: 0.125rem 0.5rem; border-radius: 1rem; font-size: 0.75rem; }
+
+/* Empty State */
+.empty-state { text-align: center; padding: 2rem; color: var(--text-muted); }
+
+/* Mobile */
+@media (max-width: 768px) {
+    .page-container { padding: 1rem; }
+    .project-grid { grid-template-columns: 1fr; }
+    .summary-cards { grid-template-columns: repeat(2, 1fr); }
+    .tabs { padding: 0 0.5rem; }
+    .tab { padding: 0.5rem 0.75rem; font-size: 0.8rem; }
+    .tab-content { padding: 0.75rem; }
+}
+
+/* Print */
+@media print {
+    .main-nav, .theme-toggle, .print-btn { display: none !important; }
+    body { background: white; color: black; }
+    .project-card, .summary-card, .issues-section { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+    <a href="/" class="logo">Homebase</a>
+    <div class="nav-links">
+        <a href="/">Dashboard</a>
+        <a href="/fleet">Fleet</a>
+        <a href="/agents">Agents</a>
+        <a href="/sentinel">Sentinel</a>
+        <a href="/research">Research</a>
+        <a href="/infra">Infra Sheet</a>
+        <a href="/settings">Settings</a>
+        <a href="/backups">Backups</a>
+    </div>
+</nav>
+
+    <div class="page-container">
+        <div class="page-header">
+            <div>
+                <h1>📊 Project Status Dashboard</h1>
+                <p>Documentation, health, and code status for all projects</p>
+            </div>
+            <div class="refresh-info">
+                Auto-refresh: 60s | <span id="last-update">Loading...</span>
+            </div>
+        </div>
+
+        <div class="summary-cards">
+            <div class="summary-card">
+                <div class="num" id="total-projects">-</div>
+                <div class="lbl">Total Projects</div>
+            </div>
+            <div class="summary-card">
+                <div class="num green" id="healthy-count">-</div>
+                <div class="lbl">Healthy</div>
+            </div>
+            <div class="summary-card">
+                <div class="num yellow" id="warning-count">-</div>
+                <div class="lbl">Warnings</div>
+            </div>
+            <div class="summary-card">
+                <div class="num red" id="critical-count">-</div>
+                <div class="lbl">Critical</div>
+            </div>
+            <div class="summary-card">
+                <div class="num" id="open-todos">-</div>
+                <div class="lbl">Open TODOs</div>
+            </div>
+        </div>
+
+        <div class="project-grid" id="project-grid">
+            <div class="empty-state">Loading projects...</div>
+        </div>
+
+        <div class="issues-section" id="issues-section">
+            <h3>🚨 Global Issues <span class="count" id="issue-count">0</span></h3>
+            <div id="issues-list">
+                <div class="empty-state">No issues found</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Theme handling
+    function toggleTheme() {
+        const body = document.body;
+        const current = body.getAttribute('data-theme');
+        const next = current === 'light' ? 'dark' : 'light';
+        body.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+    }
+    (function() {
+        const saved = localStorage.getItem('theme') || 'dark';
+        document.body.setAttribute('data-theme', saved);
+    })();
+
+    // State
+    let projectData = null;
+    let expandedCard = null;
+
+    // Score color helper
+    function scoreColor(score) {
+        if (score >= 90) return 'green';
+        if (score >= 60) return 'yellow';
+        return 'red';
+    }
+
+    // Type badge helper
+    function typeBadge(type) {
+        const badges = {
+            'demo': '<span class="badge badge-demo">Demo</span>',
+            'agent': '<span class="badge badge-agent">Agent</span>',
+            'infrastructure': '<span class="badge badge-infra">Infra</span>'
+        };
+        return badges[type] || '';
+    }
+
+    // Severity icon helper
+    function severityIcon(severity) {
+        const icons = {
+            'critical': '🔴',
+            'warning': '🟡',
+            'info': '🔵'
+        };
+        return icons[severity] || '⚪';
+    }
+
+    // Render markdown safely
+    function renderMarkdown(content) {
+        if (!content) return '<div class="empty-state">No content available</div>';
+        try {
+            return marked.parse(content);
+        } catch (e) {
+            return '<pre>' + escapeHtml(content) + '</pre>';
+        }
+    }
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    // Render project card
+    function renderCard(project, index) {
+        const score = project.health_score || 0;
+        const colorClass = scoreColor(score);
+        const icon = project.type === 'agent' ? '🤖' : project.type === 'demo' ? '🎭' : '🔧';
+
+        const portDots = (project.ports_status || []).map(p =>
+            `<span class="dot ${p.healthy ? 'green' : 'red'}"></span>`
+        ).join('');
+
+        const quickStats = [];
+        if (project.version) quickStats.push(`v${project.version}`);
+        if (project.git?.branch) quickStats.push(`📌 ${project.git.branch}`);
+        if (project.todos_open > 0) quickStats.push(`📝 ${project.todos_open} TODOs`);
+
+        return `
+        <div class="project-card" data-index="${index}" onclick="toggleCard(${index})">
+            <div class="project-card-header">
+                <div class="icon">${icon}</div>
+                <div class="info">
+                    <div class="name">${escapeHtml(project.name)}</div>
+                    <div class="meta">
+                        ${typeBadge(project.type)}
+                        <span>${project.server}</span>
+                        ${project.domain ? `· <a href="https://${project.domain}" target="_blank" onclick="event.stopPropagation()">${project.domain}</a>` : ''}
+                    </div>
+                </div>
+                <div class="score ${colorClass}">${score}</div>
+            </div>
+            <div class="quick-stats">
+                ${quickStats.map(s => `<div class="quick-stat">${s}</div>`).join('')}
+                ${portDots ? `<div class="quick-stat">Ports: ${portDots}</div>` : ''}
+            </div>
+            <div class="project-expanded" id="expanded-${index}">
+                ${renderExpandedContent(project)}
+            </div>
+        </div>`;
+    }
+
+    // Render expanded content with tabs
+    function renderExpandedContent(project) {
+        const tabs = ['Overview', 'README', 'TODO', 'CHANGELOG', 'Issues', 'Files'];
+
+        return `
+        <div class="tabs">
+            ${tabs.map((tab, i) => `<div class="tab ${i === 0 ? 'active' : ''}" onclick="switchTab(event, '${tab.toLowerCase()}')">${tab}</div>`).join('')}
+        </div>
+
+        <div class="tab-content active" data-tab="overview">
+            ${renderOverview(project)}
+        </div>
+
+        <div class="tab-content" data-tab="readme">
+            <div class="markdown-content">${renderMarkdown(project.readme)}</div>
+        </div>
+
+        <div class="tab-content" data-tab="todo">
+            <div class="markdown-content">${renderMarkdown(project.todo)}</div>
+        </div>
+
+        <div class="tab-content" data-tab="changelog">
+            <div class="markdown-content">${renderMarkdown(project.changelog)}</div>
+        </div>
+
+        <div class="tab-content" data-tab="issues">
+            ${renderProjectIssues(project)}
+        </div>
+
+        <div class="tab-content" data-tab="files">
+            ${renderFiles(project)}
+        </div>`;
+    }
+
+    // Render overview tab
+    function renderOverview(project) {
+        const git = project.git || {};
+        const docs = project.docs || [];
+
+        return `
+        <div class="overview-grid">
+            <div class="overview-section">
+                <h4>Project Info</h4>
+                <div class="overview-item"><span class="label">Server</span><span>${project.server}</span></div>
+                <div class="overview-item"><span class="label">Type</span><span>${project.type}</span></div>
+                <div class="overview-item"><span class="label">Version</span><span>${project.version || 'Unknown'}</span></div>
+                <div class="overview-item"><span class="label">Health</span><span class="${scoreColor(project.health_score)}">${project.health_score}%</span></div>
+            </div>
+
+            <div class="overview-section">
+                <h4>Git Status</h4>
+                <div class="overview-item"><span class="label">Branch</span><span>${git.branch || 'Unknown'}</span></div>
+                <div class="overview-item"><span class="label">Status</span><span>${git.status === 'clean' ? '✅ Clean' : '⚠️ ' + (git.uncommitted_count || 0) + ' changes'}</span></div>
+                <div class="overview-item"><span class="label">Last Commit</span><span style="font-size:0.75rem">${git.last_commit || 'Unknown'}</span></div>
+                ${git.changes?.length > 0 ? `
+                <div style="margin-top:0.5rem">
+                    ${git.changes.slice(0, 5).map(c => `<div class="git-change"><span class="status ${c.status}">${c.status}</span><span>${escapeHtml(c.file)}</span></div>`).join('')}
+                </div>` : ''}
+            </div>
+
+            <div class="overview-section">
+                <h4>TODOs</h4>
+                <div class="overview-item"><span class="label">Open</span><span>${project.todos_open || 0}</span></div>
+                <div class="overview-item"><span class="label">Done</span><span>${project.todos_done || 0}</span></div>
+            </div>
+
+            <div class="overview-section">
+                <h4>Ports</h4>
+                ${(project.ports_status || []).map(p => `
+                <div class="overview-item">
+                    <span class="label">:${p.port}</span>
+                    <span>${p.healthy ? '✅ ' + p.http_code : (p.open ? '⚠️ ' + p.http_code : '❌ Closed')}</span>
+                </div>`).join('')}
+            </div>
+        </div>
+
+        <div style="margin-top:1rem">
+            <h4 style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; margin-bottom:0.5rem;">Documentation</h4>
+            <div class="docs-grid">
+                ${docs.map(d => `
+                <div class="doc-item ${d.exists ? 'exists' : 'missing'}">
+                    <span class="icon">${d.exists ? '✅' : (d.required ? '❌' : '⚪')}</span>
+                    <span>${d.file}</span>
+                </div>`).join('')}
+            </div>
+        </div>`;
+    }
+
+    // Render project issues
+    function renderProjectIssues(project) {
+        const issues = project.issues || [];
+        if (issues.length === 0) {
+            return '<div class="empty-state">No issues found ✨</div>';
+        }
+        return issues.map(issue => `
+            <div class="issue-item">
+                <div class="severity">${severityIcon(issue.severity)}</div>
+                <div class="content">
+                    <div class="message">${escapeHtml(issue.message)}</div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // Render files list
+    function renderFiles(project) {
+        const files = project.files || [];
+        if (files.length === 0) {
+            return '<div class="empty-state">No files scanned</div>';
+        }
+        return `<div class="files-list">${files.map(f => `<div class="file-item">📄 ${escapeHtml(f)}</div>`).join('')}</div>`;
+    }
+
+    // Toggle card expansion
+    function toggleCard(index) {
+        const card = document.querySelector(`.project-card[data-index="${index}"]`);
+        if (!card) return;
+
+        // If clicking on already expanded card, collapse it
+        if (expandedCard === index) {
+            card.classList.remove('expanded');
+            expandedCard = null;
+            return;
+        }
+
+        // Collapse previous card
+        if (expandedCard !== null) {
+            const prevCard = document.querySelector(`.project-card[data-index="${expandedCard}"]`);
+            if (prevCard) prevCard.classList.remove('expanded');
+        }
+
+        // Expand clicked card
+        card.classList.add('expanded');
+        expandedCard = index;
+
+        // Reset tabs to first tab
+        const tabs = card.querySelectorAll('.tab');
+        const contents = card.querySelectorAll('.tab-content');
+        tabs.forEach((t, i) => t.classList.toggle('active', i === 0));
+        contents.forEach((c, i) => c.classList.toggle('active', i === 0));
+
+        // Scroll card into view
+        setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    }
+
+    // Switch tabs
+    function switchTab(event, tabName) {
+        event.stopPropagation();
+        const card = event.target.closest('.project-card');
+        if (!card) return;
+
+        const tabs = card.querySelectorAll('.tab');
+        const contents = card.querySelectorAll('.tab-content');
+
+        tabs.forEach(t => t.classList.toggle('active', t.textContent.toLowerCase() === tabName));
+        contents.forEach(c => c.classList.toggle('active', c.dataset.tab === tabName));
+    }
+
+    // Render global issues
+    function renderGlobalIssues(issues) {
+        const container = document.getElementById('issues-list');
+        document.getElementById('issue-count').textContent = issues.length;
+
+        if (issues.length === 0) {
+            container.innerHTML = '<div class="empty-state">No issues found ✨</div>';
+            return;
+        }
+
+        container.innerHTML = issues.slice(0, 20).map(issue => `
+            <div class="issue-item">
+                <div class="severity">${severityIcon(issue.severity)}</div>
+                <div class="content">
+                    <div class="project-name">${escapeHtml(issue.project)} · ${issue.server}</div>
+                    <div class="message">${escapeHtml(issue.message)}</div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // Load data
+    async function loadData() {
+        try {
+            const res = await fetch('/api/project-status');
+            projectData = await res.json();
+
+            // Update summary
+            document.getElementById('total-projects').textContent = projectData.summary?.total || 0;
+            document.getElementById('healthy-count').textContent = projectData.summary?.healthy || 0;
+            document.getElementById('warning-count').textContent = projectData.summary?.warning || 0;
+            document.getElementById('critical-count').textContent = projectData.summary?.critical || 0;
+
+            // Calculate total open TODOs
+            const totalTodos = (projectData.projects || []).reduce((sum, p) => sum + (p.todos_open || 0), 0);
+            document.getElementById('open-todos').textContent = totalTodos;
+
+            // Update last scan time
+            if (projectData.meta?.scanned_at) {
+                const date = new Date(projectData.meta.scanned_at);
+                document.getElementById('last-update').textContent = 'Last scan: ' + date.toLocaleTimeString();
+            }
+
+            // Render project cards
+            const grid = document.getElementById('project-grid');
+            const projects = projectData.projects || [];
+
+            if (projects.length === 0) {
+                grid.innerHTML = '<div class="empty-state">No projects found. Run the scanner first.</div>';
+            } else {
+                grid.innerHTML = projects.map((p, i) => renderCard(p, i)).join('');
+            }
+
+            // Render global issues
+            renderGlobalIssues(projectData.issues || []);
+
+            // Restore expanded state if any
+            if (expandedCard !== null) {
+                const card = document.querySelector(`.project-card[data-index="${expandedCard}"]`);
+                if (card) card.classList.add('expanded');
+            }
+
+        } catch (e) {
+            console.error('Failed to load project status:', e);
+            document.getElementById('project-grid').innerHTML =
+                '<div class="empty-state">Failed to load data. Is the scanner running?</div>';
+        }
+    }
+
+    // Initial load and auto-refresh
+    loadData();
+    setInterval(loadData, 60000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Detail | Homebase</title>
+    <style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+.main-nav { display: flex; align-items: center; padding: 0.75rem 1.5rem; background: #1e293b; border-bottom: 1px solid #334155; position: sticky; top: 0; z-index: 100; }
+.main-nav .logo { font-size: 1.1rem; font-weight: 600; color: #e2e8f0; margin-right: 2rem; text-decoration: none; }
+.main-nav .nav-links { display: flex; gap: 0.25rem; flex: 1; flex-wrap: wrap; align-items: center; }
+.main-nav .nav-links a { color: #94a3b8; padding: 0.5rem 0.75rem; border-radius: 0.375rem; font-size: 0.875rem; text-decoration: none; transition: all 0.15s; }
+.main-nav .nav-links a:hover, .main-nav .nav-links a.active { color: #e2e8f0; background: #334155; }
+
+a { color: #60a5fa; text-decoration: none; }
+a:hover { color: #93c5fd; }
+
+.main-nav 
+
+.page-container { padding: 1.5rem; max-width: 1400px; margin: 0 auto; }
+.back-link { color: #94a3b8; font-size: 0.875rem; margin-bottom: 1rem; display: inline-block; }
+.back-link:hover { color: #f8fafc; }
+.agent-header { background: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1.5rem; margin-bottom: 1.5rem; }
+.agent-top { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; }
+.agent-icon { font-size: 3rem; }
+.agent-info h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
+.agent-info p { color: #94a3b8; font-size: 0.875rem; }
+.agent-meta { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.75rem; }
+.badge { display: inline-flex; align-items: center; gap: 0.25rem; padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.75rem; font-weight: 500; }
+.badge-primary { background: #3b82f6; color: white; }
+.badge-green { background: #166534; color: #86efac; }
+.badge-yellow { background: #854d0e; color: #fde047; }
+.badge-red { background: #991b1b; color: #fca5a5; }
+.badge-gray { background: #374151; color: #9ca3af; }
+.tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid #334155; padding-bottom: 0.75rem; }
+.tab { padding: 0.6rem 1.25rem; border-radius: 0.375rem; border: none; background: transparent; color: #94a3b8; cursor: pointer; font-size: 0.875rem; font-weight: 500; transition: all 0.15s; }
+.tab:hover { color: #f8fafc; background: #334155; }
+.tab.active { color: #f8fafc; background: #3b82f6; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.card { background: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; margin-bottom: 1rem; }
+.card-title { font-size: 0.875rem; color: #94a3b8; margin-bottom: 0.75rem; }
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; }
+.metric { text-align: center; }
+.metric .num { font-size: 1.75rem; font-weight: 700; }
+.metric .lbl { color: #94a3b8; font-size: 0.7rem; }
+.timeline { display: flex; gap: 3px; margin-top: 1rem; height: 24px; align-items: flex-end; }
+.timeline-bar { width: 8px; background: #4ade80; border-radius: 2px; }
+.timeline-bar.warn { background: #fbbf24; }
+.timeline-bar.fail { background: #f87171; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid #334155; }
+th { color: #94a3b8; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+td { font-size: 0.85rem; }
+tr:hover { background: #1e3a5f; }
+.mono { font-family: monospace; color: #94a3b8; }
+.status { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 1rem; font-size: 0.65rem; font-weight: 600; }
+.status-healthy { background: #166534; color: #86efac; }
+.status-warning { background: #854d0e; color: #fde047; }
+.status-error { background: #991b1b; color: #fca5a5; }
+.incident { background: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; margin-bottom: 0.75rem; }
+.incident-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+.incident-title { font-weight: 500; }
+.incident-time { color: #64748b; font-size: 0.75rem; }
+.incident-body { color: #94a3b8; font-size: 0.85rem; }
+.empty-state { text-align: center; padding: 3rem; color: #64748b; }
+@media (max-width: 768px) {
+    .page-container { padding: 1rem; }
+}
+    /* Unified Navigation */
+
+.main-nav 
+
+@media (max-width: 900px) {   }
+
+</style>
+</head>
+<body>
+    <nav class="main-nav">
+    <a href="/" class="logo">Homebase</a>
+    <div class="nav-links">
+        <a href="/">Dashboard</a>
+        <a href="/fleet">Fleet</a>
+        <a href="/agents" class="active">Agents</a>
+        <a href="/sentinel">Sentinel</a>
+        <a href="/research">Research</a>
+        <a href="/infra">Infra Sheet</a>
+        <a href="/settings">Settings</a>
+        <a href="/backups">Backups</a>
+    </div>
+</nav>
+    
+
+    <div class="page-container">
+        <a href="/agents" class="back-link">← Back to Agents</a>
+
+        <div class="agent-header" id="agent-header">
+            <div class="agent-top">
+                <span class="agent-icon">🤖</span>
+                <div class="agent-info">
+                    <h1 id="agent-name">Loading...</h1>
+                    <p id="agent-host">-</p>
+                </div>
+                <span class="badge badge-green" id="agent-status">-</span>
+            </div>
+            <div class="agent-meta">
+                <span class="badge badge-gray" id="agent-type">-</span>
+                <span class="badge badge-primary" id="agent-model">Claude 3.5</span>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('overview', this)">📊 Overview</button>
+            <button class="tab" onclick="switchTab('audit', this)">📋 Audit Trail</button>
+            <button class="tab" onclick="switchTab('incidents', this)">⚠️ Incidents</button>
+            <button class="tab" onclick="switchTab('config', this)">⚙️ Config</button>
+        </div>
+
+        <!-- Overview Tab -->
+        <div id="overview-tab" class="tab-content active">
+            <div class="card">
+                <div class="card-title">Current Metrics</div>
+                <div class="metric-grid">
+                    <div class="metric">
+                        <div class="num" id="uptime" style="color:#4ade80">-</div>
+                        <div class="lbl">Uptime</div>
+                    </div>
+                    <div class="metric">
+                        <div class="num" id="memory" style="color:#60a5fa">-</div>
+                        <div class="lbl">Memory (MB)</div>
+                    </div>
+                    <div class="metric">
+                        <div class="num" id="tasks" style="color:#a78bfa">-</div>
+                        <div class="lbl">Active Tasks</div>
+                    </div>
+                    <div class="metric">
+                        <div class="num" id="compliance" style="color:#22d3ee">100%</div>
+                        <div class="lbl">Compliance</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Heartbeat History (Last 24h)</div>
+                <div class="timeline" id="timeline">
+                    <!-- Will be populated by JS -->
+                </div>
+                <p style="color:#64748b;font-size:0.75rem;margin-top:0.5rem">Each bar = 30 min interval</p>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Recent Activity</div>
+                <table>
+                    <thead>
+                        <tr><th>Time</th><th>Action</th><th>Status</th></tr>
+                    </thead>
+                    <tbody id="recent-activity">
+                        <tr><td colspan="3" style="color:#64748b;text-align:center">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Audit Trail Tab -->
+        <div id="audit-tab" class="tab-content">
+            <div class="card">
+                <div class="card-title">Audit Log</div>
+                <table>
+                    <thead>
+                        <tr><th>Time</th><th>Action Type</th><th>Tier</th><th>Summary</th><th>Status</th></tr>
+                    </thead>
+                    <tbody id="audit-log">
+                        <tr><td colspan="5" style="color:#64748b;text-align:center">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Incidents Tab -->
+        <div id="incidents-tab" class="tab-content">
+            <div id="incidents-list">
+                <div class="empty-state">No incidents recorded</div>
+            </div>
+        </div>
+
+        <!-- Config Tab -->
+        <div id="config-tab" class="tab-content">
+            <div class="card">
+                <div class="card-title">Agent Configuration</div>
+                <table>
+                    <tbody id="config-table">
+                        <tr><td colspan="2" style="color:#64748b;text-align:center">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+function switchTab(tab, btn) {
+    document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+    document.querySelectorAll('.tab-content').forEach(function(c) { c.classList.remove('active'); });
+    btn.classList.add('active');
+    document.getElementById(tab + '-tab').classList.add('active');
+}
+
+function getAgentIdFromUrl() {
+    var path = window.location.pathname;
+    var parts = path.split('/');
+    return parts[parts.length - 1] || 'david-bishop';
+}
+
+function formatDuration(seconds) {
+    if (!seconds) return '-';
+    var hours = Math.floor(seconds / 3600);
+    var mins = Math.floor((seconds % 3600) / 60);
+    if (hours > 24) return Math.floor(hours / 24) + 'd ' + (hours % 24) + 'h';
+    return hours + 'h ' + mins + 'm';
+}
+
+async function load() {
+    var agentId = getAgentIdFromUrl();
+
+    try {
+        var agent = await fetch('/api/agents/' + agentId).then(function(r) {
+            if (!r.ok) throw new Error('Agent not found');
+            return r.json();
+        });
+
+        // Header
+        document.getElementById('agent-name').textContent = agent.display_name || agentId;
+        document.getElementById('agent-host').textContent = agent.host || 'Unknown host';
+        document.getElementById('agent-type').textContent = agent.agent_type || 'AI Assistant';
+
+        var statusBadge = document.getElementById('agent-status');
+        var status = agent.last_status || 'offline';
+        statusBadge.textContent = status;
+        statusBadge.className = 'badge badge-' + (status === 'healthy' ? 'green' : status === 'degraded' ? 'yellow' : 'red');
+
+        // Metrics
+        document.getElementById('uptime').textContent = formatDuration(agent.uptime_seconds);
+        document.getElementById('memory').textContent = agent.memory_mb || '-';
+        document.getElementById('tasks').textContent = agent.active_tasks || 0;
+
+        // Timeline (mock data for now)
+        var timeline = document.getElementById('timeline');
+        var bars = '';
+        for (var i = 0; i < 48; i++) {
+            var height = Math.floor(Math.random() * 20) + 4;
+            var cls = Math.random() > 0.9 ? 'warn' : '';
+            bars += '<div class="timeline-bar ' + cls + '" style="height:' + height + 'px"></div>';
+        }
+        timeline.innerHTML = bars;
+
+        // Recent activity (mock)
+        var activities = [
+            {time: 'Just now', action: 'Heartbeat received', status: 'healthy'},
+            {time: '5 min ago', action: 'Task completed', status: 'healthy'},
+            {time: '15 min ago', action: 'Heartbeat received', status: 'healthy'},
+            {time: '1 hour ago', action: 'Configuration updated', status: 'healthy'}
+        ];
+        document.getElementById('recent-activity').innerHTML = activities.map(function(a) {
+            return '<tr><td class="mono">' + a.time + '</td><td>' + a.action + '</td><td><span class="status status-' + a.status + '">' + a.status + '</span></td></tr>';
+        }).join('');
+
+        // Audit log (mock)
+        var auditLogs = [
+            {time: '2026-02-04 10:30', type: 'READ', tier: 'TIER1', summary: 'Checked Telegram messages', status: 'success'},
+            {time: '2026-02-04 10:15', type: 'WRITE', tier: 'TIER2', summary: 'Sent response to user', status: 'success'},
+            {time: '2026-02-04 10:00', type: 'READ', tier: 'TIER1', summary: 'Heartbeat check', status: 'success'}
+        ];
+        document.getElementById('audit-log').innerHTML = auditLogs.map(function(a) {
+            return '<tr><td class="mono">' + a.time + '</td><td>' + a.type + '</td><td><span class="badge badge-gray">' + a.tier + '</span></td><td>' + a.summary + '</td><td><span class="status status-healthy">' + a.status + '</span></td></tr>';
+        }).join('');
+
+        // Config
+        var config = [
+            ['Agent ID', agent.agent_id || agentId],
+            ['Display Name', agent.display_name || agentId],
+            ['Host', agent.host || 'Unknown'],
+            ['Type', agent.agent_type || 'AI Assistant'],
+            ['Registered', agent.registered_at || 'Unknown'],
+            ['Capabilities', (agent.capabilities || []).join(', ') || 'None']
+        ];
+        document.getElementById('config-table').innerHTML = config.map(function(c) {
+            return '<tr><td style="color:#94a3b8;width:200px">' + c[0] + '</td><td>' + c[1] + '</td></tr>';
+        }).join('');
+
+    } catch (e) {
+        document.getElementById('agent-name').textContent = 'Agent Not Found';
+        document.getElementById('agent-host').textContent = e.message;
+    }
+}
+
+load();
+setInterval(load, 30000);
+    </script>
+<footer style="text-align:center;padding:1rem;color:#475569;font-size:0.75rem;border-top:1px solid #1e293b;margin-top:2rem">Homebase v1.2.0 · Rize Technologies · <span id="ft-time"></span></footer>
+<script>document.getElementById("ft-time")&&(document.getElementById("ft-time").textContent="Updated: "+new Date().toLocaleString())</script>
+</body>
+</html>

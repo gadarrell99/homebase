@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Cheat Sheet | Homebase</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f172a;color:#e2e8f0;font-family:system-ui,sans-serif}
+.main-nav { display: flex; align-items: center; padding: 0.75rem 1.5rem; background: #1e293b; border-bottom: 1px solid #334155; position: sticky; top: 0; z-index: 100; }
+.main-nav .logo { font-size: 1.1rem; font-weight: 600; color: #e2e8f0; margin-right: 2rem; text-decoration: none; }
+.main-nav .nav-links { display: flex; gap: 0.25rem; flex: 1; flex-wrap: wrap; align-items: center; }
+.main-nav .nav-links a { color: #94a3b8; padding: 0.5rem 0.75rem; border-radius: 0.375rem; font-size: 0.875rem; text-decoration: none; transition: all 0.15s; }
+.main-nav .nav-links a:hover, .main-nav .nav-links a.active { color: #e2e8f0; background: #334155; }
+
+.container{max-width:1400px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.4rem;margin-bottom:1rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:1rem}
+.section{background:#1e293b;border-radius:8px;padding:1rem;margin-bottom:1rem}
+.section h2{font-size:1rem;color:#94a3b8;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.5rem}
+table{width:100%;border-collapse:collapse}
+td,th{padding:0.5rem;text-align:left;border-bottom:1px solid #334155;font-size:0.85rem}
+th{color:#64748b;font-size:0.75rem;text-transform:uppercase}
+code{background:#0f172a;padding:0.1rem 0.3rem;border-radius:3px;font-size:0.8rem}
+.status-active{color:#10b981}.status-inactive{color:#f59e0b}
+.badge{display:inline-block;padding:0.15rem 0.4rem;border-radius:4px;font-size:0.7rem;font-weight:600}
+.badge-live{background:#059669;color:white}
+.badge-prod{background:#7c3aed;color:white}
+.agent-card{background:#0f172a;border-radius:6px;padding:0.75rem;margin-bottom:0.5rem}
+.agent-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem}
+.agent-name{font-weight:600;color:#e2e8f0}
+.agent-role{color:#64748b;font-size:0.8rem}
+.agent-meta{font-size:0.75rem;color:#64748b}
+.tag{display:inline-block;padding:0.1rem 0.3rem;background:#334155;border-radius:3px;font-size:0.7rem;margin-right:0.25rem}
+/* Unified Navigation */
+
+</style></head><body>
+<nav class="main-nav">
+    <a href="/" class="logo">Homebase</a>
+    <div class="nav-links">
+        <a href="/">Dashboard</a>
+        <a href="/fleet">Fleet</a>
+        <a href="/agents">Agents</a>
+        <a href="/sentinel">Sentinel</a>
+        <a href="/research">Research</a>
+        <a href="/infra" class="active">Infra Sheet</a>
+        <a href="/settings">Settings</a>
+        <a href="/backups">Backups</a>
+    </div>
+</nav>
+<div class="container">
+<h1>📋 Infrastructure Cheat Sheet</h1>
+<div class="grid">
+    <div id="agents-section"></div>
+    <div id="servers-section"></div>
+</div>
+<div class="grid">
+    <div id="projects-section"></div>
+    <div id="status-section"></div>
+</div>
+</div>
+<script>
+(async function(){
+    // Fetch all data
+    const [servers, projects, cheatFull] = await Promise.all([
+        fetch('/api/servers').then(r=>r.json()).catch(()=>[]),
+        fetch('/api/projects').then(r=>r.json()).catch(()=>({})),
+        fetch('/api/cheat-sheet/agents').then(r=>r.json()).catch(()=>({}))
+    ]);
+    
+    const srvList = Array.isArray(servers) ? servers : servers.servers || [];
+    const projList = projects.projects || projects || [];
+    const agents = cheatFull.agents || [];
+    
+    // Render Agents
+    let agentHtml = '<div class="section"><h2>🤖 AI AGENTS</h2>';
+    agents.forEach(a => {
+        const modeClass = a.mode === 'PRODUCTION' ? 'badge-prod' : 'badge-live';
+        agentHtml += `
+        <div class="agent-card">
+            <div class="agent-header">
+                <div>
+                    <span class="agent-name">${a.name}</span>
+                    <span class="badge ${modeClass}">${a.mode || 'LIVE'}</span>
+                </div>
+                <span class="agent-role">${a.role}</span>
+            </div>
+            <div class="agent-meta">
+                <div>${a.description || ''}</div>
+                <div style="margin-top:0.25rem">
+                    <code>${a.host}:${a.port}</code> · 
+                    ${a.email ? `<span class="tag">${a.email}</span>` : ''}
+                    ${a.telegram ? `<span class="tag">${a.telegram}</span>` : ''}
+                    ${a.bot_handle ? `<span class="tag">@${a.bot_handle}</span>` : ''}
+                </div>
+                <div style="margin-top:0.25rem">
+                    ${(a.data_sources || []).map(s => `<span class="tag">${s}</span>`).join('')}
+                </div>
+            </div>
+        </div>`;
+    });
+    agentHtml += '</div>';
+    document.getElementById('agents-section').innerHTML = agentHtml;
+    
+    // Render Servers
+    let srvHtml = '<div class="section"><h2>🖥️ SERVERS</h2><table><tr><th>ID</th><th>Name</th><th>IP</th><th>Type</th></tr>';
+    srvList.slice(0, 8).forEach(s => {
+        srvHtml += `<tr><td><code>${s.id}</code></td><td>${s.name}</td><td><code>${s.ip}</code></td><td>${s.type || '-'}</td></tr>`;
+    });
+    srvHtml += '</table></div>';
+    document.getElementById('servers-section').innerHTML = srvHtml;
+    
+    // Render Projects
+    let projHtml = '<div class="section"><h2>📁 PROJECTS</h2><table><tr><th>ID</th><th>Name</th><th>Version</th><th>Server</th></tr>';
+    projList.slice(0, 8).forEach(p => {
+        projHtml += `<tr><td><code>${p.id||'?'}</code></td><td>${p.name||'?'}</td><td>${p.version||'-'}</td><td>${p.server_id||'-'}</td></tr>`;
+    });
+    projHtml += '</table></div>';
+    document.getElementById('projects-section').innerHTML = projHtml;
+    
+    // Render Status
+    const status = cheatFull.status || {};
+    const deadlines = cheatFull.deadlines || [];
+    let statusHtml = '<div class="section"><h2>📊 STATUS</h2>';
+    statusHtml += `<table>
+        <tr><td>Security Score</td><td><strong>${status.security_score || '-'}%</strong></td></tr>
+        <tr><td>Active Alerts</td><td><strong>${status.active_alerts || '-'}</strong></td></tr>
+        <tr><td>Open Audit Items</td><td><strong>${status.open_audit_items || '-'}</strong></td></tr>
+    </table>`;
+    if (deadlines.length > 0) {
+        statusHtml += '<h2 style="margin-top:1rem">📅 DEADLINES</h2><table>';
+        deadlines.forEach(d => {
+            statusHtml += `<tr><td>${d.item}</td><td>${d.date}</td></tr>`;
+        });
+        statusHtml += '</table>';
+    }
+    statusHtml += '</div>';
+    document.getElementById('status-section').innerHTML = statusHtml;
+})();
+</script>
+</body></html>

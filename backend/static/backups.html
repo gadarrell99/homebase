@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backups | Homebase</title>
+    <style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+.main-nav { display: flex; align-items: center; padding: 0.75rem 1.5rem; background: #1e293b; border-bottom: 1px solid #334155; position: sticky; top: 0; z-index: 100; }
+.main-nav .logo { font-size: 1.1rem; font-weight: 600; color: #e2e8f0; margin-right: 2rem; text-decoration: none; }
+.main-nav .nav-links { display: flex; gap: 0.25rem; flex: 1; flex-wrap: wrap; align-items: center; }
+.main-nav .nav-links a { color: #94a3b8; padding: 0.5rem 0.75rem; border-radius: 0.375rem; font-size: 0.875rem; text-decoration: none; transition: all 0.15s; }
+.main-nav .nav-links a:hover, .main-nav .nav-links a.active { color: #e2e8f0; background: #334155; }
+
+a { color: #60a5fa; text-decoration: none; }
+a:hover { color: #93c5fd; }
+
+.main-nav 
+
+.page-container { padding: 1.5rem; max-width: 1400px; margin: 0 auto; }
+.page-header { margin-bottom: 1.5rem; }
+.page-header h1 { font-size: 1.75rem; font-weight: 600; margin-bottom: 0.25rem; }
+.page-header p { color: #64748b; font-size: 0.875rem; }
+.summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+.card { padding: 1rem; border-radius: 0.5rem; text-align: center; background: #1e293b; border: 1px solid #334155; }
+.card .num { font-size: 2rem; font-weight: 700; }
+.card .lbl { color: #94a3b8; font-size: 0.8rem; }
+.servers { display: grid; gap: 1rem; }
+.server { background: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; }
+.server-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+.server-name { font-weight: 600; font-size: 1rem; }
+.server-host { color: #64748b; font-size: 0.8rem; }
+.status { padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.75rem; font-weight: 600; }
+.status-success { background: #166534; color: #86efac; }
+.status-warning { background: #854d0e; color: #fde047; }
+.status-failed { background: #991b1b; color: #fca5a5; }
+.status-never { background: #374151; color: #9ca3af; }
+.backup-info { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; font-size: 0.85rem; }
+.backup-info div { background: #0f172a; padding: 0.5rem; border-radius: 0.25rem; }
+.backup-info .label { color: #64748b; font-size: 0.7rem; }
+.backup-info .value { font-weight: 500; }
+@media (max-width: 768px) {
+    .page-container { padding: 1rem; }
+    .summary { grid-template-columns: repeat(2, 1fr); }
+    .backup-info { grid-template-columns: 1fr; }
+}
+    /* Unified Navigation */
+
+.main-nav 
+
+@media (max-width: 900px) {   }
+
+</style>
+</head>
+<body>
+    <nav class="main-nav">
+    <a href="/" class="logo">Homebase</a>
+    <div class="nav-links">
+        <a href="/">Dashboard</a>
+        <a href="/fleet">Fleet</a>
+        <a href="/agents">Agents</a>
+        <a href="/sentinel">Sentinel</a>
+        <a href="/research">Research</a>
+        <a href="/infra">Infra Sheet</a>
+        <a href="/settings">Settings</a>
+        <a href="/backups" class="active">Backups</a>
+    </div>
+</nav>
+    
+
+    <div class="page-container">
+        <div class="page-header">
+            <h1>💾 Backup Monitor</h1>
+            <p>Backup status for all infrastructure servers</p>
+        </div>
+
+        <div class="summary">
+            <div class="card">
+                <div class="num" id="total" style="color:#60a5fa">-</div>
+                <div class="lbl">Servers</div>
+            </div>
+            <div class="card">
+                <div class="num" id="success" style="color:#4ade80">-</div>
+                <div class="lbl">Healthy</div>
+            </div>
+            <div class="card">
+                <div class="num" id="warning" style="color:#fbbf24">-</div>
+                <div class="lbl">Warning</div>
+            </div>
+            <div class="card">
+                <div class="num" id="failed" style="color:#f87171">-</div>
+                <div class="lbl">Failed/Never</div>
+            </div>
+        </div>
+
+        <div class="servers" id="servers">
+            <div style="color:#64748b;text-align:center;padding:2rem">Loading backup status...</div>
+        </div>
+    </div>
+
+    <script>
+async function load() {
+    try {
+        var data = await fetch('/api/backups').then(function(r) { return r.json(); });
+        var servers = Object.entries(data.servers || {});
+        var stats = {total: servers.length, success: 0, warning: 0, failed: 0};
+
+        document.getElementById('servers').innerHTML = servers.map(function(entry) {
+            var id = entry[0];
+            var s = entry[1];
+            var now = Date.now();
+            var last = s.last_backup ? new Date(s.last_backup).getTime() : 0;
+            var hoursAgo = last ? (now - last) / 3600000 : Infinity;
+            var status = 'never', sc = 'never';
+
+            if (s.status === 'success' && hoursAgo < 26) {
+                status = 'success'; sc = 'success'; stats.success++;
+            } else if (s.status === 'success' && hoursAgo < 50) {
+                status = 'warning'; sc = 'warning'; stats.warning++;
+            } else {
+                status = s.status || 'never';
+                sc = status === 'failed' ? 'failed' : 'never';
+                stats.failed++;
+            }
+
+            return '<div class="server">' +
+                '<div class="server-head">' +
+                '<div><span class="server-name">' + (s.name || id) + '</span> <span class="server-host">(' + (s.host || 'unknown') + ')</span></div>' +
+                '<span class="status status-' + sc + '">' + status + '</span>' +
+                '</div>' +
+                '<div class="backup-info">' +
+                '<div><div class="label">Last Backup</div><div class="value">' + (s.last_backup || 'Never') + '</div></div>' +
+                '<div><div class="label">Size</div><div class="value">' + (s.size_mb ? s.size_mb + 'MB' : '—') + '</div></div>' +
+                '<div><div class="label">Files</div><div class="value">' + (s.files ? s.files.length : 0) + '</div></div>' +
+                '</div></div>';
+        }).join('');
+
+        document.getElementById('total').textContent = stats.total;
+        document.getElementById('success').textContent = stats.success;
+        document.getElementById('warning').textContent = stats.warning;
+        document.getElementById('failed').textContent = stats.failed;
+    } catch (e) {
+        document.getElementById('servers').innerHTML = '<div style="color:#f87171;padding:2rem">Error: ' + e.message + '</div>';
+    }
+}
+
+load();
+setInterval(load, 60000);
+    </script>
+<footer style="text-align:center;padding:1rem;color:#475569;font-size:0.75rem;border-top:1px solid #1e293b;margin-top:2rem">Homebase v1.2.0 · Rize Technologies · <span id="ft-time"></span></footer>
+<script>document.getElementById("ft-time")&&(document.getElementById("ft-time").textContent="Updated: "+new Date().toLocaleString())</script>
+</body>
+</html>

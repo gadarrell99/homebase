@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Detail — Homebase</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+
+        /* Nav — same as all pages */
+        .main-nav { display: flex; align-items: center; padding: 0.75rem 1.5rem; background: #1e293b; border-bottom: 1px solid #334155; position: sticky; top: 0; z-index: 100; }
+        .main-nav .logo { font-size: 1.1rem; font-weight: 600; color: #e2e8f0; margin-right: 2rem; text-decoration: none; }
+        .main-nav .nav-links { display: flex; gap: 0.25rem; flex: 1; flex-wrap: wrap; align-items: center; }
+        .main-nav .nav-links a { color: #94a3b8; padding: 0.5rem 0.75rem; border-radius: 0.375rem; font-size: 0.875rem; text-decoration: none; transition: all 0.15s; }
+        .main-nav .nav-links a:hover, .main-nav .nav-links a.active { color: #e2e8f0; background: #334155; }
+
+        /* Layout */
+        .container { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
+        .back-link { color: #60a5fa; text-decoration: none; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.25rem; margin-bottom: 1rem; }
+        .back-link:hover { text-decoration: underline; }
+
+        /* Header */
+        .project-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
+        .project-header h1 { font-size: 1.5rem; font-weight: 600; }
+        .status-badge { padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+        .status-running { background: rgba(74, 222, 128, 0.15); color: #4ade80; }
+        .status-stopped { background: rgba(248, 113, 113, 0.15); color: #f87171; }
+        .status-mock { background: rgba(251, 191, 36, 0.15); color: #fbbf24; }
+        .project-meta { color: #64748b; font-size: 0.85rem; margin-bottom: 1.5rem; }
+
+        /* Info Cards */
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem; margin-bottom: 1.5rem; }
+        .info-card { background: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 0.75rem 1rem; }
+        .info-card .label { color: #64748b; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem; }
+        .info-card .value { color: #e2e8f0; font-size: 0.9rem; font-weight: 500; }
+        .info-card .value a { color: #60a5fa; text-decoration: none; }
+        .info-card .value a:hover { text-decoration: underline; }
+
+        /* Tabs */
+        .tabs { display: flex; gap: 0.125rem; border-bottom: 2px solid #334155; margin-bottom: 1.25rem; overflow-x: auto; }
+        .tab { padding: 0.6rem 1rem; color: #64748b; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; font-size: 0.85rem; white-space: nowrap; transition: all 0.15s; background: none; border-top: none; border-left: none; border-right: none; }
+        .tab:hover { color: #94a3b8; }
+        .tab.active { color: #60a5fa; border-bottom-color: #60a5fa; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* Doc display */
+        .doc-content { background: #0f172a; border: 1px solid #334155; border-radius: 0.5rem; padding: 1.5rem; font-family: "JetBrains Mono", "Fira Code", "Consolas", monospace; font-size: 0.82rem; line-height: 1.7; white-space: pre-wrap; word-wrap: break-word; max-height: 650px; overflow-y: auto; color: #cbd5e1; }
+        .doc-empty { color: #475569; font-style: italic; padding: 2rem; text-align: center; }
+
+        /* Loading */
+        .loading { text-align: center; padding: 3rem; color: #64748b; }
+        .error { color: #f87171; text-align: center; padding: 3rem; }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+        <a href="/" class="logo">Homebase</a>
+        <div class="nav-links">
+            <a href="/">Dashboard</a>
+            <a href="/fleet">Fleet</a>
+            <a href="/agents">Agents</a>
+            <a href="/sentinel">Sentinel</a>
+            <a href="/research">Research</a>
+            <a href="/infra">Infra Sheet</a>
+            <a href="/settings">Settings</a>
+            <a href="/backups">Backups</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <a href="/fleet" class="back-link">← Back to Fleet</a>
+        <div id="content">
+            <div class="loading">Loading project...</div>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        // Extract project ID from URL: /projects/homebase → homebase
+        var pathParts = window.location.pathname.split("/");
+        var projectId = pathParts[pathParts.length - 1] || pathParts[pathParts.length - 2];
+
+        if (!projectId || projectId === "projects") {
+            document.getElementById("content").innerHTML = "<div class=\"error\">No project ID in URL</div>";
+            return;
+        }
+
+        document.title = projectId + " — Homebase";
+
+        fetch("/api/projects/" + encodeURIComponent(projectId))
+            .then(function(r) {
+                if (!r.ok) throw new Error("Project not found");
+                return r.json();
+            })
+            .then(renderProject)
+            .catch(function(err) {
+                document.getElementById("content").innerHTML = "<div class=\"error\">" + err.message + "</div>";
+            });
+
+        function renderProject(p) {
+            document.title = (p.name || projectId) + " — Homebase";
+
+            var statusClass = (p.status === "running" || p.status === "active") ? "status-running" :
+                                (p.status === "mock") ? "status-mock" : "status-stopped";
+
+            // Info cards
+            var cards = [];
+            if (p.server_hostname) cards.push({label: "Server", value: p.server_hostname + (p.server_ip ? " (" + p.server_ip + ")" : "")});
+            if (p.stack) cards.push({label: "Stack", value: p.stack});
+            if (p.ports && p.ports.length) cards.push({label: "Ports", value: p.ports.join(", ")});
+            if (p.domain) cards.push({label: "Domain", value: "<a href=\"https://" + p.domain + "\" target=\"_blank\">" + p.domain + "</a>"});
+            if (p.server_uptime) cards.push({label: "Server Uptime", value: p.server_uptime});
+            if (p.version) cards.push({label: "Version", value: p.version});
+
+            var cardsHtml = cards.map(function(c) {
+                return "<div class=\"info-card\"><div class=\"label\">" + c.label + "</div><div class=\"value\">" + c.value + "</div></div>";
+            }).join("");
+
+            // Docs
+            var docs = p.docs || {};
+            var isRemote = docs._remote === true;
+            var remoteNote = docs._note || "Project is on a remote server. Docs not available from Homebase.";
+
+            var docTabs = [
+                {key: "overview", label: "📋 Overview"},
+                {key: "readme", label: "📖 README"},
+                {key: "todo", label: "📝 TODO"},
+                {key: "changelog", label: "📜 Changelog"},
+                {key: "project_plan", label: "📊 Project Plan"},
+                {key: "claude_md", label: "🤖 Claude.md"}
+            ];
+
+            // Overview tab content
+            var overviewItems = [];
+            overviewItems.push("Project: " + (p.name || "-"));
+            overviewItems.push("ID: " + (p.id || "-"));
+            overviewItems.push("Server: " + (p.server_hostname || p.server || "-"));
+            overviewItems.push("Status: " + ((p.status || "unknown").toUpperCase()));
+            if (p.stack) overviewItems.push("Stack: " + p.stack);
+            if (p.ports && p.ports.length) overviewItems.push("Ports: " + p.ports.join(", "));
+            if (p.domain) overviewItems.push("Domain: " + p.domain);
+            if (p.project_path) overviewItems.push("Path: " + p.project_path);
+            if (isRemote) overviewItems.push("\n⚠️ " + remoteNote);
+
+            var tabsHtml = docTabs.map(function(t, i) {
+                return "<button class=\"tab" + (i === 0 ? " active" : "") + "\" data-tab=\"tab-" + t.key + "\">" + t.label + "</button>";
+            }).join("");
+
+            var contentsHtml = docTabs.map(function(t, i) {
+                var content;
+                if (t.key === "overview") {
+                    content = overviewItems.join("\n");
+                } else if (isRemote) {
+                    content = null;
+                } else {
+                    content = docs[t.key];
+                }
+
+                var inner = content
+                    ? "<pre class=\"doc-content\">" + escapeHtml(content) + "</pre>"
+                    : "<div class=\"doc-empty\">" + (isRemote ? remoteNote : "Document not found.") + "</div>";
+
+                return "<div class=\"tab-content" + (i === 0 ? " active" : "") + "\" id=\"tab-" + t.key + "\">" + inner + "</div>";
+            }).join("");
+
+            document.getElementById("content").innerHTML =
+                "<div class=\"project-header\">" +
+                    "<h1>" + escapeHtml(p.name || projectId) + "</h1>" +
+                    "<span class=\"status-badge " + statusClass + "\">" + (p.status || "unknown") + "</span>" +
+                "</div>" +
+                "<div class=\"project-meta\">" + (p.description || "") + "</div>" +
+                "<div class=\"info-grid\">" + cardsHtml + "</div>" +
+                "<div class=\"tabs\">" + tabsHtml + "</div>" +
+                contentsHtml;
+
+            // Tab click handlers
+            document.querySelectorAll(".tab").forEach(function(tab) {
+                tab.addEventListener("click", function() {
+                    document.querySelectorAll(".tab").forEach(function(t) { t.classList.remove("active"); });
+                    document.querySelectorAll(".tab-content").forEach(function(c) { c.classList.remove("active"); });
+                    this.classList.add("active");
+                    var target = document.getElementById(this.getAttribute("data-tab"));
+                    if (target) target.classList.add("active");
+                });
+            });
+        }
+
+        function escapeHtml(text) {
+            var div = document.createElement("div");
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects — Homebase</title>
+    <style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+a { color: #60a5fa; text-decoration: none; }
+a:hover { color: #93c5fd; }
+.main-nav { display: flex; align-items: center; padding: 0.75rem 1.5rem; background: #1e293b; border-bottom: 1px solid #334155; position: sticky; top: 0; z-index: 100; }
+.main-nav .logo { font-size: 1.1rem; font-weight: 600; color: #f8fafc; margin-right: 2rem; }
+.main-nav .nav-links { display: flex; gap: 0.25rem; flex: 1; }
+.main-nav .nav-links a { color: #94a3b8; padding: 0.5rem 0.75rem; border-radius: 0.375rem; font-size: 0.875rem; transition: all 0.15s; }
+.main-nav .nav-links a:hover, .main-nav .nav-links a.active { color: #f8fafc; background: #334155; }
+.main-nav .nav-right { display: flex; gap: 0.5rem; }
+.dropdown { position: relative; display: inline-block; }
+.dropdown-btn { background: transparent; border: none; color: #94a3b8; font-size: 1.25rem; cursor: pointer; padding: 0.5rem; border-radius: 0.375rem; }
+.dropdown-btn:hover { background: #334155; color: #f8fafc; }
+.dropdown-content { display: none; position: absolute; right: 0; top: 100%; background: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; min-width: 180px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); z-index: 200; }
+.dropdown:hover .dropdown-content { display: block; }
+.dropdown-content a { display: block; padding: 0.75rem 1rem; color: #94a3b8; font-size: 0.875rem; }
+.dropdown-content a:hover { background: #334155; color: #f8fafc; }
+.page-container { padding: 1.5rem; max-width: 1400px; margin: 0 auto; }
+.page-header { margin-bottom: 1.5rem; }
+.page-header h1 { font-size: 1.75rem; font-weight: 600; margin-bottom: 0.25rem; }
+.page-header p { color: #64748b; font-size: 0.875rem; }
+.summary-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+.summary-card { background: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; text-align: center; }
+.summary-card .num { font-size: 1.75rem; font-weight: 700; }
+.summary-card .lbl { color: #94a3b8; font-size: 0.7rem; margin-top: 0.25rem; }
+.filters { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+.flt { padding: 0.4rem 0.875rem; border-radius: 0.375rem; border: 1px solid #475569; background: transparent; color: #94a3b8; cursor: pointer; font-size: 0.8rem; transition: all 0.15s; }
+.flt:hover, .flt.active { background: #334155; color: #fff; border-color: #60a5fa; }
+.project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1rem; }
+.project-card { background: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1rem; transition: all 0.15s; }
+.project-card:hover { border-color: #475569; }
+.project-header { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.5rem; }
+.project-icon { font-size: 1.5rem; }
+.project-info { flex: 1; }
+.project-name { font-size: 1rem; font-weight: 600; margin-bottom: 0.125rem; }
+.project-desc { color: #94a3b8; font-size: 0.8rem; margin-bottom: 0.5rem; }
+.project-meta { display: flex; gap: 0.75rem; font-size: 0.7rem; color: #64748b; font-family: monospace; margin-bottom: 0.75rem; }
+.project-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 0.375rem; padding: 0.4rem 0.75rem; border-radius: 0.375rem; font-size: 0.75rem; font-weight: 500; border: none; cursor: pointer; transition: all 0.15s; text-decoration: none; }
+.btn-primary { background: #3b82f6; color: white; }
+.btn-primary:hover { background: #2563eb; color: white; }
+.btn-secondary { background: #334155; color: #e2e8f0; }
+.btn-secondary:hover { background: #475569; color: white; }
+.btn-disabled { background: #1e293b; color: #64748b; cursor: not-allowed; border: 1px solid #334155; }
+.status { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 1rem; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; }
+.status-ok { background: #166534; color: #86efac; }
+.status-warning { background: #854d0e; color: #fde047; }
+.status-building { background: #c2410c; color: #fed7aa; }
+.status-new { background: #1e40af; color: #93c5fd; }
+@media (max-width: 768px) {
+    .main-nav { flex-wrap: wrap; padding: 0.75rem 1rem; }
+    .main-nav .logo { margin-right: auto; }
+    .main-nav .nav-links { order: 3; width: 100%; margin-top: 0.75rem; overflow-x: auto; flex-wrap: nowrap; }
+    .page-container { padding: 1rem; }
+    .project-grid { grid-template-columns: 1fr; }
+}
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+        <a href="/" class="logo">🏠 Homebase</a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/servers">Servers</a>
+            <a href="/projects" class="active">Projects</a>
+            <a href="/agents">Agents</a>
+            <a href="/metrics">Metrics</a>
+            <a href="/security">Security</a>
+        </div>
+        <div class="nav-right">
+            <div class="dropdown">
+                <button class="dropdown-btn">⚙️</button>
+                <div class="dropdown-content">
+                    <a href="/credentials">🔐 Credentials</a>
+                    <a href="/settings">⚙️ Settings</a>
+                    <a href="/backups">💾 Backups</a>
+                    <a href="/audit-tracker">📋 Audit Tracker</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <div class="page-header">
+            <h1>📦 Projects</h1>
+            <p>10 projects across Rize Technologies infrastructure</p>
+        </div>
+
+        <div class="summary-cards">
+            <div class="summary-card">
+                <div class="num" id="total" style="color:#60a5fa">10</div>
+                <div class="lbl">Total</div>
+            </div>
+            <div class="summary-card">
+                <div class="num" id="ok-count" style="color:#4ade80">-</div>
+                <div class="lbl">✅ OK</div>
+            </div>
+            <div class="summary-card">
+                <div class="num" id="warning-count" style="color:#fbbf24">-</div>
+                <div class="lbl">⚠️ Warning</div>
+            </div>
+            <div class="summary-card">
+                <div class="num" id="building-count" style="color:#fb923c">-</div>
+                <div class="lbl">🚧 Building</div>
+            </div>
+            <div class="summary-card">
+                <div class="num" id="new-count" style="color:#60a5fa">-</div>
+                <div class="lbl">🆕 New</div>
+            </div>
+        </div>
+
+        <div class="filters">
+            <button class="flt active" onclick="setFilter('all', this)">All</button>
+            <button class="flt" onclick="setFilter('ok', this)">✅ OK</button>
+            <button class="flt" onclick="setFilter('warning', this)">⚠️ Warning</button>
+            <button class="flt" onclick="setFilter('building', this)">🚧 Building</button>
+            <button class="flt" onclick="setFilter('new', this)">🆕 New</button>
+        </div>
+
+        <div class="project-grid" id="project-grid">
+            <div style="color:#64748b;padding:2rem;text-align:center">Loading projects...</div>
+        </div>
+    </div>
+
+    <script>
+var projects = [];
+var currentFilter = 'all';
+
+var defaultProjects = [
+    {id:"helios",name:"Helios",server:"192.168.65.240",server_name:"Helios",icon:"🌟",web_url:"https://helios.rize.bm",ssh_url:"https://helios-ssh.rize.bm",stack:"Python/FastAPI + Docker",version:"v1.0.0",status:"new",description:"BDIC Document AI Platform"},
+    {id:"david-bishop",name:"David Bishop",server:"192.168.65.241",server_name:"David",icon:"🤖",web_url:"https://davidbot.rize.bm",ssh_url:null,stack:"Python/Flask",version:"v2026.1.29",status:"ok",description:"AI Sales Assistant — Telegram, Teams, Email"},
+    {id:"homebase",name:"Homebase",server:"192.168.65.243",server_name:"Cobalt",icon:"🏠",web_url:"https://homebase.rize.bm",ssh_url:"https://cobalt-ssh.rize.bm",stack:"Python/FastAPI",version:"v0.7.0",status:"ok",description:"Infrastructure Command Center"},
+    {id:"bps-ai",name:"BPS AI",server:"192.168.65.246",server_name:"BPS AI",icon:"👮",web_url:"https://bpsai.rize.bm",ssh_url:"https://bpsai-ssh.rize.bm",stack:"Node/Next.js",version:"v0.9.26",status:"warning",description:"Police Case Management + AI"},
+    {id:"nexus",name:"Nexus",server:"192.168.65.247",server_name:"Nexus",icon:"🔗",web_url:"https://nexus.rize.bm",ssh_url:"https://nexus-ssh.rize.bm",stack:"Node/Express",version:"v2.0.0",status:"ok",description:"RMM + 109 Endpoint Management"},
+    {id:"relay",name:"Relay",server:"192.168.65.248",server_name:"Relay",icon:"⚡",web_url:"https://relay.rize.bm",ssh_url:"https://relay-ssh.rize.bm",stack:"Python/FastAPI",version:"v3.3.0",status:"ok",description:"Multi-AI Agent Orchestration"},
+    {id:"vector",name:"Vector-BET",server:"192.168.65.249",server_name:"Vector",icon:"🚁",web_url:"https://vector.rize.bm",ssh_url:"https://vector-ssh.rize.bm",stack:"Node/Express",version:"v1.0.1",status:"ok",description:"Air Ambulance Dispatch System"},
+    {id:"dockyard",name:"Dockyard WiFi",server:"192.168.65.252",server_name:"Dockyard",icon:"🚢",web_url:"https://dockyardwifi.rize.bm",ssh_url:"https://dockyard-ssh.rize.bm",stack:"Node/Express",version:"v1.4.6",status:"building",description:"WiFi Portal — Launch Feb 28"},
+    {id:"premier-emr",name:"Premier-EMR",server:"192.168.65.239",server_name:"Premier-EMR",icon:"🏥",web_url:"https://emr.rize.bm",ssh_url:"https://emr-ssh.rize.bm",stack:"Python/FastAPI + React + Docker",version:"v0.1.0",status:"new",description:"Premier Health Electronic Medical Records"},
+    {id:"property",name:"Property.Rize",server:null,server_name:null,icon:"🏢",web_url:"https://property.rize.bm",ssh_url:null,stack:"Unknown",version:"v2.0.2",status:"warning",description:"Property Management Platform"}
+];
+
+function setFilter(f, btn) {
+    currentFilter = f;
+    document.querySelectorAll('.flt').forEach(function(b) { b.classList.remove('active'); });
+    if (btn) btn.classList.add('active');
+    render();
+}
+
+function render() {
+    var filtered = projects;
+    if (currentFilter !== 'all') {
+        filtered = projects.filter(function(p) { return p.status === currentFilter; });
+    }
+
+    // Count stats
+    var stats = {ok: 0, warning: 0, building: 0, new_: 0};
+    projects.forEach(function(p) {
+        if (p.status === 'ok') stats.ok++;
+        else if (p.status === 'warning') stats.warning++;
+        else if (p.status === 'building') stats.building++;
+        else if (p.status === 'new') stats.new_++;
+    });
+
+    document.getElementById('total').textContent = projects.length;
+    document.getElementById('ok-count').textContent = stats.ok;
+    document.getElementById('warning-count').textContent = stats.warning;
+    document.getElementById('building-count').textContent = stats.building;
+    document.getElementById('new-count').textContent = stats.new_;
+
+    if (filtered.length === 0) {
+        document.getElementById('project-grid').innerHTML = '<div style="color:#64748b;padding:2rem;text-align:center">No projects match this filter</div>';
+        return;
+    }
+
+    var html = filtered.map(function(p) {
+        var statusIcon = p.status === 'ok' ? '✅' : p.status === 'warning' ? '⚠️' : p.status === 'building' ? '🚧' : '🆕';
+        var serverInfo = p.server ? p.server.split('.').pop() + ' (' + p.server_name + ')' : 'External';
+
+        var webBtn = p.web_url
+            ? '<a href="' + p.web_url + '" target="_blank" class="btn btn-primary">🌐 Open Site</a>'
+            : '';
+        var sshBtn = p.ssh_url
+            ? '<a href="' + p.ssh_url + '" target="_blank" class="btn btn-secondary">🔒 SSH</a>'
+            : '';
+        var detailBtn = '<a href="/projects/' + p.id + '" class="btn btn-secondary">📊 Detail</a>';
+
+        return '<div class="project-card">' +
+            '<div class="project-header">' +
+            '<span class="project-icon">' + p.icon + '</span>' +
+            '<div class="project-info">' +
+            '<div class="project-name">' + p.name + '</div>' +
+            '<div class="project-desc">' + p.description + '</div>' +
+            '</div>' +
+            '<span class="status status-' + p.status + '">' + statusIcon + ' ' + p.version + '</span>' +
+            '</div>' +
+            '<div class="project-meta">' +
+            '<span>.' + serverInfo + '</span>' +
+            '<span>' + p.stack + '</span>' +
+            '</div>' +
+            '<div class="project-actions">' +
+            webBtn + sshBtn + detailBtn +
+            '</div>' +
+            '</div>';
+    }).join('');
+
+    document.getElementById('project-grid').innerHTML = html;
+}
+
+async function load() {
+    try {
+        // Use default projects data - in future this can come from API
+        projects = defaultProjects;
+        render();
+    } catch (e) {
+        document.getElementById('project-grid').innerHTML = '<div style="color:#f87171;padding:2rem">Error: ' + e.message + '</div>';
+    }
+}
+
+load();
+setInterval(load, 60000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html><head><title>David Bishop - Sales Agent</title>
+<style>body{background:#0f172a;color:#e2e8f0;font-family:system-ui;margin:0;padding:2rem}
+.header{background:linear-gradient(135deg,#7c3aed,#a78bfa);padding:2rem;border-radius:12px;margin-bottom:2rem}
+h1{margin:0}h3{color:#94a3b8;margin:1rem 0 0.5rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:1.5rem}
+.card{background:#1e293b;padding:1.5rem;border-radius:12px}
+.user{padding:0.5rem 0;border-bottom:1px solid #334155}
+.allowed{color:#10b981}.blocked{color:#f59e0b}.never{color:#ef4444}</style></head>
+<body>
+<div class="header"><h1>🤵 David Bishop — Sales Agent</h1><p>Production | Host: 192.168.65.241:9001 | dbishop@rize.bm | @Morpheus_99_bot</p></div>
+<div class="grid">
+<div class="card"><h3>📚 Data Sources & Channels</h3>
+<div class="user">🎫 Halo PSA — CRM, Customers ✅</div>
+<div class="user">📧 Email — dbishop@rize.bm ✅</div>
+<div class="user">💬 MS Teams — Internal ✅</div>
+<div class="user">✈️ Telegram — @Morpheus_99_bot ✅</div></div>
+<div class="card"><h3>👥 Authorized Users</h3><p style="color:#64748b">Channels: Email, Teams, Telegram</p>
+<div class="user">Gilbert Darrell — gadarrell@rize.bm (CEO)</div>
+<div class="user">All Rize Staff — *@rize.bm</div></div>
+<div class="card"><h3>📅 Scheduled Tasks</h3>
+<div class="user">Email Poll — Every 2 min</div>
+<div class="user">Teams Check — Every 1 min</div>
+<div class="user">Telegram — Continuous</div>
+<div class="user">Heartbeat — Every 5 min</div>
+<div class="user">Daily Summary — 18:00 UTC</div></div>
+<div class="card"><h3>🛡️ Guardrails</h3>
+<div class="allowed">✅ Read CRM, respond to queries</div>
+<div class="allowed">✅ Generate quotes (within limits)</div>
+<div class="blocked">⚠️ Discounts >20%</div>
+<div class="never">🚫 Direct customer contact</div>
+<div class="never">🚫 Access financials</div></div>
+</div></body></html>

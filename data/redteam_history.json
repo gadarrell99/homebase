@@ -1,0 +1,105 @@
+{
+  "reports": [
+    {
+      "date": "2026-01-29",
+      "timestamp": "2026-01-29T00:00:00",
+      "severity": "clear",
+      "passed": 12,
+      "failed": 0,
+      "vulnerabilities": [],
+      "updates_available": [
+        "package-update-1"
+      ],
+      "full_report": "Daily red team scan for 2026-01-29\nStatus: clear"
+    },
+    {
+      "date": "2026-01-30",
+      "timestamp": "2026-01-30T00:00:00",
+      "severity": "clear",
+      "passed": 12,
+      "failed": 0,
+      "vulnerabilities": [],
+      "updates_available": [],
+      "full_report": "Daily red team scan for 2026-01-30\nStatus: clear"
+    },
+    {
+      "date": "2026-01-31",
+      "timestamp": "2026-01-31T00:00:00",
+      "severity": "low",
+      "passed": 10,
+      "failed": 1,
+      "vulnerabilities": [
+        {
+          "severity": "low",
+          "description": "Minor configuration drift detected"
+        }
+      ],
+      "updates_available": [],
+      "full_report": "Daily red team scan for 2026-01-31\nStatus: low"
+    },
+    {
+      "date": "2026-02-01",
+      "timestamp": "2026-02-01T00:00:00",
+      "severity": "clear",
+      "passed": 12,
+      "failed": 0,
+      "vulnerabilities": [],
+      "updates_available": [
+        "package-update-1"
+      ],
+      "full_report": "Daily red team scan for 2026-02-01\nStatus: clear"
+    },
+    {
+      "date": "2026-02-02",
+      "timestamp": "2026-02-02T00:00:00",
+      "severity": "medium",
+      "passed": 10,
+      "failed": 2,
+      "vulnerabilities": [
+        {
+          "severity": "medium",
+          "description": "Outdated dependency detected"
+        }
+      ],
+      "updates_available": [],
+      "full_report": "Daily red team scan for 2026-02-02\nStatus: medium"
+    },
+    {
+      "date": "2026-02-03",
+      "timestamp": "2026-02-03T00:00:00",
+      "severity": "clear",
+      "passed": 12,
+      "failed": 0,
+      "vulnerabilities": [],
+      "updates_available": [],
+      "full_report": "Daily red team scan for 2026-02-03\nStatus: clear"
+    },
+    {
+      "date": "2026-02-04",
+      "timestamp": "2026-02-04T00:00:00",
+      "severity": "clear",
+      "passed": 12,
+      "failed": 0,
+      "vulnerabilities": [],
+      "updates_available": [
+        "package-update-1"
+      ],
+      "full_report": "Daily red team scan for 2026-02-04\nStatus: clear"
+    }
+  ],
+  "gateway_status": {
+    "david": {
+      "agent": "david",
+      "status": "degraded",
+      "uptime_percent": null,
+      "gateway_url": "http://192.168.65.241:3000",
+      "last_check": "2026-02-04T12:45:53.680477",
+      "services": {
+        "pm2_processes": 0,
+        "online": 0,
+        "port_3000": "not listening"
+      },
+      "uptime": "up 15 hours, 19 minutes"
+    }
+  }
+}

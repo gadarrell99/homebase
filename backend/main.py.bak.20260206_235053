@@ -1,0 +1,2064 @@
+from services.metrics_history import history_service
+import uvicorn
+import asyncio
+import asyncssh
+from fastapi import FastAPI, HTTPException, Query, BackgroundTasks, Depends, Header, Cookie, Request, Response
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+from pydantic import BaseModel
+from typing import Optional
+import time
+import os
+
+# Import services
+from services.database import init_database, seed_servers, get_all_servers, get_server_by_ip
+from services import discovery, security, logCollector
+from services import keyManager
+from services import auth as authService
+from services import redteam
+
+app = FastAPI(title="Homebase API", version="0.5.4")
+
+# ============== SERVER CACHE ==============
+# Cache server states to enable instant page loads
+SERVER_CACHE = {
+    "data": [],
+    "timestamp": 0,
+    "refreshing": False
+}
+CACHE_MAX_AGE = 60  # seconds - serve cached data if less than this old
+SSH_TIMEOUT = 15  # seconds - timeout for individual SSH connections
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# ============== AUTH HELPERS ==============
+
+def get_client_info(request: Request) -> tuple:
+    """Extract client IP and user agent."""
+    ip = request.client.host if request.client else None
+    forwarded = request.headers.get('X-Forwarded-For')
+    if forwarded:
+        ip = forwarded.split(',')[0].strip()
+    user_agent = request.headers.get('User-Agent', '')
+    return ip, user_agent
+
+
+async def get_current_user(
+    request: Request,
+    authorization: str = Header(None),
+    session_token: str = Cookie(None)
+):
+    """Dependency to get current authenticated user."""
+    token = None
+    if authorization and authorization.startswith('Bearer '):
+        token = authorization[7:]
+    elif session_token:
+        token = session_token
+    if token:
+        return authService.validate_session(token)
+    return None
+
+
+async def require_auth(user: dict = Depends(get_current_user)):
+    """Dependency that requires authentication."""
+    if not user:
+        raise HTTPException(status_code=401, detail="Authentication required")
+    return user
+
+
+async def require_2fa(user: dict = Depends(require_auth)):
+    """Dependency that requires 2FA to be enabled."""
+    if not user.get('totp_enabled'):
+        raise HTTPException(status_code=403, detail="2FA must be enabled to access this resource")
+    return user
+
+
+# Initialize database on startup
+
+from services.totp_service import get_qr_code, verify_code, verify_token, is_setup
+
+@app.on_event("startup")
+async def startup():
+    init_database()
+    seed_servers()
+
+SERVERS = [
+    {"id": "talos", "name": "Talos", "ip": "192.168.65.237", "user": "talosadmin", "web_url": None, "ssh_url": "talos-ssh.rize.bm", "os": "linux", "status": "online"},
+    {"id": "agents", "name": "Agents", "ip": "192.168.65.241", "user": "agents", "web_url": None, "ssh_url": None, "os": "linux", "status": "online"},
+    {"id": "rize-apps", "name": "Rize-Apps", "ip": "192.168.65.245", "user": "rizeadmin", "web_url": "homebase.rize.bm", "ssh_url": "rize-apps-ssh.rize.bm", "os": "linux", "status": "online"},
+    {"id": "demos", "name": "Demos", "ip": "192.168.65.246", "user": "demos", "web_url": "bpsai.rize.bm", "ssh_url": "bpsai-ssh.rize.bm", "os": "linux", "status": "online"},
+    {"id": "vector", "name": "Vector", "ip": "192.168.65.249", "user": "betadmin", "web_url": "vector.rize.bm", "ssh_url": None, "os": "linux", "status": "online"},
+    {"id": "hyper-v", "name": "Hyper-V", "ip": "192.168.65.253", "user": "Administrator", "web_url": None, "ssh_url": None, "os": "windows", "status": "online"},
+    {"id": "premier-emr-old", "name": "Premier-EMR (OLD)", "ip": "192.168.65.239", "user": "emradmin", "web_url": None, "ssh_url": None, "os": "linux", "status": "decommissioned"},
+    {"id": "helios-old", "name": "Helios (OLD)", "ip": "192.168.65.240", "user": "heliosdev", "web_url": None, "ssh_url": None, "os": "linux", "status": "decommissioned"},
+    {"id": "cobalt-old", "name": "Cobalt (OLD)", "ip": "192.168.65.243", "user": "cobaltadmin", "web_url": None, "ssh_url": None, "os": "linux", "status": "decommissioned"},
+    {"id": "nexus-old", "name": "Nexus (OLD)", "ip": "192.168.65.247", "user": "nexusadmin", "web_url": None, "ssh_url": None, "os": "linux", "status": "decommissioned"},
+    {"id": "relay-old", "name": "Relay (OLD)", "ip": "192.168.65.248", "user": "relayadmin", "web_url": None, "ssh_url": None, "os": "linux", "status": "decommissioned"},
+    {"id": "dockyard-old", "name": "Dockyard (OLD)", "ip": "192.168.65.252", "user": "dockyardadmin", "web_url": None, "ssh_url": None, "os": "linux", "status": "decommissioned"},
+]
+
+# ============== INFRASTRUCTURE (Single Source of Truth) ==============
+INFRA_FILE = "/home/rizeadmin/homebase/data/infrastructure.json"
+
+def load_infra():
+    """Load infrastructure.json - the single source of truth for fleet data."""
+    import json
+    try:
+        with open(INFRA_FILE) as f:
+            return json.load(f)
+    except Exception as e:
+        return {"error": str(e), "servers": [], "projects": [], "agents": []}
+
+
+
+async def get_server_stats_with_timeout(server: dict, timeout: int = SSH_TIMEOUT) -> dict:
+    """Wrapper to apply timeout to server stats collection."""
+    try:
+        return await asyncio.wait_for(get_server_stats(server), timeout=timeout)
+    except asyncio.TimeoutError:
+        return {
+            "id": server.get("id", server["name"].lower().replace(" ", "-")),
+            "name": server["name"],
+            "ip": server["ip"],
+            "web_url": server.get("web_url"),
+            "ssh_url": server.get("ssh_url"),
+            "status": "offline",
+            "error": "Connection timed out",
+            "uptime": None,
+            "memory_used": None,
+            "memory_total": None,
+            "disk_used": None,
+            "disk_total": None,
+            "cpu_percent": None,
+            "vms": None,
+        }
+
+async def get_server_stats(server: dict) -> dict:
+    """SSH to server and get stats."""
+    result = {
+        "id": server.get("id", server["name"].lower().replace(" ", "-")),
+            "name": server["name"],
+        "ip": server["ip"],
+        "web_url": server.get("web_url"),
+        "ssh_url": server.get("ssh_url"),
+        "status": "offline",
+        "uptime": None,
+        "memory_used": None,
+        "memory_total": None,
+        "disk_used": None,
+        "disk_total": None,
+        "cpu_percent": None,
+        "vms": None,
+    }
+
+    server_os = server.get("os", "linux")
+
+    try:
+        async with asyncssh.connect(
+            server["ip"],
+            username=server["user"],
+            known_hosts=None,
+            connect_timeout=8
+        ) as conn:
+            if server_os == "windows":
+                hostname_result = await conn.run("hostname", check=False)
+                if hostname_result.exit_status != 0:
+                    raise Exception("Could not get hostname")
+
+                uptime_result = await conn.run('powershell -Command "(Get-Date) - (Get-CimInstance Win32_OperatingSystem).LastBootUpTime | ForEach-Object { \'{0}d {1}h {2}m\' -f $_.Days, $_.Hours, $_.Minutes }"', check=False)
+                if uptime_result.exit_status == 0:
+                    result["uptime"] = uptime_result.stdout.strip()
+
+                mem_result = await conn.run('powershell -Command "$os = Get-CimInstance Win32_OperatingSystem; $total = [math]::Round($os.TotalVisibleMemorySize/1024); $free = [math]::Round($os.FreePhysicalMemory/1024); Write-Output (\'{0} {1}\' -f $total, ($total - $free))"', check=False)
+                if mem_result.exit_status == 0:
+                    parts = mem_result.stdout.strip().split()
+                    if len(parts) == 2:
+                        result["memory_total"] = int(parts[0])
+                        result["memory_used"] = int(parts[1])
+
+                disk_result = await conn.run('powershell -Command "$d = Get-PSDrive C; $total = [math]::Round(($d.Used + $d.Free)/1GB); $used = [math]::Round($d.Used/1GB); Write-Output (\'{0} {1}\' -f $total, $used)"', check=False)
+                if disk_result.exit_status == 0:
+                    parts = disk_result.stdout.strip().split()
+                    if len(parts) == 2:
+                        result["disk_total"] = int(parts[0])
+                        result["disk_used"] = int(parts[1])
+
+                cpu_result = await conn.run('powershell -Command "(Get-CimInstance Win32_Processor | Measure-Object -Property LoadPercentage -Average).Average"', check=False)
+                if cpu_result.exit_status == 0:
+                    try:
+                        result["cpu_percent"] = float(cpu_result.stdout.strip())
+                    except:
+                        pass
+
+                vm_result = await conn.run('powershell -Command "Get-VM | Select-Object Name, State | ForEach-Object { \'{0}:{1}\' -f $_.Name, $_.State }"', check=False)
+                if vm_result.exit_status == 0 and vm_result.stdout.strip():
+                    vms = []
+                    for line in vm_result.stdout.strip().split('\n'):
+                        line = line.strip()
+                        if ':' in line:
+                            name, state = line.rsplit(':', 1)
+                            vms.append({"name": name.strip(), "state": state.strip()})
+                    result["vms"] = vms
+
+            else:
+                uptime_result = await conn.run("uptime -p", check=False)
+                if uptime_result.exit_status == 0:
+                    result["uptime"] = uptime_result.stdout.strip().replace("up ", "")
+
+                mem_result = await conn.run("free -m | awk 'NR==2{print $2,$3}'", check=False)
+                if mem_result.exit_status == 0:
+                    parts = mem_result.stdout.strip().split()
+                    if len(parts) == 2:
+                        result["memory_total"] = int(parts[0])
+                        result["memory_used"] = int(parts[1])
+
+                disk_result = await conn.run("df -BG / | awk 'NR==2{gsub(/G/,\"\"); print $2,$3}'", check=False)
+                if disk_result.exit_status == 0:
+                    parts = disk_result.stdout.strip().split()
+                    if len(parts) == 2:
+                        result["disk_total"] = int(parts[0])
+                        result["disk_used"] = int(parts[1])
+
+                cpu_result = await conn.run("top -bn1 | grep 'Cpu(s)' | awk '{print $2}' | cut -d'%' -f1", check=False)
+                if cpu_result.exit_status == 0:
+                    try:
+                        result["cpu_percent"] = float(cpu_result.stdout.strip())
+                    except:
+                        pass
+
+            result["status"] = "online"
+    except Exception as e:
+        result["status"] = "offline"
+        result["error"] = str(e)
+
+    return result
+
+
+# ============== HEALTH & SERVERS ==============
+
+@app.get("/api/health")
+async def health():
+    return {"status": "ok", "version": "0.5.0", "timestamp": time.time()}
+
+async def refresh_server_cache():
+    """Background task to refresh server cache."""
+    global SERVER_CACHE
+    if SERVER_CACHE["refreshing"]:
+        return  # Already refreshing
+
+    SERVER_CACHE["refreshing"] = True
+    try:
+        tasks = [get_server_stats_with_timeout(s) for s in SERVERS]
+        results = await asyncio.gather(*tasks)
+        SERVER_CACHE["data"] = results
+        SERVER_CACHE["timestamp"] = time.time()
+    finally:
+        SERVER_CACHE["refreshing"] = False
+
+@app.get("/api/servers")
+async def get_servers(background_tasks: BackgroundTasks, force: bool = Query(False)):
+    """
+    Get server status from infrastructure.json (single source of truth).
+    Live metrics are populated by the infra-scanner cron job every 5 minutes.
+    """
+    infra = load_infra()
+    servers = infra.get("servers", [])
+    
+    # Build response with server data + live metrics
+    result = []
+    for s in servers:
+        server_data = {
+            "id": s.get("id"),
+            "name": s.get("hostname"),
+            "hostname": s.get("hostname"),
+            "ip": s.get("ip"),
+            "user": s.get("ssh_user"),
+            "ssh_user": s.get("ssh_user"),
+            "icon": s.get("icon", "💻"),
+            "role": s.get("role", ""),
+            "description": s.get("description", ""),
+            "status": s.get("status", "unknown"),
+            "tier": s.get("tier", ""),
+            "hyperv_name": s.get("hyperv_name", ""),
+            "domains": s.get("domains", []),
+            "migrated_to": s.get("migrated_to", ""),
+            "os": s.get("os", "linux"),
+            "ram_total": s.get("ram_total", ""),
+        }
+        
+        # Add live metrics if available
+        live = s.get("live", {})
+        if live:
+            server_data["live_status"] = live.get("status", "unknown")
+            server_data["disk_pct"] = live.get("disk_pct")
+            server_data["mem_used"] = live.get("mem_used")
+            server_data["mem_total"] = live.get("mem_total")
+            server_data["load"] = live.get("load")
+            server_data["uptime"] = live.get("uptime")
+            server_data["last_scan"] = live.get("last_scan")
+        
+        result.append(server_data)
+    
+    active = [s for s in result if s["status"] == "online"]
+    decom = [s for s in result if s["status"] == "decommissioned"]
+    
+    return {
+        "servers": result,
+        "active_count": len(active),
+        "decommissioned_count": len(decom),
+        "timestamp": time.time(),
+        "source": "infrastructure.json",
+        "last_scan": infra.get("meta", {}).get("updated", "")
+    }
+
+
+
+# ============== INFRASTRUCTURE API (Single Source of Truth) ==============
+
+@app.get("/api/infrastructure")
+async def get_infrastructure():
+    """Returns the full infrastructure.json - single source of truth."""
+    return load_infra()
+
+@app.get("/api/infrastructure/servers")
+async def get_infra_servers():
+    """Returns servers from infrastructure.json with summary stats."""
+    infra = load_infra()
+    servers = infra.get("servers", [])
+    active = [s for s in servers if s.get("status") == "online"]
+    decom = [s for s in servers if s.get("status") == "decommissioned"]
+    return {
+        "servers": servers,
+        "summary": {
+            "active_count": len(active),
+            "decommissioned_count": len(decom),
+            "total_count": len(servers)
+        },
+        "updated": infra.get("meta", {}).get("updated", "")
+    }
+
+@app.get("/api/infrastructure/projects")
+async def get_infra_projects():
+    """Returns projects from infrastructure.json."""
+    infra = load_infra()
+    projects = infra.get("projects", [])
+    servers = {s["id"]: s for s in infra.get("servers", [])}
+    # Enrich projects with server info
+    for p in projects:
+        srv = servers.get(p.get("server", ""))
+        if srv:
+            p["server_name"] = srv.get("hostname", srv.get("id", ""))
+            p["server_ip"] = srv.get("ip", "")
+    return {"projects": projects, "count": len(projects)}
+
+@app.get("/api/infrastructure/agents")
+async def get_infra_agents():
+    """Returns agents from infrastructure.json."""
+    infra = load_infra()
+    agents = infra.get("agents", [])
+    servers = {s["id"]: s for s in infra.get("servers", [])}
+    # Enrich agents with server info
+    for a in agents:
+        srv = servers.get(a.get("server", ""))
+        if srv:
+            a["server_name"] = srv.get("hostname", srv.get("id", ""))
+            a["server_ip"] = srv.get("ip", "")
+    return {"agents": agents, "count": len(agents)}
+
+@app.get("/api/infrastructure/credentials")
+async def get_infra_credentials():
+    """Returns credentials from infrastructure.json (non-sensitive summary)."""
+    infra = load_infra()
+    creds = infra.get("credentials", {})
+    # Return demo logins but mask actual passwords for API safety
+    demo_logins = creds.get("demo_logins", [])
+    return {
+        "demo_logins": demo_logins,
+        "ssh_fallback_hint": "See infrastructure.json for full details"
+    }
+
+# ============== DISCOVERY ==============
+
+@app.get("/api/discovery/scan")
+async def scan_servers():
+    """Check which servers are reachable."""
+    results = await discovery.scan_servers()
+    return {"servers": results, "timestamp": time.time()}
+
+@app.get("/api/discovery/projects")
+async def discover_projects():
+    """Discover all projects across all servers."""
+    projects = await discovery.discover_all_projects()
+    return {"projects": projects, "count": len(projects), "timestamp": time.time()}
+
+@app.get("/api/discovery/projects/{server_ip}")
+async def discover_server_projects(server_ip: str):
+    """Discover projects on a specific server."""
+    server = get_server_by_ip(server_ip)
+    if not server:
+        raise HTTPException(status_code=404, detail="Server not found")
+    
+    projects = await discovery.detect_projects(server_ip, server["username"])
+    return {"server": server_ip, "projects": projects, "count": len(projects)}
+
+@app.get("/api/discovery/registered")
+async def get_registered_projects():
+    """Get all registered projects."""
+    projects = discovery.get_registered_projects()
+    return {"projects": projects, "count": len(projects)}
+
+
+# ============== SECURITY ==============
+
+@app.get("/api/security/scan")
+async def scan_all_security():
+    """Run security scan on all servers."""
+    results = await security.scan_all_servers_security()
+    return {"servers": results, "timestamp": time.time()}
+
+@app.get("/api/security/updates/{server_ip}")
+async def check_server_updates(server_ip: str):
+    """Check for OS updates on a specific server."""
+    server = get_server_by_ip(server_ip)
+    if not server:
+        raise HTTPException(status_code=404, detail="Server not found")
+    
+    updates = await security.check_os_updates(server_ip, server["username"])
+    critical = await security.get_critical_updates(server_ip, server["username"])
+    return {
+        "server": server_ip,
+        "updates": updates,
+        "critical": critical
+    }
+
+@app.get("/api/security/auth-logs/{server_ip}")
+async def get_auth_logs(server_ip: str):
+    """Get authentication logs for a server."""
+    server = get_server_by_ip(server_ip)
+    if not server:
+        raise HTTPException(status_code=404, detail="Server not found")
+    
+    logs = await security.scan_auth_logs(server_ip, server["username"])
+    return {"server": server_ip, "auth_logs": logs}
+
+@app.get("/api/security/service/{server_ip}/{service_name}")
+async def check_service(server_ip: str, service_name: str):
+    """Check status of a service on a server."""
+    server = get_server_by_ip(server_ip)
+    if not server:
+        raise HTTPException(status_code=404, detail="Server not found")
+    
+    status = await security.check_service_status(server_ip, server["username"], service_name)
+    return status
+
+
+# ============== CREDENTIALS (2FA REQUIRED) ==============
+
+# Available projects for credential categorization
+CREDENTIAL_PROJECTS = [
+    "BPS", "Nexus", "Dockyard", "Property.Rize", 
+    "Vector-BET", "Homebase", "Relay", "Infrastructure", "Other"
+]
+
+class CredentialCreate(BaseModel):
+    name: str
+    type: str  # ssh_key, api_key, password, token
+    value: str
+    project: Optional[str] = "Other"
+    server_id: Optional[int] = None
+    description: Optional[str] = None
+
+class CredentialRotate(BaseModel):
+    new_value: str
+
+@app.get("/api/credentials")
+async def list_credentials(user: dict = Depends(require_2fa)):
+    """List all credentials (without values). Requires 2FA."""
+    credentials = keyManager.list_credentials()
+    return {"credentials": credentials, "count": len(credentials), "projects": CREDENTIAL_PROJECTS}
+
+@app.post("/api/credentials")
+async def store_credential(request: Request, cred: CredentialCreate, user: dict = Depends(require_2fa)):
+    """Store a new credential. Requires 2FA."""
+    if cred.type not in ['ssh_key', 'api_key', 'password', 'token']:
+        raise HTTPException(status_code=400, detail="Invalid credential type")
+    
+    ip, _ = get_client_info(request)
+    result = keyManager.store_credential(
+        cred.name, cred.type, cred.value, cred.server_id, cred.description, 
+        user.get('username'), ip, cred.project
+    )
+    return result
+
+@app.get("/api/credentials/{name}")
+async def get_credential(request: Request, name: str, user: dict = Depends(require_2fa)):
+    """Retrieve a credential value. Requires 2FA. Logs access."""
+    ip, _ = get_client_info(request)
+    value = keyManager.get_credential(name, user.get('username'), ip)
+    if value is None:
+        raise HTTPException(status_code=404, detail="Credential not found")
+    return {"name": name, "value": value}
+
+@app.put("/api/credentials/{cred_id}/rotate")
+async def rotate_credential(request: Request, cred_id: int, rotation: CredentialRotate, user: dict = Depends(require_2fa)):
+    """Rotate a credential with a new value. Requires 2FA."""
+    ip, _ = get_client_info(request)
+    result = keyManager.rotate_credential(cred_id, rotation.new_value, user.get('username'), ip)
+    return result
+
+@app.delete("/api/credentials/{name}")
+async def delete_credential(request: Request, name: str, user: dict = Depends(require_2fa)):
+    """Delete a credential. Requires 2FA."""
+    ip, _ = get_client_info(request)
+    success = keyManager.delete_credential(name, user.get('username'), ip)
+    if not success:
+        raise HTTPException(status_code=404, detail="Credential not found")
+    return {"deleted": name}
+
+@app.get("/api/credentials/logs")
+async def get_credential_logs(credential_id: Optional[int] = None, limit: int = 100, user: dict = Depends(require_2fa)):
+    """Get credential access logs. Requires 2FA."""
+    logs = keyManager.get_credential_access_logs(credential_id, limit)
+    return {"logs": logs, "count": len(logs)}
+
+@app.get("/api/credentials/rotation-status")
+async def get_credential_rotation_status(user: dict = Depends(require_2fa)):
+    """Get credential rotation status and recommendations. Requires 2FA."""
+    return keyManager.get_rotation_status()
+
+
+# ============== LOGS ==============
+
+@app.get("/api/logs/{server_ip}/{service}")
+async def fetch_service_logs(server_ip: str, service: str, lines: int = 100):
+    """Fetch logs from a service."""
+    server = get_server_by_ip(server_ip)
+    if not server:
+        raise HTTPException(status_code=404, detail="Server not found")
+    
+    logs = await logCollector.fetch_logs(server_ip, server["username"], service, lines)
+    return logs
+
+@app.get("/api/logs/{server_ip}/{service}/analyze")
+async def analyze_service_logs(server_ip: str, service: str, lines: int = 200):
+    """Fetch and analyze logs for errors."""
+    server = get_server_by_ip(server_ip)
+    if not server:
+        raise HTTPException(status_code=404, detail="Server not found")
+    
+    analysis = await logCollector.analyze_logs(server_ip, server["username"], service, lines)
+    return analysis
+
+@app.get("/api/logs/errors/recent")
+async def get_recent_errors(hours: int = 24):
+    """Get recent errors from stored logs."""
+    errors = logCollector.get_recent_errors(hours)
+    return {"errors": errors, "count": len(errors)}
+
+
+
+
+# ============== PULSE MONITORING ==============
+
+from services.pulse_monitor import init_pulse_monitor, pulse_monitor
+
+# Initialize pulse monitor when startup runs
+_pulse_init_done = False
+
+@app.on_event("startup")
+async def init_pulse():
+    global _pulse_init_done
+    if not _pulse_init_done:
+        init_pulse_monitor(SERVERS)
+        _pulse_init_done = True
+
+@app.get("/api/pulse/status")
+async def get_pulse_status():
+    """Get current pulse monitoring status."""
+    from services.pulse_monitor import pulse_monitor
+    if not pulse_monitor:
+        raise HTTPException(status_code=503, detail="Pulse monitor not initialized")
+    return pulse_monitor.get_status()
+
+@app.post("/api/pulse/check")
+async def run_pulse_check():
+    """Trigger a health check on all servers."""
+    from services.pulse_monitor import pulse_monitor
+    if not pulse_monitor:
+        raise HTTPException(status_code=503, detail="Pulse monitor not initialized")
+    results = await pulse_monitor.run_health_check()
+    return {"success": True, "results": results}
+
+@app.get("/api/pulse/alerts")
+async def get_pulse_alerts(acknowledged: Optional[bool] = None):
+    """Get monitoring alerts."""
+    from services.pulse_monitor import pulse_monitor
+    if not pulse_monitor:
+        raise HTTPException(status_code=503, detail="Pulse monitor not initialized")
+    alerts = pulse_monitor.get_alerts(acknowledged)
+    return {"alerts": alerts, "count": len(alerts)}
+
+@app.post("/api/pulse/alerts/{alert_id}/acknowledge")
+async def acknowledge_pulse_alert(alert_id: str):
+    """Acknowledge an alert."""
+    from services.pulse_monitor import pulse_monitor
+    if not pulse_monitor:
+        raise HTTPException(status_code=503, detail="Pulse monitor not initialized")
+    success = pulse_monitor.acknowledge_alert(alert_id)
+    if not success:
+        raise HTTPException(status_code=404, detail="Alert not found")
+    return {"success": True}
+
+@app.get("/api/pulse/dashboard")
+async def get_pulse_dashboard():
+    """Get dashboard summary for pulse monitoring."""
+    from services.pulse_monitor import pulse_monitor
+    if not pulse_monitor:
+        raise HTTPException(status_code=503, detail="Pulse monitor not initialized")
+    
+    status = pulse_monitor.get_status()
+    alerts = pulse_monitor.get_alerts(acknowledged=False)
+    
+    return {
+        "last_check": status["last_check"],
+        "servers": {
+            "monitored": status["servers_monitored"],
+            "online": status["last_health"].get("summary", {}).get("online", 0),
+            "offline": status["last_health"].get("summary", {}).get("offline", 0)
+        },
+        "alerts": {
+            "total": status["total_alerts"],
+            "unacknowledged": status["unacknowledged_alerts"],
+            "critical": status["critical_alerts"]
+        },
+        "recent_alerts": alerts[:5]
+    }
+
+
+
+
+# ============== METRICS HISTORY ==============
+
+from services import metrics_history
+
+@app.get("/api/metrics/history/{server_name}")
+async def get_server_history(server_name: str, hours: int = 24, interval: int = 30):
+    """Get historical metrics for a specific server."""
+    metrics = metrics_history.get_server_metrics(server_name, hours, interval)
+    return {"server": server_name, "hours": hours, "metrics": metrics, "count": len(metrics)}
+
+@app.get("/api/metrics/history")
+async def get_all_history(hours: int = 24, interval: int = 30):
+    """Get historical metrics for all servers."""
+    all_metrics = metrics_history.get_all_servers_metrics(hours, interval)
+    return {"hours": hours, "servers": all_metrics, "timestamp": time.time()}
+
+@app.get("/api/metrics/summary")
+async def get_metrics_summary(hours: int = 24):
+    """Get metrics summary (avg, max) for all servers."""
+    summary = metrics_history.get_metrics_summary(hours)
+    return {"hours": hours, "summary": summary, "timestamp": time.time()}
+
+@app.post("/api/metrics/record")
+async def record_current_metrics():
+    """Record current metrics (typically called by scheduler)."""
+    tasks = [get_server_stats_with_timeout(s) for s in SERVERS]
+    results = await asyncio.gather(*tasks)
+    # Also update the cache while we're at it
+    global SERVER_CACHE
+    SERVER_CACHE["data"] = results
+    SERVER_CACHE["timestamp"] = time.time()
+    count = metrics_history.record_metrics(results)
+    return {"recorded": count, "timestamp": time.time()}
+
+@app.delete("/api/metrics/cleanup")
+async def cleanup_metrics(days: int = 30):
+    """Remove old metrics data."""
+    deleted = metrics_history.cleanup_old_metrics(days)
+    return {"deleted": deleted, "older_than_days": days}
+
+
+
+# ============== DAVID BISHOP REPORTS ==============
+
+# Store for David's activity reports (in-memory, persists until restart)
+DAVID_REPORTS = []
+MAX_REPORTS = 100  # Keep last 100 reports
+
+class DavidReport(BaseModel):
+    source: str
+    type: str
+    timestamp: str
+    report: str
+
+@app.post("/api/reports/david")
+async def receive_david_report(report: DavidReport):
+    """Receive activity reports from David Bishop AI assistant."""
+    global DAVID_REPORTS
+    
+    report_data = {
+        "source": report.source,
+        "type": report.type,
+        "timestamp": report.timestamp,
+        "report": report.report,
+        "received_at": time.strftime("%Y-%m-%d %H:%M:%S")
+    }
+    
+    DAVID_REPORTS.append(report_data)
+    
+    # Keep only last MAX_REPORTS
+    if len(DAVID_REPORTS) > MAX_REPORTS:
+        DAVID_REPORTS = DAVID_REPORTS[-MAX_REPORTS:]
+    
+    return {"success": True, "message": "Report received", "total_reports": len(DAVID_REPORTS)}
+
+@app.get("/api/reports/david")
+async def get_david_reports(limit: int = 10, report_type: str = None):
+    """Get David Bishop recent activity reports."""
+    reports = DAVID_REPORTS
+    
+    if report_type:
+        reports = [r for r in reports if r.get("type") == report_type]
+    
+    return {
+        "reports": reports[-limit:] if limit else reports,
+        "total": len(reports)
+    }
+
+@app.get("/api/reports/david/latest")
+async def get_david_latest():
+    """Get David Bishop most recent report."""
+    if DAVID_REPORTS:
+        return DAVID_REPORTS[-1]
+    return {"error": "No reports available"}
+
+@app.get("/api/reports/david/status")
+async def get_david_status():
+    """Get David Bishop current status summary."""
+    if not DAVID_REPORTS:
+        return {
+            "status": "unknown",
+            "last_report": None,
+            "total_reports": 0
+        }
+    
+    latest = DAVID_REPORTS[-1]
+    
+    # Determine status from latest report
+    report_text = latest.get("report", "").lower()
+    if "not running" in report_text or "offline" in report_text:
+        status = "offline"
+    elif "error" in report_text:
+        status = "error"
+    else:
+        status = "online"
+    
+    return {
+        "status": status,
+        "last_report": latest.get("timestamp"),
+        "received_at": latest.get("received_at"),
+        "total_reports": len(DAVID_REPORTS),
+        "report_types": list(set(r.get("type") for r in DAVID_REPORTS))
+    }
+
+
+
+# ============== PROJECT CHECK-IN ==============
+
+
+# ============== RED TEAM SECURITY ==============
+
+class RedTeamReport(BaseModel):
+    date: str = None
+    passed: int = 0
+    failed: int = 0
+    vulnerabilities: list = []
+    updates_available: list = []
+    full_report: str = None
+
+@app.get("/api/redteam")
+async def get_redteam_data(limit: int = 30):
+    """Get red team scan data with summary and reports."""
+    return {
+        "reports": redteam.get_reports(limit),
+        "summary": redteam.get_summary()
+    }
+
+@app.get("/api/redteam/trend")
+async def get_redteam_trend():
+    """Get 7-day red team trend data for charting."""
+    return {
+        "trend": redteam.get_7day_trend(),
+        "summary": redteam.get_summary()
+    }
+
+@app.post("/api/redteam/report")
+async def add_redteam_report(report: RedTeamReport):
+    """Add a new red team scan report."""
+    report_data = report.dict()
+    result = redteam.add_scan_report(report_data)
+    return {"success": True, "report": result}
+
+@app.get("/api/redteam/gateway/david")
+async def get_david_gateway_status():
+    """Get David Bishop gateway uptime status."""
+    status = await redteam.check_david_gateway()
+    return status
+
+@app.get("/api/redteam/gateway")
+async def get_all_gateway_status():
+    """Get all agent gateway statuses."""
+    return {
+        "gateways": redteam.get_gateway_status(),
+        "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S")
+    }
+
+
+import json
+from pathlib import Path
+
+PROJECT_STATUS_FILE = Path("/home/rizeadmin/homebase/data/project-status.json")
+
+def ensure_project_data():
+    """Ensure data directory and file exist."""
+    PROJECT_STATUS_FILE.parent.mkdir(parents=True, exist_ok=True)
+    if not PROJECT_STATUS_FILE.exists():
+        PROJECT_STATUS_FILE.write_text(json.dumps({"projects": {}}, indent=2))
+
+class ProjectCheckin(BaseModel):
+    project: str
+    version: str = "unknown"
+    status: str = "healthy"
+    milestone: str = ""
+    todos_open: int = 0
+    todos_done: int = 0
+    timestamp: str = None
+    server: str = None
+
+@app.post("/api/projects/checkin")
+async def project_checkin(checkin: ProjectCheckin):
+    """Receive project check-in from any server."""
+    try:
+        ensure_project_data()
+        data = json.loads(PROJECT_STATUS_FILE.read_text())
+        
+        # Get existing project data to preserve server if not provided
+        existing = data["projects"].get(checkin.project, {})
+        server = checkin.server or existing.get("server", "Unknown")
+        
+        data["projects"][checkin.project] = {
+            "version": checkin.version,
+            "status": checkin.status,
+            "milestone": checkin.milestone,
+            "todos_open": checkin.todos_open,
+            "todos_done": checkin.todos_done,
+            "last_checkin": checkin.timestamp or time.strftime("%Y-%m-%dT%H:%M:%S"),
+            "updated_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
+            "server": server
+        }
+        
+        PROJECT_STATUS_FILE.write_text(json.dumps(data, indent=2))
+        return {"success": True, "project": checkin.project}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/projects/status")
+async def get_project_status():
+    """Get all project statuses with summary and stale detection."""
+    try:
+        ensure_project_data()
+        data = json.loads(PROJECT_STATUS_FILE.read_text())
+        projects = data.get("projects", {})
+        
+        from datetime import datetime, timezone
+        now = datetime.now(timezone.utc)
+        
+        # Calculate hours since check-in and detect stale projects
+        for name, project in projects.items():
+            try:
+                last_checkin_str = project.get("last_checkin", "")
+                if last_checkin_str:
+                    last_checkin = datetime.fromisoformat(last_checkin_str.replace("Z", "+00:00"))
+                    hours_since = (now - last_checkin).total_seconds() / 3600
+                    project["hours_since_checkin"] = round(hours_since)
+                    if hours_since > 24 and project.get("status") == "healthy":
+                        project["status"] = "stale"
+            except:
+                project["hours_since_checkin"] = -1
+        
+        summary = {
+            "total": len(projects),
+            "healthy": len([p for p in projects.values() if p.get("status") == "healthy"]),
+            "degraded": len([p for p in projects.values() if p.get("status") == "degraded"]),
+            "critical": len([p for p in projects.values() if p.get("status") == "critical"]),
+            "stale": len([p for p in projects.values() if p.get("status") == "stale"]),
+            "offline": len([p for p in projects.values() if p.get("status") == "offline"])
+        }
+        
+        return {**data, "summary": summary}
+    except Exception as e:
+        return {"projects": {}, "summary": {"total": 0}}
+
+@app.get("/api/projects")
+async def get_projects():
+    """Alias for project status."""
+    return await get_project_status()
+
+
+
+
+# ============== PROJECTS DASHBOARD ==============
+from fastapi.responses import FileResponse as ProjectFileResponse
+
+@app.get("/projects")
+async def projects_page():
+    """Serve the projects dashboard."""
+    return ProjectFileResponse("/home/rizeadmin/homebase/backend/static/projects.html")
+
+# ============== AGENT MONITOR ==============
+from services import agent_monitor
+import json
+
+@app.get("/api/agents/overview")
+async def get_agents_overview():
+    """Get agent dashboard overview stats."""
+    return agent_monitor.get_overview()
+
+@app.get("/api/agents")
+async def list_all_agents():
+    """List all registered agents."""
+    return agent_monitor.list_agents()
+
+@app.get("/api/agents/{agent_id}")
+async def get_agent_detail(agent_id: str):
+    """Get detailed info for specific agent."""
+    agent = agent_monitor.get_agent(agent_id)
+    if not agent:
+        raise HTTPException(status_code=404, detail="Agent not found")
+    return agent
+
+@app.post("/api/agents/{agent_id}/heartbeat")
+async def agent_heartbeat(agent_id: str, request: Request):
+    """Record agent heartbeat."""
+    data = await request.json()
+    return agent_monitor.record_heartbeat(
+        agent_id,
+        data.get("status", "healthy"),
+        data.get("uptime_seconds", 0),
+        data.get("memory_mb", 0),
+        data.get("active_tasks", 0),
+        data.get("metadata")
+    )
+
+@app.post("/api/agents/register")
+async def register_new_agent(request: Request):
+    """Register a new agent."""
+    data = await request.json()
+    return agent_monitor.register_agent(
+        data["agent_id"],
+        data["display_name"],
+        data["host"],
+        data.get("agent_type", "ai-assistant"),
+        data.get("capabilities", [])
+    )
+
+# ============== AUDIT TRACKER ==============
+
+AUDIT_FIXES_PATH = "/home/rizeadmin/homebase/data/audit-fixes.json"
+
+@app.get("/api/audit-fixes")
+async def get_audit_fixes():
+    """Get all audit fix items."""
+    try:
+        with open(AUDIT_FIXES_PATH) as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {"projects": {}, "generated": None}
+
+@app.post("/api/audit-fixes/{project}/{item_id}/status")
+async def update_audit_fix_status(project: str, item_id: str, request: Request):
+    """Update status of an audit fix item."""
+    data = await request.json()
+    new_status = data.get("status")
+    
+    with open(AUDIT_FIXES_PATH) as f:
+        fixes = json.load(f)
+    
+    if project not in fixes.get("projects", {}):
+        raise HTTPException(status_code=404, detail="Project not found")
+    
+    for item in fixes["projects"][project]["items"]:
+        if item["id"] == item_id:
+            item["status"] = new_status
+            break
+    else:
+        raise HTTPException(status_code=404, detail="Item not found")
+    
+    with open(AUDIT_FIXES_PATH, "w") as f:
+        json.dump(fixes, f, indent=2)
+    
+    return {"updated": True, "project": project, "item_id": item_id, "status": new_status}
+
+# ============== BACKUP MONITOR ==============
+
+BACKUP_STATUS_PATH = "/home/rizeadmin/homebase/data/backup-status.json"
+
+@app.get("/api/backups")
+async def get_backup_status():
+    """Get backup status for all servers."""
+    try:
+        with open(BACKUP_STATUS_PATH) as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {"servers": {}, "generated": None}
+
+@app.post("/api/backups/{server_id}/report")
+async def report_backup(server_id: str, request: Request):
+    """Report a backup completion."""
+    data = await request.json()
+    
+    try:
+        with open(BACKUP_STATUS_PATH) as f:
+            backups = json.load(f)
+    except FileNotFoundError:
+        backups = {"servers": {}, "generated": None}
+    
+    from datetime import datetime
+    backups["servers"][server_id] = {
+        **backups["servers"].get(server_id, {}),
+        "status": data.get("status", "success"),
+        "last_backup": datetime.utcnow().isoformat(),
+        "size_mb": data.get("size_mb"),
+        "files": data.get("files", [])
+    }
+    
+    with open(BACKUP_STATUS_PATH, "w") as f:
+        json.dump(backups, f, indent=2)
+    
+    return {"ok": True, "server": server_id}
+
+# ============== NEW PAGE ROUTES ==============
+
+@app.get("/agents")
+async def agents_page():
+    """Serve the agent monitor page."""
+    return FileResponse("/home/rizeadmin/homebase/backend/static/agents.html")
+
+@app.get("/audit-tracker")
+async def audit_tracker_page():
+    """Serve the audit tracker page."""
+    return FileResponse("/home/rizeadmin/homebase/backend/static/audit-tracker.html")
+
+@app.get("/backups")
+async def backups_page():
+    """Serve the backup monitor page."""
+    return FileResponse("/home/rizeadmin/homebase/backend/static/backups.html")
+
+
+
+@app.get('/agents/{agent_id}')
+async def agent_detail_page(agent_id: str):
+    """Serve the agent detail page."""
+    return FileResponse('/home/rizeadmin/homebase/backend/static/agent-detail.html')
+
+@app.get("/servers/{server_id}")
+async def server_detail_page(server_id: str):
+    """Serve the server detail page."""
+    return FileResponse("/home/rizeadmin/homebase/backend/static/server-detail.html")
+
+# ============== SECURITY ==============
+
+SECURITY_SCANS_PATH = '/home/rizeadmin/homebase/data/security-scans.json'
+
+@app.get('/api/security/scans')
+async def get_security_scans():
+    """Get cached security scan results."""
+    try:
+        with open(SECURITY_SCANS_PATH) as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {'error': 'No scan data available', 'overall_score': 0, 'servers': {}, 'summary': {'total_checks': 0, 'pass': 0, 'warn': 0, 'fail': 0}}
+
+@app.get('/api/security/scans/latest')
+async def get_security_scans_latest():
+    """Get latest scan summary."""
+    try:
+        with open(SECURITY_SCANS_PATH) as f:
+            data = json.load(f)
+            return {
+                'last_scan': data.get('last_scan'),
+                'overall_score': data.get('overall_score'),
+                'summary': data.get('summary')
+            }
+    except FileNotFoundError:
+        return {'error': 'No scan data available'}
+
+@app.post('/api/security/scans/trigger')
+async def trigger_security_scan(background_tasks: BackgroundTasks):
+    """Trigger a new security scan (background)."""
+    # For now, just return success - actual scan script can be implemented later
+    return {'success': True, 'message': 'Scan triggered'}
+
+# ============== STATIC FILES ==============
+
+# Serve static HTML pages (no React SPA)
+
+@app.get('/')
+async def home_page():
+    return FileResponse('/home/rizeadmin/homebase/backend/static/index.html')
+
+@app.get('/servers')
+async def servers_page():
+    return FileResponse('/home/rizeadmin/homebase/backend/static/servers.html')
+
+@app.get('/metrics')
+async def metrics_page():
+    return FileResponse('/home/rizeadmin/homebase/backend/static/metrics.html')
+
+@app.get('/security')
+async def security_page():
+    return FileResponse('/home/rizeadmin/homebase/backend/static/security.html')
+
+@app.get('/credentials')
+async def credentials_page():
+    return FileResponse('/home/rizeadmin/homebase/backend/static/credentials.html')
+
+@app.get('/settings')
+async def settings_page():
+    return FileResponse('/home/rizeadmin/homebase/backend/static/settings.html')
+
+
+
+# ── Uptime Monitoring Routes ──
+from services.uptime import get_server_uptime, get_project_uptime, get_ping_history, get_check_history
+
+@app.get("/api/uptime/servers")
+async def api_uptime_servers(hours: int = 24):
+    return get_server_uptime(hours=hours)
+
+@app.get("/api/uptime/projects")
+async def api_uptime_projects(hours: int = 24):
+    return get_project_uptime(hours=hours)
+
+@app.get("/api/uptime/servers/{server_id}/history")
+async def api_server_history(server_id: str, hours: int = 24):
+    return get_ping_history(server_id, hours)
+
+@app.get("/api/uptime/projects/{project_id}/history")
+async def api_project_history(project_id: str, hours: int = 24):
+    return get_check_history(project_id, hours)
+
+# ── Alert Routes ──
+from services.alert_checker import get_alerts, acknowledge_alert, get_alert_settings, update_alert_settings, check_all as check_all_alerts
+
+@app.get("/api/alerts")
+async def api_alerts(severity: str = None, acknowledged: bool = None, limit: int = 100):
+    return get_alerts(severity=severity, acknowledged=acknowledged, limit=limit)
+
+@app.post("/api/alerts/{alert_id}/acknowledge")
+async def api_ack_alert(alert_id: str):
+    return {"acknowledged": acknowledge_alert(alert_id)}
+
+@app.get("/api/alerts/settings")
+async def api_alert_settings():
+    return get_alert_settings()
+
+@app.put("/api/alerts/settings")
+async def api_update_alert_settings(request: Request):
+    body = await request.json()
+    return update_alert_settings(body)
+
+@app.post("/api/alerts/check")
+async def api_check_alerts():
+    return check_all_alerts()
+
+@app.get("/api/backup-report")
+async def api_backup_report():
+    import json
+    try:
+        with open("data/backup-report.json") as f:
+            return json.load(f)
+    except:
+        return {"projects": {}, "servers": {}}
+
+@app.post("/api/agents/sentinel/report")
+async def api_sentinel_report(request: Request):
+    import json
+    body = await request.json()
+    body["received_at"] = __import__("datetime").datetime.utcnow().isoformat() + "Z"
+    with open(Path("/home/rizeadmin/homebase/data/sentinel-report.json"), "w") as f:
+        json.dump(body, f, indent=2)
+    return {"stored": True}
+
+@app.get("/api/agents/sentinel/report")
+async def api_get_sentinel_report():
+    import json
+    try:
+        with open(Path("/home/rizeadmin/homebase/data/sentinel-report.json")) as f:
+            return json.load(f)
+    except:
+        return {"error": "No report yet"}
+
+@app.get("/api/backup-freshness")
+async def api_backup_freshness():
+    import json
+    try:
+        with open("data/backup-freshness.json") as f:
+            return json.load(f)
+    except:
+        return {"projects": {}}
+    
+
+@app.get("/infrastructure")
+async def infrastructure_page():
+    """Serve the Infrastructure page (replaces Credentials + Cheat Sheet)."""
+    return FileResponse('/home/rizeadmin/homebase/backend/static/infrastructure.html')
+
+@app.get("/cheat-sheet")
+async def cheat_sheet_page():
+    return FileResponse('/home/rizeadmin/homebase/backend/static/cheat-sheet.html')
+
+
+# ══════════════════════════════════════════════════════════════════
+# MICROSOFT TEAMS BOT WEBHOOK ENDPOINTS
+# Added: 2026-02-06
+# Receives messages from Teams and forwards to agents on .241
+# ══════════════════════════════════════════════════════════════════
+
+import httpx
+from fastapi.responses import JSONResponse
+
+BOT_CONFIGS = {
+    "apex": {
+        "name": "Apex Finance",
+        "agent_url": "http://192.168.65.241:9002",
+        "app_id": "96728d3a-888d-40ca-838c-e069f864c8bf",
+    },
+    "aegis": {
+        "name": "Aegis Infrastructure",
+        "agent_url": "http://192.168.65.241:9003",
+        "app_id": "541acaa8-25c9-4bcb-8bc8-ac655e08b894",
+    },
+    "david": {
+        "name": "David Bishop",
+        "agent_url": "http://192.168.65.241:18789",
+        "app_id": "f3846ce2-88cc-43e9-913f-798c5447257f",
+    },
+}
+
+@app.post("/api/bots/{bot_id}/messages")
+async def teams_bot_webhook(bot_id: str, request: Request):
+    """Receive incoming messages from Microsoft Teams Bot Framework."""
+    if bot_id not in BOT_CONFIGS:
+        return JSONResponse(status_code=404, content={"error": f"Unknown bot: {bot_id}"})
+
+    config = BOT_CONFIGS[bot_id]
+    body = await request.json()
+
+    activity_type = body.get("type", "unknown")
+    text = body.get("text", "")
+    from_user = body.get("from", {}).get("name", "unknown")
+    print(f"[TEAMS] {config['name']}: {activity_type} from {from_user}: {text[:100]}")
+
+    # Forward to agent
+    try:
+        async with httpx.AsyncClient(timeout=30) as client:
+            resp = await client.post(
+                f"{config['agent_url']}/api/teams/message",
+                json=body,
+                headers={"X-Forwarded-By": "homebase"}
+            )
+            return resp.json()
+    except Exception as e:
+        print(f"[TEAMS] Error forwarding to {config['name']}: {e}")
+        return {"type": "message", "text": f"{config['name']} is currently starting up. Please try again in a moment."}
+
+
+@app.get("/api/bots/{bot_id}/status")
+async def bot_status(bot_id: str):
+    """Check if a bot's agent is reachable."""
+    if bot_id not in BOT_CONFIGS:
+        return JSONResponse(status_code=404, content={"error": f"Unknown bot: {bot_id}"})
+
+    config = BOT_CONFIGS[bot_id]
+    agent_status = "unknown"
+    try:
+        async with httpx.AsyncClient(timeout=5) as client:
+            resp = await client.get(f"{config['agent_url']}/health")
+            agent_status = "online" if resp.status_code == 200 else "error"
+    except:
+        agent_status = "offline"
+
+    return {
+        "bot_id": bot_id,
+        "name": config["name"],
+        "agent_url": config["agent_url"],
+        "agent_status": agent_status,
+        "app_id": config["app_id"],
+    }
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+
+# ── Vault TOTP Routes ──
+@app.get("/api/vault/status")
+async def vault_status():
+    return {"setup": is_setup()}
+
+@app.get("/api/vault/setup")
+async def vault_setup():
+    return get_qr_code()
+
+@app.post("/api/vault/verify")
+async def vault_verify(request: Request):
+    body = await request.json()
+    return verify_code(str(body.get("code", "")))
+
+@app.get("/api/vault/credentials")
+async def vault_credentials(request: Request):
+    import os
+    auth = request.headers.get("Authorization", "")
+    token = auth.replace("Bearer ", "")
+    if not verify_token(token):
+        from fastapi.responses import JSONResponse
+        return JSONResponse(status_code=401, content={"error": "Invalid or expired token"})
+    import json as _json
+    try:
+        cred_file = "data/credentials.json"
+        key_file = "data/.credentials.key"
+        if os.path.exists(key_file):
+            from cryptography.fernet import Fernet
+            with open(key_file, "rb") as f: key = f.read().strip()
+            with open(cred_file, "rb") as f: encrypted = f.read()
+            return _json.loads(Fernet(key).decrypt(encrypted))
+        else:
+            with open(cred_file) as f: return _json.load(f)
+    except Exception as e:
+        return {"error": str(e)}
+
+@app.get("/api/credentials/scan")
+async def api_credential_scan(request: Request):
+    """Return latest credential scan — requires vault token"""
+    auth = request.headers.get("Authorization", "")
+    token = auth.replace("Bearer ", "")
+    from services.totp_service import verify_token
+    if not verify_token(token):
+        from fastapi.responses import JSONResponse
+        return JSONResponse(status_code=401, content={"error": "Vault token required"})
+    import json
+    try:
+        with open("data/credential-scan.json") as f:
+            return json.load(f)
+    except:
+        return {"error": "No scan data yet — scanner runs hourly"}
+
+
+@app.get("/api/cheat-sheet-full")
+async def api_cheat_sheet_full(request: Request):
+    """Full cheat sheet with live server data — requires vault token"""
+    auth = request.headers.get("Authorization", "")
+    token = auth.replace("Bearer ", "")
+    from services.totp_service import verify_token
+    if not verify_token(token):
+        from fastapi.responses import JSONResponse
+        return JSONResponse(status_code=401, content={"error": "Vault token required"})
+    import json
+    try:
+        with open("/home/rizeadmin/homebase/data/cheat-sheet-full.json") as f:
+            return json.load(f)
+    except:
+        return {"error": "No cheat sheet yet — generator runs hourly"}
+
+@app.get("/api/history")
+async def get_history():
+    """Returns the last 20 metrics points."""
+    history_service.add_mock_point()
+    return history_service.get_data()
+
+# ============ SENTINEL ROUTES ============
+from services import sentinel, request_tracker
+
+@app.get("/api/settings")
+async def get_settings():
+    return sentinel.get_config()
+
+@app.post("/api/settings")
+async def update_settings(request: Request):
+    data = await request.json()
+    for key, value in data.items():
+        sentinel.set_config(key, str(value), updated_by='web')
+    return {"success": True}
+
+@app.get("/api/maintenance")
+async def get_maintenance():
+    return sentinel.get_maintenance_window()
+
+@app.post("/api/maintenance")
+async def update_maintenance(request: Request):
+    data = await request.json()
+    sentinel.set_maintenance_window(
+        data.get('start_time', '03:00'),
+        data.get('duration_minutes', 60),
+        data.get('days_of_week', []),
+        data.get('active', 1)
+    )
+    return {"success": True}
+
+@app.get("/api/maintenance/status")
+async def maintenance_status():
+    return sentinel.get_maintenance_status()
+
+@app.get("/api/requests")
+async def get_requests(agent_id: str = None, hours: int = 24):
+    return request_tracker.get_requests(agent_id, hours)
+
+@app.post("/api/requests")
+async def log_request_endpoint(request: Request):
+    data = await request.json()
+    request_tracker.log_request(**data)
+    return {"success": True}
+
+@app.get("/api/requests/stats")
+async def request_stats(agent_id: str = None, hours: int = 24):
+    return request_tracker.get_stats(agent_id, hours)
+
+@app.get("/api/requests/unfulfilled")
+async def unfulfilled_requests(hours: int = 24):
+    return request_tracker.get_unfulfilled_summary(hours)
+
+# ============ RESEARCH SCOUT ROUTES ============
+from services import research_scout
+
+@app.get("/api/research")
+async def get_research(status: str = 'new', limit: int = 50):
+    return research_scout.get_items(status, limit)
+
+@app.post("/api/research/scan")
+async def run_research_scan():
+    return research_scout.run_scan()
+
+@app.get("/api/research/summary")
+async def research_summary():
+    return research_scout.get_daily_summary()
+
+@app.post("/api/research/{item_id}/status")
+async def update_research_status(item_id: int, request: Request):
+    data = await request.json()
+    research_scout.update_item_status(item_id, data.get('status', 'reviewed'), data.get('reviewed_by', 'web'))
+    return {"success": True}
+
+@app.get('/research')
+async def research_page():
+    return FileResponse('/home/rizeadmin/homebase/backend/static/research.html')
+
+@app.get("/projects/{project_id}")
+async def project_detail_page(project_id: str):
+    """Serve the project detail page."""
+    return FileResponse("/home/rizeadmin/homebase/backend/static/project-detail.html")
+
+# ============ SENTINEL DASHBOARD ROUTES ============
+from services import cron_monitor
+
+@app.get("/sentinel")
+async def sentinel_page():
+    """Serve the Sentinel dashboard page."""
+    return FileResponse('/home/rizeadmin/homebase/backend/static/sentinel.html')
+
+@app.get("/api/crons")
+async def get_cron_jobs():
+    """Get all cron jobs from Cobalt and known agents."""
+    return cron_monitor.get_all_crons()
+
+@app.get("/api/crons/summary")
+async def get_cron_summary():
+    """Get summary of cron jobs."""
+    return cron_monitor.get_cron_summary()
+
+@app.post("/api/agents/{agent_id}/kill")
+async def kill_agent(agent_id: str):
+    """Kill switch - immediately stops an agent process and updates database."""
+    from services import agent_monitor
+    import subprocess
+    import json
+    
+    db = agent_monitor.get_db()
+    killed_process = False
+    
+    # Map agent IDs to process paths
+    agent_processes = {
+        "david-bishop": "/home/david/openclaw",
+        "treasurer": "/home/agents/treasurer",
+        "watchman": "/home/agents/watchman"
+    }
+    
+    # Try to kill the actual process via SSH
+    if agent_id in agent_processes:
+        try:
+            path = agent_processes[agent_id]
+            result = subprocess.run(
+                ["ssh", "-o", "ConnectTimeout=5", "agents@192.168.65.241",
+                 f"pkill -f '{path}' && echo 'KILLED'"],
+                capture_output=True, text=True, timeout=15
+            )
+            killed_process = "KILLED" in result.stdout
+        except Exception as e:
+            pass  # Process kill failed, but continue with DB update
+    
+    # Update agent status in database
+    db.execute("UPDATE agents SET status = 'killed' WHERE agent_id = ?", (agent_id,))
+    
+    # Log incident
+    db.execute('''
+        INSERT INTO incidents (incident_id, agent_id, type, severity, summary, status)
+        VALUES (?, ?, 'kill_switch', 'critical', 'Agent killed via Sentinel dashboard', 'open')
+    ''', (f"kill-{agent_id}-{int(__import__('time').time())}", agent_id))
+    
+    # Log audit
+    db.execute('''
+        INSERT INTO audit_log (log_id, agent_id, action_type, summary, status)
+        VALUES (?, ?, 'kill_switch', 'Agent killed via Sentinel dashboard', 'success')
+    ''', (f"audit-{agent_id}-{int(__import__('time').time())}", agent_id))
+    
+    db.commit()
+    db.close()
+    
+    # Send email alert
+    try:
+        subprocess.run(
+            ["ssh", "agents@192.168.65.241",
+             f"python3 ~/scripts/send-email.py dbishop@rize.bm artiedarrell@gmail.com "
+             f"'SENTINEL: Agent {agent_id} KILLED' 'Kill switch activated via Sentinel dashboard. "
+             f"Process terminated: {killed_process}'"],
+            capture_output=True, timeout=30
+        )
+    except:
+        pass
+    
+    return {"killed": True, "agent_id": agent_id, "process_terminated": killed_process}
+
+@app.post("/api/agents/{agent_id}/resume")
+async def resume_agent(agent_id: str):
+    """Resume a killed agent (requires CEO approval - not implemented yet)."""
+    return {"error": "CEO approval required", "agent_id": agent_id}
+
+
+@app.get("/api/projects/{project_id}")
+async def get_project_by_id(project_id: str):
+    """Get a single project by ID."""
+    import json
+    
+    # First try project-status.json (has live check-in data)
+    status = await get_project_status()
+    projects = status.get('projects', {})
+    
+    if project_id in projects:
+        proj = projects[project_id]
+        proj['id'] = project_id
+        return proj
+    
+    # Try case-insensitive match in status
+    for key, proj in projects.items():
+        if key.lower() == project_id.lower():
+            proj['id'] = key
+            return proj
+    
+    # Fallback to projects.json (static project list)
+    try:
+        with open('/home/rizeadmin/homebase/data/projects.json') as f:
+            data = json.load(f)
+        project_list = data.get('projects', data)
+        if isinstance(project_list, list):
+            for p in project_list:
+                if p.get('id') == project_id or p.get('id','').lower() == project_id.lower():
+                    return p
+    except:
+        pass
+    
+    raise HTTPException(status_code=404, detail=f'Project {project_id} not found')
+
+# ============================================================================
+# SENTINEL DASHBOARD APIs (P2 Overhaul - 2026-02-06)
+# ============================================================================
+
+@app.get("/api/sentinel/overview")
+async def sentinel_overview():
+    """Get overview stats for Sentinel dashboard."""
+    import sqlite3
+    from datetime import datetime, timedelta
+
+    agents_db = sqlite3.connect("/home/rizeadmin/homebase/data/agents.db")
+    agents_db.row_factory = sqlite3.Row
+
+    # Get agent counts by status
+    cur = agents_db.execute("""
+        SELECT status, COUNT(*) as count
+        FROM (
+            SELECT agent_id, status
+            FROM heartbeats
+            WHERE timestamp > datetime('now', '-10 minutes')
+            GROUP BY agent_id
+            ORDER BY timestamp DESC
+        )
+        GROUP BY status
+    """)
+    status_counts = {row["status"]: row["count"] for row in cur.fetchall()}
+
+    # Get 24h request count
+    cur = agents_db.execute("""
+        SELECT COUNT(*) as count FROM request_log
+        WHERE timestamp > datetime('now', '-24 hours')
+    """)
+    requests_24h = cur.fetchone()["count"]
+
+    # Get guardrail triggers
+    cur = agents_db.execute("""
+        SELECT COUNT(*) as count FROM request_log
+        WHERE guardrail_triggered IS NOT NULL AND guardrail_triggered != ''
+        AND timestamp > datetime('now', '-24 hours')
+    """)
+    guardrails_24h = cur.fetchone()["count"]
+
+    agents_db.close()
+
+    # Get security alerts from JSON
+    try:
+        with open("/home/rizeadmin/homebase/data/security-scans.json") as f:
+            scans = json.load(f)
+        critical = sum(1 for s in scans.get("servers", []) if s.get("score", 100) < 50)
+        warnings = sum(1 for s in scans.get("servers", []) if 50 <= s.get("score", 100) < 80)
+    except:
+        critical = warnings = 0
+
+    return {
+        "agents_healthy": status_counts.get("healthy", 0) + status_counts.get("running", 0),
+        "agents_degraded": status_counts.get("degraded", 0),
+        "agents_offline": status_counts.get("offline", 0) + status_counts.get("killed", 0),
+        "requests_24h": requests_24h,
+        "guardrails_24h": guardrails_24h,
+        "alerts_critical": critical,
+        "alerts_warning": warnings,
+        "last_updated": datetime.utcnow().isoformat()
+    }
+
+@app.get("/api/sentinel/agents")
+async def sentinel_agents():
+    """Get detailed agent status for Sentinel cards."""
+    import sqlite3
+
+    agents_db = sqlite3.connect("/home/rizeadmin/homebase/data/agents.db")
+    agents_db.row_factory = sqlite3.Row
+
+    # Get latest heartbeat per agent (deduplicated by rowid)
+    cur = agents_db.execute("""
+        SELECT h.agent_id, h.status, h.timestamp, h.uptime_seconds, h.memory_mb, 
+               h.cpu_percent, h.active_tasks, h.error_count_1h,
+               a.display_name, a.channels, a.host
+        FROM heartbeats h
+        LEFT JOIN agents a ON h.agent_id = a.agent_id
+        WHERE h.rowid IN (
+            SELECT MAX(rowid) FROM heartbeats GROUP BY agent_id
+        )
+        ORDER BY h.agent_id
+    """)
+
+    agents = []
+    for row in cur.fetchall():
+        agents.append({
+            "id": row["agent_id"],
+            "name": row["display_name"] or row["agent_id"],
+            "status": row["status"],
+            "last_heartbeat": row["timestamp"],
+            "uptime_seconds": row["uptime_seconds"] or 0,
+            "memory_mb": row["memory_mb"] or 0,
+            "cpu_percent": row["cpu_percent"] or 0,
+            "active_tasks": row["active_tasks"] or 0,
+            "error_count_1h": row["error_count_1h"] or 0,
+            "channels": json.loads(row["channels"]) if row["channels"] else [],
+            "host": row["host"]
+        })
+
+    agents_db.close()
+    return {"agents": agents}
+
+@app.get("/api/sentinel/alerts")
+async def sentinel_alerts():
+    """Get security alerts feed."""
+    alerts = []
+
+    # From security-scans.json
+    try:
+        with open("/home/rizeadmin/homebase/data/security-scans.json") as f:
+            scans = json.load(f)
+        for server in scans.get("servers", []):
+            if server.get("score", 100) < 80:
+                severity = "critical" if server.get("score", 100) < 50 else "warning"
+                alerts.append({
+                    "id": f"sec-{server.get('name')}",
+                    "timestamp": scans.get("timestamp", ""),
+                    "severity": severity,
+                    "source": "Security Scan",
+                    "message": f"{server.get('name')} security score: {server.get('score')}/100",
+                    "details": server.get("checks", [])
+                })
+    except:
+        pass
+
+    # From alerts.json
+    try:
+        with open("/home/rizeadmin/homebase/data/alerts.json") as f:
+            alert_data = json.load(f)
+        for alert in alert_data.get("alerts", [])[:20]:
+            alerts.append({
+                "id": alert.get("id", ""),
+                "timestamp": alert.get("timestamp", ""),
+                "severity": alert.get("severity", "info"),
+                "source": alert.get("source", "System"),
+                "message": alert.get("message", "")
+            })
+    except:
+        pass
+
+    return {"alerts": sorted(alerts, key=lambda x: x.get("timestamp", ""), reverse=True)[:50]}
+
+@app.get("/api/sentinel/guardrails")
+async def sentinel_guardrails():
+    """Get guardrail trigger logs."""
+    import sqlite3
+
+    agents_db = sqlite3.connect("/home/rizeadmin/homebase/data/agents.db")
+    agents_db.row_factory = sqlite3.Row
+
+    cur = agents_db.execute("""
+        SELECT * FROM request_log
+        WHERE guardrail_triggered IS NOT NULL AND guardrail_triggered != ''
+        ORDER BY timestamp DESC
+        LIMIT 100
+    """)
+
+    guardrails = []
+    for row in cur.fetchall():
+        guardrails.append({
+            "timestamp": row["timestamp"],
+            "agent_id": row["agent_id"],
+            "user_id": row["user_id"],
+            "channel": row["channel"],
+            "request": row["request_summary"],
+            "guardrail": row["guardrail_triggered"],
+            "outcome": row["outcome"]
+        })
+
+    agents_db.close()
+    return {"guardrails": guardrails}
+
+@app.get("/api/guardrails/rules")
+async def get_guardrail_rules():
+    """Get all guardrail rules."""
+    from services import guardrails as gr
+    
+    rules = gr.get_all_rules(enabled_only=False)
+    return {"rules": rules}
+
+@app.post("/api/guardrails/check")
+async def check_guardrails(request: Request):
+    """Check a request against guardrail rules."""
+    from services import guardrails as gr
+    
+    body = await request.json()
+    agent_id = body.get("agent_id", "unknown")
+    request_text = body.get("request", "")
+    
+    result = gr.check_request(agent_id, request_text)
+    
+    # Log any triggers
+    for trigger in result.get("triggered_rules", []):
+        action = "blocked" if trigger["severity"] == "block" else "warned"
+        gr.log_trigger(
+            agent_id=agent_id,
+            rule_id=trigger["rule_id"],
+            rule_name=trigger["rule_name"],
+            request_summary=request_text[:200],
+            action_taken=action,
+            details=trigger["message"]
+        )
+    
+    return result
+
+@app.post("/api/guardrails/rules")
+async def create_guardrail_rule(request: Request):
+    """Create a new guardrail rule."""
+    from services import guardrails as gr
+    
+    body = await request.json()
+    rule_id = gr.create_rule(
+        rule_name=body.get("rule_name"),
+        rule_type=body.get("rule_type"),
+        config=body.get("config", {}),
+        agent_id=body.get("agent_id"),
+        severity=body.get("severity", "warning"),
+        created_by=body.get("created_by", "web")
+    )
+    return {"created": True, "rule_id": rule_id}
+
+@app.put("/api/guardrails/rules/{rule_id}")
+async def update_guardrail_rule(rule_id: int, request: Request):
+    """Update a guardrail rule."""
+    from services import guardrails as gr
+    
+    body = await request.json()
+    gr.update_rule(rule_id, body, updated_by=body.get("updated_by", "web"))
+    return {"updated": True, "rule_id": rule_id}
+
+@app.delete("/api/guardrails/rules/{rule_id}")
+async def delete_guardrail_rule(rule_id: int):
+    """Delete a guardrail rule."""
+    from services import guardrails as gr
+    
+    gr.delete_rule(rule_id)
+    return {"deleted": True, "rule_id": rule_id}
+
+@app.get("/api/guardrails/triggers")
+async def get_guardrail_triggers():
+    """Get recent guardrail trigger events."""
+    from services import guardrails as gr
+    
+    triggers = gr.get_recent_triggers(limit=50)
+    return {"triggers": triggers}
+
+@app.get("/api/sentinel/requests")
+async def sentinel_requests():
+    """Get request log stats and recent requests."""
+    import sqlite3
+
+    agents_db = sqlite3.connect("/home/rizeadmin/homebase/data/agents.db")
+    agents_db.row_factory = sqlite3.Row
+
+    # Get hourly volume for last 24 hours
+    cur = agents_db.execute("""
+        SELECT strftime('%Y-%m-%d %H:00', timestamp) as hour, COUNT(*) as count
+        FROM request_log
+        WHERE timestamp > datetime('now', '-24 hours')
+        GROUP BY hour
+        ORDER BY hour
+    """)
+    hourly = [{"hour": row["hour"], "count": row["count"]} for row in cur.fetchall()]
+
+    # Get volume by agent
+    cur = agents_db.execute("""
+        SELECT agent_id, COUNT(*) as count
+        FROM request_log
+        WHERE timestamp > datetime('now', '-24 hours')
+        GROUP BY agent_id
+        ORDER BY count DESC
+    """)
+    by_agent = [{"agent": row["agent_id"], "count": row["count"]} for row in cur.fetchall()]
+
+    # Get volume by channel
+    cur = agents_db.execute("""
+        SELECT channel, COUNT(*) as count
+        FROM request_log
+        WHERE timestamp > datetime('now', '-24 hours')
+        GROUP BY channel
+        ORDER BY count DESC
+    """)
+    by_channel = [{"channel": row["channel"], "count": row["count"]} for row in cur.fetchall()]
+
+    # Recent requests
+    cur = agents_db.execute("""
+        SELECT * FROM request_log
+        ORDER BY timestamp DESC
+        LIMIT 50
+    """)
+    recent = []
+    for row in cur.fetchall():
+        recent.append({
+            "timestamp": row["timestamp"],
+            "agent_id": row["agent_id"],
+            "user_id": row["user_id"],
+            "channel": row["channel"],
+            "request": row["request_summary"],
+            "fulfilled": row["fulfilled"],
+            "response_time_ms": row["response_time_ms"]
+        })
+
+    agents_db.close()
+    return {
+        "hourly": hourly,
+        "by_agent": by_agent,
+        "by_channel": by_channel,
+        "recent": recent
+    }
+
+@app.get("/api/sentinel/crons")
+async def sentinel_crons():
+    """Get cron job health from agents server."""
+    import subprocess
+
+    try:
+        result = subprocess.run(
+            ["ssh", "agents@192.168.65.241", "crontab -l 2>/dev/null"],
+            capture_output=True, text=True, timeout=10
+        )
+        cron_lines = [l.strip() for l in result.stdout.split("\n") if l.strip() and not l.startswith("#")]
+
+        crons = []
+        for line in cron_lines:
+            parts = line.split(None, 5)
+            if len(parts) >= 6:
+                crons.append({
+                    "schedule": " ".join(parts[:5]),
+                    "command": parts[5][:80],
+                    "status": "ok"
+                })
+
+        return {"crons": crons, "total": len(crons)}
+    except Exception as e:
+        return {"crons": [], "error": str(e)}
+
+@app.get("/api/sentinel/resources")
+async def sentinel_resources():
+    """Get resource usage for key servers."""
+    import subprocess
+
+    resources = {}
+
+    # All 5 active servers from infrastructure.json
+    for server, user in [
+        ("192.168.65.237", "talosadmin"),  # Talos
+        ("192.168.65.241", "agents"),       # Agents
+        ("192.168.65.245", "rizeadmin"),    # Rize-Apps
+        ("192.168.65.246", "demos"),        # Demos
+        ("192.168.65.249", "betadmin"),     # Vector
+    ]:
+        try:
+            result = subprocess.run(
+                ["ssh", f"{user}@{server}",
+                 "echo CPU:$(top -bn1 | grep Cpu | awk '{print $2}');"
+                 "echo MEM:$(free -m | awk '/Mem/{print $3,$2}');"
+                 "echo DISK:$(df -h / | awk 'NR==2{print $5}')"],
+                capture_output=True, text=True, timeout=10
+            )
+
+            data = {}
+            for line in result.stdout.strip().split("\n"):
+                if line.startswith("CPU:"):
+                    try:
+                        data["cpu"] = float(line.split(":")[1].strip() or 0)
+                    except:
+                        data["cpu"] = 0
+                elif line.startswith("MEM:"):
+                    parts = line.split(":")[1].strip().split()
+                    if len(parts) >= 2:
+                        data["mem_used"] = int(parts[0])
+                        data["mem_total"] = int(parts[1])
+                elif line.startswith("DISK:"):
+                    data["disk"] = line.split(":")[1].strip()
+
+            resources[server] = data
+        except Exception as e:
+            resources[server] = {"error": str(e)}
+
+    return {"resources": resources}
+
+# ══════════════════════════════════════════════════════════════════
+# AGENT DASHBOARD API ENDPOINTS - Added 2026-02-06
+# ══════════════════════════════════════════════════════════════════
+
+@app.get("/api/agents/{agent_id}/dashboard")
+async def get_agent_dashboard(agent_id: str):
+    """Get dashboard data for an agent."""
+    import sqlite3
+    conn = sqlite3.connect("/home/rizeadmin/homebase/data/agents.db")
+    conn.row_factory = sqlite3.Row
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM agents WHERE agent_id = ?", (agent_id,))
+    agent = cur.fetchone()
+    cur.execute("SELECT * FROM heartbeats WHERE agent_id = ? ORDER BY timestamp DESC LIMIT 10", (agent_id,))
+    heartbeats = cur.fetchall()
+    conn.close()
+    
+    users = {
+        "apex": [
+            {"name": "Mary Ocoy", "email": "mocoy@rize.bm", "role": "Finance"},
+            {"name": "Gabrielle Higham", "email": "ghigham@rize.bm", "role": "Admin"},
+            {"name": "Gilbert Darrell", "email": "gadarrell@rize.bm", "role": "CEO"},
+        ],
+        "aegis": [
+            {"name": "Mary Ocoy", "email": "mocoy@rize.bm", "role": "Finance"},
+            {"name": "Gilbert Darrell", "email": "gadarrell@rize.bm", "role": "CEO"},
+            {"name": "Ibrahim El Charif", "email": "icharif@rize.bm", "role": "Tech Lead"},
+        ],
+        "david-bishop": [
+            {"name": "Gilbert Darrell", "email": "gadarrell@rize.bm", "role": "CEO"},
+            {"name": "All Rize Staff", "email": "*@rize.bm", "role": "Internal"},
+        ],
+    }
+    
+    return {
+        "agent": dict(agent) if agent else None,
+        "status": agent["status"] if agent else "unknown",
+        "last_heartbeat": heartbeats[0]["timestamp"] if heartbeats else None,
+        "heartbeats": [dict(h) for h in heartbeats],
+        "users": users.get(agent_id, []),
+    }
+
+# Agent-specific dashboard pages
+@app.get("/agent/apex")
+async def agent_apex_page():
+    return FileResponse('/home/rizeadmin/homebase/backend/static/agent-apex.html')
+
+@app.get("/agent/aegis")
+async def agent_aegis_page():
+    return FileResponse('/home/rizeadmin/homebase/backend/static/agent-aegis.html')
+
+@app.get("/agent/david-bishop")
+async def agent_david_page():
+    return FileResponse('/home/rizeadmin/homebase/backend/static/agent-david-bishop.html')
+
+# ══════════════════════════════════════════════════════════════════
+# PROJECT STATUS DASHBOARD - Added 2026-02-06
+# ══════════════════════════════════════════════════════════════════
+
+PROJECT_STATUS_FILE = "/home/rizeadmin/homebase/data/project-status.json"
+
+@app.get("/api/project-status")
+async def get_project_status():
+    """Get project status data from scanner."""
+    import json
+    try:
+        with open(PROJECT_STATUS_FILE) as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {"error": "No scan data. Run project-status-scanner.py first.", "projects": [], "issues": []}
+    except Exception as e:
+        return {"error": str(e), "projects": [], "issues": []}
+
+@app.get("/project-status")
+async def project_status_page():
+    """Serve the project status dashboard."""
+    return FileResponse("/home/rizeadmin/homebase/backend/static/project-status.html")
+
+# Mount static JS directory for marked.js
+app.mount("/static", StaticFiles(directory="/home/rizeadmin/homebase/backend/static"), name="static")
+
+@app.get("/api/cheat-sheet/agents")
+async def api_cheat_sheet_agents():
+    """Get agents section from cheat sheet (no auth required)"""
+    import json
+    try:
+        with open("/home/rizeadmin/homebase/data/cheat-sheet-full.json") as f:
+            data = json.load(f)
+            return {
+                "agents": data.get("agents", []),
+                "status": data.get("status", {}),
+                "deadlines": data.get("deadlines", []),
+                "generated": data.get("generated")
+            }
+    except:
+        return {"agents": [], "status": {}, "deadlines": []}
