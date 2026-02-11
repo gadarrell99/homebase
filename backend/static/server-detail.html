@@ -34,6 +34,8 @@
         <a href="/infra">Infra Sheet</a>
         <a href="/settings">Settings</a>
         <a href="/backups">Backups</a>
+        <a href="/requirements">Requirements</a>
+        <a href="https://gitea.rize.bm" target="_blank">Gitea</a>
     </div>
 </nav>
     <!-- Content will be replaced by the shared layout if using wrap_page, 
@@ -71,7 +73,8 @@
         </div>
     </div>
 
-    <script>
+    <script src="/static/cache-helper.js"></script>
+<script>
         // 1. Inject Shared CSS (Simulating the navbar.py logic for static file)
         const css = `
 :root { --bg-body: #0f172a; --bg-nav: #1e293b; --bg-card: #1e293b; --bg-hover: #334155; --text-main: #e2e8f0; --text-muted: #94a3b8; --border-color: #334155; --link-color: #60a5fa; --link-hover: #93c5fd; --shadow: 0 10px 25px rgba(0,0,0,0.3); }
@@ -172,7 +175,8 @@ a:hover { color: var(--link-hover); }
             }
         }
         
-        loadData();
+        var _serverId = window.location.pathname.split('/').pop() || 'default';
+        initCacheFirst('homebase_server_' + _serverId, 'server-name', loadData, 0);
     </script>
 </body>
 </html>

@@ -75,6 +75,8 @@ a:hover { color: #93c5fd; }
         <a href="/infra">Infra Sheet</a>
         <a href="/settings">Settings</a>
         <a href="/backups">Backups</a>
+        <a href="/requirements">Requirements</a>
+        <a href="https://gitea.rize.bm" target="_blank">Gitea</a>
     </div>
 </nav>
 
@@ -97,7 +99,8 @@ a:hover { color: #93c5fd; }
         <div class="server-grid hidden" id="decom-grid"></div>
     </div>
 
-    <script>
+    <script src="/static/cache-helper.js"></script>
+<script>
     let infraData = null;
 
     async function loadData() {
@@ -195,8 +198,7 @@ a:hover { color: #93c5fd; }
         alert('Copied: ssh ' + cmd);
     }
 
-    loadData();
-    setInterval(loadData, 60000);
+    initCacheFirst('homebase_servers', 'active-grid', loadData, 60000);
     </script>
 </body>
 </html>

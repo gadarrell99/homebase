@@ -78,6 +78,8 @@ a:hover { color: #93c5fd; }
         <a href="/infra">Infra Sheet</a>
         <a href="/settings">Settings</a>
         <a href="/backups">Backups</a>
+        <a href="/requirements">Requirements</a>
+        <a href="https://gitea.rize.bm" target="_blank">Gitea</a>
     </div>
 </nav>
 
@@ -119,7 +121,8 @@ a:hover { color: #93c5fd; }
         <div class="updated" id="last-updated"></div>
     </div>
 
-    <script>
+    <script src="/static/cache-helper.js"></script>
+<script>
     async function loadFleet() {
         try {
             const res = await fetch('/api/fleet');
@@ -217,8 +220,7 @@ a:hover { color: #93c5fd; }
         document.getElementById('decom-body').classList.toggle('open');
     });
     
-    loadFleet();
-    setInterval(loadFleet, 60000);
+    initCacheFirst('homebase_fleet', 'servers-container', loadFleet, 60000);
     </script>
 </body>
 </html>

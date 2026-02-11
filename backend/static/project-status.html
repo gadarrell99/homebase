@@ -185,6 +185,8 @@ a:hover { color: var(--link-hover); }
         <a href="/infra">Infra Sheet</a>
         <a href="/settings">Settings</a>
         <a href="/backups">Backups</a>
+        <a href="/requirements">Requirements</a>
+        <a href="https://gitea.rize.bm" target="_blank">Gitea</a>
     </div>
 </nav>
 
@@ -234,7 +236,8 @@ a:hover { color: var(--link-hover); }
         </div>
     </div>
 
-    <script>
+    <script src="/static/cache-helper.js"></script>
+<script>
     // Theme handling
     function toggleTheme() {
         const body = document.body;
@@ -562,8 +565,7 @@ a:hover { color: var(--link-hover); }
     }
 
     // Initial load and auto-refresh
-    loadData();
-    setInterval(loadData, 60000);
+    initCacheFirst('homebase_proj_status', 'project-grid', loadData, 60000);
     </script>
 </body>
 </html>

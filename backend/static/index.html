@@ -61,6 +61,8 @@ a:hover { color: #93c5fd; }
         <a href="/infra">Infra Sheet</a>
         <a href="/settings">Settings</a>
         <a href="/backups">Backups</a>
+        <a href="/requirements">Requirements</a>
+        <a href="https://gitea.rize.bm" target="_blank">Gitea</a>
     </div>
 </nav>
 
@@ -107,7 +109,8 @@ a:hover { color: #93c5fd; }
         </div>
     </div>
 
-    <script>
+    <script src="/static/cache-helper.js"></script>
+<script>
     async function loadDashboard() {
         try {
             const res = await fetch('/api/infrastructure');
@@ -186,8 +189,7 @@ a:hover { color: #93c5fd; }
         }
     }
     
-    loadDashboard();
-    setInterval(loadDashboard, 60000);
+    initCacheFirst('homebase_dashboard', 'server-list', loadDashboard, 60000);
     </script>
 </body>
 </html>

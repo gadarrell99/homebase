@@ -60,6 +60,8 @@ a:hover { color: #93c5fd; }
         <a href="/infra">Infra Sheet</a>
         <a href="/settings">Settings</a>
         <a href="/backups">Backups</a>
+        <a href="/requirements">Requirements</a>
+        <a href="https://gitea.rize.bm" target="_blank">Gitea</a>
     </div>
 </nav>
 
@@ -78,7 +80,8 @@ a:hover { color: #93c5fd; }
         <div id="project-groups">Loading...</div>
     </div>
 
-    <script>
+    <script src="/static/cache-helper.js"></script>
+<script>
     async function loadProjects() {
         try {
             const res = await fetch('/api/infrastructure');
@@ -186,7 +189,7 @@ a:hover { color: #93c5fd; }
         modal.style.display = 'flex';
     }
     
-    loadProjects();
+    initCacheFirst('homebase_projects', 'project-groups', loadProjects, 0);
     </script>
 </body>
 </html>

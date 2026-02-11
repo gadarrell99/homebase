@@ -42,6 +42,8 @@ code{background:#0f172a;padding:0.1rem 0.3rem;border-radius:3px;font-size:0.8rem
         <a href="/infra" class="active">Infra Sheet</a>
         <a href="/settings">Settings</a>
         <a href="/backups">Backups</a>
+        <a href="/requirements">Requirements</a>
+        <a href="https://gitea.rize.bm" target="_blank">Gitea</a>
     </div>
 </nav>
 <div class="container">
@@ -55,8 +57,23 @@ code{background:#0f172a;padding:0.1rem 0.3rem;border-radius:3px;font-size:0.8rem
     <div id="status-section"></div>
 </div>
 </div>
+<script src="/static/cache-helper.js"></script>
 <script>
 (async function(){
+    // Cache-first: restore cached HTML immediately
+    var CACHE_KEY = 'homebase_cheatsheet';
+    try {
+        var raw = sessionStorage.getItem(CACHE_KEY);
+        if (raw) {
+            var obj = JSON.parse(raw);
+            if (Date.now() - obj.ts < 300000) {
+                var p = document.getElementById('projects-section');
+                var s = document.getElementById('status-section');
+                if (p && obj.projects) p.innerHTML = obj.projects;
+                if (s && obj.status) s.innerHTML = obj.status;
+            }
+        }
+    } catch(e) {}
     // Fetch all data
     const [servers, projects, cheatFull] = await Promise.all([
         fetch('/api/servers').then(r=>r.json()).catch(()=>[]),
@@ -132,6 +149,16 @@ code{background:#0f172a;padding:0.1rem 0.3rem;border-radius:3px;font-size:0.8rem
     }
     statusHtml += '</div>';
     document.getElementById('status-section').innerHTML = statusHtml;
+    // Save to cache
+    try {
+        var p = document.getElementById('projects-section');
+        var s = document.getElementById('status-section');
+        sessionStorage.setItem(CACHE_KEY, JSON.stringify({
+            projects: p ? p.innerHTML : '',
+            status: s ? s.innerHTML : '',
+            ts: Date.now()
+        }));
+    } catch(e) {}
 })();
 </script>
 </body></html>

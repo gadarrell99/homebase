@@ -71,6 +71,8 @@ a:hover { color: #93c5fd; }
         <a href="/infra">Infra Sheet</a>
         <a href="/settings">Settings</a>
         <a href="/backups">Backups</a>
+        <a href="/requirements">Requirements</a>
+        <a href="https://gitea.rize.bm" target="_blank">Gitea</a>
     </div>
 </nav>
 
@@ -104,7 +106,8 @@ a:hover { color: #93c5fd; }
         </div>
     </div>
 
-    <script>
+    <script src="/static/cache-helper.js"></script>
+<script>
 var D = null, F = 'all';
 
 function setF(f, b) {
@@ -204,8 +207,7 @@ async function load() {
     }
 }
 
-load();
-setInterval(load, 60000);
+initCacheFirst('homebase_audit', 'list', load, 60000);
     </script>
 <footer style="text-align:center;padding:1rem;color:#475569;font-size:0.75rem;border-top:1px solid #1e293b;margin-top:2rem">Homebase v1.2.0 · Rize Technologies · <span id="ft-time"></span></footer>
 <script>document.getElementById("ft-time")&&(document.getElementById("ft-time").textContent="Updated: "+new Date().toLocaleString())</script>

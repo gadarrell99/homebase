@@ -65,6 +65,8 @@ tr:hover td { background: #1a1a2e; }
         <a href="/infra" class="active">Infra Sheet</a>
         <a href="/settings">Settings</a>
         <a href="/backups">Backups</a>
+        <a href="/requirements">Requirements</a>
+        <a href="https://gitea.rize.bm" target="_blank">Gitea</a>
     </div>
 </nav>
 
@@ -131,7 +133,8 @@ tr:hover td { background: #1a1a2e; }
         <div class="updated" id="footer-updated"></div>
     </div>
 
-    <script>
+    <script src="/static/cache-helper.js"></script>
+<script>
     function toggleSection(header) {
         header.classList.toggle('open');
         header.nextElementSibling.classList.toggle('open');
@@ -332,8 +335,7 @@ tr:hover td { background: #1a1a2e; }
         }
     }
     
-    loadInfra();
-    setInterval(loadInfra, 120000);
+    initCacheFirst('homebase_infra', 'fleet-topology', loadInfra, 120000);
     </script>
 </body>
 </html>

@@ -77,6 +77,8 @@ tr:hover { background: #334155; }
         <a href="/infra" class="active">Infra Sheet</a>
         <a href="/settings">Settings</a>
         <a href="/backups">Backups</a>
+        <a href="/requirements">Requirements</a>
+        <a href="https://gitea.rize.bm" target="_blank">Gitea</a>
     </div>
 </nav>
 
@@ -156,7 +158,8 @@ tr:hover { background: #334155; }
         </div>
     </div>
 
-    <script>
+    <script src="/static/cache-helper.js"></script>
+<script>
     let infraData = null;
     const serverMap = {};
 
@@ -265,8 +268,7 @@ tr:hover { background: #334155; }
         navigator.clipboard.writeText(text);
     }
 
-    loadData();
-    setInterval(loadData, 60000);
+    initCacheFirst('homebase_infra_full', 'active-servers', loadData, 60000);
     </script>
 </body>
 </html>
