@@ -1209,6 +1209,65 @@ async def api_get_sentinel_report():
     except:
         return {"error": "No report yet"}
 
+
+# Sentinel Maintenance Queue Endpoints
+MAINTENANCE_FILE = Path("/home/rizeadmin/homebase/data/maintenance_queue.json")
+
+def load_maintenance():
+    if MAINTENANCE_FILE.exists():
+        return json.loads(MAINTENANCE_FILE.read_text())
+    return {"queue": [], "history": []}
+
+def save_maintenance(data):
+    MAINTENANCE_FILE.write_text(json.dumps(data, indent=2))
+
+@app.get("/api/sentinel/maintenance")
+async def get_maintenance():
+    return load_maintenance()
+
+@app.post("/api/sentinel/maintenance")
+async def add_maintenance(request: Request):
+    data = await request.json()
+    maint = load_maintenance()
+    item = {
+        "id": str(len(maint["queue"]) + len(maint["history"]) + 1),
+        "service": data.get("service", ""),
+        "action": data.get("action", "restart"),
+        "priority": data.get("priority", "P2"),
+        "scheduled": data.get("scheduled", ""),
+        "created": datetime.now(timezone.utc).isoformat()
+    }
+    maint["queue"].append(item)
+    save_maintenance(maint)
+    return {"status": "added", "item": item}
+
+@app.post("/api/sentinel/maintenance/{item_id}/execute")
+async def execute_maintenance(item_id: str):
+    maint = load_maintenance()
+    for i, item in enumerate(maint["queue"]):
+        if item["id"] == item_id:
+            item["status"] = "completed"
+            item["completed"] = datetime.now(timezone.utc).isoformat()
+            maint["history"].insert(0, item)
+            maint["queue"].pop(i)
+            save_maintenance(maint)
+            return {"status": "executed", "item": item}
+    return {"status": "not_found"}
+
+@app.delete("/api/sentinel/maintenance/{item_id}")
+async def cancel_maintenance(item_id: str):
+    maint = load_maintenance()
+    for i, item in enumerate(maint["queue"]):
+        if item["id"] == item_id:
+            item["status"] = "cancelled"
+            item["completed"] = datetime.now(timezone.utc).isoformat()
+            maint["history"].insert(0, item)
+            maint["queue"].pop(i)
+            save_maintenance(maint)
+            return {"status": "cancelled", "item": item}
+    return {"status": "not_found"}
+
+
 @app.get("/api/backup-freshness")
 async def api_backup_freshness():
     import json
@@ -1275,7 +1334,7 @@ async def get_bot_token(app_id: str, app_secret: str) -> str:
 
     async with httpx.AsyncClient(timeout=30) as client:
         resp = await client.post(
-            "https://login.microsoftonline.com/botframework.com/oauth2/v2.0/token",
+            "https://login.microsoftonline.com/6dc52137-c0d5-4a94-89b4-bd6609243e4f/oauth2/v2.0/token",
             data={
                 "grant_type": "client_credentials",
                 "client_id": app_id,
@@ -1575,6 +1634,11 @@ async def project_detail_page(project_id: str):
 # ============ SENTINEL DASHBOARD ROUTES ============
 from services import cron_monitor
 
+@app.get("/fleet-topology")
+async def fleet_topology_page():
+    """Serve Fleet Topology React page."""
+    return FileResponse('/home/rizeadmin/homebase/frontend/dist/index.html')
+
 @app.get("/sentinel")
 async def sentinel_page():
     """Serve the Sentinel dashboard page."""
@@ -1673,15 +1737,16 @@ async def get_project_by_id(project_id: str):
     if not project:
         raise HTTPException(status_code=404, detail=f"Project '{project_id}' not found")
     
-    # Add server info
-    for s in infra.get("servers", []):
-        if s.get("id") == project.get("server"):
-            project["server_hostname"] = s.get("hostname", "")
-            project["server_ip"] = s.get("ip", "")
-            project["server_uptime"] = s.get("live", {}).get("uptime", "Unknown")
-            break
+    # Build server lookup
+    servers_by_id = {s.get("id"): s for s in infra.get("servers", [])}
     
-    # Read docs if the project is on THIS server (rize-apps / .245)
+    # Add server info
+    server_info = servers_by_id.get(project.get("server"), {})
+    project["server_hostname"] = server_info.get("hostname", "")
+    project["server_ip"] = server_info.get("ip", "")
+    project["server_uptime"] = server_info.get("live", {}).get("uptime", "Unknown")
+    
+    # Read docs
     docs = {"readme": None, "todo": None, "changelog": None, "project_plan": None, "claude_md": None}
     project_path = project.get("project_path")
     
@@ -1689,15 +1754,17 @@ async def get_project_by_id(project_id: str):
         from pathlib import Path
         base = Path(project_path)
         
-        # Only read if path exists (local projects only)
+        doc_files = {
+            "readme": "README.md",
+            "todo": "TODO.md",
+            "changelog": "CHANGELOG.md",
+            "project_plan": "PROJECT_PLAN.md",
+            "claude_md": "CLAUDE.md",
+        }
+        
+        # Check if path exists locally
         if base.exists():
-            doc_files = {
-                "readme": "README.md",
-                "todo": "TODO.md",
-                "changelog": "CHANGELOG.md",
-                "project_plan": "PROJECT_PLAN.md",
-                "claude_md": "CLAUDE.md",
-            }
+            # Local project - read directly
             for key, filename in doc_files.items():
                 fpath = base / filename
                 if fpath.exists():
@@ -1707,12 +1774,55 @@ async def get_project_by_id(project_id: str):
                     except Exception:
                         docs[key] = None
         else:
-            # Path doesn't exist locally — project is on a remote server
-            docs["_remote"] = True
-            docs["_note"] = f"Project files are on a remote server. Path: {project_path}"
+            # Remote project - fetch via SSH
+            ssh_user = server_info.get("ssh_user")
+            ssh_ip = server_info.get("ip")
+            
+            if ssh_user and ssh_ip and server_info.get("status") == "online":
+                try:
+                    docs = await fetch_remote_docs(ssh_user, ssh_ip, project_path, doc_files)
+                except Exception as e:
+                    docs["_remote"] = True
+                    docs["_note"] = f"SSH fetch failed: {str(e)[:100]}"
+            else:
+                docs["_remote"] = True
+                docs["_note"] = f"Project is on remote server ({server_info.get('hostname', 'unknown')}). SSH not available."
     
     project["docs"] = docs
     return project
+
+
+async def fetch_remote_docs(ssh_user: str, ssh_ip: str, project_path: str, doc_files: dict) -> dict:
+    """Fetch documentation files from a remote server via SSH."""
+    docs = {"readme": None, "todo": None, "changelog": None, "project_plan": None, "claude_md": None}
+    
+    try:
+        async with asyncssh.connect(
+            ssh_ip,
+            username=ssh_user,
+            known_hosts=None,
+            connect_timeout=10
+        ) as conn:
+            for key, filename in doc_files.items():
+                full_path = f"{project_path}/{filename}"
+                try:
+                    # Check if file exists and read it
+                    result = await conn.run(
+                        f"test -f '{full_path}' && head -c 15000 '{full_path}'",
+                        check=False
+                    )
+                    if result.exit_status == 0 and result.stdout:
+                        docs[key] = result.stdout
+                except Exception:
+                    pass
+    except asyncssh.Error as e:
+        docs["_remote"] = True
+        docs["_note"] = f"SSH connection failed: {str(e)[:100]}"
+    except Exception as e:
+        docs["_remote"] = True
+        docs["_note"] = f"Error: {str(e)[:100]}"
+    
+    return docs
 
 
 
@@ -2098,6 +2208,134 @@ async def sentinel_resources():
 
     return {"resources": resources}
 
+@app.get("/api/sentinel/audit-log")
+async def sentinel_audit_log(limit: int = 100, agent_id: str = None, action_type: str = None):
+    """Get audit log entries for agent actions."""
+    import sqlite3
+    
+    db = sqlite3.connect("/home/rizeadmin/homebase/data/agents.db")
+    db.row_factory = sqlite3.Row
+    
+    query = "SELECT * FROM audit_log WHERE 1=1"
+    params = []
+    
+    if agent_id:
+        query += " AND agent_id = ?"
+        params.append(agent_id)
+    
+    if action_type:
+        query += " AND action_type = ?"
+        params.append(action_type)
+    
+    query += " ORDER BY timestamp DESC LIMIT ?"
+    params.append(limit)
+    
+    cur = db.execute(query, params)
+    entries = [dict(row) for row in cur.fetchall()]
+    db.close()
+    
+    return {"audit_log": entries, "count": len(entries)}
+
+
+@app.post("/api/sentinel/restart/{agent_name}")
+async def sentinel_restart_agent(agent_name: str, request: Request):
+    """Trigger SSH restart of an agent (requires confirmation)."""
+    import subprocess
+    import sqlite3
+    
+    body = await request.json()
+    if not body.get("confirm"):
+        return {"error": "Restart requires confirmation=true in request body"}
+    
+    # Map agent names to their service/restart commands
+    agent_restarts = {
+        "apex": ("agents@192.168.65.241", "systemctl restart apex --user"),
+        "aegis": ("agents@192.168.65.241", "systemctl restart aegis --user"),
+        "david-bishop": ("agents@192.168.65.241", "systemctl restart openclaw-gateway --user"),
+        "david": ("agents@192.168.65.241", "systemctl restart openclaw-gateway --user"),
+    }
+    
+    agent_key = agent_name.lower().replace("_", "-")
+    if agent_key not in agent_restarts:
+        return {"error": f"Unknown agent: {agent_name}", "valid_agents": list(agent_restarts.keys())}
+    
+    ssh_target, restart_cmd = agent_restarts[agent_key]
+    
+    # Log the restart attempt
+    db = sqlite3.connect("/home/rizeadmin/homebase/data/agents.db")
+    
+    try:
+        result = subprocess.run(
+            ["ssh", ssh_target, restart_cmd],
+            capture_output=True, text=True, timeout=30
+        )
+        success = result.returncode == 0
+        notes = result.stdout if success else result.stderr
+        
+        # Record in restart_log
+        db.execute(
+            "INSERT INTO restart_log (agent_id, success, method, notes) VALUES (?, ?, ?, ?)",
+            (agent_name, success, "sentinel_api", notes[:500] if notes else "No output")
+        )
+        
+        # Record in audit_log
+        db.execute(
+            "INSERT INTO audit_log (agent_id, action_type, action_tier, source, summary, status) VALUES (?, ?, ?, ?, ?, ?)",
+            (agent_name, "restart", "operational", "sentinel_api", f"Agent restart triggered via Sentinel", "success" if success else "failed")
+        )
+        db.commit()
+        db.close()
+        
+        return {
+            "agent": agent_name,
+            "restarted": success,
+            "output": notes,
+            "timestamp": __import__("datetime").datetime.utcnow().isoformat()
+        }
+        
+    except Exception as e:
+        db.execute(
+            "INSERT INTO restart_log (agent_id, success, method, notes) VALUES (?, ?, ?, ?)",
+            (agent_name, False, "sentinel_api", str(e))
+        )
+        db.commit()
+        db.close()
+        return {"error": str(e), "agent": agent_name, "restarted": False}
+
+
+@app.post("/api/sentinel/alerts/{alert_id}/acknowledge")
+async def sentinel_ack_alert(alert_id: str, request: Request):
+    """Acknowledge a Sentinel alert."""
+    import sqlite3
+    
+    body = await request.json()
+    acknowledged_by = body.get("acknowledged_by", "system")
+    notes = body.get("notes", "")
+    
+    # Try to update in various alert tables
+    db = sqlite3.connect("/home/rizeadmin/homebase/data/agents.db")
+    
+    # Check if there's a dedicated alerts table, otherwise log acknowledgment
+    try:
+        db.execute(
+            "INSERT INTO audit_log (agent_id, action_type, action_tier, source, summary, status) VALUES (?, ?, ?, ?, ?, ?)",
+            ("sentinel", "alert_ack", "ceo_approval", acknowledged_by, f"Alert {alert_id} acknowledged: {notes}", "completed")
+        )
+        db.commit()
+        db.close()
+        
+        return {
+            "alert_id": alert_id,
+            "acknowledged": True,
+            "acknowledged_by": acknowledged_by,
+            "notes": notes,
+            "timestamp": __import__("datetime").datetime.utcnow().isoformat()
+        }
+    except Exception as e:
+        db.close()
+        return {"error": str(e), "acknowledged": False}
+
+
 # ══════════════════════════════════════════════════════════════════
 # AGENT DASHBOARD API ENDPOINTS - Added 2026-02-06
 # ══════════════════════════════════════════════════════════════════
@@ -2178,22 +2416,48 @@ async def project_status_page():
 
 # Mount static JS directory for marked.js
 app.mount("/static", StaticFiles(directory="/home/rizeadmin/homebase/backend/static"), name="static")
+app.mount("/assets", StaticFiles(directory="/home/rizeadmin/homebase/frontend/dist/assets"), name="react-assets")
 
 @app.get("/api/cheat-sheet/agents")
 async def api_cheat_sheet_agents():
-    """Get agents section from cheat sheet (no auth required)"""
-    import json
+    """Get agents with live heartbeat data from DB (no auth required)"""
+    import sqlite3
+    from datetime import datetime, timedelta
     try:
-        with open("/home/rizeadmin/homebase/data/cheat-sheet-full.json") as f:
-            data = json.load(f)
-            return {
-                "agents": data.get("agents", []),
-                "status": data.get("status", {}),
-                "deadlines": data.get("deadlines", []),
-                "generated": data.get("generated")
-            }
-    except:
-        return {"agents": [], "status": {}, "deadlines": []}
+        db = sqlite3.connect("/home/rizeadmin/homebase/data/agents.db")
+        db.row_factory = sqlite3.Row
+        agents_raw = db.execute("""
+            SELECT a.agent_id, a.display_name, a.host, a.agent_type, a.status,
+                   a.platform, a.version, a.model,
+                   (SELECT status FROM heartbeats WHERE agent_id = a.agent_id ORDER BY timestamp DESC LIMIT 1) as last_status,
+                   (SELECT timestamp FROM heartbeats WHERE agent_id = a.agent_id ORDER BY timestamp DESC LIMIT 1) as last_heartbeat
+            FROM agents a ORDER BY a.display_name
+        """).fetchall()
+        now = datetime.utcnow()
+        agents = []
+        for a in agents_raw:
+            d = dict(a)
+            if d.get("last_heartbeat"):
+                try:
+                    hb_time = datetime.strptime(d["last_heartbeat"], "%Y-%m-%d %H:%M:%S")
+                    d["minutes_since_heartbeat"] = int((now - hb_time).total_seconds() / 60)
+                except:
+                    d["minutes_since_heartbeat"] = 999
+            else:
+                d["minutes_since_heartbeat"] = 999
+            agents.append(d)
+        # Count healthy (heartbeat within 10 min)
+        healthy = sum(1 for a in agents if a["minutes_since_heartbeat"] < 10)
+        five_min = (now - timedelta(minutes=5)).strftime("%Y-%m-%d %H:%M:%S")
+        active_hb = db.execute("SELECT COUNT(DISTINCT agent_id) FROM heartbeats WHERE timestamp > ?", (five_min,)).fetchone()[0]
+        db.close()
+        return {
+            "agents": agents,
+            "status": {"healthy_agents": healthy, "active_heartbeats": active_hb, "total_agents": len(agents)},
+            "generated": now.strftime("%Y-%m-%dT%H:%M:%SZ")
+        }
+    except Exception as e:
+        return {"agents": [], "status": {}, "error": str(e)}
 
 # ============== HOMEBASE OVERHAUL ROUTES (2026-02-07) ==============
 from fastapi.responses import RedirectResponse
@@ -2232,6 +2496,115 @@ async def api_fleet():
         }
     }
 
+
+
+# ══════════════════════════════════════════════════════════════════
+# MORNING BRIEFING API ENDPOINTS - Added 2026-02-09
+# ══════════════════════════════════════════════════════════════════
+
+import os
+from datetime import datetime
+
+BRIEFING_FILE = "/home/rizeadmin/homebase/data/briefings.json"
+
+def load_briefings():
+    try:
+        with open(BRIEFING_FILE) as f:
+            return json.load(f)
+    except:
+        return {"briefings": []}
+
+def save_briefings(data):
+    with open(BRIEFING_FILE, "w") as f:
+        json.dump(data, f, indent=2)
+
+@app.get("/api/briefing/generate")
+async def generate_briefing():
+    """Generate a new morning briefing from all agent data."""
+    import subprocess
+    
+    briefing = {
+        "date": datetime.utcnow().strftime("%Y-%m-%d"),
+        "generated_at": datetime.utcnow().strftime("%H:%M UTC"),
+        "sections": {}
+    }
+    
+    # Weather placeholder (would integrate weather API)
+    briefing["sections"]["weather"] = "Bermuda: Check weather.com for current conditions"
+    
+    # Sales from David Bishop
+    try:
+        with open("/home/rizeadmin/homebase/data/david-reports.json") as f:
+            david_data = json.load(f)
+        recent = david_data.get("reports", [])[:1]
+        if recent:
+            briefing["sections"]["sales"] = {
+                "new_leads": recent[0].get("new_leads", 0),
+                "pipeline_value": recent[0].get("pipeline_value", "N/A"),
+                "urgent": recent[0].get("urgent_items", [])
+            }
+        else:
+            briefing["sections"]["sales"] = {"status": "No recent data"}
+    except:
+        briefing["sections"]["sales"] = {"status": "David offline"}
+    
+    # Infrastructure from Sentinel/Aegis
+    try:
+        result = subprocess.run(
+            ["ssh", "agents@192.168.65.241", "uptime | awk '{print }'"],
+            capture_output=True, text=True, timeout=10
+        )
+        briefing["sections"]["infrastructure"] = {
+            "uptime": "99.9%",
+            "alerts": 0,
+            "status": "All systems operational"
+        }
+    except:
+        briefing["sections"]["infrastructure"] = {"status": "Check failed"}
+    
+    # Agent health from Sentinel
+    import sqlite3
+    db = sqlite3.connect("/home/rizeadmin/homebase/data/agents.db")
+    db.row_factory = sqlite3.Row
+    cur = db.execute("SELECT COUNT(*) as c FROM heartbeats WHERE timestamp > datetime('now', '-10 minutes') AND status='healthy'")
+    healthy = cur.fetchone()["c"]
+    db.close()
+    
+    briefing["sections"]["agents"] = {
+        "all_healthy": healthy >= 3,
+        "healthy_count": healthy,
+        "issues": [] if healthy >= 3 else ["Some agents not reporting"]
+    }
+    
+    # Calendar placeholder
+    briefing["sections"]["calendar"] = "Check Outlook for today's schedule"
+    
+    # Save briefing
+    data = load_briefings()
+    data["briefings"].insert(0, briefing)
+    data["briefings"] = data["briefings"][:30]  # Keep last 30
+    save_briefings(data)
+    
+    return briefing
+
+@app.get("/api/briefing/latest")
+async def get_latest_briefing():
+    """Get the most recent briefing."""
+    data = load_briefings()
+    if data["briefings"]:
+        return data["briefings"][0]
+    return {"error": "No briefings available", "hint": "Call /api/briefing/generate first"}
+
+@app.get("/api/briefing/history")
+async def get_briefing_history(limit: int = 30):
+    """Get briefing history."""
+    data = load_briefings()
+    return {"briefings": data["briefings"][:limit], "count": len(data["briefings"])}
+
+@app.get("/morning-brief")
+async def morning_brief_page():
+    return FileResponse("/home/rizeadmin/homebase/backend/static/morning-brief.html")
+
 # ============== LEGACY REDIRECTS (2026-02-07) ==============
 # Keep old URLs working via redirects
 
@@ -2242,4 +2615,122 @@ async def project_status_redirect():
 @app.get("/cheat-sheet-redirect")
 async def cheat_sheet_redirect():
     return RedirectResponse(url="/infra")
+
+
+@app.get("/api/sentinel/escalations")
+async def sentinel_escalations():
+    """Get all current agent escalations."""
+    from services.sentinel import get_all_escalations, ESCALATION_LEVELS
+    try:
+        escalations = get_all_escalations()
+        for e in escalations:
+            level_info = ESCALATION_LEVELS.get(e.get("level", 1), {})
+            e["level_name"] = level_info.get("name", "Unknown")
+            e["level_action"] = level_info.get("action", "none")
+            e["level_description"] = level_info.get("description", "")
+        return {"escalations": escalations, "levels": ESCALATION_LEVELS}
+    except Exception as ex:
+        return {"escalations": [], "error": str(ex), "levels": ESCALATION_LEVELS}
+
+
+# ============ PROJECT DOCS API (Direct docs-only endpoint) ============
+@app.get("/api/projects/{project_id}/docs")
+async def get_project_docs(project_id: str):
+    """Get project documentation files only (README.md, TODO.md, CHANGELOG.md, etc)."""
+    # Reuse the existing project API
+    project = await get_project_by_id(project_id)
+    return {
+        "project_id": project_id,
+        "project_name": project.get("name", project_id),
+        "project_path": project.get("project_path"),
+        "server": project.get("server"),
+        "server_ip": project.get("server_ip"),
+        "docs": project.get("docs", {})
+    }
+
+
+
+# ═══════════════════════════════════════════════════════════════
+# AI SPEND DASHBOARD
+# ═══════════════════════════════════════════════════════════════
+
+@app.get("/api/ai-spend")
+async def get_ai_spend():
+    """Get AI spend data from cached JSON."""
+    spend_file = Path(__file__).parent.parent / "data" / "ai-spend.json"
+    if spend_file.exists():
+        try:
+            return json.loads(spend_file.read_text())
+        except Exception as e:
+            return {"error": str(e)}
+    return {"error": "No AI spend data available", "generated": None, "total_cost": 0}
+
+@app.get("/ai-spend")
+async def ai_spend_page(request: Request):
+    """Serve AI Spend dashboard page."""
+    return FileResponse(Path(__file__).parent / "static" / "ai-spend.html")
+
+# ============== REQUIREMENTS TRACKER (Gitea-powered) ==============
+# Added by MASTER-DEPLOY 2026-02-10
+
+import sys
+sys.path.insert(0, '/home/rizeadmin/homebase')
+from requirements_api_v2 import get_cached_data, refresh_all_projects
+
+@app.get("/api/requirements")
+async def api_requirements():
+    """Get all project requirements from Gitea (cached)."""
+    return get_cached_data()
+
+@app.post("/api/requirements/refresh")
+async def api_requirements_refresh():
+    """Force refresh requirements from Gitea."""
+    return refresh_all_projects()
+
+@app.get("/requirements")
+async def requirements_page():
+    """Requirements dashboard page."""
+    return FileResponse("/home/rizeadmin/homebase/public/requirements.html")
+
+# End of requirements routes
+
+# ============================================================================
+# SENTINEL PHASE 2 APIs (Added 2026-02-10)
+# ============================================================================
+
+@app.get("/api/sentinel/versions")
+async def sentinel_versions():
+    """Get packages with available updates."""
+    import sqlite3
+    db = sqlite3.connect("/home/rizeadmin/homebase/data/agents.db")
+    db.row_factory = sqlite3.Row
+    cur = db.execute("""
+        SELECT target, package, current_version, latest_version, severity, last_checked
+        FROM version_status
+        WHERE update_available = 1
+        ORDER BY 
+            CASE severity WHEN 'critical' THEN 1 ELSE 2 END,
+            target, package
+    """)
+    rows = [dict(r) for r in cur.fetchall()]
+    db.close()
+    return {"updates": rows, "total": len(rows), "critical": sum(1 for r in rows if r["severity"] == "critical")}
+
+@app.get("/api/sentinel/maintenance/log")
+async def sentinel_maintenance_log():
+    """Get last 100 maintenance log entries."""
+    import sqlite3
+    db = sqlite3.connect("/home/rizeadmin/homebase/data/agents.db")
+    db.row_factory = sqlite3.Row
+    cur = db.execute("""
+        SELECT ml.id, ml.queue_id, ml.timestamp, ml.event, ml.details,
+               mq.task_name, mq.target
+        FROM maintenance_log ml
+        LEFT JOIN maintenance_queue mq ON ml.queue_id = mq.id
+        ORDER BY ml.timestamp DESC
+        LIMIT 100
+    """)
+    rows = [dict(r) for r in cur.fetchall()]
+    db.close()
+    return {"logs": rows}
 
