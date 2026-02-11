@@ -89,6 +89,8 @@ tr:hover { background: #1e3a5f; }
         <a href="/infra">Infra Sheet</a>
         <a href="/settings">Settings</a>
         <a href="/backups">Backups</a>
+        <a href="/requirements">Requirements</a>
+        <a href="https://gitea.rize.bm" target="_blank">Gitea</a>
     </div>
 </nav>
     
@@ -169,7 +171,7 @@ tr:hover { background: #1e3a5f; }
                 <div class="card-title">Audit Log</div>
                 <table>
                     <thead>
-                        <tr><th>Time</th><th>Action Type</th><th>Tier</th><th>Summary</th><th>Status</th></tr>
+                        <tr><th>Time</th><th>Action Type</th><th>Level</th><th>Summary</th><th>Status</th></tr>
                     </thead>
                     <tbody id="audit-log">
                         <tr><td colspan="5" style="color:#64748b;text-align:center">Loading...</td></tr>
@@ -272,7 +274,7 @@ async function load() {
             {time: '2026-02-04 10:00', type: 'READ', tier: 'TIER1', summary: 'Heartbeat check', status: 'success'}
         ];
         document.getElementById('audit-log').innerHTML = auditLogs.map(function(a) {
-            return '<tr><td class="mono">' + a.time + '</td><td>' + a.type + '</td><td><span class="badge badge-gray">' + a.tier + '</span></td><td>' + a.summary + '</td><td><span class="status status-healthy">' + a.status + '</span></td></tr>';
+            return '<tr><td class="mono">' + a.time + '</td><td>' + a.type + '</td><td><span class="badge badge-gray">' + a.level + '</span></td><td>' + a.summary + '</td><td><span class="status status-healthy">' + a.status + '</span></td></tr>';
         }).join('');
 
         // Config
