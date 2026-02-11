@@ -145,6 +145,8 @@
         <a href="/infra">Infra Sheet</a>
         <a href="/settings">Settings</a>
         <a href="/backups">Backups</a>
+        <a href="/requirements">Requirements</a>
+        <a href="https://gitea.rize.bm" target="_blank">Gitea</a>
     </div>
 </nav>
 
@@ -219,6 +221,30 @@
                 </div>
             </div>
         </div>
+
+            <!-- Audit Log -->
+            <div class="card full-width">
+                <h2>📋 Agent Audit Log (<span id="audit-count">0</span> entries)</h2>
+                <div style="margin-bottom: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <select id="audit-agent-filter" onchange="loadAuditLog()" style="background: #0f172a; border: 1px solid #334155; color: #e2e8f0; padding: 0.5rem; border-radius: 0.25rem;">
+                        <option value="">All Agents</option>
+                        <option value="apex">Apex</option>
+                        <option value="aegis">Aegis</option>
+                        <option value="david-bishop">David Bishop</option>
+                        <option value="sentinel">Sentinel</option>
+                    </select>
+                    <select id="audit-type-filter" onchange="loadAuditLog()" style="background: #0f172a; border: 1px solid #334155; color: #e2e8f0; padding: 0.5rem; border-radius: 0.25rem;">
+                        <option value="">All Actions</option>
+                        <option value="restart">Restarts</option>
+                        <option value="alert_ack">Alert Acknowledgments</option>
+                        <option value="request">Requests</option>
+                        <option value="operational">Operational</option>
+                    </select>
+                </div>
+                <div class="alert-list" id="audit-log-list" style="max-height: 350px;">
+                    <div class="empty">Loading audit log...</div>
+                </div>
+            </div>
     </div>
 
     <script>
@@ -330,7 +356,7 @@
                             <div class="channels">
                                 ${(agent.channels || []).map(c => `<span class="channel">${c}</span>`).join('')}
                             </div>
-                            <button class="kill-btn" onclick="killAgent('${agent.id}')">⚡ Kill Switch</button>
+                            <button class="kill-btn" style="background:#1e3a5f;" onclick="restartAgent('${agent.id}')">🔄 Restart</button> <button class="kill-btn" onclick="killAgent('${agent.id}')">⚡ Kill Switch</button>
                         </div>
                     `;
                 }).join('');
@@ -468,7 +494,8 @@
         }
 
         // Load crons
-        async function loadCrons() {
+        async function loadCrons(),
+                loadAuditLog() {
             try {
                 const resp = await fetch('/api/sentinel/crons');
                 const data = await resp.json();
@@ -493,6 +520,97 @@
             }
         }
 
+
+        // Load audit log
+        async function loadAuditLog() {
+            try {
+                const agentFilter = document.getElementById('audit-agent-filter')?.value || '';
+                const typeFilter = document.getElementById('audit-type-filter')?.value || '';
+                
+                let url = '/api/sentinel/audit-log?limit=50';
+                if (agentFilter) url += '&agent_id=' + encodeURIComponent(agentFilter);
+                if (typeFilter) url += '&action_type=' + encodeURIComponent(typeFilter);
+                
+                const resp = await fetch(url);
+                const data = await resp.json();
+                
+                document.getElementById('audit-count').textContent = data.count || 0;
+                const list = document.getElementById('audit-log-list');
+                
+                if (!data.audit_log || data.audit_log.length === 0) {
+                    list.innerHTML = '<div class="empty">No audit entries found</div>';
+                    return;
+                }
+                
+                list.innerHTML = data.audit_log.map(entry => {
+                    const sevClass = entry.status === 'failed' ? 'critical' : 
+                                    entry.action_tier === 'ceo_approval' ? 'warning' : 'info';
+                    return `
+                        <div class="alert-item">
+                            <div class="alert-sev ${sevClass}"></div>
+                            <div class="alert-time">${timeAgo(entry.timestamp)}</div>
+                            <div class="alert-msg">
+                                <strong>${entry.agent_id || 'system'}</strong> - ${entry.action_type || 'action'}<br>
+                                <span style="color: #94a3b8;">${entry.summary || ''}</span>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } catch (e) {
+                console.error('Audit log error:', e);
+            }
+        }
+
+        // Restart agent
+        async function restartAgent(agentId) {
+            if (!confirm('Restart agent ' + agentId + '?')) return;
+            
+            try {
+                const resp = await fetch('/api/sentinel/restart/' + agentId, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ confirm: true })
+                });
+                const data = await resp.json();
+                
+                if (data.restarted) {
+                    alert('Agent restarted successfully.');
+                    loadAgents();
+                    loadAuditLog();
+                    loadOverview();
+                } else {
+                    alert('Restart failed: ' + (data.error || 'Unknown'));
+                }
+            } catch (e) {
+                alert('Error: ' + e.message);
+            }
+        }
+
+        // Acknowledge alert
+        async function acknowledgeAlert(alertId) {
+            const notes = prompt('Enter notes (optional):');
+            if (notes === null) return;
+            
+            try {
+                const resp = await fetch('/api/sentinel/alerts/' + alertId + '/acknowledge', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ acknowledged_by: 'ceo_web', notes: notes })
+                });
+                const data = await resp.json();
+                
+                if (data.acknowledged) {
+                    alert('Alert acknowledged.');
+                    loadAlerts();
+                    loadAuditLog();
+                } else {
+                    alert('Failed: ' + (data.error || 'Unknown'));
+                }
+            } catch (e) {
+                alert('Error: ' + e.message);
+            }
+        }
+
         // Kill agent
         async function killAgent(agentId) {
             if (!confirm('Kill agent ' + agentId + '? This will immediately stop all agent operations.')) return;
@@ -503,11 +621,6 @@
                 if (data.killed) {
                     alert('Agent ' + agentId + ' has been killed.');
                     loadAgents();
-                    // Cache-first pattern
-    const cached = getCached();
-    if (cached) { renderData(cached); }
-    showRefreshing(true);
-    loadOverview().finally(() => showRefreshing(false));
                 } else {
                     alert('Failed to kill agent: ' + JSON.stringify(data));
                 }
@@ -525,7 +638,8 @@
                 loadGuardrails(),
                 loadRequests(),
                 loadResources(),
-                loadCrons()
+                loadCrons(),
+                loadAuditLog()
             ]);
         }
 

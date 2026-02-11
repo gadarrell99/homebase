@@ -1,10 +1,27 @@
 {
-  "generated": "2026-02-04",
+  "generated": "2026-02-11",
+  "note": "Backup system not yet configured. Git repos are the primary backup for code.",
   "servers": {
-    "david-bishop": {
-      "name": "David Bishop",
+    "talos": {
+      "name": "Talos",
+      "host": ".237",
+      "status": "not_configured",
+      "last_backup": null,
+      "size_mb": null,
+      "files": []
+    },
+    "agents": {
+      "name": "Agents",
       "host": ".241",
-      "status": "never",
+      "status": "not_configured",
+      "last_backup": null,
+      "size_mb": null,
+      "files": []
+    },
+    "rize-apps": {
+      "name": "Rize-Apps",
+      "host": ".245",
+      "status": "not_configured",
       "last_backup": null,
       "size_mb": null,
       "files": []
@@ -12,55 +29,15 @@
     "demos": {
       "name": "Demos",
       "host": ".246",
-      "status": "pending",
-      "last_backup": "2026-02-06T02:00:01.316696",
-      "size_mb": null,
-      "files": 0
-    },
-    "relay": {
-      "name": "Relay",
-      "host": ".248",
-      "status": "pending",
-      "last_backup": "2026-02-06T02:00:01.944573",
-      "size_mb": null,
-      "files": 0
-    },
-    "homebase": {
-      "name": "Homebase",
-      "host": ".245",
-      "status": "never",
-      "last_backup": null,
-      "size_mb": null,
-      "files": []
-    },
-    "nexus": {
-      "name": "Nexus",
-      "host": ".247",
-      "status": "pending",
-      "last_backup": "2026-02-06T02:00:01.687916",
-      "size_mb": null,
-      "files": 0
-    },
-    "dockyard": {
-      "name": "Dockyard",
-      "host": ".252",
-      "status": "never",
+      "status": "not_configured",
       "last_backup": null,
       "size_mb": null,
       "files": []
     },
     "vector": {
-      "name": "Vector-BET",
+      "name": "Vector (BET)",
       "host": ".249",
-      "status": "pending",
-      "last_backup": "2026-02-06T06:00:01.768425",
-      "size_mb": null,
-      "files": 0
-    },
-    "rize-apps": {
-      "name": "Claude-Dev",
-      "host": ".245",
-      "status": "never",
+      "status": "not_configured",
       "last_backup": null,
       "size_mb": null,
       "files": []
