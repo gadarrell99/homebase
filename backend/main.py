@@ -247,6 +247,7 @@ async def get_server_stats(server: dict) -> dict:
 # ============== HEALTH & SERVERS ==============
 
 @app.get("/api/health")
+@app.get("/health")
 async def health():
     return {"status": "ok", "version": "0.5.0", "timestamp": time.time()}
 
@@ -2733,4 +2734,140 @@ async def sentinel_maintenance_log():
     rows = [dict(r) for r in cur.fetchall()]
     db.close()
     return {"logs": rows}
+
+
+# ============================================================================
+# CORTEX INTERFACE APIs (Added 2026-02-11)
+# ============================================================================
+
+@app.get("/cortex")
+async def cortex_page():
+    """Serve Cortex dashboard page."""
+    return FileResponse('/home/rizeadmin/homebase/backend/static/cortex.html')
+
+@app.get("/api/cortex/knowledge")
+async def api_cortex_knowledge():
+    """Return Cortex knowledge base file listing from .241"""
+    import subprocess
+    try:
+        result = subprocess.run(
+            ["ssh", "-o", "ConnectTimeout=5", "-o", "StrictHostKeyChecking=no",
+             "agents@192.168.65.241", "ls -la ~/cortex/knowledge/ 2>/dev/null"],
+            capture_output=True, text=True, timeout=10
+        )
+        files = []
+        for line in result.stdout.strip().split('\n'):
+            if line.startswith('-'):
+                parts = line.split()
+                if len(parts) >= 9:
+                    files.append({
+                        "name": parts[-1],
+                        "size": parts[4],
+                        "modified": f"{parts[5]} {parts[6]} {parts[7]}"
+                    })
+        return {"files": files, "count": len(files)}
+    except Exception as e:
+        return {"files": [], "count": 0, "error": str(e)}
+
+@app.get("/api/cortex/scripts")
+async def api_cortex_scripts():
+    """Return Cortex script listing from .241"""
+    import subprocess
+    try:
+        result = subprocess.run(
+            ["ssh", "-o", "ConnectTimeout=5", "-o", "StrictHostKeyChecking=no",
+             "agents@192.168.65.241", "ls -la ~/cortex/scripts/*.py ~/cortex/scripts/*.sh 2>/dev/null"],
+            capture_output=True, text=True, timeout=10
+        )
+        scripts = []
+        for line in result.stdout.strip().split('\n'):
+            if line.startswith('-'):
+                parts = line.split()
+                if len(parts) >= 9:
+                    name = parts[-1].split('/')[-1]
+                    if name.endswith('.bak') or '__pycache__' in name:
+                        continue
+                    scripts.append({
+                        "name": name,
+                        "size": parts[4],
+                        "modified": f"{parts[5]} {parts[6]} {parts[7]}"
+                    })
+        return {"scripts": scripts, "count": len(scripts)}
+    except Exception as e:
+        return {"scripts": [], "count": 0, "error": str(e)}
+
+@app.get("/api/cortex/status")
+async def api_cortex_status():
+    """Return Cortex gateway status from .241"""
+    import subprocess
+    try:
+        # Get systemd status
+        status_result = subprocess.run(
+            ["ssh", "-o", "ConnectTimeout=5", "-o", "StrictHostKeyChecking=no",
+             "agents@192.168.65.241",
+             "systemctl --user status cortex-gateway 2>/dev/null | head -15; "
+             "echo '---SEPARATOR---'; "
+             "ss -tlnp 2>/dev/null | grep 9101; "
+             "echo '---SEPARATOR---'; "
+             "journalctl --user -u cortex-gateway --no-pager -n 3 2>/dev/null"],
+            capture_output=True, text=True, timeout=10
+        )
+        
+        output = status_result.stdout
+        parts = output.split('---SEPARATOR---')
+        
+        systemd_output = parts[0] if len(parts) > 0 else ''
+        port_output = parts[1].strip() if len(parts) > 1 else ''
+        logs_output = parts[2].strip() if len(parts) > 2 else ''
+        
+        # Parse status
+        gateway_running = 'active (running)' in systemd_output
+        
+        # Parse PID
+        pid = ''
+        for line in systemd_output.split('\n'):
+            if 'Main PID' in line:
+                pid = line.split('Main PID:')[1].strip().split()[0] if 'Main PID:' in line else ''
+                break
+        
+        # Parse memory
+        memory = ''
+        for line in systemd_output.split('\n'):
+            if 'Memory:' in line:
+                memory = line.split('Memory:')[1].strip().split('(')[0].strip()
+                break
+        
+        # Parse uptime from Active line
+        uptime = ''
+        for line in systemd_output.split('\n'):
+            if 'Active:' in line and 'since' in line:
+                # Extract the "Xh Xmin ago" part
+                if ';' in line:
+                    uptime = line.split(';')[1].strip().rstrip(')')
+                break
+        
+        # Parse port
+        port = '9101'
+        if '9101' in port_output:
+            port = '9101'
+        
+        # Parse last log line
+        last_log = ''
+        if logs_output:
+            log_lines = [l.strip() for l in logs_output.split('\n') if l.strip()]
+            if log_lines:
+                last_log = log_lines[-1][:120]
+        
+        return {
+            "gateway_running": gateway_running,
+            "pid": pid,
+            "port": port,
+            "teams_port": "3979",
+            "memory": memory,
+            "uptime": uptime,
+            "last_log": last_log,
+            "recent_logs": logs_output[:500] if logs_output else None
+        }
+    except Exception as e:
+        return {"gateway_running": False, "error": str(e)}
 

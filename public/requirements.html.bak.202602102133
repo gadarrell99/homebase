@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requirements Tracker — Homebase</title>
+    <style>
+        :root {
+            --bg-primary: #0f1923;
+            --bg-card: #1a2736;
+            --bg-card-hover: #1e2f42;
+            --border: #2a3a4e;
+            --text-primary: #e8edf2;
+            --text-secondary: #8899aa;
+            --accent-teal: #00897b;
+            --status-open: #ef4444;
+            --status-progress: #f59e0b;
+            --status-done: #22c55e;
+            --status-verified: #3b82f6;
+            --status-blocked: #6b7280;
+            --status-reopened: #f97316;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg-primary); color: var(--text-primary); font-family: 'Inter', -apple-system, sans-serif; }
+
+        .page-header {
+            padding: 24px 32px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .page-header h1 { font-size: 20px; font-weight: 600; }
+        .page-header .subtitle { color: var(--text-secondary); font-size: 13px; margin-top: 4px; }
+
+        .refresh-btn {
+            background: var(--accent-teal);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .refresh-btn:hover { opacity: 0.9; }
+        .refresh-btn.loading { opacity: 0.5; pointer-events: none; }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            padding: 24px 32px;
+        }
+        .overview-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+        }
+        .overview-card .label { color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .overview-card .value { font-size: 28px; font-weight: 700; margin-top: 4px; }
+        .overview-card .detail { color: var(--text-secondary); font-size: 12px; margin-top: 4px; }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 20px;
+            padding: 0 32px 32px;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: border-color 0.2s;
+        }
+        .project-card:hover { border-color: var(--accent-teal); }
+
+        .project-header {
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid var(--border);
+        }
+        .project-name { font-size: 16px; font-weight: 600; }
+        .project-url { color: var(--text-secondary); font-size: 12px; margin-top: 2px; }
+        .project-url a { color: var(--accent-teal); text-decoration: none; }
+        .deadline-badge {
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .deadline-urgent { background: rgba(239,68,68,0.15); color: #ef4444; }
+        .deadline-soon { background: rgba(245,158,11,0.15); color: #f59e0b; }
+        .deadline-ok { background: rgba(34,197,94,0.15); color: #22c55e; }
+        .deadline-none { background: rgba(107,114,128,0.15); color: #6b7280; }
+
+        .progress-section { padding: 16px 20px; }
+        .progress-bar-container {
+            background: #0d1520;
+            border-radius: 6px;
+            height: 8px;
+            overflow: hidden;
+            display: flex;
+            margin-top: 8px;
+        }
+        .progress-segment { height: 100%; transition: width 0.3s; }
+        .seg-verified { background: var(--status-verified); }
+        .seg-done { background: var(--status-done); }
+        .seg-progress { background: var(--status-progress); }
+        .seg-open { background: var(--status-open); }
+
+        .progress-stats {
+            display: flex;
+            gap: 12px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        .stat-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+        .stat-count { font-weight: 600; color: var(--text-primary); }
+
+        .p0-section { padding: 0 20px 16px; }
+        .p0-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .req-list { list-style: none; }
+        .req-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 0;
+            font-size: 13px;
+            border-bottom: 1px solid rgba(42,58,78,0.5);
+        }
+        .req-item:last-child { border-bottom: none; }
+        .req-id {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--text-secondary);
+            min-width: 65px;
+        }
+        .req-status {
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            min-width: 55px;
+            text-align: center;
+        }
+        .s-open { background: rgba(239,68,68,0.15); color: var(--status-open); }
+        .s-in_progress { background: rgba(245,158,11,0.15); color: var(--status-progress); }
+        .s-done { background: rgba(34,197,94,0.15); color: var(--status-done); }
+        .s-verified { background: rgba(59,130,246,0.15); color: var(--status-verified); }
+        .s-blocked { background: rgba(107,114,128,0.15); color: var(--status-blocked); }
+        .s-reopened { background: rgba(249,115,22,0.15); color: var(--status-reopened); }
+        .req-desc { flex: 1; color: var(--text-secondary); }
+
+        .test-section {
+            padding: 12px 20px;
+            background: rgba(0,0,0,0.15);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+        }
+        .test-pass { color: var(--status-done); font-weight: 600; }
+        .test-fail { color: var(--status-open); font-weight: 600; }
+        .test-time { color: var(--text-secondary); }
+
+        .expand-toggle {
+            color: var(--accent-teal);
+            font-size: 12px;
+            cursor: pointer;
+            padding: 8px 20px;
+            display: block;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+        .expand-toggle:hover { text-decoration: underline; }
+
+        .hidden { display: none; }
+
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .loading-state { animation: pulse 1.5s infinite; }
+
+        .last-updated {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 11px;
+            padding: 16px;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAV: Include shared nav component here -->
+    <!-- ##NAV_PLACEHOLDER## — Replace with shared nav include -->
+
+    <div class="page-header">
+        <div>
+            <h1>📋 Requirements Tracker</h1>
+            <div class="subtitle">Tier 2 + Tier 3 — All Projects</div>
+        </div>
+        <button class="refresh-btn" onclick="refreshAll()">↻ Refresh All</button>
+    </div>
+
+    <div class="overview-grid" id="overviewGrid">
+        <!-- Populated by JS -->
+    </div>
+
+    <div class="projects-grid" id="projectsGrid">
+        <!-- Populated by JS -->
+    </div>
+
+    <div class="last-updated" id="lastUpdated"></div>
+
+    <script>
+        // =====================================================
+        // REQUIREMENTS DASHBOARD — CLIENT
+        // Fetches from /api/requirements and renders cards
+        // =====================================================
+
+        const API_BASE = '/api/requirements';
+        let cachedData = null;
+
+        async function fetchRequirements() {
+            try {
+                const res = await fetch(API_BASE);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                cachedData = await res.json();
+                renderOverview(cachedData);
+                renderProjects(cachedData.projects);
+                document.getElementById('lastUpdated').textContent =
+                    `Last updated: ${new Date(cachedData.last_refresh || Date.now()).toLocaleString()}`;
+            } catch (err) {
+                console.error('Failed to fetch requirements:', err);
+                // Show error state
+                document.getElementById('projectsGrid').innerHTML =
+                    `<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--text-secondary)">
+                        Failed to load requirements data. <br>
+                        <button class="refresh-btn" onclick="refreshAll()" style="margin-top:12px">Retry</button>
+                    </div>`;
+            }
+        }
+
+        async function refreshAll() {
+            const btn = document.querySelector('.refresh-btn');
+            btn.classList.add('loading');
+            btn.textContent = '↻ Refreshing...';
+            try {
+                await fetch(`${API_BASE}/refresh`, { method: 'POST' });
+                await fetchRequirements();
+            } catch (err) {
+                console.error('Refresh failed:', err);
+            }
+            btn.classList.remove('loading');
+            btn.textContent = '↻ Refresh All';
+        }
+
+        function renderOverview(data) {
+            const projects = data.projects || [];
+            const totalReqs = projects.reduce((s, p) => s + (p.totals?.total || 0), 0);
+            const totalOpen = projects.reduce((s, p) => s + (p.totals?.open || 0), 0);
+            const totalDone = projects.reduce((s, p) => s + (p.totals?.done || 0) + (p.totals?.verified || 0), 0);
+            const totalP0Open = projects.reduce((s, p) => s + (p.p0_status?.open || 0), 0);
+            const overallPct = totalReqs > 0 ? Math.round((totalDone / totalReqs) * 100) : 0;
+
+            // Find nearest deadline
+            const upcoming = projects
+                .filter(p => p.deadline)
+                .sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
+            const nearest = upcoming[0];
+            const nearestText = nearest
+                ? `${nearest.name}: ${nearest.days_remaining}d`
+                : 'None set';
+
+            document.getElementById('overviewGrid').innerHTML = `
+                <div class="overview-card">
+                    <div class="label">Total Requirements</div>
+                    <div class="value">${totalReqs}</div>
+                    <div class="detail">Across ${projects.length} projects</div>
+                </div>
+                <div class="overview-card">
+                    <div class="label">Open Items</div>
+                    <div class="value" style="color:var(--status-open)">${totalOpen}</div>
+                    <div class="detail">P0 Open: ${totalP0Open}</div>
+                </div>
+                <div class="overview-card">
+                    <div class="label">Completed</div>
+                    <div class="value" style="color:var(--status-done)">${totalDone}</div>
+                    <div class="detail">${overallPct}% overall</div>
+                </div>
+                <div class="overview-card">
+                    <div class="label">Next Deadline</div>
+                    <div class="value" style="font-size:18px">${nearestText}</div>
+                    <div class="detail">${nearest ? nearest.deadline : ''}</div>
+                </div>
+            `;
+        }
+
+        function renderProjects(projects) {
+            const grid = document.getElementById('projectsGrid');
+            grid.innerHTML = projects.map(p => renderProjectCard(p)).join('');
+        }
+
+        function renderProjectCard(p) {
+            const t = p.totals || {};
+            const total = t.total || 1;
+            const verifiedPct = ((t.verified || 0) / total * 100).toFixed(1);
+            const donePct = ((t.done || 0) / total * 100).toFixed(1);
+            const progressPct = ((t.in_progress || 0) / total * 100).toFixed(1);
+            const openPct = ((t.open || 0) / total * 100).toFixed(1);
+
+            // Deadline badge
+            let deadlineBadge = '';
+            if (p.deadline) {
+                const days = p.days_remaining;
+                let cls = 'deadline-ok';
+                if (days <= 3) cls = 'deadline-urgent';
+                else if (days <= 7) cls = 'deadline-soon';
+                deadlineBadge = `<span class="deadline-badge ${cls}">${days}d left</span>`;
+            } else {
+                deadlineBadge = `<span class="deadline-badge deadline-none">No deadline</span>`;
+            }
+
+            // P0 requirements list
+            const p0Reqs = (p.requirements || []).filter(r => r.priority === 'P0');
+            const p0Html = p0Reqs.length > 0
+                ? p0Reqs.slice(0, 5).map(r => `
+                    <li class="req-item">
+                        <span class="req-id">${r.id}</span>
+                        <span class="req-status s-${r.status.toLowerCase()}">${r.status}</span>
+                        <span class="req-desc">${r.description}</span>
+                    </li>`).join('')
+                : '<li class="req-item"><span class="req-desc">No P0 items</span></li>';
+
+            const hasMore = p0Reqs.length > 5;
+            const remainingReqs = (p.requirements || []).filter(r => r.priority !== 'P0');
+            const expandId = `expand-${p.slug}`;
+
+            // Test results
+            const ts = p.test_summary || {};
+            const testHtml = ts.passed !== undefined
+                ? `<span class="test-pass">✓ ${ts.passed} passed</span> / <span class="test-fail">✗ ${ts.failed} failed</span>`
+                : '<span style="color:var(--text-secondary)">No test results</span>';
+            const testTime = p.last_test_run
+                ? new Date(p.last_test_run).toLocaleString()
+                : 'Never';
+
+            return `
+                <div class="project-card">
+                    <div class="project-header">
+                        <div>
+                            <div class="project-name">${p.name}</div>
+                            <div class="project-url"><a href="${p.url}" target="_blank">${p.url}</a></div>
+                        </div>
+                        ${deadlineBadge}
+                    </div>
+                    <div class="progress-section">
+                        <div style="display:flex;justify-content:space-between;align-items:center">
+                            <span style="font-size:13px;font-weight:600">${p.percent_complete || 0}% Complete</span>
+                            <span style="font-size:12px;color:var(--text-secondary)">${t.total || 0} requirements</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-segment seg-verified" style="width:${verifiedPct}%"></div>
+                            <div class="progress-segment seg-done" style="width:${donePct}%"></div>
+                            <div class="progress-segment seg-progress" style="width:${progressPct}%"></div>
+                        </div>
+                        <div class="progress-stats">
+                            <div class="stat"><span class="stat-dot" style="background:var(--status-open)"></span> Open <span class="stat-count">${t.open || 0}</span></div>
+                            <div class="stat"><span class="stat-dot" style="background:var(--status-done)"></span> Done <span class="stat-count">${t.done || 0}</span></div>
+                            <div class="stat"><span class="stat-dot" style="background:var(--status-verified)"></span> Verified <span class="stat-count">${t.verified || 0}</span></div>
+                            <div class="stat"><span class="stat-dot" style="background:var(--status-blocked)"></span> Blocked <span class="stat-count">${t.blocked || 0}</span></div>
+                        </div>
+                    </div>
+                    <div class="p0-section">
+                        <div class="p0-label">P0 — Must Have (${p.p0_status?.open || 0} open / ${p.p0_status?.total || 0} total)</div>
+                        <ul class="req-list">${p0Html}</ul>
+                        ${hasMore ? `<div class="expand-toggle" onclick="toggleExpand('${expandId}')">Show all ${p0Reqs.length} P0 items ▾</div>` : ''}
+                    </div>
+                    <div class="test-section">
+                        <div>${testHtml}</div>
+                        <div class="test-time">Last run: ${testTime}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function toggleExpand(id) {
+            const el = document.getElementById(id);
+            if (el) el.classList.toggle('hidden');
+        }
+
+        // Load on page ready
+        document.addEventListener('DOMContentLoaded', fetchRequirements);
+
+        // Auto-refresh every 5 minutes
+        setInterval(fetchRequirements, 5 * 60 * 1000);
+    </script>
+</body>
+</html>

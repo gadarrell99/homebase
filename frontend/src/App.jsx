@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { initCache, getCached, getCacheAge, subscribe, refreshKey } from "./services/dataCache";
 import { BrowserRouter, Routes, Route, Link, useLocation } from "react-router-dom";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
@@ -26,7 +27,7 @@ function NavLink({ to, children }) {
 }
 
 function Layout({ children }) {
-  return <div className="min-h-screen bg-slate-900 text-white"><nav className="bg-slate-800 border-b border-slate-700"><div className="max-w-7xl mx-auto px-6 py-4"><div className="flex items-center justify-between"><Link to="/" className="text-xl font-bold">Homebase</Link><div className="flex gap-2"><NavLink to="/">Servers</NavLink><NavLink to="/projects">Projects</NavLink><NavLink to="/metrics">Metrics</NavLink><NavLink to="/security">Security</NavLink><NavLink to="/discovery">Discovery</NavLink><NavLink to="/credentials">Credentials</NavLink><NavLink to="/settings">Settings</NavLink><NavLink to="/agent-security">🔒 Security</NavLink></div></div></div></nav><main className="max-w-7xl mx-auto p-6">{children}</main></div>;
+  return <div className="min-h-screen bg-slate-900 text-white"><nav className="bg-slate-800 border-b border-slate-700"><div className="max-w-7xl mx-auto px-6 py-4"><div className="flex items-center justify-between"><Link to="/" className="text-xl font-bold">Homebase</Link><div className="flex gap-2"><NavLink to="/">Servers</NavLink><NavLink to="/projects">Projects</NavLink><NavLink to="/metrics">Metrics</NavLink><NavLink to="/security">Security</NavLink><NavLink to="/discovery">Discovery</NavLink><NavLink to="/credentials">Credentials</NavLink><NavLink to="/settings">Settings</NavLink><NavLink to="/fleet-topology">🗺️ Fleet</NavLink><NavLink to="/sentinel">🛡️ Sentinel</NavLink><NavLink to="/agent-security">🔒 Security</NavLink></div></div></div></nav><main className="max-w-7xl mx-auto p-6">{children}</main></div>;
 }
 
 function ServerCard({ server }) {
@@ -34,8 +35,8 @@ function ServerCard({ server }) {
 }
 
 function ServersPage() {
-  const [servers, setServers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [servers, setServers] = useState(() => getCached('servers')?.servers || []);
+  const [loading, setLoading] = useState(() => !getCached('servers'));
   const [refreshing, setRefreshing] = useState(false);
   const [lastUpdate, setLastUpdate] = useState(null);
   const [cacheAge, setCacheAge] = useState(0);
@@ -77,7 +78,7 @@ function MetricsPage() {
   const [summary, setSummary] = useState({});
   const [selectedServer, setSelectedServer] = useState(null);
   const [hours, setHours] = useState(24);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(() => !getCached('servers'));
   const [error, setError] = useState(null);
 
   const fetchMetrics = async () => {
@@ -112,8 +113,8 @@ function MetricsPage() {
 }
 
 function SecurityPage() {
-  const [securityData, setSecurityData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [securityData, setSecurityData] = useState(() => getCached("security")?.servers || []);
+  const [loading, setLoading] = useState(() => !getCached('servers'));
   const [lastUpdate, setLastUpdate] = useState(null);
   const [error, setError] = useState(null);
 
@@ -171,9 +172,9 @@ function ProjectCard({ project, onClick }) {
 }
 
 function ProjectsPage() {
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState(() => getCached("projects")?.projects || []);
   const [health, setHealth] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(() => !getCached('servers'));
   const [syncing, setSyncing] = useState(false);
   const [error, setError] = useState(null);
   const [selectedProject, setSelectedProject] = useState(null);
@@ -234,7 +235,7 @@ function ProjectsPage() {
 }
 
 function DiscoveryPage() {
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState(() => getCached("projects")?.projects || []);
   const [loading, setLoading] = useState(false);
   const [lastUpdate, setLastUpdate] = useState(null);
   const [error, setError] = useState(null);
@@ -263,9 +264,9 @@ function DiscoveryPage() {
 
 function CredentialsPage() {
   const [credentials, setCredentials] = useState([]);
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState(() => getCached("projects")?.projects || []);
   const [logs, setLogs] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(() => !getCached('servers'));
   const [error, setError] = useState(null);
   const [authError, setAuthError] = useState(false);
   const [showAddForm, setShowAddForm] = useState(false);
@@ -413,7 +414,7 @@ function SettingsPage() {
     alert_recipients: '',
     alerts_enabled: true
   });
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(() => !getCached('servers'));
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState(null);
 
@@ -858,8 +859,222 @@ function RedTeamPage() {
   );
 }
 
+function FleetTopologyPage() {
+  const [servers, setServers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  
+  useEffect(() => {
+    fetch('/api/infrastructure/servers')
+      .then(r => r.json())
+      .then(data => { setServers(data.servers || []); setLoading(false); })
+      .catch(() => setLoading(false));
+  }, []);
+
+  const positions = {
+    talos: { x: 300, y: 200 },
+    agents: { x: 150, y: 80 },
+    'rize-apps': { x: 450, y: 80 },
+    demos: { x: 150, y: 320 },
+    vector: { x: 450, y: 320 }
+  };
+
+  const getColor = (status) => {
+    if (status === 'online' || status === 'ok') return '#22c55e';
+    if (status === 'warning') return '#eab308';
+    return '#ef4444';
+  };
+
+  const serverMap = {};
+  servers.forEach(s => { serverMap[s.id] = s; });
+
+  return (
+    <div>
+      <h1 className="text-2xl font-bold mb-6">Fleet Topology</h1>
+      {loading ? (
+        <div className="text-gray-400">Loading...</div>
+      ) : (
+        <div className="bg-slate-800 rounded-lg p-6 border border-slate-700">
+          <svg viewBox="0 0 600 400" className="w-full max-w-4xl mx-auto">
+            {/* Connection lines from Talos to all */}
+            {Object.keys(positions).filter(k => k !== 'talos').map(k => (
+              <line key={k} x1={positions.talos.x} y1={positions.talos.y} 
+                x2={positions[k].x} y2={positions[k].y}
+                stroke="#475569" strokeWidth="2" strokeDasharray="5,5" />
+            ))}
+            
+            {/* Server nodes */}
+            {Object.entries(positions).map(([id, pos]) => {
+              const server = serverMap[id] || { hostname: id, ip: '?', status: 'unknown' };
+              const status = server.live?.status || server.status || 'unknown';
+              return (
+                <g key={id} transform={`translate(${pos.x - 60}, ${pos.y - 30})`}>
+                  <rect width="120" height="60" rx="8" fill="#1e293b" stroke="#475569" strokeWidth="2" />
+                  <circle cx="110" cy="10" r="6" fill={getColor(status)} />
+                  <text x="60" y="22" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">
+                    {server.hostname || id}
+                  </text>
+                  <text x="60" y="38" textAnchor="middle" fill="#94a3b8" fontSize="10">
+                    {server.ip || ''}
+                  </text>
+                  <text x="60" y="52" textAnchor="middle" fill="#64748b" fontSize="9">
+                    {server.role?.substring(0, 18) || ''}
+                  </text>
+                </g>
+              );
+            })}
+          </svg>
+          
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {servers.map(s => (
+              <div key={s.id} className="bg-slate-700/50 rounded p-3 border border-slate-600">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="font-semibold">{s.hostname}</span>
+                  <StatusBadge status={s.live?.status || s.status} />
+                </div>
+                <div className="text-sm text-gray-400">{s.ip}</div>
+                <div className="text-xs text-gray-500 mt-1">{s.description?.substring(0, 50)}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+
+function SentinelPage() {
+  // Use cache for instant loading - getCached returns pre-fetched data
+  const cachedData = getCached("sentinelMaintenance");
+  const [queue, setQueue] = useState(() => cachedData?.queue || []);
+  const [history, setHistory] = useState(() => cachedData?.history || []);
+  const [loading, setLoading] = useState(() => !cachedData);
+  const [newItem, setNewItem] = useState({ service: '', action: 'restart', priority: 'P2', scheduled: '' });
+
+  const fetchData = () => {
+    refreshKey("sentinelMaintenance").then(data => {
+      if (data) {
+        setQueue(data.queue || []);
+        setHistory(data.history || []);
+      }
+      setLoading(false);
+    });
+  };
+
+  useEffect(() => {
+    if (!cachedData) fetchData();
+    else setLoading(false);
+  }, []);
+
+  const addItem = () => {
+    if (!newItem.service) return;
+    fetch('/api/sentinel/maintenance', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newItem)
+    }).then(() => { fetchData(); setNewItem({ service: '', action: 'restart', priority: 'P2', scheduled: '' }); });
+  };
+
+  const executeItem = (id) => {
+    fetch(`/api/sentinel/maintenance/${id}/execute`, { method: 'POST' })
+      .then(() => fetchData());
+  };
+
+  const cancelItem = (id) => {
+    fetch(`/api/sentinel/maintenance/${id}`, { method: 'DELETE' })
+      .then(() => fetchData());
+  };
+
+  return (
+    <div>
+      <h1 className="text-2xl font-bold mb-6">Sentinel - Maintenance Queue</h1>
+      
+      {/* Add New Item Form */}
+      <div className="bg-slate-800 rounded-lg p-4 border border-slate-700 mb-6">
+        <h2 className="font-semibold mb-3">Schedule Maintenance</h2>
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
+          <input type="text" placeholder="Service name" value={newItem.service}
+            onChange={e => setNewItem({...newItem, service: e.target.value})}
+            className="bg-slate-700 border border-slate-600 rounded px-3 py-2 text-white" />
+          <select value={newItem.action} onChange={e => setNewItem({...newItem, action: e.target.value})}
+            className="bg-slate-700 border border-slate-600 rounded px-3 py-2 text-white">
+            <option value="restart">Restart</option>
+            <option value="update">Update</option>
+            <option value="backup">Backup</option>
+            <option value="scan">Security Scan</option>
+          </select>
+          <select value={newItem.priority} onChange={e => setNewItem({...newItem, priority: e.target.value})}
+            className="bg-slate-700 border border-slate-600 rounded px-3 py-2 text-white">
+            <option value="P0">P0 - Critical</option>
+            <option value="P1">P1 - High</option>
+            <option value="P2">P2 - Medium</option>
+            <option value="P3">P3 - Low</option>
+          </select>
+          <input type="datetime-local" value={newItem.scheduled}
+            onChange={e => setNewItem({...newItem, scheduled: e.target.value})}
+            className="bg-slate-700 border border-slate-600 rounded px-3 py-2 text-white" />
+          <button onClick={addItem} className="bg-blue-600 hover:bg-blue-700 rounded px-4 py-2 font-medium">
+            Add to Queue
+          </button>
+        </div>
+      </div>
+
+      {/* Queue */}
+      <div className="bg-slate-800 rounded-lg p-4 border border-slate-700 mb-6">
+        <h2 className="font-semibold mb-3">Pending Queue ({queue.length})</h2>
+        {loading ? <div className="text-gray-400">Loading...</div> : queue.length === 0 ? (
+          <div className="text-gray-500">No pending maintenance items</div>
+        ) : (
+          <table className="w-full text-sm">
+            <thead><tr className="text-left text-gray-400 border-b border-slate-700">
+              <th className="pb-2">Service</th><th className="pb-2">Action</th>
+              <th className="pb-2">Priority</th><th className="pb-2">Scheduled</th><th className="pb-2">Actions</th>
+            </tr></thead>
+            <tbody>{queue.map(item => (
+              <tr key={item.id} className="border-b border-slate-700/50">
+                <td className="py-2">{item.service}</td>
+                <td className="py-2">{item.action}</td>
+                <td className="py-2"><PriorityBadge priority={item.priority} /></td>
+                <td className="py-2 text-gray-400">{item.scheduled || 'ASAP'}</td>
+                <td className="py-2 space-x-2">
+                  <button onClick={() => executeItem(item.id)} className="bg-green-600 hover:bg-green-700 px-2 py-1 rounded text-xs">Execute</button>
+                  <button onClick={() => cancelItem(item.id)} className="bg-red-600 hover:bg-red-700 px-2 py-1 rounded text-xs">Cancel</button>
+                </td>
+              </tr>
+            ))}</tbody>
+          </table>
+        )}
+      </div>
+
+      {/* History */}
+      <div className="bg-slate-800 rounded-lg p-4 border border-slate-700">
+        <h2 className="font-semibold mb-3">History ({history.length})</h2>
+        {history.length === 0 ? <div className="text-gray-500">No history</div> : (
+          <table className="w-full text-sm">
+            <thead><tr className="text-left text-gray-400 border-b border-slate-700">
+              <th className="pb-2">Service</th><th className="pb-2">Action</th>
+              <th className="pb-2">Status</th><th className="pb-2">Completed</th>
+            </tr></thead>
+            <tbody>{history.slice(0, 20).map(item => (
+              <tr key={item.id} className="border-b border-slate-700/50">
+                <td className="py-2">{item.service}</td>
+                <td className="py-2">{item.action}</td>
+                <td className="py-2"><StatusBadge status={item.status} /></td>
+                <td className="py-2 text-gray-400">{item.completed}</td>
+              </tr>
+            ))}</tbody>
+          </table>
+        )}
+      </div>
+    </div>
+  );
+}
+
+
+    // Initialize global data cache on app mount
+  useEffect(() => { initCache(); }, []);
   return (<BrowserRouter><Layout><Routes><Route path="/" element={<ServersPage />} /><Route path="/projects" element={<ProjectsPage />} /><Route path="/metrics" element={<MetricsPage />} /><Route path="/security" element={<SecurityPage />} /><Route path="/discovery" element={<DiscoveryPage />} /><Route path="/credentials" element={<CredentialsPage />} />
-          <Route path="/settings" element={<SettingsPage />} /><Route path="/agent-security" element={<AgentSecurityPage />} /><Route path="/agent-security/redteam" element={<RedTeamPage />} /></Routes></Layout></BrowserRouter>);
+          <Route path="/settings" element={<SettingsPage />} /><Route path="/agent-security" element={<AgentSecurityPage />} /><Route path="/agent-security/redteam" element={<RedTeamPage />} /><Route path="/fleet-topology" element={<FleetTopologyPage />} /><Route path="/sentinel" element={<SentinelPage />} /></Routes></Layout></BrowserRouter>);
 }
 
 export default App;

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "scanned_at": "2026-02-07T23:10:02.184969+00:00",
+    "scanned_at": "2026-02-12T14:37:01.839263+00:00",
     "project_count": 11,
     "scanner_version": "1.0.0"
   },
@@ -15,9 +15,14 @@
         3001,
         8001
       ],
-      "scanned_at": "2026-02-07T23:10:02.185016+00:00",
+      "scanned_at": "2026-02-12T14:37:01.839291+00:00",
       "status": "ok",
-      "issues": [],
+      "issues": [
+        {
+          "severity": "info",
+          "message": "20 uncommitted changes"
+        }
+      ],
       "docs": [
         {
           "file": "README.md",
@@ -163,11 +168,52 @@
       "todos_done": 10,
       "version": "1.0.0",
       "git": {
-        "status": "clean",
+        "status": "dirty",
         "branch": "main",
-        "last_commit": "3fc4fdf BEST Shipping Dashboard: demo-ready, Cornell login, systemd services, full API (16 minutes ago)",
-        "changes": [],
-        "uncommitted_count": 0
+        "last_commit": "3fc4fdf BEST Shipping Dashboard: demo-ready, Cornell login, systemd services, full API (5 days ago)",
+        "changes": [
+          {
+            "status": "M",
+            "file": "ackend/__pycache__/config.cpython-312.pyc"
+          },
+          {
+            "status": "M",
+            "file": "backend/api/__pycache__/dashboard.cpython-312.pyc"
+          },
+          {
+            "status": "M",
+            "file": "backend/api/__pycache__/shipments.cpython-312.pyc"
+          },
+          {
+            "status": "M",
+            "file": "backend/api/dashboard.py"
+          },
+          {
+            "status": "M",
+            "file": "backend/api/shipments.py"
+          },
+          {
+            "status": "M",
+            "file": "backend/best_shipping.db"
+          },
+          {
+            "status": "M",
+            "file": "backend/config.py"
+          },
+          {
+            "status": "M",
+            "file": "frontend/index.html"
+          },
+          {
+            "status": "M",
+            "file": "frontend/package-lock.json"
+          },
+          {
+            "status": "M",
+            "file": "frontend/package.json"
+          }
+        ],
+        "uncommitted_count": 20
       },
       "ports_status": [
         {
@@ -186,7 +232,9 @@
       "files": [
         "API.md",
         "ARCHITECTURE.md",
+        "BEST-SHIPPING-REQUIREMENTS.md",
         "CHANGELOG.md",
+        "CLAUDE.md",
         "DEMO-SCRIPT.md",
         "DEMO_SCRIPT.md",
         "DEPLOYMENT.md",
@@ -195,6 +243,7 @@
         "TODO.md",
         "backend/config.py",
         "backend/main.py",
+        "ecosystem.config.js",
         "frontend/README.md",
         "frontend/eslint.config.js",
         "frontend/package-lock.json",
@@ -203,7 +252,7 @@
         "frontend/tailwind.config.js",
         "frontend/vite.config.js"
       ],
-      "health_score": 100
+      "health_score": 98
     },
     {
       "name": "BPS-AI",
@@ -214,9 +263,14 @@
       "ports": [
         3000
       ],
-      "scanned_at": "2026-02-07T23:10:16.231509+00:00",
+      "scanned_at": "2026-02-12T14:37:18.342497+00:00",
       "status": "ok",
-      "issues": [],
+      "issues": [
+        {
+          "severity": "info",
+          "message": "13 uncommitted changes"
+        }
+      ],
       "docs": [
         {
           "file": "README.md",
@@ -273,100 +327,141 @@
           "status": "ok"
         }
       ],
-      "readme": "# BPS AI - Bermuda Police Services AI Case Management\n\n> **\ud83d\udcda Documentation Navigation**\n> This is the main README. See all documentation:\n> - [Project Plan](docs/PROJECT_PLAN.md) - Development roadmap\n> - [TODO Checklist](docs/TODO.md) - Complete task tracking\n> - [Technical Spec](docs/TECHNICAL_SPEC.md) - Architecture & stack\n> - [Design Spec](docs/DESIGN_SPEC.md) - UI/UX guidelines\n> - [Database Schema](docs/DATABASE_SCHEMA.md) - Data models\n> - [API Spec](docs/API_SPEC.md) - Endpoint documentation\n> - [Security](docs/SECURITY.md) - Auth & access control\n> - [Scraper Guide](docs/SCRAPER_GUIDE.md) - Data collection\n> - [RAG Architecture](docs/RAG_ARCHITECTURE.md) - AI research system\n> - [Changelog](CHANGELOG.md) - Version history\n\n---\n\n## Project Overview\n\nAI-powered case management and reporting system for Bermuda Police Services. Features multi-model AI report generation, internal affairs monitoring, and integrated legal/news research capabilities.\n\n**Client:** Bermuda Police Services  \n**Contact:** Alexander Rollin (arollin@bps.bm)  \n**Development:** Gadarrell / Rize Business Development  \n**Version:** 0.9.26\n\n---\n\n## Live Demo URLs\n\n| Environment | URL | Purpose |\n|-------------|-----|---------|\n| Main Application | https://bpsai.rize.bm/login | Officer & Admin login |\n| Internal Affairs | https://bpsai.rize.bm/ia-login | IA-specific login (separate system) |\n| SSH Access | https://bpsai-ssh.rize.bm | Browser-based SSH |\n\n---\n\n## Login Credentials (Demo)\n\n### Main Application (bpsai.rize.bm/login)\n\n| Role | Email | Password | Access Level |\n|------|-------|----------|--------------|\n| Superintendent | rizeadmin@bps.bm | BPSDemo2026\\! | Full admin rights |\n| Admin | admin@bps.bm | BPSAdmin2026\\! | Administration |\n| Officer | officer@bps.bm | BPSOfficer2026\\! | Standard officer |\n| Demo | demo@bps.bm | BPSDemo2026\\! | Demo user |\n\n### Internal Affairs Portal (bpsai.rize.bm/ia-login)\n\n| Role | Email | Password | Access Level |\n|------|-------|----------|--------------|\n| IA Admin | ia.admin@bps.bm | IAAdmin2026\\! | Full IA admin |\n| IA Supervisor | ia.supervisor@bps.bm | IASuper2026\\! | Supervisory |\n| IA Investigator | ia.investigator@bps.bm | IAInvest2026\\! | Investigation |\n| IA Analyst | ia.analyst@bps.bm | IAAnalyst2026\\! | Analysis only |\n\n---\n\n## Monitoring\n\nThis project is monitored by **Relay/Pulse** at 192.168.65.248\n\n| Check | Endpoint |\n|-------|----------|\n| Health | /api/health |\n| Pulse Dashboard | http://192.168.65.248:8000/api/pulse/status |\n\n---\n\n## Core Features\n\n### 1. Case Management\n- **3 Case Types:** Domestic Abuse, Gang/Drug, Traffic\n- Pre-filled forms with dropdowns\n- Voice dictation support\n- Extensible template architecture\n\n### 2. Multi-AI Report Generation\n| Model | Provider | Type |\n|-------|----------|------|\n| Claude | Anthropic | Cloud |\n| GPT-4 | OpenAI | Cloud |\n| Gemini | Google | Cloud |\n| Llama 3 8B | Ollama | Local |\n| Mistral 7B | Ollama | Local |\n\n### 3. Internal Affairs Module\n- Separate authentication & database\n- Officer activity monitoring\n- Full investigation workflow\n- Audit logging\n- Purple/dark theme for visual distinction\n\n### 4. Legal & News Research (RAG)\n- **Bermuda Laws Database** - 98 scraped laws (62 police-priority)\n- **News Archive** - 10 years from Royal Gazette & Bernews\n- Vector search for AI-enhanced research\n- AI Law Assistant for statute explanations\n\n### 5. Analytics Dashboard\n- Case statistics & trends\n- AI usage metrics\n- Officer activity reports\n\n---\n\n## Tech Stack\n\n| Layer | Technology |\n|-------|------------|\n| Frontend | Next.js 14, React, TypeScript, Tailwind CSS |\n| Backend | Next.js API Routes, Node.js |\n| Database | PostgreSQL 16 + pgvector |\n| ORM | Prisma |\n| Auth | NextAuth.js |\n| AI Cloud | Claude, OpenAI, Gemini APIs |\n| AI Local | Ollama (Llama 3, Mistral) |\n| Vector DB | pgvector (PostgreSQL extension) |\n| Scraping | Puppeteer, Cheerio |\n| Hosting | Hyper-V VM, Cloudflare Tunnel |\n\n---\n\n## Quick Start\n\n```bash\n# Clone repository\ngit clone https://github.com/gadarrell99/bps-ai.git\ncd bps-ai\n\n# Install dependencies\nnpm install\n\n# Set up environment\ncp .env.example .env\n# Edit .env with your API keys\n\n# Set up database\nnpm run db:setup\nnpm run db:seed\n\n# Start development server\nnpm run dev\n```\n\n---\n\n## Project Structure\n\n```\nbps-ai/\n\u251c\u2500\u2500 README.md                \u2190 You are here\n\u251c\u2500\u2500 CHANGELOG.md             # Version history\n\u251c\u2500\u2500 CLAUDE.md                # AI agent instructions\n\u251c\u2500\u2500 VERSION\n\u251c\u2500\u2500 docs/\n\u2502   \u251c\u2500\u2500 PROJECT_PLAN.md      # Development roadmap\n\u2502   \u251c\u2500\u2500 TODO.md              # Task checklist\n\u2502   \u251c\u2500\u2500 TECHNICAL_SPEC.md    # Architecture\n\u2502   \u251c\u2500\u2500 DESIGN_SPEC.md       # UI/UX guidelines\n\u2502   \u251c\u2500\u2500 DATABASE_SCHEMA.md   # Data models\n\u2502   \u251c\u2500\u2500 API_SPEC.md          # API documentation\n\u2502   \u251c\u2500\u2500 SECURITY.md          # Security specs\n\u2502   \u251c\u2500\u2500 SCRAPER_GUIDE.md     # Scraping documentation\n\u2502   \u2514\u2500\u2500 RAG_ARCHITECTURE.md  # RAG system design\n\u251c\u2500\u2500 src/\n\u2502   \u251c\u2500\u2500 app/                 # Next.js app router\n\u2502   \u251c\u2500\u2500 components/          # React components\n\u2502   \u251c\u2500\u2500 lib/                 # Utilities & services\n\u2502   \u2514\u2500\u2500 styles/              # CSS/Tailwind\n\u251c\u2500\u2500 scrapers/\n\u2502   \u251c\u2500\u2500 laws/                # Bermuda laws scraper\n\u2502   \u251c\u2500\u2500 news/                # News scrapers\n\u2502   \u2514\u2500\u2500 data/                # Scraped data output\n\u251c\u2500\u2500 prisma/\n\u2502   \u2514\u2500\u2500 schema.prisma        # Database schema\n\u2514\u2500\u2500 scripts/\n    \u2514\u2500\u2500 seed-users.js        # Database seeding\n```\n\n---\n\n## Key Contacts\n\n| Role | Name | Email |\n|------|------|-------|\n| Client | Alexander Rollin | arollin@bps.bm |\n| Developer | Gilbert Darrell | gadarrell@rize.bm |\n| Biz Dev | Sarah | (Rize) |\n\n---\n\n## License\n\nProprietary - Bermuda Police Services / Gadarrell / Rize\n\n---\n\n> **\ud83d\udcda Next Steps:** Review [PROJECT_PLAN.md](docs/PROJECT_PLAN.md) for the development timeline and [TODO.md](docs/TODO.md) for current tasks.",
-      "todo": "# BPS-AI TODO\n\n## Current Version: v0.9.26\n\n---\n\n## v0.9.26 - Case Review Rename\n- [x] Renamed Reports to Case Review in navigation\n- [x] Updated page titles and labels\n- [x] All routes remain functional\n\n## v0.9.25 - Prominent PDF Export\n- [x] Made PDF Export button prominent (red, shadow)\n- [x] Added PDF emoji icon\n- [x] Button visible without scrolling\n\n## v0.9.24 - Column Customization\n- [x] Column picker dropdown on case list\n- [x] Show/hide columns (Case #, Title, Type, Status, Priority, Officer, Date, Parish, Complainant)\n- [x] localStorage persistence for preferences\n- [x] Reset to defaults button\n\n## v0.9.23 - Prominent Voice Input\n- [x] Large microphone button at top of New Case form\n- [x] Gold color, next to AI Assistant button\n- [x] Pulses red when recording\n- [x] Voice feeds into notes area\n\n\n## v0.9.22 - AI Auto-Fill & Voice Input\n- [x] AI extraction API (/api/ai/extract-from-notes)\n- [x] Auto-Fill from Notes button on New Case page\n- [x] AI fills form fields from raw notes\n- [x] AI NEVER fabricates - prompts user for missing fields\n- [x] \"AI filled X fields, verify Y fields\" message\n- [x] Prominent voice input button at top of New Case form\n- [x] Voice transcription feeds into notes area\n\n\n## v0.9.21 - Footer Link\n- [x] Added Rize Technologies link to main page\n- [x] Added Rize Technologies link to login page\n- [x] Added Rize Technologies link to IA login\n\n\n## v0.9.20 - IA Audit View\n- [x] Created /api/ia/audit-logs API endpoint\n- [x] Created /ia-audit-logs page\n- [x] Added filters: user, action, date range\n- [x] Read-only table view\n\n\n## v0.9.19 - Audit Logging\n- [x] Created audit_logs table in schema\n- [x] Created audit service (src/lib/audit.ts)\n- [x] Added VIEW_CASE logging to case routes\n- [x] Added EDIT_CASE logging to case routes\n- [x] Added VIEW_EVIDENCE logging to evidence routes\n\n\n## v0.9.18 - Login Performance\n- [x] Made lastLoginAt update non-blocking\n- [x] Reduced login latency by ~50-100ms\n\n\n## v0.9.17 - PDF Route Fix\n- [x] Fixed PDF export route TypeScript error\n- [x] Changed officer to assignedOfficer in Prisma include\n- [x] Updated officer name formatting\n- [x] Verified all 10 test cases render correctly\n- [x] Rebuilt and restarted PM2\n\n\n## v0.9.16 - Bug Fix\n- [x] Fixed case detail page \"Something went wrong\" error\n- [x] Rebuilt corrupted .next build directory\n- [x] Verified all manifest files generated correctly\n- [x] PM2 service restarted successfully\n\n## v0.9.15 - PDF Export\n- [x] PDF export endpoint (/api/cases/:id/pdf)\n- [x] PDFKit integration\n- [x] Case details, timeline, evidence in report\n- [x] Confidential footer\n- [x] Auto-download with case number filename\n\n## v0.9.14 - Email Notifications\n- [x] Email service created (lib/emailService.ts)\n- [x] SMTP configured (Office365)\n- [x] notifyCaseAssigned, notifyStatusChange, notifyNewEvidence\n- [x] Test email sent successfully\n- [x] Email templates: case-created, case-updated, evidence-added\n\n## v0.9.13 - Evidence Upload\n- [x] Real evidence file upload system\n- [x] Upload API endpoint (/api/evidence/upload)\n- [x] File serving API (/api/files/[...path])\n- [x] Drag-and-drop file upload form\n- [x] File preview (images, video, audio, PDF)\n- [x] File download functionality\n- [x] 10MB file size limit\n\n## v0.9.12 - Verification\n- [x] Database connection verification (Main + IA)\n- [x] Endpoint health check (all 200 OK)\n- [x] Demo readiness confirmed\n\n## v0.9.10 - Browser Testing\n- [x] Browser verification testing - ALL PAGES PASS\n- [x] Edit page exists at /cases/[id]/edit with audit logging\n- [x] Data counts verified: 16 users, 65 cases, 136 evidence, 10 IA investigations\n\n## v0.9.9 - Features\n- [x] Profile page with user info, stats\n- [x] Edit case with audit warning popup\n- [x] Edit case form (full case editing)\n- [x] Cases list filterable by status, type, priority\n- [x] Cases list sortable (newest, oldest, priority, case number)\n- [x] Dashboard stats clickable (links to filtered views)\n- [x] 50 fake cases with realistic data\n- [x] 130 evidence records\n- [x] 10 IA investigations with documents\n- [x] IA investigation detail page\n- [x] Voice dictation in new case form\n\n## Demo Complete (v0.9.4)\n- [x] AI Legal Assistant with anti-hallucination\n- [x] Evidence immutability system\n- [x] Chain of custody tracking\n- [x] Audit trail for all evidence actions\n- [x] Demo cases with realistic evidence\n- [x] Demo script for Alex\n- [x] User guide documentation\n- [x] Mock government integration placeholders\n\n---\n\n## Before Demo (High Priority)\n- [x] Test login with Alex credentials\n- [x] Verify all demo cases display correctly\n- [x] Check AI responses for each demo query\n\n## Post-Demo (Current Sprint)\n- [x] Real evidence file upload (local storage) - DONE v0.9.13\n- [x] Email notifications for case updates - DONE v0.9.14\n- [x] PDF report export - DONE v0.9.15\n- [ ] Mobile-responsive improvements (audit needed)\n\n---\n\n## Future Integrations (Pending Agreements)\n- [ ] Bermuda Court System API\n- [ ] Transportation Control Department API\n- [ ] Immigration Department API\n- [ ] Bermuda Hospitals Board (with warrant system)\n\n## Technical Debt\n- [ ] Add comprehensive test suite\n- [ ] Implement proper error boundaries\n- [ ] Add loading states to all data fetching\n- [ ] Optimize database queries\n\n---\n\n*Last Updated: 2026-01-29*",
-      "changelog": "# Changelog\n## [0.9.22] - 2026-01-30\n\n### Added - AI Auto-Fill from Notes\n- **AI Extraction API**: POST /api/ai/extract-from-notes\n  - Uses Claude AI to extract structured case data from raw officer notes\n  - Extracts: Case Type, Date/Time, Location, Parties, Vehicles, Injuries, Description\n  - CRITICAL: AI NEVER fabricates data - only extracts explicitly stated information\n  - Returns summary: filled fields count, missing fields that need user input\n- **Auto-Fill Button**: New Case page now has \"Auto-Fill from Notes\" button\n  - Officers paste/dictate raw notes into text area\n  - Click button to have AI populate form fields\n  - Shows banner: \"AI filled X fields, please verify Y fields\"\n  - Missing fields highlighted for user attention\n- **Prominent Voice Input**: Large microphone button at top of New Case form\n  - Next to AI Assistant toggle\n  - Gold color, highly visible\n  - Pulses red when recording\n  - Voice transcription feeds into notes area\n\n## [0.9.21] - 2026-01-30\n\n### Added - Rize Website Link in Footer\n- Added clickable Rize Technologies link to main page footer\n- Added clickable Rize Technologies link to login page footer\n- Added clickable Rize Technologies link to IA login page footer\n- Links open https://rize.bm in new tab\n\n## [0.9.20] - 2026-01-30\n\n### Added - IA Audit Logs View\n- **API Endpoint**: GET /api/ia/audit-logs\n  - Query audit logs with filters (userId, action, resourceType, dateRange)\n  - Pagination support (limit, offset)\n  - Returns filter options for dropdowns\n- **IA Audit Logs Page**: /ia-audit-logs\n  - Table view: When, Who, Action, Resource, Details, From Where\n  - Filters: User, Action, Start Date, End Date\n  - Read-only (no edit/delete capability)\n\n## [0.9.19] - 2026-01-30\n\n### Added - Comprehensive Audit Logging (HOSPITAL-GRADE)\n- **AuditLog Table**: Created append-only audit_logs table\n  - Columns: userId, userEmail, action, resourceType, resourceId, details, ipAddress, userAgent, createdAt\n  - Indexes on: userId, resourceType+resourceId, action, createdAt\n- **Audit Service**: src/lib/audit.ts with logAudit() function\n  - Fire-and-forget logging (non-blocking)\n  - Supports VIEW_CASE, EDIT_CASE, VIEW_EVIDENCE, DOWNLOAD_EVIDENCE, etc.\n- **Case Routes**: Added audit logging to GET and PATCH handlers\n- **Evidence Routes**: Added audit logging to GET handler\n\n## [0.9.18] - 2026-01-30\n\n### Performance\n- **Login Speed Optimization**: Reduced login latency\n  - Made lastLoginAt update non-blocking (fire-and-forget)\n  - Login no longer waits for timestamp update to complete\n  - Estimated savings: ~50-100ms per login\n\n\n## [0.9.17] - 2026-01-29\n\n### Fixed\n- **PDF Export Route Error**: Fixed TypeScript error in /api/cases/[id]/pdf route\n  - Changed officer to assignedOfficer in Prisma include\n  - Updated officer name formatting to use firstName/lastName fields\n  - Root cause: Schema field name mismatch (officer vs assignedOfficer)\n\n### Verified\n- Case detail pages: All 10 tested cases render correctly\n- PDF export route: Builds without errors\n- Health check: OK\n- Database: 65 cases, 16 users\n- PM2 status: Online, no errors\n\n## [0.9.16] - 2026-01-29\n\n### Fixed\n- **Case Detail Page Error**: Fixed Something went wrong - Unexpected error occurred when viewing any case\n  - Root cause: Corrupted .next build directory missing prerender-manifest.json\n  - Cleared and rebuilt the production build\n  - Verified all manifest files regenerated correctly\n  - Restarted PM2 service\n\n### Verified\n- Health check: OK\n- Login page: Renders correctly\n- Case detail redirect: Working (307 to login for unauthenticated users)\n- PM2 status: Online\n\n## [0.9.15] - 2026-01-29\n\n### Added\n- **PDF Report Export** (lib/pdfService.ts)\n  - PDFKit dependency installed\n  - GET /api/cases/:id/pdf endpoint\n  - Report includes: case details, timeline, evidence list\n  - Auto-download with case number in filename\n  - Confidential footer\n\n### Added\n- **Email Notification System**: Automated email alerts for case events\n  - SMTP configuration via Office 365 (smtp.office365.com:587)\n  - Nodemailer integration for email sending\n  - Professional HTML email templates with BPS branding\n\n### Email Templates\n- **case-created.html**: Notification when new case assigned to officer\n- **case-updated.html**: Notification when case details changed\n- **evidence-added.html**: Notification when new evidence added to case\n\n### API Integration\n- POST /api/cases: Sends case-created email to assigned officer\n- PATCH /api/cases/[id]: Sends case-updated email on changes\n- POST /api/evidence: Sends evidence-added email to case owner\n\n### Technical\n- New library: src/lib/email.ts with sendEmail function\n- Template variables: recipientName, caseNumber, caseTitle, caseUrl, etc.\n- Async email sending (non-blocking for API responses)\n- SMTP config in .env: SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM\n\n## [0.9.23] - 2026-01-30\n\n### Added - Prominent Voice Input (Task 7)\n- Large microphone button at top of New Case form\n- Gold color, highly visible next to AI Assistant button\n- Pulses red when recording\n- Voice transcription feeds directly into notes area\n\n## [0.9.24] - 2026-01-30\n\n### Added - Column Customization (Task 8)\n- **Column Picker**: Dropdown button to show/hide columns on case list\n- Available columns: Case #, Title, Type, Status, Priority, Assigned To, Date, Parish, Complainant\n- **LocalStorage Persistence**: Column preferences saved in browser\n- Reset button to restore default columns\n- Footer shows visible column count\n\n## [0.9.25] - 2026-01-30\n\n### Changed - PDF Export Button (Task 9)\n- Made PDF Export button prominent with red background\n- Added PDF emoji icon for visibility\n- Shadow effect for visual prominence\n- Button visible at top of case detail page without scrolling\n\n## [0.9.26] - 2026-01-30\n\n### Changed - Renamed Reports to Case Review (Task 10)\n- Renamed 'Reports' to 'Case Review' in sidebar navigation\n- Updated page heading from 'Reports' to 'Case Review'\n- Updated statistics label from 'Total Reports' to 'Total Reviews'\n- All links and routes remain functional",
+      "readme": "# BPS AI - Bermuda Police Services AI Case Management\n\n> **\ud83d\udcda Documentation Navigation**\n> This is the main README. See all documentation:\n> - [Project Plan](docs/PROJECT_PLAN.md) - Development roadmap\n> - [TODO Checklist](docs/TODO.md) - Complete task tracking\n> - [Technical Spec](docs/TECHNICAL_SPEC.md) - Architecture & stack\n> - [Design Spec](docs/DESIGN_SPEC.md) - UI/UX guidelines\n> - [Database Schema](docs/DATABASE_SCHEMA.md) - Data models\n> - [API Spec](docs/API_SPEC.md) - Endpoint documentation\n> - [Security](docs/SECURITY.md) - Auth & access control\n> - [Scraper Guide](docs/SCRAPER_GUIDE.md) - Data collection\n> - [RAG Architecture](docs/RAG_ARCHITECTURE.md) - AI research system\n> - [Changelog](CHANGELOG.md) - Version history\n\n---\n\n## Project Overview\n\nAI-powered case management and reporting system for Bermuda Police Services. Features multi-model AI report generation, internal affairs monitoring, and integrated legal/news research capabilities.\n\n**Client:** Bermuda Police Services  \n**Contact:** Alexander Rollin (arollin@bps.bm)  \n**Development:** Gadarrell / Rize Business Development  \n**Version:** 0.9.28\n\n---\n\n## Live Demo URLs\n\n| Environment | URL | Purpose |\n|-------------|-----|---------|\n| Main Application | https://bpsai.rize.bm/login | Officer & Admin login |\n| Internal Affairs | https://bpsai.rize.bm/ia-login | IA-specific login (separate system) |\n| SSH Access | https://bpsai-ssh.rize.bm | Browser-based SSH |\n\n---\n\n## Login Credentials (Demo)\n\n### Main Application (bpsai.rize.bm/login)\n\n| Role | Email | Password | Access Level |\n|------|-------|----------|--------------|\n| Superintendent | superintendent@bps.bm | BPSDemo2026\\! | Full admin, case management |\n| Inspector | inspector@bps.bm | BPSDemo2026\\! | Supervisory access |\n| Officer | officer@bps.bm | BPSDemo2026\\! | Standard officer |\n| Alex Rollin | arollin@bps.bm | BPSDemo2026\\! | Detective Sergeant (IA access) |\n\n### Internal Affairs Portal (bpsai.rize.bm/ia-login)\n\n| Role | Email | Password | Access Level |\n|------|-------|----------|--------------|\n| IA Admin | ia.admin@bps.bm | IAAdmin2026\\! | Full IA admin |\n| IA Supervisor | ia.supervisor@bps.bm | IASuper2026\\! | Supervisory |\n| IA Investigator | ia.investigator@bps.bm | IAInvest2026\\! | Investigation |\n| IA Analyst | ia.analyst@bps.bm | IAAnalyst2026\\! | Analysis only |\n\n---\n\n## Monitoring\n\nThis project is monitored by **Relay/Pulse** at 192.168.65.248\n\n| Check | Endpoint |\n|-------|----------|\n| Health | /api/health |\n| Pulse Dashboard | http://192.168.65.248:8000/api/pulse/status |\n\n---\n\n## Core Features\n\n### 1. Case Management\n- **3 Case Types:** Domestic Abuse, Gang/Drug, Traffic\n- Pre-filled forms with dropdowns\n- Voice dictation support\n- Extensible template architecture\n\n### 2. Multi-AI Report Generation\n| Model | Provider | Type |\n|-------|----------|------|\n| Claude | Anthropic | Cloud |\n| GPT-4 | OpenAI | Cloud |\n| Gemini | Google | Cloud |\n| Llama 3 8B | Ollama | Local |\n| Mistral 7B | Ollama | Local |\n\n### 3. Internal Affairs Module\n- Separate authentication & database\n- Officer activity monitoring\n- Full investigation workflow\n- Audit logging\n- Purple/dark theme for visual distinction\n\n### 4. Legal & News Research (RAG)\n- **Bermuda Laws Database** - 98 scraped laws (62 police-priority)\n- **News Archive** - 10 years from Royal Gazette & Bernews\n- Vector search for AI-enhanced research\n- AI Law Assistant for statute explanations\n\n### 5. Analytics Dashboard\n- Case statistics & trends\n- AI usage metrics\n- Officer activity reports\n\n---\n\n## Tech Stack\n\n| Layer | Technology |\n|-------|------------|\n| Frontend | Next.js 14, React, TypeScript, Tailwind CSS |\n| Backend | Next.js API Routes, Node.js |\n| Database | PostgreSQL 16 + pgvector |\n| ORM | Prisma |\n| Auth | NextAuth.js |\n| AI Cloud | Claude, OpenAI, Gemini APIs |\n| AI Local | Ollama (Llama 3, Mistral) |\n| Vector DB | pgvector (PostgreSQL extension) |\n| Scraping | Puppeteer, Cheerio |\n| Hosting | Hyper-V VM, Cloudflare Tunnel |\n\n---\n\n## Quick Start\n\n```bash\n# Clone repository\ngit clone https://github.com/gadarrell99/bps-ai.git\ncd bps-ai\n\n# Install dependencies\nnpm install\n\n# Set up environment\ncp .env.example .env\n# Edit .env with your API keys\n\n# Set up database\nnpm run db:setup\nnpm run db:seed\n\n# Start development server\nnpm run dev\n```\n\n---\n\n## Project Structure\n\n```\nbps-ai/\n\u251c\u2500\u2500 README.md                \u2190 You are here\n\u251c\u2500\u2500 CHANGELOG.md             # Version history\n\u251c\u2500\u2500 CLAUDE.md                # AI agent instructions\n\u251c\u2500\u2500 VERSION\n\u251c\u2500\u2500 docs/\n\u2502   \u251c\u2500\u2500 PROJECT_PLAN.md      # Development roadmap\n\u2502   \u251c\u2500\u2500 TODO.md              # Task checklist\n\u2502   \u251c\u2500\u2500 TECHNICAL_SPEC.md    # Architecture\n\u2502   \u251c\u2500\u2500 DESIGN_SPEC.md       # UI/UX guidelines\n\u2502   \u251c\u2500\u2500 DATABASE_SCHEMA.md   # Data models\n\u2502   \u251c\u2500\u2500 API_SPEC.md          # API documentation\n\u2502   \u251c\u2500\u2500 SECURITY.md          # Security specs\n\u2502   \u251c\u2500\u2500 SCRAPER_GUIDE.md     # Scraping documentation\n\u2502   \u2514\u2500\u2500 RAG_ARCHITECTURE.md  # RAG system design\n\u251c\u2500\u2500 src/\n\u2502   \u251c\u2500\u2500 app/                 # Next.js app router\n\u2502   \u251c\u2500\u2500 components/          # React components\n\u2502   \u251c\u2500\u2500 lib/                 # Utilities & services\n\u2502   \u2514\u2500\u2500 styles/              # CSS/Tailwind\n\u251c\u2500\u2500 scrapers/\n\u2502   \u251c\u2500\u2500 laws/                # Bermuda laws scraper\n\u2502   \u251c\u2500\u2500 news/                # News scrapers\n\u2502   \u2514\u2500\u2500 data/                # Scraped data output\n\u251c\u2500\u2500 prisma/\n\u2502   \u2514\u2500\u2500 schema.prisma        # Database schema\n\u2514\u2500\u2500 scripts/\n    \u2514\u2500\u2500 seed-users.js        # Database seeding\n```\n\n---\n\n## Key Contacts\n\n| Role | Name | Email |\n|------|------|-------|\n| Client | Alexander Rollin | arollin@bps.bm |\n| Developer | Gilbert Darrell | gadarrell@rize.bm |\n| Biz Dev | Sarah | (Rize) |\n\n---\n\n## License\n\nProprietary - Bermuda Police Services / Gadarrell / Rize\n\n---\n\n> **\ud83d\udcda Next Steps:** Review [PROJECT_PLAN.md](docs/PROJECT_PLAN.md) for the development timeline and [TODO.md](docs/TODO.md) for current tasks.",
+      "todo": "# BPS-AI TODO\n\n## Current Version: v0.9.30\n\n---\n\n## v0.9.30 - Feature Verification Push (2026-02-11)\n- [x] Demo login buttons: Superintendent, Inspector, Officer \u2014 all 3 verified via Playwright\n- [x] Cases data: 68 cases across 4 statuses (26 open, 20 in progress, 13 closed, 9 under review)\n- [x] IA access: arollin@bps.bm verified \u2014 logs in, reaches /ia-dashboard\n- [x] AI assistant: Ollama llama3:8b + mistral:7b running, /laws/assistant page loads with chat input\n- [x] Reports page: 11K chars, 4 reports in DB, analytics page loads\n- [x] Playwright 10-test suite: 10/10 PASSED\n- [x] Gitea issues closed: #2, #4, #10, #11, #12, #13, #14, #16, #17\n\n## v0.9.29 - Documentation & Credential Fixes (2026-02-10)\n- [x] Documentation updates, credential fixes, PM2 reset\n\n## v0.9.28 - CEO Visual Review Fixes (2026-02-10)\n- [x] Deleted 7 junk laws with UUID titles and 'unk' year from database\n- [x] Simplified login demo buttons: Superintendent, Inspector, Officer\n- [x] Created superintendent@bps.bm and inspector@bps.bm demo accounts\n- [x] Added Alexander Rollin (arollin@bps.bm) to Internal Affairs user table\n- [x] Login page now uses bermuda-police.png logo instead of SVG\n- [x] Fixed login loading state - button disabled when isLoading is true\n\n## v0.9.27 - Deep Dive Fixes (2026-02-10)\n- [x] One-click demo login buttons with column sorting\n- [x] Alex Rollin set to SUPERINTENDENT role\n- [x] Dashboard shows System Status instead of AI Models\n- [x] Fixed hydration errors in IA pages\n\n---\n\n## Open Issues (8 remaining)\n- [ ] #1: DROPDOWN: Fix big dropdown on Analysis Demo click\n- [ ] #3: SORTING: Case list sorting works correctly\n- [ ] #5: UI: Dark slate + gold theme consistent\n- [ ] #6: CONSOLE: No React hydration errors (#425/#422)\n- [ ] #7: UX: Multiple UI improvements from CEO walkthrough\n- [ ] #8: DOCS: All 5 standard docs current\n- [ ] #9: SECURITY: Serper key not hardcoded\n- [ ] #15: Voice dictation: Verify Whisper integration works\n\n## Known Issues / Future Work\n- [ ] Case detail URL shows UUID (by design \u2014 case number shown prominently in UI)\n- [ ] Logo: login page uses PNG instead of SVG for compatibility\n- [ ] IA system has separate user database \u2014 dual access requires both\n\n## Demo Accounts\nMain System:\n- superintendent@bps.bm / BPSDemo2026! (Superintendent)\n- inspector@bps.bm / BPSDemo2026! (Inspector)\n- officer@bps.bm / BPSDemo2026! (Officer)\n\nInternal Affairs:\n- ia.admin@bps.bm / BPSDemo2026!\n- ia.supervisor@bps.bm / BPSDemo2026!\n- ia.investigator@bps.bm / BPSDemo2026!\n- arollin@bps.bm / BPSDemo2026! (Investigator)",
+      "changelog": "## v0.9.30 (2026-02-11) \u2014 Feature Verification Push\n- Verified all 3 demo login buttons (Superintendent, Inspector, Officer) via Playwright\n- Verified 68 cases in database across 4 statuses \u2014 cases page shows 51 rows\n- Verified IA access for Alexander Rollin (arollin@bps.bm) \u2014 reaches /ia-dashboard\n- Verified AI assistant: Ollama llama3:8b responds, /laws/assistant page loads with chat input\n- Verified reports page (11K chars) and analytics page (10K chars)\n- Added Playwright 10-test suite: 10/10 PASSED (tests/bps-full.spec.js)\n- Closed 9 Gitea issues: #2, #4, #10, #11, #12, #13, #14, #16, #17\n\n## v0.9.28 (2026-02-10) \u2014 CEO Fixes\n- Deleted 7 junk laws with UUID titles and unknown years (20 clean laws remain)\n- Fixed login double-click bug (button + inputs disabled during isLoading)\n- Added Alexander Rollin (arollin@bps.bm) to Internal Affairs user table\n- Added 3 demo login buttons on login page (Superintendent, Inspector, Officer)\n- Fixed login page styling and error handling\n- Updated seed data with correct user accounts\n\n## v0.9.27 (2026-02-09) \u2014 Table Sorting & Polish\n- Added column sorting (asc/desc) to cases table\n- Updated dashboard layout\n- Sidebar navigation improvements\n- Reports client updates\n\n# Changelog\n## [0.9.22] - 2026-01-30\n\n### Added - AI Auto-Fill from Notes\n- **AI Extraction API**: POST /api/ai/extract-from-notes\n  - Uses Claude AI to extract structured case data from raw officer notes\n  - Extracts: Case Type, Date/Time, Location, Parties, Vehicles, Injuries, Description\n  - CRITICAL: AI NEVER fabricates data - only extracts explicitly stated information\n  - Returns summary: filled fields count, missing fields that need user input\n- **Auto-Fill Button**: New Case page now has \"Auto-Fill from Notes\" button\n  - Officers paste/dictate raw notes into text area\n  - Click button to have AI populate form fields\n  - Shows banner: \"AI filled X fields, please verify Y fields\"\n  - Missing fields highlighted for user attention\n- **Prominent Voice Input**: Large microphone button at top of New Case form\n  - Next to AI Assistant toggle\n  - Gold color, highly visible\n  - Pulses red when recording\n  - Voice transcription feeds into notes area\n\n## [0.9.21] - 2026-01-30\n\n### Added - Rize Website Link in Footer\n- Added clickable Rize Technologies link to main page footer\n- Added clickable Rize Technologies link to login page footer\n- Added clickable Rize Technologies link to IA login page footer\n- Links open https://rize.bm in new tab\n\n## [0.9.20] - 2026-01-30\n\n### Added - IA Audit Logs View\n- **API Endpoint**: GET /api/ia/audit-logs\n  - Query audit logs with filters (userId, action, resourceType, dateRange)\n  - Pagination support (limit, offset)\n  - Returns filter options for dropdowns\n- **IA Audit Logs Page**: /ia-audit-logs\n  - Table view: When, Who, Action, Resource, Details, From Where\n  - Filters: User, Action, Start Date, End Date\n  - Read-only (no edit/delete capability)\n\n## [0.9.19] - 2026-01-30\n\n### Added - Comprehensive Audit Logging (HOSPITAL-GRADE)\n- **AuditLog Table**: Created append-only audit_logs table\n  - Columns: userId, userEmail, action, resourceType, resourceId, details, ipAddress, userAgent, createdAt\n  - Indexes on: userId, resourceType+resourceId, action, createdAt\n- **Audit Service**: src/lib/audit.ts with logAudit() function\n  - Fire-and-forget logging (non-blocking)\n  - Supports VIEW_CASE, EDIT_CASE, VIEW_EVIDENCE, DOWNLOAD_EVIDENCE, etc.\n- **Case Routes**: Added audit logging to GET and PATCH handlers\n- **Evidence Routes**: Added audit logging to GET handler\n\n## [0.9.18] - 2026-01-30\n\n### Performance\n- **Login Speed Optimization**: Reduced login latency\n  - Made lastLoginAt update non-blocking (fire-and-forget)\n  - Login no longer waits for timestamp update to complete\n  - Estimated savings: ~50-100ms per login\n\n\n## [0.9.17] - 2026-01-29\n\n### Fixed\n- **PDF Export Route Error**: Fixed TypeScript error in /api/cases/[id]/pdf route\n  - Changed officer to assignedOfficer in Prisma include\n  - Updated officer name formatting to use firstName/lastName fields\n  - Root cause: Schema field name mismatch (officer vs assignedOfficer)\n\n### Verified\n- Case detail pages: All 10 tested cases render correctly\n- PDF export route: Builds without errors\n- Health check: OK\n- Database: 65 cases, 16 users\n- PM2 status: Online, no errors\n\n## [0.9.16] - 2026-01-29\n\n### Fixed\n- **Case Detail Page Error**: Fixed Something went wrong - Unexpected error occurred when viewing any case\n  - Root cause: Corrupted .next build directory missing prerender-manifest.json\n  - Cleared and rebuilt the production build\n  - Verified all manifest files regenerated correctly\n  - Restarted PM2 service\n\n### Verified\n- Health check: OK\n- Login page: Renders correctly\n- Case detail redirect: Working (307 to login for unauthenticated users)\n- PM2 status: Online\n\n## [0.9.15] - 2026-01-29\n\n### Added\n- **PDF Report Export** (lib/pdfService.ts)\n  - PDFKit dependency installed\n  - GET /api/cases/:id/pdf endpoint\n  - Report includes: case details, timeline, evidence list\n  - Auto-download with case number in filename\n  - Confidential footer\n\n### Added\n- **Email Notification System**: Automated email alerts for case events\n  - SMTP configuration via Office 365 (smtp.office365.com:587)\n  - Nodemailer integration for email sending\n  - Professional HTML email templates with BPS branding\n\n### Email Templates\n- **case-created.html**: Notification when new case assigned to officer\n- **case-updated.html**: Notification when case details changed\n- **evidence-added.html**: Notification when new evidence added to case\n\n### API Integration\n- POST /api/cases: Sends case-created email to assigned officer\n- PATCH /api/cases/[id]: Sends case-updated email on changes\n- POST /api/evidence: Sends evidence-added email to case owner\n\n### Technical\n- New library: src/lib/email.ts with sendEmail function\n- Template variables: recipientName, caseNumber, caseTitle, caseUrl, etc.\n- Async email sending (non-blocking for API responses)\n- SMTP config in .env: SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM\n\n## [0.9.23] - 2026-01-30\n\n### Added - Prominent Voice Input (Task 7)\n- Large microphone button at top of New Case form\n- Gold color, highly visible next to AI Assistant button\n- Pulses red when recording\n- Voice transcription feeds directly into notes area\n\n## [0.9.24] - 2026-01-30\n\n### Added - Column Customization (Task 8)\n- **Column Picker**: Dropdown button to show/hide columns on case list\n- Available columns: Case #, Title, Type, Status, Priority, Assigned To, Date, Parish, Complainant\n- **LocalStorage Persistence**: Column preferences saved in browser\n- Reset button to restore default columns\n- Footer shows visible column count\n\n## [0.9.25] - 2026-01-30\n\n### Changed - PDF Export Button (Task 9)\n- Made PDF Export button prominent with red background\n- Added PDF emoji icon for visibility\n- Shadow effect for visual prominence\n- Button visible at top of case detail page without scrolling\n\n## [0.9.26] - 2026-01-30\n\n### Changed - Renamed Reports to Case Review (Task 10)\n- Renamed 'Reports' to 'Case Review' in sidebar navigation\n- Updated page heading from 'Reports' to 'Case Review'\n- Updated statistics label from 'Total Reports' to 'Total Reviews'\n- All links and routes remain functional",
       "todos_parsed": [
         {
-          "text": "Renamed Reports to Case Review in navigation",
+          "text": "Demo login buttons: Superintendent, Inspector, Officer \u2014 all 3 verified via Playwright",
           "done": true
         },
         {
-          "text": "Updated page titles and labels",
+          "text": "Cases data: 68 cases across 4 statuses (26 open, 20 in progress, 13 closed, 9 under review)",
           "done": true
         },
         {
-          "text": "All routes remain functional",
+          "text": "IA access: arollin@bps.bm verified \u2014 logs in, reaches /ia-dashboard",
           "done": true
         },
         {
-          "text": "Made PDF Export button prominent (red, shadow)",
+          "text": "AI assistant: Ollama llama3:8b + mistral:7b running, /laws/assistant page loads with chat input",
           "done": true
         },
         {
-          "text": "Added PDF emoji icon",
+          "text": "Reports page: 11K chars, 4 reports in DB, analytics page loads",
           "done": true
         },
         {
-          "text": "Button visible without scrolling",
+          "text": "Playwright 10-test suite: 10/10 PASSED",
           "done": true
         },
         {
-          "text": "Column picker dropdown on case list",
+          "text": "Gitea issues closed: #2, #4, #10, #11, #12, #13, #14, #16, #17",
           "done": true
         },
         {
-          "text": "Show/hide columns (Case #, Title, Type, Status, Priority, Officer, Date, Parish, Complainant)",
+          "text": "Documentation updates, credential fixes, PM2 reset",
           "done": true
         },
         {
-          "text": "localStorage persistence for preferences",
+          "text": "Deleted 7 junk laws with UUID titles and 'unk' year from database",
           "done": true
         },
         {
-          "text": "Reset to defaults button",
+          "text": "Simplified login demo buttons: Superintendent, Inspector, Officer",
           "done": true
         },
         {
-          "text": "Large microphone button at top of New Case form",
+          "text": "Created superintendent@bps.bm and inspector@bps.bm demo accounts",
           "done": true
         },
         {
-          "text": "Gold color, next to AI Assistant button",
+          "text": "Added Alexander Rollin (arollin@bps.bm) to Internal Affairs user table",
           "done": true
         },
         {
-          "text": "Pulses red when recording",
+          "text": "Login page now uses bermuda-police.png logo instead of SVG",
           "done": true
         },
         {
-          "text": "Voice feeds into notes area",
+          "text": "Fixed login loading state - button disabled when isLoading is true",
           "done": true
         },
         {
-          "text": "AI extraction API (/api/ai/extract-from-notes)",
+          "text": "One-click demo login buttons with column sorting",
           "done": true
         },
         {
-          "text": "Auto-Fill from Notes button on New Case page",
+          "text": "Alex Rollin set to SUPERINTENDENT role",
           "done": true
         },
         {
-          "text": "AI fills form fields from raw notes",
+          "text": "Dashboard shows System Status instead of AI Models",
           "done": true
         },
         {
-          "text": "AI NEVER fabricates - prompts user for missing fields",
+          "text": "Fixed hydration errors in IA pages",
           "done": true
         },
         {
-          "text": "\"AI filled X fields, verify Y fields\" message",
-          "done": true
+          "text": "#1: DROPDOWN: Fix big dropdown on Analysis Demo click",
+          "done": false
         },
         {
-          "text": "Prominent voice input button at top of New Case form",
-          "done": true
+          "text": "#3: SORTING: Case list sorting works correctly",
+          "done": false
         }
       ],
-      "todos_open": 0,
-      "todos_done": 20,
-      "version": "0.9.22",
+      "todos_open": 2,
+      "todos_done": 18,
+      "version": "0.9.30",
       "git": {
-        "status": "clean",
+        "status": "dirty",
         "branch": "main",
-        "last_commit": "761b322 17 users seeded, systemd service, court/laws API endpoints operational (23 minutes ago)",
-        "changes": [],
-        "uncommitted_count": 0
+        "last_commit": "1929818 fix: REQ-B001/B002/B004 test regressions \u2014 hydration wait, IA link selector, cases navigation (21 hours ago)",
+        "changes": [
+          {
+            "status": "M",
+            "file": "ublic/images/bps-icon.svg"
+          },
+          {
+            "status": "M",
+            "file": "src/app/layout.tsx"
+          },
+          {
+            "status": "M",
+            "file": "test-results/.last-run.json"
+          },
+          {
+            "status": "D",
+            "file": "\"test-results/bps-tests-REQ-B001-Analysis-section-\\342\\200\\224-no-oversized-dropdown/error-context.md\""
+          },
+          {
+            "status": "D",
+            "file": "test-results/bps-tests-REQ-B002-Demo-login-buttons-exist-and-work/error-context.md"
+          },
+          {
+            "status": "D",
+            "file": "test-results/bps-tests-REQ-B003-Case-list-sorting-works/error-context.md"
+          },
+          {
+            "status": "D",
+            "file": "test-results/bps-tests-REQ-B004-20-demo-cases-exist/error-context.md"
+          },
+          {
+            "status": "D",
+            "file": "test-results/bps-tests-REQ-B006-No-React-hydration-errors-in-console/error-context.md"
+          },
+          {
+            "status": "D",
+            "file": "test-results/bps-tests-REQ-B007-Pages-load-data-immediately/error-context.md"
+          },
+          {
+            "status": "??",
+            "file": "public/bpsai-180.png"
+          }
+        ],
+        "uncommitted_count": 13
       },
       "ports_status": [
         {
@@ -379,15 +474,16 @@
       "files": [
         "API.md",
         "ARCHITECTURE.md",
+        "BPS-AI-CLAUDE-CODE-PROMPT.md",
+        "BPS-AI-REQUIREMENTS.md",
         "CHANGELOG.md",
         "CLAUDE.md",
         "DEMO_CHECKLIST.md",
         "DEMO_SCRIPT.md",
         "DEPLOYMENT.md",
-        "README.md",
         "ROADMAP.md",
-        "TODO.md",
         "USER_GUIDE.md",
+        "bps-tests.spec.js",
         "docs/API_SPEC.md",
         "docs/DATABASE_SCHEMA.md",
         "docs/DESIGN_SPEC.md",
@@ -406,7 +502,6 @@
         "rag/index_embeddings.py",
         "rag/index_laws.py",
         "scrapers/daily-scraper.py",
-        "scrapers/sync-to-db.js",
         "scripts/check-user.ts",
         "scripts/create-superintendent.ts",
         "scripts/elevate-alex.ts",
@@ -423,12 +518,12 @@
         "search-laws-advanced.js",
         "seed-ia-investigations.js",
         "src/middleware.ts",
-        "tailwind.config.js",
         "test-upload.js",
+        "tests/bps-full.spec.js",
         "tsconfig.json",
         "verify_db.js"
       ],
-      "health_score": 100
+      "health_score": 98
     },
     {
       "name": "Premier EMR",
@@ -440,9 +535,14 @@
         3004,
         5004
       ],
-      "scanned_at": "2026-02-07T23:10:29.652326+00:00",
+      "scanned_at": "2026-02-12T14:37:34.158699+00:00",
       "status": "ok",
-      "issues": [],
+      "issues": [
+        {
+          "severity": "info",
+          "message": "6 uncommitted changes"
+        }
+      ],
       "docs": [
         {
           "file": "README.md",
@@ -588,11 +688,36 @@
       "todos_done": 20,
       "version": "0.4.0",
       "git": {
-        "status": "clean",
+        "status": "dirty",
         "branch": "main",
-        "last_commit": "4a81291 RBAC seeded: 4 users, 10 roles, 32 permissions. Docker compose operational (23 minutes ago)",
-        "changes": [],
-        "uncommitted_count": 0
+        "last_commit": "4a81291 RBAC seeded: 4 users, 10 roles, 32 permissions. Docker compose operational (5 days ago)",
+        "changes": [
+          {
+            "status": "M",
+            "file": "LAUDE.md"
+          },
+          {
+            "status": "M",
+            "file": "frontend/index.html"
+          },
+          {
+            "status": "??",
+            "file": "CLAUDE.md.bak.20260210"
+          },
+          {
+            "status": "??",
+            "file": "PREMIER-EMR-REQUIREMENTS.md"
+          },
+          {
+            "status": "??",
+            "file": "frontend/public/"
+          },
+          {
+            "status": "??",
+            "file": "public/"
+          }
+        ],
+        "uncommitted_count": 6
       },
       "ports_status": [
         {
@@ -615,6 +740,7 @@
         "CLAUDE.md",
         "DEMO-SCRIPT.md",
         "DEPLOYMENT.md",
+        "PREMIER-EMR-REQUIREMENTS.md",
         "PROJECT_PLAN.md",
         "README.md",
         "ROADMAP.md",
@@ -627,7 +753,7 @@
         "frontend/tailwind.config.js",
         "frontend/vite.config.js"
       ],
-      "health_score": 100
+      "health_score": 98
     },
     {
       "name": "Helios AI",
@@ -638,9 +764,14 @@
       "ports": [
         3005
       ],
-      "scanned_at": "2026-02-07T23:10:43.214127+00:00",
+      "scanned_at": "2026-02-12T14:37:50.085888+00:00",
       "status": "ok",
-      "issues": [],
+      "issues": [
+        {
+          "severity": "info",
+          "message": "20 uncommitted changes"
+        }
+      ],
       "docs": [
         {
           "file": "README.md",
@@ -697,100 +828,141 @@
           "status": "ok"
         }
       ],
-      "readme": "# BMA Document AI - Intelligent Data Management Platform\n\nBMA Document AI is a comprehensive platform that combines artificial intelligence with data management to help you work smarter, not harder. Our platform integrates with your existing email and file storage services, providing AI-powered search, analysis, and assistance across all your data.\n\n## \ud83d\ude80 Features\n\n### Core Features\n\n- **AI Chat**: Interactive AI conversations with streaming responses and chat history storage\n- **AI Prompts**: Create and manage custom AI prompt templates for specific use cases\n- **Email Management**: Connect and manage emails from Gmail and Microsoft Outlook\n- **File Management**: Access and manage files from Google Drive and Microsoft OneDrive\n- **Data Lake**: Centralized data repository with advanced search capabilities\n- **Semantic Search**: Powerful search across all your data sources\n\n### Administrative Features\n\n- **User Management**: Manage users, assign roles, and control access permissions\n- **Group Management**: Create and manage user groups for better organization\n- **Prompt Management**: Create and manage AI prompt templates for your organization\n- **Permissions**: Configure detailed access controls and permissions\n\n## \ud83d\udee0\ufe0f Technology Stack\n\n### Frontend\n\n- **React 18** - Modern React with hooks and functional components\n- **Bootstrap 5** - Responsive UI framework\n- **TailwindCSS** - Utility-first CSS framework\n- **Reactstrap** - Bootstrap components for React\n- **Redux & Redux Saga** - State management\n- **React Router** - Client-side routing\n\n### Backend\n\n- **FastAPI** - Modern Python web framework\n- **SQLAlchemy** - SQL toolkit and ORM\n- **PostgreSQL** - Primary database\n- **Alembic** - Database migrations\n- **OpenAI API** - AI model integration\n- **OAuth 2.0** - Authentication with Google and Microsoft\n\n### AI & Search\n\n- **OpenAI GPT Models** - Advanced language models\n- **Vector Database** - Semantic search capabilities\n- **Embedding Generation** - Text-to-vector conversion\n- **Streaming Responses** - Real-time AI interactions\n\n## \ud83d\udccb Prerequisites\n\n- Node.js >= 16\n- Python >= 3.8\n- PostgreSQL >= 12\n- Docker & Docker Compose (optional)\n\n## \ud83d\ude80 Quick Start\n\n### Using Docker (Recommended)\n\n1. **Clone the repository**\n\n   ```bash\n   git clone <repository-url>\n   cd helios\n   ```\n\n2. **Set up environment variables**\n\n   ```bash\n   cp .env.example .env\n   # Edit .env with your configuration\n   ```\n\n3. **Start the application**\n\n   ```bash\n   docker-compose up -d\n   ```\n\n4. **Access the application**\n   - Frontend: http://localhost:3000\n   - Backend API: http://localhost:8000\n   - API Documentation: http://localhost:8000/docs\n\n### Manual Setup\n\n#### Backend Setup\n\n1. **Create virtual environment**\n\n   ```bash\n   cd backend\n   python -m venv venv\n   source venv/bin/activate  # On Windows: venv\\Scripts\\activate\n   ```\n\n2. **Install dependencies**\n\n   ```bash\n   pip install -r requirements.txt\n   ```\n\n3. **Set up database**\n\n   ```bash\n   # Configure your database connection in .env\n   # Run migrations\n   alembic upgrade head\n   ```\n\n4. **Start the backend**\n   ```bash\n   uvicorn app.main:app --reload --host 0.0.0.0 --port 8000\n   ```\n\n#### Frontend Setup\n\n1. **Install dependencies**\n\n   ```bash\n   cd frontend\n   npm install\n   ```\n\n2. **Start the development server**\n   ```bash\n   npm start\n   ```\n\n## \ud83d\udd27 Configuration\n\n### Environment Variables\n\nCreate a `.env` file in the root directory with the following variables:\n\n```env\n# Database\nDATABASE_URL=postgresql://username:password@localhost:5432/helios_db\n\n# OpenAI\nOPENAI_API_KEY=your_openai_api_key\n\n# Admin User\nADMIN_EMAIL=admin@example.com\nADMIN_PASSWORD=secure_password\n\n# OAuth (Google)\nGOOGLE_CLIENT_ID=your_google_client_id\nGOOGLE_CLIENT_SECRET=your_google_client_secret\n\n# OAuth (Microsoft)\nMICROSOFT_CLIENT_ID=your_microsoft_client_id\nMICROSOFT_CLIENT_SECRET=your_microsoft_client_secret\n\n# Security\nSECRET_KEY=your_secret_key\nJWT_SECRET=your_jwt_secret\n```\n\n## \ud83d\udcd6 Usage Guide\n\n### Getting Started\n\n1. **Authentication**: Sign in using your Google or Microsoft account, or create a new account with email and password\n2. **Connect Accounts**: Go to Settings (accessible from your profile) to connect your Gmail, Outlook, Google Drive, and OneDrive accounts for data integration\n3. **Start Chatting**: Use the AI Chat feature to ask questions about your data or get assistance with tasks\n4. **Explore Data**: Browse your emails, files, and use the search functionality to find specific information\n5. **Create Prompts**: Build custom AI prompt templates for specific workflows and use cases\n\n### Account Connections\n\nTo enable email and file integration, users must connect their accounts through the Settings page:\n\n1. **Access Settings**: Click on your profile picture/name in the top navigation, then select \"Settings\"\n2. **Google Integration**: Click \"Login with Google\" to connect Gmail and Google Drive\n3. **Microsoft Integration**: Click \"Login with Microsoft\" to connect Outlook and OneDrive\n4. **Security**: Your data remains secure with OAuth 2.0 authentication and minimal required permissions\n5. **Management**: Disconnect accounts at any time through the Settings page\n\n### AI Chat Features\n\n- **Real-time Streaming**: Get AI responses as they're generated\n- **Chat History**: All conversations are automatically stored and searchable\n- **Context Awareness**: AI remembers previous conversations\n- **Multiple Models**: Support for OpenAI GPT and Ollama models\n\n### Data Integration\n\n- **Email Integration**: Connect Gmail and Outlook for email analysis\n- **File Integration**: Access Google Drive and OneDrive files\n- **Vector Search**: Advanced semantic search across all data\n- **Data Embedding**: Automatic content embedding for AI analysis\n\n### Administrative Tools\n\n- **User Management**: Create, edit, and manage user accounts\n- **Group Management**: Organize users into groups with specific permissions\n- **Prompt Templates**: Create reusable AI prompt templates\n- **Access Control**: Fine-grained permission management\n\n## \ud83d\udd12 Security Features\n\n- **OAuth 2.0 Authentication**: Secure login with Google and Microsoft\n- **Role-Based Access Control**: Granular permissions system\n- **Encrypted Data Storage**: All sensitive data is encrypted\n- **Session Management**: Secure session handling\n- **API Rate Limiting**: Protection against abuse\n\n## \ud83e\uddea Testing\n\n### Backend Tests\n\n```bash\ncd backend\npytest\n```\n\n### Frontend Tests\n\n```bash\ncd frontend\nnpm test\n```\n\n## \ud83d\udcda API Documentation\n\nThe API documentation is automatically generated and available at:\n\n- Swagger UI: http://localhost:8000/docs\n- ReDoc: http://localhost:8000/redoc\n\n## \ud83e\udd1d Contributing\n\n1. Fork the repository\n2. Create a feature branch (`git checkout -b feature/amazing-feature`)\n3. Commit your changes (`git commit -m 'Add amazing feature'`)\n4. Push to the branch (`git push origin feature/amazing-feature`)\n5. Open a Pull Request\n\n## \ud83d\udcc4 License\n\nThis project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.\n\n## \ud83c\udd98 Support\n\nIf you need assistance with BMA Document AI or have questions about any features, please:\n\n- Check the About page in the application\n- Contact your system administrator\n- Refer to the platform documentation\n- Open an issue on GitHub\n\n## \ud83d\udd04 Changelog\n\n### v1.0.0\n\n- Initial release\n- AI Chat with streaming responses\n- Email and file integration\n- Vector search capabilities\n- Administrative dashboard\n- OAuth authentication\n- Chat history storage\n\n---\n\n**BMA Document AI** - Empowering your data with artificial intelligence.",
-      "todo": "# Helios TODO\n\n## Security Review Summary (Feb 2, 2026)\nChatGPT codebase audit identified 7 findings. Categorized below by demo-blocking vs post-demo hardening.\n\n---\n\n## P0 - CRITICAL (Demo Blockers)\n\n### Security - Must Fix Before Any External Demo\n- [ ] **Rotate all exposed secrets** - credentials.json, encryption_key.key, hardcoded passwords in docker-compose.yml, alembic.ini, connection.py, auth.py, frontend config are ALL compromised since they're in git history\n- [ ] **Remove secrets from repo** - add .gitignore entries, use .env for all secrets, run `git filter-branch` or BFG to scrub history\n- [ ] **Fix path traversal in file upload/download** - shared_files.py uses user-controlled folder/file names in os.path.join without safe resolution. Store by server-generated IDs, validate absolute paths against base directory\n- [ ] **Fix XSS via dangerouslySetInnerHTML** - AiPromptContent.jsx, EmailModal.jsx, SearchBar.jsx, EmailToolbar.js all render untrusted HTML. Add DOMPurify sanitization or render as plain text\n- [ ] **Fix auth middleware bypass** - /admin/groups paths skip auth checks. Remove bypass, require auth on ALL admin routes\n- [ ] **Fix token handling** - refresh token has hardcoded secret, broken datetime, Redis storage not namespaced per user. Rebuild to fail-closed if secrets missing\n\n### Infrastructure - Demo Readiness\n- [ ] Verify all 5 Docker containers healthy (backend, frontend, weaviate, redis, postgres)\n- [ ] Create BDIC demo user account\n- [ ] Test AI chat functionality end-to-end\n- [ ] Setup Cloudflare tunnel for helios.rize.bm\n- [ ] Load sample BDIC-relevant documents for demo\n- [ ] Test semantic search with sample docs\n- [ ] Verify document upload/download workflow\n\n---\n\n## P1 - HIGH (Demo Polish / Pre-Production)\n\n### Security Hardening\n- [ ] **Stop logging document content** - remove `logger.info(f\"conditions : {conditions}\")` and similar in ai_process.py. Add log redaction\n- [ ] **Policy gate for external AI models** - when internet mode enabled, document content goes to external providers. Add explicit approval toggle for regulated tenants, default OFF\n- [ ] **Protect content integrity** - embedding_generator.py text \"cleanup\" alters extracted text (names, numbers, capitalization). Store raw extracted text as source of truth, keep normalized text as separate derived field\n- [ ] **Remove wildcard CORS** - restrict to specific origins\n- [ ] **Add CSP headers** - prevent XSS even if sanitization is bypassed\n- [ ] Add malware scanning on document upload\n\n### Demo Experience\n- [ ] Create demo walkthrough script for BDIC\n- [ ] Screenshot/record key features\n- [ ] Configure email integration (OAuth) if needed for demo\n- [ ] Prepare presentation deck\n- [ ] Test with realistic BDIC document types (regulatory filings, compliance docs, etc.)\n\n---\n\n## P2 - MEDIUM (Post-Demo Hardening)\n\n### Security & Compliance\n- [ ] **Chunk-level indexing with citations** - return search results as references + short snippets, not full document content\n- [ ] **Object-level RBAC** - enforce permissions in every retrieval query, not just UI layer\n- [ ] **Encryption & key management** - KMS-backed keys, rotation, no keys in containers/repos\n- [ ] **Audit trails** - who accessed what, when, how (search, view, export, AI), with retention controls\n- [ ] **Tokens out of localStorage** - use httpOnly cookies for regulated tenants\n- [ ] Production SSL certs (Let's Encrypt via Cloudflare)\n- [ ] Decide compliance target: SOC 2, ISO 27001, or Bermuda PIPA-driven control set\n- [ ] Add secret scanning in CI/CD pipeline\n- [ ] API rate limiting\n\n### Infrastructure\n- [ ] Backup strategy (database + uploaded documents)\n- [ ] Add to Homebase monitoring\n- [ ] Performance tuning\n- [ ] Database migration strategy\n\n---\n\n## P3 - LOW (Future Roadmap)\n- [ ] Multi-tenant support with proper isolation\n- [ ] On-prem inference option (restrict external model calls entirely)\n- [ ] Redaction layer for external AI calls (strip PII before sending)\n- [ ] Advanced analytics & usage reporting\n- [ ] Mobile-responsive improvements\n- [ ] Automated compliance reporting\n\n---\n\n## Completed\n- [x] VM provisioned (.240 / heliosdev)\n- [x] Ubuntu 24.04 + Docker v29.2.1 + Compose v5.0.2\n- [x] Security (UFW, fail2ban, SSH keys, subnet whitelisted)\n- [x] SSH key auth configured\n- [x] Passwordless sudo for heliosdev\n- [x] Git repo cloned\n- [x] API keys configured (OpenAI, Gemini, Anthropic)\n- [x] SSL self-signed certs generated\n- [x] Environment files created\n- [x] Project docs created (PROJECT_PLAN, TODO, CHANGELOG, CLAUDE.md)\n- [x] Docker stack initiated\n- [x] ChatGPT security review completed\n\n---\n\n## Decision Log\n| Date | Decision | Rationale |\n|------|----------|-----------|\n| 2026-02-02 | BMA demo on hold, pivoting to BDIC | Client priority shift |\n| 2026-02-02 | Security fixes before demo | Can't demo regulated tool with path traversal and XSS |\n| 2026-02-02 | Raw text preservation required | BDIC is a regulator - altered document text kills legal defensibility |\n\nLast Updated: 2026-02-02",
-      "changelog": "# Helios Changelog\n\n## [Unreleased] - Security Remediation\n### Security\n- Pending: Rotate all exposed secrets\n- Pending: Fix path traversal in shared_files.py\n- Pending: Fix XSS in React components\n- Pending: Fix auth middleware bypass\n- Pending: Fix token handling\n- Pending: Scrub git history\n\n---\n\n## [1.0.1] - 2026-02-02 (Security Review)\n\n### Changed\n- Target client changed from BMA to BDIC\n- Demo blocked pending security fixes\n\n### Security Audit Findings\n- **Critical**: Credentials exposed in git history (credentials.json, encryption_key.key, docker-compose.yml, alembic.ini, auth.py)\n- **Critical**: Path traversal vulnerability in shared_files.py\n- **Critical**: XSS via dangerouslySetInnerHTML in 4 React components\n- **Critical**: Auth middleware bypass on /admin/groups routes\n- **High**: Token handling issues (hardcoded secret, broken datetime)\n- **Medium**: Document content logged to console\n- **Medium**: Wildcard CORS enabled\n\n### Added\n- Comprehensive security-focused TODO.md\n- Decision log tracking client pivot and security prioritization\n\n---\n\n## [1.0.0] - 2026-02-02 (Initial Deployment)\n\n### Added\n- VM provisioned at 192.168.65.240 (heliosdev)\n- Ubuntu 24.04 LTS\n- Docker v29.2.1 + Compose v5.0.2\n- Self-signed SSL certificates\n- Security: UFW (22,80,443,2222), fail2ban with subnet whitelist\n- SSH key authentication from claudedev\n- Passwordless sudo for heliosdev\n- Project documentation (PROJECT_PLAN.md, TODO.md, CHANGELOG.md, CLAUDE.md)\n- API keys configured (OpenAI, Gemini, Anthropic)\n\n### Stack\n- Frontend: React 18, Bootstrap 5, TailwindCSS, Redux\n- Backend: FastAPI, SQLAlchemy, PostgreSQL 15\n- AI: OpenAI GPT, Google Gemini, Anthropic Claude\n- Search: Weaviate vector DB\n- Cache: Redis\n\n---\n\n## [0.0.0] - Pre-deployment\n- Initial codebase from Rize-Technologies/helios-ai\n\n---\n\nLast Updated: 2026-02-02",
+      "readme": "# Helios AI \u2014 Intelligent Data Management Platform\n\nHelios AI is a comprehensive platform that combines artificial intelligence with data management to help organizations work smarter, not harder. The platform integrates with existing email and file storage services, providing AI-powered search, analysis, and assistance across all your data.\n\n## Current Status: Ready for Feb 17 CPA Demo\n\nTarget Client: **BDIC (Bermuda Business Development Corporation)**\n\n## Quick Start\n\n```bash\nssh demos@192.168.65.246\ncd ~/helios\ndocker compose up -d\n```\n\nAccess:\n- Frontend: https://helios.rize.bm (or https://192.168.65.246:3005)\n- Backend API: https://192.168.65.246:5005\n\n## Features\n\n### Core Features\n\n- **AI Chat**: Interactive AI conversations with streaming responses and chat history\n- **AI Prompts**: Custom AI prompt templates for specific use cases\n- **Email Management**: Connect Gmail and Microsoft Outlook\n- **File Management**: Access Google Drive and Microsoft OneDrive\n- **Data Lake**: Centralized data repository with advanced search\n- **Semantic Search**: Powerful vector-based search across all data sources\n\n### Administrative Features\n\n- **User Management**: Manage users, roles, and access permissions\n- **Group Management**: Create and manage user groups\n- **Prompt Management**: Organization-wide AI prompt templates\n- **Permissions**: Detailed access controls\n\n## Technology Stack\n\n### Frontend\n- React 18, Bootstrap 5, TailwindCSS\n- Zustand for state management\n- React Router for client-side routing\n\n### Backend\n- FastAPI with SQLAlchemy ORM\n- PostgreSQL 15 database\n- Alembic for migrations\n- OAuth 2.0 (Google, Microsoft)\n\n### AI and Search\n- OpenAI GPT-4, Google Gemini, Grok, Ollama\n- Weaviate vector database\n- sentence-transformers embeddings\n\n## Docker Services\n\n| Service | Host Port | Container Port |\n|---------|-----------|----------------|\n| frontend | 3005 | 443 |\n| backend | 5005 | 443 |\n| postgres | 5433 | 5432 |\n| weaviate | 8182 | 8080 |\n| redis | 6380 | 6379 |\n\n## Security\n\n### Completed \u2705\n- credentials.json removed from git tracking\n- encryption_key.key removed from git tracking\n- Git history cleaned (force-pushed)\n- All API keys in .env files\n\n### Remaining P0 Items\n- Path traversal fix in shared_files.py\n- XSS fixes in 4 React components\n- Auth bypass fix on /admin/groups\n- Token handling rebuild\n\nSee TODO.md for full security remediation plan.\n\n## Documentation\n\n- `CLAUDE.md` \u2014 Claude Code instructions\n- `PROJECT_PLAN.md` \u2014 Project phases and status\n- `TODO.md` \u2014 Current tasks and priorities\n- `CHANGELOG.md` \u2014 Version history\n- `ARCHITECTURE.md` \u2014 System design\n- `DEPLOYMENT.md` \u2014 Deployment guide\n- `DEMO-SCRIPT.md` \u2014 Demo walkthrough\n- `ROADMAP.md` \u2014 Future plans\n\n## License\n\nProprietary - Rize Technologies\n\n---\n\nLast Updated: 2026-02-11",
+      "todo": "# Helios TODO \u2014 Updated Feb 12, 2026\n\n## Completed\n- [x] Dashboard charts: donut by type + bar by client (Fixes #1)\n- [x] Document detail: clickable rows navigate to detail page (Fixes #2)\n- [x] CPA demo data: 356 documents seeded with fictional company names (Fixes #3)\n- [x] Report generation: Excel/Word/PowerPoint working (Fixes #4)\n- [x] UI polish: SVG logo, favicon, page titles, skeletons (Fixes #5)\n- [x] AI Chat: Weaviate RAG + Claude Sonnet, document-aware (Fixes #7)\n- [x] Security: DB password to .env, auth working (Fixes #8)\n- [x] GitHub mirror: Push mirrors configured (Fixes #9)\n- [x] Git workflow: Gitea is source of truth, CLAUDE.md updated\n- [x] Playwright: 20-test suite written, 18/20 passing\n- [x] Remove all real company names (Bermuda, BPS, BMA, etc.) \u2014 replaced with fictional\n- [x] Fix document classification chart \u2014 top 8 + Other, legend, readable\n- [x] Data Lake files clickable \u2014 table view with search/filter, links to detail\n- [x] AI Chat mode toggle \u2014 documents_only vs documents_plus_web\n- [x] Weaviate vector embeddings \u2014 356 docs embedded with all-mpnet-base-v2\n- [x] Assign all documents to clients \u2014 0 unassigned\n- [x] Consolidate doc_types from 45 to 23 categories\n- [x] Search results clickable \u2014 Links to /documents/{id}, hover effects, doc type icons\n\n## Open\n- [ ] Add real public documents (SEC filings, IRS forms) for richer demo\n- [ ] 2 flaky Playwright tests (login timeout on SSL)\n- [ ] P0 Security: Path traversal fix, XSS fixes, auth bypass, token handling\n\n## Feb 17 CPA Demo Readiness\n- Dashboard: READY (charts with fictional data, top 8 + Other donut)\n- Documents: READY (clickable, detail pages, 356 docs)\n- Data Lake: READY (clickable table, search, filter by type)\n- AI Chat: READY (Weaviate RAG, Claude, mode toggle, streaming)\n- Reports: READY (Excel generation + download)\n- Search: READY (clickable results, type icons, hover effects)\n- Upload: READY (OCR with Tesseract)\n- Login: READY (3 demo buttons)\n- Emails: READY (500 business emails searchable)\n- Company Names: CLEAN (all fictional)\n\n## CEO QA Feedback (Feb 12) \u2014 Status\n1. \u2705 Files are real PDFs/Excel \u2014 356 ReportLab-generated documents with actual content\n2. \u2705 Folder structure \u2014 19 client folders organized by doc_type\n3. \u2705 OCR \u2014 Tesseract 5.5.0 installed, pytesseract integrated in upload pipeline\n4. \u2705 Search clickable \u2014 Results link to /documents/{id} with hover effects\n5. \u2705 AI Chat \u2014 Weaviate RAG + Claude, document sources, mode toggle\n6. \u2705 Emails \u2014 500 business emails generated across 7 categories\n7. \u2b1c Project plan review \u2014 Pending deeper review\n8. \u2705 Overall demo quality \u2014 Production-ready for CPA demo",
+      "changelog": "## v2.3.0 \u2014 Feb 11, 2026\n- Dashboard: Real donut chart (by classification) + bar chart (by client) using recharts\n- Documents: Rows clickable, navigates to document detail page\n- CPA Data: 26 CPA-specific documents seeded (tax returns, audits, invoices, engagement letters)\n- UI Polish: SVG sun logo, Helios favicon, page titles, fade transitions, skeleton loading\n- AI Chat: Verified \u2014 returns document-specific answers with references\n- Reports: Verified \u2014 Excel generation working, 12 reports in system\n- Git: Gitea workflow rules added to CLAUDE.md, 10 GitHub push mirrors configured\n- Playwright: 20-test suite, 18/20 passing\n\n## [2.2.0] - 2026-02-11\n\n### Fixed\n- Dashboard stats route: /api/dashboard/stats now returns 200 (was 405)\n- Added dual route registration for /dashboard and /api/dashboard prefixes\n- DB password moved from docker-compose.yml to .env variable\n\n### Security\n- Path traversal: Verified safe_path_join() in shared_files.py\n- XSS: Confirmed no dangerouslySetInnerHTML in new Vite frontend\n- Auth bypass: /admin/groups properly returns 401 without auth\n- Token expiry: JWT tokens have 24h TTL with exp claim\n\n### Added\n- 80 realistic business emails seeded into database\n- Email senders from BMA, BPS Legal, CPA, Insurance, Hospital, Shipping\n\n# Helios AI - Changelog\n\n## [2.1.0] - 2026-02-10\n\n### Added\n- Document Detail page (/documents/:id) with full AI analysis view\n- Recharts integration for Dashboard visualizations\n- Pie chart showing document type distribution\n- Bar chart showing weekly activity\n- Demo script page at /demo for presenter guide\n- has_signature field in documents API\n- Loading skeleton animations\n- Trend indicators on stat cards\n\n### Changed\n- Documents page rows now clickable (navigate to detail)\n- Dashboard uses proper /dashboard/stats endpoint\n- Recent documents use /dashboard/recent-files endpoint\n- Enhanced document cards with hover effects\n\n### Fixed\n- Dashboard stats 405 error (wrong endpoint path)\n- Document list missing has_signature field\n- Recent documents field mapping\n\n### Performance\n- All pages load in <0.03 seconds\n- All APIs respond in <0.05 seconds\n\n## [2.0.0] - 2026-02-10\n\n### Added\n- Complete frontend rebuild with Vite + React + Tailwind\n- One-click demo login buttons (Admin/Analyst/Viewer)\n- AI Chat with Anthropic Claude integration\n- Report generation (Excel/Word/PowerPoint)\n- Document upload with OCR processing\n\n### Changed\n- Replaced old Velzon Redux template\n- User avatars now use initials instead of stock photos\n\n### Fixed\n- Connection pool exhaustion in AI routes\n- Demo account password hashes\n- Hardcoded JWT secret\n\n## [1.0.0] - 2026-02-02\n\n### Added\n- Initial Helios deployment\n- Document management system\n- Client management\n- Email import functionality\n- Search and Data Lake\n\n\n## v2.4.0 \u2014 Feb 12, 2026 (CPA Demo Overhaul)\n\n### Data Cleanup\n- Replaced all 19 real Bermuda company names with fictional CPA-appropriate names\n- Updated 356 shared_files (client_name, content, ai_summary, filenames)\n- Updated 80 emails (sender addresses, content)\n- Replaced Bermuda addresses, currency (BMD->USD), legal references\n- Assigned all 315 previously unassigned documents to appropriate clients\n- Consolidated 45 doc_types into 23 cleaner categories\n\n### Dashboard\n- Fixed classification donut chart: now shows top 8 categories + \"Other\"\n- Added Legend below chart for readability\n- Labels only show for categories >5% of total\n- Increased chart height for breathing room\n\n### Data Lake\n- Complete rewrite: now shows as sortable table with columns\n- Files are clickable \u2014 navigate to document detail page\n- Added search bar (searches by filename and client name)\n- Added doc_type filter dropdown\n- Color-coded type badges\n- Formatted dates\n- File type icons (PDF, Excel, Word, etc.)\n\n### AI Chat\n- Upgraded to Weaviate vector search (was PostgreSQL FTS only)\n- 356 documents embedded with all-mpnet-base-v2 sentence-transformers\n- Added mode toggle: \"Documents Only\" vs \"Documents + AI Knowledge\"\n- Professional CPA system prompt with document citation format\n- Animated loading indicator\n- Source document chips below AI responses (clickable)\n- New conversation button\n- Placeholder text changes based on mode\n\n### Infrastructure\n- Created Weaviate schema (Document class, 7 properties, vectorizer=none)\n- Created embed_weaviate.py for batch embedding pipeline\n- Created Dockerfile for frontend (was missing)\n- Created nginx.conf for frontend container",
       "todos_parsed": [
         {
-          "text": "**Rotate all exposed secrets** - credentials.json, encryption_key.key, hardcoded passwords in docker-compose.yml, alembic.ini, connection.py, auth.py, frontend config are ALL compromised since they're in git history",
+          "text": "Dashboard charts: donut by type + bar by client (Fixes #1)",
+          "done": true
+        },
+        {
+          "text": "Document detail: clickable rows navigate to detail page (Fixes #2)",
+          "done": true
+        },
+        {
+          "text": "CPA demo data: 356 documents seeded with fictional company names (Fixes #3)",
+          "done": true
+        },
+        {
+          "text": "Report generation: Excel/Word/PowerPoint working (Fixes #4)",
+          "done": true
+        },
+        {
+          "text": "UI polish: SVG logo, favicon, page titles, skeletons (Fixes #5)",
+          "done": true
+        },
+        {
+          "text": "AI Chat: Weaviate RAG + Claude Sonnet, document-aware (Fixes #7)",
+          "done": true
+        },
+        {
+          "text": "Security: DB password to .env, auth working (Fixes #8)",
+          "done": true
+        },
+        {
+          "text": "GitHub mirror: Push mirrors configured (Fixes #9)",
+          "done": true
+        },
+        {
+          "text": "Git workflow: Gitea is source of truth, CLAUDE.md updated",
+          "done": true
+        },
+        {
+          "text": "Playwright: 20-test suite written, 18/20 passing",
+          "done": true
+        },
+        {
+          "text": "Remove all real company names (Bermuda, BPS, BMA, etc.) \u2014 replaced with fictional",
+          "done": true
+        },
+        {
+          "text": "Fix document classification chart \u2014 top 8 + Other, legend, readable",
+          "done": true
+        },
+        {
+          "text": "Data Lake files clickable \u2014 table view with search/filter, links to detail",
+          "done": true
+        },
+        {
+          "text": "AI Chat mode toggle \u2014 documents_only vs documents_plus_web",
+          "done": true
+        },
+        {
+          "text": "Weaviate vector embeddings \u2014 356 docs embedded with all-mpnet-base-v2",
+          "done": true
+        },
+        {
+          "text": "Assign all documents to clients \u2014 0 unassigned",
+          "done": true
+        },
+        {
+          "text": "Consolidate doc_types from 45 to 23 categories",
+          "done": true
+        },
+        {
+          "text": "Search results clickable \u2014 Links to /documents/{id}, hover effects, doc type icons",
+          "done": true
+        },
+        {
+          "text": "Add real public documents (SEC filings, IRS forms) for richer demo",
           "done": false
         },
         {
-          "text": "**Remove secrets from repo** - add .gitignore entries, use .env for all secrets, run `git filter-branch` or BFG to scrub history",
-          "done": false
-        },
-        {
-          "text": "**Fix path traversal in file upload/download** - shared_files.py uses user-controlled folder/file names in os.path.join without safe resolution. Store by server-generated IDs, validate absolute paths against base directory",
-          "done": false
-        },
-        {
-          "text": "**Fix XSS via dangerouslySetInnerHTML** - AiPromptContent.jsx, EmailModal.jsx, SearchBar.jsx, EmailToolbar.js all render untrusted HTML. Add DOMPurify sanitization or render as plain text",
-          "done": false
-        },
-        {
-          "text": "**Fix auth middleware bypass** - /admin/groups paths skip auth checks. Remove bypass, require auth on ALL admin routes",
-          "done": false
-        },
-        {
-          "text": "**Fix token handling** - refresh token has hardcoded secret, broken datetime, Redis storage not namespaced per user. Rebuild to fail-closed if secrets missing",
-          "done": false
-        },
-        {
-          "text": "Verify all 5 Docker containers healthy (backend, frontend, weaviate, redis, postgres)",
-          "done": false
-        },
-        {
-          "text": "Create BDIC demo user account",
-          "done": false
-        },
-        {
-          "text": "Test AI chat functionality end-to-end",
-          "done": false
-        },
-        {
-          "text": "Setup Cloudflare tunnel for helios.rize.bm",
-          "done": false
-        },
-        {
-          "text": "Load sample BDIC-relevant documents for demo",
-          "done": false
-        },
-        {
-          "text": "Test semantic search with sample docs",
-          "done": false
-        },
-        {
-          "text": "Verify document upload/download workflow",
-          "done": false
-        },
-        {
-          "text": "**Stop logging document content** - remove `logger.info(f\"conditions : {conditions}\")` and similar in ai_process.py. Add log redaction",
-          "done": false
-        },
-        {
-          "text": "**Policy gate for external AI models** - when internet mode enabled, document content goes to external providers. Add explicit approval toggle for regulated tenants, default OFF",
-          "done": false
-        },
-        {
-          "text": "**Protect content integrity** - embedding_generator.py text \"cleanup\" alters extracted text (names, numbers, capitalization). Store raw extracted text as source of truth, keep normalized text as separate derived field",
-          "done": false
-        },
-        {
-          "text": "**Remove wildcard CORS** - restrict to specific origins",
-          "done": false
-        },
-        {
-          "text": "**Add CSP headers** - prevent XSS even if sanitization is bypassed",
-          "done": false
-        },
-        {
-          "text": "Add malware scanning on document upload",
-          "done": false
-        },
-        {
-          "text": "Create demo walkthrough script for BDIC",
+          "text": "2 flaky Playwright tests (login timeout on SSL)",
           "done": false
         }
       ],
-      "todos_open": 20,
-      "todos_done": 0,
-      "version": "1.0.1",
+      "todos_open": 2,
+      "todos_done": 18,
+      "version": "2.3.0",
       "git": {
-        "status": "clean",
+        "status": "dirty",
         "branch": "main",
-        "last_commit": "3dc0f66 Fixed env vars (ADMIN_EMAIL/PASSWORD), backend container recreated, all 5 containers healthy (23 minutes ago)",
-        "changes": [],
-        "uncommitted_count": 0
+        "last_commit": "4a1eb0a docs: Update TODO.md with CEO QA fix status (53 minutes ago)",
+        "changes": [
+          {
+            "status": "M",
+            "file": "ackend/app/routes/documents.py"
+          },
+          {
+            "status": "M",
+            "file": "frontend/index.html"
+          },
+          {
+            "status": "M",
+            "file": "frontend/public/helios-icon.svg"
+          },
+          {
+            "status": "M",
+            "file": "frontend/src/App.jsx"
+          },
+          {
+            "status": "M",
+            "file": "frontend/src/Layout.jsx"
+          },
+          {
+            "status": "M",
+            "file": "test-results/.last-run.json"
+          },
+          {
+            "status": "D",
+            "file": "test-results/tests-helios-test-Helios-N-789c4-end-9-Search-page-has-input/error-context.md"
+          },
+          {
+            "status": "M",
+            "file": "tests/helios-full.spec.js"
+          },
+          {
+            "status": "??",
+            "file": "backend/patch_supp.py"
+          },
+          {
+            "status": "??",
+            "file": "backend/scripts/generate_emails.py"
+          }
+        ],
+        "uncommitted_count": 20
       },
       "ports_status": [
         {
@@ -808,17 +980,40 @@
         "CLAUDE.md",
         "DEMO-SCRIPT.md",
         "DEPLOYMENT.md",
+        "HELIOS-REQUIREMENTS.md",
         "PROJECT_PLAN.md",
         "README.md",
         "ROADMAP.md",
         "TODO.md",
+        "backend/assign_clients.py",
         "backend/credentials.json",
+        "backend/embed_weaviate.py",
+        "backend/migrate_names.py",
+        "backend/patch_supp.py",
+        "backend/seed_cpa_data.py",
+        "backend/seed_demo_data.py",
+        "frontend.dead.1770758364/package-lock.json",
+        "frontend.dead.1770758364/package.json",
+        "frontend.dead.1770758364/playwright.config.js",
+        "frontend.dead.1770758364/postcss.config.js",
+        "frontend.dead.1770758364/tailwind.config.js",
+        "frontend/README.md",
+        "frontend/eslint.config.js",
         "frontend/package-lock.json",
         "frontend/package.json",
-        "frontend/postcss.config.js",
-        "frontend/tailwind.config.js"
+        "frontend/vite.config.js",
+        "helios-tests.spec.js",
+        "node_modules/.package-lock.json",
+        "package-lock.json",
+        "package.json",
+        "playwright.config.js",
+        "test-results/.last-run.json",
+        "tests/helios-full.spec.js",
+        "tests/helios-test.spec.js",
+        "tests/helios-verify.spec.js",
+        "verify.py"
       ],
-      "health_score": 100
+      "health_score": 98
     },
     {
       "name": "Homebase",
@@ -829,12 +1024,12 @@
       "ports": [
         8000
       ],
-      "scanned_at": "2026-02-07T23:10:56.787667+00:00",
+      "scanned_at": "2026-02-12T14:38:07.400562+00:00",
       "status": "ok",
       "issues": [
         {
           "severity": "info",
-          "message": "5 uncommitted changes"
+          "message": "20 uncommitted changes"
         }
       ],
       "docs": [
@@ -864,8 +1059,8 @@
         }
       ],
       "readme": "# Homebase - Monitor 8 servers",
-      "todo": "# Homebase TODO\n\n## In Progress\n- [ ] Fleet page: add live disk/mem metrics from infra-scanner\n- [ ] Sentinel: integrate pipeline_monitor.py into 30-min checks\n- [ ] Infra Sheet: add credential reveal toggle\n\n## Backlog\n- [ ] Agent dashboard pages: add real-time heartbeat display\n- [ ] Research Scout: filter by date range\n- [ ] Audit results endpoint: POST /api/audit/results for Cortex\n- [ ] Mindmap: auto-generate from infrastructure.json agents\n- [ ] Settings: add maintenance window scheduling\n- [ ] Backups: add one-click backup trigger\n\n## Completed\n- [x] Nav reorganization: 22 pages \u2192 8 core pages, 7 nav items (2026-02-07)\n- [x] Fleet page merged Servers + Projects (2026-02-07)\n- [x] Infra Sheet merged Infrastructure + Credentials + Cheat Sheet (2026-02-07)\n- [x] Added nav to agent dashboard pages (2026-02-07)\n- [x] Redirects for old URLs (2026-02-07)",
-      "changelog": "# Homebase Changelog\n\n## v1.3.0 (2026-02-07)\n- **NAV OVERHAUL**: Reorganized navigation: 22 pages \u2192 8 core pages, 7 nav items\n- NEW: Fleet page (merged Servers + Projects + Project Status)\n- NEW: Infra Sheet (merged Infrastructure + Credentials + Cheat Sheet)\n- Enhanced Sentinel with Security, Metrics, and Audit Trail tabs\n- Added nav bar to all agent dashboard pages (apex, aegis, david-bishop)\n- Deleted stale cheat-sheet-full.json\n- Added redirects for old URLs (/servers \u2192 /fleet, /cheat-sheet \u2192 /infra)\n- Fixed agent names in templates (Treasurer\u2192Apex, Watchman\u2192Aegis)\n- Fixed David Bishop port in infrastructure.json (9001\u21927070)\n\n## v1.2.0 (2026-02-06)\n- Added Settings, Research, Sentinel, Credentials pages\n- Research Scout with complaint filtering\n- infrastructure.json as single source of truth\n- Agent heartbeat system (5-minute intervals)\n- Pipeline monitor for Cortex/Sentinel oversight\n- Agent dashboard pages for Apex, Aegis, David Bishop\n- Azure Teams bot integration\n\n## v1.1.0 (2026-02-05)\n- Initial deployment with Dashboard, Servers, Projects, Agents\n- infra-scanner.py cron job\n- Basic alert system\n\n## v1.0.0 (2026-02-04)\n- First deployment of Homebase",
+      "todo": "# Homebase TODO\n\n## In Progress\n- [ ] Fleet page: add live disk/mem metrics from infra-scanner\n- [ ] Sentinel: integrate pipeline_monitor.py into 30-min checks\n- [ ] Infra Sheet: add credential reveal toggle\n\n## Backlog\n- [ ] Agent dashboard pages: add real-time heartbeat display\n- [ ] Research Scout: filter by date range\n- [ ] Audit results endpoint: POST /api/audit/results for Cortex\n- [ ] Mindmap: auto-generate from infrastructure.json agents\n- [ ] Settings: add maintenance window scheduling\n- [ ] Backups: add one-click backup trigger\n\n## Completed\n- [x] Sentinel page caching: Instant loading via getCached pattern (2026-02-10)\n- [x] Project docs endpoint: /api/projects/{id}/docs now works for agents (Apex, Aegis, Cortex) (2026-02-10)\n- [x] Fleet click navigation: Clicking Apex/Aegis/Cortex navigates to project detail (2026-02-10)\n- [x] Updated tech stacks: Best Shipping, BPS AI, Helios, Apex, Aegis, Cortex in infrastructure.json (2026-02-10)\n- [x] Added Apex and Aegis to projects list in infrastructure.json (2026-02-10)\n- [x] Project Docs Viewer: SSH fetch remote project docs (2026-02-09)\n- [x] API: GET /api/projects/{id}/docs endpoint added (2026-02-09)\n- [x] Fixed project_path in infrastructure.json for best-shipping and bet-air-ambulance (2026-02-09)\n- [x] Nav reorganization: 22 pages -> 8 core pages, 7 nav items (2026-02-07)\n- [x] Fleet page merged Servers + Projects (2026-02-07)\n- [x] Infra Sheet merged Infrastructure + Credentials + Cheat Sheet (2026-02-07)\n- [x] Added nav to agent dashboard pages (2026-02-07)\n- [x] Redirects for old URLs (2026-02-07)",
+      "changelog": "# Homebase Changelog\n\n## v1.4.0 (2026-02-09)\n- **PROJECT DOCS VIEWER**: View project README/TODO/CHANGELOG from Homebase\n- NEW: GET /api/projects/{id}/docs endpoint for direct docs access\n- NEW: SSH-based doc fetching for remote projects (demos, vector, agents servers)\n- Fixed project_path in infrastructure.json for best-shipping and bet-air-ambulance\n- Project detail page now shows docs with tabs (README, TODO, Changelog, Project Plan, Claude.md)\n\n## v1.3.0 (2026-02-07)\n- **NAV OVERHAUL**: Reorganized navigation: 22 pages -> 8 core pages, 7 nav items\n- NEW: Fleet page (merged Servers + Projects + Project Status)\n- NEW: Infra Sheet (merged Infrastructure + Credentials + Cheat Sheet)\n- Enhanced Sentinel with Security, Metrics, and Audit Trail tabs\n- Added nav bar to all agent dashboard pages (apex, aegis, david-bishop)\n- Deleted stale cheat-sheet-full.json\n- Added redirects for old URLs (/servers -> /fleet, /cheat-sheet -> /infra)\n- Fixed agent names in templates (Treasurer->Apex, Watchman->Aegis)\n- Fixed David Bishop port in infrastructure.json (9001->7070)\n\n## v1.2.0 (2026-02-06)\n- Added Settings, Research, Sentinel, Credentials pages\n- Research Scout with complaint filtering\n- infrastructure.json as single source of truth\n- Agent heartbeat system (5-minute intervals)\n- Pipeline monitor for Cortex/Sentinel oversight\n- Agent dashboard pages for Apex, Aegis, David Bishop\n- Azure Teams bot integration\n\n## v1.1.0 (2026-02-05)\n- Initial deployment with Dashboard, Servers, Projects, Agents\n- infra-scanner.py cron job\n- Basic alert system\n\n## v1.0.0 (2026-02-04)\n- First deployment of Homebase",
       "todos_parsed": [
         {
           "text": "Fleet page: add live disk/mem metrics from infra-scanner",
@@ -904,7 +1099,39 @@
           "done": false
         },
         {
-          "text": "Nav reorganization: 22 pages \u2192 8 core pages, 7 nav items (2026-02-07)",
+          "text": "Sentinel page caching: Instant loading via getCached pattern (2026-02-10)",
+          "done": true
+        },
+        {
+          "text": "Project docs endpoint: /api/projects/{id}/docs now works for agents (Apex, Aegis, Cortex) (2026-02-10)",
+          "done": true
+        },
+        {
+          "text": "Fleet click navigation: Clicking Apex/Aegis/Cortex navigates to project detail (2026-02-10)",
+          "done": true
+        },
+        {
+          "text": "Updated tech stacks: Best Shipping, BPS AI, Helios, Apex, Aegis, Cortex in infrastructure.json (2026-02-10)",
+          "done": true
+        },
+        {
+          "text": "Added Apex and Aegis to projects list in infrastructure.json (2026-02-10)",
+          "done": true
+        },
+        {
+          "text": "Project Docs Viewer: SSH fetch remote project docs (2026-02-09)",
+          "done": true
+        },
+        {
+          "text": "API: GET /api/projects/{id}/docs endpoint added (2026-02-09)",
+          "done": true
+        },
+        {
+          "text": "Fixed project_path in infrastructure.json for best-shipping and bet-air-ambulance (2026-02-09)",
+          "done": true
+        },
+        {
+          "text": "Nav reorganization: 22 pages -> 8 core pages, 7 nav items (2026-02-07)",
           "done": true
         },
         {
@@ -914,46 +1141,58 @@
         {
           "text": "Infra Sheet merged Infrastructure + Credentials + Cheat Sheet (2026-02-07)",
           "done": true
-        },
-        {
-          "text": "Added nav to agent dashboard pages (2026-02-07)",
-          "done": true
-        },
-        {
-          "text": "Redirects for old URLs (2026-02-07)",
-          "done": true
         }
       ],
       "todos_open": 9,
-      "todos_done": 5,
-      "version": "1.3.0",
+      "todos_done": 11,
+      "version": "1.4.0",
       "git": {
         "status": "dirty",
         "branch": "master",
-        "last_commit": "0f03dd7 v1.3: Nav overhaul (9 items, no dropdown), fleet dedup, project detail with docs, agent depth (integrations/phase/daily output), mind map with servers, sentinel docs (README/TODO/roadmap), infra creds (9 logins, 5 API keys, SMTP, SSH), removed Treasurer/Watchman refs, updated PROJECT_PLAN + CLAUDE.md (24 minutes ago)",
+        "last_commit": "918cd1d fix: increase Sentinel-API health check timeout from 10s to 30s (20 hours ago)",
         "changes": [
           {
             "status": "M",
-            "file": "ata/agents.db"
+            "file": "HANGELOG.md"
           },
           {
             "status": "M",
-            "file": "data/credential-scan.json"
+            "file": "CLAUDE.md"
           },
           {
             "status": "M",
-            "file": "data/infrastructure.json"
+            "file": "TODO.md"
           },
           {
             "status": "M",
-            "file": "data/project-status.json"
+            "file": "backend/main.py"
           },
           {
             "status": "M",
-            "file": "data/uptime.db"
+            "file": "backend/services/metrics_history.py"
+          },
+          {
+            "status": "M",
+            "file": "backend/services/sentinel.py"
+          },
+          {
+            "status": "M",
+            "file": "backend/static/agent-aegis.html"
+          },
+          {
+            "status": "M",
+            "file": "backend/static/agent-apex.html"
+          },
+          {
+            "status": "M",
+            "file": "backend/static/agent-david-bishop.html"
+          },
+          {
+            "status": "M",
+            "file": "backend/static/agent-detail.html"
           }
         ],
-        "uncommitted_count": 5
+        "uncommitted_count": 20
       },
       "ports_status": [
         {
@@ -965,33 +1204,41 @@
       ],
       "files": [
         ".aider.chat.history.md",
-        "CHANGELOG.md",
         "CLAUDE.md",
-        "DEPLOYMENT.md",
+        "HOMEBASE-REQUIREMENTS.md",
         "PROJECT_PLAN.md",
-        "README.md",
-        "RIZE-CHEATSHEET.md",
         "TODO.md",
+        "WORKFLOW-SPEC.md",
         "backend/__init__.py",
         "backend/main.py",
+        "data/3cx-status.json",
+        "data/activity-log.json",
+        "data/agent_registry.json",
+        "data/ai-spend.json",
         "data/alerts.json",
-        "data/audit-fixes.json",
         "data/backup-freshness.json",
         "data/backup-report.json",
         "data/backup-status.json",
-        "data/cheat-sheet-full.json",
+        "data/briefings.json",
         "data/credential-scan.json",
-        "data/credentials.json",
         "data/discovery-queue.json",
         "data/infrastructure.json",
-        "data/overlord-report.json",
+        "data/interaction-stats.json",
+        "data/maintenance_queue.json",
         "data/project-status.json",
+        "data/redteam-latest.json",
         "data/redteam_history.json",
         "data/security-scans.json",
+        "data/sentinel-latest-audit.json",
         "data/sentinel-report.json",
+        "data/sentinel_rules.json",
+        "data/sentinel_scan_targets.json",
         "docs/API.md",
         "docs/ARCHITECTURE.md",
         "docs/DEPLOYMENT.md",
+        "docs/SENTINEL-API.md",
+        "docs/SENTINEL-ARCHITECTURE.md",
+        "docs/SENTINEL-RUNBOOK.md",
         "docs/SENTINEL.md",
         "frontend/README.md",
         "frontend/eslint.config.js",
@@ -1000,9 +1247,12 @@
         "frontend/postcss.config.js",
         "frontend/tailwind.config.js",
         "frontend/vite.config.js",
+        "homebase-tests.spec.js",
+        "monitor_all.py",
+        "package-lock.json",
+        "package.json",
         "pulse_data/latest_health.json",
-        "scripts/test_history_api.py",
-        "test_smtp.py"
+        "test-results/.last-run.json"
       ],
       "health_score": 98
     },
@@ -1016,7 +1266,7 @@
         3002,
         3003
       ],
-      "scanned_at": "2026-02-07T23:10:56.895936+00:00",
+      "scanned_at": "2026-02-12T14:38:07.674811+00:00",
       "status": "ok",
       "issues": [],
       "docs": [
@@ -1045,98 +1295,98 @@
           "status": "ok"
         }
       ],
-      "readme": "# Nexus - IT Support Intelligence Platform\n\nUnified IT support platform aggregating client context from Halo PSA, Microsoft 365 (Teams, SharePoint, Email), PRTG monitoring, and AI providers. Provides a \"Client 360\" view enabling support staff to quickly understand client history, assets, tickets, network status, and communications in one place.\n\n## Quick Reference\n\n| Service | Port | Status |\n|---------|------|--------|\n| Backend API | 3001 | `sudo systemctl status nexus` |\n| PostgreSQL | 5432 | `docker compose ps` |\n| Redis | 6379 | `docker compose ps` |\n| Elasticsearch | 9200 | `docker compose ps` |\n\n## URLs\n- **Production:** https://nexus.rize.bm\n- **Local API:** http://localhost:3001\n- **SSH Access:** https://nexus-ssh.rize.bm\n- **PRTG:** https://prtg.rize.bm\n- **GitHub:** https://github.com/gadarrell99/context-ai\n\n## API Endpoints\n\n### Core APIs\n| Endpoint | Method | Description |\n|----------|--------|-------------|\n| `/health` | GET | Health check with memory stats |\n| `/api/companies` | GET | List all companies |\n| `/api/client360/:id` | GET | Full company context view |\n| `/api/clients` | GET | List all clients |\n| `/api/tickets` | GET | List all tickets |\n| `/api/search?q=` | GET | Elasticsearch search |\n| `/api/ask` | POST | AI query `{question}` |\n| `/api/settings` | GET/POST | View/update settings |\n\n### PRTG Monitoring APIs (v1.14.0)\n| Endpoint | Method | Description |\n|----------|--------|-------------|\n| `/api/prtg/status` | GET | Dashboard summary (down/warning/up counts) |\n| `/api/prtg/sensor/:objid` | GET | Single sensor details with PRTG link |\n| `/api/prtg/refresh` | POST | Force refresh PRTG cache |\n\n**Note:** PRTG API requires Cloudflare bypass configuration. See TODO.md for details.\n\n### Sync APIs\n| Endpoint | Method | Description |\n|----------|--------|-------------|\n| `/api/sync/clients` | POST | Sync Halo clients |\n| `/api/sync/users` | POST | Sync Halo users |\n| `/api/sync/tickets` | POST | Sync all Halo tickets |\n| `/api/sync/actions` | POST | Sync ticket actions |\n| `/api/sync/assets` | POST | Sync Halo assets |\n| `/api/sync/emails?email=` | POST | Sync user emails |\n| `/api/sync/sharepoint` | POST | Sync SharePoint docs |\n| `/api/sync/teams` | POST | Sync Teams messages |\n| `/api/sync/index` | POST | Rebuild search index |\n| `/api/sync/linking` | POST | Re-run client linking |\n\n### Relay Integration APIs\n| Endpoint | Method | Description |\n|----------|--------|-------------|\n| `/api/relay/context/:companyId` | GET | Full client context |\n| `/api/relay/search` | POST | Search across all data |\n| `/api/relay/ask` | POST | AI-powered Q&A |\n| `/api/relay/companies` | GET | List companies with stats |\n\n## Quick Start\n```bash\n# Start Docker services\ncd /opt/it-nexus && docker compose up -d\n\n# Start backend (if not using systemd)\ncd backend && npm run dev\n\n# Or restart systemd service\nsudo systemctl restart nexus\n```\n\n## Common Commands\n```bash\n# Check all services\ndocker compose ps && sudo systemctl status nexus --no-pager | head -5\n\n# View logs\nsudo journalctl -u nexus -f\n\n# Restart everything\ndocker compose restart && sudo systemctl restart nexus\n\n# Health check\ncurl http://localhost:3001/health\n\n# Test PRTG integration\ncurl http://localhost:3001/api/prtg/status\n```\n\n## File Structure\nSee: [docs/FILE_MAP.md](docs/FILE_MAP.md)\n\n## Configuration\nSee: [docs/SETUP.md](docs/SETUP.md)\n\n## Next Steps (TODO)\nSee: [TODO.md](TODO.md)\n\n## Changelog\nSee: [CHANGELOG.md](CHANGELOG.md)\n\n## AI Configuration\n- **Primary:** Anthropic Claude (recommended)\n- **Alternatives:** OpenAI GPT-4, Google Gemini\n- **Local Embeddings:** Ollama (nomic-embed-text)\n- Configure via `/api/settings` or database `settings` table\n\n## PRTG Configuration (v1.14.0)\nEnvironment variables in `.env`:\n- `PRTG_URL` - PRTG server URL (default: https://prtg.rize.bm)\n- `PRTG_USERNAME` - API username\n- `PRTG_PASSHASH` - API passhash authentication\n\n**Status:** Awaiting Cloudflare bypass configuration. See TODO.md for resolution options.\n\n## Data Sources\n| Source | Records | Sync Frequency |\n|--------|---------|----------------|\n| Companies (Halo) | 44 | Every 4 hours |\n| Clients (Halo) | 12 | Every 4 hours |\n| Tickets (Halo) | 30,780 | Every 4 hours |\n| Assets (Halo) | 50 | Every 4 hours |\n| Interactions (Email/Teams) | 259 | On-demand |\n| Documents (SharePoint) | 11,303 | On-demand |\n| PRTG Sensors | Real-time | 60-second cache |\n\n---\n\n*Version: 1.14.0 | Last updated: 2026-01-28*",
-      "todo": "# Nexus - TODO List\n**Last Updated:** 2026-01-30\n\n---\n\n## Priority Legend\n- P0 - Critical/Blocking\n- P1 - High Priority\n- P2 - Medium Priority\n- P3 - Nice to Have\n\n---\n\n## Completed in v1.15.0\n\n### SharePoint Settings UI (P1 - DONE)\n- [x] **Settings panel created** - New SharePointSettingsPanel component in Settings view\n- [x] **Add settings** - Form to add include paths, exclude paths, and allowed sites\n- [x] **Delete settings** - Trash button to remove any setting\n- [x] **Color-coded lists** - Green for includes, red for excludes, blue for allowed sites\n- [x] **Real-time updates** - Changes reflect immediately via React Query\n\n---\n\n## Completed in v1.14.0\n\n## Completed in v1.14.2\n\n### Domain Display Fix (P2 - DONE)\n- [x] **Derive domain from client emails** - If company.domain not set, extract from first client email\n- [x] **Filter common providers** - Exclude gmail, hotmail, yahoo, outlook domains\n\n### Time-Off User Fix (P2 - DONE)\n- [x] **Match current user** - Time-off now uses logged-in user's email to find their ID\n- [x] **Passed currentUser prop** - TimeOffView receives current user data\n\n### SharePoint Configuration (P1 - DONE)\n- [x] **Folder filtering** - Management, Executive, HR, Personnel, Confidential, Board excluded\n- [x] **Include paths** - Only /Sales/ and /Technical/ indexed\n- [x] **Configuration in filters.ts** - SHAREPOINT_INCLUDE_PATHS, SHAREPOINT_EXCLUDE_PATHS\n\n### PRTG Integration (P1 - DONE)\n**Status:** Code complete - Awaiting Cloudflare bypass configuration\n\n- [x] **PRTG service created** (`backend/src/services/prtg/client.ts`)\n- [x] **API endpoints added**: `/api/prtg/status`, `/api/prtg/sensor/:id`, `/api/prtg/refresh`\n- [x] **Dashboard PRTG panel** - Shows down/warning/paused/up sensor counts\n- [x] **Credentials configured** - PRTG_URL, PRTG_USERNAME, PRTG_PASSHASH in .env\n- [x] **Direct links to PRTG** - Each sensor links to PRTG web UI\n\n**BLOCKER:** PRTG is behind Cloudflare bot protection. Needs one of:\n- Cloudflare Access service token for API\n- Internal IP/hostname bypass\n- Cloudflare WAF rule to whitelist Nexus IP (192.168.65.247)\n\n---\n\n## Completed in v1.13.0\n\n### SLA Breach Fix (P0 - DONE)\n- [x] **Fixed false SLA breaches** - Tickets with status 2/4/8/21/22 no longer show as breached\n- [x] **Tech engagement detection** - Status changes now correctly indicate tech response\n\n### AI Anti-Hallucination (P0 - DONE)\n- [x] **Require hard references** - AI must cite ticket #, asset names, or document names\n- [x] **Verification disclaimer** - Added warning if response lacks proper citations\n- [x] **Clearer prompts** - Strengthened instructions against making up data\n\n### Verified Working\n- [x] Dashboard shows 50 assets accurately\n- [x] Recent tickets are clickable with detail modal\n- [x] Client 360 shows open tickets, domains, contacts\n- [x] BEST Shipping mastersheet is indexed\n- [x] Authentication works via Cloudflare Access\n\n---\n\n## PENDING WORK\n\n### Cloudflare PRTG Bypass (P1 - STILL BLOCKING)\n- [ ] Configure Cloudflare Access service token for PRTG API\n- [ ] OR: Get internal PRTG IP/hostname that bypasses Cloudflare\n- [ ] OR: Add WAF rule to whitelist Nexus server IP\n- [ ] Test PRTG API access after bypass configured\n- [ ] Verify dashboard shows real sensor data\n\n### Frontend Time Off (P2 - DONE)\n- [x] Time off request form component (backend ready)\n- [x] Pending requests list with approve/deny buttons\n- [x] Admin approval interface\n- [x] Integration with user management via email matching\n\n---\n\n## Tech Debt\n\n### Performance\n- [ ] Implement incremental sync (only changed records)\n- [ ] Add database query caching\n- [ ] Optimize Elasticsearch indexing batch size\n\n### Code Quality\n- [ ] Add unit tests (Jest)\n- [ ] Add integration tests\n- [ ] Set up CI/CD pipeline\n- [ ] Add ESLint + Prettier\n\n### Monitoring (P1)\n- [ ] Set up health check endpoint monitoring\n- [ ] Configure alerts for service down events\n- [ ] Add Prometheus metrics endpoint\n\n### Cloudflare Access (P0 - Manual)\n- [ ] Configure Cloudflare Access policies in dashboard\n- [ ] Set @rize.bm email restriction\n- [ ] Test one-time PIN authentication\n\n---\n\n## Future Enhancements (P3)\n\n### AI Improvements\n- [ ] Semantic search with Ollama embeddings\n- [ ] RAG (Retrieval Augmented Generation) for better answers\n- [ ] Conversation history for follow-up questions\n\n### Dashboard Enhancements\n- [ ] Real-time WebSocket updates\n- [ ] Customizable dashboard widgets\n- [ ] User-specific dashboard preferences\n\n---\n\n*Last updated: 2026-01-28 by Claude Code*\n\n## Teams Sync Permission Issue (RESOLVED 2026-01-29)\n\nTeams sync now working after permissions granted in Azure Portal.\n\n**Current Status:** The app can access Users (87 found) and Emails, but Groups/Teams return 403 Forbidden.\n\n**Required Permissions to Add in Azure Portal:**\n1. Go to Azure Portal > App Registrations > Select the app (Client ID: b48dc8a2-ae77-4505-b117-02fafebed6e9)\n2. Go to API Permissions > Add permission > Microsoft Graph\n3. Add these Application permissions:\n   - `Group.Read.All` - to list Teams/groups\n   - `ChannelMessage.Read.All` - to read channel messages\n4. Click \"Grant admin consent\" after adding\n\n**Note:** These are Application permissions (not Delegated), since this is a daemon/background sync service.\n\n\n## Completed in v1.16.0\n\n### Admin Control Panel (Task 11 - DONE)\n- [x] Admin view in navigation\n- [x] User list with Name, Email, Role, Status, Department\n- [x] Add user functionality\n- [x] Edit user functionality\n- [x] Enable/Disable user toggle\n- [x] Role management (Admin, Manager, User, Staff)\n- [x] User search and filtering\n- [x] Audit log tracking and display\n\n### Service Status Monitor (Task 15 - DONE)\n- [x] Service Status widget on dashboard\n- [x] Google Workspace monitoring\n- [x] Microsoft 365 monitoring\n- [x] Cloudflare monitoring\n- [x] Auto-refresh every 5 minutes\n- [x] Status colors (green/yellow/red)\n- [x] Links to status pages\n\n### Time Off Conflict Detection API (Task 14 - DONE)\n- [x] GET /api/timeoff/conflicts endpoint\n- [x] Overlap detection for date ranges\n- [x] Threshold calculation (50% team max)\n- [x] Conflict warning messages",
-      "changelog": "# Nexus Changelog\n\n## [2.0.0] - 2026-01-30\n\n### Changed\n- **RENAMED**: Project renamed from 'Context Hub' to 'Nexus'\n- Updated all branding, URLs, documentation\n- New URL: https://nexus.rize.bm (was context.rize.bm)\n- New service: nexus.service (was context-hub.service)\n- New path: /opt/nexus (was /opt/it-context-hub)\n- Docker containers: nexus-db, nexus-redis, nexus-es\n\n### Infrastructure\n- systemd service renamed\n- Docker compose container names updated\n- All package.json files updated\n\n---\n\n## [1.16.4] - 2026-01-30\n\n### Verified - All Context Hub Tasks Complete\n\n#### Task 11: Admin Control Panel (v1.16.0)\n- Admin view in navigation with user management\n- User list: Name, Email, Role, Status, Department\n- Add/Edit/Enable/Disable users\n- Roles: Admin, Manager, User, Staff\n- User search/filtering\n- Audit log tracking\n\n#### Task 12: Time Off Request System (v1.16.1)\n- Time Off navigation item\n- Request form: Start Date, End Date, Type (Vacation/Sick/Personal/Other), Notes\n- User sees their requests with status (Pending/Approved/Denied)\n- API: POST /api/timeoff for submissions\n\n#### Task 13: Manager Time Off Approval (v1.16.2)\n- Pending requests list with Approve (green) and Deny (red) buttons\n- Review mutation calls POST /api/timeoff/:id/review\n- Status updates on approval/denial\n- Approved requests shown in separate section\n\n#### Task 14: Time Off Conflict Detection (v1.16.3)\n- Conflict check endpoint: GET /api/timeoff/conflicts\n- Overlap detection for date ranges\n- 50% team capacity threshold (configurable)\n- Conflict warning messages\n\n#### Task 15: Service Status Monitor (v1.16.4)\n- Service Status widget on dashboard\n- Monitors: Google Workspace, Microsoft 365, Cloudflare\n- Auto-refresh every 5 minutes\n- Status indicators: Operational/Degraded/Down\n- Links to external status pages\n\n## [1.15.6] - 2026-01-29\n\n### Added - AI Response Ticket Links\n- Ticket numbers in AI responses are now clickable\n- Regex matches #12345, ticket #12345, Ticket 12345 patterns\n- Links open Halo PSA ticket detail page in new tab\n- Blue underlined styling to indicate clickability\n\n## [1.15.5] - 2026-01-29\n\n### Fixed - Browser Back Button\n- Added browser history management using pushState/popstate\n- Back button now returns to previous Context Hub page\n- Forward button also works correctly\n- State (view, selected company) is preserved in history\n\n## [1.15.4] - 2026-01-29\n\n### Added - Client 360 Click Handlers\n- Stat cards (Documents, Assets, Tickets) are now clickable\n- Clicking scrolls to the relevant section\n- Added Documents section to Client 360 detail view\n- Documents show name, path, and link to SharePoint\n\n## [1.15.3] - 2026-01-29\n\n### Fixed - Ticket Count Discrepancy\n- Removed take: 50 limit from Client 360 detail ticket query\n- Removed take: 200 limit from AI service ticket query\n- All ticket counts now use full dataset without artificial limits\n- Ensures consistent counts between Dashboard, Client Detail, and AI\n\n## [1.15.2] - 2026-01-29\n\n### Fixed - Halo Ticket URL Format\n- Updated ticket URL format from /tickets/{id} to /Tickets/Ticket/{id}\n- Fixes: Clicking tickets went to \"page does not exist\"\n- Ticket links now open correct Halo PSA ticket detail page\n\n## [1.15.1] - 2026-01-29\n\n### Fixed - Gemini Model Error\n- Updated Gemini API model from deprecated gemini-pro to gemini-1.5-flash\n- Fixes: \"AI Error: models/gemini-pro is not found for API version v1\"\n- AI queries with Gemini provider now work correctly\n\n## [1.15.0] - 2026-01-29\n\n### Added - SharePoint Settings UI\n\n#### New Features\n- SharePoint Settings Panel - Added configurable UI in Settings view\n- Add/remove include paths (folders to index)\n- Add/remove exclude paths (folders to skip)\n- Add/remove allowed sites (SharePoint sites to crawl)\n- Real-time updates without page refresh\n\n#### Files Changed\n- frontend/src/App.tsx: Added SharePointSettingsPanel component\n- VERSION: Updated to 1.15.0\n- CHANGELOG.md: This entry\n\n## [1.14.1] - 2026-01-28\n\n### Fixed - Client360 White Page Bug (CH-001)\n\n#### Critical Bug Fix\n- **Fixed white page crash when clicking on clients in Client360 view**\n  - Root cause: Destructuring API response without null checks caused \"Cannot read properties of undefined\" error\n  - When API returned malformed or incomplete data, `const { company, emails } = data` would crash if `data.company` was undefined\n  - All subsequent property access (`company.name`, `company.clients`, etc.) would throw and cause React to show white page\n\n#### Code Changes (`frontend/src/App.tsx`)\n- Added safe data extraction with optional chaining: `const company = data?.company`\n- Added default empty array for emails: `const emails = data?.emails || []`\n- Added explicit null check: `if (error || \\!data || \\!company)`\n- Added user-friendly error UI with \"Back to clients\" button instead of white page\n- Error state now shows red-bordered card with AlertCircle icon and helpful message\n\n#### Impact\n- Users can now safely click on any client without risk of white page crash\n- If client data fails to load, users see helpful error message and can navigate back\n- No more console errors for \"Cannot read properties of undefined\"\n\n## [1.14.0] - 2026-01-28\n\n### Added - PRTG Network Monitoring Integration\n\n#### PRTG API Integration\n- **New PRTG monitoring service** (`backend/src/services/prtg/client.ts`)\n  - `fetchSensors(statusCodes)` - Fetch sensors filtered by status (down, warning, paused)\n  - `fetchAlerts(count)` - Get recent alert messages from PRTG\n  - `getSensorDetails(objid)` - Get details for a specific sensor\n  - `buildPrtgLink(objid)` - Build clickable link to PRTG UI\n  - `getStatusSummary()` - Aggregated dashboard summary with caching (1 min TTL)\n\n#### New API Endpoints\n- `GET /api/prtg/status` - Dashboard summary with down/warning/paused/up counts\n- `GET /api/prtg/sensor/:objid` - Single sensor details with PRTG link\n- `POST /api/prtg/refresh` - Force refresh of PRTG cache\n\n#### Dashboard PRTG Panel\n- **Network Monitoring panel on dashboard**\n  - Shows real-time sensor status (down, warning, paused, up counts)\n  - Lists down sensors with device names and error messages\n  - Lists warning sensors with expandable list\n  - Direct links to PRTG UI for each sensor\n  - \"All Systems OK\" indicator when no issues\n  - Auto-refreshes every 60 seconds\n  - Graceful error handling when PRTG unavailable\n\n#### Configuration\n- Added PRTG credentials to `.env`:\n  - `PRTG_URL` - PRTG server URL\n  - `PRTG_USERNAME` - API username\n  - `PRTG_PASSHASH` - API passhash authentication\n\n### Known Issues\n- **Cloudflare Challenge** - PRTG is behind Cloudflare bot protection\n  - API calls return Cloudflare challenge page instead of JSON\n  - Requires Cloudflare bypass configuration or internal IP access\n  - Integration code is complete and will work once access configured\n  - Dashboard shows \"Unavailable\" status with error message until resolved\n\n### Changed\n- Version updated to 1.14.0\n- Dashboard updated with PRTG monitoring section\n\n## [1.13.0] - 2026-01-27\n\n### Fixed\n\n#### SLA Breach Logic\n- **Fixed false SLA breaches for answered tickets**\n  - Tickets with status 2 (In Progress), 4 (Awaiting Response), 8 (Pending), \n    21 (Third Party), 22 (Awaiting Customer) are now correctly marked as tech-engaged\n  - Only tickets with status 1 (New) with no tech actions show as SLA breached\n  - Dashboard SLA counts now accurately reflect actual breaches\n\n#### AI Anti-Hallucination\n- **Strengthened AI response accuracy**\n  - Updated prompts to require specific references (ticket #, asset names, document names)\n  - Ticket lists now include Halo ticket IDs (e.g., #32415)\n  - Added verification disclaimer if response lacks proper citations\n  - Clear \"not in database\" messages when data unavailable\n\n#### Dashboard Activity Feed\n- **Recent activity now includes internal ticket ID** for reliable modal lookup\n\n### Already Working (Verified)\n- Dashboard shows 50 assets accurately\n- Recent tickets are clickable with full detail modal\n- Client 360 shows open ticket counts, domains, and all data correctly\n- BEST Shipping mastersheet is indexed in SharePoint\n- Authentication works via Cloudflare Access headers\n\n### Changed\n- Version updated to 1.13.0\n\n## [1.12.0] - 2026-01-27\n\n### Added - UI Overhaul & AI Improvements\n\n#### Dark Theme Dashboard\n- **Complete dark theme redesign** - Slate color scheme across all pages\n  - Dark sidebar with improved navigation styling\n  - Dark header with modern search bar\n  - All cards, tables, and buttons use dark theme\n  - Better contrast for SLA breach/warning indicators\n\n#### Company Domain Auto-Population\n- **Domain extraction from client emails** - Companies now show domains\n  - Automatically extracts most common domain from client emails\n  - Updates company records with inferred domains\n  - Excludes common email providers (gmail, yahoo, etc.)\n\n#### Ollama Integration for Local AI\n- **Ollama provider option** - Run AI queries locally for free\n  - Added llama3.2:3b model for chat queries\n  - nomic-embed-text already available for embeddings\n  - Settings page now includes Ollama as AI provider option\n  - Falls back gracefully if Ollama isn't running\n\n#### Multi-Source Search Indexing\n- **Expanded Elasticsearch indexing**\n  - Tickets: summary, details, status, actions\n  - Emails: subject, content, sender\n  - Teams messages: content, sender\n  - Documents (SharePoint): name, path\n  - Assets: name, type, serial number\n  - Cross-index search with fuzzy matching\n\n### Fixed\n\n#### AI Sensitive Data Detection\n- **Reduced false positives** - No longer blocks legitimate business queries\n  - Removed overly broad PII patterns\n  - Only detects explicit PII with keyword context (e.g., \"SSN: 123-45-6789\")\n  - Sensitive HR keywords now require exact phrase match\n  - Questions about assets, tickets, companies work without blocking\n\n#### Client 360 Click Handlers\n- **Fixed client card click navigation**\n  - Clicking a client card now properly navigates to detail view\n  - Added Globe icon to show domain info\n  - Back button resets selection correctly\n\n### Changed\n- Version updated to 1.12.0\n- Settings page shows API key status as \"Configured\" instead of masked dots\n- Added \"Refresh Client Linking and Domains\" button to settings\n\n### Infrastructure\n- Cron jobs running: syncs every 4 hours, backups at 2am/3am\n- Ollama service running on localhost:11434\n- Elasticsearch indexing all data sources\n\n## [1.12.0] - 2026-01-27\n\n### Added - UI Overhaul & AI Improvements\n\n#### Dark Theme Dashboard\n- **Complete dark theme redesign** - Slate color scheme across all pages\n  - Dark sidebar with improved navigation styling\n  - Dark header with modern search bar\n  - All cards, tables, and buttons use dark theme\n  - Better contrast for SLA breach/warning indicators\n\n#### Company Domain Auto-Population\n- **Domain extraction from client emails** - Companies now show domains\n  - Automatically extracts most common domain from client emails\n  - Updates company records with inferred domains\n  - Excludes common email providers (gmail, yahoo, etc.)\n\n#### Ollama Integration for Local AI\n- **Ollama provider option** - Run AI queries locally for free\n  - Added llama3.2:3b model for chat queries\n  - nomic-embed-text already available for embeddings\n  - Settings page now includes Ollama as AI provider option\n  - Falls back gracefully if Ollama isn't running\n\n#### Multi-Source Search Indexing\n- **Expanded Elasticsearch indexing**\n  - Tickets: summary, details, status, actions\n  - Emails: subject, content, sender\n  - Teams messages: content, sender\n  - Documents (SharePoint): name, path\n  - Assets: name, type, serial number\n  - Cross-index search with fuzzy matching\n\n### Fixed\n\n#### AI Sensitive Data Detection\n- **Reduced false positives** - No longer blocks legitimate business queries\n  - Removed overly broad PII patterns\n  - Only detects explicit PII with keyword context (e.g., \"SSN: 123-45-6789\")\n  - Sensitive HR keywords now require exact phrase match\n  - Questions about assets, tickets, companies work without blocking\n\n#### Client 360 Click Handlers\n- **Fixed client card click navigation**\n  - Clicking a client card now properly navigates to detail view\n  - Added Globe icon to show domain info\n  - Back button resets selection correctly\n\n### Changed\n- Version updated to 1.12.0\n- Settings page shows API key status as \"Configured\" instead of masked dots\n- Added \"Refresh Client Linking and Domains\" button to settings\n\n### Infrastructure\n- Cron jobs running: syncs every 4 hours, backups at 2am/3am\n- Ollama service running on localhost:11434\n- Elasticsearch indexing all data sources\n\n## [1.9.111] - 2026-01-27\n## [1.11.0] - 2026-01-27\n\n### Added - Dashboard Overhaul & AI Improvements\n- **New Operations Dashboard** - Complete redesign focused on ticket operations\n  - Active tickets count with real-time updates\n  - SLA breach tracking (red alerts for overdue tickets)\n  - SLA warning tracking (yellow alerts for approaching deadlines)\n  - Recent ticket activity feed (last 15 updates)\n  - Technician workload summary by team\n  - Removed client list (moved to Client 360)\n\n- **SLA Tracking** - Added SLA fields to ticket data\n  - respond_by and fix_by timestamps from Halo\n  - sla_excluded flag for excluded tickets\n  - Automatic SLA status calculation (breached, approaching, on track)\n\n- **Improved AI Query** - Multi-source search capability\n  - Searches across: tickets, assets, emails, SharePoint docs, Teams messages\n  - Smart company name extraction from questions\n  - Focused context when company is identified\n  - Asset counts by type per company\n  - Better aggregated answers for questions like \"How many PCs does BEST have?\"\n\n### Fixed\n- **Client 360** - Fixed click handlers for client selection\n  - Clicking clients now properly navigates to detail view\n  - Added back button for navigation\n  - Improved client card styling and interaction\n\n### Changed\n- **AI Provider** - Default changed from OpenAI to Anthropic (Claude)\n  - Settings page now shows Anthropic as recommended option\n  - Still supports OpenAI and Gemini as alternatives\n\n### Removed\n- **Review AI** - Removed from navigation (rarely used, confusing purpose)\n\n### Infrastructure\n- **Ollama** - Installed and configured for local embeddings\n  - Running on http://localhost:11434\n  - nomic-embed-text model pulled for semantic search\n\n\n\n### Fixed\n- **project_id validation** - API now accepts integers and auto-converts to strings\n  - Added Pydantic field_validator to coerce integer project_ids to strings\n  - Improved error message when invalid type is provided\n  - Updated API docstring to clarify project_id must be a STRING\n\n### Added\n- **COMMON_MISTAKES.md** - New documentation file with common API errors and solutions\n  - Documents project_id string requirement\n  - Lists other common mistakes and how to avoid them\n  - Located in ~/relay/docs/COMMON_MISTAKES.md\n\n### Improved\n- **CLAUDE.md** - Added note about project_id format in \"How to Test\" section\n\n\n## [1.9.110] - 2026-01-27\n\n### Added - Phase 10.x Complete\n- **Phase 10.2: Structured JSON outputs** - All agents now return structured JSON\n  - Commander returns: plan, steps, files_to_create, done_criteria\n  - Worker returns: files_created, verification_commands, summary\n  - Reviewer returns: approved, issues, suggestions\n  - Updated json_parser.py integration in worker_service.py\n  - Fixed Reviewer API to parse JSON instead of text-based approval\n\n- **Phase 10.3: Self-Fix Loop** - Retry mechanism with error context\n  - Worker retries up to 3 times on failure with error context\n  - Error history passed to subsequent attempts\n  - After 3 failures: escalate to Commander for alternative approach\n  - If still fails: mark task as blocked and track for user review\n  - Added retry_count tracking to job results\n\n- **Phase 10.4: Milestone-Based Execution** - Track progress per milestone\n  - Jobs with >5 steps grouped into milestones (5 steps each)\n  - Milestone tracker logs start and completion\n  - Progress tracking per milestone\n  - Event logging for milestone_complete\n  - Milestone failure tracking\n\n### Fixed\n- **Reviewer JSON parsing bug** - Reviewer API now correctly parses JSON responses\n  - Was using text-based \"APPROVE\" check, now uses JSON extraction\n  - Fallback to text-based check if JSON not found\n  - Properly returns approved field from JSON\n\n### Improved\n- Better logging for Commander, Worker, and Reviewer JSON data\n- Milestone progress visible in worker logs\n- Retry attempts logged with error context\n\n\n## [1.9.109] - 2026-01-26\n\n### Fixed\n- **REVIEWER_PROMPT format() error** - Escaped curly braces in JSON examples\n- JSON examples now use double braces to prevent KeyError\n- file_context placeholder remains unescaped for proper substitution\n\n\n# Changelog\n## [1.9.104] - 2026-01-25\n\n### Fixed\n- **Regex group error** - `match.group(1)` \u2192 `match.group(0)` for non-capturing groups\n- Fixes \"no such group\" error during file verification\n\n## [1.9.103] - 2026-01-25\n\n### Fixed\n- **Error propagation** - \"Unknown error\" now shows actual failure reason\n- When verification fails: \"Verification failed: X missing, Y errors\"\n- When review rejects: includes review feedback\n- `success` field now correctly reflects approval status\n\n## [1.9.102] - 2026-01-25\n\n### Fixed (Critical Bugs)\n- **Removed local fallback execution** - Jobs fail properly if remote fails\n- **Reviewer error = reject** - Non-200 and exceptions now reject (fail-safe)\n- **Execution failure is fatal** - Jobs stop immediately on exec failure\n- **Job queue file locking** - Atomic writes prevent corruption\n\n### Improved\n- **Expanded verification regex** - Catches relative paths like `backend/*.py`\n- **Job-level cost tracking** - Track costs per job_id and project_id\n- **Documentation overhaul** - Clarified vision based on user feedback\n\n## [1.9.101] - 2026-01-25\n### Changed\n- **Documentation Overhaul** - Post-ChatGPT audit\n  - Updated TODO.md with critical fixes and phases 10-14\n  - Updated PROJECT_PLAN.md with health assessment\n  - Identified 4 critical bugs to fix before Phase 10\n\n### Identified (To Fix)\n- Local fallback execution (security risk)\n- Reviewer non-200 defaults to approval\n- Execution failure not fatal\n- No file locking on job queue\n\n## [1.9.101] - 2026-01-25\n### Changed\n- **Documentation Overhaul** - Post-ChatGPT audit\n  - Updated TODO.md with critical fixes and phases 10-14\n  - Updated PROJECT_PLAN.md with health assessment\n  - Identified 4 critical bugs to fix before Phase 10\n\n### Identified (To Fix)\n- Local fallback execution (security risk)\n- Reviewer non-200 defaults to approval\n- Execution failure not fatal\n- No file locking on job queue\n\n## [1.9.90] - 2026-01-25\n\n### Added\n- **Read Phase**: Load project docs (README, TODO, PLAN, SPEC) before executing tasks\n- **Dynamic Context Loading**: Gets project paths from database, not hardcoded\n- **Project Dashboard API**: `/api/autonomous/project/{id}/dashboard`\n- **Job Detail API**: `/api/autonomous/jobs/{id}/detail`\n- **Event Filtering API**: `/api/autonomous/events?type=job&project_id=X`\n- **Export Job Logs API**: `/api/autonomous/jobs/{id}/export?format=markdown`\n- **Cost Summary API**: `/api/autonomous/costs/summary?days=7`",
+      "readme": "# Nexus v3.0 \u2014 Unified MSP Hub\n\nUnified MSP management platform for Rize Technologies. Single sidebar, no hub toggle.\nAll data syncs every 60 seconds via Aegis connectors.\n\n## Quick Reference\n\n| Service | Port | Status |\n|---------|------|--------|\n| Frontend (nginx) | 3002 | `curl http://localhost:3002` |\n| Backend API | 3003 | `sudo systemctl status nexus` |\n| PostgreSQL | 5432 | `docker compose ps` |\n| Aegis Sync | .241 | `systemctl status aegis-sync` |\n\n## Pages (10)\n- Dashboard \u2014 KPIs, alerts feed, device health, insights widget\n- Clients \u2014 Table with search/filter, click for detail\n- Client Detail \u2014 8 tabs: Overview, Devices, Tickets, Patches, Alerts, Forms, Insights, Notes\n- Devices \u2014 All devices, filter by status/type/client\n- Tickets \u2014 Open/Closed/All tabs, priority colors, SLA indicators\n- Monitoring \u2014 Active alerts feed with acknowledge buttons\n- Patches \u2014 Compliance %, severity filter, status badges\n- Forms \u2014 Dynamic form renderer from JSON schema templates\n- Insights \u2014 Intelligence feed from Cortex/Aegis\n- Audit Log \u2014 Filterable system event log\n- Settings \u2014 Integration management, form templates\n\n## API Endpoints (15+)\n- `/api/companies` \u2014 List/detail companies\n- `/api/devices` \u2014 Devices with filters\n- `/api/tickets` \u2014 Tickets with status filter\n- `/api/alerts` \u2014 Alerts with acknowledge/resolve\n- `/api/patches` \u2014 Patches with severity filter\n- `/api/forms/templates` \u2014 Form template CRUD\n- `/api/forms/submissions` \u2014 Form submission CRUD\n- `/api/settings/integrations` \u2014 Integration config\n- `/api/audit-log` \u2014 Audit log\n- `/api/dashboard/stats` \u2014 KPI aggregation\n- `/api/insights` \u2014 Intelligence insights\n- `/api/learning` \u2014 Learning memory entries\n- `/api/reports/daily` \u2014 Daily review reports\n- `/api/sync/{halo,prtg,action1,sharepoint}` \u2014 Sync endpoints\n\n## Data Sources\n- **Halo PSA** \u2014 Clients, tickets, contacts\n- **PRTG** \u2014 Devices, sensors, alerts (556 devices)\n- **Action1** \u2014 Endpoints, patches, software (blocked: needs admin perms)\n- **SharePoint** \u2014 Documents (blocked: needs Azure AD creds)\n\n## Form Templates\n- Client Onboarding (49 fields, 6 sections)\n- Monthly Review (15 fields)\n- Quarterly Business Review (17 fields)\n\n## Schema: 24 Prisma models\nIncluding Insight, LearningEntry, DailyReport for intelligence layer.\n\n## Access\n- Internal: http://192.168.65.245:3002\n- API: http://192.168.65.245:3003\n- Tunnel: nexus.rize.bm (pending Cloudflare)",
+      "todo": "# Nexus TODO\n\n## Completed (v3.0.0)\n- [x] Merge Support/MSP hubs into unified sidebar\n- [x] Complete frontend rewrite (10 pages)\n- [x] Intelligence layer (Insight, LearningEntry, DailyReport models)\n- [x] 15+ unified API endpoints\n- [x] Forms engine (3 templates, dynamic renderer)\n- [x] Settings page with integration management\n- [x] Aegis 60s sync engine (systemd service)\n- [x] Insights page with dedup + recurrence tracking\n- [x] Dashboard KPIs + alert feed + insights widget\n- [x] Audit log page\n\n## Blocked (CEO Action Required)\n- [ ] Cloudflare tunnel: nexus.rize.bm\n- [ ] SharePoint: Azure AD App Registration\n- [ ] Action1: Admin API permissions (403 on endpoints)\n- [ ] Halo PSA: Client endpoint 403 (check OAuth scopes)\n\n## Next Up\n- [ ] Cortex daily strategic review script (Phase 6C)\n- [ ] Aegis intelligence analyzer (Phase 6B)\n- [ ] Learning memory engine (Phase 6E)\n- [ ] Playwright E2E tests\n- [ ] PDF export for completed forms\n- [ ] Ticket trend chart (30 day opened vs closed)\n- [ ] Device health heatmap by client\n- [ ] Contract renewal calendar\n- [ ] Drag-and-drop form template editor\n- [ ] Real-time WebSocket updates (replace polling)",
+      "changelog": "# Changelog\n\n## v3.0.0 (2026-02-12) \u2014 Unified MSP Hub + Intelligence Layer\n\n### Architecture\n- Merged Support Hub + MSP Hub into single unified sidebar\n- Removed hub toggle completely \u2014 one cohesive experience\n- Halo PSA = source of truth for all clients\n- All data syncs every 60 seconds via Aegis engine on .241\n\n### Frontend (complete rewrite \u2014 782 lines)\n- 10 pages: Dashboard, Clients, Client Detail, Devices, Tickets, Monitoring, Patches, Forms, Insights, Audit Log, Settings\n- Dark theme with Nexus purple (#7C3AED) accent\n- KPI cards with real-time data\n- Alert feed with acknowledge buttons\n- Active insights widget on dashboard\n- Device health overview\n\n### Backend\n- 15+ API endpoints via unified routes\n- 24 Prisma models including Insight, LearningEntry, DailyReport\n- Sync endpoints: POST /api/sync/{halo,prtg,action1,sharepoint}\n- Intelligence endpoints: GET/POST /api/insights, /api/learning, /api/reports/daily\n- Integration settings with test connection\n- Audit logging on all mutations\n\n### Forms Engine\n- Dynamic JSON schema form renderer\n- 3 templates: Client Onboarding (49 fields), Monthly Review (15), QBR (17)\n- Field types: text, number, date, dropdown, checkbox, textarea, credential, contact, currency, checkbox_group\n- Auto-save drafts every 30s\n- Create/submit/review workflow\n\n### Settings\n- Integration management: PRTG, Action1, Halo PSA, SharePoint\n- Enable/disable toggle per provider\n- Test connection button\n- Credential management (masked)\n- Sync frequency and status display\n- Form template management\n\n### Intelligence Layer (Phase 6)\n- Insight model with deduplication and recurrence tracking\n- LearningEntry model for adaptive thresholds and playbooks\n- DailyReport model for Cortex strategic reviews\n- Insights page with filter by source/severity/status/client\n- Acknowledge/Resolve/Dismiss workflow on insights\n\n### Aegis Sync Engine (.241)\n- systemd service: aegis-sync.service (60s cycle)\n- Parallel connector execution (PRTG, Halo, Action1)\n- 556 PRTG devices syncing\n- Mock data fallback when APIs unreachable\n- Log to ~/aegis/logs/\n\n### Blocked (CEO action needed)\n- Cloudflare tunnel: nexus.rize.bm\n- SharePoint: Azure AD App Registration\n- Action1: admin API permissions\n- Halo PSA: Client endpoint returns 403\n\n## v2.0.0 (2026-02-10)\n- Added MSP Hub mode with Support/MSP toggle\n- Device, Patch, Alert models\n- Form templates and submissions\n- Action1 RMM integration\n\n## v1.0.0 (2026-01-14)\n- Initial release: Halo PSA integration, ticket management",
       "todos_parsed": [
         {
-          "text": "**Settings panel created** - New SharePointSettingsPanel component in Settings view",
+          "text": "Merge Support/MSP hubs into unified sidebar",
           "done": true
         },
         {
-          "text": "**Add settings** - Form to add include paths, exclude paths, and allowed sites",
+          "text": "Complete frontend rewrite (10 pages)",
           "done": true
         },
         {
-          "text": "**Delete settings** - Trash button to remove any setting",
+          "text": "Intelligence layer (Insight, LearningEntry, DailyReport models)",
           "done": true
         },
         {
-          "text": "**Color-coded lists** - Green for includes, red for excludes, blue for allowed sites",
+          "text": "15+ unified API endpoints",
           "done": true
         },
         {
-          "text": "**Real-time updates** - Changes reflect immediately via React Query",
+          "text": "Forms engine (3 templates, dynamic renderer)",
           "done": true
         },
         {
-          "text": "**Derive domain from client emails** - If company.domain not set, extract from first client email",
+          "text": "Settings page with integration management",
           "done": true
         },
         {
-          "text": "**Filter common providers** - Exclude gmail, hotmail, yahoo, outlook domains",
+          "text": "Aegis 60s sync engine (systemd service)",
           "done": true
         },
         {
-          "text": "**Match current user** - Time-off now uses logged-in user's email to find their ID",
+          "text": "Insights page with dedup + recurrence tracking",
           "done": true
         },
         {
-          "text": "**Passed currentUser prop** - TimeOffView receives current user data",
+          "text": "Dashboard KPIs + alert feed + insights widget",
           "done": true
         },
         {
-          "text": "**Folder filtering** - Management, Executive, HR, Personnel, Confidential, Board excluded",
+          "text": "Audit log page",
           "done": true
         },
         {
-          "text": "**Include paths** - Only /Sales/ and /Technical/ indexed",
-          "done": true
+          "text": "Cloudflare tunnel: nexus.rize.bm",
+          "done": false
         },
         {
-          "text": "**Configuration in filters.ts** - SHAREPOINT_INCLUDE_PATHS, SHAREPOINT_EXCLUDE_PATHS",
-          "done": true
+          "text": "SharePoint: Azure AD App Registration",
+          "done": false
         },
         {
-          "text": "**PRTG service created** (`backend/src/services/prtg/client.ts`)",
-          "done": true
+          "text": "Action1: Admin API permissions (403 on endpoints)",
+          "done": false
         },
         {
-          "text": "**API endpoints added**: `/api/prtg/status`, `/api/prtg/sensor/:id`, `/api/prtg/refresh`",
-          "done": true
+          "text": "Halo PSA: Client endpoint 403 (check OAuth scopes)",
+          "done": false
         },
         {
-          "text": "**Dashboard PRTG panel** - Shows down/warning/paused/up sensor counts",
-          "done": true
+          "text": "Cortex daily strategic review script (Phase 6C)",
+          "done": false
         },
         {
-          "text": "**Credentials configured** - PRTG_URL, PRTG_USERNAME, PRTG_PASSHASH in .env",
-          "done": true
+          "text": "Aegis intelligence analyzer (Phase 6B)",
+          "done": false
         },
         {
-          "text": "**Direct links to PRTG** - Each sensor links to PRTG web UI",
-          "done": true
+          "text": "Learning memory engine (Phase 6E)",
+          "done": false
         },
         {
-          "text": "**Fixed false SLA breaches** - Tickets with status 2/4/8/21/22 no longer show as breached",
-          "done": true
+          "text": "Playwright E2E tests",
+          "done": false
         },
         {
-          "text": "**Tech engagement detection** - Status changes now correctly indicate tech response",
-          "done": true
+          "text": "PDF export for completed forms",
+          "done": false
         },
         {
-          "text": "**Require hard references** - AI must cite ticket #, asset names, or document names",
-          "done": true
+          "text": "Ticket trend chart (30 day opened vs closed)",
+          "done": false
         }
       ],
-      "todos_open": 0,
-      "todos_done": 20,
-      "version": "2.0.0",
+      "todos_open": 10,
+      "todos_done": 10,
+      "version": "3.0.0",
       "git": {
         "status": "clean",
-        "branch": "unknown",
-        "last_commit": "unknown",
+        "branch": "master",
+        "last_commit": "ab107df v3.0.0: unified MSP hub \u2014 merged hubs, Halo sync, 60s Aegis engine, dynamic forms, intelligence layer, embedded actions, Settings page (5 minutes ago)",
         "changes": [],
         "uncommitted_count": 0
       },
@@ -1201,7 +1451,7 @@
         8080,
         8081
       ],
-      "scanned_at": "2026-02-07T23:10:57.022339+00:00",
+      "scanned_at": "2026-02-12T14:38:07.877872+00:00",
       "status": "ok",
       "issues": [
         {
@@ -1210,7 +1460,7 @@
         },
         {
           "severity": "info",
-          "message": "2 uncommitted changes"
+          "message": "8 uncommitted changes"
         }
       ],
       "docs": [
@@ -1330,18 +1580,42 @@
       "git": {
         "status": "dirty",
         "branch": "main",
-        "last_commit": "53ed441 Auto-backup: $(date \"+%Y-%m-%d %H:%M\") (2 days ago)",
+        "last_commit": "17db722 fix: add missing initGatewayPanel JS function for admin Gateways tab (20 hours ago)",
         "changes": [
           {
             "status": "M",
-            "file": "ocker-compose.yml"
+            "file": "dmin/public/index.html"
+          },
+          {
+            "status": "M",
+            "file": "backend/public/index-new.html"
+          },
+          {
+            "status": "M",
+            "file": "backend/public/index.html"
+          },
+          {
+            "status": "M",
+            "file": "backend/public/pages/privacy.html"
+          },
+          {
+            "status": "M",
+            "file": "backend/public/pages/terms.html"
+          },
+          {
+            "status": "M",
+            "file": "backend/public/payment.html"
           },
           {
             "status": "??",
-            "file": "docker-compose.yml.bak"
+            "file": "admin/public/img/"
+          },
+          {
+            "status": "??",
+            "file": "backend/public/img/"
           }
         ],
-        "uncommitted_count": 2
+        "uncommitted_count": 8
       },
       "ports_status": [
         {
@@ -1400,12 +1674,12 @@
       "ports": [
         9001
       ],
-      "scanned_at": "2026-02-07T23:10:57.173259+00:00",
+      "scanned_at": "2026-02-12T14:38:08.107171+00:00",
       "status": "ok",
       "issues": [
         {
           "severity": "warning",
-          "message": "Missing required docs: README.md, TODO.md, CHANGELOG.md, SPEC.md, SECURITY.md, INTEGRATIONS.md, RUNBOOK.md, ESCALATION.md, AUDIT-LOG.md"
+          "message": "Missing required docs: SPEC.md, SECURITY.md, INTEGRATIONS.md, RUNBOOK.md, ESCALATION.md, AUDIT-LOG.md"
         },
         {
           "severity": "critical",
@@ -1416,20 +1690,20 @@
         {
           "file": "README.md",
           "required": true,
-          "exists": false,
-          "status": "warning"
+          "exists": true,
+          "status": "ok"
         },
         {
           "file": "TODO.md",
           "required": true,
-          "exists": false,
-          "status": "warning"
+          "exists": true,
+          "status": "ok"
         },
         {
           "file": "CHANGELOG.md",
           "required": true,
-          "exists": false,
-          "status": "warning"
+          "exists": true,
+          "status": "ok"
         },
         {
           "file": "SPEC.md",
@@ -1468,16 +1742,100 @@
           "status": "warning"
         }
       ],
-      "readme": null,
-      "todo": null,
-      "changelog": null,
-      "todos_parsed": [],
+      "readme": "# David Bishop \u2014 Sales & BD Assistant\n\n**Version:** v2026.2.4  \n**Server:** 192.168.65.241 (david@)  \n**Gateway:** OpenClaw v2026.1.29, port 18789  \n**Status:** \u2705 Active\n\n## Channels\n| Channel | Identifier | Status |\n|---------|-----------|--------|\n| MS Teams | Bot ID [DAVID_APP_ID_REDACTED] | \u2705 Active (port 3978) |\n| Telegram | @Morpheus_99_bot | \u2705 Active |\n| Email (inbound) | dbishop@rize.bm (polled every 5 min) | \u2705 Active |\n| Email (outbound) | dbishop@rize.bm via send-email.py | \u2705 Active |\n\n## Quickstart\n```bash\n# Check status\nssh david@192.168.65.241 \"systemctl --user status openclaw-gateway\"\n\n# View recent logs\nssh david@192.168.65.241 \"journalctl --user -u openclaw-gateway --since '1 hour ago' --no-pager | tail -30\"\n\n# Emergency stop\nssh david@192.168.65.241 \"bash ~/scripts/kill-switch.sh\"\n\n# Notify Artie manually\nssh david@192.168.65.241 \"bash ~/scripts/notify-artie.sh 'Subject' 'Message'\"\n```\n\n## Security\n- **Tier 1 (Admin):** Artie/Gilbert \u2014 full access\n- **Tier 2 (Trusted):** @rize.bm, @celeste.bm, @tuocollective.com \u2014 business only, sanitized\n- **Tier 3 (External):** Blocked\n- See INPUT-SECURITY.md for full rules\n\n## Cron Jobs\n| Schedule | Script | Purpose |\n|----------|--------|---------|\n| */5 | poll-email-inbound.py | Check dbishop inbox for new emails |\n| */5 | sync-output-logs.sh | Sync session logs to audit JSONL |\n| 0 3 | nightly-security-scan.sh | Security audit |\n| 0 11 | daily-digest (via cron) | Email summary to Artie |\n| 0 */6 | health-check (via cron) | System health verification |\n\n## Key Files\n| File | Purpose |\n|------|---------|\n| ~/.openclaw/openclaw.json | Main config |\n| ~/.openclaw/workspace/IDENTITY.md | Role + contact resolution |\n| ~/.openclaw/workspace/SECURITY.md | Authority hierarchy |\n| ~/.openclaw/workspace/INPUT-SECURITY.md | Inbound message rules |\n| ~/.openclaw/workspace/DATA-RESTRICTIONS.md | Output exclusion zones |\n| ~/scripts/notify-artie.sh | Multi-channel owner notification |\n| ~/scripts/content-filter.py | Output content scanning |\n| ~/scripts/kill-switch.sh | Emergency gateway stop |\n| ~/scripts/graph-api-helper.py | Rate-limited Graph API client |\n| ~/logs/outputs/openclaw-output.jsonl | Audit trail |",
+      "todo": "# David Bishop \u2014 TODO\n\n## \u2705 Completed (Feb 4, 2026)\n\n### Contact Resolution\n- [x] Artie/Gilbert mapped with explicit IDs (Telegram 837188550, Teams gadarrell@rize.bm, email)\n- [x] notify-artie.sh \u2014 multi-channel fallback (Telegram + personal email + work email)\n- [x] IDENTITY.md updated with full contact resolution table\n\n### Security Architecture\n- [x] INPUT-SECURITY.md \u2014 Tier 1 (Admin), Tier 2 (Trusted), Tier 3 (External)\n- [x] Input sanitization rules (prompt injection, code injection, data exfiltration)\n- [x] Content filter (content-filter.py) \u2014 output scanning\n- [x] Kill switch (kill-switch.sh) ready\n\n### Email\n- [x] Email inbound polling (poll-email-inbound.py, every 5 min)\n- [x] Email rate limit handling (graph-api-helper.py with exponential backoff)\n- [x] Email send via send-email.py (positional args: from to subject body)\n\n### Monitoring & Logging\n- [x] Output JSONL audit trail (sync-output-logs.sh \u2192 ~/logs/outputs/openclaw-output.jsonl)\n- [x] Nightly security scan (3 AM)\n- [x] Daily digest email (11 AM)\n- [x] Health check (every 6h)\n- [x] Escalation failure log (~/logs/escalation-failures.log)\n- [x] Graph API rate limit log (~/logs/graph-rate-limits.log)\n\n### Deployment\n- [x] Teams app published org-wide (v1.0.1) via Teams Admin Center\n- [x] Deep link: https://teams.microsoft.com/l/chat/0/0?users=28:[DAVID_APP_ID_REDACTED]\n- [x] dmPolicy: open with allowFrom wildcards\n- [x] Fake --raw-stream flags removed from service file\n\n### Removed\n- [x] Red team script moved to Homebase (scripts disabled, logs preserved)\n- [x] Teams message tracker removed (Graph API doesn't support app-only auth for /chats)\n\n## \u2b1c Pending\n\n### Credential Rotation (moved to Homebase)\n- [ ] Rotate Telegram bot token via @BotFather\n- [ ] Rotate Teams appPassword in Azure AD\n- [ ] Update openclaw.json with new creds\n\n### Enhancements\n- [ ] Refine content-filter.py keyword list (1855 false positives on \"token\")\n- [ ] Add session log analyzer to nightly scan\n- [ ] Wire graph-api-helper.py into read-email.py as replacement\n- [ ] Dockyard WiFi proposal templates (docxtpl)\n\n## EMAIL ROUTING CHANGES (From Homebase Feedback 2026-02-05)\n\n### Current Problem:\n- David sending non-David items\n- Mixed email sources\n\n### New Routing:\n- David regular work updates \u2192 dbishop@rize.bm\n- David security flags \u2192 Sentinel \u2192 aidev@rize.bm \u2192 Artie\n- David should NOT send Talos job alerts\n\n### Scripts to Update:\n- ~/scripts/homebase-heartbeat.sh\n- ~/scripts/daily-report.sh\n- ~/scripts/verbose-report.sh\n- ~/scripts/send-email.py (check FROM address logic)\n- Any script that sends to artiedarrell@gmail.com\n\n### Alert Workflow:\n- Security issues: POST to Sentinel /api/agents/david-bishop/flag\n- Sentinel evaluates and sends to CEO if warranted\n- Regular updates: send directly via dbishop@rize.bm",
+      "changelog": "# David Bishop \u2014 Changelog\n\n\n## v2026.2.4 \u2014 Security Architecture & Monitoring Overhaul\n\n### Added\n- INPUT-SECURITY.md \u2014 3-tier inbound message security (Admin/Trusted/External)\n- notify-artie.sh \u2014 Multi-channel notification (Telegram + 2x email)\n- graph-api-helper.py \u2014 Rate-limited Graph API client with exponential backoff\n- poll-email-inbound.py \u2014 Email inbound polling with tier classification (cron */5)\n- sync-output-logs.sh \u2014 Session-to-output JSONL sync for audit trail (cron */5)\n- Escalation failure logging (~/logs/escalation-failures.log)\n- Graph API rate limit logging (~/logs/graph-rate-limits.log)\n- Teams app manifest v1.0.1 published org-wide\n\n### Changed\n- IDENTITY.md \u2014 Added explicit contact resolution (Artie=Gilbert, all channel IDs)\n- IDENTITY.md \u2014 Added email search best practices and rate limit guidance\n- IDENTITY.md \u2014 Added inbound message handling workflow\n- SECURITY.md \u2014 Added tier cross-references and inbound rules\n- redteam-david.sh \u2014 Fixed integer expression error, UFW detection, email args\n- Gateway service file \u2014 Removed fake --raw-stream flags, cleaned ExecStart\n- send-email.py calls \u2014 Standardized to positional args (from to subject body)\n\n### Removed\n- Red team security testing (moved to Homebase agent)\n- Teams message tracker (Graph /chats API incompatible with app-only auth)\n- Broken --raw-stream / OPENCLAW_RAW_STREAM config\n\n### Fixed\n- Contact resolution: \"Artie\" now maps to chatId 837188550 (was unresolvable)\n- All 3 notification channels working (Telegram, personal email, work email)\n- UFW firewall detection in cron context (reads /etc/ufw/ufw.conf, no sudo)\n- Email rate limiting (was hitting 429s on rapid searches)\n- Service file corruption from sed cleanup (ExecStart repaired)",
+      "todos_parsed": [
+        {
+          "text": "Artie/Gilbert mapped with explicit IDs (Telegram 837188550, Teams gadarrell@rize.bm, email)",
+          "done": true
+        },
+        {
+          "text": "notify-artie.sh \u2014 multi-channel fallback (Telegram + personal email + work email)",
+          "done": true
+        },
+        {
+          "text": "IDENTITY.md updated with full contact resolution table",
+          "done": true
+        },
+        {
+          "text": "INPUT-SECURITY.md \u2014 Tier 1 (Admin), Tier 2 (Trusted), Tier 3 (External)",
+          "done": true
+        },
+        {
+          "text": "Input sanitization rules (prompt injection, code injection, data exfiltration)",
+          "done": true
+        },
+        {
+          "text": "Content filter (content-filter.py) \u2014 output scanning",
+          "done": true
+        },
+        {
+          "text": "Kill switch (kill-switch.sh) ready",
+          "done": true
+        },
+        {
+          "text": "Email inbound polling (poll-email-inbound.py, every 5 min)",
+          "done": true
+        },
+        {
+          "text": "Email rate limit handling (graph-api-helper.py with exponential backoff)",
+          "done": true
+        },
+        {
+          "text": "Email send via send-email.py (positional args: from to subject body)",
+          "done": true
+        },
+        {
+          "text": "Output JSONL audit trail (sync-output-logs.sh \u2192 ~/logs/outputs/openclaw-output.jsonl)",
+          "done": true
+        },
+        {
+          "text": "Nightly security scan (3 AM)",
+          "done": true
+        },
+        {
+          "text": "Daily digest email (11 AM)",
+          "done": true
+        },
+        {
+          "text": "Health check (every 6h)",
+          "done": true
+        },
+        {
+          "text": "Escalation failure log (~/logs/escalation-failures.log)",
+          "done": true
+        },
+        {
+          "text": "Graph API rate limit log (~/logs/graph-rate-limits.log)",
+          "done": true
+        },
+        {
+          "text": "Teams app published org-wide (v1.0.1) via Teams Admin Center",
+          "done": true
+        },
+        {
+          "text": "Deep link: https://teams.microsoft.com/l/chat/0/0?users=28:[DAVID_APP_ID_REDACTED]",
+          "done": true
+        },
+        {
+          "text": "dmPolicy: open with allowFrom wildcards",
+          "done": true
+        },
+        {
+          "text": "Fake --raw-stream flags removed from service file",
+          "done": true
+        }
+      ],
       "todos_open": 0,
-      "todos_done": 0,
-      "version": null,
+      "todos_done": 20,
+      "version": "2026.2.4",
       "git": {
-        "status": "not_git",
-        "changes": []
+        "status": "clean",
+        "branch": "unknown",
+        "last_commit": "unknown",
+        "changes": [],
+        "uncommitted_count": 0
       },
       "ports_status": [
         {
@@ -1499,9 +1857,14 @@
       "ports": [
         9002
       ],
-      "scanned_at": "2026-02-07T23:11:14.089843+00:00",
+      "scanned_at": "2026-02-12T14:38:28.953745+00:00",
       "status": "ok",
-      "issues": [],
+      "issues": [
+        {
+          "severity": "info",
+          "message": "20 uncommitted changes"
+        }
+      ],
       "docs": [
         {
           "file": "README.md",
@@ -1558,9 +1921,9 @@
           "status": "ok"
         }
       ],
-      "readme": "# Apex \u2014 Finance Intelligence Agent\n\n**Version:** 1.1.0\n**Host:** agents@192.168.65.241\n**Port:** 9002\n**Status:** MOCK MODE (Phase 1)\n\n---\n\n## Overview\n\nApex is Rize Technology Group's finance intelligence agent. It reads data from Xero (accounting) and Halo PSA (timesheets/tickets) to identify revenue leakage, billing anomalies, and financial trends.\n\n**Phase 1 (Current):** Read-only observer with mock data. All integrations return realistic test data. No writes to any external system.\n\n**Phase 2 (Planned):** Live Xero and Halo PSA read access. Daily/weekly reports to CEO via MS Teams.\n\n**Phase 3 (Future):** Advisory mode \u2014 recommends billing corrections, draft invoices for CEO review.\n\n---\n\n## Architecture\n\n```\napex/\n\u251c\u2500\u2500 main.py              # FastAPI server \u2014 endpoints, heartbeat, Teams handler\n\u251c\u2500\u2500 .env                 # Configuration (MOCK_MODE=true, READ_ONLY_MODE=true)\n\u251c\u2500\u2500 integrations/\n\u2502   \u251c\u2500\u2500 xero_client.py   # Xero API \u2014 P&L, invoices, contacts, bank txns\n\u2502   \u2514\u2500\u2500 halo_client.py   # Halo PSA \u2014 timesheets, tickets, clients\n\u251c\u2500\u2500 analysis/\n\u2502   \u2514\u2500\u2500 revenue_leakage.py  # Cross-system leakage detection\n\u251c\u2500\u2500 reporting/\n\u2502   \u2514\u2500\u2500 financial_summary.py # Daily digest + weekly report generator\n\u2514\u2500\u2500 docs/\n    \u251c\u2500\u2500 README.md         # This file\n    \u251c\u2500\u2500 CLAUDE.md         # Claude Code instructions\n    \u251c\u2500\u2500 TODO.md           # Task tracker\n    \u251c\u2500\u2500 CHANGELOG.md      # Version history\n    \u2514\u2500\u2500 PROJECT_PLAN.md   # Roadmap\n```\n\n## Endpoints\n\n| Endpoint | Method | Description |\n|----------|--------|-------------|\n| /health | GET | Health check with memory/uptime |\n| /status | GET | Agent status + config |\n| /api/teams/message | POST | Teams message handler |\n| /reports/latest | GET | Most recent generated report |\n| /reports/daily | GET | Generate daily digest |\n| /reports/weekly | GET | Generate weekly report |\n| /analysis/leakage | GET | Revenue leakage analysis |\n\n## Safety\n\n- **MOCK_MODE=true** \u2014 All integrations return mock data\n- **READ_ONLY_MODE=true** \u2014 Hardcoded startup check, exits if false\n- No write operations to Xero, Halo, or any external API\n- All actions logged with timestamps\n- Sentinel monitors via heartbeat every 5 minutes\n\n## Integrations\n\n| System | Status | Scope |\n|--------|--------|-------|\n| Xero | Mock | P&L, invoices, contacts, bank transactions |\n| Halo PSA | Mock | Timesheets, tickets, clients |\n| MS Teams | Via Homebase | Report delivery to CEO/CFO |\n| Homebase | Active | Heartbeat + bot message relay |\n\n## Running\n\n```bash\n# Service managed by systemd\nsystemctl --user status apex\nsystemctl --user restart apex  # Only when instructed\n\n# Manual test\ncd /home/agents/apex\nsource venv/bin/activate  # if using venv\npython3 main.py\n```",
-      "todo": "# Apex Finance Agent \u2014 TODO\n\n## Phase 1: Mock Observer \u2014 IN PROGRESS\n- [x] FastAPI server on port 9002\n- [x] /health endpoint with memory + uptime\n- [x] Teams message handler via Homebase\n- [x] Heartbeat to Homebase every 5 minutes\n- [x] MOCK_MODE=true with hardcoded safety check\n- [x] READ_ONLY_MODE=true with hardcoded safety check\n- [x] Xero API client (mock responses)\n- [x] Halo PSA client (mock responses)\n- [x] Revenue leakage analyzer\n- [x] Daily digest generator\n- [x] Weekly report generator\n- [ ] /reports/latest endpoint in main.py\n- [ ] /reports/daily endpoint in main.py\n- [ ] /reports/weekly endpoint in main.py\n- [ ] /analysis/leakage endpoint in main.py\n- [ ] Switch LLM to Anthropic API (currently 402 on OpenRouter)\n- [ ] Scheduled report generation (APScheduler \u2014 every 6 hours)\n- [ ] MS Teams webhook for report delivery\n\n## Phase 2: Live Read-Only\n- [ ] Complete Xero OAuth flow (get Tenant ID, test refresh)\n- [ ] Test live Xero P&L, invoices, contacts\n- [ ] Test live Halo PSA timesheets, tickets\n- [ ] Build billing model classifier (AYCE / AYCE+Hourly / Bill-by-Hour)\n- [ ] Daily digest at 07:00 UTC \u2014 P&L snapshot, unbilled hours, AYCE overuse\n- [ ] Weekly report Monday 07:00 UTC \u2014 deep revenue/margin analysis\n- [ ] Bot Framework reply flow for Teams responses\n\n## Phase 3: Advisory Mode\n- [ ] Recommend billing corrections\n- [ ] Draft invoices for CEO review\n- [ ] Proactive alerts for revenue risks\n- [ ] Historical trend analysis",
-      "changelog": "# Changelog \u2014 Apex Finance Agent\n\n## v1.1.0 \u2014 2026-02-07\n### Integration Stubs + Analysis\n- integrations/xero_client.py \u2014 Full Xero API client with mock data (P&L, invoices, contacts, bank txns)\n- integrations/halo_client.py \u2014 Halo PSA client with mock data (timesheets, tickets, clients, unbilled)\n- analysis/revenue_leakage.py \u2014 Cross-system leakage detection (unbilled hours, AYCE overuse, overdue)\n- reporting/financial_summary.py \u2014 Daily digest + weekly report generator with Teams formatting\n- Hardcoded READ_ONLY_MODE safety check at startup\n- MOCK_MODE fixed to true\n- Documentation: README.md, CLAUDE.md, TODO.md, CHANGELOG.md, PROJECT_PLAN.md\n\n## v1.0.0 \u2014 2026-02-06\n### Initial Deployment\n- FastAPI server on port 9002\n- /health endpoint\n- Teams message handler via Homebase\n- Heartbeat to Homebase\n- System prompt with Phase 1 restrictions",
+      "readme": "# Apex Finance Agent\n\n**Phase 1: Mock Observer \u2014 COMPLETE**\n\nApex is a read-only finance intelligence agent for Rize Technology Group. It monitors Xero (accounting) and Halo PSA (timesheets) to produce financial reports, detect revenue leakage, and classify billing models.\n\n## Quick Start\n\n```bash\n# Service is managed by systemd\nsudo systemctl status apex.service\n\n# View logs\ntail -f ~/apex/logs/apex.log\n\n# Test health\ncurl http://localhost:9002/health\n```\n\n## API Endpoints\n\n### Health & Status\n| Endpoint | Method | Description |\n|----------|--------|-------------|\n| /health | GET | Health check with uptime |\n| /status | GET | Full status with integrations |\n\n### Reports\n| Endpoint | Method | Description |\n|----------|--------|-------------|\n| /api/reports/latest | GET | Most recent report of any type |\n| /api/reports/daily | GET | Daily P&L digest with unbilled hours |\n| /api/reports/weekly | GET | Weekly revenue/margin analysis |\n\n### Analysis\n| Endpoint | Method | Description |\n|----------|--------|-------------|\n| /api/analysis/leakage | GET | Revenue leakage detection (5 types) |\n| /api/analysis/billing-models | GET | Client billing classifications |\n| /api/analysis/unbilled | GET | Unbilled hours by client |\n\n### Messaging\n| Endpoint | Method | Description |\n|----------|--------|-------------|\n| /api/teams/message | POST | Handle Teams messages via Homebase |\n\n## Revenue Leakage Detection\n\nApex detects 5 types of revenue leakage:\n\n1. **UNBILLED_HOURS** \u2014 Time logged in Halo but not invoiced in Xero\n2. **AYCE_OVERUSE** \u2014 AYCE clients using more hours than their fee supports\n3. **PRICING_DEVIATION** \u2014 Invoices with rates different from contract\n4. **STALE_TIMESHEET** \u2014 Timesheet entries older than 30 days without invoice\n5. **MISSING_TIMESHEET** \u2014 Invoice exists but no backing timesheet (audit risk)\n\n## Billing Models\n\nApex classifies clients into:\n- **AYCE** \u2014 All-You-Can-Eat flat monthly fee\n- **AYCE+Hourly** \u2014 Flat fee plus project/hourly billing\n- **Hourly** \u2014 All time billed at hourly rate\n\n## Scheduled Tasks\n\n| Task | Schedule | Description |\n|------|----------|-------------|\n| Daily Digest | 07:00 UTC | P&L snapshot, unbilled hours, alerts |\n| Weekly Report | Mon 07:00 UTC | Revenue trends, margin analysis |\n| Leakage Scan | Every 6 hours | Detect new revenue leakage |\n\n## Mock Data\n\nGenerate mock data for testing:\n```bash\npython3 ~/apex/scripts/generate_mock_data.py\n```\n\nCreates 12 clients, 6 months of P&L, 100+ timesheets, 60+ invoices.\n\n## Configuration\n\nKey environment variables in .env:\n- MOCK_MODE=true (Phase 1)\n- READ_ONLY_MODE=true (NEVER change to false)\n- ANTHROPIC_API_KEY \u2014 Primary LLM\n- OPENROUTER_API_KEY \u2014 Fallback LLM\n- HOMEBASE_URL \u2014 For Teams relay\n\n## Safety\n\n\u26a0\ufe0f **READ_ONLY_MODE=true** \u2014 Agent cannot modify any data\n\u26a0\ufe0f **MOCK_MODE=true** \u2014 Uses mock data, not live APIs\n\n## Directory Structure\n\n```\n~/apex/\n\u251c\u2500\u2500 main.py              # FastAPI application\n\u251c\u2500\u2500 analysis/\n\u2502   \u251c\u2500\u2500 revenue_leakage.py   # Leakage detection\n\u2502   \u251c\u2500\u2500 billing_classifier.py # Billing model classification\n\u2502   \u2514\u2500\u2500 anomaly_detector.py   # Anomaly detection\n\u251c\u2500\u2500 integrations/\n\u2502   \u251c\u2500\u2500 xero_client.py       # Xero API client\n\u2502   \u251c\u2500\u2500 halo_client.py       # Halo PSA client\n\u2502   \u2514\u2500\u2500 homebase_client.py   # Homebase relay\n\u251c\u2500\u2500 reporting/\n\u2502   \u251c\u2500\u2500 financial_summary.py # Report generators\n\u2502   \u251c\u2500\u2500 daily_digest.py      # Daily report\n\u2502   \u2514\u2500\u2500 weekly_report.py     # Weekly report\n\u251c\u2500\u2500 scripts/\n\u2502   \u2514\u2500\u2500 generate_mock_data.py # Mock data generator\n\u251c\u2500\u2500 db/\n\u2502   \u2514\u2500\u2500 mock_data.json       # Generated mock data\n\u251c\u2500\u2500 reports/               # Generated reports\n\u2514\u2500\u2500 logs/                  # Application logs\n```\n\n## Support\n\nContact: artiedarrell@gmail.com",
+      "todo": "# Apex Finance Agent \u2014 TODO\n\n## Phase 1: Mock Observer \u2014 COMPLETE \u2705\n\n- [x] FastAPI server on port 9002\n- [x] /health endpoint with memory + uptime\n- [x] Teams message handler via Homebase\n- [x] Heartbeat to Homebase every 5 minutes\n- [x] MOCK_MODE=true with hardcoded safety check\n- [x] READ_ONLY_MODE=true with hardcoded safety check\n- [x] Xero API client (mock responses)\n- [x] Halo PSA client (mock responses)\n- [x] Revenue leakage analyzer (5 detection types)\n- [x] Daily digest generator\n- [x] Weekly report generator\n- [x] /reports/latest endpoint\n- [x] /reports/daily endpoint\n- [x] /reports/weekly endpoint\n- [x] /analysis/leakage endpoint\n- [x] /analysis/billing-models endpoint\n- [x] /analysis/unbilled endpoint\n- [x] Switch LLM to Anthropic API (with OpenRouter fallback)\n- [x] Scheduled report generation (APScheduler)\n- [x] MS Teams webhook for report delivery\n- [x] Email report delivery (SMTP)\n- [x] Mock data generator with 12 Bermuda clients\n- [x] Billing model classifier\n\n---\n\n## Phase 2: Live Read-Only \u2014 IN PROGRESS \ud83d\udd04\n\n### Xero Integration\n- [ ] Complete Xero OAuth flow (exchange authorization code for tokens)\n- [ ] Store refresh token securely\n- [ ] Test token refresh cycle\n- [ ] Test live P&L reports\n- [ ] Test live invoice listing (all statuses)\n- [ ] Test live contact/client sync\n- [ ] Test bank transactions (for cash flow)\n\n### Halo PSA Integration\n- [ ] Verify client_secret in .env works\n- [ ] Test live timesheet entries\n- [ ] Test live ticket details\n- [ ] Test live client contracts\n- [ ] Test agent utilization data\n\n### Billing Analysis\n- [ ] Connect billing classifier to live data\n- [ ] Validate leakage detection vs Mary's manual reconciliation\n- [ ] Historical trend analysis with 6+ months data\n\n### Scheduled Reports\n- [ ] Enable daily digest at 07:00 UTC (3:00 AM ADT)\n- [ ] Enable weekly report Monday 07:00 UTC\n- [ ] Verify reports contain live data\n\n### Communication\n- [ ] Bot Framework reply flow for Teams responses\n\n### Validation\n- [ ] Confirm no false positives for 2 weeks\n- [ ] Document accuracy metrics in AUDIT-LOG.md\n\n---\n\n## Phase 3: Advisory Mode \u2014 PLANNED \ud83d\udccb\n\n- [ ] Recommend billing corrections\n- [ ] Flag unbilled hours for invoicing suggestions\n- [ ] Suggest AYCE repricing when consumption exceeds plan\n- [ ] Proactive alerts for revenue risks\n- [ ] AI-powered anomaly detection in timesheets\n- [ ] Contract renewal recommendations\n\n---\n\n## Phase 4: Supervised Execution \u2014 FUTURE \u23f3\n\n- [ ] Generate draft invoices for CEO review\n- [ ] Unbilled hours \u2192 invoice suggestions\n- [ ] Project milestone billing drafts\n- [ ] Test rollback capability\n\n---\n\n## Phase 5: Autonomous (Limited) \u2014 FUTURE \ud83d\udd2e\n\n- [ ] Automated recurring invoice generation\n- [ ] Payment reminder sequences\n- [ ] Standard billing corrections\n- [ ] Cash flow forecasting\n- [ ] Continuous Sentinel audit integration\n- [ ] Quarterly human review process",
+      "changelog": "# Apex Finance Agent \u2014 Changelog\n\n## [1.2.0] \u2014 2026-02-08 (Overnight Build)\n\n### Added\n- **Mock Data Generator** (scripts/generate_mock_data.py)\n  - 12 realistic Bermuda MSP clients with billing models\n  - 6 months of P&L data\n  - 100+ timesheet entries\n  - 60+ invoices with various statuses\n  - Automatic leakage detection on generated data\n  - Contract rate cards for all clients\n\n- **Enhanced Revenue Leakage Analyzer**\n  - 5 detection types: UNBILLED_HOURS, AYCE_OVERUSE, PRICING_DEVIATION, STALE_TIMESHEET, MISSING_TIMESHEET\n  - Risk scoring (0-100) with levels: MINIMAL, LOW, MEDIUM, HIGH, CRITICAL\n  - Per-finding recommendations\n  - Filter by type or client\n\n- **Billing Model Classifier** (analysis/billing_classifier.py)\n  - Classifies clients as AYCE, AYCE+Hourly, or Hourly\n  - Detects model drift (overuse, underutilization, AYCE candidates)\n  - Generates billing recommendations\n\n- **Scheduled Reports** (APScheduler)\n  - Daily digest at 07:00 UTC (3:00 AM ADT)\n  - Weekly report Monday 07:00 UTC\n  - Leakage scan every 6 hours\n  - Auto-save to reports/ directory\n\n- **Report Delivery**\n  - Teams webhook via Homebase relay\n  - SMTP email to CEO\n\n### Changed\n- LLM backend now tries Anthropic API first, falls back to OpenRouter\n- All API endpoints return structured JSON with timestamps\n- Improved error handling across all modules\n\n### Fixed\n- Main.py now properly imports from analysis/ and reporting/ modules\n- Revenue leakage analyzer uses mock_data.json when available\n\n## [1.1.0] \u2014 2026-02-06\n\n### Added\n- API endpoints: /reports/latest, /reports/daily, /reports/weekly\n- Analysis endpoints: /analysis/leakage, /analysis/billing-models, /analysis/unbilled\n- Anthropic API integration with fallback\n- Heartbeat to Homebase every 5 minutes\n- Teams message handler\n\n### Changed\n- Upgraded to FastAPI with async handlers\n- Improved logging to logs/apex.log\n\n## [1.0.0] \u2014 2026-02-05\n\n### Added\n- Initial release\n- FastAPI server on port 9002\n- Health and status endpoints\n- Mock Xero client\n- Mock Halo PSA client\n- READ_ONLY_MODE and MOCK_MODE safety checks",
       "todos_parsed": [
         {
           "text": "FastAPI server on port 9002",
@@ -1595,7 +1958,7 @@
           "done": true
         },
         {
-          "text": "Revenue leakage analyzer",
+          "text": "Revenue leakage analyzer (5 detection types)",
           "done": true
         },
         {
@@ -1607,51 +1970,92 @@
           "done": true
         },
         {
-          "text": "/reports/latest endpoint in main.py",
-          "done": false
+          "text": "/reports/latest endpoint",
+          "done": true
         },
         {
-          "text": "/reports/daily endpoint in main.py",
-          "done": false
+          "text": "/reports/daily endpoint",
+          "done": true
         },
         {
-          "text": "/reports/weekly endpoint in main.py",
-          "done": false
+          "text": "/reports/weekly endpoint",
+          "done": true
         },
         {
-          "text": "/analysis/leakage endpoint in main.py",
-          "done": false
+          "text": "/analysis/leakage endpoint",
+          "done": true
         },
         {
-          "text": "Switch LLM to Anthropic API (currently 402 on OpenRouter)",
-          "done": false
+          "text": "/analysis/billing-models endpoint",
+          "done": true
         },
         {
-          "text": "Scheduled report generation (APScheduler \u2014 every 6 hours)",
-          "done": false
+          "text": "/analysis/unbilled endpoint",
+          "done": true
+        },
+        {
+          "text": "Switch LLM to Anthropic API (with OpenRouter fallback)",
+          "done": true
+        },
+        {
+          "text": "Scheduled report generation (APScheduler)",
+          "done": true
         },
         {
           "text": "MS Teams webhook for report delivery",
-          "done": false
-        },
-        {
-          "text": "Complete Xero OAuth flow (get Tenant ID, test refresh)",
-          "done": false
-        },
-        {
-          "text": "Test live Xero P&L, invoices, contacts",
-          "done": false
+          "done": true
         }
       ],
-      "todos_open": 9,
-      "todos_done": 11,
-      "version": "1.1.0",
+      "todos_open": 0,
+      "todos_done": 20,
+      "version": "1.2.0",
       "git": {
-        "status": "clean",
-        "branch": "unknown",
-        "last_commit": "unknown",
-        "changes": [],
-        "uncommitted_count": 0
+        "status": "dirty",
+        "branch": "main",
+        "last_commit": "b5d2b7e security: comprehensive .gitignore for credential protection (14 hours ago)",
+        "changes": [
+          {
+            "status": "M",
+            "file": "gitignore"
+          },
+          {
+            "status": "M",
+            "file": "CHANGELOG.md"
+          },
+          {
+            "status": "M",
+            "file": "CLAUDE.md"
+          },
+          {
+            "status": "M",
+            "file": "PROJECT_PLAN.md"
+          },
+          {
+            "status": "M",
+            "file": "README.md"
+          },
+          {
+            "status": "M",
+            "file": "SECURITY.md"
+          },
+          {
+            "status": "M",
+            "file": "SPEC.md"
+          },
+          {
+            "status": "M",
+            "file": "TODO.md"
+          },
+          {
+            "status": "M",
+            "file": "analysis/billing_classifier.py"
+          },
+          {
+            "status": "M",
+            "file": "analysis/revenue_leakage.py"
+          }
+        ],
+        "uncommitted_count": 20
       },
       "ports_status": [
         {
@@ -1662,44 +2066,58 @@
         }
       ],
       "files": [
-        "API.md",
-        "ARCHITECTURE.md",
-        "AUDIT-LOG.md",
         "CHANGELOG.md",
-        "CLAUDE.md",
-        "DASHBOARD.md",
         "DEPLOYMENT.md",
-        "ENDPOINTS_PATCH.py",
-        "ESCALATION.md",
-        "INTEGRATIONS.md",
-        "PROJECT_PLAN.md",
-        "README.md",
         "RUNBOOK.md",
         "SECURITY.md",
-        "SPEC.md",
         "TODO.md",
-        "TROUBLESHOOTING.md",
-        "analysis/__init__.py",
-        "analysis/anomaly_detector.py",
-        "analysis/billing_classifier.py",
-        "analysis/revenue_leakage.py",
-        "analysis/timesheet_auditor.py",
-        "config.py",
-        "db/__init__.py",
-        "db/models.py",
-        "integrations/__init__.py",
-        "integrations/halo_client.py",
-        "integrations/homebase_client.py",
-        "integrations/spreadsheet_parser.py",
-        "integrations/xero_client.py",
-        "main.py",
+        "config/IDENTITY.md",
+        "data/improvement-tracker.json",
+        "data/xero-snapshot-2026-02-10.json",
+        "data/xero-snapshot-2026-02-11.json",
+        "data/xero_tokens.json",
         "reporting/__init__.py",
         "reporting/daily_digest.py",
         "reporting/financial_summary.py",
         "reporting/monthly_package.py",
-        "reporting/weekly_report.py"
+        "reporting/weekly_report.py",
+        "reports/daily_20260208_054118.json",
+        "reports/daily_20260208_110000.json",
+        "reports/daily_20260208_132942.json",
+        "reports/daily_20260208_133338.json",
+        "reports/daily_20260209_110000.json",
+        "reports/daily_20260210_110004.json",
+        "reports/daily_20260211_110004.json",
+        "reports/daily_20260212_110004.json",
+        "reports/leakage_20260208_100000.json",
+        "reports/leakage_20260208_160000.json",
+        "reports/leakage_20260208_220000.json",
+        "reports/leakage_20260209_040000.json",
+        "reports/leakage_20260209_100000.json",
+        "reports/leakage_20260209_160000.json",
+        "reports/leakage_20260209_220000.json",
+        "reports/leakage_20260210_040006.json",
+        "reports/leakage_20260210_100005.json",
+        "reports/leakage_20260210_160004.json",
+        "reports/leakage_20260210_220005.json",
+        "reports/leakage_20260211_040004.json",
+        "reports/leakage_20260211_100004.json",
+        "reports/leakage_20260211_160005.json",
+        "reports/leakage_20260211_220005.json",
+        "reports/leakage_20260212_040005.json",
+        "reports/leakage_20260212_100005.json",
+        "reports/weekly_20260208_054118.json",
+        "reports/weekly_20260208_132942.json",
+        "reports/weekly_20260208_133338.json",
+        "reports/weekly_20260209_110000.json",
+        "scripts/financial-digest-v2.py",
+        "scripts/financial-digest.py",
+        "scripts/generate_mock_data.py",
+        "scripts/xero-authorize.py",
+        "scripts/xero-refresh-token.py",
+        "scripts/xero-sync.py"
       ],
-      "health_score": 100
+      "health_score": 98
     },
     {
       "name": "Aegis",
@@ -1710,9 +2128,14 @@
       "ports": [
         9003
       ],
-      "scanned_at": "2026-02-07T23:11:27.826390+00:00",
+      "scanned_at": "2026-02-12T14:38:45.199710+00:00",
       "status": "ok",
-      "issues": [],
+      "issues": [
+        {
+          "severity": "info",
+          "message": "20 uncommitted changes"
+        }
+      ],
       "docs": [
         {
           "file": "README.md",
@@ -1769,9 +2192,9 @@
           "status": "ok"
         }
       ],
-      "readme": "# Aegis \u2014 Infrastructure Intelligence Agent\n\n**Version:** 1.1.0\n**Host:** agents@192.168.65.241\n**Port:** 9003\n**Status:** MOCK MODE (Phase 1)\n\n---\n\n## Overview\n\nAegis is Rize Technology Group's infrastructure intelligence agent. It reads data from PRTG (network monitoring), Action1 (patch management), and Halo PSA (ticketing) to identify alert patterns, compliance gaps, and operational risks.\n\n**Phase 1 (Current):** Read-only observer with mock data.\n**Phase 2 (Planned):** Live PRTG, Action1, Halo read access. Daily/weekly reports.\n**Phase 3 (Future):** Advisory mode \u2014 recommends ticket responses, suggests remediation.\n\n---\n\n## Architecture\n\n```\naegis/\n\u251c\u2500\u2500 main.py                  # FastAPI server \u2014 endpoints, heartbeat, Teams handler\n\u251c\u2500\u2500 .env                     # Configuration (MOCK_MODE=true, READ_ONLY_MODE=true)\n\u251c\u2500\u2500 integrations/\n\u2502   \u251c\u2500\u2500 prtg_client.py       # PRTG \u2014 sensors, alerts, devices, history\n\u2502   \u251c\u2500\u2500 action1_client.py    # Action1 \u2014 endpoints, patches, compliance\n\u2502   \u2514\u2500\u2500 halo_client.py       # Halo PSA \u2014 tickets, SLA breaches\n\u251c\u2500\u2500 intelligence/\n\u2502   \u251c\u2500\u2500 alert_correlator.py  # PRTG alert \u2194 Halo ticket matching\n\u2502   \u2514\u2500\u2500 pattern_detector.py  # Recurring pattern detection\n\u251c\u2500\u2500 reporting/\n\u2502   \u2514\u2500\u2500 infrastructure_report.py  # Daily briefing + weekly compliance\n\u2514\u2500\u2500 docs/\n    \u251c\u2500\u2500 README.md, CLAUDE.md, TODO.md, CHANGELOG.md, PROJECT_PLAN.md\n```\n\n## Endpoints\n\n| Endpoint | Method | Description |\n|----------|--------|-------------|\n| /health | GET | Health check with memory/uptime |\n| /status | GET | Agent status + config |\n| /api/teams/message | POST | Teams message handler |\n| /alerts/active | GET | Active PRTG alerts |\n| /correlations | GET | Alert-to-ticket correlations |\n| /reports/daily | GET | Generate daily briefing |\n| /reports/weekly | GET | Generate weekly compliance |\n| /patterns | GET | Detected recurring patterns |\n\n## Safety\n\n- **MOCK_MODE=true** \u2014 All integrations return mock data\n- **READ_ONLY_MODE=true** \u2014 Hardcoded startup check\n- No write operations to PRTG, Action1, Halo, or any external API\n- Sentinel monitors via heartbeat every 5 minutes",
-      "todo": "# Aegis Infrastructure Agent \u2014 TODO\n\n## Phase 1: Mock Observer \u2014 IN PROGRESS\n- [x] FastAPI server on port 9003\n- [x] /health endpoint with memory + uptime\n- [x] Teams message handler via Homebase\n- [x] Heartbeat to Homebase every 5 minutes\n- [x] MOCK_MODE=true with hardcoded safety check\n- [x] READ_ONLY_MODE=true with hardcoded safety check\n- [x] PRTG API client (mock sensors, alerts, devices)\n- [x] Action1 API client (mock endpoints, patches, compliance)\n- [x] Halo PSA ticket client (mock tickets, SLA breaches)\n- [x] Alert correlator (PRTG alert \u2194 Halo ticket matching)\n- [x] Pattern detector (repeat offenders, flapping, concentration)\n- [x] Daily briefing generator\n- [x] Weekly compliance report generator\n- [ ] /alerts/active endpoint in main.py\n- [ ] /correlations endpoint in main.py\n- [ ] /patterns endpoint in main.py\n- [ ] /reports/daily and /reports/weekly endpoints in main.py\n- [ ] Switch LLM to Anthropic API\n- [ ] Scheduled report generation (APScheduler)\n- [ ] MS Teams webhook for report delivery\n\n## Phase 2: Live Read-Only\n- [ ] Connect to live PRTG (verify passhash works)\n- [ ] Connect to live Action1 (verify API key)\n- [ ] Connect to live Halo PSA (verify OAuth)\n- [ ] Build asset tracker (SSL certs, domains, licenses)\n- [ ] Daily briefing at 07:30 UTC\n- [ ] Weekly compliance Monday 08:00 UTC\n- [ ] Bot Framework reply flow\n\n## Phase 3: Advisory Mode\n- [ ] Recommend ticket responses\n- [ ] Suggest remediation steps\n- [ ] Proactive infrastructure risk alerts\n- [ ] Historical trend analysis",
-      "changelog": "# Changelog \u2014 Aegis Infrastructure Agent\n\n## v1.1.0 \u2014 2026-02-07\n### Integration Stubs + Intelligence\n- integrations/prtg_client.py \u2014 PRTG API client with mock data (sensors, alerts, devices, history)\n- integrations/action1_client.py \u2014 Action1 RMM client with mock data (endpoints, patches, compliance)\n- integrations/halo_client.py \u2014 Halo PSA ticket client with mock data (tickets, SLA breaches)\n- intelligence/alert_correlator.py \u2014 PRTG alert \u2194 Halo ticket matching with confidence scoring\n- intelligence/pattern_detector.py \u2014 Recurring pattern detection (repeat offenders, flapping, concentration)\n- reporting/infrastructure_report.py \u2014 Daily briefing + weekly compliance report generator\n- Hardcoded READ_ONLY_MODE safety check at startup\n- MOCK_MODE fixed to true\n- Documentation: README.md, CLAUDE.md, TODO.md, CHANGELOG.md, PROJECT_PLAN.md\n\n## v1.0.0 \u2014 2026-02-06\n### Initial Deployment\n- FastAPI server on port 9003\n- /health endpoint\n- Teams message handler via Homebase\n- Heartbeat to Homebase\n- System prompt with Phase 1 restrictions",
+      "readme": "# Aegis \u2014 Infrastructure Intelligence Agent\n\n**Version:** 1.2.0\n**Host:** agents@192.168.65.241\n**Port:** 9003\n**Status:** MOCK MODE (Phase 1 Complete)\n\n---\n\n## Overview\n\nAegis is Rize Technology Group's infrastructure intelligence agent. It reads data from PRTG (network monitoring), Action1 (patch management), and Halo PSA (ticketing) to identify alert patterns, compliance gaps, and operational risks.\n\n**Phase 1 (Current):** Read-only observer with mock data \u2014 **COMPLETE**\n**Phase 2 (Planned):** Live PRTG, Action1, Halo read access. Daily/weekly reports.\n**Phase 3 (Future):** Advisory mode \u2014 recommends ticket responses, suggests remediation.\n\n---\n\n## Architecture\n\n```\naegis/\n\u251c\u2500\u2500 main.py                  # FastAPI server \u2014 endpoints, heartbeat, Teams handler\n\u251c\u2500\u2500 .env                     # Configuration (MOCK_MODE=true, READ_ONLY_MODE=true)\n\u251c\u2500\u2500 config.py                # Config loader\n\u251c\u2500\u2500 integrations/\n\u2502   \u251c\u2500\u2500 prtg_client.py       # PRTG \u2014 sensors, alerts, devices, history\n\u2502   \u251c\u2500\u2500 action1_client.py    # Action1 \u2014 endpoints, patches, compliance\n\u2502   \u251c\u2500\u2500 halo_client.py       # Halo PSA \u2014 tickets, SLA breaches\n\u2502   \u2514\u2500\u2500 homebase_client.py   # Homebase relay integration\n\u251c\u2500\u2500 intelligence/\n\u2502   \u251c\u2500\u2500 alert_correlator.py  # PRTG alert \u2194 Halo ticket matching\n\u2502   \u251c\u2500\u2500 pattern_detector.py  # Recurring pattern detection\n\u2502   \u251c\u2500\u2500 asset_tracker.py     # SSL/domain/license tracking\n\u2502   \u2514\u2500\u2500 anomaly_detector.py  # Anomaly detection\n\u251c\u2500\u2500 reporting/\n\u2502   \u251c\u2500\u2500 infrastructure_report.py  # Daily briefing + weekly compliance\n\u2502   \u251c\u2500\u2500 daily_briefing.py    # Detailed daily report generator\n\u2502   \u2514\u2500\u2500 templates/           # Report templates\n\u251c\u2500\u2500 monitor/\n\u2502   \u251c\u2500\u2500 synthetic_monitor.py # HTTP endpoint checks (every 5 min)\n\u2502   \u251c\u2500\u2500 login_monitor.py     # Login flow tests (every 15 min)\n\u2502   \u251c\u2500\u2500 browser_monitor.py   # Playwright browser tests (daily 6 AM UTC)\n\u2502   \u251c\u2500\u2500 config.json          # Endpoint configuration\n\u2502   \u251c\u2500\u2500 results.json         # Synthetic check results\n\u2502   \u251c\u2500\u2500 browser_results.json # Browser check results\n\u2502   \u2514\u2500\u2500 screenshots/         # Browser screenshots\n\u251c\u2500\u2500 reports/                 # Generated reports storage\n\u251c\u2500\u2500 logs/                    # Log files\n\u2514\u2500\u2500 docs/\n    \u251c\u2500\u2500 README.md, CLAUDE.md, TODO.md, CHANGELOG.md, PROJECT_PLAN.md\n```\n\n## Endpoints\n\n| Endpoint | Method | Description |\n|----------|--------|-------------|\n| /health | GET | Health check with memory/uptime |\n| /status | GET | Agent status + config (includes scheduler status) |\n| /api/teams/message | POST | Teams message handler |\n| /api/alerts/active | GET | Active PRTG alerts (mock data) |\n| /api/correlations | GET | Alert-to-ticket correlations |\n| /api/patterns | GET | Detected recurring patterns + recommendations |\n| /api/reports/daily | GET | Generate daily infrastructure briefing |\n| /api/reports/weekly | GET | Generate weekly compliance report |\n| /api/monitor/status | GET | Synthetic monitoring results |\n| /alerts/active | GET | (Legacy) Active PRTG alerts |\n| /correlations | GET | (Legacy) Alert-to-ticket correlations |\n| /patterns | GET | (Legacy) Detected patterns |\n| /reports/daily | GET | (Legacy) Daily briefing |\n| /reports/weekly | GET | (Legacy) Weekly compliance |\n| /infrastructure/summary | GET | Aggregated infrastructure health |\n| /compliance | GET | Patch compliance summary |\n| /assets | GET | Asset health (SSL, licenses, domains) |\n\n## LLM Integration\n\nAegis uses AI to respond to Teams messages:\n- **Primary:** Anthropic API (claude-sonnet-4-20250514)\n- **Fallback:** OpenRouter (anthropic/claude-opus-4)\n\n## Scheduled Tasks\n\n| Task | Schedule | Description |\n|------|----------|-------------|\n| Synthetic Monitor | Every 5 min | HTTP checks on all tunnel endpoints |\n| Login Monitor | Every 15 min | Login flow verification |\n| Browser Monitor | Daily 06:00 UTC | Playwright browser tests with screenshots |\n| Daily Briefing | 07:30 UTC | Infrastructure health report \u2192 Teams + email |\n| Weekly Compliance | Mon 08:00 UTC | Compliance report \u2192 Teams + email |\n| Heartbeat | Every 5 min | Status to Homebase with monitor summary |\n\n## Safety\n\n- **MOCK_MODE=true** \u2014 All integrations return mock data\n- **READ_ONLY_MODE=true** \u2014 Hardcoded startup check (agent refuses to start if false)\n- No write operations to PRTG, Action1, Halo, or any external API\n- Homebase monitors via heartbeat every 5 minutes\n- All API endpoints return mock/cached data only",
+      "todo": "# Aegis Infrastructure Agent \u2014 TODO\n\n## Phase 1: Mock Observer \u2014 COMPLETE \u2705\n\n- [x] FastAPI server on port 9003\n- [x] /health endpoint with memory + uptime\n- [x] Teams message handler via Homebase\n- [x] Heartbeat to Homebase every 5 minutes\n- [x] MOCK_MODE=true with hardcoded safety check\n- [x] READ_ONLY_MODE=true with hardcoded safety check\n- [x] PRTG API client (mock sensors, alerts, devices)\n- [x] Action1 API client (mock endpoints, patches, compliance)\n- [x] Halo PSA ticket client (mock tickets, SLA breaches)\n- [x] Alert correlator (PRTG alert \u2194 Halo ticket matching)\n- [x] Pattern detector (repeat offenders, flapping, concentration)\n- [x] Daily briefing generator\n- [x] Weekly compliance report generator\n- [x] /api/alerts/active endpoint\n- [x] /api/correlations endpoint\n- [x] /api/patterns endpoint\n- [x] /api/reports/daily and /api/reports/weekly endpoints\n- [x] /api/monitor/status endpoint (synthetic monitor results)\n- [x] Switch LLM to Anthropic API (with OpenRouter fallback)\n- [x] Scheduled report generation (APScheduler \u2014 daily 07:30 UTC, weekly Monday 08:00 UTC)\n- [x] MS Teams webhook for report delivery\n- [x] Heartbeat includes monitor summary (endpoints_healthy, endpoints_total)\n- [x] Synthetic monitor (HTTP checks every 5 minutes via cron)\n- [x] Login monitor (form POST tests every 15 minutes via cron)\n- [x] Browser monitor with Playwright (daily 06:00 UTC, screenshots, JS error detection)\n\n---\n\n## Phase 2: Live Read-Only \u2014 IN PROGRESS \ud83d\udd04\n\n### Integration Tasks\n- [ ] Connect to live PRTG (verify passhash works)\n- [ ] Connect to live Action1 (verify API key)\n- [ ] Connect to live Halo PSA (verify OAuth)\n\n### Asset Tracking\n- [ ] Build asset tracker (SSL certs, domains, licenses)\n- [ ] SSL certificate expiration monitoring\n- [ ] Domain registration expiration tracking\n- [ ] Software license renewal tracking\n\n### Scheduled Reports\n- [ ] Daily briefing at 07:00 UTC (3:00 AM ADT)\n- [ ] Weekly compliance report Monday 07:00 UTC\n\n### Communication\n- [ ] Bot Framework reply flow for Teams responses\n\n### Validation\n- [ ] Validate correlation accuracy vs Ibrahim's manual triage\n- [ ] Confirm no false positives for 2 weeks\n- [ ] Document accuracy metrics in AUDIT-LOG.md\n\n---\n\n## Phase 3: Advisory Mode \u2014 PLANNED \ud83d\udccb\n\n- [ ] Recommend ticket responses based on alert patterns\n- [ ] Suggest remediation steps for recurring issues\n- [ ] Proactive infrastructure risk alerts\n- [ ] Historical trend analysis and reporting\n- [ ] Anomaly detection for unusual patterns\n- [ ] Customer health scoring based on alert frequency\n\n---\n\n## Phase 4: Supervised Execution \u2014 FUTURE \u23f3\n\n- [ ] Acknowledge low-priority PRTG alerts (with approval)\n- [ ] Create Halo tickets from correlation data (with approval)\n- [ ] Schedule patch deployments (with approval)\n- [ ] Test rollback capability\n\n---\n\n## Phase 5: Autonomous (Limited) \u2014 FUTURE \ud83d\udd2e\n\n- [ ] Auto-acknowledge specific alert types\n- [ ] Auto-create tickets for known patterns\n- [ ] Auto-schedule routine patches\n- [ ] Continuous Sentinel audit integration\n- [ ] Quarterly human review process",
+      "changelog": "# Changelog \u2014 Aegis Infrastructure Agent\n\n## v1.2.0 \u2014 2026-02-08\n### Overnight Build \u2014 Phase 1 Complete\n- **New API Endpoints:**\n  - GET /api/alerts/active \u2014 Returns active PRTG alerts (mock data)\n  - GET /api/correlations \u2014 Returns PRTG alert \u2194 Halo ticket correlations\n  - GET /api/patterns \u2014 Returns recurring alert patterns with recommendations\n  - GET /api/reports/daily \u2014 Returns latest daily infrastructure briefing\n  - GET /api/reports/weekly \u2014 Returns latest weekly compliance report\n  - GET /api/monitor/status \u2014 Returns synthetic monitoring results\n\n- **LLM Integration:**\n  - Primary: Anthropic API (claude-sonnet-4-20250514)\n  - Fallback: OpenRouter (anthropic/claude-opus-4)\n  - Added ANTHROPIC_MODEL to .env\n\n- **Scheduled Reports:**\n  - APScheduler integrated for automated report generation\n  - Daily briefing at 07:30 UTC (3:30 AM ADT)\n  - Weekly compliance report Monday 08:00 UTC (4:00 AM ADT)\n  - Reports sent via Teams webhook + email (SMTP)\n\n- **Monitor Integration:**\n  - Heartbeat now includes monitor_summary, endpoints_healthy, endpoints_total\n  - /api/monitor/status exposes synthetic check results\n\n- **Browser Monitor (Playwright):**\n  - monitor/browser_monitor.py \u2014 Headless Chrome browser testing\n  - Takes screenshots of each endpoint (saved to monitor/screenshots/)\n  - Detects JS console errors\n  - Verifies page content rendered (not just 200 OK)\n  - Runs daily at 06:00 UTC via cron\n  - Auto-cleans screenshots older than 7 days\n\n## v1.1.0 \u2014 2026-02-07\n### Integration Stubs + Intelligence\n- integrations/prtg_client.py \u2014 PRTG API client with mock data (sensors, alerts, devices, history)\n- integrations/action1_client.py \u2014 Action1 RMM client with mock data (endpoints, patches, compliance)\n- integrations/halo_client.py \u2014 Halo PSA ticket client with mock data (tickets, SLA breaches)\n- intelligence/alert_correlator.py \u2014 PRTG alert \u2194 Halo ticket matching with confidence scoring\n- intelligence/pattern_detector.py \u2014 Recurring pattern detection (repeat offenders, flapping, concentration)\n- reporting/infrastructure_report.py \u2014 Daily briefing + weekly compliance report generator\n- Hardcoded READ_ONLY_MODE safety check at startup\n- MOCK_MODE fixed to true\n- Documentation: README.md, CLAUDE.md, TODO.md, CHANGELOG.md, PROJECT_PLAN.md\n\n## v1.0.0 \u2014 2026-02-06\n### Initial Deployment\n- FastAPI server on port 9003\n- /health endpoint\n- Teams message handler via Homebase\n- Heartbeat to Homebase\n- System prompt with Phase 1 restrictions",
       "todos_parsed": [
         {
           "text": "FastAPI server on port 9003",
@@ -1826,43 +2249,84 @@
           "done": true
         },
         {
-          "text": "/alerts/active endpoint in main.py",
-          "done": false
+          "text": "/api/alerts/active endpoint",
+          "done": true
         },
         {
-          "text": "/correlations endpoint in main.py",
-          "done": false
+          "text": "/api/correlations endpoint",
+          "done": true
         },
         {
-          "text": "/patterns endpoint in main.py",
-          "done": false
+          "text": "/api/patterns endpoint",
+          "done": true
         },
         {
-          "text": "/reports/daily and /reports/weekly endpoints in main.py",
-          "done": false
+          "text": "/api/reports/daily and /api/reports/weekly endpoints",
+          "done": true
         },
         {
-          "text": "Switch LLM to Anthropic API",
-          "done": false
+          "text": "/api/monitor/status endpoint (synthetic monitor results)",
+          "done": true
         },
         {
-          "text": "Scheduled report generation (APScheduler)",
-          "done": false
+          "text": "Switch LLM to Anthropic API (with OpenRouter fallback)",
+          "done": true
         },
         {
-          "text": "MS Teams webhook for report delivery",
-          "done": false
+          "text": "Scheduled report generation (APScheduler \u2014 daily 07:30 UTC, weekly Monday 08:00 UTC)",
+          "done": true
         }
       ],
-      "todos_open": 7,
-      "todos_done": 13,
-      "version": "1.1.0",
+      "todos_open": 0,
+      "todos_done": 20,
+      "version": "1.2.0",
       "git": {
-        "status": "clean",
-        "branch": "unknown",
-        "last_commit": "unknown",
-        "changes": [],
-        "uncommitted_count": 0
+        "status": "dirty",
+        "branch": "main",
+        "last_commit": "368ccc3 security: comprehensive .gitignore for credential protection (14 hours ago)",
+        "changes": [
+          {
+            "status": "M",
+            "file": "gitignore"
+          },
+          {
+            "status": "M",
+            "file": "CHANGELOG.md"
+          },
+          {
+            "status": "M",
+            "file": "CLAUDE.md"
+          },
+          {
+            "status": "M",
+            "file": "PROJECT_PLAN.md"
+          },
+          {
+            "status": "M",
+            "file": "README.md"
+          },
+          {
+            "status": "M",
+            "file": "SECURITY.md"
+          },
+          {
+            "status": "M",
+            "file": "SPEC.md"
+          },
+          {
+            "status": "M",
+            "file": "TODO.md"
+          },
+          {
+            "status": "M",
+            "file": "config.py"
+          },
+          {
+            "status": "M",
+            "file": "integrations/halo_client.py"
+          }
+        ],
+        "uncommitted_count": 20
       },
       "ports_status": [
         {
@@ -1873,45 +2337,58 @@
         }
       ],
       "files": [
-        "API.md",
-        "ARCHITECTURE.md",
+        ".3cx-credentials.json",
         "AUDIT-LOG.md",
         "CHANGELOG.md",
-        "CLAUDE.md",
         "DEPLOYMENT.md",
-        "ENDPOINTS_PATCH.py",
         "ESCALATION.md",
         "INTEGRATIONS.md",
         "PROJECT_PLAN.md",
         "README.md",
+        "ROADMAP.md",
         "RUNBOOK.md",
         "SECURITY.md",
         "SPEC.md",
         "TODO.md",
         "TROUBLESHOOTING.md",
-        "config.py",
+        "browser-monitor.py",
+        "config/IDENTITY.md",
+        "connectors/__init__.py",
+        "connectors/action1_connector.py",
+        "connectors/base_connector.py",
+        "connectors/halo_connector.py",
+        "connectors/prtg_connector.py",
+        "connectors/sharepoint_connector.py",
+        "connectors/sync_all.py",
+        "data/action1-2026-02-10.json",
+        "data/action1-2026-02-11.json",
+        "data/prtg-intel-2026-02-10.json",
+        "data/prtg-intel-2026-02-11.json",
         "db/__init__.py",
         "db/models.py",
-        "integrations/__init__.py",
-        "integrations/action1_client.py",
-        "integrations/halo_client.py",
-        "integrations/homebase_client.py",
-        "integrations/prtg_client.py",
         "intelligence/__init__.py",
-        "intelligence/alert_correlator.py",
-        "intelligence/anomaly_detector.py",
-        "intelligence/asset_tracker.py",
-        "intelligence/customer_profiler.py",
-        "intelligence/pattern_detector.py",
-        "intelligence/ticket_analyzer.py",
+        "intelligence/aegis_analyzer.py",
         "main.py",
+        "monitor/browser-results.json",
+        "monitor/browser_monitor.py",
+        "monitor/browser_results.json",
+        "monitor/config.json",
+        "monitor/login_monitor.py",
+        "monitor/results.json",
+        "monitor/strikes.json",
+        "monitor/synthetic_monitor.py",
         "reporting/__init__.py",
         "reporting/asset_report.py",
         "reporting/compliance_report.py",
         "reporting/daily_briefing.py",
-        "reporting/infrastructure_report.py"
+        "reporting/infrastructure_report.py",
+        "scripts/action1-sync.py",
+        "scripts/monitor-3cx-sbc.py",
+        "scripts/morning-briefing.py",
+        "scripts/prtg-intelligence.py",
+        "sync_engine.py"
       ],
-      "health_score": 100
+      "health_score": 98
     },
     {
       "name": "BET Air Ambulance",
@@ -1922,7 +2399,7 @@
       "ports": [
         3000
       ],
-      "scanned_at": "2026-02-07T23:11:41.593656+00:00",
+      "scanned_at": "2026-02-12T14:39:01.080858+00:00",
       "status": "ok",
       "issues": [
         {
@@ -2051,7 +2528,7 @@
       "git": {
         "status": "clean",
         "branch": "main",
-        "last_commit": "129eafd Auto-backup: $(date \"+%Y-%m-%d %H:%M\") (5 days ago)",
+        "last_commit": "129eafd Auto-backup: $(date \"+%Y-%m-%d %H:%M\") (10 days ago)",
         "changes": [],
         "uncommitted_count": 0
       },
@@ -2105,7 +2582,7 @@
       "project": "David Bishop",
       "server": "agents",
       "severity": "warning",
-      "message": "Missing required docs: README.md, TODO.md, CHANGELOG.md, SPEC.md, SECURITY.md, INTEGRATIONS.md, RUNBOOK.md, ESCALATION.md, AUDIT-LOG.md"
+      "message": "Missing required docs: SPEC.md, SECURITY.md, INTEGRATIONS.md, RUNBOOK.md, ESCALATION.md, AUDIT-LOG.md"
     },
     {
       "project": "BET Air Ambulance",
@@ -2114,16 +2591,52 @@
       "message": "Missing required docs: DEPLOYMENT.md"
     },
     {
+      "project": "Best Shipping",
+      "server": "demos",
+      "severity": "info",
+      "message": "20 uncommitted changes"
+    },
+    {
+      "project": "BPS-AI",
+      "server": "demos",
+      "severity": "info",
+      "message": "13 uncommitted changes"
+    },
+    {
+      "project": "Premier EMR",
+      "server": "demos",
+      "severity": "info",
+      "message": "6 uncommitted changes"
+    },
+    {
+      "project": "Helios AI",
+      "server": "demos",
+      "severity": "info",
+      "message": "20 uncommitted changes"
+    },
+    {
       "project": "Homebase",
       "server": "rize-apps",
       "severity": "info",
-      "message": "5 uncommitted changes"
+      "message": "20 uncommitted changes"
     },
     {
       "project": "Dockyard WiFi",
       "server": "rize-apps",
       "severity": "info",
-      "message": "2 uncommitted changes"
+      "message": "8 uncommitted changes"
+    },
+    {
+      "project": "Apex",
+      "server": "agents",
+      "severity": "info",
+      "message": "20 uncommitted changes"
+    },
+    {
+      "project": "Aegis",
+      "server": "agents",
+      "severity": "info",
+      "message": "20 uncommitted changes"
     }
   ],
   "summary": {

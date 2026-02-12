@@ -1,5 +1,5 @@
 {
-  "generated": "2026-02-07T22:30:01Z",
+  "generated": "2026-02-12T14:30:01Z",
   "servers": [
     {
       "id": "helios",
@@ -22,7 +22,7 @@
       "ssh_url": "",
       "alive": true,
       "version": "",
-      "uptime": "up 6 hours, 45 minutes",
+      "uptime": "up 4 days, 22 hours, 45 minutes",
       "disk": "",
       "memory": "",
       "services": "0 0"
@@ -48,7 +48,7 @@
       "ssh_url": "https://claude-dev-ssh.rize.bm",
       "alive": true,
       "version": "",
-      "uptime": "up 6 hours, 45 minutes",
+      "uptime": "up 4 days, 22 hours, 45 minutes",
       "disk": "",
       "memory": "",
       "services": "0 0"
@@ -61,10 +61,10 @@
       "ssh_url": "https://bpsai-ssh.rize.bm",
       "alive": true,
       "version": "",
-      "uptime": "up 6 hours, 45 minutes",
+      "uptime": "up 4 days, 22 hours, 45 minutes",
       "disk": "",
       "memory": "",
-      "services": "0 0"
+      "services": "4"
     },
     {
       "id": "nexus",
@@ -85,12 +85,12 @@
       "user": "relayadmin",
       "path": "~/relay",
       "ssh_url": "https://relay-ssh.rize.bm",
-      "alive": true,
-      "version": "v2.1.0",
-      "uptime": "up 6 hours, 45 minutes",
+      "alive": false,
+      "version": "",
+      "uptime": "",
       "disk": "",
       "memory": "",
-      "services": "0 0"
+      "services": ""
     },
     {
       "id": "vector",
@@ -100,7 +100,7 @@
       "ssh_url": "https://vector-ssh.rize.bm",
       "alive": true,
       "version": "",
-      "uptime": "up 6 hours, 45 minutes",
+      "uptime": "up 4 days, 22 hours, 45 minutes",
       "disk": "",
       "memory": "",
       "services": "0 0"
@@ -111,12 +111,12 @@
       "user": "emradmin",
       "path": "~/premier-emr",
       "ssh_url": "https://emr-ssh.rize.bm",
-      "alive": true,
+      "alive": false,
       "version": "",
-      "uptime": "up 6 hours, 45 minutes",
+      "uptime": "",
       "disk": "",
       "memory": "",
-      "services": "0 0"
+      "services": ""
     },
     {
       "id": "dockyard",
@@ -124,12 +124,12 @@
       "user": "dockyardadmin",
       "path": "~/dockyard-wifi-portal",
       "ssh_url": "https://dockyard-ssh.rize.bm",
-      "alive": true,
+      "alive": false,
       "version": "",
-      "uptime": "up 6 hours, 45 minutes",
+      "uptime": "",
       "disk": "",
       "memory": "",
-      "services": "0 0"
+      "services": ""
     },
     {
       "id": "hyper-v",
@@ -137,7 +137,7 @@
       "user": "Administrator",
       "path": "",
       "ssh_url": "",
-      "alive": false,
+      "alive": true,
       "version": "",
       "uptime": "",
       "disk": "",
@@ -167,8 +167,8 @@
     {
       "name": "relay",
       "url": "http://192.168.65.248:8000",
-      "http_code": 200,
-      "status": "up"
+      "http_code": 0,
+      "status": "down"
     },
     {
       "name": "vector",
@@ -179,8 +179,8 @@
     {
       "name": "dockyard",
       "url": "http://192.168.65.252:3000",
-      "http_code": 200,
-      "status": "up"
+      "http_code": 0,
+      "status": "down"
     },
     {
       "name": "david",
@@ -197,8 +197,8 @@
     {
       "name": "premier-emr",
       "url": "http://192.168.65.239:3000",
-      "http_code": 200,
-      "status": "up"
+      "http_code": 0,
+      "status": "down"
     }
   ],
   "status": {
@@ -230,18 +230,23 @@
   ],
   "cobalt_crons": [
     "*/5 * * * * curl -s -X POST http://localhost:8000/api/metrics/record > /dev/null 2>&1",
+    "*/5 * * * * cd /home/rizeadmin/homebase && bash backend/scripts/uptime-monitor.sh >> logs/uptime.log 2>&1",
+    "1-56/5 * * * * cd /home/rizeadmin/homebase && python3 -c 'import sys;sys.path.insert(0,\".\");from backend.services.alert_checker import check_all;check_all()' >> logs/alerts.log 2>&1",
+    "1-56/5 * * * * /usr/bin/python3 /home/rizeadmin/homebase/backend/scripts/infra-scanner.py >> /home/rizeadmin/homebase/logs/scanner.log 2>&1",
+    "2-57/5 * * * * python3 /home/rizeadmin/homebase/backend/scripts/alert-generator.py >> /home/rizeadmin/homebase/logs/alerts.log 2>&1",
+    "2-57/5 * * * * python3 /home/rizeadmin/homebase/backend/scripts/project-status-scanner.py >> /home/rizeadmin/homebase/logs/project-status.log 2>&1",
+    "3-58/5 * * * * cd ~/homebase && python3 monitor_all.py >> /tmp/rize-monitor.log 2>&1",
+    "3-58/5 * * * * cd /home/rizeadmin/homebase && python3 backend/services/agent_health_monitor.py >> logs/agent-health.log 2>&1",
     "0 0 * * * curl -s -X DELETE http://localhost:8000/api/metrics/cleanup?days=30 > /dev/null 2>&1",
     "0 * * * * curl -s -X POST http://localhost:8000/api/projects/sync > /dev/null 2>&1",
     "0 */6 * * * /home/rizeadmin/scripts/health-check.sh",
     "0 3 * * * cd /home/rizeadmin/homebase && bash backend/scripts/nightly-scan.sh >> logs/nightly-scan.log 2>&1",
-    "*/5 * * * * cd /home/rizeadmin/homebase && bash backend/scripts/uptime-monitor.sh >> logs/uptime.log 2>&1",
-    "*/5 * * * * cd /home/rizeadmin/homebase && python3 -c 'import sys;sys.path.insert(0,\".\");from backend.services.alert_checker import check_all;check_all()' >> logs/alerts.log 2>&1",
     "0 4 * * 0 cd /home/rizeadmin/homebase && bash backend/scripts/discovery-scan.sh >> logs/discovery.log 2>&1",
     "0 * * * * cd /home/rizeadmin/homebase && bash backend/scripts/credential-scanner.sh >> logs/credential-scanner.log 2>&1",
     "30 * * * * cd /home/rizeadmin/homebase && bash backend/scripts/generate-cheat-sheet.sh >> logs/cheat-sheet.log 2>&1",
     "0 8 * * * bash /home/rizeadmin/homebase/backend/scripts/research-digest.sh >> /home/rizeadmin/homebase/logs/research.log 2>&1",
-    "*/5 * * * * /usr/bin/python3 /home/rizeadmin/homebase/backend/scripts/infra-scanner.py >> /home/rizeadmin/homebase/logs/scanner.log 2>&1",
-    "*/5 * * * * python3 /home/rizeadmin/homebase/backend/scripts/alert-generator.py >> /home/rizeadmin/homebase/logs/alerts.log 2>&1",
-    "*/5 * * * * python3 /home/rizeadmin/homebase/backend/scripts/project-status-scanner.py >> /home/rizeadmin/homebase/logs/project-status.log 2>&1"
+    "*/30 * * * * scp -q agents@192.168.65.241:~/data/spend-logs/homebase-export.json ~/homebase/data/ai-spend.json 2>/dev/null",
+    "0 8 * * * cd /home/rizeadmin/homebase && python3 backend/services/version_scanner.py >> logs/version-scan.log 2>&1",
+    "0 7 * * * cd /home/rizeadmin/homebase && python3 backend/services/maintenance_executor.py >> logs/maintenance.log 2>&1"
   ]
 }

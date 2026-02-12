@@ -1,0 +1,63 @@
+{
+  "scan_targets": {
+    "agents": [
+      {
+        "name": "David Bishop",
+        "server": "192.168.65.241",
+        "health_endpoint": "http://192.168.65.241:18789/health",
+        "checks": ["heartbeat", "guardrails", "pii_filter", "scope_compliance"],
+        "allowed_scope": ["sales", "client_communication", "crm", "security_flagging"],
+        "forbidden": ["infrastructure", "financial_operations", "code_deployment"]
+      },
+      {
+        "name": "Apex",
+        "server": "192.168.65.241",
+        "health_endpoint": "http://192.168.65.241:9004/",
+        "checks": ["heartbeat", "guardrails", "pii_filter", "scope_compliance"],
+        "allowed_scope": ["finance", "xero", "halo_psa", "invoicing", "collections"],
+        "allowed_crosstalk": ["aegis:billing_suspension", "aegis:license_renewal"],
+        "forbidden": ["infrastructure_management", "code_deployment", "non_financial_support"]
+      },
+      {
+        "name": "Aegis",
+        "server": "192.168.65.241",
+        "health_endpoint": "http://192.168.65.241:9005/",
+        "checks": ["heartbeat", "guardrails", "pii_filter", "scope_compliance"],
+        "allowed_scope": ["infrastructure", "prtg", "action1", "monitoring", "halo_tickets"],
+        "allowed_crosstalk": ["apex:license_cost_notification", "apex:service_billing"],
+        "forbidden": ["financial_operations", "sales", "client_communication"]
+      },
+      {
+        "name": "Cortex",
+        "server": "192.168.65.241",
+        "health_endpoint": "http://192.168.65.241:9101/",
+        "checks": ["heartbeat", "task_audit", "scope_compliance"],
+        "allowed_scope": ["fleet_command", "project_scanning", "task_dispatch", "memory_management"],
+        "forbidden": ["direct_client_communication"]
+      },
+      {
+        "name": "Sentinel",
+        "server": "192.168.65.241",
+        "health_endpoint": "http://192.168.65.241:9006/",
+        "checks": ["self_check", "database_integrity"],
+        "notes": "Self-monitoring"
+      }
+    ],
+    "projects": [
+      {"name": "BEST Shipping", "server": "192.168.65.246", "url": "https://bestshipping.rize.bm", "local_port": 3001, "checks": ["security_scan", "auth_check", "secrets_in_code"], "sensitivity": "standard"},
+      {"name": "BPS AI", "server": "192.168.65.246", "url": "https://bpsai.rize.bm", "local_port": 3000, "checks": ["security_scan", "auth_check", "secrets_in_code"], "sensitivity": "standard"},
+      {"name": "Premier EMR", "server": "192.168.65.246", "local_port": 3004, "checks": ["security_scan", "auth_check", "hipaa_compliance"], "sensitivity": "medical_high"},
+      {"name": "Helios", "server": "192.168.65.246", "url": "https://helios.rize.bm", "local_port": 3005, "checks": ["security_scan", "auth_check", "document_access_control"], "sensitivity": "standard"},
+      {"name": "Dockyard", "server": "192.168.65.245", "local_port": 8080, "checks": ["security_scan", "payment_data_handling"], "sensitivity": "financial_high"},
+      {"name": "Nexus", "server": "192.168.65.245", "local_port": 3002, "checks": ["security_scan", "data_exposure"], "sensitivity": "standard"}
+    ],
+    "infrastructure": {
+      "checks": ["ssl_expiry", "open_ports", "secrets_in_git", "firewall_audit", "service_health"],
+      "servers": ["192.168.65.237", "192.168.65.241", "192.168.65.245", "192.168.65.246", "192.168.65.249"]
+    }
+  },
+  "authorization": {
+    "ceo_only_actions": ["modify_agent_behavior", "change_guardrails", "deploy_code", "restart_agents"],
+    "authorized_contacts": ["gadarrell@rize.bm", "artiedarrell@gmail.com"]
+  }
+}

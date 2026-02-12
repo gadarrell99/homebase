@@ -1,0 +1,157 @@
+{
+  "agents": [
+    {
+      "name": "David Bishop",
+      "id": "david",
+      "server": "192.168.65.241",
+      "port": 18789,
+      "teams_port": 3978,
+      "user": "david",
+      "type": "openclaw",
+      "role": "Sales/BD/Email/Teams",
+      "status": "LIVE",
+      "security": {
+        "can_send_email": true,
+        "can_access_crm": true,
+        "can_contact_customers": false,
+        "can_offer_discounts": false,
+        "pricing_deviation_limit": 0.2,
+        "ceo_approval_required": [
+          "pricing_override",
+          "contract_terms",
+          "customer_direct_contact"
+        ],
+        "rate_limit_emails_per_hour": 20,
+        "pii_scan_outbound": true,
+        "allowed_external_apis": [
+          "graph.microsoft.com",
+          "freshsales.io"
+        ],
+        "blocked_actions": [
+          "delete_data",
+          "modify_contracts",
+          "access_financial"
+        ]
+      }
+    },
+    {
+      "name": "Apex",
+      "id": "apex",
+      "server": "192.168.65.241",
+      "port": 9002,
+      "user": "agents",
+      "type": "fastapi",
+      "role": "Financial Intelligence (Xero, Halo PSA)",
+      "status": "LIVE",
+      "security": {
+        "mode": "read_only",
+        "can_modify_xero": false,
+        "can_modify_halo": false,
+        "can_send_email": true,
+        "ceo_approval_required": [
+          "write_operations",
+          "financial_adjustments"
+        ],
+        "allowed_external_apis": [
+          "api.xero.com",
+          "halo.rize.bm"
+        ],
+        "pii_scan_outbound": true,
+        "blocked_actions": [
+          "create_invoice",
+          "modify_payment",
+          "delete_record"
+        ]
+      }
+    },
+    {
+      "name": "Aegis",
+      "id": "aegis",
+      "server": "192.168.65.241",
+      "port": 9003,
+      "user": "agents",
+      "type": "fastapi",
+      "role": "Infrastructure Monitoring (PRTG, Browser, Halo)",
+      "status": "LIVE",
+      "security": {
+        "mode": "read_only",
+        "can_restart_services": false,
+        "can_modify_prtg": false,
+        "can_send_email": true,
+        "allowed_external_apis": [
+          "prtg.rize.bm",
+          "halo.rize.bm"
+        ],
+        "pii_scan_outbound": true,
+        "blocked_actions": [
+          "modify_monitoring",
+          "delete_sensors",
+          "change_thresholds"
+        ]
+      }
+    },
+    {
+      "name": "Cortex",
+      "id": "cortex",
+      "server": "192.168.65.241",
+      "port": 9100,
+      "user": "agents",
+      "type": "openclaw",
+      "role": "Fleet Intelligence, Documentation Compliance, AI Spend Management",
+      "status": "DEPLOYING",
+      "security": {
+        "mode": "read_only",
+        "can_ssh_fleet": true,
+        "ssh_mode": "read_only_commands",
+        "can_restart_services": false,
+        "can_deploy_code": false,
+        "can_modify_agents": false,
+        "can_send_email": true,
+        "rate_limit_emails_per_hour": 10,
+        "ceo_approval_required": [
+          "any_write_operation",
+          "service_restart",
+          "code_deploy"
+        ],
+        "allowed_ssh_targets": [
+          "talosadmin@192.168.65.237",
+          "agents@192.168.65.241",
+          "rizeadmin@192.168.65.245",
+          "demos@192.168.65.246",
+          "betadmin@192.168.65.249"
+        ],
+        "blocked_ssh_commands": [
+          "rm -rf",
+          "mkfs",
+          "dd if=",
+          "shutdown",
+          "reboot",
+          "systemctl stop",
+          "systemctl restart",
+          "kill -9",
+          "DROP TABLE",
+          "DELETE FROM",
+          "passwd",
+          "useradd",
+          "userdel"
+        ],
+        "ai_spend_rules": {
+          "model_routing_enabled": true,
+          "max_opus_calls_per_hour": 10,
+          "default_model": "claude-sonnet-4-5-20250929",
+          "cost_alert_threshold_daily": 50.0,
+          "cost_alert_threshold_monthly": 500.0,
+          "track_all_api_calls": true
+        },
+        "pii_scan_outbound": true,
+        "blocked_actions": [
+          "modify_guardrails",
+          "disable_sentinel",
+          "escalate_privileges"
+        ]
+      }
+    }
+  ],
+  "updated_at": "2026-02-10T04:25:00Z",
+  "version": "2.0"
+}

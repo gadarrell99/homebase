@@ -1,0 +1,131 @@
+{
+  "version": "2.0",
+  "updated_at": "2026-02-10T04:25:00Z",
+  "global_rules": {
+    "all_agents_heartbeat_interval_seconds": 300,
+    "missed_heartbeat_threshold": 3,
+    "auto_restart_on_crash": true,
+    "auto_restart_requires_approval": false,
+    "max_auto_restarts_per_hour": 3,
+    "pii_patterns": [
+      "\\b\\d{3}-\\d{2}-\\d{4}\\b",
+      "\\b\\d{16}\\b",
+      "\\b[A-Z]{2}\\d{6,8}\\b",
+      "\\bpassword\\s*[:=]\\s*\\S+"
+    ],
+    "blocked_outbound_domains": [
+      "pastebin.com",
+      "hastebin.com",
+      "ghostbin.com",
+      "transfer.sh",
+      "file.io"
+    ],
+    "api_key_rotation_days": 90,
+    "audit_log_retention_days": 365
+  },
+  "ai_spend_rules": {
+    "enabled": true,
+    "model_tiers": {
+      "tier1_complex": {
+        "models": [
+          "claude-opus-4-5-20250929"
+        ],
+        "max_calls_per_hour": 10,
+        "max_daily_cost": 25.0,
+        "use_cases": [
+          "incident_diagnosis",
+          "architecture_decisions",
+          "complex_analysis"
+        ]
+      },
+      "tier2_routine": {
+        "models": [
+          "claude-sonnet-4-5-20250929"
+        ],
+        "max_calls_per_hour": 100,
+        "max_daily_cost": 20.0,
+        "use_cases": [
+          "email_compose",
+          "data_extraction",
+          "report_generation"
+        ]
+      },
+      "tier3_bulk": {
+        "models": [
+          "claude-haiku-4-5-20251001",
+          "gemini-flash"
+        ],
+        "max_calls_per_hour": 500,
+        "max_daily_cost": 5.0,
+        "use_cases": [
+          "log_parsing",
+          "classification",
+          "status_checks"
+        ]
+      },
+      "tier4_local": {
+        "models": [
+          "kimi",
+          "llama3",
+          "ollama-local"
+        ],
+        "max_calls_per_hour": 0,
+        "max_daily_cost": 0,
+        "use_cases": [
+          "pii_scanning",
+          "sensitive_data",
+          "offline_processing"
+        ],
+        "note": "No API cost \u2014 hardware only. Planned for Hyper-V deployment."
+      }
+    },
+    "alerts": {
+      "daily_spend_warning": 30.0,
+      "daily_spend_critical": 50.0,
+      "monthly_budget": 500.0,
+      "alert_email": "artiedarrell@gmail.com"
+    }
+  },
+  "escalation_matrix": {
+    "info": {
+      "response_time": "none",
+      "action": "log_only",
+      "notification": "daily_digest"
+    },
+    "warning": {
+      "response_time": "30min",
+      "action": "log_and_monitor",
+      "notification": "email_if_persists_1hr"
+    },
+    "error": {
+      "response_time": "5min",
+      "action": "log_and_auto_fix",
+      "notification": "immediate_email"
+    },
+    "critical": {
+      "response_time": "immediate",
+      "action": "kill_switch",
+      "notification": "email_every_5min_until_ack"
+    }
+  },
+  "kill_switch": {
+    "auto_triggers": [
+      "10+ malformed responses in 5 minutes",
+      ">50% error rate sustained 5 minutes",
+      "forbidden resource access attempt",
+      ">60s sustained response times",
+      "3+ user complaints per hour",
+      "PII detected in outbound communication",
+      "unauthorized API call to blocked domain",
+      "privilege escalation attempt"
+    ],
+    "protocol": [
+      "1. SIGTERM to agent process",
+      "2. Full incident logged with context",
+      "3. Immediate email to CEO",
+      "4. Agent blocked from restart until CEO approval",
+      "5. All logs preserved",
+      "6. Resume requires CEO acknowledgment + 1hr probation"
+    ]
+  }
+}

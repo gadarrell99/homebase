@@ -1,0 +1,761 @@
+{
+    "meta": {
+        "version": "1.0",
+        "updated": "2026-02-09T22:20:07.917811+00:00",
+        "auto_refresh_minutes": 5
+    },
+    "servers": [
+        {
+            "id": "talos",
+            "hostname": "Talos",
+            "ip": "192.168.65.237",
+            "ssh_user": "talosadmin",
+            "icon": "\ud83d\udcbb",
+            "status": "online",
+            "role": "C2 Command Hub",
+            "description": "Claude Code, C2 Dashboard, Talos Drop, ttyd terminal",
+            "ram_total": "8GB",
+            "os": "Ubuntu 24.04",
+            "tier": "core",
+            "tunnel_uuid": "84bd4915-1cf4-42ec-9c9b-e384995a4197",
+            "domains": [
+                "talos.rize.bm",
+                "talos-ftp.rize.bm",
+                "talos-term.rize.bm",
+                "talos-ssh.rize.bm"
+            ],
+            "live": {
+                "status": "ok",
+                "last_scan": "2026-02-09T22:20:03.401687+00:00",
+                "uptime": "2 days, 6 hours, 35 minutes",
+                "disk_pct": "16",
+                "mem_total": "7608",
+                "mem_used": "2788",
+                "kernel": "6.8.0-100-generic",
+                "load": "0.78"
+            },
+            "hyperv_name": "Talos"
+        },
+        {
+            "id": "agents",
+            "hostname": "Agents",
+            "ip": "192.168.65.241",
+            "ssh_user": "agents",
+            "icon": "\ud83e\udd16",
+            "status": "online",
+            "role": "AI Agent Host",
+            "description": "David Bishop, Apex, Aegis \u2014 AI Agent Host",
+            "ram_total": "12GB",
+            "os": "Ubuntu 24.04",
+            "tier": "core",
+            "tunnel_uuid": "23740853-4b98-416f-a2ac-871895f60bde",
+            "domains": [
+                "davidbot.rize.bm"
+            ],
+            "live": {
+                "status": "ok",
+                "last_scan": "2026-02-09T22:20:04.241393+00:00",
+                "uptime": "2 days, 6 hours, 35 minutes",
+                "disk_pct": "31",
+                "mem_total": "7863",
+                "mem_used": "1631",
+                "kernel": "6.8.0-100-generic",
+                "load": "0.51"
+            },
+            "hyperv_name": "Agents"
+        },
+        {
+            "id": "rize-apps",
+            "hostname": "Rize-Apps",
+            "ip": "192.168.65.245",
+            "ssh_user": "rizeadmin",
+            "icon": "\ud83c\udfe0",
+            "status": "online",
+            "role": "Rize Production & Infrastructure",
+            "description": "Homebase, Sentinel, Property Rize, Nexus, Dockyard WiFi, Relay, OpenHands, PostgreSQL",
+            "ram_total": "16GB",
+            "os": "Ubuntu 24.04",
+            "tier": "production",
+            "tunnel_uuid": "5d69d616-005b-455d-8ab0-18d7533b9487",
+            "domains": [
+                "homebase.rize.bm",
+                "property.rize.bm",
+                "nexus.rize.bm",
+                "relay.rize.bm",
+                "dockyardwifi.rize.bm",
+                "dockyard-admin.rize.bm",
+                "openhands.rize.bm",
+                "rize-apps-ssh.rize.bm"
+            ],
+            "live": {
+                "status": "ok",
+                "last_scan": "2026-02-09T22:20:04.241452+00:00",
+                "uptime": "2 days, 6 hours, 35 minutes",
+                "disk_pct": "37",
+                "mem_total": "15613",
+                "mem_used": "1660",
+                "kernel": "6.8.0-100-generic",
+                "load": "0.29"
+            },
+            "hyperv_name": "Rize-Apps"
+        },
+        {
+            "id": "demos",
+            "hostname": "Demos",
+            "ip": "192.168.65.246",
+            "ssh_user": "demos",
+            "icon": "\ud83d\udee1\ufe0f",
+            "status": "online",
+            "role": "Client Demo Showcase",
+            "description": "Best Shipping, BPS AI, Premier EMR, Helios",
+            "ram_total": "16GB",
+            "os": "Ubuntu 24.04",
+            "tier": "demos",
+            "tunnel_uuid": "ae68edab-703a-43ff-a9b3-a6c32ba75054",
+            "domains": [
+                "bestshipping.rize.bm",
+                "bestshipping-api.rize.bm",
+                "bpsai.rize.bm",
+                "emr.rize.bm",
+                "emr-api.rize.bm",
+                "helios.rize.bm"
+            ],
+            "live": {
+                "status": "ok",
+                "last_scan": "2026-02-09T22:20:05.138265+00:00",
+                "uptime": "2 days, 6 hours, 35 minutes",
+                "disk_pct": "49",
+                "mem_total": "11987",
+                "mem_used": "3710",
+                "kernel": "6.8.0-100-generic",
+                "load": "1.52"
+            },
+            "hyperv_name": "Demos"
+        },
+        {
+            "id": "vector",
+            "hostname": "Vector",
+            "ip": "192.168.65.249",
+            "ssh_user": "betadmin",
+            "icon": "\ud83d\ude81",
+            "status": "online",
+            "role": "Air Ambulance Dispatch \u2014 CRITICAL",
+            "description": "BET Air Ambulance production system",
+            "ram_total": "3GB",
+            "os": "Ubuntu 24.04",
+            "tier": "production",
+            "tunnel_uuid": "99789829-9d9a-4fa6-b784-48037490bdbe",
+            "domains": [
+                "vector.rize.bm"
+            ],
+            "live": {
+                "status": "ok",
+                "last_scan": "2026-02-09T22:20:07.917714+00:00",
+                "uptime": "2 days, 6 hours, 35 minutes",
+                "disk_pct": "13",
+                "mem_total": "3259",
+                "mem_used": "905",
+                "kernel": "6.8.0-100-generic",
+                "load": "0.21"
+            },
+            "hyperv_name": "bet-vector"
+        },
+        {
+            "id": "hyperv",
+            "hostname": "Hyper-V Host",
+            "ip": "192.168.65.253",
+            "ssh_user": "Administrator",
+            "icon": "\ud83d\udce6",
+            "status": "online",
+            "role": "VM Hypervisor (Windows)",
+            "description": "Hosts all VMs",
+            "ram_total": "64GB",
+            "os": "Windows Server 2022",
+            "tier": "infrastructure",
+            "domains": [],
+            "live": {},
+            "hyperv_name": "N/A"
+        },
+        {
+            "id": "premier-emr-old",
+            "hostname": "Premier-EMR",
+            "ip": "192.168.65.239",
+            "status": "decommissioned",
+            "migrated_to": "demos",
+            "icon": "\ud83c\udfe5"
+        },
+        {
+            "id": "helios-old",
+            "hostname": "Helios",
+            "ip": "192.168.65.240",
+            "status": "decommissioned",
+            "migrated_to": "demos",
+            "icon": "\u2b50"
+        },
+        {
+            "id": "nexus-old",
+            "hostname": "Nexus",
+            "ip": "192.168.65.247",
+            "status": "decommissioned",
+            "migrated_to": "rize-apps",
+            "icon": "\ud83d\udd17"
+        },
+        {
+            "id": "relay-old",
+            "hostname": "Relay",
+            "ip": "192.168.65.248",
+            "status": "decommissioned",
+            "migrated_to": "rize-apps",
+            "icon": "\u26a1"
+        },
+        {
+            "id": "dockyard-old",
+            "hostname": "Dockyard",
+            "ip": "192.168.65.252",
+            "status": "decommissioned",
+            "migrated_to": "rize-apps",
+            "icon": "\ud83d\udea2"
+        }
+    ],
+    "projects": [
+        {
+            "id": "talos-c2-dashboard",
+            "name": "Talos C2 Dashboard",
+            "server": "talos",
+            "ports": [
+                8080,
+                8888,
+                7681
+            ],
+            "domain": "talos.rize.bm",
+            "stack": "Python/ttyd",
+            "status": "running",
+            "subdomains": [
+                {
+                    "name": "Dashboard",
+                    "url": "talos.rize.bm",
+                    "port": 8080
+                },
+                {
+                    "name": "Talos Drop",
+                    "url": "talos-ftp.rize.bm",
+                    "port": 8888
+                },
+                {
+                    "name": "Terminal",
+                    "url": "talos-term.rize.bm",
+                    "port": 7681
+                }
+            ],
+            "project_path": "/home/talosadmin/c2-dashboard"
+        },
+        {
+            "id": "homebase",
+            "name": "Homebase",
+            "server": "rize-apps",
+            "ports": [
+                8000
+            ],
+            "domain": "homebase.rize.bm",
+            "stack": "Python/FastAPI",
+            "status": "running",
+            "project_path": "/home/rizeadmin/homebase"
+        },
+        {
+            "id": "sentinel",
+            "name": "Sentinel",
+            "server": "rize-apps",
+            "ports": [
+                8000
+            ],
+            "domain": "homebase.rize.bm/sentinel",
+            "stack": "Part of Homebase",
+            "status": "running",
+            "project_path": "/home/rizeadmin/homebase"
+        },
+        {
+            "id": "property-rize",
+            "name": "Property Rize",
+            "server": "rize-apps",
+            "ports": [
+                8501
+            ],
+            "domain": "property.rize.bm",
+            "stack": "Streamlit",
+            "status": "running",
+            "project_path": "/home/rizeadmin/property-rize"
+        },
+        {
+            "id": "nexus",
+            "name": "Nexus",
+            "server": "rize-apps",
+            "ports": [
+                3002,
+                3003
+            ],
+            "domain": "nexus.rize.bm",
+            "stack": "React/Node",
+            "status": "running",
+            "project_path": "/home/rizeadmin/nexus"
+        },
+        {
+            "id": "dockyard",
+            "name": "Dockyard WiFi",
+            "server": "rize-apps",
+            "ports": [
+                8080,
+                8081
+            ],
+            "domain": "dockyardwifi.rize.bm",
+            "stack": "Node.js",
+            "status": "running",
+            "project_path": "/home/rizeadmin/dockyard-wifi"
+        },
+        {
+            "id": "relay",
+            "name": "Relay",
+            "server": "rize-apps",
+            "ports": [
+                8888
+            ],
+            "domain": "relay.rize.bm",
+            "stack": "Python",
+            "status": "running",
+            "project_path": "/home/rizeadmin/relay"
+        },
+        {
+            "id": "openhands",
+            "name": "OpenHands",
+            "server": "rize-apps",
+            "ports": [
+                3000
+            ],
+            "domain": "openhands.rize.bm",
+            "stack": "Docker",
+            "status": "running",
+            "project_path": "/home/rizeadmin/openhands"
+        },
+        {
+            "id": "postgresql",
+            "name": "PostgreSQL",
+            "server": "rize-apps",
+            "ports": [
+                5432
+            ],
+            "domain": null,
+            "stack": "PostgreSQL",
+            "status": "running",
+            "type": "infrastructure",
+            "hidden": true
+        },
+        {
+            "id": "best-shipping",
+            "name": "Best Shipping",
+            "server": "demos",
+            "ports": [
+                3001,
+                8001
+            ],
+            "domain": "bestshipping.rize.bm",
+            "stack": "React/FastAPI",
+            "status": "running",
+            "project_path": "/home/demos/best-shipping"
+        },
+        {
+            "id": "bps-ai",
+            "name": "BPS AI",
+            "server": "demos",
+            "ports": [
+                3000
+            ],
+            "domain": "bpsai.rize.bm",
+            "stack": "Next.js",
+            "status": "running",
+            "project_path": "/home/demos/bps-ai"
+        },
+        {
+            "id": "premier-emr",
+            "name": "Premier EMR",
+            "server": "demos",
+            "ports": [
+                3004,
+                5004
+            ],
+            "domain": "emr.rize.bm",
+            "stack": "React/FastAPI",
+            "status": "running",
+            "project_path": "/home/demos/premier-emr"
+        },
+        {
+            "id": "helios",
+            "name": "Helios",
+            "server": "demos",
+            "ports": [
+                3005
+            ],
+            "domain": "helios.rize.bm",
+            "stack": "Docker",
+            "status": "running",
+            "project_path": "/home/demos/helios"
+        },
+        {
+            "id": "bet-air-ambulance",
+            "name": "BET Air Ambulance",
+            "server": "vector",
+            "ports": [],
+            "domain": "vector.rize.bm",
+            "stack": "Python",
+            "status": "running",
+            "project_path": "/home/betadmin/bet-air-ambulance"
+        },
+        {
+            "id": "cortex",
+            "name": "Cortex",
+            "server": "talos",
+            "ports": [
+                9100
+            ],
+            "domain": null,
+            "internal_only": true,
+            "stack": "Python/FastAPI/SQLite",
+            "status": "planned",
+            "project_path": "/home/talosadmin/cortex"
+        }
+    ],
+    "agents": [
+        {
+            "id": "talos",
+            "name": "Talos",
+            "type": "c2",
+            "icon": "\ud83c\udfaf",
+            "server": "talos",
+            "host": "192.168.65.237",
+            "port": null,
+            "mode": "active",
+            "phase": "production",
+            "description": "C2 Command Hub \u2014 Claude Code, SSH gateway, fleet orchestration",
+            "email": null,
+            "channels": [
+                "ssh",
+                "cli"
+            ],
+            "heartbeat": false
+        },
+        {
+            "id": "cortex",
+            "name": "Cortex",
+            "type": "c2",
+            "icon": "\ud83e\udde0",
+            "server": "agents",
+            "host": "192.168.65.241",
+            "port": 9100,
+            "mode": "active",
+            "phase": "production",
+            "description": "Intelligence Engine \u2014 fleet scanning, drift detection, ChromaDB, context API",
+            "email": null,
+            "channels": [
+                "api"
+            ],
+            "heartbeat": true
+        },
+        {
+            "id": "architect",
+            "name": "The Architect",
+            "type": "cli_persona",
+            "icon": "\ud83c\udfd7\ufe0f",
+            "server": "talos",
+            "host": "192.168.65.237",
+            "port": null,
+            "mode": "active",
+            "phase": "production",
+            "description": "Builder Script \u2014 Claude Code persona for deployment, documentation, builds",
+            "email": null,
+            "channels": [
+                "cli"
+            ],
+            "heartbeat": false
+        },
+        {
+            "id": "inquisitor",
+            "name": "The Inquisitor",
+            "type": "cli_persona",
+            "icon": "\ud83d\udd0d",
+            "server": "talos",
+            "host": "192.168.65.237",
+            "port": null,
+            "mode": "active",
+            "phase": "production",
+            "description": "Auditor Script \u2014 zero-trust QA persona, red-teams endpoints, grades docs",
+            "email": null,
+            "channels": [
+                "cli"
+            ],
+            "heartbeat": false
+        },
+        {
+            "id": "david-bishop",
+            "name": "David Bishop",
+            "type": "agent",
+            "icon": "\ud83d\udd74\ufe0f",
+            "server": "agents",
+            "host": "192.168.65.241",
+            "port": 7070,
+            "mode": "live",
+            "phase": "production",
+            "description": "Security/Email/Teams agent \u2014 email triage, Teams messaging, Telegram bot",
+            "email": "dbishop@rize.bm",
+            "channels": [
+                "email",
+                "teams",
+                "telegram"
+            ],
+            "heartbeat": true,
+            "authorized_users": [
+                "*@rize.bm"
+            ],
+            "telegram_bot": "@Morpheus_99_bot"
+        },
+        {
+            "id": "apex",
+            "name": "Apex",
+            "type": "agent",
+            "icon": "\ud83d\udcb0",
+            "server": "agents",
+            "host": "192.168.65.241",
+            "port": 9002,
+            "mode": "readonly",
+            "phase": "phase-1",
+            "description": "Finance Agent \u2014 Xero accounting, Halo timesheets, revenue leakage detection",
+            "email": "apex@rize.bm",
+            "channels": [
+                "email",
+                "teams"
+            ],
+            "heartbeat": true,
+            "authorized_users": [
+                "mocoy@rize.bm",
+                "ghigham@rize.bm",
+                "gadarrell@rize.bm"
+            ]
+        },
+        {
+            "id": "aegis",
+            "name": "Aegis",
+            "type": "agent",
+            "icon": "\ud83d\udee1\ufe0f",
+            "server": "agents",
+            "host": "192.168.65.241",
+            "port": 9003,
+            "mode": "readonly",
+            "phase": "phase-1",
+            "description": "Infrastructure Agent \u2014 PRTG monitoring, Action1 patching, Halo ticket correlation",
+            "email": "aegis@rize.bm",
+            "channels": [
+                "email",
+                "teams"
+            ],
+            "heartbeat": true,
+            "authorized_users": [
+                "mocoy@rize.bm",
+                "gadarrell@rize.bm",
+                "icharif@rize.bm"
+            ]
+        },
+        {
+            "id": "sentinel",
+            "name": "Sentinel",
+            "type": "oversight",
+            "icon": "\ud83d\udc41\ufe0f",
+            "server": "agents",
+            "host": "192.168.65.241",
+            "port": null,
+            "mode": "active",
+            "phase": "production",
+            "description": "Oversight Agent \u2014 kill switch, auto-restart, PII gateway, compliance, audit trail",
+            "email": "aidev@rize.bm",
+            "channels": [
+                "api",
+                "email"
+            ],
+            "heartbeat": false
+        }
+    ],
+    "credentials": {
+        "ssh_fallback": "M00nshot2025!@#",
+        "demo_logins": [
+            {
+                "app": "BEST Shipping (Customer Portal)",
+                "user": "cornell@bestshipping.bm",
+                "pass": "demo2026"
+            },
+            {
+                "app": "BEST Shipping (Admin)",
+                "user": "admin@bestshipping.bm",
+                "pass": "admin2026"
+            },
+            {
+                "app": "BPS AI (Superintendent)",
+                "user": "rizeadmin@bps.bm",
+                "pass": "BPSDemo2026!"
+            },
+            {
+                "app": "BPS AI (Demo Officer)",
+                "user": "demo@bps.bm",
+                "pass": "BPSDemo2026!"
+            },
+            {
+                "app": "Premier EMR (Practice Manager)",
+                "user": "manager@premierhealth.bm",
+                "pass": "Demo2026!"
+            },
+            {
+                "app": "Premier EMR (Billing)",
+                "user": "billing@premierhealth.bm",
+                "pass": "Demo2026!"
+            },
+            {
+                "app": "Premier EMR (Lab Tech)",
+                "user": "lab@premierhealth.bm",
+                "pass": "Demo2026!"
+            },
+            {
+                "app": "Premier EMR (Nurse Practitioner)",
+                "user": "np@premierhealth.bm",
+                "pass": "Demo2026!"
+            },
+            {
+                "app": "Helios / BMA Document AI (Admin)",
+                "user": "admin@helios.bm",
+                "pass": "HeliosDemo2026!"
+            }
+        ],
+        "api_keys": [
+            {
+                "service": "Cloudflare",
+                "key_name": "Rize Zone API Token",
+                "location": "Cloudflare Dashboard - rize.bm zone",
+                "note": "Used for DNS and tunnel management"
+            },
+            {
+                "service": "Halo PSA",
+                "key_name": "Client ID + Secret",
+                "location": "Agent configs on .241 (/home/agents/*/config/)",
+                "note": "Timesheet and ticket API access"
+            },
+            {
+                "service": "PRTG",
+                "key_name": "API Token",
+                "location": "Aegis config on .241",
+                "note": "Network monitoring alert access"
+            },
+            {
+                "service": "Xero",
+                "key_name": "OAuth 2.0 App",
+                "location": "Not yet configured",
+                "note": "Awaiting setup - needed for Apex Phase 2"
+            },
+            {
+                "service": "Microsoft Graph (Teams)",
+                "key_name": "Bot Registration",
+                "location": "Azure AD - Rize Bot App",
+                "note": "David Bishop Teams webhook integration"
+            }
+        ],
+        "smtp": {
+            "relay_address": "aidev@rize.bm",
+            "purpose": "All agent outbound email routes through this relay",
+            "agents_using": [
+                "David Bishop",
+                "Sentinel",
+                "Apex",
+                "Aegis"
+            ]
+        },
+        "server_ssh": [
+            {
+                "server": "Talos (.237)",
+                "user": "talosadmin",
+                "auth": "SSH key + fallback password"
+            },
+            {
+                "server": "Agents (.241)",
+                "user": "agents",
+                "auth": "SSH key + fallback password"
+            },
+            {
+                "server": "Rize-Apps (.245)",
+                "user": "rizeadmin",
+                "auth": "SSH key + fallback password"
+            },
+            {
+                "server": "Demos (.246)",
+                "user": "demos",
+                "auth": "SSH key + fallback password"
+            },
+            {
+                "server": "Vector (.249)",
+                "user": "betadmin",
+                "auth": "SSH key + fallback password"
+            }
+        ]
+    },
+    "automation": {
+        "description": "Build & audit pipeline \u2014 Cortex executes, Sentinel reviews",
+        "ownership": {
+            "execution": "cortex",
+            "review": "sentinel",
+            "approval": "ceo"
+        },
+        "cortex_endpoints": {
+            "base_url": "http://192.168.65.237:9100",
+            "fleet_manifest": "GET /api/fleet/manifest",
+            "fleet_discover": "GET /api/fleet/discover",
+            "audit_run": "POST /api/audit/run",
+            "audit_status": "GET /api/audit/status",
+            "audit_latest": "GET /api/audit/latest",
+            "audit_history": "GET /api/audit/history"
+        },
+        "homebase_endpoints": {
+            "base_url": "http://192.168.65.245:8000",
+            "infrastructure": "GET /api/infrastructure",
+            "agents": "GET /api/agents",
+            "audit_results": "POST /api/audit/results"
+        },
+        "schedule": {
+            "automated_audit": "0 3 * * * (3am ADT daily)",
+            "manifest_refresh": "on-demand via Cortex or Claude Code",
+            "learning_log_review": "after every audit run"
+        },
+        "files": {
+            "talos": {
+                "manifest_generator": "~/rize-prompts/manifest-generator.py",
+                "cortex_fleet_router": "~/cortex/cortex_fleet_router.py",
+                "architect_prompt": "~/rize-prompts/THE-ARCHITECT-v2.md",
+                "inquisitor_prompt": "~/rize-prompts/THE-INQUISITOR-v2.md",
+                "job1_agents": "~/rize-prompts/JOB1-AGENTS.md",
+                "job2_apps": "~/rize-prompts/JOB2-APPS-DEMOS.md",
+                "learning_log": "~/rize-prompts/learning-log.json",
+                "fleet_manifest": "~/fleet-manifest.json",
+                "audit_reports": "~/audit-reports/"
+            }
+        },
+        "data_flow": [
+            "1. Homebase serves infrastructure.json (fleet truth)",
+            "2. Cortex manifest-generator pulls fleet from Homebase API",
+            "3. Manifest generator SSHes to each server, discovers state",
+            "4. Results written to ~/fleet-manifest.json",
+            "5. Results pushed to Homebase /api/audit/results",
+            "6. Cortex notified via /api/fleet/manifest-event",
+            "7. Claude Code sessions query Cortex for ground truth",
+            "8. Sentinel monitors pipeline health (see sentinel rules)"
+        ],
+        "sentinel_monitors": {
+            "audit_freshness": "Alert if no audit report in 36 hours",
+            "manifest_freshness": "Alert if fleet-manifest.json older than 36 hours",
+            "learning_log_growth": "Warn if learning log unchanged for 7 days",
+            "cortex_health": "Alert if Cortex :9100 unreachable",
+            "homebase_api": "Alert if /api/infrastructure returns non-200",
+            "compile_regression": "Alert if audit compile failures > 0"
+        }
+    }
+}

@@ -1,0 +1,20 @@
+{
+  "timestamp": "2026-02-12T14:38:26.219229+00:00",
+  "results": {
+    "helios": {
+      "passed": 2,
+      "failed": 17,
+      "total": 19
+    },
+    "bps-ai": {
+      "passed": 1,
+      "failed": 6,
+      "total": 7
+    },
+    "homebase": {
+      "passed": 9,
+      "failed": 2,
+      "total": 11
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "briefings": [
+    {
+      "date": "2026-02-11",
+      "generated_at": "15:00 UTC",
+      "sections": {
+        "weather": "Bermuda: Check weather.com for current conditions",
+        "sales": {
+          "status": "David offline"
+        },
+        "infrastructure": {
+          "uptime": "99.9%",
+          "alerts": 0,
+          "status": "All systems operational"
+        },
+        "agents": {
+          "all_healthy": true,
+          "healthy_count": 12,
+          "issues": []
+        },
+        "calendar": "Check Outlook for today's schedule"
+      }
+    },
+    {
+      "date": "2026-02-10",
+      "generated_at": "15:00 UTC",
+      "sections": {
+        "weather": "Bermuda: Check weather.com for current conditions",
+        "sales": {
+          "status": "David offline"
+        },
+        "infrastructure": {
+          "uptime": "99.9%",
+          "alerts": 0,
+          "status": "All systems operational"
+        },
+        "agents": {
+          "all_healthy": false,
+          "healthy_count": 2,
+          "issues": [
+            "Some agents not reporting"
+          ]
+        },
+        "calendar": "Check Outlook for today's schedule"
+      }
+    },
+    {
+      "date": "2026-02-09",
+      "generated_at": "17:57 UTC",
+      "sections": {
+        "weather": "Bermuda: Check weather.com for current conditions",
+        "sales": {
+          "status": "David offline"
+        },
+        "infrastructure": {
+          "uptime": "99.9%",
+          "alerts": 0,
+          "status": "All systems operational"
+        },
+        "agents": {
+          "all_healthy": true,
+          "healthy_count": 4,
+          "issues": []
+        },
+        "calendar": "Check Outlook for today's schedule"
+      }
+    }
+  ]
+}

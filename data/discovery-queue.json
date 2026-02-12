@@ -1,1 +1,6 @@
-{"discovered":[],"dismissed":[],"last_scan":null}
+{
+  "discovered": [],
+  "dismissed": [],
+  "last_scan": "2026-02-08T04:00:01Z",
+  "known_ips": []
+}

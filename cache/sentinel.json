@@ -1,0 +1,104 @@
+{
+  "timestamp": "2026-02-12T14:38:26.220118+00:00",
+  "agents": [
+    {
+      "name": "David Bishop",
+      "server": "192.168.65.241",
+      "port": 18789,
+      "status": "active",
+      "last_check": "2026-02-12T14:38:27.302214+00:00"
+    },
+    {
+      "name": "Cortex",
+      "server": "192.168.65.241",
+      "port": 9101,
+      "status": "active",
+      "last_check": "2026-02-12T14:38:28.362394+00:00"
+    },
+    {
+      "name": "Apex",
+      "server": "192.168.65.241",
+      "port": 9004,
+      "status": "active",
+      "last_check": "2026-02-12T14:38:29.243700+00:00"
+    },
+    {
+      "name": "Aegis",
+      "server": "192.168.65.241",
+      "port": 9005,
+      "status": "active",
+      "last_check": "2026-02-12T14:38:30.207168+00:00"
+    },
+    {
+      "name": "Sentinel",
+      "server": "192.168.65.241",
+      "port": 9006,
+      "status": "active",
+      "last_check": "2026-02-12T14:38:31.164904+00:00"
+    },
+    {
+      "name": "Homebase",
+      "server": "192.168.65.245",
+      "port": 8000,
+      "status": "active",
+      "last_check": "2026-02-12T14:38:32.201511+00:00"
+    }
+  ],
+  "audit_log": [
+    "[2026-02-12 14:23:07] [INFO] All services healthy",
+    "[2026-02-12 14:23:07] [INFO] Checking for stale P0 issues...",
+    "[2026-02-12 14:23:09] [INFO] Stale P0 check: 0 stale issues",
+    "[2026-02-12 14:23:09] [INFO] Checking deadlines...",
+    "[2026-02-12 14:23:10] [INFO] Deadline check: 0 warnings",
+    "[2026-02-12 14:23:10] [INFO] Refreshing test results...",
+    "[2026-02-12 14:23:21] [INFO] Test results refreshed for 3 projects",
+    "[2026-02-12 14:23:21] [INFO] Refreshing Sentinel cache...",
+    "[2026-02-12 14:23:25] [INFO] Sentinel cache refreshed: 6 agents tracked",
+    "[2026-02-12 14:23:25] [INFO] ========== MONITOR RUN COMPLETE ==========",
+    "[2026-02-12 14:28:01] [INFO] ========== MONITOR RUN START ==========",
+    "[2026-02-12 14:28:01] [INFO] Refreshing requirements from Gitea...",
+    "[2026-02-12 14:28:03] [INFO] Requirements refreshed: 72 total, 57 open (gitea)",
+    "[2026-02-12 14:28:03] [INFO] Checking service health...",
+    "[2026-02-12 14:28:05] [INFO] All services healthy",
+    "[2026-02-12 14:28:05] [INFO] Checking for stale P0 issues...",
+    "[2026-02-12 14:28:06] [INFO] Stale P0 check: 0 stale issues",
+    "[2026-02-12 14:28:06] [INFO] Checking deadlines...",
+    "[2026-02-12 14:28:06] [INFO] Deadline check: 0 warnings",
+    "[2026-02-12 14:28:06] [INFO] Refreshing test results...",
+    "[2026-02-12 14:28:18] [INFO] Test results refreshed for 3 projects",
+    "[2026-02-12 14:28:18] [INFO] Refreshing Sentinel cache...",
+    "[2026-02-12 14:28:24] [INFO] Sentinel cache refreshed: 6 agents tracked",
+    "[2026-02-12 14:28:24] [INFO] ========== MONITOR RUN COMPLETE ==========",
+    "[2026-02-12 14:33:01] [INFO] ========== MONITOR RUN START ==========",
+    "[2026-02-12 14:33:01] [INFO] Refreshing requirements from Gitea...",
+    "[2026-02-12 14:33:02] [INFO] Requirements refreshed: 72 total, 57 open (gitea)",
+    "[2026-02-12 14:33:02] [INFO] Checking service health...",
+    "[2026-02-12 14:33:04] [INFO] All services healthy",
+    "[2026-02-12 14:33:04] [INFO] Checking for stale P0 issues...",
+    "[2026-02-12 14:33:06] [INFO] Stale P0 check: 0 stale issues",
+    "[2026-02-12 14:33:06] [INFO] Checking deadlines...",
+    "[2026-02-12 14:33:06] [INFO] Deadline check: 0 warnings",
+    "[2026-02-12 14:33:06] [INFO] Refreshing test results...",
+    "[2026-02-12 14:33:19] [INFO] Test results refreshed for 3 projects",
+    "[2026-02-12 14:33:19] [INFO] Refreshing Sentinel cache...",
+    "[2026-02-12 14:33:25] [INFO] Sentinel cache refreshed: 6 agents tracked",
+    "[2026-02-12 14:33:25] [INFO] ========== MONITOR RUN COMPLETE ==========",
+    "[2026-02-12 14:38:01] [INFO] ========== MONITOR RUN START ==========",
+    "[2026-02-12 14:38:01] [INFO] Refreshing requirements from Gitea...",
+    "[2026-02-12 14:38:04] [INFO] Requirements refreshed: 72 total, 57 open (gitea)",
+    "[2026-02-12 14:38:04] [INFO] Checking service health...",
+    "[2026-02-12 14:38:07] [INFO] All services healthy",
+    "[2026-02-12 14:38:07] [INFO] Checking for stale P0 issues...",
+    "[2026-02-12 14:38:09] [INFO] Stale P0 check: 0 stale issues",
+    "[2026-02-12 14:38:09] [INFO] Checking deadlines...",
+    "[2026-02-12 14:38:09] [INFO] Deadline check: 0 warnings",
+    "[2026-02-12 14:38:09] [INFO] Refreshing test results...",
+    "[2026-02-12 14:38:26] [INFO] Test results refreshed for 3 projects",
+    "[2026-02-12 14:38:26] [INFO] Refreshing Sentinel cache..."
+  ],
+  "oversight_mode": "active",
+  "guardrails": {
+    "status": "enabled",
+    "violations_24h": 0
+  }
+}

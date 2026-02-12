@@ -1,0 +1,52 @@
+{
+  "date": "2026-02-12",
+  "agents": {
+    "cortex": {
+      "total": 1,
+      "by_type": {
+        "teams_message": 1
+      },
+      "by_user": {
+        "test@rize.bm": 1
+      },
+      "errors": 0
+    },
+    "apex": {
+      "total": 1,
+      "by_type": {
+        "teams_message": 1
+      },
+      "by_user": {
+        "test@rize.bm": 1
+      },
+      "errors": 0
+    },
+    "aegis": {
+      "total": 1,
+      "by_type": {
+        "teams_message": 1
+      },
+      "by_user": {
+        "test@rize.bm": 1
+      },
+      "errors": 0
+    },
+    "sentinel": {
+      "total": 1,
+      "by_type": {
+        "teams_message": 1
+      },
+      "by_user": {
+        "test@rize.bm": 1
+      },
+      "errors": 0
+    },
+    "david": {
+      "total": 0,
+      "by_type": {},
+      "by_user": {},
+      "errors": 0
+    }
+  },
+  "total": 4
+}

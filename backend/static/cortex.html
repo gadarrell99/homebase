@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/svg+xml" href="/img/homebase.svg">
+    <link rel="icon" type="image/x-icon" href="/img/homebase.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/homebase-180.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cortex | Homebase</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+
+        /* Nav - matches sentinel.html exactly */
+        .main-nav { display: flex; align-items: center; padding: 0.75rem 1.5rem; background: #1e293b; border-bottom: 1px solid #334155; position: sticky; top: 0; z-index: 100; }
+        .main-nav .logo { font-size: 1.1rem; font-weight: 600; color: #e2e8f0; margin-right: 2rem; text-decoration: none; }
+        .main-nav .nav-links { display: flex; gap: 0.25rem; flex: 1; flex-wrap: wrap; align-items: center; }
+        .main-nav .nav-links a { color: #94a3b8; padding: 0.5rem 0.75rem; border-radius: 0.375rem; font-size: 0.875rem; text-decoration: none; transition: all 0.15s; }
+        .main-nav .nav-links a:hover, .main-nav .nav-links a.active { color: #e2e8f0; background: #334155; }
+
+        /* Container */
+        .container { max-width: 1600px; margin: 0 auto; padding: 1.5rem; }
+        h1 { font-size: 1.5rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+        .sub { color: #64748b; font-size: 0.85rem; margin-bottom: 1.5rem; }
+
+        /* Overview Cards */
+        .overview-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+        .overview-card { background: #1e293b; border-radius: 0.5rem; padding: 1rem; text-align: center; border: 1px solid #334155; }
+        .overview-card .num { font-size: 2rem; font-weight: 700; }
+        .overview-card .lbl { font-size: 0.75rem; color: #64748b; margin-top: 0.25rem; }
+        .overview-card.healthy .num { color: #4ade80; }
+        .overview-card.accent .num { color: #60a5fa; }
+        .overview-card.warn .num { color: #fbbf24; }
+        .overview-card.danger .num { color: #f87171; }
+
+        /* Section Grid */
+        .section-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-bottom: 1.5rem; }
+        @media (max-width: 1200px) { .section-grid { grid-template-columns: 1fr; } }
+
+        /* Cards */
+        .card { background: #1e293b; border-radius: 0.5rem; padding: 1.25rem; border: 1px solid #334155; }
+        .card h2 { font-size: 1rem; color: #a78bfa; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .card.full-width { grid-column: 1 / -1; }
+
+        /* Agent Cards */
+        .agent-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+        .agent-card { background: #0f172a; border-radius: 0.375rem; padding: 1rem; border: 1px solid #334155; transition: border-color 0.2s; }
+        .agent-card:hover { border-color: #475569; }
+        .agent-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+        .agent-name { font-weight: 600; font-size: 1rem; }
+        .badge { padding: 0.25rem 0.6rem; border-radius: 1rem; font-size: 0.7rem; font-weight: 600; }
+        .badge-healthy { background: #064e3b; color: #4ade80; }
+        .badge-active { background: #064e3b; color: #4ade80; }
+        .badge-degraded { background: #78350f; color: #fbbf24; }
+        .badge-offline { background: #450a0a; color: #f87171; }
+        .badge-unknown { background: #334155; color: #94a3b8; }
+
+        .agent-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-bottom: 0.75rem; }
+        .stat { text-align: center; background: #1e293b; padding: 0.5rem; border-radius: 0.25rem; }
+        .stat .val { font-size: 0.9rem; font-weight: 600; }
+        .stat .lbl { font-size: 0.65rem; color: #64748b; }
+
+        .agent-meta { font-size: 0.75rem; color: #64748b; }
+        .agent-meta span { margin-right: 1rem; }
+
+        /* Knowledge Table */
+        .kb-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .kb-table th { text-align: left; color: #64748b; padding: 0.5rem; border-bottom: 1px solid #334155; font-weight: 500; }
+        .kb-table td { padding: 0.5rem; border-bottom: 1px solid #1e293b; }
+        .kb-table tr:hover { background: #0f172a; }
+        .kb-file-icon { color: #60a5fa; margin-right: 0.5rem; }
+        .kb-size { color: #64748b; font-size: 0.8rem; }
+
+        /* Cron Log */
+        .cron-list { max-height: 400px; overflow-y: auto; }
+        .cron-item { display: flex; gap: 0.75rem; padding: 0.75rem; border-bottom: 1px solid #334155; font-size: 0.85rem; align-items: flex-start; }
+        .cron-item:last-child { border-bottom: none; }
+        .cron-time { color: #64748b; font-size: 0.75rem; white-space: nowrap; min-width: 80px; }
+        .cron-cmd { flex: 1; font-family: 'Courier New', monospace; font-size: 0.8rem; color: #94a3b8; word-break: break-all; }
+        .cron-dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; flex-shrink: 0; margin-top: 5px; }
+        .cron-dot.warn { background: #fbbf24; }
+        .cron-dot.fail { background: #f87171; }
+
+        /* Script Cards */
+        .script-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; }
+        .script-card { background: #0f172a; border-radius: 0.375rem; padding: 1rem; border: 1px solid #334155; }
+        .script-name { font-weight: 600; color: #60a5fa; font-size: 0.9rem; margin-bottom: 0.5rem; }
+        .script-meta { font-size: 0.75rem; color: #64748b; }
+
+        /* Quick Actions */
+        .action-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+        .action-card { background: #0f172a; border-radius: 0.5rem; padding: 1.25rem; border: 1px solid #334155; text-decoration: none; color: #e2e8f0; transition: all 0.2s; display: block; }
+        .action-card:hover { border-color: #60a5fa; background: #1e293b; transform: translateY(-2px); }
+        .action-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .action-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.25rem; }
+        .action-desc { font-size: 0.75rem; color: #64748b; }
+
+        /* Cortex Status Banner */
+        .cortex-banner { display: flex; align-items: center; gap: 1rem; background: #1e293b; border-radius: 0.5rem; padding: 1rem 1.5rem; border: 1px solid #334155; margin-bottom: 1.5rem; }
+        .cortex-avatar { width: 48px; height: 48px; background: linear-gradient(135deg, #6366f1, #8b5cf6); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+        .cortex-info { flex: 1; }
+        .cortex-title { font-size: 1.1rem; font-weight: 700; }
+        .cortex-role { font-size: 0.8rem; color: #a78bfa; }
+        .cortex-status-pill { padding: 0.35rem 1rem; border-radius: 1rem; font-size: 0.8rem; font-weight: 600; }
+        .cortex-status-pill.online { background: #064e3b; color: #4ade80; }
+        .cortex-status-pill.offline { background: #450a0a; color: #f87171; }
+
+        /* Empty State */
+        .empty { text-align: center; padding: 2rem; color: #64748b; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #1e293b; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+
+        /* Refresh indicator */
+        .refresh-time { font-size: 0.75rem; color: #64748b; margin-left: auto; }
+
+        /* Pulse animation */
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .pulse { animation: pulse 2s infinite; }
+
+        @media (max-width: 900px) {
+            .overview-grid { grid-template-columns: repeat(2, 1fr); }
+            .agent-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+        <a href="/" class="logo">Homebase</a>
+        <div class="nav-links">
+            <a href="/">Dashboard</a>
+            <a href="/fleet">Fleet</a>
+            <a href="/agents">Agents</a>
+            <a href="/sentinel">Sentinel</a>
+            <a href="/cortex" class="active">Cortex</a>
+            <a href="/research">Research</a>
+            <a href="/infra">Infra Sheet</a>
+            <a href="/settings">Settings</a>
+            <a href="/backups">Backups</a>
+            <a href="/requirements">Requirements</a>
+            <a href="https://gitea.rize.bm" target="_blank">Gitea</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Cortex - Fleet Intelligence Leader</h1>
+        <p class="sub">Infrastructure monitoring, fleet orchestration, and knowledge management <span class="refresh-time" id="refresh-time"></span></p>
+
+        <!-- Cortex Status Banner -->
+        <div class="cortex-banner">
+            <div class="cortex-avatar">C</div>
+            <div class="cortex-info">
+                <div class="cortex-title">Cortex</div>
+                <div class="cortex-role">Fleet Intelligence | Infrastructure Scanner | Cron Orchestrator</div>
+                <div class="agent-meta" style="margin-top: 0.25rem;">
+                    <span>Host: 192.168.65.241</span>
+                    <span>Port: <span id="cortex-port">9101</span></span>
+                    <span>PID: <span id="cortex-pid">-</span></span>
+                    <span>Uptime: <span id="cortex-uptime">-</span></span>
+                </div>
+            </div>
+            <span class="cortex-status-pill" id="cortex-status-pill">Checking...</span>
+        </div>
+
+        <!-- Overview Cards -->
+        <div class="overview-grid">
+            <div class="overview-card healthy"><div class="num" id="ov-agents-healthy">-</div><div class="lbl">Agents Healthy</div></div>
+            <div class="overview-card accent"><div class="num" id="ov-agents-total">-</div><div class="lbl">Agents Total</div></div>
+            <div class="overview-card accent"><div class="num" id="ov-crons">-</div><div class="lbl">Active Crons</div></div>
+            <div class="overview-card accent"><div class="num" id="ov-kb-files">-</div><div class="lbl">KB Files</div></div>
+            <div class="overview-card accent"><div class="num" id="ov-scripts">-</div><div class="lbl">Scripts</div></div>
+        </div>
+
+        <!-- Fleet Agent Status -->
+        <div class="card full-width" style="margin-bottom: 1.5rem;">
+            <h2>Fleet Agent Status</h2>
+            <div class="agent-grid" id="agent-grid">
+                <div class="empty">Loading agents...</div>
+            </div>
+        </div>
+
+        <div class="section-grid">
+            <!-- Knowledge Base -->
+            <div class="card">
+                <h2>Knowledge Base</h2>
+                <table class="kb-table" id="kb-table">
+                    <thead>
+                        <tr><th>File</th><th>Size</th><th>Modified</th></tr>
+                    </thead>
+                    <tbody id="kb-body">
+                        <tr><td colspan="3" class="empty">Loading knowledge base...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Cortex Scripts -->
+            <div class="card">
+                <h2>Cortex Scripts</h2>
+                <div class="script-grid" id="script-grid">
+                    <div class="empty">Loading scripts...</div>
+                </div>
+            </div>
+
+            <!-- Recent Cron Activity -->
+            <div class="card">
+                <h2>Cortex Cron Schedule (<span id="cron-count">0</span> jobs)</h2>
+                <div class="cron-list" id="cron-list">
+                    <div class="empty">Loading cron jobs...</div>
+                </div>
+            </div>
+
+            <!-- Gateway Health -->
+            <div class="card">
+                <h2>Gateway Health</h2>
+                <div id="gateway-health">
+                    <div class="empty">Loading gateway status...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="card full-width" style="margin-top: 0;">
+            <h2>Quick Navigation</h2>
+            <div class="action-grid">
+                <a href="/sentinel" class="action-card">
+                    <div class="action-icon">&#x1F6E1;</div>
+                    <div class="action-title">Sentinel</div>
+                    <div class="action-desc">Agent oversight, security alerts, guardrails</div>
+                </a>
+                <a href="/ai-spend" class="action-card">
+                    <div class="action-icon">&#x1F4B0;</div>
+                    <div class="action-title">AI Spend</div>
+                    <div class="action-desc">Cost tracking, model usage, budget</div>
+                </a>
+                <a href="/agents" class="action-card">
+                    <div class="action-icon">&#x1F916;</div>
+                    <div class="action-title">Agents</div>
+                    <div class="action-desc">David, Apex, Aegis, Sentinel status</div>
+                </a>
+                <a href="/fleet" class="action-card">
+                    <div class="action-icon">&#x1F5A5;</div>
+                    <div class="action-title">Fleet</div>
+                    <div class="action-desc">Server health, resources, services</div>
+                </a>
+                <a href="/requirements" class="action-card">
+                    <div class="action-icon">&#x1F4CB;</div>
+                    <div class="action-title">Requirements</div>
+                    <div class="action-desc">Project requirements from Gitea</div>
+                </a>
+                <a href="/infra" class="action-card">
+                    <div class="action-icon">&#x1F527;</div>
+                    <div class="action-title">Infra Sheet</div>
+                    <div class="action-desc">Port map, services, credentials</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // === PRE-CACHE PATTERN ===
+    const CACHE_KEY = "homebase_cortex_cache";
+    const CACHE_TTL = 300000; // 5 min
+
+    function getCached() {
+        try {
+            const raw = sessionStorage.getItem(CACHE_KEY);
+            if (!raw) return null;
+            const { data, ts } = JSON.parse(raw);
+            if (Date.now() - ts > CACHE_TTL) return null;
+            return data;
+        } catch { return null; }
+    }
+
+    function setCache(data) {
+        try {
+            sessionStorage.setItem(CACHE_KEY, JSON.stringify({ data, ts: Date.now() }));
+        } catch {}
+    }
+
+    // Time formatting
+    function timeAgo(dateStr) {
+        if (!dateStr) return 'never';
+        const date = new Date(dateStr.replace(' ', 'T') + 'Z');
+        const now = new Date();
+        const seconds = Math.floor((now - date) / 1000);
+        if (seconds < 0) return 'just now';
+        if (seconds < 60) return seconds + 's ago';
+        if (seconds < 3600) return Math.floor(seconds / 60) + 'm ago';
+        if (seconds < 86400) return Math.floor(seconds / 3600) + 'h ago';
+        return Math.floor(seconds / 86400) + 'd ago';
+    }
+
+    function formatBytes(bytes) {
+        bytes = parseInt(bytes) || 0;
+        if (bytes < 1024) return bytes + ' B';
+        if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+        return (bytes / 1048576).toFixed(1) + ' MB';
+    }
+
+    // Load agents from cheat-sheet API
+    async function loadAgents() {
+        try {
+            const resp = await fetch('/api/cheat-sheet/agents');
+            const data = await resp.json();
+            const grid = document.getElementById('agent-grid');
+
+            if (!data.agents || data.agents.length === 0) {
+                grid.innerHTML = '<div class="empty">No agents found</div>';
+                return;
+            }
+
+            let healthyCount = 0;
+            const agents = data.agents;
+            agents.forEach(a => {
+                if (a.status === 'healthy' || a.status === 'active') healthyCount++;
+            });
+
+            document.getElementById('ov-agents-healthy').textContent = healthyCount;
+            document.getElementById('ov-agents-total').textContent = agents.length;
+
+            grid.innerHTML = agents.map(agent => {
+                const status = agent.status || 'unknown';
+                const statusClass = (status === 'healthy' || status === 'active') ? 'healthy' :
+                                   status === 'degraded' ? 'degraded' :
+                                   status === 'offline' ? 'offline' : 'unknown';
+                const isCortex = agent.agent_id === 'cortex';
+
+                return `
+                    <div class="agent-card" ${isCortex ? 'style="border-color: #6366f1;"' : ''}>
+                        <div class="agent-header">
+                            <span class="agent-name">${isCortex ? 'Cortex (this agent)' : agent.display_name}</span>
+                            <span class="badge badge-${statusClass}">${status}</span>
+                        </div>
+                        <div class="agent-stats">
+                            <div class="stat"><div class="val">${timeAgo(agent.last_heartbeat)}</div><div class="lbl">Last Beat</div></div>
+                            <div class="stat"><div class="val">${agent.platform || '-'}</div><div class="lbl">Platform</div></div>
+                            <div class="stat"><div class="val">${agent.version || '-'}</div><div class="lbl">Version</div></div>
+                        </div>
+                        <div class="agent-meta">
+                            <span>Type: ${agent.agent_type || '-'}</span>
+                            <span>Host: ${agent.host || '-'}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        } catch (e) {
+            console.error('Agents error:', e);
+            document.getElementById('agent-grid').innerHTML = '<div class="empty">Error loading agents</div>';
+        }
+    }
+
+    // Load knowledge base files
+    async function loadKnowledge() {
+        try {
+            const resp = await fetch('/api/cortex/knowledge');
+            const data = await resp.json();
+
+            document.getElementById('ov-kb-files').textContent = data.count || 0;
+            const tbody = document.getElementById('kb-body');
+
+            if (!data.files || data.files.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="3" class="empty">No knowledge base files found</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = data.files.map(f => `
+                <tr>
+                    <td><span class="kb-file-icon">&#x1F4C4;</span>${f.name}</td>
+                    <td class="kb-size">${formatBytes(f.size)}</td>
+                    <td class="kb-size">${f.modified || '-'}</td>
+                </tr>
+            `).join('');
+        } catch (e) {
+            console.error('Knowledge error:', e);
+        }
+    }
+
+    // Load Cortex scripts
+    async function loadScripts() {
+        try {
+            const resp = await fetch('/api/cortex/scripts');
+            const data = await resp.json();
+
+            document.getElementById('ov-scripts').textContent = data.count || 0;
+            const grid = document.getElementById('script-grid');
+
+            if (!data.scripts || data.scripts.length === 0) {
+                grid.innerHTML = '<div class="empty">No scripts found</div>';
+                return;
+            }
+
+            grid.innerHTML = data.scripts.map(s => `
+                <div class="script-card">
+                    <div class="script-name">${s.name}</div>
+                    <div class="script-meta">
+                        Size: ${formatBytes(s.size)} | Modified: ${s.modified || '-'}
+                    </div>
+                </div>
+            `).join('');
+        } catch (e) {
+            console.error('Scripts error:', e);
+        }
+    }
+
+    // Load cron jobs
+    async function loadCrons() {
+        try {
+            const resp = await fetch('/api/sentinel/crons');
+            const data = await resp.json();
+
+            document.getElementById('ov-crons').textContent = data.total || 0;
+            document.getElementById('cron-count').textContent = data.total || 0;
+            const list = document.getElementById('cron-list');
+
+            if (!data.crons || data.crons.length === 0) {
+                list.innerHTML = '<div class="empty">No cron jobs found</div>';
+                return;
+            }
+
+            // Show cortex-related crons first, then others
+            const cortexCrons = data.crons.filter(c => 
+                c.command && (c.command.toLowerCase().includes('cortex') || 
+                c.command.includes('service-watcher') || 
+                c.command.includes('fleet-maintenance') ||
+                c.command.includes('config-validator') ||
+                c.command.includes('daily-intelligence') ||
+                c.command.includes('security-monitor') ||
+                c.command.includes('doc-audit') ||
+                c.command.includes('path-validator'))
+            );
+            const otherCrons = data.crons.filter(c => !cortexCrons.includes(c));
+            const sortedCrons = [...cortexCrons, ...otherCrons];
+
+            list.innerHTML = sortedCrons.map((cron, i) => {
+                const isCortex = cortexCrons.includes(cron);
+                return `
+                    <div class="cron-item" ${isCortex ? 'style="background: rgba(99, 102, 241, 0.05);"' : ''}>
+                        <div class="cron-dot ${cron.status === 'ok' ? '' : cron.status === 'warn' ? 'warn' : 'fail'}"></div>
+                        <div class="cron-time">${cron.schedule}</div>
+                        <div class="cron-cmd">${isCortex ? '<strong style="color:#a78bfa;">[CORTEX]</strong> ' : ''}${cron.command}</div>
+                    </div>
+                `;
+            }).join('');
+        } catch (e) {
+            console.error('Crons error:', e);
+        }
+    }
+
+    // Load gateway health
+    async function loadGatewayHealth() {
+        try {
+            const resp = await fetch('/api/cortex/status');
+            const data = await resp.json();
+            const container = document.getElementById('gateway-health');
+
+            const isOnline = data.gateway_running || false;
+            const pill = document.getElementById('cortex-status-pill');
+            pill.textContent = isOnline ? 'ONLINE' : 'OFFLINE';
+            pill.className = 'cortex-status-pill ' + (isOnline ? 'online' : 'offline');
+
+            if (data.pid) document.getElementById('cortex-pid').textContent = data.pid;
+            if (data.port) document.getElementById('cortex-port').textContent = data.port;
+            if (data.uptime) document.getElementById('cortex-uptime').textContent = data.uptime;
+
+            container.innerHTML = `
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+                    <div style="background: #0f172a; padding: 1rem; border-radius: 0.375rem; border: 1px solid #334155;">
+                        <div style="font-size: 0.75rem; color: #64748b; margin-bottom: 0.25rem;">Gateway</div>
+                        <div style="font-weight: 600; color: ${isOnline ? '#4ade80' : '#f87171'};">${isOnline ? 'Running' : 'Stopped'}</div>
+                    </div>
+                    <div style="background: #0f172a; padding: 1rem; border-radius: 0.375rem; border: 1px solid #334155;">
+                        <div style="font-size: 0.75rem; color: #64748b; margin-bottom: 0.25rem;">Port</div>
+                        <div style="font-weight: 600;">${data.port || '9101'}</div>
+                    </div>
+                    <div style="background: #0f172a; padding: 1rem; border-radius: 0.375rem; border: 1px solid #334155;">
+                        <div style="font-size: 0.75rem; color: #64748b; margin-bottom: 0.25rem;">Teams Port</div>
+                        <div style="font-weight: 600;">${data.teams_port || '3979'}</div>
+                    </div>
+                    <div style="background: #0f172a; padding: 1rem; border-radius: 0.375rem; border: 1px solid #334155;">
+                        <div style="font-size: 0.75rem; color: #64748b; margin-bottom: 0.25rem;">Memory</div>
+                        <div style="font-weight: 600;">${data.memory || '-'}</div>
+                    </div>
+                    <div style="background: #0f172a; padding: 1rem; border-radius: 0.375rem; border: 1px solid #334155;">
+                        <div style="font-size: 0.75rem; color: #64748b; margin-bottom: 0.25rem;">Uptime</div>
+                        <div style="font-weight: 600;">${data.uptime || '-'}</div>
+                    </div>
+                    <div style="background: #0f172a; padding: 1rem; border-radius: 0.375rem; border: 1px solid #334155;">
+                        <div style="font-size: 0.75rem; color: #64748b; margin-bottom: 0.25rem;">Last Log</div>
+                        <div style="font-weight: 600; font-size: 0.8rem; color: #94a3b8;">${data.last_log || '-'}</div>
+                    </div>
+                </div>
+                ${data.recent_logs ? `
+                <div style="margin-top: 1rem; background: #0f172a; padding: 1rem; border-radius: 0.375rem; border: 1px solid #334155;">
+                    <div style="font-size: 0.75rem; color: #64748b; margin-bottom: 0.5rem;">Recent Logs</div>
+                    <pre style="font-size: 0.75rem; color: #94a3b8; overflow-x: auto; white-space: pre-wrap;">${data.recent_logs}</pre>
+                </div>` : ''}
+            `;
+        } catch (e) {
+            console.error('Gateway error:', e);
+            document.getElementById('cortex-status-pill').textContent = 'ERROR';
+            document.getElementById('cortex-status-pill').className = 'cortex-status-pill offline';
+        }
+    }
+
+    // Load all data
+    async function loadAll() {
+        const cached = getCached();
+        if (cached) {
+            // Show cached immediately, then refresh
+            renderFromCache(cached);
+        }
+
+        document.getElementById('refresh-time').textContent = 'Refreshing...';
+
+        await Promise.all([
+            loadAgents(),
+            loadKnowledge(),
+            loadScripts(),
+            loadCrons(),
+            loadGatewayHealth()
+        ]);
+
+        document.getElementById('refresh-time').textContent = 'Updated: ' + new Date().toLocaleTimeString();
+
+        // Cache current overview state
+        try {
+            setCache({
+                agentsHealthy: document.getElementById('ov-agents-healthy').textContent,
+                agentsTotal: document.getElementById('ov-agents-total').textContent,
+                crons: document.getElementById('ov-crons').textContent,
+                kbFiles: document.getElementById('ov-kb-files').textContent,
+                scripts: document.getElementById('ov-scripts').textContent
+            });
+        } catch {}
+    }
+
+    function renderFromCache(c) {
+        if (c.agentsHealthy) document.getElementById('ov-agents-healthy').textContent = c.agentsHealthy;
+        if (c.agentsTotal) document.getElementById('ov-agents-total').textContent = c.agentsTotal;
+        if (c.crons) document.getElementById('ov-crons').textContent = c.crons;
+        if (c.kbFiles) document.getElementById('ov-kb-files').textContent = c.kbFiles;
+        if (c.scripts) document.getElementById('ov-scripts').textContent = c.scripts;
+    }
+
+    // Initial load
+    loadAll();
+
+    // Auto-refresh every 60 seconds
+    setInterval(loadAll, 60000);
+    </script>
+</body>
+</html>

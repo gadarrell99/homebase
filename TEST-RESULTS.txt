@@ -1,0 +1,70 @@
+
+Running 11 tests using 1 worker
+
+  ✓   1 homebase-tests.spec.js:21:1 › REQ-H001: Nav bar consistent size across all pages (21.7s)
+  ✓   2 homebase-tests.spec.js:43:1 › REQ-H002: Research link present on all pages (2.1s)
+  ✓   3 homebase-tests.spec.js:59:1 › REQ-H003: Settings/Backups placement consistent (458ms)
+  ✓   4 homebase-tests.spec.js:76:1 › REQ-H004: Project detail page shows content (884ms)
+  ✓   5 homebase-tests.spec.js:93:1 › REQ-H005: Metrics API responds (no 500) (189ms)
+  ✘   6 homebase-tests.spec.js:99:1 › REQ-H006: Research page has content on first load (4.1s)
+  ✘   7 homebase-tests.spec.js:113:1 › REQ-H007: Dashboard loads data within 2 seconds (3.1s)
+  ✓   8 homebase-tests.spec.js:127:1 › REQ-H008: Sentinel shows agent heartbeat status (1.0s)
+  ✓   9 homebase-tests.spec.js:144:1 › REQ-H010: Talos shows version and uptime (975ms)
+  ✓  10 homebase-tests.spec.js:160:1 › REQ-H011: No duplicate Talos entries (901ms)
+  ✓  11 homebase-tests.spec.js:176:1 › REQ-H014: Mind map includes demo server (2.0s)
+
+
+  1) homebase-tests.spec.js:99:1 › REQ-H006: Research page has content on first load ───────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('main, .content, .research, [class*="research"]').first()
+    Expected: visible
+    Timeout: 3000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 3000ms[22m
+    [2m  - waiting for locator('main, .content, .research, [class*="research"]').first()[22m
+
+
+      102 |
+      103 |   const content = page.locator('main, .content, .research, [class*="research"]');
+    > 104 |   await expect(content.first()).toBeVisible({ timeout: 3000 });
+          |                                 ^
+      105 |
+      106 |   const text = await content.first().textContent();
+      107 |   // Should not be empty/blank
+        at /home/rizeadmin/homebase/homebase-tests.spec.js:104:33
+
+    Error Context: test-results/homebase-tests-REQ-H006-Re-7034a-e-has-content-on-first-load/error-context.md
+
+  2) homebase-tests.spec.js:113:1 › REQ-H007: Dashboard loads data within 2 seconds ────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('.dashboard, main, .content').first()
+    Expected: visible
+    Timeout: 2000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 2000ms[22m
+    [2m  - waiting for locator('.dashboard, main, .content').first()[22m
+
+
+      117 |
+      118 |   const content = page.locator('.dashboard, main, .content').first();
+    > 119 |   await expect(content).toBeVisible({ timeout: 2000 });
+          |                         ^
+      120 |
+      121 |   const text = await content.textContent();
+      122 |   expect(text.trim().length).toBeGreaterThan(20);
+        at /home/rizeadmin/homebase/homebase-tests.spec.js:119:25
+
+    Error Context: test-results/homebase-tests-REQ-H007-Da-1d4bd-loads-data-within-2-seconds/error-context.md
+
+  2 failed
+    homebase-tests.spec.js:99:1 › REQ-H006: Research page has content on first load ────────────────
+    homebase-tests.spec.js:113:1 › REQ-H007: Dashboard loads data within 2 seconds ─────────────────
+  9 passed (56.0s)

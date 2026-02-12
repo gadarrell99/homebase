@@ -1,0 +1,39 @@
+{
+  "generated": "2026-02-10T20:16:20.969928+00:00",
+  "period_days": 7,
+  "daily": [
+    {
+      "date": "2026-02-10",
+      "calls": 2,
+      "cost": 0.011699999999999999,
+      "input_tokens": 1500,
+      "output_tokens": 700
+    }
+  ],
+  "by_agent": [
+    {
+      "agent": "david",
+      "cost": 0.010499999999999999,
+      "calls": 1
+    },
+    {
+      "agent": "apex",
+      "cost": 0.0012000000000000001,
+      "calls": 1
+    }
+  ],
+  "by_model": [
+    {
+      "model": "claude-sonnet-4-5-20250929",
+      "cost": 0.010499999999999999,
+      "calls": 1
+    },
+    {
+      "model": "claude-haiku-4-5-20251001",
+      "cost": 0.0012000000000000001,
+      "calls": 1
+    }
+  ],
+  "total_cost": 0.011699999999999999,
+  "total_calls": 2
+}

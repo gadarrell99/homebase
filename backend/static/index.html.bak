@@ -1,416 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard — Homebase</title>
+    <title>Homebase | Rize Infrastructure</title>
     <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: #0f172a;
-    color: #e2e8f0;
-    min-height: 100vh;
-}
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+.main-nav { display: flex; align-items: center; padding: 0.75rem 1.5rem; background: #1e293b; border-bottom: 1px solid #334155; position: sticky; top: 0; z-index: 100; }
+.main-nav .logo { font-size: 1.1rem; font-weight: 600; color: #e2e8f0; margin-right: 2rem; text-decoration: none; }
+.main-nav .nav-links { display: flex; gap: 0.25rem; flex: 1; flex-wrap: wrap; align-items: center; }
+.main-nav .nav-links a { color: #94a3b8; padding: 0.5rem 0.75rem; border-radius: 0.375rem; font-size: 0.875rem; text-decoration: none; transition: all 0.15s; }
+.main-nav .nav-links a:hover, .main-nav .nav-links a.active { color: #e2e8f0; background: #334155; }
+
 a { color: #60a5fa; text-decoration: none; }
 a:hover { color: #93c5fd; }
 
-/* Navigation */
-.main-nav {
-    display: flex;
-    align-items: center;
-    padding: 0.75rem 1.5rem;
-    background: #1e293b;
-    border-bottom: 1px solid #334155;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-.main-nav .logo {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #f8fafc;
-    margin-right: 2rem;
-}
-.main-nav .nav-links {
-    display: flex;
-    gap: 0.25rem;
-    flex: 1;
-}
-.main-nav .nav-links a {
-    color: #94a3b8;
-    padding: 0.5rem 0.75rem;
-    border-radius: 0.375rem;
-    font-size: 0.875rem;
-    transition: all 0.15s;
-}
-.main-nav .nav-links a:hover, .main-nav .nav-links a.active {
-    color: #f8fafc;
-    background: #334155;
-}
-.main-nav .nav-right { display: flex; gap: 0.5rem; }
-.dropdown { position: relative; display: inline-block; }
-.dropdown-btn {
-    background: transparent; border: none; color: #94a3b8;
-    font-size: 1.25rem; cursor: pointer; padding: 0.5rem;
-    border-radius: 0.375rem; transition: all 0.15s;
-}
-.dropdown-btn:hover { background: #334155; color: #f8fafc; }
-.dropdown-content {
-    display: none; position: absolute; right: 0; top: 100%;
-    background: #1e293b; border: 1px solid #334155; border-radius: 0.5rem;
-    min-width: 180px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); z-index: 200;
-}
-.dropdown:hover .dropdown-content { display: block; }
-.dropdown-content a { display: block; padding: 0.75rem 1rem; color: #94a3b8; font-size: 0.875rem; }
-.dropdown-content a:hover { background: #334155; color: #f8fafc; }
-
-/* Page Container */
 .page-container { padding: 1.5rem; max-width: 1400px; margin: 0 auto; }
 .page-header { margin-bottom: 1.5rem; }
 .page-header h1 { font-size: 1.75rem; font-weight: 600; margin-bottom: 0.25rem; }
 .page-header p { color: #64748b; font-size: 0.875rem; }
-
-/* Summary Cards */
-.summary-cards {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-.summary-card {
-    background: #1e293b; border: 1px solid #334155;
-    border-radius: 0.5rem; padding: 1rem; text-align: center;
-}
-.summary-card .num { font-size: 2rem; font-weight: 700; }
-.summary-card .lbl { color: #94a3b8; font-size: 0.75rem; margin-top: 0.25rem; }
-
-/* Server Health Grid */
-.section { margin-bottom: 2rem; }
-.section h2 { font-size: 1rem; color: #94a3b8; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
-.server-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 0.75rem;
-}
-.server-tile {
-    background: #1e293b; border: 1px solid #334155;
-    border-radius: 0.5rem; padding: 0.75rem 1rem;
-    display: flex; align-items: center; gap: 0.75rem;
-    transition: all 0.15s; cursor: pointer;
-}
-.server-tile:hover { border-color: #475569; background: #1e3a5f; }
-.server-dot {
-    width: 10px; height: 10px; border-radius: 50%;
-    flex-shrink: 0;
-}
-.server-dot.online { background: #4ade80; box-shadow: 0 0 8px rgba(74, 222, 128, 0.4); }
-.server-dot.offline { background: #f87171; }
-.server-dot.unknown { background: #64748b; }
-.server-info { flex: 1; min-width: 0; }
-.server-info .name { font-size: 0.875rem; font-weight: 500; color: #f8fafc; }
-.server-info .ip { font-size: 0.7rem; color: #64748b; font-family: monospace; }
-
-/* Quick Actions */
-.quick-actions {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 0.75rem;
-}
-.action-btn {
-    background: #1e293b; border: 1px solid #334155;
-    border-radius: 0.5rem; padding: 1rem;
-    display: flex; align-items: center; gap: 0.75rem;
-    color: #e2e8f0; cursor: pointer; transition: all 0.15s;
-}
-.action-btn:hover { background: #334155; border-color: #475569; }
-.action-btn .icon { font-size: 1.5rem; }
-.action-btn .text .title { font-size: 0.875rem; font-weight: 500; }
-.action-btn .text .sub { font-size: 0.7rem; color: #64748b; }
-
-/* Activity Feed */
-.feed { display: flex; flex-direction: column; gap: 0.5rem; }
-.feed-item {
-    background: #1e293b; border: 1px solid #334155;
-    border-radius: 0.375rem; padding: 0.75rem 1rem;
-    display: flex; align-items: center; gap: 0.75rem; font-size: 0.8rem;
-}
-.feed-item .icon { font-size: 1rem; }
-.feed-item .content { flex: 1; }
-.feed-item .time { color: #64748b; font-size: 0.7rem; }
-
-/* Mobile */
-@media (max-width: 768px) {
-    .summary-cards { grid-template-columns: repeat(2, 1fr); }
-    .main-nav { flex-wrap: wrap; padding: 0.75rem 1rem; }
-    .main-nav .logo { margin-right: auto; }
-    .main-nav .nav-links { order: 3; width: 100%; margin-top: 0.75rem; overflow-x: auto; flex-wrap: nowrap; }
-    .page-container { padding: 1rem; }
-}
-.maint-banner { background: linear-gradient(90deg, #f59e0b, #d97706); color: #1e293b; padding: 0.5rem 1rem; text-align: center; font-weight: 600; display: none; }
-.maint-banner.active { display: block; }
-.maint-info { background: #334155; color: #94a3b8; padding: 0.5rem 1rem; text-align: center; font-size: 0.85rem; }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+.stat-card { background: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1.25rem; }
+.stat-card:hover { border-color: #475569; }
+.stat-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+.stat-label { color: #94a3b8; font-size: 0.875rem; }
+.stat-value { font-size: 2rem; font-weight: 700; color: #e2e8f0; }
+.stat-value.green { color: #4ade80; }
+.stat-value.yellow { color: #fbbf24; }
+.stat-value.red { color: #f87171; }
+.stat-detail { font-size: 0.75rem; color: #64748b; margin-top: 0.5rem; }
+.section { background: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 1.25rem; margin-bottom: 1.5rem; }
+.section h2 { font-size: 1rem; font-weight: 600; margin-bottom: 1rem; color: #f1f5f9; }
+.server-row { display: flex; align-items: center; padding: 0.75rem; border-radius: 0.375rem; margin-bottom: 0.5rem; background: #0f172a; }
+.server-row:hover { background: #1a1a2e; }
+.server-icon { font-size: 1.25rem; margin-right: 0.75rem; }
+.server-info { flex: 1; }
+.server-name { font-weight: 500; font-size: 0.9rem; }
+.server-ip { font-size: 0.75rem; color: #64748b; font-family: monospace; }
+.server-status { padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.7rem; font-weight: 600; }
+.status-ok { background: #166534; color: #86efac; }
+.status-warn { background: #854d0e; color: #fcd34d; }
+.status-error { background: #991b1b; color: #fca5a5; }
+.alert-banner { background: #7f1d1d; border: 1px solid #991b1b; padding: 0.75rem 1rem; border-radius: 0.5rem; margin-bottom: 1rem; display: none; }
+.alert-banner.show { display: block; }
+.updated { font-size: 0.7rem; color: #475569; text-align: right; margin-top: 0.5rem; }
+@media (max-width: 768px) { .page-container { padding: 1rem; } .stats-grid { grid-template-columns: 1fr 1fr; } }
     </style>
 </head>
 <body>
-<div id="alert-banner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:9999;padding:0.75rem 1rem;text-align:center;font-weight:600;font-size:0.9rem;background:linear-gradient(90deg,#dc2626,#b91c1c);color:#fff">
-<span id="alert-banner-text"></span>
-<button id="alert-banner-close" onclick="document.getElementById('alert-banner').style.display='none';document.body.style.paddingTop='0'" style="position:absolute;right:1rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#fff;font-size:1.2rem;cursor:pointer">✕</button>
-</div>
-<script>
-(async function checkAlerts(){try{const r=await fetch('/api/alerts');const d=await r.json();const a=(Array.isArray(d)?d:d.alerts||[]).filter(x=>x&&x.message&&x.severity==='critical'&&!x.acknowledged);if(a.length>0){const b=document.getElementById('alert-banner');const t=document.getElementById('alert-banner-text');if(b&&t){t.textContent='🔴 '+a.length+' critical alert'+(a.length>1?'s':'')+' — '+(a[0].message||'Unknown');t.style.cursor='pointer';t.onclick=()=>location.href='/security';b.style.display='block';document.body.style.paddingTop='48px'}}}catch(e){}setTimeout(checkAlerts,60000)})();
-</script>
     <nav class="main-nav">
-        <a href="/" class="logo">🏠 Homebase</a>
-        <div class="nav-links">
-            <a href="/" class="active">Home</a>
-            <a href="/servers">Servers</a>
-            <a href="/projects">Projects</a>
-            <a href="/agents">Agents</a>
-            <a href="/metrics">Metrics</a>
-            <a href="/security">Security</a>
-        </div>
-        <div class="nav-right">
-            <div class="dropdown">
-                <button class="dropdown-btn">⚙️</button>
-                <div class="dropdown-content">
-                    <a href="/credentials">🔐 Credentials</a>
-                    <a href="/settings">⚙️ Settings</a>
-                    <a href="/backups">💾 Backups</a>
-                    <a href="/audit-tracker">📋 Audit Tracker</a>
-                    <a href="/research">🔬 Research</a>
-                </div>
-            </div>
-        </div>
-    </nav>
-    <div class="maint-banner" id="maint-banner">🔧 MAINTENANCE WINDOW ACTIVE — Alerts suppressed</div>
-    <div class="maint-info" id="maint-info"></div>
+    <a href="/" class="logo">Homebase</a>
+    <div class="nav-links">
+        <a href="/" class="active">Dashboard</a>
+        <a href="/fleet">Fleet</a>
+        <a href="/agents">Agents</a>
+        <a href="/sentinel">Sentinel</a>
+        <a href="/research">Research</a>
+        <a href="/infra">Infra Sheet</a>
+        <a href="/settings">Settings</a>
+        <a href="/backups">Backups</a>
+        <a href="/requirements">Requirements</a>
+        <a href="https://gitea.rize.bm" target="_blank">Gitea</a>
+    </div>
+</nav>
 
     <div class="page-container">
         <div class="page-header">
-            <h1>Infrastructure Command Center</h1>
-            <p>Rize Technologies — Monitoring 11 servers, 10 projects, 1 AI agent</p>
+            <h1>Rize Infrastructure Dashboard</h1>
+            <p>Real-time status from infrastructure.json</p>
         </div>
 
-        <!-- Summary Cards -->
-        <div class="summary-cards">
-            <div class="summary-card">
-                <div class="num" id="server-count" style="color:#60a5fa">11</div>
-                <div class="lbl">Servers</div>
-            </div>
-            <div class="summary-card">
-                <div class="num" id="project-count" style="color:#a78bfa">10</div>
-                <div class="lbl">Projects</div>
-            </div>
-            <div class="summary-card">
-                <div class="num" id="agent-count" style="color:#22d3ee">1</div>
-                <div class="lbl">AI Agents</div>
-            </div>
-            <div class="summary-card">
-                <div class="num" id="p0-count" style="color:#f87171">-</div>
-                <div class="lbl">Open P0s</div>
-            </div>
-            <div class="summary-card">
-                <div class="num" id="security-score" style="color:#4ade80">-</div>
-                <div class="lbl">Security Score</div>
-            </div>
+        <div id="alert-banner" class="alert-banner"></div>
+
+        <div class="stats-grid">
+            <a href="/servers" class="stat-card">
+                <div class="stat-header"><span class="stat-label">Active Servers</span></div>
+                <div class="stat-value green" id="server-count">-</div>
+                <div class="stat-detail" id="server-detail">Loading...</div>
+            </a>
+            <a href="/projects" class="stat-card">
+                <div class="stat-header"><span class="stat-label">Projects</span></div>
+                <div class="stat-value" id="project-count">-</div>
+                <div class="stat-detail" id="project-detail">Loading...</div>
+            </a>
+            <a href="/agents" class="stat-card">
+                <div class="stat-header"><span class="stat-label">AI Agents</span></div>
+                <div class="stat-value" id="agent-count">-</div>
+                <div class="stat-detail" id="agent-detail">Loading...</div>
+            </a>
+            <a href="/sentinel" class="stat-card">
+                <div class="stat-header"><span class="stat-label">Disk Alerts</span></div>
+                <div class="stat-value" id="disk-alerts">-</div>
+                <div class="stat-detail" id="disk-detail">Servers over 80%</div>
+            </a>
         </div>
 
-        <!-- Server Health Grid -->
         <div class="section">
-            <h2>📡 Server Health</h2>
-            <div class="server-grid" id="server-grid">
-                <div style="color:#64748b;padding:1rem">Loading servers...</div>
-            </div>
+            <h2>Server Fleet Status</h2>
+            <div id="server-list">Loading...</div>
+            <div class="updated" id="last-updated"></div>
         </div>
 
-        <!-- Quick Actions -->
         <div class="section">
-            <h2>⚡ Quick Actions</h2>
-            <div class="quick-actions">
-                <a href="/servers" class="action-btn">
-                    <span class="icon">📡</span>
-                    <span class="text"><span class="title">View All Servers</span><br><span class="sub">SSH links, status, backups</span></span>
-                </a>
-                <a href="/projects" class="action-btn">
-                    <span class="icon">📦</span>
-                    <span class="text"><span class="title">View All Projects</span><br><span class="sub">Status, versions, links</span></span>
-                </a>
-                <a href="/agents" class="action-btn">
-                    <span class="icon">🤖</span>
-                    <span class="text"><span class="title">Agent Monitor</span><br><span class="sub">David Bishop status</span></span>
-                </a>
-                <a href="/security" class="action-btn">
-                    <span class="icon">🛡️</span>
-                    <span class="text"><span class="title">Security Dashboard</span><br><span class="sub">Scan results, audit tracker</span></span>
-                </a>
-            </div>
-        </div>
-
-        <!-- Recent Activity -->
-        <div class="section">
-            <h2>📋 Recent Activity</h2>
-            <div class="feed" id="activity-feed">
-                <div style="color:#64748b;padding:1rem">Loading activity...</div>
-            </div>
+            <h2>Recent Agent Activity</h2>
+            <div id="agent-activity">Loading...</div>
         </div>
     </div>
 
-    <script>
-// Load server data
-async function loadServers() {
-    try {
-        const res = await fetch('/api/servers');
-        const data = await res.json();
-        const servers = data.servers || [];
-
-        // Define all 11 servers with their data
-        const allServers = [
-            {name: 'Premier-EMR', ip: '.239', status: 'unknown'},
-            {name: 'Helios', ip: '.240', status: 'unknown'},
-            {name: 'David', ip: '.241', status: 'unknown'},
-            {name: 'Cobalt', ip: '.243', status: 'online'},
-            {name: 'Claude-Dev', ip: '.245', status: 'unknown'},
-            {name: 'BPS AI', ip: '.246', status: 'unknown'},
-            {name: 'Nexus', ip: '.247', status: 'unknown'},
-            {name: 'Relay', ip: '.248', status: 'unknown'},
-            {name: 'Vector', ip: '.249', status: 'unknown'},
-            {name: 'Dockyard', ip: '.252', status: 'unknown'},
-            {name: 'Hyper-V', ip: '.253', status: 'unknown'}
-        ];
-
-        // Merge with actual server data
-        servers.forEach(function(s) {
-            var found = allServers.find(function(a) {
-                return s.ip && s.ip.endsWith(a.ip.replace('.', ''));
-            });
-            if (found) {
-                found.status = s.status || 'unknown';
+    <script src="/static/cache-helper.js"></script>
+<script>
+    async function loadDashboard() {
+        try {
+            const res = await fetch('/api/infrastructure');
+            const infra = await res.json();
+            
+            const servers = infra.servers || [];
+            const projects = infra.projects || [];
+            const agents = infra.agents || [];
+            
+            const activeServers = servers.filter(s => s.status === 'online');
+            const diskAlerts = activeServers.filter(s => parseInt(s.live?.disk_pct || '0') > 80);
+            const liveAgents = agents.filter(a => a.mode === 'live');
+            
+            // Stats
+            document.getElementById('server-count').textContent = activeServers.length;
+            document.getElementById('server-detail').textContent = activeServers.length + ' active, ' + (servers.length - activeServers.length) + ' decommissioned';
+            
+            document.getElementById('project-count').textContent = projects.length;
+            document.getElementById('project-detail').textContent = 'Across ' + new Set(projects.map(p => p.server)).size + ' servers';
+            
+            document.getElementById('agent-count').textContent = agents.length;
+            document.getElementById('agent-detail').textContent = liveAgents.length + ' live, ' + (agents.length - liveAgents.length) + ' mock/active';
+            
+            const diskEl = document.getElementById('disk-alerts');
+            diskEl.textContent = diskAlerts.length;
+            diskEl.className = 'stat-value ' + (diskAlerts.length > 0 ? 'red' : 'green');
+            if (diskAlerts.length > 0) {
+                document.getElementById('disk-detail').textContent = diskAlerts.map(s => s.hostname).join(', ');
             }
-        });
-
-        var html = allServers.map(function(s) {
-            return '<a href="/servers" class="server-tile">' +
-                '<div class="server-dot ' + s.status + '"></div>' +
-                '<div class="server-info">' +
-                '<div class="name">' + s.name + '</div>' +
-                '<div class="ip">192.168.65' + s.ip + '</div>' +
-                '</div></a>';
-        }).join('');
-        document.getElementById('server-grid').innerHTML = html;
-    } catch (e) {
-        document.getElementById('server-grid').innerHTML = '<div style="color:#f87171;padding:1rem">Error loading servers</div>';
-    }
-}
-
-// Load projects summary
-async function loadProjects() {
-    try {
-        const res = await fetch('/api/projects');
-        const data = await res.json();
-        const projects = data.projects || {};
-        const projectCount = Object.keys(projects).length || 10;
-        document.getElementById('project-count').textContent = projectCount;
-
-        // Count P0s from health summary
-        const health = data.health || data.summary || {};
-        const criticalCount = (health.critical || 0) + (health.degraded || 0);
-        document.getElementById('p0-count').textContent = criticalCount || '0';
-    } catch (e) {
-        console.error('Projects load error:', e);
-    }
-}
-
-// Load agents summary
-async function loadAgents() {
-    try {
-        const res = await fetch('/api/agents/overview');
-        const data = await res.json();
-        document.getElementById('agent-count').textContent = data.total_agents || 1;
-    } catch (e) {
-        console.error('Agents load error:', e);
-    }
-}
-
-// Load activity feed
-async function loadActivity() {
-    var feed = document.getElementById('activity-feed');
-    var activities = [
-        {icon: '✅', text: 'Homebase v0.7.0 deployed', time: 'Just now'},
-        {icon: '🔄', text: 'Nightly backup completed for all servers', time: '3h ago'},
-        {icon: '🛡️', text: 'Security scan completed — 82% score', time: '6h ago'},
-        {icon: '🤖', text: 'David Bishop heartbeat received', time: '10m ago'},
-        {icon: '📦', text: 'BPS AI v0.9.26 deployed', time: '1d ago'}
-    ];
-
-    var html = activities.map(function(a) {
-        return '<div class="feed-item">' +
-            '<span class="icon">' + a.icon + '</span>' +
-            '<span class="content">' + a.text + '</span>' +
-            '<span class="time">' + a.time + '</span>' +
-            '</div>';
-    }).join('');
-    feed.innerHTML = html;
-}
-
-// Load actual security score
-async function loadSecurityScore() {
-    try {
-        const res = await fetch('/api/security/scans/latest');
-        const data = await res.json();
-        const score = data.overall_score || 0;
-        const el = document.getElementById('security-score');
-        el.textContent = score + '%';
-        el.style.color = score >= 80 ? '#4ade80' : score >= 60 ? '#fbbf24' : '#f87171';
-    } catch (e) {
-        document.getElementById('security-score').textContent = 'N/A';
-    }
-}
-loadSecurityScore();
-
-// Load all data
-loadServers();
-loadProjects();
-loadAgents();
-loadActivity();
-// Check maintenance status
-async function checkMaintenance() {
-    try {
-        const resp = await fetch("/api/maintenance/status");
-        const data = await resp.json();
-        const banner = document.getElementById("maint-banner");
-        const info = document.getElementById("maint-info");
-        if (data.active) {
-            banner.classList.add("active");
-        } else {
-            banner.classList.remove("active");
+            
+            // Alert banner
+            if (diskAlerts.length > 0) {
+                const banner = document.getElementById('alert-banner');
+                banner.innerHTML = '⚠️ Disk alert: ' + diskAlerts.map(s => s.hostname + ' at ' + s.live?.disk_pct + '%').join(', ');
+                banner.classList.add('show');
+            }
+            
+            // Server list
+            document.getElementById('server-list').innerHTML = activeServers.map(s => {
+                const live = s.live || {};
+                const statusClass = (live.status === 'ok' || s.status === 'online') ? 'status-ok' : 'status-warn';
+                const diskPct = live.disk_pct || '-';
+                const memUsed = live.mem_used || '-';
+                const memTotal = live.mem_total || '-';
+                
+                return '<div class="server-row">' +
+                    '<span class="server-icon">' + (s.icon || '💻') + '</span>' +
+                    '<div class="server-info">' +
+                    '<div class="server-name">' + s.hostname + '</div>' +
+                    '<div class="server-ip">' + s.ip + ' | ' + (s.ssh_user || '-') + ' | Disk: ' + diskPct + '% | Mem: ' + memUsed + '/' + memTotal + 'MB</div>' +
+                    '</div>' +
+                    '<span class="server-status ' + statusClass + '">' + (live.status || 'online') + '</span>' +
+                    '</div>';
+            }).join('');
+            
+            // Agent activity
+            document.getElementById('agent-activity').innerHTML = agents.map(a => {
+                const modeClass = a.mode === 'live' ? 'status-ok' : (a.mode === 'mock' ? 'status-warn' : 'status-ok');
+                const srv = servers.find(s => s.id === a.server) || {};
+                return '<div class="server-row">' +
+                    '<span class="server-icon">🤖</span>' +
+                    '<div class="server-info">' +
+                    '<div class="server-name">' + a.name + '</div>' +
+                    '<div class="server-ip">' + (srv.hostname || a.server) + ' | Channels: ' + (a.channels || []).join(', ') + '</div>' +
+                    '</div>' +
+                    '<span class="server-status ' + modeClass + '">' + a.mode.toUpperCase() + '</span>' +
+                    '</div>';
+            }).join('');
+            
+            // Updated timestamp
+            if (infra.meta?.updated) {
+                document.getElementById('last-updated').textContent = 'Last scan: ' + new Date(infra.meta.updated).toLocaleString();
+            }
+        } catch (e) {
+            console.error('Dashboard load failed:', e);
         }
-        if (data.window) {
-            const days = JSON.parse(data.window.days_of_week || "[]").join(", ");
-            info.textContent = "Maintenance: " + data.window.start_time + " UTC for " + data.window.duration_minutes + " min (" + days + ")";
-        }
-    } catch(e) { console.error("Maint check failed:", e); }
-}
-checkMaintenance();
-setInterval(checkMaintenance, 60000);
-
-
-// Auto-refresh
-setInterval(function() {
-    loadServers();
-    loadProjects();
-    loadAgents();
-}, 60000);
+    }
+    
+    initCacheFirst('homebase_dashboard', 'server-list', loadDashboard, 60000);
     </script>
 </body>
-<script>
-fetch('/api/uptime/servers?hours=24').then(r=>r.json()).then(d=>{
-    const el=document.getElementById('uptime-badge');
-    if(!el)return;
-    const vals=Object.values(d).filter(v=>v.uptime_pct!==null);
-    const avg=vals.length?Math.round(vals.reduce((a,b)=>a+b.uptime_pct,0)/vals.length*10)/10:0;
-    el.textContent=avg+'%';
-    el.style.color=avg>=99?'#4ade80':avg>=95?'#fbbf24':'#f87171';
-}).catch(()=>{});
-</script>
 </html>

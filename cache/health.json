@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-02-12T14:38:07.805894+00:00",
+  "all_healthy": true,
+  "down": [],
+  "checked": [
+    "Homebase",
+    "Gitea",
+    "Demos .246",
+    "Talos .237"
+  ]
+}

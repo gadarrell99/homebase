@@ -1,0 +1,948 @@
+{
+  "projects": [
+    {
+      "name": "Helios",
+      "slug": "helios",
+      "url": "https://helios.rize.bm",
+      "deadline": "2026-02-17",
+      "days_remaining": 5,
+      "totals": {
+        "open": 5,
+        "done": 4,
+        "verified": 0,
+        "blocked": 0,
+        "total": 9
+      },
+      "percent_complete": 44,
+      "p0_status": {
+        "open": 0,
+        "total": 0
+      },
+      "requirements": [
+        {
+          "id": "GH-9",
+          "gitea_number": 9,
+          "status": "OPEN",
+          "description": "GitHub PAT expired: Restore GitHub push mirror",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/helios/issues/9"
+        },
+        {
+          "id": "GH-8",
+          "gitea_number": 8,
+          "status": "OPEN",
+          "description": "Security: Close remaining vulnerabilities before external demo",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/helios/issues/8"
+        },
+        {
+          "id": "GH-7",
+          "gitea_number": 7,
+          "status": "OPEN",
+          "description": "AI Chat: Verify demo queries return good answers",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/helios/issues/7"
+        },
+        {
+          "id": "GH-6",
+          "gitea_number": 6,
+          "status": "OPEN",
+          "description": "Search: Verify results include highlighted text excerpts",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/helios/issues/6"
+        },
+        {
+          "id": "GH-4",
+          "gitea_number": 4,
+          "status": "OPEN",
+          "description": "Report generation: Excel, Word, PowerPoint output from AI queries",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/helios/issues/4"
+        },
+        {
+          "id": "GH-5",
+          "gitea_number": 5,
+          "status": "DONE",
+          "description": "UI polish: Loading skeletons, animations, proper SVG logo",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/helios/issues/5"
+        },
+        {
+          "id": "GH-3",
+          "gitea_number": 3,
+          "status": "DONE",
+          "description": "CPA demo data: Add tax returns, financial statements, audit workpapers",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/helios/issues/3"
+        },
+        {
+          "id": "GH-2",
+          "gitea_number": 2,
+          "status": "DONE",
+          "description": "Document detail: Make rows clickable, show AI analysis sidebar",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/helios/issues/2"
+        },
+        {
+          "id": "GH-1",
+          "gitea_number": 1,
+          "status": "DONE",
+          "description": "Dashboard charts: Add donut and bar charts with recharts",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/helios/issues/1"
+        }
+      ],
+      "source": "gitea"
+    },
+    {
+      "name": "BPS AI",
+      "slug": "bps-ai",
+      "url": "https://bpsai.rize.bm",
+      "deadline": "2026-02-20",
+      "days_remaining": 8,
+      "totals": {
+        "open": 7,
+        "done": 10,
+        "verified": 0,
+        "blocked": 0,
+        "total": 17
+      },
+      "percent_complete": 59,
+      "p0_status": {
+        "open": 0,
+        "total": 0
+      },
+      "requirements": [
+        {
+          "id": "GH-15",
+          "gitea_number": 15,
+          "status": "OPEN",
+          "description": "Voice dictation: Verify Whisper integration works",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/15"
+        },
+        {
+          "id": "REQ-B009",
+          "gitea_number": 9,
+          "status": "OPEN",
+          "description": "SECURITY: Serper key not hardcoded",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/9"
+        },
+        {
+          "id": "REQ-B008",
+          "gitea_number": 8,
+          "status": "OPEN",
+          "description": "DOCS: All 5 standard docs current",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/8"
+        },
+        {
+          "id": "REQ-B007",
+          "gitea_number": 7,
+          "status": "OPEN",
+          "description": "UX: Multiple UI improvements from CEO walkthrough",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/7"
+        },
+        {
+          "id": "REQ-B005",
+          "gitea_number": 5,
+          "status": "OPEN",
+          "description": "UI: Dark slate + gold theme consistent",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/5"
+        },
+        {
+          "id": "REQ-B003",
+          "gitea_number": 3,
+          "status": "OPEN",
+          "description": "SORTING: Case list sorting works correctly",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/3"
+        },
+        {
+          "id": "REQ-B001",
+          "gitea_number": 1,
+          "status": "OPEN",
+          "description": "DROPDOWN: Fix big dropdown on Analysis Demo click",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/1"
+        },
+        {
+          "id": "GH-17",
+          "gitea_number": 17,
+          "status": "DONE",
+          "description": "GitHub PAT expired: Restore GitHub push",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/17"
+        },
+        {
+          "id": "GH-16",
+          "gitea_number": 16,
+          "status": "DONE",
+          "description": "PDF export: Verify report generation works",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/16"
+        },
+        {
+          "id": "GH-14",
+          "gitea_number": 14,
+          "status": "DONE",
+          "description": "AI assistant: Verify at least one model responds",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/14"
+        },
+        {
+          "id": "GH-13",
+          "gitea_number": 13,
+          "status": "DONE",
+          "description": "Cases data: Verify cases exist and display correctly",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/13"
+        },
+        {
+          "id": "GH-12",
+          "gitea_number": 12,
+          "status": "DONE",
+          "description": "IA access: Verify Alexander Rollin can access Internal Affairs",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/12"
+        },
+        {
+          "id": "GH-11",
+          "gitea_number": 11,
+          "status": "DONE",
+          "description": "PM2 restart investigation: 1,244 restarts from EADDRINUSE",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/11"
+        },
+        {
+          "id": "GH-10",
+          "gitea_number": 10,
+          "status": "DONE",
+          "description": "Demo login buttons: Verify 3 buttons render and work in browser",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/10"
+        },
+        {
+          "id": "REQ-B006",
+          "gitea_number": 6,
+          "status": "DONE",
+          "description": "CONSOLE: No React hydration errors (#425/#422)",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/6"
+        },
+        {
+          "id": "REQ-B004",
+          "gitea_number": 4,
+          "status": "DONE",
+          "description": "DATA: 20+ realistic demo cases seeded",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/4"
+        },
+        {
+          "id": "REQ-B002",
+          "gitea_number": 2,
+          "status": "DONE",
+          "description": "LOGIN: Demo login buttons work for all roles",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/2"
+        }
+      ],
+      "source": "gitea"
+    },
+    {
+      "name": "Homebase",
+      "slug": "homebase",
+      "url": "http://localhost:8000",
+      "deadline": null,
+      "days_remaining": null,
+      "totals": {
+        "open": 25,
+        "done": 1,
+        "verified": 0,
+        "blocked": 0,
+        "total": 26
+      },
+      "percent_complete": 4,
+      "p0_status": {
+        "open": 6,
+        "total": 6
+      },
+      "requirements": [
+        {
+          "id": "GH-25",
+          "gitea_number": 25,
+          "status": "OPEN",
+          "description": "Global caching audit: Sentinel and other pages still making user wait for data",
+          "priority": "P0",
+          "labels": [
+            "P0",
+            "ceo-feedback"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/25"
+        },
+        {
+          "id": "GH-22",
+          "gitea_number": 22,
+          "status": "OPEN",
+          "description": "gitea.rize.bm: DNS not resolving \u2014 needs Cloudflare CNAME record",
+          "priority": "P0",
+          "labels": [
+            "P0",
+            "ceo-feedback"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/22"
+        },
+        {
+          "id": "GH-21",
+          "gitea_number": 21,
+          "status": "OPEN",
+          "description": "Requirements page: missing all agents \u2014 need Cortex, David, Apex, Aegis, Sentinel sections",
+          "priority": "P0",
+          "labels": [
+            "P0",
+            "ceo-feedback"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/21"
+        },
+        {
+          "id": "GH-20",
+          "gitea_number": 20,
+          "status": "OPEN",
+          "description": "Requirements page: remove Tier 2/Tier 3 jargon \u2014 rename to Requirements Tracker",
+          "priority": "P0",
+          "labels": [
+            "P0",
+            "ceo-feedback"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/20"
+        },
+        {
+          "id": "GH-19",
+          "gitea_number": 19,
+          "status": "OPEN",
+          "description": "Requirements page: missing shared navbar",
+          "priority": "P0",
+          "labels": [
+            "P0",
+            "ceo-feedback"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/19"
+        },
+        {
+          "id": "GH-18",
+          "gitea_number": 18,
+          "status": "OPEN",
+          "description": "Sentinel page: nothing loads, not cached, takes forever",
+          "priority": "P0",
+          "labels": [
+            "P0",
+            "bug",
+            "ceo-feedback"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/18"
+        },
+        {
+          "id": "GH-26",
+          "gitea_number": 26,
+          "status": "OPEN",
+          "description": "GitHub \u2194 Gitea sync: verify all 12 repos have both remotes configured",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/26"
+        },
+        {
+          "id": "GH-24",
+          "gitea_number": 24,
+          "status": "OPEN",
+          "description": "Backups page: verify actual backup functionality, not just UI",
+          "priority": "P1",
+          "labels": [
+            "P1",
+            "ceo-feedback"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/24"
+        },
+        {
+          "id": "GH-23",
+          "gitea_number": 23,
+          "status": "OPEN",
+          "description": "Embed Gitea issue data inside Homebase \u2014 stop requiring separate URL",
+          "priority": "P1",
+          "labels": [
+            "P1",
+            "ceo-feedback"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/23"
+        },
+        {
+          "id": "REQ-H021",
+          "gitea_number": 17,
+          "status": "OPEN",
+          "description": "Register Plane in Homebase infrastructure",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/17"
+        },
+        {
+          "id": "REQ-H015",
+          "gitea_number": 15,
+          "status": "OPEN",
+          "description": "CREDENTIALS: Move to Infrastructure page",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/15"
+        },
+        {
+          "id": "REQ-H014",
+          "gitea_number": 14,
+          "status": "OPEN",
+          "description": "MINDMAP: Add demo server and all servers",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/14"
+        },
+        {
+          "id": "REQ-H013",
+          "gitea_number": 13,
+          "status": "OPEN",
+          "description": "AGENTS: More in-depth agent information",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/13"
+        },
+        {
+          "id": "REQ-H012",
+          "gitea_number": 12,
+          "status": "OPEN",
+          "description": "AGENTS: Add document viewer button",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/12"
+        },
+        {
+          "id": "REQ-H011",
+          "gitea_number": 11,
+          "status": "OPEN",
+          "description": "FLEET: Deduplicate Talos entries",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/11"
+        },
+        {
+          "id": "REQ-H010",
+          "gitea_number": 10,
+          "status": "OPEN",
+          "description": "FLEET: Talos shows version and uptime",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/10"
+        },
+        {
+          "id": "REQ-H009",
+          "gitea_number": 9,
+          "status": "OPEN",
+          "description": "SENTINEL: Agent-specific security info",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/9"
+        },
+        {
+          "id": "REQ-H008",
+          "gitea_number": 8,
+          "status": "OPEN",
+          "description": "SENTINEL: Show heartbeat status in dashboard",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/8"
+        },
+        {
+          "id": "REQ-H007",
+          "gitea_number": 7,
+          "status": "OPEN",
+          "description": "UX: All pages show pre-cached data on click",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/7"
+        },
+        {
+          "id": "REQ-H006",
+          "gitea_number": 6,
+          "status": "OPEN",
+          "description": "RESEARCH: Blank on first load",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/6"
+        },
+        {
+          "id": "REQ-H005",
+          "gitea_number": 5,
+          "status": "OPEN",
+          "description": "METRICS: /api/metrics/summary returns 500",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/5"
+        },
+        {
+          "id": "REQ-H004",
+          "gitea_number": 4,
+          "status": "OPEN",
+          "description": "PROJECTS: Detail button loads empty page",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/4"
+        },
+        {
+          "id": "REQ-H003",
+          "gitea_number": 3,
+          "status": "OPEN",
+          "description": "NAV: Settings and Backups outside gear icon",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/3"
+        },
+        {
+          "id": "REQ-H002",
+          "gitea_number": 2,
+          "status": "OPEN",
+          "description": "NAV: Research link appears/disappears",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/2"
+        },
+        {
+          "id": "REQ-H001",
+          "gitea_number": 1,
+          "status": "OPEN",
+          "description": "NAV: Consistent size across ALL 16 pages",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/1"
+        },
+        {
+          "id": "REQ-H020",
+          "gitea_number": 16,
+          "status": "DONE",
+          "description": "Register Gitea in Homebase infrastructure",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/16"
+        }
+      ],
+      "source": "gitea"
+    },
+    {
+      "name": "BEST Shipping",
+      "slug": "best-shipping",
+      "url": "https://bestshipping.rize.bm",
+      "deadline": null,
+      "days_remaining": null,
+      "totals": {
+        "open": 9,
+        "done": 0,
+        "verified": 0,
+        "blocked": 0,
+        "total": 9
+      },
+      "percent_complete": 0,
+      "p0_status": {
+        "open": 0,
+        "total": 0
+      },
+      "requirements": [
+        {
+          "id": "REQ-S009",
+          "gitea_number": 9,
+          "status": "OPEN",
+          "description": "TUNNEL: bestshipping.rize.bm resolves and loads",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/best-shipping/issues/9"
+        },
+        {
+          "id": "REQ-S008",
+          "gitea_number": 8,
+          "status": "OPEN",
+          "description": "DOCS: All 5 standard docs exist",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/best-shipping/issues/8"
+        },
+        {
+          "id": "REQ-S007",
+          "gitea_number": 7,
+          "status": "OPEN",
+          "description": "UX: Fast page loads, no blank pages",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/best-shipping/issues/7"
+        },
+        {
+          "id": "REQ-S006",
+          "gitea_number": 6,
+          "status": "OPEN",
+          "description": "TRACKING: Shipment tracking page works",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/best-shipping/issues/6"
+        },
+        {
+          "id": "REQ-S005",
+          "gitea_number": 5,
+          "status": "OPEN",
+          "description": "DEMO BANNER: Visible POC indicator",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/best-shipping/issues/5"
+        },
+        {
+          "id": "REQ-S004",
+          "gitea_number": 4,
+          "status": "OPEN",
+          "description": "BRANDING: BEST Shipping branding applied",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/best-shipping/issues/4"
+        },
+        {
+          "id": "REQ-S003",
+          "gitea_number": 3,
+          "status": "OPEN",
+          "description": "DATA: Realistic Bermuda shipping demo data",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/best-shipping/issues/3"
+        },
+        {
+          "id": "REQ-S002",
+          "gitea_number": 2,
+          "status": "OPEN",
+          "description": "DASHBOARD: Shipping operations overview",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/best-shipping/issues/2"
+        },
+        {
+          "id": "REQ-S001",
+          "gitea_number": 1,
+          "status": "OPEN",
+          "description": "LOGIN: Demo login buttons for all roles",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/best-shipping/issues/1"
+        }
+      ],
+      "source": "gitea"
+    },
+    {
+      "name": "Premier EMR",
+      "slug": "premier-emr",
+      "url": "https://premieremr.rize.bm",
+      "deadline": null,
+      "days_remaining": null,
+      "totals": {
+        "open": 9,
+        "done": 0,
+        "verified": 0,
+        "blocked": 0,
+        "total": 9
+      },
+      "percent_complete": 0,
+      "p0_status": {
+        "open": 0,
+        "total": 0
+      },
+      "requirements": [
+        {
+          "id": "REQ-E009",
+          "gitea_number": 9,
+          "status": "OPEN",
+          "description": "TUNNEL: premieremr.rize.bm resolves and loads",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/9"
+        },
+        {
+          "id": "REQ-E008",
+          "gitea_number": 8,
+          "status": "OPEN",
+          "description": "DOCS: All 5 standard docs exist",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/8"
+        },
+        {
+          "id": "REQ-E007",
+          "gitea_number": 7,
+          "status": "OPEN",
+          "description": "UX: Fast page loads, no blank pages",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/7"
+        },
+        {
+          "id": "REQ-E006",
+          "gitea_number": 6,
+          "status": "OPEN",
+          "description": "PATIENT: Patient record view works",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/6"
+        },
+        {
+          "id": "REQ-E005",
+          "gitea_number": 5,
+          "status": "OPEN",
+          "description": "DEMO BANNER: Visible POC indicator",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/5"
+        },
+        {
+          "id": "REQ-E004",
+          "gitea_number": 4,
+          "status": "OPEN",
+          "description": "BRANDING: Premier Health / generic medical branding",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/4"
+        },
+        {
+          "id": "REQ-E003",
+          "gitea_number": 3,
+          "status": "OPEN",
+          "description": "DATA: Realistic medical demo data",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/3"
+        },
+        {
+          "id": "REQ-E002",
+          "gitea_number": 2,
+          "status": "OPEN",
+          "description": "DASHBOARD: Patient overview",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/2"
+        },
+        {
+          "id": "REQ-E001",
+          "gitea_number": 1,
+          "status": "OPEN",
+          "description": "LOGIN: Demo login buttons for all roles",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/1"
+        }
+      ],
+      "source": "gitea"
+    },
+    {
+      "name": "Cortex",
+      "slug": "cortex",
+      "url": "",
+      "deadline": null,
+      "days_remaining": null,
+      "totals": {
+        "open": 0,
+        "done": 0,
+        "verified": 0,
+        "blocked": 0,
+        "total": 0
+      },
+      "percent_complete": 0,
+      "p0_status": {
+        "open": 0,
+        "total": 0
+      },
+      "requirements": [],
+      "source": "gitea"
+    },
+    {
+      "name": "David Bishop",
+      "slug": "david-bishop",
+      "url": "",
+      "deadline": null,
+      "days_remaining": null,
+      "totals": {
+        "open": 0,
+        "done": 0,
+        "verified": 0,
+        "blocked": 0,
+        "total": 0
+      },
+      "percent_complete": 0,
+      "p0_status": {
+        "open": 0,
+        "total": 0
+      },
+      "requirements": [],
+      "source": "gitea"
+    },
+    {
+      "name": "Apex",
+      "slug": "apex",
+      "url": "",
+      "deadline": null,
+      "days_remaining": null,
+      "totals": {
+        "open": 0,
+        "done": 0,
+        "verified": 0,
+        "blocked": 0,
+        "total": 0
+      },
+      "percent_complete": 0,
+      "p0_status": {
+        "open": 0,
+        "total": 0
+      },
+      "requirements": [],
+      "source": "gitea"
+    },
+    {
+      "name": "Aegis",
+      "slug": "aegis",
+      "url": "",
+      "deadline": null,
+      "days_remaining": null,
+      "totals": {
+        "open": 0,
+        "done": 0,
+        "verified": 0,
+        "blocked": 0,
+        "total": 0
+      },
+      "percent_complete": 0,
+      "p0_status": {
+        "open": 0,
+        "total": 0
+      },
+      "requirements": [],
+      "source": "gitea"
+    },
+    {
+      "name": "Talos",
+      "slug": "talos",
+      "url": "https://talos.rize.bm",
+      "deadline": null,
+      "days_remaining": null,
+      "totals": {
+        "open": 0,
+        "done": 0,
+        "verified": 0,
+        "blocked": 0,
+        "total": 0
+      },
+      "percent_complete": 0,
+      "p0_status": {
+        "open": 0,
+        "total": 0
+      },
+      "requirements": [],
+      "source": "gitea"
+    },
+    {
+      "name": "Vector",
+      "slug": "vector",
+      "url": "",
+      "deadline": null,
+      "days_remaining": null,
+      "totals": {
+        "open": 2,
+        "done": 0,
+        "verified": 0,
+        "blocked": 0,
+        "total": 2
+      },
+      "percent_complete": 0,
+      "p0_status": {
+        "open": 0,
+        "total": 0
+      },
+      "requirements": [
+        {
+          "id": "GH-2",
+          "gitea_number": 2,
+          "status": "OPEN",
+          "description": "[Security/HIGH] failed_logins: 158 failed SSH login attempts in auth.log",
+          "priority": "P1",
+          "labels": [
+            "automated",
+            "priority:high",
+            "security"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/2"
+        },
+        {
+          "id": "GH-1",
+          "gitea_number": 1,
+          "status": "OPEN",
+          "description": "[Security/HIGH] failed_logins: 156 failed SSH login attempts in auth.log",
+          "priority": "P1",
+          "labels": [
+            "automated",
+            "priority:high",
+            "security"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/1"
+        }
+      ],
+      "source": "gitea"
+    },
+    {
+      "name": "Sentinel",
+      "slug": "sentinel",
+      "url": "",
+      "deadline": null,
+      "days_remaining": null,
+      "totals": {
+        "open": 0,
+        "done": 0,
+        "verified": 0,
+        "blocked": 0,
+        "total": 0
+      },
+      "percent_complete": 0,
+      "p0_status": {
+        "open": 0,
+        "total": 0
+      },
+      "requirements": [],
+      "source": "gitea"
+    }
+  ],
+  "last_refresh": "2026-02-12T14:38:04.192849+00:00",
+  "source": "gitea",
+  "project_count": 12,
+  "total_requirements": 72,
+  "total_open": 57
+}

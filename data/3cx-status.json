@@ -1,0 +1,135 @@
+{
+  "timestamp": "2026-02-12 10:15:02",
+  "results": [
+    {
+      "name": "Forensica",
+      "url": "https://forensica.3cx.us",
+      "checks": [
+        {
+          "check": "reachable",
+          "status": "PASS",
+          "http_code": 200,
+          "ms": 524
+        },
+        {
+          "check": "ssl",
+          "status": "PASS"
+        }
+      ]
+    },
+    {
+      "name": "Vision Bermuda",
+      "url": "https://visionbda.3cx.us",
+      "checks": [
+        {
+          "check": "reachable",
+          "status": "PASS",
+          "http_code": 200,
+          "ms": 380
+        },
+        {
+          "check": "ssl",
+          "status": "PASS"
+        }
+      ]
+    },
+    {
+      "name": "TUO",
+      "url": "http://tuopbx.3cx.us:5001",
+      "checks": [
+        {
+          "check": "reachable",
+          "status": "FAIL",
+          "http_code": 400,
+          "ms": 96
+        }
+      ]
+    },
+    {
+      "name": "Rize Internal",
+      "url": "https://rize.3cx.us",
+      "checks": [
+        {
+          "check": "reachable",
+          "status": "PASS",
+          "http_code": 200,
+          "ms": 226
+        },
+        {
+          "check": "ssl",
+          "status": "PASS"
+        }
+      ]
+    },
+    {
+      "name": "ICE BDA",
+      "url": "https://icebda.3cx.us",
+      "checks": [
+        {
+          "check": "reachable",
+          "status": "PASS",
+          "http_code": 200,
+          "ms": 281
+        },
+        {
+          "check": "ssl",
+          "status": "PASS"
+        }
+      ]
+    },
+    {
+      "name": "Sterling Trust",
+      "url": "https://sterlingtrust.3cx.us:5001",
+      "checks": [
+        {
+          "check": "reachable",
+          "status": "PASS",
+          "http_code": 200,
+          "ms": 299
+        },
+        {
+          "check": "ssl",
+          "status": "PASS"
+        }
+      ]
+    },
+    {
+      "name": "OBA",
+      "url": "https://oba3cx.3cx.us",
+      "checks": [
+        {
+          "check": "reachable",
+          "status": "PASS",
+          "http_code": 200,
+          "ms": 293
+        },
+        {
+          "check": "ssl",
+          "status": "PASS"
+        }
+      ]
+    },
+    {
+      "name": "SBC01",
+      "url": "http://10.1.12.249",
+      "checks": [
+        {
+          "check": "reachable",
+          "status": "FAIL",
+          "detail": "HTTPConnectionPool(host='10.1.12.249', port=80): Max retries exceeded with url: "
+        }
+      ]
+    },
+    {
+      "name": "SBC02",
+      "url": "http://66.45.251.19",
+      "checks": [
+        {
+          "check": "reachable",
+          "status": "FAIL",
+          "detail": "HTTPConnectionPool(host='66.45.251.19', port=80): Max retries exceeded with url:"
+        }
+      ]
+    }
+  ]
+}
