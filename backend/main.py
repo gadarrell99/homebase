@@ -31,6 +31,14 @@ SERVER_CACHE = {
     "refreshing": False
 }
 CACHE_MAX_AGE = 60  # seconds - serve cached data if less than this old
+
+# ============== SENTINEL CACHE ==============
+SENTINEL_CACHE = {
+    "overview": {"data": None, "timestamp": 0},
+    "agents": {"data": None, "timestamp": 0},
+    "resources": {"data": None, "timestamp": 0},
+}
+SENTINEL_CACHE_TTL = 120  # 2 minutes
 SSH_TIMEOUT = 15  # seconds - timeout for individual SSH connections
 
 app.add_middleware(
@@ -1833,6 +1841,11 @@ async def fetch_remote_docs(ssh_user: str, ssh_ip: str, project_path: str, doc_f
 @app.get("/api/sentinel/overview")
 async def sentinel_overview():
     """Get overview stats for Sentinel dashboard."""
+    # Serve from cache if fresh
+    cache = SENTINEL_CACHE["overview"]
+    if cache["data"] and (time.time() - cache["timestamp"]) < SENTINEL_CACHE_TTL:
+        return cache["data"]
+
     import sqlite3
     from datetime import datetime, timedelta
 
@@ -1879,7 +1892,7 @@ async def sentinel_overview():
     except:
         critical = warnings = 0
 
-    return {
+    result = {
         "agents_healthy": status_counts.get("healthy", 0) + status_counts.get("running", 0),
         "agents_degraded": status_counts.get("degraded", 0),
         "agents_offline": status_counts.get("offline", 0) + status_counts.get("killed", 0),
@@ -1889,6 +1902,8 @@ async def sentinel_overview():
         "alerts_warning": warnings,
         "last_updated": datetime.utcnow().isoformat()
     }
+    SENTINEL_CACHE["overview"] = {"data": result, "timestamp": time.time()}
+    return result
 
 @app.get("/api/sentinel/agents")
 async def sentinel_agents():
@@ -2166,7 +2181,12 @@ async def sentinel_crons():
 
 @app.get("/api/sentinel/resources")
 async def sentinel_resources():
-    """Get resource usage for key servers."""
+    """Get resource usage for key servers (cached)."""
+    # Serve from cache if fresh
+    cache = SENTINEL_CACHE["resources"]
+    if cache["data"] and (time.time() - cache["timestamp"]) < SENTINEL_CACHE_TTL:
+        return cache["data"]
+
     import subprocess
 
     resources = {}
@@ -2207,7 +2227,9 @@ async def sentinel_resources():
         except Exception as e:
             resources[server] = {"error": str(e)}
 
-    return {"resources": resources}
+    result = {"resources": resources}
+    SENTINEL_CACHE["resources"] = {"data": result, "timestamp": time.time()}
+    return result
 
 @app.get("/api/sentinel/audit-log")
 async def sentinel_audit_log(limit: int = 100, agent_id: str = None, action_type: str = None):
@@ -2391,6 +2413,15 @@ async def agent_aegis_page():
 @app.get("/agent/david-bishop")
 async def agent_david_page():
     return FileResponse('/home/rizeadmin/homebase/backend/static/agent-david-bishop.html')
+
+@app.get("/agent/{agent_id}")
+async def agent_generic_detail(agent_id: str):
+    """Generic agent detail page - catch-all for any agent."""
+    # Check for specific HTML files first
+    specific = f"/home/rizeadmin/homebase/backend/static/agent-{agent_id}.html"
+    if os.path.exists(specific):
+        return FileResponse(specific)
+    return FileResponse('/home/rizeadmin/homebase/backend/static/agent-detail.html')
 
 # ══════════════════════════════════════════════════════════════════
 # PROJECT STATUS DASHBOARD - Added 2026-02-06
@@ -2694,6 +2725,274 @@ async def requirements_page():
     return FileResponse("/home/rizeadmin/homebase/public/requirements.html")
 
 # End of requirements routes
+
+# ============================================================================
+# GITEA INTEGRATION APIs (Fixes #48, #49)
+# ============================================================================
+
+GITEA_ISSUES_CACHE = {"data": None, "timestamp": 0}
+GITEA_ISSUES_CACHE_TTL = 300  # 5 minutes
+
+@app.get("/api/gitea/issues")
+async def gitea_all_issues():
+    """Fetch all open issues from all Gitea repos. Returns unified list."""
+    import urllib.request
+    import urllib.error
+
+    # Serve from cache
+    if GITEA_ISSUES_CACHE["data"] and (time.time() - GITEA_ISSUES_CACHE["timestamp"]) < GITEA_ISSUES_CACHE_TTL:
+        return GITEA_ISSUES_CACHE["data"]
+
+    gitea_url = os.environ.get("GITEA_URL", "http://localhost:3100")
+    gitea_token = os.environ.get("GITEA_TOKEN", "")
+    
+    if not gitea_token:
+        return {"error": "GITEA_TOKEN not configured", "issues": []}
+
+    headers = {"Authorization": f"token {gitea_token}"}
+    all_issues = []
+
+    try:
+        # First get all repos
+        req = urllib.request.Request(f"{gitea_url}/api/v1/repos/search?limit=50", headers=headers)
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            repos = json.loads(resp.read()).get("data", [])
+
+        for repo in repos:
+            repo_name = repo.get("full_name", "")
+            if repo.get("open_issues_count", 0) == 0:
+                continue
+            
+            # Fetch open issues for this repo
+            page = 1
+            while True:
+                try:
+                    issue_url = f"{gitea_url}/api/v1/repos/{repo_name}/issues?state=open&limit=50&page={page}"
+                    req = urllib.request.Request(issue_url, headers=headers)
+                    with urllib.request.urlopen(req, timeout=10) as resp:
+                        issues = json.loads(resp.read())
+                    
+                    if not issues:
+                        break
+
+                    for issue in issues:
+                        labels = [l.get("name", "") for l in issue.get("labels", [])]
+                        priority = "normal"
+                        for l in labels:
+                            if "p0" in l.lower() or "critical" in l.lower():
+                                priority = "critical"
+                            elif "p1" in l.lower() or "high" in l.lower():
+                                priority = "high"
+                            elif "p2" in l.lower() or "medium" in l.lower():
+                                priority = "medium"
+                            elif "p3" in l.lower() or "low" in l.lower():
+                                priority = "low"
+
+                        all_issues.append({
+                            "repo": repo_name,
+                            "number": issue.get("number"),
+                            "title": issue.get("title", ""),
+                            "labels": labels,
+                            "priority": priority,
+                            "status": "open",
+                            "created": issue.get("created_at", ""),
+                            "updated": issue.get("updated_at", ""),
+                            "url": issue.get("html_url", ""),
+                            "assignee": issue.get("assignee", {}).get("login", "") if issue.get("assignee") else ""
+                        })
+                    
+                    if len(issues) < 50:
+                        break
+                    page += 1
+                except Exception:
+                    break
+
+        result = {
+            "issues": all_issues,
+            "total": len(all_issues),
+            "repos_scanned": len(repos),
+            "timestamp": datetime.utcnow().isoformat()
+        }
+        GITEA_ISSUES_CACHE["data"] = result
+        GITEA_ISSUES_CACHE["timestamp"] = time.time()
+        return result
+
+    except Exception as e:
+        return {"error": str(e), "issues": [], "total": 0}
+
+
+@app.post("/api/gitea/refresh")
+async def gitea_refresh_issues():
+    """Force refresh Gitea issues cache."""
+    GITEA_ISSUES_CACHE["data"] = None
+    GITEA_ISSUES_CACHE["timestamp"] = 0
+    return await gitea_all_issues()
+
+
+@app.get("/api/gitea/repos")
+async def gitea_repos():
+    """Get Gitea repos summary."""
+    import urllib.request
+    gitea_url = os.environ.get("GITEA_URL", "http://localhost:3100")
+    gitea_token = os.environ.get("GITEA_TOKEN", "")
+    
+    if not gitea_token:
+        return {"error": "GITEA_TOKEN not configured", "repos": []}
+
+    try:
+        req = urllib.request.Request(
+            f"{gitea_url}/api/v1/repos/search?limit=50",
+            headers={"Authorization": f"token {gitea_token}"}
+        )
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            repos = json.loads(resp.read()).get("data", [])
+        
+        summary = []
+        for repo in repos:
+            summary.append({
+                "name": repo.get("name"),
+                "full_name": repo.get("full_name"),
+                "open_issues": repo.get("open_issues_count", 0),
+                "description": repo.get("description", ""),
+                "updated": repo.get("updated_at", ""),
+                "url": repo.get("html_url", "")
+            })
+        summary.sort(key=lambda x: x["open_issues"], reverse=True)
+        return {"repos": summary, "total": len(summary), "total_issues": sum(r["open_issues"] for r in summary)}
+    except Exception as e:
+        return {"error": str(e), "repos": []}
+
+
+# ============================================================================
+# CLOUDFLARE API (Fixes #45 / HB-9)
+# ============================================================================
+
+CF_API_TOKEN = "hTlhw40nee2b81BPbeh4TVKnU1bCB6QAfQDno-8u"
+CF_API_BASE = "https://api.cloudflare.com/client/v4"
+CF_CACHE = {
+    "dns": {"data": None, "timestamp": 0},
+    "tunnels": {"data": None, "timestamp": 0},
+}
+CF_CACHE_TTL = 3600  # 1 hour
+
+
+def cf_request(endpoint, method="GET"):
+    """Make authenticated request to Cloudflare API."""
+    import urllib.request
+    req = urllib.request.Request(
+        f"{CF_API_BASE}{endpoint}",
+        headers={
+            "Authorization": f"Bearer {CF_API_TOKEN}",
+            "Content-Type": "application/json"
+        },
+        method=method
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            return json.loads(resp.read())
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+
+
+@app.get("/api/cloudflare/dns")
+async def cloudflare_dns():
+    """Get Cloudflare DNS records for all zones (cached hourly)."""
+    cache = CF_CACHE["dns"]
+    if cache["data"] and (time.time() - cache["timestamp"]) < CF_CACHE_TTL:
+        return cache["data"]
+
+    try:
+        # Get zones
+        zones_resp = cf_request("/zones?per_page=50")
+        if not zones_resp.get("success"):
+            return {"error": zones_resp.get("error", "Failed to fetch zones"), "records": []}
+
+        all_records = []
+        zones = zones_resp.get("result", [])
+        
+        for zone in zones:
+            zone_id = zone["id"]
+            zone_name = zone["name"]
+            
+            records_resp = cf_request(f"/zones/{zone_id}/dns_records?per_page=100")
+            if records_resp.get("success"):
+                for rec in records_resp.get("result", []):
+                    all_records.append({
+                        "zone": zone_name,
+                        "name": rec.get("name", ""),
+                        "type": rec.get("type", ""),
+                        "content": rec.get("content", ""),
+                        "proxied": rec.get("proxied", False),
+                        "ttl": rec.get("ttl", 0)
+                    })
+
+        result = {
+            "records": all_records,
+            "total": len(all_records),
+            "zones": len(zones),
+            "zone_names": [z["name"] for z in zones],
+            "cached_at": datetime.utcnow().isoformat()
+        }
+        CF_CACHE["dns"] = {"data": result, "timestamp": time.time()}
+        return result
+    except Exception as e:
+        return {"error": str(e), "records": []}
+
+
+@app.get("/api/cloudflare/tunnels")
+async def cloudflare_tunnels():
+    """Get Cloudflare tunnel status (cached hourly)."""
+    cache = CF_CACHE["tunnels"]
+    if cache["data"] and (time.time() - cache["timestamp"]) < CF_CACHE_TTL:
+        return cache["data"]
+
+    try:
+        # Get account ID from zones
+        zones_resp = cf_request("/zones?per_page=1")
+        if not zones_resp.get("success") or not zones_resp.get("result"):
+            return {"error": "Cannot determine account", "tunnels": []}
+        
+        account_id = zones_resp["result"][0].get("account", {}).get("id")
+        if not account_id:
+            return {"error": "No account ID found", "tunnels": []}
+
+        tunnels_resp = cf_request(f"/accounts/{account_id}/cfd_tunnel?per_page=50")
+        tunnels = []
+        if tunnels_resp.get("success"):
+            for t in tunnels_resp.get("result", []):
+                tunnels.append({
+                    "id": t.get("id", ""),
+                    "name": t.get("name", ""),
+                    "status": t.get("status", "unknown"),
+                    "created": t.get("created_at", ""),
+                    "connections": len(t.get("connections", []))
+                })
+
+        result = {
+            "tunnels": tunnels,
+            "total": len(tunnels),
+            "cached_at": datetime.utcnow().isoformat()
+        }
+        CF_CACHE["tunnels"] = {"data": result, "timestamp": time.time()}
+        return result
+    except Exception as e:
+        return {"error": str(e), "tunnels": []}
+
+
+@app.get("/api/cloudflare/summary")
+async def cloudflare_summary():
+    """Combined DNS + tunnel summary for Infrastructure page."""
+    dns_data = await cloudflare_dns()
+    tunnel_data = await cloudflare_tunnels()
+    return {
+        "dns_records": dns_data.get("total", 0),
+        "zones": dns_data.get("zones", 0),
+        "zone_names": dns_data.get("zone_names", []),
+        "tunnels": tunnel_data.get("tunnels", []),
+        "tunnel_count": tunnel_data.get("total", 0),
+        "cached_at": datetime.utcnow().isoformat()
+    }
+
 
 # ============================================================================
 # SENTINEL PHASE 2 APIs (Added 2026-02-10)

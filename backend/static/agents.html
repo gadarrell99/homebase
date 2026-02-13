@@ -29,10 +29,11 @@ a { color: #60a5fa; text-decoration: none; }
 .summary-card .num.yellow { color: #fbbf24; }
 .summary-card .num.blue { color: #60a5fa; }
 .summary-card .lbl { color: #94a3b8; font-size: 0.75rem; margin-top: 0.25rem; }
-.agent-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-@media (max-width: 1024px) { .agent-grid { grid-template-columns: 1fr; } }
-.agent-card { background: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; overflow: hidden; }
-.agent-card:hover { border-color: #475569; }
+.agent-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+@media (max-width: 1200px) { .agent-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) { .agent-grid { grid-template-columns: 1fr; } }
+.agent-card { background: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; overflow: hidden; cursor: pointer; transition: transform 0.15s, border-color 0.15s; }
+.agent-card:hover { border-color: #60a5fa; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(96,165,250,0.1); }
 .agent-header { display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: #0f172a; border-bottom: 1px solid #334155; }
 .agent-icon { font-size: 2.5rem; }
 .agent-title { flex: 1; }
@@ -42,6 +43,7 @@ a { color: #60a5fa; text-decoration: none; }
 .mode-live { background: #166534; color: #86efac; }
 .mode-mock { background: #854d0e; color: #fcd34d; }
 .mode-active { background: #1e40af; color: #93c5fd; }
+.mode-cli { background: #4c1d95; color: #c4b5fd; }
 .agent-body { padding: 1.25rem; }
 .agent-desc { color: #94a3b8; font-size: 0.9rem; line-height: 1.5; margin-bottom: 1rem; }
 .agent-section { margin-bottom: 1rem; }
@@ -345,7 +347,7 @@ a { color: #60a5fa; text-decoration: none; }
         (infra.servers || []).forEach(s => servers[s.id] = s);
 
         // Filter out CLI personas (Architect, Inquisitor) — only show real agents/services
-        const displayAgents = agents.filter(a => a.type !== 'cli_persona');
+        const displayAgents = agents;  // Show all agents including CLI personas
 
         const live = displayAgents.filter(a => a.mode === 'live').length;
         const mock = displayAgents.filter(a => a.mode === 'mock' || a.mode === 'readonly').length;
@@ -358,12 +360,12 @@ a { color: #60a5fa; text-decoration: none; }
 
         document.getElementById('agent-grid').innerHTML = displayAgents.map(a => {
             const server = servers[a.server] || {};
-            const modeClass = (a.mode === 'readonly') ? 'mode-mock' : ('mode-' + (a.mode || 'mock'));
-            const modeLabel = (a.mode === 'readonly') ? 'READ-ONLY' : (a.mode || 'mock').toUpperCase();
+            const modeClass = a.type === 'cli_persona' ? 'mode-cli' : (a.mode === 'readonly') ? 'mode-mock' : ('mode-' + (a.mode || 'mock'));
+            const modeLabel = a.type === 'cli_persona' ? 'CLI PERSONA' : (a.mode === 'readonly') ? 'READ-ONLY' : (a.mode || 'mock').toUpperCase();
             const details = agentDetails[a.name] || {description: a.description || '', capabilities: [], guardrails: [], integrations: [], daily_output: []};
             const agentId = a.id || a.name.toLowerCase().replace(/\s+/g, '-');
 
-            return '<div class="agent-card">' +
+            return '<a href="/agent/' + agentId + '"  style="text-decoration:none;color:inherit;display:block" class="agent-card-link"><div class="agent-card">' +
                 '<div class="agent-header">' +
                 '<span class="agent-icon">' + (a.icon || '🤖') + '</span>' +
                 '<div class="agent-title">' +
@@ -418,7 +420,7 @@ a { color: #60a5fa; text-decoration: none; }
                 '<a href="/projects/' + agentId + '#readme" class="doc-btn">📖 README</a>' +
                 '<a href="/projects/' + agentId + '#todo" class="doc-btn">📝 TODO</a>' +
                 '</div></div>' +
-                '</div></div>';
+                '</div></div></a>';
         }).join('');
     }
 

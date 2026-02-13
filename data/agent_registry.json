@@ -150,8 +150,54 @@
           "escalate_privileges"
         ]
       }
+    },
+    {
+      "name": "The Architect",
+      "id": "architect",
+      "server": "192.168.65.237",
+      "port": null,
+      "user": "talosadmin",
+      "type": "cli_persona",
+      "role": "Builder Script - Claude Code persona for deployment, documentation, builds",
+      "status": "ACTIVE",
+      "security": {
+        "mode": "cli_only",
+        "can_send_email": false,
+        "allowed_actions": [
+          "deploy",
+          "build",
+          "document"
+        ],
+        "blocked_actions": [
+          "delete_data",
+          "modify_production"
+        ]
+      }
+    },
+    {
+      "name": "The Inquisitor",
+      "id": "inquisitor",
+      "server": "192.168.65.237",
+      "port": null,
+      "user": "talosadmin",
+      "type": "cli_persona",
+      "role": "Auditor Script - zero-trust QA persona, red-teams endpoints, grades docs",
+      "status": "ACTIVE",
+      "security": {
+        "mode": "cli_only",
+        "can_send_email": false,
+        "allowed_actions": [
+          "audit",
+          "scan",
+          "grade"
+        ],
+        "blocked_actions": [
+          "modify_data",
+          "deploy"
+        ]
+      }
     }
   ],
-  "updated_at": "2026-02-10T04:25:00Z",
+  "updated_at": "2026-02-13T18:37:12.906813Z",
   "version": "2.0"
 }

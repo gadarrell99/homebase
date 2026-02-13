@@ -254,6 +254,20 @@
 
     // === PRE-CACHE PATTERN ===
     const CACHE_KEY = "homebase_sentinel_cache";
+    
+    // Helper: fetch with timeout (5s default)
+    async function fetchWithTimeout(url, opts = {}, timeout = 8000) {
+        const controller = new AbortController();
+        const id = setTimeout(() => controller.abort(), timeout);
+        try {
+            const resp = await fetch(url, { ...opts, signal: controller.signal });
+            clearTimeout(id);
+            return resp;
+        } catch (e) {
+            clearTimeout(id);
+            throw e;
+        }
+    }
     const CACHE_TTL = 300000; // 5 minutes
     
     function getCached() {
@@ -308,7 +322,7 @@
         // Load overview
         async function loadOverview() {
             try {
-                const resp = await fetch('/api/sentinel/overview');
+                const resp = await fetchWithTimeout('/api/sentinel/overview');
                 const data = await resp.json();
                 document.getElementById('ov-healthy').textContent = data.agents_healthy || 0;
                 document.getElementById('ov-degraded').textContent = data.agents_degraded || 0;
@@ -325,7 +339,7 @@
         // Load agents
         async function loadAgents() {
             try {
-                const resp = await fetch('/api/sentinel/agents');
+                const resp = await fetchWithTimeout('/api/sentinel/agents');
                 const data = await resp.json();
                 const grid = document.getElementById('agent-grid');
 
@@ -372,7 +386,7 @@
         // Load alerts
         async function loadAlerts() {
             try {
-                const resp = await fetch('/api/sentinel/alerts');
+                const resp = await fetchWithTimeout('/api/sentinel/alerts');
                 const data = await resp.json();
                 const list = document.getElementById('alert-list');
 
@@ -396,7 +410,7 @@
         // Load guardrails
         async function loadGuardrails() {
             try {
-                const resp = await fetch('/api/guardrails/triggers');
+                const resp = await fetchWithTimeout('/api/guardrails/triggers');
                 const data = await resp.json();
                 const list = document.getElementById('guardrail-list');
 
@@ -423,7 +437,7 @@
         // Load requests
         async function loadRequests() {
             try {
-                const resp = await fetch('/api/sentinel/requests');
+                const resp = await fetchWithTimeout('/api/sentinel/requests');
                 const data = await resp.json();
 
                 document.getElementById('req-total').textContent = data.recent?.length || 0;
@@ -447,7 +461,7 @@
         // Load resources
         async function loadResources() {
             try {
-                const resp = await fetch('/api/sentinel/resources');
+                const resp = await fetchWithTimeout('/api/sentinel/resources');
                 const data = await resp.json();
                 const grid = document.getElementById('resource-grid');
 
@@ -500,7 +514,7 @@
         async function loadCrons(),
                 loadAuditLog() {
             try {
-                const resp = await fetch('/api/sentinel/crons');
+                const resp = await fetchWithTimeout('/api/sentinel/crons');
                 const data = await resp.json();
 
                 document.getElementById('cron-count').textContent = data.total || 0;

@@ -20,7 +20,7 @@ from pathlib import Path
 # =====================================================
 
 GITEA_URL = os.environ.get("GITEA_URL", "http://localhost:3100")
-GITEA_TOKEN = ""
+GITEA_TOKEN = os.environ.get("GITEA_TOKEN", "")
 
 # Try to load token from file
 TOKEN_FILE = os.path.expanduser("~/gitea-api-token.txt")

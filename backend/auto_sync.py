@@ -49,7 +49,9 @@ def sync_fleet():
 
 def sync_gitea():
     try:
-        result = run_cmd("curl -s 'http://localhost:3100/api/v1/repos/search?limit=50' 2>/dev/null")
+        token = open(os.path.expanduser('~/.gitea-token')).read().strip() if os.path.exists(os.path.expanduser('~/.gitea-token')) else ''
+        header = f'-H "Authorization: token {token}"' if token else ''
+        result = run_cmd(f"curl -s {header} 'http://localhost:3100/api/v1/repos/search?limit=50' 2>/dev/null")
         if result:
             repos = json.loads(result).get("data", [])
             summary = []

@@ -236,7 +236,44 @@ tr:hover td { background: #1a1a2e; }
             const dnsHtml = domains.length ? '<table><tr><th>Domain</th><th>Server</th><th>Tunnel UUID</th></tr>' +
                 domains.map(d => '<tr><td><a href="https://' + d.domain + '" target="_blank" style="color:#60a5fa">' + d.domain + '</a></td><td class="mono">' + d.server + ' (.' + d.server_ip.split('.').pop() + ')</td><td class="mono">' + (d.tunnel_uuid ? d.tunnel_uuid.slice(0, 8) + '...' : '-') + '</td></tr>').join('') +
                 '</table>' : '<p style="color:#64748b">No domain records in infrastructure.json</p>';
-            document.getElementById('dns-tunnels').innerHTML = dnsHtml;
+            
+            // Also load live Cloudflare data
+            let cfHtml = '<div style="margin-top:1.5rem"><h3 style="font-size:0.85rem;color:#94a3b8;margin-bottom:0.5rem">Live Cloudflare Data</h3><p style="color:#64748b">Loading...</p></div>';
+            document.getElementById('dns-tunnels').innerHTML = dnsHtml + cfHtml;
+            
+            // Async load Cloudflare summary
+            fetch('/api/cloudflare/summary').then(r => r.json()).then(cf => {
+                let liveHtml = '<div style="margin-top:1.5rem">';
+                liveHtml += '<h3 style="font-size:0.85rem;color:#94a3b8;margin-bottom:0.5rem">Cloudflare (Live)</h3>';
+                liveHtml += '<div style="display:flex;gap:1rem;margin-bottom:1rem;flex-wrap:wrap">';
+                liveHtml += '<div style="background:#0f172a;padding:0.75rem 1rem;border-radius:0.375rem"><div style="font-size:1.5rem;font-weight:700;color:#60a5fa">' + (cf.dns_records || 0) + '</div><div style="color:#64748b;font-size:0.75rem">DNS Records</div></div>';
+                liveHtml += '<div style="background:#0f172a;padding:0.75rem 1rem;border-radius:0.375rem"><div style="font-size:1.5rem;font-weight:700;color:#4ade80">' + (cf.zones || 0) + '</div><div style="color:#64748b;font-size:0.75rem">Zones</div></div>';
+                liveHtml += '<div style="background:#0f172a;padding:0.75rem 1rem;border-radius:0.375rem"><div style="font-size:1.5rem;font-weight:700;color:#fbbf24">' + (cf.tunnel_count || 0) + '</div><div style="color:#64748b;font-size:0.75rem">Tunnels</div></div>';
+                liveHtml += '</div>';
+                
+                // Tunnel status
+                if (cf.tunnels && cf.tunnels.length) {
+                    liveHtml += '<table><tr><th>Tunnel Name</th><th>Status</th><th>Connections</th></tr>';
+                    cf.tunnels.forEach(t => {
+                        const statusColor = t.status === 'active' ? '#4ade80' : t.status === 'healthy' ? '#4ade80' : '#fbbf24';
+                        liveHtml += '<tr><td>' + t.name + '</td><td><span style="color:' + statusColor + '">' + (t.status || 'unknown') + '</span></td><td>' + (t.connections || 0) + '</td></tr>';
+                    });
+                    liveHtml += '</table>';
+                }
+                
+                // Zone names
+                if (cf.zone_names && cf.zone_names.length) {
+                    liveHtml += '<div style="margin-top:0.5rem;color:#64748b;font-size:0.8rem">Zones: ' + cf.zone_names.join(', ') + '</div>';
+                }
+                
+                if (cf.cached_at) {
+                    liveHtml += '<div style="margin-top:0.5rem;color:#475569;font-size:0.7rem">Cached: ' + new Date(cf.cached_at).toLocaleString() + ' (refreshes hourly)</div>';
+                }
+                liveHtml += '</div>';
+                document.getElementById('dns-tunnels').innerHTML = dnsHtml + liveHtml;
+            }).catch(e => {
+                console.error('Cloudflare data error:', e);
+            });
             
             // Credentials (FIX 3: field names + SSH fallback)
             const creds = data.credentials || {};
