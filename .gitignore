@@ -21,3 +21,6 @@ backend/homebase.db
 *.bak
 *.precache.bak
 test-results/
+*.bak
+*.bak.*
+.env.bak*
