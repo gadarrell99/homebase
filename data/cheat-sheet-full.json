@@ -1,5 +1,5 @@
 {
-  "generated": "2026-02-12T14:30:01Z",
+  "generated": "2026-02-13T03:30:01Z",
   "servers": [
     {
       "id": "helios",
@@ -22,7 +22,7 @@
       "ssh_url": "",
       "alive": true,
       "version": "",
-      "uptime": "up 4 days, 22 hours, 45 minutes",
+      "uptime": "up 5 days, 11 hours, 45 minutes",
       "disk": "",
       "memory": "",
       "services": "0 0"
@@ -48,7 +48,7 @@
       "ssh_url": "https://claude-dev-ssh.rize.bm",
       "alive": true,
       "version": "",
-      "uptime": "up 4 days, 22 hours, 45 minutes",
+      "uptime": "up 5 days, 11 hours, 45 minutes",
       "disk": "",
       "memory": "",
       "services": "0 0"
@@ -61,7 +61,7 @@
       "ssh_url": "https://bpsai-ssh.rize.bm",
       "alive": true,
       "version": "",
-      "uptime": "up 4 days, 22 hours, 45 minutes",
+      "uptime": "up 5 days, 11 hours, 45 minutes",
       "disk": "",
       "memory": "",
       "services": "4"
@@ -100,7 +100,7 @@
       "ssh_url": "https://vector-ssh.rize.bm",
       "alive": true,
       "version": "",
-      "uptime": "up 4 days, 22 hours, 45 minutes",
+      "uptime": "up 5 days, 11 hours, 45 minutes",
       "disk": "",
       "memory": "",
       "services": "0 0"
@@ -247,6 +247,7 @@
     "0 8 * * * bash /home/rizeadmin/homebase/backend/scripts/research-digest.sh >> /home/rizeadmin/homebase/logs/research.log 2>&1",
     "*/30 * * * * scp -q agents@192.168.65.241:~/data/spend-logs/homebase-export.json ~/homebase/data/ai-spend.json 2>/dev/null",
     "0 8 * * * cd /home/rizeadmin/homebase && python3 backend/services/version_scanner.py >> logs/version-scan.log 2>&1",
-    "0 7 * * * cd /home/rizeadmin/homebase && python3 backend/services/maintenance_executor.py >> logs/maintenance.log 2>&1"
+    "0 7 * * * cd /home/rizeadmin/homebase && python3 backend/services/maintenance_executor.py >> logs/maintenance.log 2>&1",
+    "*/15 * * * * cd /home/rizeadmin/homebase && python3 backend/auto_sync.py >> /home/rizeadmin/homebase/logs/auto_sync.log 2>&1"
   ]
 }

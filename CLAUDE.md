@@ -46,3 +46,24 @@ Every commit must be pushed to BOTH remotes:
 
 Never push to only one remote. Both must stay in sync.
 
+
+## Auto-Sync (Cron — Every 15 Minutes)
+Script: `backend/auto_sync.py`
+Cron: `*/15 * * * * cd /home/rizeadmin/homebase && python3 backend/auto_sync.py >> logs/auto_sync.log 2>&1`
+
+### What It Syncs:
+1. **Fleet Status** — Pings all 5 servers (.237, .241, .245, .246, .249), checks port availability
+2. **Agent Status** — SSH to .241, checks David/Cortex/Apex/Aegis/Sentinel process status
+3. **Gitea Repos** — Queries local Gitea API for repo list and open issue counts
+
+### Data Files:
+- `data/fleet_status.json` — Server online/offline + port status per server
+- `data/agent_status.json` — Agent active/inactive status from .241
+- `data/gitea_repos.json` — Repo list with open issue counts
+- `data/sync_status.json` — Last sync timestamp and summary counts
+
+### Notes:
+- Runs as rizeadmin user on .245
+- SSH timeout: 5 seconds per agent check
+- Curl timeout: 3 seconds per port check
+- Log: `logs/auto_sync.log`

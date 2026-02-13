@@ -5,20 +5,179 @@
       "slug": "helios",
       "url": "https://helios.rize.bm",
       "deadline": "2026-02-17",
-      "days_remaining": 5,
+      "days_remaining": 4,
       "totals": {
-        "open": 5,
+        "open": 21,
         "done": 4,
         "verified": 0,
         "blocked": 0,
-        "total": 9
+        "total": 25
       },
-      "percent_complete": 44,
+      "percent_complete": 16,
       "p0_status": {
         "open": 0,
         "total": 0
       },
       "requirements": [
+        {
+          "id": "GH-25",
+          "gitea_number": 25,
+          "status": "OPEN",
+          "description": "Company Names: CLEAN (all fictional)",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/helios/issues/25"
+        },
+        {
+          "id": "GH-24",
+          "gitea_number": 24,
+          "status": "OPEN",
+          "description": "Emails: READY (500 business emails searchable)",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/helios/issues/24"
+        },
+        {
+          "id": "GH-23",
+          "gitea_number": 23,
+          "status": "OPEN",
+          "description": "Login: READY (3 demo buttons)",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/helios/issues/23"
+        },
+        {
+          "id": "GH-22",
+          "gitea_number": 22,
+          "status": "OPEN",
+          "description": "Upload: READY (OCR with Tesseract)",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/helios/issues/22"
+        },
+        {
+          "id": "GH-21",
+          "gitea_number": 21,
+          "status": "OPEN",
+          "description": "Search: READY (clickable results, type icons, hover effects)",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/helios/issues/21"
+        },
+        {
+          "id": "GH-20",
+          "gitea_number": 20,
+          "status": "OPEN",
+          "description": "Reports: READY (Excel generation + download)",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/helios/issues/20"
+        },
+        {
+          "id": "GH-19",
+          "gitea_number": 19,
+          "status": "OPEN",
+          "description": "AI Chat: READY (Weaviate RAG, Claude, mode toggle, streaming)",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/helios/issues/19"
+        },
+        {
+          "id": "GH-18",
+          "gitea_number": 18,
+          "status": "OPEN",
+          "description": "Data Lake: READY (clickable table, search, filter by type)",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/helios/issues/18"
+        },
+        {
+          "id": "GH-17",
+          "gitea_number": 17,
+          "status": "OPEN",
+          "description": "Documents: READY (clickable, detail pages, 356 docs)",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/helios/issues/17"
+        },
+        {
+          "id": "GH-16",
+          "gitea_number": 16,
+          "status": "OPEN",
+          "description": "Dashboard: READY (charts with fictional data, top 8 + Other donut)",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/helios/issues/16"
+        },
+        {
+          "id": "GH-15",
+          "gitea_number": 15,
+          "status": "OPEN",
+          "description": "P0 Security: Path traversal fix, XSS fixes, auth bypass, token handling",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/helios/issues/15"
+        },
+        {
+          "id": "GH-14",
+          "gitea_number": 14,
+          "status": "OPEN",
+          "description": "2 flaky Playwright tests (login timeout on SSL)",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/helios/issues/14"
+        },
+        {
+          "id": "GH-13",
+          "gitea_number": 13,
+          "status": "OPEN",
+          "description": "Add real public documents (SEC filings, IRS forms) for richer demo",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/helios/issues/13"
+        },
+        {
+          "id": "GH-12",
+          "gitea_number": 12,
+          "status": "OPEN",
+          "description": "[Helios] P0 Security: Path traversal fix, XSS fixes, auth bypass, token handling",
+          "priority": "P1",
+          "labels": [
+            "demo:helios",
+            "priority:high",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/helios/issues/12"
+        },
+        {
+          "id": "GH-11",
+          "gitea_number": 11,
+          "status": "OPEN",
+          "description": "[Helios] 2 flaky Playwright tests (login timeout on SSL)",
+          "priority": "P1",
+          "labels": [
+            "demo:helios",
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/helios/issues/11"
+        },
+        {
+          "id": "GH-10",
+          "gitea_number": 10,
+          "status": "OPEN",
+          "description": "[Helios] Add real public documents (SEC filings, IRS forms) for richer demo",
+          "priority": "P1",
+          "labels": [
+            "demo:helios",
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/helios/issues/10"
+        },
         {
           "id": "GH-9",
           "gitea_number": 9,
@@ -108,20 +267,76 @@
       "slug": "bps-ai",
       "url": "https://bpsai.rize.bm",
       "deadline": "2026-02-20",
-      "days_remaining": 8,
+      "days_remaining": 7,
       "totals": {
-        "open": 7,
+        "open": 11,
         "done": 10,
         "verified": 0,
         "blocked": 0,
-        "total": 17
+        "total": 21
       },
-      "percent_complete": 59,
+      "percent_complete": 48,
       "p0_status": {
         "open": 0,
         "total": 0
       },
       "requirements": [
+        {
+          "id": "GH-21",
+          "gitea_number": 21,
+          "status": "OPEN",
+          "description": "[Bps-ai] IA system has separate user database \u2014 dual access requires both",
+          "priority": "P1",
+          "labels": [
+            "demo:bps",
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/21"
+        },
+        {
+          "id": "GH-20",
+          "gitea_number": 20,
+          "status": "OPEN",
+          "description": "[Bps-ai] Logo: login page uses PNG instead of SVG for compatibility",
+          "priority": "P1",
+          "labels": [
+            "demo:bps",
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/20"
+        },
+        {
+          "id": "GH-19",
+          "gitea_number": 19,
+          "status": "OPEN",
+          "description": "[Bps-ai] Case detail URL shows UUID (by design \u2014 case number shown prominently in UI)",
+          "priority": "P1",
+          "labels": [
+            "demo:bps",
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/19"
+        },
+        {
+          "id": "GH-18",
+          "gitea_number": 18,
+          "status": "OPEN",
+          "description": "[Bps-ai] CONSOLE: No React hydration errors (#425/#422)",
+          "priority": "P1",
+          "labels": [
+            "demo:bps",
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/18"
+        },
         {
           "id": "GH-15",
           "gitea_number": 15,
@@ -285,13 +500,13 @@
       "deadline": null,
       "days_remaining": null,
       "totals": {
-        "open": 25,
+        "open": 34,
         "done": 1,
         "verified": 0,
         "blocked": 0,
-        "total": 26
+        "total": 35
       },
-      "percent_complete": 4,
+      "percent_complete": 3,
       "p0_status": {
         "open": 6,
         "total": 6
@@ -369,6 +584,123 @@
             "ceo-feedback"
           ],
           "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/18"
+        },
+        {
+          "id": "GH-35",
+          "gitea_number": 35,
+          "status": "OPEN",
+          "description": "[Homebase] Backups: add one-click backup trigger",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:245",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/35"
+        },
+        {
+          "id": "GH-34",
+          "gitea_number": 34,
+          "status": "OPEN",
+          "description": "[Homebase] Settings: add maintenance window scheduling",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:245",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/34"
+        },
+        {
+          "id": "GH-33",
+          "gitea_number": 33,
+          "status": "OPEN",
+          "description": "[Homebase] Mindmap: auto-generate from infrastructure.json agents",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:245",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/33"
+        },
+        {
+          "id": "GH-32",
+          "gitea_number": 32,
+          "status": "OPEN",
+          "description": "[Homebase] Audit results endpoint: POST /api/audit/results for Cortex",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:245",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/32"
+        },
+        {
+          "id": "GH-31",
+          "gitea_number": 31,
+          "status": "OPEN",
+          "description": "[Homebase] Research Scout: filter by date range",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:245",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/31"
+        },
+        {
+          "id": "GH-30",
+          "gitea_number": 30,
+          "status": "OPEN",
+          "description": "[Homebase] Agent dashboard pages: add real-time heartbeat display",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:245",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/30"
+        },
+        {
+          "id": "GH-29",
+          "gitea_number": 29,
+          "status": "OPEN",
+          "description": "[Homebase] Infra Sheet: add credential reveal toggle",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:245",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/29"
+        },
+        {
+          "id": "GH-28",
+          "gitea_number": 28,
+          "status": "OPEN",
+          "description": "[Homebase] Sentinel: integrate pipeline_monitor.py into 30-min checks",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:245",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/28"
+        },
+        {
+          "id": "GH-27",
+          "gitea_number": 27,
+          "status": "OPEN",
+          "description": "[Homebase] Fleet page: add live disk/mem metrics from infra-scanner",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:245",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/27"
         },
         {
           "id": "GH-26",
@@ -566,11 +898,11 @@
       "deadline": null,
       "days_remaining": null,
       "totals": {
-        "open": 9,
+        "open": 23,
         "done": 0,
         "verified": 0,
         "blocked": 0,
-        "total": 9
+        "total": 23
       },
       "percent_complete": 0,
       "p0_status": {
@@ -578,6 +910,202 @@
         "total": 0
       },
       "requirements": [
+        {
+          "id": "GH-23",
+          "gitea_number": 23,
+          "status": "OPEN",
+          "description": "[Best-shipping] Mobile app (React Native)",
+          "priority": "P1",
+          "labels": [
+            "demo:best",
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/best-shipping/issues/23"
+        },
+        {
+          "id": "GH-22",
+          "gitea_number": 22,
+          "status": "OPEN",
+          "description": "[Best-shipping] Microsoft Dynamics CRM integration",
+          "priority": "P1",
+          "labels": [
+            "demo:best",
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/best-shipping/issues/22"
+        },
+        {
+          "id": "GH-21",
+          "gitea_number": 21,
+          "status": "OPEN",
+          "description": "[Best-shipping] Online payment capability",
+          "priority": "P1",
+          "labels": [
+            "demo:best",
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/best-shipping/issues/21"
+        },
+        {
+          "id": "GH-20",
+          "gitea_number": 20,
+          "status": "OPEN",
+          "description": "[Best-shipping] Push notifications for status changes",
+          "priority": "P1",
+          "labels": [
+            "demo:best",
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/best-shipping/issues/20"
+        },
+        {
+          "id": "GH-19",
+          "gitea_number": 19,
+          "status": "OPEN",
+          "description": "[Best-shipping] Production deployment",
+          "priority": "P1",
+          "labels": [
+            "demo:best",
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/best-shipping/issues/19"
+        },
+        {
+          "id": "GH-18",
+          "gitea_number": 18,
+          "status": "OPEN",
+          "description": "[Best-shipping] Multi-tenant customer auth",
+          "priority": "P1",
+          "labels": [
+            "demo:best",
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/best-shipping/issues/18"
+        },
+        {
+          "id": "GH-17",
+          "gitea_number": 17,
+          "status": "OPEN",
+          "description": "[Best-shipping] Email parser (IMAP + Claude)",
+          "priority": "P1",
+          "labels": [
+            "demo:best",
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/best-shipping/issues/17"
+        },
+        {
+          "id": "GH-16",
+          "gitea_number": 16,
+          "status": "OPEN",
+          "description": "[Best-shipping] QuickBooks Online API (OAuth)",
+          "priority": "P1",
+          "labels": [
+            "demo:best",
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/best-shipping/issues/16"
+        },
+        {
+          "id": "GH-15",
+          "gitea_number": 15,
+          "status": "OPEN",
+          "description": "[Best-shipping] CargoWise eHub API integration",
+          "priority": "P1",
+          "labels": [
+            "demo:best",
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/best-shipping/issues/15"
+        },
+        {
+          "id": "GH-14",
+          "gitea_number": 14,
+          "status": "OPEN",
+          "description": "[Best-shipping] Screenshot deck for offline demo",
+          "priority": "P1",
+          "labels": [
+            "demo:best",
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/best-shipping/issues/14"
+        },
+        {
+          "id": "GH-13",
+          "gitea_number": 13,
+          "status": "OPEN",
+          "description": "[Best-shipping] Mobile responsive testing",
+          "priority": "P1",
+          "labels": [
+            "demo:best",
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/best-shipping/issues/13"
+        },
+        {
+          "id": "GH-12",
+          "gitea_number": 12,
+          "status": "OPEN",
+          "description": "[Best-shipping] Test full login \u2192 dashboard \u2192 shipment detail flow",
+          "priority": "P1",
+          "labels": [
+            "demo:best",
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/best-shipping/issues/12"
+        },
+        {
+          "id": "GH-11",
+          "gitea_number": 11,
+          "status": "OPEN",
+          "description": "[Best-shipping] Create demo walkthrough script for Cornell",
+          "priority": "P1",
+          "labels": [
+            "demo:best",
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/best-shipping/issues/11"
+        },
+        {
+          "id": "GH-10",
+          "gitea_number": 10,
+          "status": "OPEN",
+          "description": "[Best-shipping] Verify Vite allowedHosts for external access",
+          "priority": "P1",
+          "labels": [
+            "demo:best",
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/best-shipping/issues/10"
+        },
         {
           "id": "REQ-S009",
           "gitea_number": 9,
@@ -669,11 +1197,11 @@
       "deadline": null,
       "days_remaining": null,
       "totals": {
-        "open": 9,
+        "open": 40,
         "done": 0,
         "verified": 0,
         "blocked": 0,
-        "total": 9
+        "total": 40
       },
       "percent_complete": 0,
       "p0_status": {
@@ -681,6 +1209,409 @@
         "total": 0
       },
       "requirements": [
+        {
+          "id": "GH-40",
+          "gitea_number": 40,
+          "status": "OPEN",
+          "description": "[Premier-emr] DEMO_SCRIPT.md",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/40"
+        },
+        {
+          "id": "GH-39",
+          "gitea_number": 39,
+          "status": "OPEN",
+          "description": "[Premier-emr] DEPLOYMENT.md",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/39"
+        },
+        {
+          "id": "GH-38",
+          "gitea_number": 38,
+          "status": "OPEN",
+          "description": "[Premier-emr] ARCHITECTURE.md (detailed)",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/38"
+        },
+        {
+          "id": "GH-37",
+          "gitea_number": 37,
+          "status": "OPEN",
+          "description": "[Premier-emr] API.md (OpenAPI spec)",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/37"
+        },
+        {
+          "id": "GH-36",
+          "gitea_number": 36,
+          "status": "OPEN",
+          "description": "[Premier-emr] CI/CD pipeline setup",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/36"
+        },
+        {
+          "id": "GH-35",
+          "gitea_number": 35,
+          "status": "OPEN",
+          "description": "[Premier-emr] Add end-to-end tests",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/35"
+        },
+        {
+          "id": "GH-34",
+          "gitea_number": 34,
+          "status": "OPEN",
+          "description": "[Premier-emr] Database connection pooling optimization",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/34"
+        },
+        {
+          "id": "GH-33",
+          "gitea_number": 33,
+          "status": "OPEN",
+          "description": "[Premier-emr] Add API versioning strategy",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/33"
+        },
+        {
+          "id": "GH-32",
+          "gitea_number": 32,
+          "status": "OPEN",
+          "description": "[Premier-emr] Implement request rate limiting",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/32"
+        },
+        {
+          "id": "GH-31",
+          "gitea_number": 31,
+          "status": "OPEN",
+          "description": "[Premier-emr] Add comprehensive error handling throughout backend",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/31"
+        },
+        {
+          "id": "GH-30",
+          "gitea_number": 30,
+          "status": "OPEN",
+          "description": "[Premier-emr] Data sync conflict resolution",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/30"
+        },
+        {
+          "id": "GH-29",
+          "gitea_number": 29,
+          "status": "OPEN",
+          "description": "[Premier-emr] Offline appointment booking",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/29"
+        },
+        {
+          "id": "GH-28",
+          "gitea_number": 28,
+          "status": "OPEN",
+          "description": "[Premier-emr] Push notifications",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/28"
+        },
+        {
+          "id": "GH-27",
+          "gitea_number": 27,
+          "status": "OPEN",
+          "description": "[Premier-emr] Mobile-optimized clinical workflows",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/27"
+        },
+        {
+          "id": "GH-26",
+          "gitea_number": 26,
+          "status": "OPEN",
+          "description": "[Premier-emr] Offline data persistence",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/26"
+        },
+        {
+          "id": "GH-25",
+          "gitea_number": 25,
+          "status": "OPEN",
+          "description": "[Premier-emr] Progressive Web App (PWA) setup",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/25"
+        },
+        {
+          "id": "GH-24",
+          "gitea_number": 24,
+          "status": "OPEN",
+          "description": "[Premier-emr] Multi-currency support (BMD/USD)",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/24"
+        },
+        {
+          "id": "GH-23",
+          "gitea_number": 23,
+          "status": "OPEN",
+          "description": "[Premier-emr] Insurance verification",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/23"
+        },
+        {
+          "id": "GH-22",
+          "gitea_number": 22,
+          "status": "OPEN",
+          "description": "[Premier-emr] Pharmacy integration",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/22"
+        },
+        {
+          "id": "GH-21",
+          "gitea_number": 21,
+          "status": "OPEN",
+          "description": "[Premier-emr] Lab integration APIs",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/21"
+        },
+        {
+          "id": "GH-20",
+          "gitea_number": 20,
+          "status": "OPEN",
+          "description": "[Premier-emr] Basic billing module",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/20"
+        },
+        {
+          "id": "GH-19",
+          "gitea_number": 19,
+          "status": "OPEN",
+          "description": "[Premier-emr] HL7 FHIR compliance layer",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/19"
+        },
+        {
+          "id": "GH-18",
+          "gitea_number": 18,
+          "status": "OPEN",
+          "description": "[Premier-emr] Predictive analytics (no-show risk)",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/18"
+        },
+        {
+          "id": "GH-17",
+          "gitea_number": 17,
+          "status": "OPEN",
+          "description": "[Premier-emr] Provider productivity reports",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/17"
+        },
+        {
+          "id": "GH-16",
+          "gitea_number": 16,
+          "status": "OPEN",
+          "description": "[Premier-emr] Patient volume metrics",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/16"
+        },
+        {
+          "id": "GH-15",
+          "gitea_number": 15,
+          "status": "OPEN",
+          "description": "[Premier-emr] Recurring appointments",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/15"
+        },
+        {
+          "id": "GH-14",
+          "gitea_number": 14,
+          "status": "OPEN",
+          "description": "[Premier-emr] Multi-location support",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/14"
+        },
+        {
+          "id": "GH-13",
+          "gitea_number": 13,
+          "status": "OPEN",
+          "description": "[Premier-emr] SMS reminders integration",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/13"
+        },
+        {
+          "id": "GH-12",
+          "gitea_number": 12,
+          "status": "OPEN",
+          "description": "[Premier-emr] Appointment reminders (email)",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/12"
+        },
+        {
+          "id": "GH-11",
+          "gitea_number": 11,
+          "status": "OPEN",
+          "description": "[Premier-emr] Clinical decision support alerts",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/11"
+        },
+        {
+          "id": "GH-10",
+          "gitea_number": 10,
+          "status": "OPEN",
+          "description": "[Premier-emr] Unit tests setup",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/10"
+        },
         {
           "id": "REQ-E009",
           "gitea_number": 9,
@@ -772,18 +1703,285 @@
       "deadline": null,
       "days_remaining": null,
       "totals": {
-        "open": 0,
+        "open": 19,
         "done": 0,
         "verified": 0,
         "blocked": 0,
-        "total": 0
+        "total": 19
       },
       "percent_complete": 0,
       "p0_status": {
         "open": 0,
         "total": 0
       },
-      "requirements": [],
+      "requirements": [
+        {
+          "id": "GH-19",
+          "gitea_number": 19,
+          "status": "OPEN",
+          "description": "[Cortex] Morning visual dashboard (beyond email)",
+          "priority": "P1",
+          "labels": [
+            "agent:cortex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/cortex/issues/19"
+        },
+        {
+          "id": "GH-18",
+          "gitea_number": 18,
+          "status": "OPEN",
+          "description": "[Cortex] Monthly spend tracking and budget alerts",
+          "priority": "P1",
+          "labels": [
+            "agent:cortex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/cortex/issues/18"
+        },
+        {
+          "id": "GH-17",
+          "gitea_number": 17,
+          "status": "OPEN",
+          "description": "[Cortex] Local model deployment on Hyper-V (Ollama/Kimi)",
+          "priority": "P1",
+          "labels": [
+            "agent:cortex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/cortex/issues/17"
+        },
+        {
+          "id": "GH-16",
+          "gitea_number": 16,
+          "status": "OPEN",
+          "description": "[Cortex] Audit log shipping to central location",
+          "priority": "P1",
+          "labels": [
+            "agent:cortex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/cortex/issues/16"
+        },
+        {
+          "id": "GH-15",
+          "gitea_number": 15,
+          "status": "OPEN",
+          "description": "[Cortex] Rate limiting on all agent API endpoints",
+          "priority": "P1",
+          "labels": [
+            "agent:cortex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/cortex/issues/15"
+        },
+        {
+          "id": "GH-14",
+          "gitea_number": 14,
+          "status": "OPEN",
+          "description": "[Cortex] Network segmentation review",
+          "priority": "P1",
+          "labels": [
+            "agent:cortex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/cortex/issues/14"
+        },
+        {
+          "id": "GH-13",
+          "gitea_number": 13,
+          "status": "OPEN",
+          "description": "[Cortex] API key rotation strategy (90-day cycle)",
+          "priority": "P1",
+          "labels": [
+            "agent:cortex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/cortex/issues/13"
+        },
+        {
+          "id": "GH-12",
+          "gitea_number": 12,
+          "status": "OPEN",
+          "description": "[Cortex] Capacity trending (7-day rolling average for predictions)",
+          "priority": "P1",
+          "labels": [
+            "agent:cortex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/cortex/issues/12"
+        },
+        {
+          "id": "GH-11",
+          "gitea_number": 11,
+          "status": "OPEN",
+          "description": "[Cortex] Incident memory (SQLite) \u2014 remember past incidents for pattern matching",
+          "priority": "P1",
+          "labels": [
+            "agent:cortex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/cortex/issues/11"
+        },
+        {
+          "id": "GH-10",
+          "gitea_number": 10,
+          "status": "OPEN",
+          "description": "[Cortex] Expand knowledge base: 4/17 files deployed (~23% coverage)",
+          "priority": "P1",
+          "labels": [
+            "agent:cortex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/cortex/issues/10"
+        },
+        {
+          "id": "GH-9",
+          "gitea_number": 9,
+          "status": "OPEN",
+          "description": "[Cortex] Cross-agent correlation engine (real-time, not just hourly)",
+          "priority": "P1",
+          "labels": [
+            "agent:cortex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/cortex/issues/9"
+        },
+        {
+          "id": "GH-8",
+          "gitea_number": 8,
+          "status": "OPEN",
+          "description": "[Cortex] Add cost logging to all agent API calls",
+          "priority": "P1",
+          "labels": [
+            "agent:cortex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/cortex/issues/8"
+        },
+        {
+          "id": "GH-7",
+          "gitea_number": 7,
+          "status": "OPEN",
+          "description": "[Cortex] Install ChromaDB for vector memory / incident history",
+          "priority": "P1",
+          "labels": [
+            "agent:cortex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/cortex/issues/7"
+        },
+        {
+          "id": "GH-6",
+          "gitea_number": 6,
+          "status": "OPEN",
+          "description": "[Cortex] Build model router API using lib/providers (AI Spend Phase 2)",
+          "priority": "P1",
+          "labels": [
+            "agent:cortex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/cortex/issues/6"
+        },
+        {
+          "id": "GH-5",
+          "gitea_number": 5,
+          "status": "OPEN",
+          "description": "[Cortex] Integrate lib/ modules into runtime (consensus, usage_tracker, providers)",
+          "priority": "P1",
+          "labels": [
+            "agent:cortex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/cortex/issues/5"
+        },
+        {
+          "id": "GH-4",
+          "gitea_number": 4,
+          "status": "OPEN",
+          "description": "[Cortex] Action1 API 403 (needs admin to grant endpoint permissions)",
+          "priority": "P1",
+          "labels": [
+            "agent:cortex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/cortex/issues/4"
+        },
+        {
+          "id": "GH-3",
+          "gitea_number": 3,
+          "status": "OPEN",
+          "description": "[Cortex] Graph API 403 on user resolution (needs Azure AD admin to grant User.Read.All)",
+          "priority": "P1",
+          "labels": [
+            "agent:cortex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/cortex/issues/3"
+        },
+        {
+          "id": "GH-2",
+          "gitea_number": 2,
+          "status": "OPEN",
+          "description": "[Cortex] Azure messaging endpoint: https://cortexbot.rize.bm/api/messages (needs Azure Portal)",
+          "priority": "P1",
+          "labels": [
+            "agent:cortex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/cortex/issues/2"
+        },
+        {
+          "id": "GH-1",
+          "gitea_number": 1,
+          "status": "OPEN",
+          "description": "[Cortex] Cloudflare tunnel entry for cortexbot.rize.bm (DNS resolves, tunnel not configured in dashboard)",
+          "priority": "P1",
+          "labels": [
+            "agent:cortex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/cortex/issues/1"
+        }
+      ],
       "source": "gitea"
     },
     {
@@ -793,18 +1991,145 @@
       "deadline": null,
       "days_remaining": null,
       "totals": {
-        "open": 0,
+        "open": 9,
         "done": 0,
         "verified": 0,
         "blocked": 0,
-        "total": 0
+        "total": 9
       },
       "percent_complete": 0,
       "p0_status": {
         "open": 0,
         "total": 0
       },
-      "requirements": [],
+      "requirements": [
+        {
+          "id": "GH-9",
+          "gitea_number": 9,
+          "status": "OPEN",
+          "description": "[David-bishop] Add contract renewal alerts from CRM",
+          "priority": "P1",
+          "labels": [
+            "agent:david",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/david-bishop/issues/9"
+        },
+        {
+          "id": "GH-8",
+          "gitea_number": 8,
+          "status": "OPEN",
+          "description": "[David-bishop] Create weekly pipeline report with delta analysis",
+          "priority": "P1",
+          "labels": [
+            "agent:david",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/david-bishop/issues/8"
+        },
+        {
+          "id": "GH-7",
+          "gitea_number": 7,
+          "status": "OPEN",
+          "description": "[David-bishop] Build customer meeting prep summaries",
+          "priority": "P1",
+          "labels": [
+            "agent:david",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/david-bishop/issues/7"
+        },
+        {
+          "id": "GH-6",
+          "gitea_number": 6,
+          "status": "OPEN",
+          "description": "[David-bishop] Add automated follow-up reminders for stale deals",
+          "priority": "P1",
+          "labels": [
+            "agent:david",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/david-bishop/issues/6"
+        },
+        {
+          "id": "GH-5",
+          "gitea_number": 5,
+          "status": "OPEN",
+          "description": "[David-bishop] Integrate with Halo PSA for ticket-aware responses",
+          "priority": "P1",
+          "labels": [
+            "agent:david",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/david-bishop/issues/5"
+        },
+        {
+          "id": "GH-4",
+          "gitea_number": 4,
+          "status": "OPEN",
+          "description": "[David-bishop] Implement quote generation from templates",
+          "priority": "P1",
+          "labels": [
+            "agent:david",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/david-bishop/issues/4"
+        },
+        {
+          "id": "GH-3",
+          "gitea_number": 3,
+          "status": "OPEN",
+          "description": "[David-bishop] Add Teams channel message posting",
+          "priority": "P1",
+          "labels": [
+            "agent:david",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/david-bishop/issues/3"
+        },
+        {
+          "id": "GH-2",
+          "gitea_number": 2,
+          "status": "OPEN",
+          "description": "[David-bishop] Improve opportunity scraping reliability",
+          "priority": "P1",
+          "labels": [
+            "agent:david",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/david-bishop/issues/2"
+        },
+        {
+          "id": "GH-1",
+          "gitea_number": 1,
+          "status": "OPEN",
+          "description": "[David-bishop] Add sentiment analysis to email responses",
+          "priority": "P1",
+          "labels": [
+            "agent:david",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/david-bishop/issues/1"
+        }
+      ],
       "source": "gitea"
     },
     {
@@ -814,18 +2139,593 @@
       "deadline": null,
       "days_remaining": null,
       "totals": {
-        "open": 0,
+        "open": 41,
         "done": 0,
         "verified": 0,
         "blocked": 0,
-        "total": 0
+        "total": 41
       },
       "percent_complete": 0,
       "p0_status": {
         "open": 0,
         "total": 0
       },
-      "requirements": [],
+      "requirements": [
+        {
+          "id": "GH-41",
+          "gitea_number": 41,
+          "status": "OPEN",
+          "description": "[Apex] Webhook alerts for zero-logging Core 5 members",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/41"
+        },
+        {
+          "id": "GH-40",
+          "gitea_number": 40,
+          "status": "OPEN",
+          "description": "[Apex] Add authentication (API key or JWT)",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/40"
+        },
+        {
+          "id": "GH-39",
+          "gitea_number": 39,
+          "status": "OPEN",
+          "description": "[Apex] Add cron schedule for standalone time report",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/39"
+        },
+        {
+          "id": "GH-38",
+          "gitea_number": 38,
+          "status": "OPEN",
+          "description": "[Apex] Integrate get_report_section() into financial-digest.py",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/38"
+        },
+        {
+          "id": "GH-37",
+          "gitea_number": 37,
+          "status": "OPEN",
+          "description": "[Apex] Quarterly human review process",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/37"
+        },
+        {
+          "id": "GH-36",
+          "gitea_number": 36,
+          "status": "OPEN",
+          "description": "[Apex] Continuous Sentinel audit integration",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/36"
+        },
+        {
+          "id": "GH-35",
+          "gitea_number": 35,
+          "status": "OPEN",
+          "description": "[Apex] Cash flow forecasting",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/35"
+        },
+        {
+          "id": "GH-34",
+          "gitea_number": 34,
+          "status": "OPEN",
+          "description": "[Apex] Standard billing corrections",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/34"
+        },
+        {
+          "id": "GH-33",
+          "gitea_number": 33,
+          "status": "OPEN",
+          "description": "[Apex] Payment reminder sequences",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/33"
+        },
+        {
+          "id": "GH-32",
+          "gitea_number": 32,
+          "status": "OPEN",
+          "description": "[Apex] Automated recurring invoice generation",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/32"
+        },
+        {
+          "id": "GH-31",
+          "gitea_number": 31,
+          "status": "OPEN",
+          "description": "[Apex] Test rollback capability",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/31"
+        },
+        {
+          "id": "GH-30",
+          "gitea_number": 30,
+          "status": "OPEN",
+          "description": "[Apex] Project milestone billing drafts",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/30"
+        },
+        {
+          "id": "GH-29",
+          "gitea_number": 29,
+          "status": "OPEN",
+          "description": "[Apex] Unbilled hours \u2192 invoice suggestions",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/29"
+        },
+        {
+          "id": "GH-28",
+          "gitea_number": 28,
+          "status": "OPEN",
+          "description": "[Apex] Generate draft invoices for CEO review",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/28"
+        },
+        {
+          "id": "GH-27",
+          "gitea_number": 27,
+          "status": "OPEN",
+          "description": "[Apex] Contract renewal recommendations",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/27"
+        },
+        {
+          "id": "GH-26",
+          "gitea_number": 26,
+          "status": "OPEN",
+          "description": "[Apex] AI-powered anomaly detection in timesheets",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/26"
+        },
+        {
+          "id": "GH-25",
+          "gitea_number": 25,
+          "status": "OPEN",
+          "description": "[Apex] Proactive alerts for revenue risks",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/25"
+        },
+        {
+          "id": "GH-24",
+          "gitea_number": 24,
+          "status": "OPEN",
+          "description": "[Apex] Suggest AYCE repricing when consumption exceeds plan",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/24"
+        },
+        {
+          "id": "GH-23",
+          "gitea_number": 23,
+          "status": "OPEN",
+          "description": "[Apex] Flag unbilled hours for invoicing suggestions",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/23"
+        },
+        {
+          "id": "GH-22",
+          "gitea_number": 22,
+          "status": "OPEN",
+          "description": "[Apex] Recommend billing corrections",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/22"
+        },
+        {
+          "id": "GH-21",
+          "gitea_number": 21,
+          "status": "OPEN",
+          "description": "[Apex] Document accuracy metrics in AUDIT-LOG.md",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/21"
+        },
+        {
+          "id": "GH-20",
+          "gitea_number": 20,
+          "status": "OPEN",
+          "description": "[Apex] Confirm no false positives for 2 weeks",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/20"
+        },
+        {
+          "id": "GH-19",
+          "gitea_number": 19,
+          "status": "OPEN",
+          "description": "[Apex] Bot Framework reply flow for Teams responses",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/19"
+        },
+        {
+          "id": "GH-18",
+          "gitea_number": 18,
+          "status": "OPEN",
+          "description": "[Apex] Verify reports contain live data",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/18"
+        },
+        {
+          "id": "GH-17",
+          "gitea_number": 17,
+          "status": "OPEN",
+          "description": "[Apex] Enable weekly report Monday 07:00 UTC",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/17"
+        },
+        {
+          "id": "GH-16",
+          "gitea_number": 16,
+          "status": "OPEN",
+          "description": "[Apex] Enable daily digest at 07:00 UTC (3:00 AM ADT)",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/16"
+        },
+        {
+          "id": "GH-15",
+          "gitea_number": 15,
+          "status": "OPEN",
+          "description": "[Apex] Historical trend analysis with 6+ months data",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/15"
+        },
+        {
+          "id": "GH-14",
+          "gitea_number": 14,
+          "status": "OPEN",
+          "description": "[Apex] Validate leakage detection vs Mary's manual reconciliation",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/14"
+        },
+        {
+          "id": "GH-13",
+          "gitea_number": 13,
+          "status": "OPEN",
+          "description": "[Apex] Connect billing classifier to live data",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/13"
+        },
+        {
+          "id": "GH-12",
+          "gitea_number": 12,
+          "status": "OPEN",
+          "description": "[Apex] Test agent utilization data",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/12"
+        },
+        {
+          "id": "GH-11",
+          "gitea_number": 11,
+          "status": "OPEN",
+          "description": "[Apex] Test live client contracts",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/11"
+        },
+        {
+          "id": "GH-10",
+          "gitea_number": 10,
+          "status": "OPEN",
+          "description": "[Apex] Test live ticket details",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/10"
+        },
+        {
+          "id": "GH-9",
+          "gitea_number": 9,
+          "status": "OPEN",
+          "description": "[Apex] Test live timesheet entries",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/9"
+        },
+        {
+          "id": "GH-8",
+          "gitea_number": 8,
+          "status": "OPEN",
+          "description": "[Apex] Verify client_secret in .env works",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/8"
+        },
+        {
+          "id": "GH-7",
+          "gitea_number": 7,
+          "status": "OPEN",
+          "description": "[Apex] Test bank transactions (for cash flow)",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/7"
+        },
+        {
+          "id": "GH-6",
+          "gitea_number": 6,
+          "status": "OPEN",
+          "description": "[Apex] Test live contact/client sync",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/6"
+        },
+        {
+          "id": "GH-5",
+          "gitea_number": 5,
+          "status": "OPEN",
+          "description": "[Apex] Test live invoice listing (all statuses)",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/5"
+        },
+        {
+          "id": "GH-4",
+          "gitea_number": 4,
+          "status": "OPEN",
+          "description": "[Apex] Test live P&L reports",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/4"
+        },
+        {
+          "id": "GH-3",
+          "gitea_number": 3,
+          "status": "OPEN",
+          "description": "[Apex] Test token refresh cycle",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/3"
+        },
+        {
+          "id": "GH-2",
+          "gitea_number": 2,
+          "status": "OPEN",
+          "description": "[Apex] Store refresh token securely",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/2"
+        },
+        {
+          "id": "GH-1",
+          "gitea_number": 1,
+          "status": "OPEN",
+          "description": "[Apex] Complete Xero OAuth flow (exchange authorization code for tokens)",
+          "priority": "P1",
+          "labels": [
+            "agent:apex",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/apex/issues/1"
+        }
+      ],
       "source": "gitea"
     },
     {
@@ -835,18 +2735,495 @@
       "deadline": null,
       "days_remaining": null,
       "totals": {
-        "open": 0,
+        "open": 34,
         "done": 0,
         "verified": 0,
         "blocked": 0,
-        "total": 0
+        "total": 34
       },
       "percent_complete": 0,
       "p0_status": {
         "open": 0,
         "total": 0
       },
-      "requirements": [],
+      "requirements": [
+        {
+          "id": "GH-34",
+          "gitea_number": 34,
+          "status": "OPEN",
+          "description": "[Aegis] Escalation to Cortex for persistent non-compliance",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/34"
+        },
+        {
+          "id": "GH-33",
+          "gitea_number": 33,
+          "status": "OPEN",
+          "description": "[Aegis] Email alerts to managers for critical violations",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:high",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/33"
+        },
+        {
+          "id": "GH-32",
+          "gitea_number": 32,
+          "status": "OPEN",
+          "description": "[Aegis] Add cron: run at 4 PM AST (20:00 UTC) daily for zero-hour check",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/32"
+        },
+        {
+          "id": "GH-31",
+          "gitea_number": 31,
+          "status": "OPEN",
+          "description": "[Aegis] Daily compliance email to managers",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/31"
+        },
+        {
+          "id": "GH-30",
+          "gitea_number": 30,
+          "status": "OPEN",
+          "description": "[Aegis] Add cron schedule for standalone time report",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/30"
+        },
+        {
+          "id": "GH-29",
+          "gitea_number": 29,
+          "status": "OPEN",
+          "description": "[Aegis] Integrate get_report_section() into morning-briefing.py",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/29"
+        },
+        {
+          "id": "GH-28",
+          "gitea_number": 28,
+          "status": "OPEN",
+          "description": "[Aegis] Quarterly human review process",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/28"
+        },
+        {
+          "id": "GH-27",
+          "gitea_number": 27,
+          "status": "OPEN",
+          "description": "[Aegis] Continuous Sentinel audit integration",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/27"
+        },
+        {
+          "id": "GH-26",
+          "gitea_number": 26,
+          "status": "OPEN",
+          "description": "[Aegis] Auto-schedule routine patches",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/26"
+        },
+        {
+          "id": "GH-25",
+          "gitea_number": 25,
+          "status": "OPEN",
+          "description": "[Aegis] Auto-create tickets for known patterns",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/25"
+        },
+        {
+          "id": "GH-24",
+          "gitea_number": 24,
+          "status": "OPEN",
+          "description": "[Aegis] Auto-acknowledge specific alert types",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/24"
+        },
+        {
+          "id": "GH-23",
+          "gitea_number": 23,
+          "status": "OPEN",
+          "description": "[Aegis] Test rollback capability",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/23"
+        },
+        {
+          "id": "GH-22",
+          "gitea_number": 22,
+          "status": "OPEN",
+          "description": "[Aegis] Schedule patch deployments (with approval)",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/22"
+        },
+        {
+          "id": "GH-21",
+          "gitea_number": 21,
+          "status": "OPEN",
+          "description": "[Aegis] Create Halo tickets from correlation data (with approval)",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/21"
+        },
+        {
+          "id": "GH-20",
+          "gitea_number": 20,
+          "status": "OPEN",
+          "description": "[Aegis] Acknowledge low-priority PRTG alerts (with approval)",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/20"
+        },
+        {
+          "id": "GH-19",
+          "gitea_number": 19,
+          "status": "OPEN",
+          "description": "[Aegis] Customer health scoring based on alert frequency",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/19"
+        },
+        {
+          "id": "GH-18",
+          "gitea_number": 18,
+          "status": "OPEN",
+          "description": "[Aegis] Anomaly detection for unusual patterns",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/18"
+        },
+        {
+          "id": "GH-17",
+          "gitea_number": 17,
+          "status": "OPEN",
+          "description": "[Aegis] Historical trend analysis and reporting",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/17"
+        },
+        {
+          "id": "GH-16",
+          "gitea_number": 16,
+          "status": "OPEN",
+          "description": "[Aegis] Proactive infrastructure risk alerts",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/16"
+        },
+        {
+          "id": "GH-15",
+          "gitea_number": 15,
+          "status": "OPEN",
+          "description": "[Aegis] Suggest remediation steps for recurring issues",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/15"
+        },
+        {
+          "id": "GH-14",
+          "gitea_number": 14,
+          "status": "OPEN",
+          "description": "[Aegis] Recommend ticket responses based on alert patterns",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/14"
+        },
+        {
+          "id": "GH-13",
+          "gitea_number": 13,
+          "status": "OPEN",
+          "description": "[Aegis] Document accuracy metrics in AUDIT-LOG.md",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/13"
+        },
+        {
+          "id": "GH-12",
+          "gitea_number": 12,
+          "status": "OPEN",
+          "description": "[Aegis] Confirm no false positives for 2 weeks",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/12"
+        },
+        {
+          "id": "GH-11",
+          "gitea_number": 11,
+          "status": "OPEN",
+          "description": "[Aegis] Validate correlation accuracy vs Ibrahim's manual triage",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/11"
+        },
+        {
+          "id": "GH-10",
+          "gitea_number": 10,
+          "status": "OPEN",
+          "description": "[Aegis] Bot Framework reply flow for Teams responses",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/10"
+        },
+        {
+          "id": "GH-9",
+          "gitea_number": 9,
+          "status": "OPEN",
+          "description": "[Aegis] Weekly compliance report Monday 07:00 UTC",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/9"
+        },
+        {
+          "id": "GH-8",
+          "gitea_number": 8,
+          "status": "OPEN",
+          "description": "[Aegis] Daily briefing at 07:00 UTC (3:00 AM ADT)",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/8"
+        },
+        {
+          "id": "GH-7",
+          "gitea_number": 7,
+          "status": "OPEN",
+          "description": "[Aegis] Software license renewal tracking",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/7"
+        },
+        {
+          "id": "GH-6",
+          "gitea_number": 6,
+          "status": "OPEN",
+          "description": "[Aegis] Domain registration expiration tracking",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/6"
+        },
+        {
+          "id": "GH-5",
+          "gitea_number": 5,
+          "status": "OPEN",
+          "description": "[Aegis] SSL certificate expiration monitoring",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/5"
+        },
+        {
+          "id": "GH-4",
+          "gitea_number": 4,
+          "status": "OPEN",
+          "description": "[Aegis] Build asset tracker (SSL certs, domains, licenses)",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/4"
+        },
+        {
+          "id": "GH-3",
+          "gitea_number": 3,
+          "status": "OPEN",
+          "description": "[Aegis] Connect to live Halo PSA (verify OAuth)",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/3"
+        },
+        {
+          "id": "GH-2",
+          "gitea_number": 2,
+          "status": "OPEN",
+          "description": "[Aegis] Connect to live Action1 (verify API key)",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/2"
+        },
+        {
+          "id": "GH-1",
+          "gitea_number": 1,
+          "status": "OPEN",
+          "description": "[Aegis] Connect to live PRTG (verify passhash works)",
+          "priority": "P1",
+          "labels": [
+            "agent:aegis",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/aegis/issues/1"
+        }
+      ],
       "source": "gitea"
     },
     {
@@ -856,18 +3233,565 @@
       "deadline": null,
       "days_remaining": null,
       "totals": {
-        "open": 0,
+        "open": 42,
         "done": 0,
         "verified": 0,
         "blocked": 0,
-        "total": 0
+        "total": 42
       },
       "percent_complete": 0,
       "p0_status": {
         "open": 0,
         "total": 0
       },
-      "requirements": [],
+      "requirements": [
+        {
+          "id": "GH-42",
+          "gitea_number": 42,
+          "status": "OPEN",
+          "description": "[Talos] Nexus/Property-Rize/Dockyard have no Gitea repos (items go to rize/infrastructure)",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/42"
+        },
+        {
+          "id": "GH-41",
+          "gitea_number": 41,
+          "status": "OPEN",
+          "description": "[Talos] Sentinel TODO.md missing on .241 (needs creation)",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/41"
+        },
+        {
+          "id": "GH-40",
+          "gitea_number": 40,
+          "status": "OPEN",
+          "description": "[Talos] Consolidate all 3 services into a single process (optional)",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/40"
+        },
+        {
+          "id": "GH-39",
+          "gitea_number": 39,
+          "status": "OPEN",
+          "description": "[Talos] Add health check endpoint (/health) to all services",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/39"
+        },
+        {
+          "id": "GH-38",
+          "gitea_number": 38,
+          "status": "OPEN",
+          "description": "[Talos] Move from tmux-managed ttyd to systemd user service",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/38"
+        },
+        {
+          "id": "GH-37",
+          "gitea_number": 37,
+          "status": "OPEN",
+          "description": "[Talos] Replace raw HTTPServer with FastAPI for Drop + Dashboard (API endpoints, WebSocket)",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/37"
+        },
+        {
+          "id": "GH-36",
+          "gitea_number": 36,
+          "status": "OPEN",
+          "description": "[Talos] No HTTPS between cloudflared and local services (localhost only, acceptable)",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/36"
+        },
+        {
+          "id": "GH-35",
+          "gitea_number": 35,
+          "status": "OPEN",
+          "description": "[Talos] Ctrl shortcuts may conflict with terminal keybindings",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/35"
+        },
+        {
+          "id": "GH-34",
+          "gitea_number": 34,
+          "status": "OPEN",
+          "description": "[Talos] Cloudflare Access may require separate auth per iframe subdomain",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/34"
+        },
+        {
+          "id": "GH-33",
+          "gitea_number": 33,
+          "status": "OPEN",
+          "description": "[Talos] ttyd `login` prompt from system service \u2014 must disable default ttyd.service",
+          "priority": "P1",
+          "labels": [
+            "priority:high",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/33"
+        },
+        {
+          "id": "GH-32",
+          "gitea_number": 32,
+          "status": "OPEN",
+          "description": "[Talos] **Tunnel manager** \u2014 view/add/remove cloudflared routes from UI",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/32"
+        },
+        {
+          "id": "GH-31",
+          "gitea_number": 31,
+          "status": "OPEN",
+          "description": "[Talos] **Unified log viewer** \u2014 tail logs from any server in the dashboard",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/31"
+        },
+        {
+          "id": "GH-30",
+          "gitea_number": 30,
+          "status": "OPEN",
+          "description": "[Talos] **File distribution** \u2014 upload once, deploy to selected servers",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/30"
+        },
+        {
+          "id": "GH-29",
+          "gitea_number": 29,
+          "status": "OPEN",
+          "description": "[Talos] **Broadcast mode** \u2014 type once, execute on multiple servers",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/29"
+        },
+        {
+          "id": "GH-28",
+          "gitea_number": 28,
+          "status": "OPEN",
+          "description": "[Talos] **Server tabs** \u2014 open terminals to multiple servers simultaneously",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/28"
+        },
+        {
+          "id": "GH-27",
+          "gitea_number": 27,
+          "status": "OPEN",
+          "description": "[Talos] **Audit log** \u2014 track all uploads, commands, and file changes",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/27"
+        },
+        {
+          "id": "GH-26",
+          "gitea_number": 26,
+          "status": "OPEN",
+          "description": "[Talos] **Webhook receiver** \u2014 POST endpoint that accepts files from CI/CD, scripts, agents",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/26"
+        },
+        {
+          "id": "GH-25",
+          "gitea_number": 25,
+          "status": "OPEN",
+          "description": "[Talos] **Clipboard bridge** \u2014 two-way clipboard sync between browser and terminal",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/25"
+        },
+        {
+          "id": "GH-24",
+          "gitea_number": 24,
+          "status": "OPEN",
+          "description": "[Talos] **Diff viewer** \u2014 compare two uploaded files side by side",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/24"
+        },
+        {
+          "id": "GH-23",
+          "gitea_number": 23,
+          "status": "OPEN",
+          "description": "[Talos] **Task queue** \u2014 queue bash commands to run sequentially on any server",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/23"
+        },
+        {
+          "id": "GH-22",
+          "gitea_number": 22,
+          "status": "OPEN",
+          "description": "[Talos] **Command palette** \u2014 Ctrl+K search across snippets, servers, recent uploads",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/22"
+        },
+        {
+          "id": "GH-21",
+          "gitea_number": 21,
+          "status": "OPEN",
+          "description": "[Talos] **Snippet library** \u2014 save frequently used code blocks with tags (one-click paste to terminal)",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/21"
+        },
+        {
+          "id": "GH-20",
+          "gitea_number": 20,
+          "status": "OPEN",
+          "description": "[Talos] **tmux session manager** \u2014 list/attach/kill tmux sessions from the UI",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/20"
+        },
+        {
+          "id": "GH-19",
+          "gitea_number": 19,
+          "status": "OPEN",
+          "description": "[Talos] **Cron monitor** \u2014 last-run status of all cron jobs across servers",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/19"
+        },
+        {
+          "id": "GH-18",
+          "gitea_number": 18,
+          "status": "OPEN",
+          "description": "[Talos] **Git status panel** \u2014 show dirty repos across fleet",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/18"
+        },
+        {
+          "id": "GH-17",
+          "gitea_number": 17,
+          "status": "OPEN",
+          "description": "[Talos] **Claude Code output viewer** \u2014 tail Claude Code session logs in a third pane",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/17"
+        },
+        {
+          "id": "GH-16",
+          "gitea_number": 16,
+          "status": "OPEN",
+          "description": "[Talos] **PRTG mini-alerts** \u2014 pull recent PRTG alerts into a notification badge",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/16"
+        },
+        {
+          "id": "GH-15",
+          "gitea_number": 15,
+          "status": "OPEN",
+          "description": "[Talos] **Agent heartbeat display** \u2014 show David/Apex/Aegis status in header",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/15"
+        },
+        {
+          "id": "GH-14",
+          "gitea_number": 14,
+          "status": "OPEN",
+          "description": "[Talos] **Homebase widget** \u2014 embed mini server status from homebase.rize.bm API",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/14"
+        },
+        {
+          "id": "GH-13",
+          "gitea_number": 13,
+          "status": "OPEN",
+          "description": "[Talos] **Mobile responsive** \u2014 stack panes vertically on small screens (partially done)",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/13"
+        },
+        {
+          "id": "GH-12",
+          "gitea_number": 12,
+          "status": "OPEN",
+          "description": "[Talos] **Session persistence** \u2014 remember split ratio and active view in localStorage",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/12"
+        },
+        {
+          "id": "GH-11",
+          "gitea_number": 11,
+          "status": "OPEN",
+          "description": "[Talos] **Multi-file paste** \u2014 split pasted content into multiple files using `---filename.py---` markers",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/11"
+        },
+        {
+          "id": "GH-10",
+          "gitea_number": 10,
+          "status": "OPEN",
+          "description": "[Talos] **Talos Drop: edit mode** \u2014 open/edit existing files from ~/uploads in the browser",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/10"
+        },
+        {
+          "id": "GH-9",
+          "gitea_number": 9,
+          "status": "OPEN",
+          "description": "[Talos] **Talos Drop: syntax highlighting** \u2014 detect language from filename, show preview before save",
+          "priority": "P1",
+          "labels": [
+            "priority:high",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/9"
+        },
+        {
+          "id": "GH-8",
+          "gitea_number": 8,
+          "status": "OPEN",
+          "description": "[Talos] Talos: Upgrade pyOpenSSL (needs sudo)",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/8"
+        },
+        {
+          "id": "GH-7",
+          "gitea_number": 7,
+          "status": "OPEN",
+          "description": "[Talos] Action1: Admin needs to grant endpoint/patch permissions",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/7"
+        },
+        {
+          "id": "GH-6",
+          "gitea_number": 6,
+          "status": "OPEN",
+          "description": "[Talos] Teams Admin Center: Add 4 new bots to org so staff can discover them",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/6"
+        },
+        {
+          "id": "GH-5",
+          "gitea_number": 5,
+          "status": "OPEN",
+          "description": "[Talos] Azure Portal: Enable MS Teams channel for Cortex, Apex, Aegis, Sentinel bots",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/5"
+        },
+        {
+          "id": "GH-4",
+          "gitea_number": 4,
+          "status": "OPEN",
+          "description": "[Talos] Azure Portal: Set messaging endpoints for 4 new bots (https://{name}bot.rize.bm/api/messages)",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/4"
+        },
+        {
+          "id": "GH-3",
+          "gitea_number": 3,
+          "status": "OPEN",
+          "description": "[Talos] Cloudflare DNS: Create CNAME records for 4 new bot hostnames \u2192 tunnel UUID",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/3"
+        },
+        {
+          "id": "GH-2",
+          "gitea_number": 2,
+          "status": "OPEN",
+          "description": "[Talos] Cloudflare Dashboard: Add tunnel entries for cortexbot/apexbot/aegisbot/sentinelbot.rize.bm",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/2"
+        },
+        {
+          "id": "GH-1",
+          "gitea_number": 1,
+          "status": "OPEN",
+          "description": "[Talos] pyOpenSSL: Talos still at 23.2.0 (needs sudo)",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:237",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/talos/issues/1"
+        }
+      ],
       "source": "gitea"
     },
     {
@@ -877,11 +3801,11 @@
       "deadline": null,
       "days_remaining": null,
       "totals": {
-        "open": 2,
+        "open": 32,
         "done": 0,
         "verified": 0,
         "blocked": 0,
-        "total": 2
+        "total": 32
       },
       "percent_complete": 0,
       "p0_status": {
@@ -889,6 +3813,396 @@
         "total": 0
       },
       "requirements": [
+        {
+          "id": "GH-32",
+          "gitea_number": 32,
+          "status": "OPEN",
+          "description": "[Vector] Billing/Invoicing Module",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:249",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/32"
+        },
+        {
+          "id": "GH-31",
+          "gitea_number": 31,
+          "status": "OPEN",
+          "description": "[Vector] Real-time WebSocket Updates",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:249",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/31"
+        },
+        {
+          "id": "GH-30",
+          "gitea_number": 30,
+          "status": "OPEN",
+          "description": "[Vector] ForeFlight API",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:249",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/30"
+        },
+        {
+          "id": "GH-29",
+          "gitea_number": 29,
+          "status": "OPEN",
+          "description": "[Vector] HL7/FHIR Integration (healthcare interoperability)",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:249",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/29"
+        },
+        {
+          "id": "GH-28",
+          "gitea_number": 28,
+          "status": "OPEN",
+          "description": "[Vector] NEMSIS v3.5 Compliance (US EMS reporting standard)",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:249",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/28"
+        },
+        {
+          "id": "GH-27",
+          "gitea_number": 27,
+          "status": "OPEN",
+          "description": "[Vector] Dark Mode for Pilots",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:249",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/27"
+        },
+        {
+          "id": "GH-26",
+          "gitea_number": 26,
+          "status": "OPEN",
+          "description": "[Vector] Push Notifications",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:249",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/26"
+        },
+        {
+          "id": "GH-25",
+          "gitea_number": 25,
+          "status": "OPEN",
+          "description": "[Vector] Satellite Tracking for over-ocean flights",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:249",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/25"
+        },
+        {
+          "id": "GH-24",
+          "gitea_number": 24,
+          "status": "OPEN",
+          "description": "[Vector] Timeline-based ePCR (electronic Patient Care Report)",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:249",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/24"
+        },
+        {
+          "id": "GH-23",
+          "gitea_number": 23,
+          "status": "OPEN",
+          "description": "[Vector] Availability conflicts detection",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:249",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/23"
+        },
+        {
+          "id": "GH-22",
+          "gitea_number": 22,
+          "status": "OPEN",
+          "description": "[Vector] On-call rotation management",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:249",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/22"
+        },
+        {
+          "id": "GH-21",
+          "gitea_number": 21,
+          "status": "OPEN",
+          "description": "[Vector] Shift scheduling interface",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:249",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/21"
+        },
+        {
+          "id": "GH-20",
+          "gitea_number": 20,
+          "status": "OPEN",
+          "description": "[Vector] 24/7 coverage scheduling (2 pilots, 1-2 nurses, 1 paramedic, office staff)",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:249",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/20"
+        },
+        {
+          "id": "GH-19",
+          "gitea_number": 19,
+          "status": "OPEN",
+          "description": "[Vector] Invoice generation",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:249",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/19"
+        },
+        {
+          "id": "GH-18",
+          "gitea_number": 18,
+          "status": "OPEN",
+          "description": "[Vector] Bank transfer support",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:249",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/18"
+        },
+        {
+          "id": "GH-17",
+          "gitea_number": 17,
+          "status": "OPEN",
+          "description": "[Vector] Credit card processing integration",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:249",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/17"
+        },
+        {
+          "id": "GH-16",
+          "gitea_number": 16,
+          "status": "OPEN",
+          "description": "[Vector] Authorization obtained on patient's behalf",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:249",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/16"
+        },
+        {
+          "id": "GH-15",
+          "gitea_number": 15,
+          "status": "OPEN",
+          "description": "[Vector] Insurance pre-authorization workflow",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:249",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/15"
+        },
+        {
+          "id": "GH-14",
+          "gitea_number": 14,
+          "status": "OPEN",
+          "description": "[Vector] Push notifications to case stakeholders",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:249",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/14"
+        },
+        {
+          "id": "GH-13",
+          "gitea_number": 13,
+          "status": "OPEN",
+          "description": "[Vector] Automated takeoff and landing alerts",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:249",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/13"
+        },
+        {
+          "id": "GH-12",
+          "gitea_number": 12,
+          "status": "OPEN",
+          "description": "[Vector] Assign tail number to patient case",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:249",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/12"
+        },
+        {
+          "id": "GH-11",
+          "gitea_number": 11,
+          "status": "OPEN",
+          "description": "[Vector] FlightAware API integration (official, not scraper)",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:249",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/11"
+        },
+        {
+          "id": "GH-10",
+          "gitea_number": 10,
+          "status": "OPEN",
+          "description": "[Vector] Secure access for field staff",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:249",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/10"
+        },
+        {
+          "id": "GH-9",
+          "gitea_number": 9,
+          "status": "OPEN",
+          "description": "[Vector] Sync when reconnected",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:249",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/9"
+        },
+        {
+          "id": "GH-8",
+          "gitea_number": 8,
+          "status": "OPEN",
+          "description": "[Vector] Patient notes entry even when offline",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:249",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/8"
+        },
+        {
+          "id": "GH-7",
+          "gitea_number": 7,
+          "status": "OPEN",
+          "description": "[Vector] Offline-capable PWA for medical crew",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:249",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/7"
+        },
+        {
+          "id": "GH-6",
+          "gitea_number": 6,
+          "status": "OPEN",
+          "description": "[Vector] Fix Pi power supply (5V 3A + powered USB hub)",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:249",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/6"
+        },
+        {
+          "id": "GH-5",
+          "gitea_number": 5,
+          "status": "OPEN",
+          "description": "[Vector] Troubleshoot ADS-B Pi connection (offline)",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:249",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/5"
+        },
+        {
+          "id": "GH-4",
+          "gitea_number": 4,
+          "status": "OPEN",
+          "description": "[Vector] OpenSky API credentials (reduce rate limiting)",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:249",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/4"
+        },
+        {
+          "id": "GH-3",
+          "gitea_number": 3,
+          "status": "OPEN",
+          "description": "[Security/HIGH] failed_logins: 182 failed SSH login attempts in auth.log",
+          "priority": "P1",
+          "labels": [
+            "automated",
+            "priority:high",
+            "security"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/3"
+        },
         {
           "id": "GH-2",
           "gitea_number": 2,
@@ -940,9 +4254,9 @@
       "source": "gitea"
     }
   ],
-  "last_refresh": "2026-02-12T14:38:04.192849+00:00",
+  "last_refresh": "2026-02-13T03:38:05.435631+00:00",
   "source": "gitea",
   "project_count": 12,
-  "total_requirements": 72,
-  "total_open": 57
+  "total_requirements": 321,
+  "total_open": 306
 }

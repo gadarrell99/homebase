@@ -1,6 +1,6 @@
 {
   "meta": {
-    "scanned_at": "2026-02-12T14:37:01.839263+00:00",
+    "scanned_at": "2026-02-13T03:37:01.215494+00:00",
     "project_count": 11,
     "scanner_version": "1.0.0"
   },
@@ -15,7 +15,7 @@
         3001,
         8001
       ],
-      "scanned_at": "2026-02-12T14:37:01.839291+00:00",
+      "scanned_at": "2026-02-13T03:37:01.215521+00:00",
       "status": "ok",
       "issues": [
         {
@@ -170,11 +170,15 @@
       "git": {
         "status": "dirty",
         "branch": "main",
-        "last_commit": "3fc4fdf BEST Shipping Dashboard: demo-ready, Cornell login, systemd services, full API (5 days ago)",
+        "last_commit": "42a8ad8 security: Block sensitive file access via Vite middleware (9 hours ago)",
         "changes": [
           {
             "status": "M",
             "file": "ackend/__pycache__/config.cpython-312.pyc"
+          },
+          {
+            "status": "M",
+            "file": "backend/__pycache__/main.cpython-312.pyc"
           },
           {
             "status": "M",
@@ -202,15 +206,11 @@
           },
           {
             "status": "M",
+            "file": "backend/main.py"
+          },
+          {
+            "status": "M",
             "file": "frontend/index.html"
-          },
-          {
-            "status": "M",
-            "file": "frontend/package-lock.json"
-          },
-          {
-            "status": "M",
-            "file": "frontend/package.json"
           }
         ],
         "uncommitted_count": 20
@@ -263,12 +263,12 @@
       "ports": [
         3000
       ],
-      "scanned_at": "2026-02-12T14:37:18.342497+00:00",
+      "scanned_at": "2026-02-13T03:37:15.222144+00:00",
       "status": "ok",
       "issues": [
         {
           "severity": "info",
-          "message": "13 uncommitted changes"
+          "message": "15 uncommitted changes"
         }
       ],
       "docs": [
@@ -418,11 +418,15 @@
       "git": {
         "status": "dirty",
         "branch": "main",
-        "last_commit": "1929818 fix: REQ-B001/B002/B004 test regressions \u2014 hydration wait, IA link selector, cases navigation (21 hours ago)",
+        "last_commit": "1929818 fix: REQ-B001/B002/B004 test regressions \u2014 hydration wait, IA link selector, cases navigation (34 hours ago)",
         "changes": [
           {
             "status": "M",
-            "file": "ublic/images/bps-icon.svg"
+            "file": "ext.config.js"
+          },
+          {
+            "status": "M",
+            "file": "public/images/bps-icon.svg"
           },
           {
             "status": "M",
@@ -455,13 +459,9 @@
           {
             "status": "D",
             "file": "test-results/bps-tests-REQ-B007-Pages-load-data-immediately/error-context.md"
-          },
-          {
-            "status": "??",
-            "file": "public/bpsai-180.png"
           }
         ],
-        "uncommitted_count": 13
+        "uncommitted_count": 15
       },
       "ports_status": [
         {
@@ -535,12 +535,12 @@
         3004,
         5004
       ],
-      "scanned_at": "2026-02-12T14:37:34.158699+00:00",
+      "scanned_at": "2026-02-13T03:37:29.439340+00:00",
       "status": "ok",
       "issues": [
         {
           "severity": "info",
-          "message": "6 uncommitted changes"
+          "message": "8 uncommitted changes"
         }
       ],
       "docs": [
@@ -698,6 +698,10 @@
           },
           {
             "status": "M",
+            "file": "backend/app/main.py"
+          },
+          {
+            "status": "M",
             "file": "frontend/index.html"
           },
           {
@@ -710,6 +714,10 @@
           },
           {
             "status": "??",
+            "file": "backend/app/main.py.bak.20260212204300"
+          },
+          {
+            "status": "??",
             "file": "frontend/public/"
           },
           {
@@ -717,7 +725,7 @@
             "file": "public/"
           }
         ],
-        "uncommitted_count": 6
+        "uncommitted_count": 8
       },
       "ports_status": [
         {
@@ -764,7 +772,7 @@
       "ports": [
         3005
       ],
-      "scanned_at": "2026-02-12T14:37:50.085888+00:00",
+      "scanned_at": "2026-02-13T03:37:42.954576+00:00",
       "status": "ok",
       "issues": [
         {
@@ -829,8 +837,8 @@
         }
       ],
       "readme": "# Helios AI \u2014 Intelligent Data Management Platform\n\nHelios AI is a comprehensive platform that combines artificial intelligence with data management to help organizations work smarter, not harder. The platform integrates with existing email and file storage services, providing AI-powered search, analysis, and assistance across all your data.\n\n## Current Status: Ready for Feb 17 CPA Demo\n\nTarget Client: **BDIC (Bermuda Business Development Corporation)**\n\n## Quick Start\n\n```bash\nssh demos@192.168.65.246\ncd ~/helios\ndocker compose up -d\n```\n\nAccess:\n- Frontend: https://helios.rize.bm (or https://192.168.65.246:3005)\n- Backend API: https://192.168.65.246:5005\n\n## Features\n\n### Core Features\n\n- **AI Chat**: Interactive AI conversations with streaming responses and chat history\n- **AI Prompts**: Custom AI prompt templates for specific use cases\n- **Email Management**: Connect Gmail and Microsoft Outlook\n- **File Management**: Access Google Drive and Microsoft OneDrive\n- **Data Lake**: Centralized data repository with advanced search\n- **Semantic Search**: Powerful vector-based search across all data sources\n\n### Administrative Features\n\n- **User Management**: Manage users, roles, and access permissions\n- **Group Management**: Create and manage user groups\n- **Prompt Management**: Organization-wide AI prompt templates\n- **Permissions**: Detailed access controls\n\n## Technology Stack\n\n### Frontend\n- React 18, Bootstrap 5, TailwindCSS\n- Zustand for state management\n- React Router for client-side routing\n\n### Backend\n- FastAPI with SQLAlchemy ORM\n- PostgreSQL 15 database\n- Alembic for migrations\n- OAuth 2.0 (Google, Microsoft)\n\n### AI and Search\n- OpenAI GPT-4, Google Gemini, Grok, Ollama\n- Weaviate vector database\n- sentence-transformers embeddings\n\n## Docker Services\n\n| Service | Host Port | Container Port |\n|---------|-----------|----------------|\n| frontend | 3005 | 443 |\n| backend | 5005 | 443 |\n| postgres | 5433 | 5432 |\n| weaviate | 8182 | 8080 |\n| redis | 6380 | 6379 |\n\n## Security\n\n### Completed \u2705\n- credentials.json removed from git tracking\n- encryption_key.key removed from git tracking\n- Git history cleaned (force-pushed)\n- All API keys in .env files\n\n### Remaining P0 Items\n- Path traversal fix in shared_files.py\n- XSS fixes in 4 React components\n- Auth bypass fix on /admin/groups\n- Token handling rebuild\n\nSee TODO.md for full security remediation plan.\n\n## Documentation\n\n- `CLAUDE.md` \u2014 Claude Code instructions\n- `PROJECT_PLAN.md` \u2014 Project phases and status\n- `TODO.md` \u2014 Current tasks and priorities\n- `CHANGELOG.md` \u2014 Version history\n- `ARCHITECTURE.md` \u2014 System design\n- `DEPLOYMENT.md` \u2014 Deployment guide\n- `DEMO-SCRIPT.md` \u2014 Demo walkthrough\n- `ROADMAP.md` \u2014 Future plans\n\n## License\n\nProprietary - Rize Technologies\n\n---\n\nLast Updated: 2026-02-11",
-      "todo": "# Helios TODO \u2014 Updated Feb 12, 2026\n\n## Completed\n- [x] Dashboard charts: donut by type + bar by client (Fixes #1)\n- [x] Document detail: clickable rows navigate to detail page (Fixes #2)\n- [x] CPA demo data: 356 documents seeded with fictional company names (Fixes #3)\n- [x] Report generation: Excel/Word/PowerPoint working (Fixes #4)\n- [x] UI polish: SVG logo, favicon, page titles, skeletons (Fixes #5)\n- [x] AI Chat: Weaviate RAG + Claude Sonnet, document-aware (Fixes #7)\n- [x] Security: DB password to .env, auth working (Fixes #8)\n- [x] GitHub mirror: Push mirrors configured (Fixes #9)\n- [x] Git workflow: Gitea is source of truth, CLAUDE.md updated\n- [x] Playwright: 20-test suite written, 18/20 passing\n- [x] Remove all real company names (Bermuda, BPS, BMA, etc.) \u2014 replaced with fictional\n- [x] Fix document classification chart \u2014 top 8 + Other, legend, readable\n- [x] Data Lake files clickable \u2014 table view with search/filter, links to detail\n- [x] AI Chat mode toggle \u2014 documents_only vs documents_plus_web\n- [x] Weaviate vector embeddings \u2014 356 docs embedded with all-mpnet-base-v2\n- [x] Assign all documents to clients \u2014 0 unassigned\n- [x] Consolidate doc_types from 45 to 23 categories\n- [x] Search results clickable \u2014 Links to /documents/{id}, hover effects, doc type icons\n\n## Open\n- [ ] Add real public documents (SEC filings, IRS forms) for richer demo\n- [ ] 2 flaky Playwright tests (login timeout on SSL)\n- [ ] P0 Security: Path traversal fix, XSS fixes, auth bypass, token handling\n\n## Feb 17 CPA Demo Readiness\n- Dashboard: READY (charts with fictional data, top 8 + Other donut)\n- Documents: READY (clickable, detail pages, 356 docs)\n- Data Lake: READY (clickable table, search, filter by type)\n- AI Chat: READY (Weaviate RAG, Claude, mode toggle, streaming)\n- Reports: READY (Excel generation + download)\n- Search: READY (clickable results, type icons, hover effects)\n- Upload: READY (OCR with Tesseract)\n- Login: READY (3 demo buttons)\n- Emails: READY (500 business emails searchable)\n- Company Names: CLEAN (all fictional)\n\n## CEO QA Feedback (Feb 12) \u2014 Status\n1. \u2705 Files are real PDFs/Excel \u2014 356 ReportLab-generated documents with actual content\n2. \u2705 Folder structure \u2014 19 client folders organized by doc_type\n3. \u2705 OCR \u2014 Tesseract 5.5.0 installed, pytesseract integrated in upload pipeline\n4. \u2705 Search clickable \u2014 Results link to /documents/{id} with hover effects\n5. \u2705 AI Chat \u2014 Weaviate RAG + Claude, document sources, mode toggle\n6. \u2705 Emails \u2014 500 business emails generated across 7 categories\n7. \u2b1c Project plan review \u2014 Pending deeper review\n8. \u2705 Overall demo quality \u2014 Production-ready for CPA demo",
-      "changelog": "## v2.3.0 \u2014 Feb 11, 2026\n- Dashboard: Real donut chart (by classification) + bar chart (by client) using recharts\n- Documents: Rows clickable, navigates to document detail page\n- CPA Data: 26 CPA-specific documents seeded (tax returns, audits, invoices, engagement letters)\n- UI Polish: SVG sun logo, Helios favicon, page titles, fade transitions, skeleton loading\n- AI Chat: Verified \u2014 returns document-specific answers with references\n- Reports: Verified \u2014 Excel generation working, 12 reports in system\n- Git: Gitea workflow rules added to CLAUDE.md, 10 GitHub push mirrors configured\n- Playwright: 20-test suite, 18/20 passing\n\n## [2.2.0] - 2026-02-11\n\n### Fixed\n- Dashboard stats route: /api/dashboard/stats now returns 200 (was 405)\n- Added dual route registration for /dashboard and /api/dashboard prefixes\n- DB password moved from docker-compose.yml to .env variable\n\n### Security\n- Path traversal: Verified safe_path_join() in shared_files.py\n- XSS: Confirmed no dangerouslySetInnerHTML in new Vite frontend\n- Auth bypass: /admin/groups properly returns 401 without auth\n- Token expiry: JWT tokens have 24h TTL with exp claim\n\n### Added\n- 80 realistic business emails seeded into database\n- Email senders from BMA, BPS Legal, CPA, Insurance, Hospital, Shipping\n\n# Helios AI - Changelog\n\n## [2.1.0] - 2026-02-10\n\n### Added\n- Document Detail page (/documents/:id) with full AI analysis view\n- Recharts integration for Dashboard visualizations\n- Pie chart showing document type distribution\n- Bar chart showing weekly activity\n- Demo script page at /demo for presenter guide\n- has_signature field in documents API\n- Loading skeleton animations\n- Trend indicators on stat cards\n\n### Changed\n- Documents page rows now clickable (navigate to detail)\n- Dashboard uses proper /dashboard/stats endpoint\n- Recent documents use /dashboard/recent-files endpoint\n- Enhanced document cards with hover effects\n\n### Fixed\n- Dashboard stats 405 error (wrong endpoint path)\n- Document list missing has_signature field\n- Recent documents field mapping\n\n### Performance\n- All pages load in <0.03 seconds\n- All APIs respond in <0.05 seconds\n\n## [2.0.0] - 2026-02-10\n\n### Added\n- Complete frontend rebuild with Vite + React + Tailwind\n- One-click demo login buttons (Admin/Analyst/Viewer)\n- AI Chat with Anthropic Claude integration\n- Report generation (Excel/Word/PowerPoint)\n- Document upload with OCR processing\n\n### Changed\n- Replaced old Velzon Redux template\n- User avatars now use initials instead of stock photos\n\n### Fixed\n- Connection pool exhaustion in AI routes\n- Demo account password hashes\n- Hardcoded JWT secret\n\n## [1.0.0] - 2026-02-02\n\n### Added\n- Initial Helios deployment\n- Document management system\n- Client management\n- Email import functionality\n- Search and Data Lake\n\n\n## v2.4.0 \u2014 Feb 12, 2026 (CPA Demo Overhaul)\n\n### Data Cleanup\n- Replaced all 19 real Bermuda company names with fictional CPA-appropriate names\n- Updated 356 shared_files (client_name, content, ai_summary, filenames)\n- Updated 80 emails (sender addresses, content)\n- Replaced Bermuda addresses, currency (BMD->USD), legal references\n- Assigned all 315 previously unassigned documents to appropriate clients\n- Consolidated 45 doc_types into 23 cleaner categories\n\n### Dashboard\n- Fixed classification donut chart: now shows top 8 categories + \"Other\"\n- Added Legend below chart for readability\n- Labels only show for categories >5% of total\n- Increased chart height for breathing room\n\n### Data Lake\n- Complete rewrite: now shows as sortable table with columns\n- Files are clickable \u2014 navigate to document detail page\n- Added search bar (searches by filename and client name)\n- Added doc_type filter dropdown\n- Color-coded type badges\n- Formatted dates\n- File type icons (PDF, Excel, Word, etc.)\n\n### AI Chat\n- Upgraded to Weaviate vector search (was PostgreSQL FTS only)\n- 356 documents embedded with all-mpnet-base-v2 sentence-transformers\n- Added mode toggle: \"Documents Only\" vs \"Documents + AI Knowledge\"\n- Professional CPA system prompt with document citation format\n- Animated loading indicator\n- Source document chips below AI responses (clickable)\n- New conversation button\n- Placeholder text changes based on mode\n\n### Infrastructure\n- Created Weaviate schema (Document class, 7 properties, vectorizer=none)\n- Created embed_weaviate.py for batch embedding pipeline\n- Created Dockerfile for frontend (was missing)\n- Created nginx.conf for frontend container",
+      "todo": "# Helios TODO \u2014 Updated Feb 12, 2026\n\n## Completed\n- [x] Dashboard charts: donut by type + bar by client (Fixes #1)\n- [x] Document detail: clickable rows navigate to detail page (Fixes #2)\n- [x] CPA demo data: 356 documents seeded with fictional company names (Fixes #3)\n- [x] Report generation: Excel/Word/PowerPoint working (Fixes #4)\n- [x] UI polish: SVG logo, favicon, page titles, skeletons (Fixes #5)\n- [x] AI Chat: Weaviate RAG + Claude Sonnet, document-aware (Fixes #7)\n- [x] Security: DB password to .env, auth working (Fixes #8)\n- [x] GitHub mirror: Push mirrors configured (Fixes #9)\n- [x] Git workflow: Gitea is source of truth, CLAUDE.md updated\n- [x] Playwright: 20-test suite written, 18/20 passing\n- [x] Remove all real company names (Bermuda, BPS, BMA, etc.) \u2014 replaced with fictional\n- [x] Fix document classification chart \u2014 top 8 + Other, legend, readable\n- [x] Data Lake files clickable \u2014 table view with search/filter, links to detail\n- [x] AI Chat mode toggle \u2014 documents_only vs documents_plus_web\n- [x] Weaviate vector embeddings \u2014 356 docs embedded with all-mpnet-base-v2\n- [x] Assign all documents to clients \u2014 0 unassigned\n- [x] Consolidate doc_types from 45 to 23 categories\n- [x] Search results clickable \u2014 Links to /documents/{id}, hover effects, doc type icons\n\n- [x] File download fix \u2014 3-strategy lookup (UUID, download_url, filename search)\n- [x] OCR endpoint fix \u2014 same 3-strategy file lookup\n- [x] Emails page \u2014 full inbox UI with search, detail panel, category icons\n- [x] Email nav item \u2014 added to Layout.jsx sidebar\n- [x] Nginx fix \u2014 removed /dashboard/ proxy block (was breaking SPA routing)\n- [x] Email RAG \u2014 500 emails indexed in Weaviate for AI Chat\n- [x] AI Chat enhancement \u2014 quick actions, email search, better formatting, conversation history\n- [x] Full QA verification \u2014 25/25 checks passing\n\n## Open\n- [ ] Add real public documents (SEC filings, IRS forms) for richer demo\n- [ ] 2 flaky Playwright tests (login timeout on SSL)\n- [ ] P0 Security: Path traversal fix, XSS fixes, auth bypass, token handling\n\n## Feb 17 CPA Demo Readiness\n- Dashboard: READY (charts with fictional data, top 8 + Other donut)\n- Documents: READY (clickable, detail pages, 356 docs)\n- Data Lake: READY (clickable table, search, filter by type)\n- AI Chat: READY (Weaviate RAG, Claude, mode toggle, streaming)\n- Reports: READY (Excel generation + download)\n- Search: READY (clickable results, type icons, hover effects)\n- Upload: READY (OCR with Tesseract)\n- Login: READY (3 demo buttons)\n- Emails: READY (500 business emails searchable)\n- Company Names: CLEAN (all fictional)\n\n## CEO QA Feedback (Feb 12) \u2014 Status\n1. \u2705 Files are real PDFs/Excel \u2014 356 ReportLab-generated documents with actual content\n2. \u2705 Folder structure \u2014 19 client folders organized by doc_type\n3. \u2705 OCR \u2014 Tesseract 5.5.0 installed, pytesseract integrated in upload pipeline\n4. \u2705 Search clickable \u2014 Results link to /documents/{id} with hover effects\n5. \u2705 AI Chat \u2014 Weaviate RAG + Claude, document sources, mode toggle\n6. \u2705 Emails \u2014 500 business emails generated across 7 categories\n7. \u2b1c Project plan review \u2014 Pending deeper review\n8. \u2705 Overall demo quality \u2014 Production-ready for CPA demo",
+      "changelog": "## v2.4.0 \u2014 Feb 12, 2026 (CEO QA Fix Cycle)\n- File Downloads: Fixed 3-strategy file lookup (UUID dir, download_url path, filename search)\n- OCR Endpoint: Same 3-strategy fix applied to OCR file lookup\n- Emails Page: New /emails route with full inbox UI, search, detail panel, category icons\n- Email RAG: 500 business emails indexed in Weaviate for AI Chat semantic search\n- AI Chat Enhanced: Quick action buttons, email+document search, markdown formatting, conversation history sidebar\n- Nginx Fix: Removed /dashboard/ proxy block that was breaking SPA routing\n- Verification: 25/25 automated QA checks passing (auth, pages, APIs, download, DB, Weaviate, AI, OCR, files)\n\n## v2.3.0 \u2014 Feb 11, 2026\n- Dashboard: Real donut chart (by classification) + bar chart (by client) using recharts\n- Documents: Rows clickable, navigates to document detail page\n- CPA Data: 26 CPA-specific documents seeded (tax returns, audits, invoices, engagement letters)\n- UI Polish: SVG sun logo, Helios favicon, page titles, fade transitions, skeleton loading\n- AI Chat: Verified \u2014 returns document-specific answers with references\n- Reports: Verified \u2014 Excel generation working, 12 reports in system\n- Git: Gitea workflow rules added to CLAUDE.md, 10 GitHub push mirrors configured\n- Playwright: 20-test suite, 18/20 passing\n\n## [2.2.0] - 2026-02-11\n\n### Fixed\n- Dashboard stats route: /api/dashboard/stats now returns 200 (was 405)\n- Added dual route registration for /dashboard and /api/dashboard prefixes\n- DB password moved from docker-compose.yml to .env variable\n\n### Security\n- Path traversal: Verified safe_path_join() in shared_files.py\n- XSS: Confirmed no dangerouslySetInnerHTML in new Vite frontend\n- Auth bypass: /admin/groups properly returns 401 without auth\n- Token expiry: JWT tokens have 24h TTL with exp claim\n\n### Added\n- 80 realistic business emails seeded into database\n- Email senders from BMA, BPS Legal, CPA, Insurance, Hospital, Shipping\n\n# Helios AI - Changelog\n\n## [2.1.0] - 2026-02-10\n\n### Added\n- Document Detail page (/documents/:id) with full AI analysis view\n- Recharts integration for Dashboard visualizations\n- Pie chart showing document type distribution\n- Bar chart showing weekly activity\n- Demo script page at /demo for presenter guide\n- has_signature field in documents API\n- Loading skeleton animations\n- Trend indicators on stat cards\n\n### Changed\n- Documents page rows now clickable (navigate to detail)\n- Dashboard uses proper /dashboard/stats endpoint\n- Recent documents use /dashboard/recent-files endpoint\n- Enhanced document cards with hover effects\n\n### Fixed\n- Dashboard stats 405 error (wrong endpoint path)\n- Document list missing has_signature field\n- Recent documents field mapping\n\n### Performance\n- All pages load in <0.03 seconds\n- All APIs respond in <0.05 seconds\n\n## [2.0.0] - 2026-02-10\n\n### Added\n- Complete frontend rebuild with Vite + React + Tailwind\n- One-click demo login buttons (Admin/Analyst/Viewer)\n- AI Chat with Anthropic Claude integration\n- Report generation (Excel/Word/PowerPoint)\n- Document upload with OCR processing\n\n### Changed\n- Replaced old Velzon Redux template\n- User avatars now use initials instead of stock photos\n\n### Fixed\n- Connection pool exhaustion in AI routes\n- Demo account password hashes\n- Hardcoded JWT secret\n\n## [1.0.0] - 2026-02-02\n\n### Added\n- Initial Helios deployment\n- Document management system\n- Client management\n- Email import functionality\n- Search and Data Lake\n\n\n## v2.4.0 \u2014 Feb 12, 2026 (CPA Demo Overhaul)\n\n### Data Cleanup\n- Replaced all 19 real Bermuda company names with fictional CPA-appropriate names\n- Updated 356 shared_files (client_name, content, ai_summary, filenames)\n- Updated 80 emails (sender addresses, content)\n- Replaced Bermuda addresses, currency (BMD->USD), legal references\n- Assigned all 315 previously unassigned documents to appropriate clients\n- Consolidated 45 doc_types into 23 cleaner categories\n\n### Dashboard\n- Fixed classification donut chart: now shows top 8 categories + \"Other\"\n- Added Legend below chart for readability\n- Labels only show for categories >5% of total\n- Increased chart height for breathing room\n\n### Data Lake\n- Complete rewrite: now shows as sortable table with columns\n- Files are clickable \u2014 navigate to document detail page\n- Added search bar (searches by filename and client name)\n- Added doc_type filter dropdown\n- Color-coded type badges\n- Formatted dates\n- File type icons (PDF, Excel, Word, etc.)\n\n### AI Chat\n- Upgraded to Weaviate vector search (was PostgreSQL FTS only)\n- 356 documents embedded with all-mpnet-base-v2 sentence-transformers\n- Added mode toggle: \"Documents Only\" vs \"Documents + AI Knowledge\"\n- Professional CPA system prompt with document citation format\n- Animated loading indicator\n- Source document chips below AI responses (clickable)\n- New conversation button\n- Placeholder text changes based on mode\n\n### Infrastructure\n- Created Weaviate schema (Document class, 7 properties, vectorizer=none)\n- Created embed_weaviate.py for batch embedding pipeline\n- Created Dockerfile for frontend (was missing)\n- Created nginx.conf for frontend container",
       "todos_parsed": [
         {
           "text": "Dashboard charts: donut by type + bar by client (Fixes #1)",
@@ -905,25 +913,45 @@
           "done": true
         },
         {
-          "text": "Add real public documents (SEC filings, IRS forms) for richer demo",
-          "done": false
+          "text": "File download fix \u2014 3-strategy lookup (UUID, download_url, filename search)",
+          "done": true
         },
         {
-          "text": "2 flaky Playwright tests (login timeout on SSL)",
-          "done": false
+          "text": "OCR endpoint fix \u2014 same 3-strategy file lookup",
+          "done": true
         }
       ],
-      "todos_open": 2,
-      "todos_done": 18,
-      "version": "2.3.0",
+      "todos_open": 0,
+      "todos_done": 20,
+      "version": "2.4.0",
       "git": {
         "status": "dirty",
         "branch": "main",
-        "last_commit": "4a1eb0a docs: Update TODO.md with CEO QA fix status (53 minutes ago)",
+        "last_commit": "57ad5a9 fix: CEO QA cycle \u2014 file downloads, email page, AI chat RAG, nginx routing (12 hours ago)",
         "changes": [
           {
             "status": "M",
-            "file": "ackend/app/routes/documents.py"
+            "file": "ackend/app/middleware/auth_middleware.py"
+          },
+          {
+            "status": "M",
+            "file": "backend/app/routes/shared_files.py"
+          },
+          {
+            "status": "M",
+            "file": "docker-compose.yml"
+          },
+          {
+            "status": "M",
+            "file": "frontend.dead.1770758364/build/static/js/main.0ff94bc8.js"
+          },
+          {
+            "status": "M",
+            "file": "frontend.dead.1770758364/src/Layouts/LayoutMenuData.js"
+          },
+          {
+            "status": "M",
+            "file": "frontend.dead.1770758364/src/Routes/allRoutes.js"
           },
           {
             "status": "M",
@@ -931,35 +959,15 @@
           },
           {
             "status": "M",
-            "file": "frontend/public/helios-icon.svg"
+            "file": "frontend/nginx.conf"
           },
           {
             "status": "M",
-            "file": "frontend/src/App.jsx"
+            "file": "frontend/package-lock.json"
           },
           {
             "status": "M",
-            "file": "frontend/src/Layout.jsx"
-          },
-          {
-            "status": "M",
-            "file": "test-results/.last-run.json"
-          },
-          {
-            "status": "D",
-            "file": "test-results/tests-helios-test-Helios-N-789c4-end-9-Search-page-has-input/error-context.md"
-          },
-          {
-            "status": "M",
-            "file": "tests/helios-full.spec.js"
-          },
-          {
-            "status": "??",
-            "file": "backend/patch_supp.py"
-          },
-          {
-            "status": "??",
-            "file": "backend/scripts/generate_emails.py"
+            "file": "frontend/package.json"
           }
         ],
         "uncommitted_count": 20
@@ -1024,7 +1032,7 @@
       "ports": [
         8000
       ],
-      "scanned_at": "2026-02-12T14:38:07.400562+00:00",
+      "scanned_at": "2026-02-13T03:37:57.478657+00:00",
       "status": "ok",
       "issues": [
         {
@@ -1149,47 +1157,47 @@
       "git": {
         "status": "dirty",
         "branch": "master",
-        "last_commit": "918cd1d fix: increase Sentinel-API health check timeout from 10s to 30s (20 hours ago)",
+        "last_commit": "fa48cd9 fix: nginx proxy config, all sub-pages now 200 (13 hours ago)",
         "changes": [
           {
             "status": "M",
-            "file": "HANGELOG.md"
+            "file": "LAUDE.md"
           },
           {
             "status": "M",
-            "file": "CLAUDE.md"
+            "file": "cache/deadlines.json"
           },
           {
             "status": "M",
-            "file": "TODO.md"
+            "file": "cache/health.json"
           },
           {
             "status": "M",
-            "file": "backend/main.py"
+            "file": "cache/requirements.json"
           },
           {
             "status": "M",
-            "file": "backend/services/metrics_history.py"
+            "file": "cache/sentinel.json"
           },
           {
             "status": "M",
-            "file": "backend/services/sentinel.py"
+            "file": "cache/stale_p0.json"
           },
           {
             "status": "M",
-            "file": "backend/static/agent-aegis.html"
+            "file": "cache/test_results.json"
           },
           {
             "status": "M",
-            "file": "backend/static/agent-apex.html"
+            "file": "data/3cx-status.json"
           },
           {
             "status": "M",
-            "file": "backend/static/agent-david-bishop.html"
+            "file": "data/agents.db"
           },
           {
             "status": "M",
-            "file": "backend/static/agent-detail.html"
+            "file": "data/briefings.json"
           }
         ],
         "uncommitted_count": 20
@@ -1210,18 +1218,18 @@
         "TODO.md",
         "WORKFLOW-SPEC.md",
         "backend/__init__.py",
+        "backend/auto_sync.py",
         "backend/main.py",
         "data/3cx-status.json",
-        "data/activity-log.json",
         "data/agent_registry.json",
         "data/ai-spend.json",
-        "data/alerts.json",
         "data/backup-freshness.json",
         "data/backup-report.json",
         "data/backup-status.json",
         "data/briefings.json",
-        "data/credential-scan.json",
         "data/discovery-queue.json",
+        "data/fleet_status.json",
+        "data/gitea_repos.json",
         "data/infrastructure.json",
         "data/interaction-stats.json",
         "data/maintenance_queue.json",
@@ -1231,8 +1239,8 @@
         "data/security-scans.json",
         "data/sentinel-latest-audit.json",
         "data/sentinel-report.json",
-        "data/sentinel_rules.json",
         "data/sentinel_scan_targets.json",
+        "data/sync_status.json",
         "docs/API.md",
         "docs/ARCHITECTURE.md",
         "docs/DEPLOYMENT.md",
@@ -1266,7 +1274,7 @@
         3002,
         3003
       ],
-      "scanned_at": "2026-02-12T14:38:07.674811+00:00",
+      "scanned_at": "2026-02-13T03:37:57.586900+00:00",
       "status": "ok",
       "issues": [],
       "docs": [
@@ -1295,28 +1303,28 @@
           "status": "ok"
         }
       ],
-      "readme": "# Nexus v3.0 \u2014 Unified MSP Hub\n\nUnified MSP management platform for Rize Technologies. Single sidebar, no hub toggle.\nAll data syncs every 60 seconds via Aegis connectors.\n\n## Quick Reference\n\n| Service | Port | Status |\n|---------|------|--------|\n| Frontend (nginx) | 3002 | `curl http://localhost:3002` |\n| Backend API | 3003 | `sudo systemctl status nexus` |\n| PostgreSQL | 5432 | `docker compose ps` |\n| Aegis Sync | .241 | `systemctl status aegis-sync` |\n\n## Pages (10)\n- Dashboard \u2014 KPIs, alerts feed, device health, insights widget\n- Clients \u2014 Table with search/filter, click for detail\n- Client Detail \u2014 8 tabs: Overview, Devices, Tickets, Patches, Alerts, Forms, Insights, Notes\n- Devices \u2014 All devices, filter by status/type/client\n- Tickets \u2014 Open/Closed/All tabs, priority colors, SLA indicators\n- Monitoring \u2014 Active alerts feed with acknowledge buttons\n- Patches \u2014 Compliance %, severity filter, status badges\n- Forms \u2014 Dynamic form renderer from JSON schema templates\n- Insights \u2014 Intelligence feed from Cortex/Aegis\n- Audit Log \u2014 Filterable system event log\n- Settings \u2014 Integration management, form templates\n\n## API Endpoints (15+)\n- `/api/companies` \u2014 List/detail companies\n- `/api/devices` \u2014 Devices with filters\n- `/api/tickets` \u2014 Tickets with status filter\n- `/api/alerts` \u2014 Alerts with acknowledge/resolve\n- `/api/patches` \u2014 Patches with severity filter\n- `/api/forms/templates` \u2014 Form template CRUD\n- `/api/forms/submissions` \u2014 Form submission CRUD\n- `/api/settings/integrations` \u2014 Integration config\n- `/api/audit-log` \u2014 Audit log\n- `/api/dashboard/stats` \u2014 KPI aggregation\n- `/api/insights` \u2014 Intelligence insights\n- `/api/learning` \u2014 Learning memory entries\n- `/api/reports/daily` \u2014 Daily review reports\n- `/api/sync/{halo,prtg,action1,sharepoint}` \u2014 Sync endpoints\n\n## Data Sources\n- **Halo PSA** \u2014 Clients, tickets, contacts\n- **PRTG** \u2014 Devices, sensors, alerts (556 devices)\n- **Action1** \u2014 Endpoints, patches, software (blocked: needs admin perms)\n- **SharePoint** \u2014 Documents (blocked: needs Azure AD creds)\n\n## Form Templates\n- Client Onboarding (49 fields, 6 sections)\n- Monthly Review (15 fields)\n- Quarterly Business Review (17 fields)\n\n## Schema: 24 Prisma models\nIncluding Insight, LearningEntry, DailyReport for intelligence layer.\n\n## Access\n- Internal: http://192.168.65.245:3002\n- API: http://192.168.65.245:3003\n- Tunnel: nexus.rize.bm (pending Cloudflare)",
-      "todo": "# Nexus TODO\n\n## Completed (v3.0.0)\n- [x] Merge Support/MSP hubs into unified sidebar\n- [x] Complete frontend rewrite (10 pages)\n- [x] Intelligence layer (Insight, LearningEntry, DailyReport models)\n- [x] 15+ unified API endpoints\n- [x] Forms engine (3 templates, dynamic renderer)\n- [x] Settings page with integration management\n- [x] Aegis 60s sync engine (systemd service)\n- [x] Insights page with dedup + recurrence tracking\n- [x] Dashboard KPIs + alert feed + insights widget\n- [x] Audit log page\n\n## Blocked (CEO Action Required)\n- [ ] Cloudflare tunnel: nexus.rize.bm\n- [ ] SharePoint: Azure AD App Registration\n- [ ] Action1: Admin API permissions (403 on endpoints)\n- [ ] Halo PSA: Client endpoint 403 (check OAuth scopes)\n\n## Next Up\n- [ ] Cortex daily strategic review script (Phase 6C)\n- [ ] Aegis intelligence analyzer (Phase 6B)\n- [ ] Learning memory engine (Phase 6E)\n- [ ] Playwright E2E tests\n- [ ] PDF export for completed forms\n- [ ] Ticket trend chart (30 day opened vs closed)\n- [ ] Device health heatmap by client\n- [ ] Contract renewal calendar\n- [ ] Drag-and-drop form template editor\n- [ ] Real-time WebSocket updates (replace polling)",
-      "changelog": "# Changelog\n\n## v3.0.0 (2026-02-12) \u2014 Unified MSP Hub + Intelligence Layer\n\n### Architecture\n- Merged Support Hub + MSP Hub into single unified sidebar\n- Removed hub toggle completely \u2014 one cohesive experience\n- Halo PSA = source of truth for all clients\n- All data syncs every 60 seconds via Aegis engine on .241\n\n### Frontend (complete rewrite \u2014 782 lines)\n- 10 pages: Dashboard, Clients, Client Detail, Devices, Tickets, Monitoring, Patches, Forms, Insights, Audit Log, Settings\n- Dark theme with Nexus purple (#7C3AED) accent\n- KPI cards with real-time data\n- Alert feed with acknowledge buttons\n- Active insights widget on dashboard\n- Device health overview\n\n### Backend\n- 15+ API endpoints via unified routes\n- 24 Prisma models including Insight, LearningEntry, DailyReport\n- Sync endpoints: POST /api/sync/{halo,prtg,action1,sharepoint}\n- Intelligence endpoints: GET/POST /api/insights, /api/learning, /api/reports/daily\n- Integration settings with test connection\n- Audit logging on all mutations\n\n### Forms Engine\n- Dynamic JSON schema form renderer\n- 3 templates: Client Onboarding (49 fields), Monthly Review (15), QBR (17)\n- Field types: text, number, date, dropdown, checkbox, textarea, credential, contact, currency, checkbox_group\n- Auto-save drafts every 30s\n- Create/submit/review workflow\n\n### Settings\n- Integration management: PRTG, Action1, Halo PSA, SharePoint\n- Enable/disable toggle per provider\n- Test connection button\n- Credential management (masked)\n- Sync frequency and status display\n- Form template management\n\n### Intelligence Layer (Phase 6)\n- Insight model with deduplication and recurrence tracking\n- LearningEntry model for adaptive thresholds and playbooks\n- DailyReport model for Cortex strategic reviews\n- Insights page with filter by source/severity/status/client\n- Acknowledge/Resolve/Dismiss workflow on insights\n\n### Aegis Sync Engine (.241)\n- systemd service: aegis-sync.service (60s cycle)\n- Parallel connector execution (PRTG, Halo, Action1)\n- 556 PRTG devices syncing\n- Mock data fallback when APIs unreachable\n- Log to ~/aegis/logs/\n\n### Blocked (CEO action needed)\n- Cloudflare tunnel: nexus.rize.bm\n- SharePoint: Azure AD App Registration\n- Action1: admin API permissions\n- Halo PSA: Client endpoint returns 403\n\n## v2.0.0 (2026-02-10)\n- Added MSP Hub mode with Support/MSP toggle\n- Device, Patch, Alert models\n- Form templates and submissions\n- Action1 RMM integration\n\n## v1.0.0 (2026-01-14)\n- Initial release: Halo PSA integration, ticket management",
+      "readme": "# Nexus v3.0 \u2014 Unified MSP Hub\n\nUnified MSP management platform for Rize Technologies. Single sidebar, no hub toggle.\nAll data syncs every 60 seconds via Aegis connectors.\n\n## Quick Reference\n\n| Service | Port | Status |\n|---------|------|--------|\n| Frontend (nginx) | 3002 | `curl http://localhost:3002` |\n| Backend API | 3003 | `sudo systemctl status nexus` |\n| PostgreSQL | 5432 | `docker compose ps` |\n| Aegis Sync | .241 | `systemctl status aegis-sync` |\n\n## Pages (10)\n- Dashboard \u2014 KPIs, alerts feed, device health, insights widget\n- Clients \u2014 Table with search/filter, click for detail\n- Client Detail \u2014 8 tabs: Overview, Devices, Tickets, Patches, Alerts, Forms, Insights, Notes\n- Devices \u2014 All devices, filter by status/type/client\n- Tickets \u2014 Open/Closed/All tabs, priority colors, SLA indicators\n- Monitoring \u2014 Active alerts feed with acknowledge buttons\n- Patches \u2014 Compliance %, severity filter, status badges\n- Forms \u2014 Dynamic form renderer from JSON schema templates\n- Insights \u2014 Intelligence feed from Cortex/Aegis\n- Audit Log \u2014 Filterable system event log\n- Settings \u2014 Integration management, form templates\n\n## API Endpoints (15+)\n- `/api/companies` \u2014 List/detail companies\n- `/api/devices` \u2014 Devices with filters\n- `/api/tickets` \u2014 Tickets with status filter\n- `/api/alerts` \u2014 Alerts with acknowledge/resolve\n- `/api/patches` \u2014 Patches with severity filter\n- `/api/forms/templates` \u2014 Form template CRUD\n- `/api/forms/submissions` \u2014 Form submission CRUD\n- `/api/settings/integrations` \u2014 Integration config\n- `/api/audit-log` \u2014 Audit log\n- `/api/dashboard/stats` \u2014 KPI aggregation\n- `/api/insights` \u2014 Intelligence insights\n- `/api/learning` \u2014 Learning memory entries\n- `/api/reports/daily` \u2014 Daily review reports\n- `/api/sync/{halo,prtg,action1,sharepoint}` \u2014 Sync endpoints\n\n## Data Sources\n- **Halo PSA** \u2014 Clients, tickets, contacts\n- **PRTG** \u2014 Devices, sensors, alerts (556 devices)\n- **Action1** \u2014 Endpoints, patches, software (blocked: needs admin perms)\n- **SharePoint** \u2014 Documents (blocked: needs Azure AD creds)\n\n## Form Templates\n- Client Onboarding (49 fields, 6 sections)\n- Monthly Review (15 fields)\n- Quarterly Business Review (17 fields)\n\n## Schema: 24 Prisma models\nIncluding Insight, LearningEntry, DailyReport for intelligence layer.\n\n## Access\n- Internal: http://192.168.65.245:3002\n- API: http://192.168.65.245:3003\n- Tunnel: nexus.rize.bm (pending Cloudflare)\n\n## Time Tracker Page (Added Feb 12, 2026)\n\n**Nav item:** Time Tracker (clock icon)\n**Data source:** Apex Time Dashboard API on .241:9010 (proxied through Nexus backend)\n\n### Features\n- **Period Switcher**: Daily / Weekly / Monthly views\n- **KPI Cards**: Total hours, billable %, revenue logged, team utilization\n- **Agent Cards**: One card per Core 5 staff member showing:\n  - Progress bar (hours logged vs target)\n  - Utilization % with color-coded status\n  - Revenue logged and chargeable hours\n  - Expandable detail with daily breakdown and client hours\n  - Manager review checkbox per day\n- **Auto-refresh**: Every 5 minutes via react-query\n\n### Core 5 Staff Tracked\nIbrahim El Charif, Mary Ocoy, Prabin AT, Haroon Kareem, DesRon deShield-Burchall\n\n### Architecture\n```\nNginx:3002 \u2192 Express:3003 (proxy /api/time/*) \u2192 FastAPI:9010 (.241) \u2192 Halo PSA API\n```\n\n### Backend Proxy\nAdded to `backend/src/app.ts`: forwards all `/api/time/*` requests to `http://192.168.65.241:9010` with 120s timeout.\n\n### Frontend Components\nAdded to `frontend/src/App.tsx`:\n- `TimeTrackerPage` \u2014 Main page with period switcher + KPI cards\n- `AgentCard` \u2014 Expandable per-person card with details\n- `ProgressBar` \u2014 Color-coded progress indicator",
+      "todo": "# Nexus TODO\n\n## Completed (v3.0.0)\n- [x] Merge Support/MSP hubs into unified sidebar\n- [x] Complete frontend rewrite (10 pages, 782 lines)\n- [x] Intelligence layer (Insight, LearningEntry, DailyReport models \u2014 24 total)\n- [x] 15+ unified API endpoints (all return 200)\n- [x] Forms engine (3 templates: Onboarding 49 fields, Monthly 15 fields, QBR 17 fields)\n- [x] Settings page with integration management\n- [x] Aegis 60s sync engine (systemd service, PRTG 556 devices, 48 alerts)\n- [x] Insights page with dedup + recurrence tracking (17 initial insights)\n- [x] Dashboard KPIs + alert feed + insights widget\n- [x] Audit log page\n- [x] Aegis intelligence analyzer (Phase 6B \u2014 4 analysis categories)\n- [x] Cortex daily strategic review script (Phase 6C)\n- [x] Learning memory engine (Phase 6E \u2014 patterns, baselines, effectiveness)\n- [x] Analyzer integrated into sync engine (runs every 5th cycle)\n- [x] UFW rule for .241 \u2192 .245:3003 cross-server access\n\n## Blocked (CEO Action Required)\n- [ ] Cloudflare tunnel: nexus.rize.bm (need dashboard entry)\n- [ ] SharePoint: Azure AD App Registration\n- [ ] Action1: Admin API permissions (403 on endpoints)\n- [ ] Halo PSA: Client endpoint 403 (check OAuth scopes)\n- [ ] Gitea push: Need credentials configured\n\n## Next Up\n- [ ] Playwright E2E tests\n- [ ] PDF export for completed forms\n- [ ] Ticket trend chart (30 day opened vs closed)\n- [ ] Device health heatmap by client\n- [ ] Contract renewal calendar\n- [ ] Drag-and-drop form template editor\n- [ ] Real-time WebSocket updates (replace polling)\n- [ ] Redis caching layer for sync data",
+      "changelog": "# Nexus Changelog\n\n## v3.0.0 (2026-02-12)\n\n### Major Rewrite\n- Complete frontend rewrite from dual-hub (Support/MSP toggle) to unified MSP hub\n- 10 pages: Dashboard, Clients, Devices, Tickets, Monitoring, Patches, Forms, Insights, Audit Log, Settings\n- Dark theme (Slate #0F172A) with Nexus purple (#7C3AED) accent\n- React + TypeScript + TanStack React Query (60s auto-refetch)\n\n### Backend\n- 24 Prisma models (added Insight, LearningEntry, DailyReport)\n- 15+ API endpoints for unified data access\n- Intelligence routes: insights CRUD, learning CRUD, daily reports\n- Backend bound to 0.0.0.0 for cross-server access\n\n### Intelligence Layer (Phase 6)\n- Aegis Analyzer: 4 analysis categories (device_health, patch_compliance, ticket_intelligence, data_quality)\n- Cortex Daily Review: Executive summary aggregation, submitted to /api/reports/daily\n- Learning Engine: Pattern extraction, baseline tracking, effectiveness measurement\n- Analyzer integrated into sync engine (every 5th cycle = 5 min)\n- 17 initial insights generated, 3 learning entries\n\n### Sync Engine\n- Aegis 60s sync on .241 (systemd aegis-sync.service)\n- PRTG: 556 devices, 48 alerts synced\n- Halo: 3 companies synced (mock mode pending OAuth scope fix)\n- Action1: Auth OK, endpoints 403 (admin perms needed)\n\n### Forms Engine\n- 3 form templates: Client Onboarding (49 fields), Monthly Review (15 fields), QBR (17 fields)\n- Dynamic JSON schema renderer supporting 10 field types\n- Auto-save with debounce\n\n### Infrastructure\n- UFW rule: .241 \u2192 .245:3003 for cross-server sync\n- Crons: Cortex daily review 7 AM AST, Aegis sync continuous\n- VERSION: 3.0.0",
       "todos_parsed": [
         {
           "text": "Merge Support/MSP hubs into unified sidebar",
           "done": true
         },
         {
-          "text": "Complete frontend rewrite (10 pages)",
+          "text": "Complete frontend rewrite (10 pages, 782 lines)",
           "done": true
         },
         {
-          "text": "Intelligence layer (Insight, LearningEntry, DailyReport models)",
+          "text": "Intelligence layer (Insight, LearningEntry, DailyReport models \u2014 24 total)",
           "done": true
         },
         {
-          "text": "15+ unified API endpoints",
+          "text": "15+ unified API endpoints (all return 200)",
           "done": true
         },
         {
-          "text": "Forms engine (3 templates, dynamic renderer)",
+          "text": "Forms engine (3 templates: Onboarding 49 fields, Monthly 15 fields, QBR 17 fields)",
           "done": true
         },
         {
@@ -1324,11 +1332,11 @@
           "done": true
         },
         {
-          "text": "Aegis 60s sync engine (systemd service)",
+          "text": "Aegis 60s sync engine (systemd service, PRTG 556 devices, 48 alerts)",
           "done": true
         },
         {
-          "text": "Insights page with dedup + recurrence tracking",
+          "text": "Insights page with dedup + recurrence tracking (17 initial insights)",
           "done": true
         },
         {
@@ -1340,7 +1348,27 @@
           "done": true
         },
         {
-          "text": "Cloudflare tunnel: nexus.rize.bm",
+          "text": "Aegis intelligence analyzer (Phase 6B \u2014 4 analysis categories)",
+          "done": true
+        },
+        {
+          "text": "Cortex daily strategic review script (Phase 6C)",
+          "done": true
+        },
+        {
+          "text": "Learning memory engine (Phase 6E \u2014 patterns, baselines, effectiveness)",
+          "done": true
+        },
+        {
+          "text": "Analyzer integrated into sync engine (runs every 5th cycle)",
+          "done": true
+        },
+        {
+          "text": "UFW rule for .241 \u2192 .245:3003 cross-server access",
+          "done": true
+        },
+        {
+          "text": "Cloudflare tunnel: nexus.rize.bm (need dashboard entry)",
           "done": false
         },
         {
@@ -1356,37 +1384,17 @@
           "done": false
         },
         {
-          "text": "Cortex daily strategic review script (Phase 6C)",
-          "done": false
-        },
-        {
-          "text": "Aegis intelligence analyzer (Phase 6B)",
-          "done": false
-        },
-        {
-          "text": "Learning memory engine (Phase 6E)",
-          "done": false
-        },
-        {
-          "text": "Playwright E2E tests",
-          "done": false
-        },
-        {
-          "text": "PDF export for completed forms",
-          "done": false
-        },
-        {
-          "text": "Ticket trend chart (30 day opened vs closed)",
+          "text": "Gitea push: Need credentials configured",
           "done": false
         }
       ],
-      "todos_open": 10,
-      "todos_done": 10,
+      "todos_open": 5,
+      "todos_done": 15,
       "version": "3.0.0",
       "git": {
         "status": "clean",
         "branch": "master",
-        "last_commit": "ab107df v3.0.0: unified MSP hub \u2014 merged hubs, Halo sync, 60s Aegis engine, dynamic forms, intelligence layer, embedded actions, Settings page (5 minutes ago)",
+        "last_commit": "89f58c6 fix: systemd service for backend, CLAUDE.md update, .env port fix (6 hours ago)",
         "changes": [],
         "uncommitted_count": 0
       },
@@ -1451,7 +1459,7 @@
         8080,
         8081
       ],
-      "scanned_at": "2026-02-12T14:38:07.877872+00:00",
+      "scanned_at": "2026-02-13T03:37:57.723735+00:00",
       "status": "ok",
       "issues": [
         {
@@ -1580,7 +1588,7 @@
       "git": {
         "status": "dirty",
         "branch": "main",
-        "last_commit": "17db722 fix: add missing initGatewayPanel JS function for admin Gateways tab (20 hours ago)",
+        "last_commit": "17db722 fix: add missing initGatewayPanel JS function for admin Gateways tab (33 hours ago)",
         "changes": [
           {
             "status": "M",
@@ -1674,7 +1682,7 @@
       "ports": [
         9001
       ],
-      "scanned_at": "2026-02-12T14:38:08.107171+00:00",
+      "scanned_at": "2026-02-13T03:37:57.888112+00:00",
       "status": "ok",
       "issues": [
         {
@@ -1857,7 +1865,7 @@
       "ports": [
         9002
       ],
-      "scanned_at": "2026-02-12T14:38:28.953745+00:00",
+      "scanned_at": "2026-02-13T03:38:15.155495+00:00",
       "status": "ok",
       "issues": [
         {
@@ -1921,9 +1929,9 @@
           "status": "ok"
         }
       ],
-      "readme": "# Apex Finance Agent\n\n**Phase 1: Mock Observer \u2014 COMPLETE**\n\nApex is a read-only finance intelligence agent for Rize Technology Group. It monitors Xero (accounting) and Halo PSA (timesheets) to produce financial reports, detect revenue leakage, and classify billing models.\n\n## Quick Start\n\n```bash\n# Service is managed by systemd\nsudo systemctl status apex.service\n\n# View logs\ntail -f ~/apex/logs/apex.log\n\n# Test health\ncurl http://localhost:9002/health\n```\n\n## API Endpoints\n\n### Health & Status\n| Endpoint | Method | Description |\n|----------|--------|-------------|\n| /health | GET | Health check with uptime |\n| /status | GET | Full status with integrations |\n\n### Reports\n| Endpoint | Method | Description |\n|----------|--------|-------------|\n| /api/reports/latest | GET | Most recent report of any type |\n| /api/reports/daily | GET | Daily P&L digest with unbilled hours |\n| /api/reports/weekly | GET | Weekly revenue/margin analysis |\n\n### Analysis\n| Endpoint | Method | Description |\n|----------|--------|-------------|\n| /api/analysis/leakage | GET | Revenue leakage detection (5 types) |\n| /api/analysis/billing-models | GET | Client billing classifications |\n| /api/analysis/unbilled | GET | Unbilled hours by client |\n\n### Messaging\n| Endpoint | Method | Description |\n|----------|--------|-------------|\n| /api/teams/message | POST | Handle Teams messages via Homebase |\n\n## Revenue Leakage Detection\n\nApex detects 5 types of revenue leakage:\n\n1. **UNBILLED_HOURS** \u2014 Time logged in Halo but not invoiced in Xero\n2. **AYCE_OVERUSE** \u2014 AYCE clients using more hours than their fee supports\n3. **PRICING_DEVIATION** \u2014 Invoices with rates different from contract\n4. **STALE_TIMESHEET** \u2014 Timesheet entries older than 30 days without invoice\n5. **MISSING_TIMESHEET** \u2014 Invoice exists but no backing timesheet (audit risk)\n\n## Billing Models\n\nApex classifies clients into:\n- **AYCE** \u2014 All-You-Can-Eat flat monthly fee\n- **AYCE+Hourly** \u2014 Flat fee plus project/hourly billing\n- **Hourly** \u2014 All time billed at hourly rate\n\n## Scheduled Tasks\n\n| Task | Schedule | Description |\n|------|----------|-------------|\n| Daily Digest | 07:00 UTC | P&L snapshot, unbilled hours, alerts |\n| Weekly Report | Mon 07:00 UTC | Revenue trends, margin analysis |\n| Leakage Scan | Every 6 hours | Detect new revenue leakage |\n\n## Mock Data\n\nGenerate mock data for testing:\n```bash\npython3 ~/apex/scripts/generate_mock_data.py\n```\n\nCreates 12 clients, 6 months of P&L, 100+ timesheets, 60+ invoices.\n\n## Configuration\n\nKey environment variables in .env:\n- MOCK_MODE=true (Phase 1)\n- READ_ONLY_MODE=true (NEVER change to false)\n- ANTHROPIC_API_KEY \u2014 Primary LLM\n- OPENROUTER_API_KEY \u2014 Fallback LLM\n- HOMEBASE_URL \u2014 For Teams relay\n\n## Safety\n\n\u26a0\ufe0f **READ_ONLY_MODE=true** \u2014 Agent cannot modify any data\n\u26a0\ufe0f **MOCK_MODE=true** \u2014 Uses mock data, not live APIs\n\n## Directory Structure\n\n```\n~/apex/\n\u251c\u2500\u2500 main.py              # FastAPI application\n\u251c\u2500\u2500 analysis/\n\u2502   \u251c\u2500\u2500 revenue_leakage.py   # Leakage detection\n\u2502   \u251c\u2500\u2500 billing_classifier.py # Billing model classification\n\u2502   \u2514\u2500\u2500 anomaly_detector.py   # Anomaly detection\n\u251c\u2500\u2500 integrations/\n\u2502   \u251c\u2500\u2500 xero_client.py       # Xero API client\n\u2502   \u251c\u2500\u2500 halo_client.py       # Halo PSA client\n\u2502   \u2514\u2500\u2500 homebase_client.py   # Homebase relay\n\u251c\u2500\u2500 reporting/\n\u2502   \u251c\u2500\u2500 financial_summary.py # Report generators\n\u2502   \u251c\u2500\u2500 daily_digest.py      # Daily report\n\u2502   \u2514\u2500\u2500 weekly_report.py     # Weekly report\n\u251c\u2500\u2500 scripts/\n\u2502   \u2514\u2500\u2500 generate_mock_data.py # Mock data generator\n\u251c\u2500\u2500 db/\n\u2502   \u2514\u2500\u2500 mock_data.json       # Generated mock data\n\u251c\u2500\u2500 reports/               # Generated reports\n\u2514\u2500\u2500 logs/                  # Application logs\n```\n\n## Support\n\nContact: artiedarrell@gmail.com",
-      "todo": "# Apex Finance Agent \u2014 TODO\n\n## Phase 1: Mock Observer \u2014 COMPLETE \u2705\n\n- [x] FastAPI server on port 9002\n- [x] /health endpoint with memory + uptime\n- [x] Teams message handler via Homebase\n- [x] Heartbeat to Homebase every 5 minutes\n- [x] MOCK_MODE=true with hardcoded safety check\n- [x] READ_ONLY_MODE=true with hardcoded safety check\n- [x] Xero API client (mock responses)\n- [x] Halo PSA client (mock responses)\n- [x] Revenue leakage analyzer (5 detection types)\n- [x] Daily digest generator\n- [x] Weekly report generator\n- [x] /reports/latest endpoint\n- [x] /reports/daily endpoint\n- [x] /reports/weekly endpoint\n- [x] /analysis/leakage endpoint\n- [x] /analysis/billing-models endpoint\n- [x] /analysis/unbilled endpoint\n- [x] Switch LLM to Anthropic API (with OpenRouter fallback)\n- [x] Scheduled report generation (APScheduler)\n- [x] MS Teams webhook for report delivery\n- [x] Email report delivery (SMTP)\n- [x] Mock data generator with 12 Bermuda clients\n- [x] Billing model classifier\n\n---\n\n## Phase 2: Live Read-Only \u2014 IN PROGRESS \ud83d\udd04\n\n### Xero Integration\n- [ ] Complete Xero OAuth flow (exchange authorization code for tokens)\n- [ ] Store refresh token securely\n- [ ] Test token refresh cycle\n- [ ] Test live P&L reports\n- [ ] Test live invoice listing (all statuses)\n- [ ] Test live contact/client sync\n- [ ] Test bank transactions (for cash flow)\n\n### Halo PSA Integration\n- [ ] Verify client_secret in .env works\n- [ ] Test live timesheet entries\n- [ ] Test live ticket details\n- [ ] Test live client contracts\n- [ ] Test agent utilization data\n\n### Billing Analysis\n- [ ] Connect billing classifier to live data\n- [ ] Validate leakage detection vs Mary's manual reconciliation\n- [ ] Historical trend analysis with 6+ months data\n\n### Scheduled Reports\n- [ ] Enable daily digest at 07:00 UTC (3:00 AM ADT)\n- [ ] Enable weekly report Monday 07:00 UTC\n- [ ] Verify reports contain live data\n\n### Communication\n- [ ] Bot Framework reply flow for Teams responses\n\n### Validation\n- [ ] Confirm no false positives for 2 weeks\n- [ ] Document accuracy metrics in AUDIT-LOG.md\n\n---\n\n## Phase 3: Advisory Mode \u2014 PLANNED \ud83d\udccb\n\n- [ ] Recommend billing corrections\n- [ ] Flag unbilled hours for invoicing suggestions\n- [ ] Suggest AYCE repricing when consumption exceeds plan\n- [ ] Proactive alerts for revenue risks\n- [ ] AI-powered anomaly detection in timesheets\n- [ ] Contract renewal recommendations\n\n---\n\n## Phase 4: Supervised Execution \u2014 FUTURE \u23f3\n\n- [ ] Generate draft invoices for CEO review\n- [ ] Unbilled hours \u2192 invoice suggestions\n- [ ] Project milestone billing drafts\n- [ ] Test rollback capability\n\n---\n\n## Phase 5: Autonomous (Limited) \u2014 FUTURE \ud83d\udd2e\n\n- [ ] Automated recurring invoice generation\n- [ ] Payment reminder sequences\n- [ ] Standard billing corrections\n- [ ] Cash flow forecasting\n- [ ] Continuous Sentinel audit integration\n- [ ] Quarterly human review process",
-      "changelog": "# Apex Finance Agent \u2014 Changelog\n\n## [1.2.0] \u2014 2026-02-08 (Overnight Build)\n\n### Added\n- **Mock Data Generator** (scripts/generate_mock_data.py)\n  - 12 realistic Bermuda MSP clients with billing models\n  - 6 months of P&L data\n  - 100+ timesheet entries\n  - 60+ invoices with various statuses\n  - Automatic leakage detection on generated data\n  - Contract rate cards for all clients\n\n- **Enhanced Revenue Leakage Analyzer**\n  - 5 detection types: UNBILLED_HOURS, AYCE_OVERUSE, PRICING_DEVIATION, STALE_TIMESHEET, MISSING_TIMESHEET\n  - Risk scoring (0-100) with levels: MINIMAL, LOW, MEDIUM, HIGH, CRITICAL\n  - Per-finding recommendations\n  - Filter by type or client\n\n- **Billing Model Classifier** (analysis/billing_classifier.py)\n  - Classifies clients as AYCE, AYCE+Hourly, or Hourly\n  - Detects model drift (overuse, underutilization, AYCE candidates)\n  - Generates billing recommendations\n\n- **Scheduled Reports** (APScheduler)\n  - Daily digest at 07:00 UTC (3:00 AM ADT)\n  - Weekly report Monday 07:00 UTC\n  - Leakage scan every 6 hours\n  - Auto-save to reports/ directory\n\n- **Report Delivery**\n  - Teams webhook via Homebase relay\n  - SMTP email to CEO\n\n### Changed\n- LLM backend now tries Anthropic API first, falls back to OpenRouter\n- All API endpoints return structured JSON with timestamps\n- Improved error handling across all modules\n\n### Fixed\n- Main.py now properly imports from analysis/ and reporting/ modules\n- Revenue leakage analyzer uses mock_data.json when available\n\n## [1.1.0] \u2014 2026-02-06\n\n### Added\n- API endpoints: /reports/latest, /reports/daily, /reports/weekly\n- Analysis endpoints: /analysis/leakage, /analysis/billing-models, /analysis/unbilled\n- Anthropic API integration with fallback\n- Heartbeat to Homebase every 5 minutes\n- Teams message handler\n\n### Changed\n- Upgraded to FastAPI with async handlers\n- Improved logging to logs/apex.log\n\n## [1.0.0] \u2014 2026-02-05\n\n### Added\n- Initial release\n- FastAPI server on port 9002\n- Health and status endpoints\n- Mock Xero client\n- Mock Halo PSA client\n- READ_ONLY_MODE and MOCK_MODE safety checks",
+      "readme": "# Apex Finance Agent\n\n**Phase 1: Mock Observer \u2014 COMPLETE**\n\nApex is a read-only finance intelligence agent for Rize Technology Group. It monitors Xero (accounting) and Halo PSA (timesheets) to produce financial reports, detect revenue leakage, and classify billing models.\n\n## Quick Start\n\n```bash\n# Service is managed by systemd\nsudo systemctl status apex.service\n\n# View logs\ntail -f ~/apex/logs/apex.log\n\n# Test health\ncurl http://localhost:9002/health\n```\n\n## API Endpoints\n\n### Health & Status\n| Endpoint | Method | Description |\n|----------|--------|-------------|\n| /health | GET | Health check with uptime |\n| /status | GET | Full status with integrations |\n\n### Reports\n| Endpoint | Method | Description |\n|----------|--------|-------------|\n| /api/reports/latest | GET | Most recent report of any type |\n| /api/reports/daily | GET | Daily P&L digest with unbilled hours |\n| /api/reports/weekly | GET | Weekly revenue/margin analysis |\n\n### Analysis\n| Endpoint | Method | Description |\n|----------|--------|-------------|\n| /api/analysis/leakage | GET | Revenue leakage detection (5 types) |\n| /api/analysis/billing-models | GET | Client billing classifications |\n| /api/analysis/unbilled | GET | Unbilled hours by client |\n\n### Messaging\n| Endpoint | Method | Description |\n|----------|--------|-------------|\n| /api/teams/message | POST | Handle Teams messages via Homebase |\n\n## Revenue Leakage Detection\n\nApex detects 5 types of revenue leakage:\n\n1. **UNBILLED_HOURS** \u2014 Time logged in Halo but not invoiced in Xero\n2. **AYCE_OVERUSE** \u2014 AYCE clients using more hours than their fee supports\n3. **PRICING_DEVIATION** \u2014 Invoices with rates different from contract\n4. **STALE_TIMESHEET** \u2014 Timesheet entries older than 30 days without invoice\n5. **MISSING_TIMESHEET** \u2014 Invoice exists but no backing timesheet (audit risk)\n\n## Billing Models\n\nApex classifies clients into:\n- **AYCE** \u2014 All-You-Can-Eat flat monthly fee\n- **AYCE+Hourly** \u2014 Flat fee plus project/hourly billing\n- **Hourly** \u2014 All time billed at hourly rate\n\n## Scheduled Tasks\n\n| Task | Schedule | Description |\n|------|----------|-------------|\n| Daily Digest | 07:00 UTC | P&L snapshot, unbilled hours, alerts |\n| Weekly Report | Mon 07:00 UTC | Revenue trends, margin analysis |\n| Leakage Scan | Every 6 hours | Detect new revenue leakage |\n\n## Mock Data\n\nGenerate mock data for testing:\n```bash\npython3 ~/apex/scripts/generate_mock_data.py\n```\n\nCreates 12 clients, 6 months of P&L, 100+ timesheets, 60+ invoices.\n\n## Configuration\n\nKey environment variables in .env:\n- MOCK_MODE=true (Phase 1)\n- READ_ONLY_MODE=true (NEVER change to false)\n- ANTHROPIC_API_KEY \u2014 Primary LLM\n- OPENROUTER_API_KEY \u2014 Fallback LLM\n- HOMEBASE_URL \u2014 For Teams relay\n\n## Safety\n\n\u26a0\ufe0f **READ_ONLY_MODE=true** \u2014 Agent cannot modify any data\n\u26a0\ufe0f **MOCK_MODE=true** \u2014 Uses mock data, not live APIs\n\n## Directory Structure\n\n```\n~/apex/\n\u251c\u2500\u2500 main.py              # FastAPI application\n\u251c\u2500\u2500 analysis/\n\u2502   \u251c\u2500\u2500 revenue_leakage.py   # Leakage detection\n\u2502   \u251c\u2500\u2500 billing_classifier.py # Billing model classification\n\u2502   \u2514\u2500\u2500 anomaly_detector.py   # Anomaly detection\n\u251c\u2500\u2500 integrations/\n\u2502   \u251c\u2500\u2500 xero_client.py       # Xero API client\n\u2502   \u251c\u2500\u2500 halo_client.py       # Halo PSA client\n\u2502   \u2514\u2500\u2500 homebase_client.py   # Homebase relay\n\u251c\u2500\u2500 reporting/\n\u2502   \u251c\u2500\u2500 financial_summary.py # Report generators\n\u2502   \u251c\u2500\u2500 daily_digest.py      # Daily report\n\u2502   \u2514\u2500\u2500 weekly_report.py     # Weekly report\n\u251c\u2500\u2500 scripts/\n\u2502   \u2514\u2500\u2500 generate_mock_data.py # Mock data generator\n\u251c\u2500\u2500 db/\n\u2502   \u2514\u2500\u2500 mock_data.json       # Generated mock data\n\u251c\u2500\u2500 reports/               # Generated reports\n\u2514\u2500\u2500 logs/                  # Application logs\n```\n\n## Support\n\nContact: artiedarrell@gmail.com\n\n\n## Halo Time Report \u2014 Financial Lens (Added Feb 12, 2026)\n\n**Script:** `scripts/halo-time-report.py`\n\n### Purpose\nGenerates a workforce revenue impact section for the daily financial digest.\nAnalyzes Halo PSA timesheet data through a financial lens.\n\n### What it reports:\n- Revenue Summary (hours logged, chargeable, revenue captured vs at risk)\n- Week-over-Week Trend (logging up or down)\n- Agent Chargeable Performance (who is generating billable hours)\n- Client Billable Hours (per-client breakdown with dollar values)\n- Unbilled Time Exposure (revenue leakage risk per agent)\n- Compliance Scorecard (team-wide metrics)\n\n### Usage:\n```bash\npython3 scripts/halo-time-report.py           # Print report\npython3 scripts/halo-time-report.py --json    # JSON output\n```\n\n### Import for digest integration:\n```python\nfrom halo_time_report import get_report_section\nsection = get_report_section()\n```\n\n### Data Sources:\n- `/Timesheet` \u2014 Agent daily hours (actual, target, chargeable, unlogged)\n- `/Actions` \u2014 Individual time entries with ticket context\n- `/Tickets/{id}` \u2014 Client attribution per time entry\n- `/ChargeRate` \u2014 Billing rates ($50/hr, $100/hr)\n\n### Key Metrics:\n- Default rate: $100/hr\n- Revenue at risk = unlogged hours \u00d7 $100/hr\n- External vs internal (Rize Technologies) client separation\n\n\n## Apex Time Dashboard API (Added Feb 12, 2026)\n\n**Script:** `scripts/time-dashboard-api.py`\n**Port:** 9010\n**Service:** `systemctl --user status apex-time-dashboard`\n\n### Purpose\nProvides a real-time REST API for the \"Core 5\" staff time tracking dashboard in Nexus. Pulls data from Halo PSA `/Timesheet` and `/Actions` endpoints.\n\n### Core 5 Staff\n| ID | Name | Type |\n|----|------|------|\n| 3 | Ibrahim El Charif | Full-time |\n| 13 | Mary Ocoy | Full-time |\n| 16 | Prabin AT | Full-time |\n| 17 | Haroon Kareem | Full-time |\n| 32 | DesRon deShield-Burchall | Full-time |\n\n### Endpoints\n| Endpoint | Method | Description |\n|----------|--------|-------------|\n| /health | GET | Health check |\n| /api/time/core5/daily | GET | Today's hours per Core 5 agent |\n| /api/time/core5/weekly | GET | This week's hours per Core 5 agent |\n| /api/time/core5/monthly | GET | This month's hours per Core 5 agent |\n| /api/time/core5/detail/{agent_id} | GET | Detailed time entries for one agent |\n| /api/time/core5/review/{agent_id} | POST | Toggle review status for an agent/date |\n| /api/time/core5/reviews | GET | All review marks |\n\n### Response Format\n```json\n{\n  \"period\": \"weekly\",\n  \"start\": \"2026-02-09\",\n  \"end\": \"2026-02-12\",\n  \"agents\": [\n    {\n      \"agent_id\": 3,\n      \"name\": \"Ibrahim El Charif\",\n      \"hours_logged\": 18.1,\n      \"hours_target\": 24.0,\n      \"hours_chargeable\": 12.5,\n      \"utilization_pct\": 75.4,\n      \"charge_pct\": 52.1,\n      \"revenue_logged\": 937.5,\n      \"revenue_target\": 1800.0,\n      \"status\": \"ok\"\n    }\n  ]\n}\n```\n\n### Performance\n- Summary endpoints use `/Timesheet` only (2-3s first call, <0.2s cached)\n- Detail endpoint paginates `/Actions` (slower, ~10s for full history)\n- Cache TTL: 5 minutes\n- Default rate: $75/hr blended average\n\n### Review System\n- Reviews stored in `data/time-reviews.json`\n- Keyed by date and agent_id\n- Toggle: POST with `{\"date\": \"2026-02-12\"}` body\n\n## Finance Dashboard Integration (Feb 12, 2026)\nApex owns and feeds the finance dashboard at finance.rize.bm (.245:9020).\n\n**Data Flow:** Apex Time API (.241:9010) -> Express proxy (.245:9020) -> React frontend\n\n**Insights Engine:** Runs every 2 hours via cron, analyzing Core 5 time data for:\n- Compliance gaps (who's not logging)\n- Trends (low chargeable ratios)\n- Revenue opportunities (unlogged hours x rates)\n- Dashboard health (is the frontend up, is data fresh)\n- Improvement proposals (new features to build)\n\n**Files:**\n- scripts/time-dashboard-api.py \u2014 FastAPI serving time data + insights\n- scripts/insights-engine.py \u2014 Cron-based analysis engine\n- scripts/insights_router.py \u2014 FastAPI router for insights endpoints\n- data/insights/current.json \u2014 Latest insights\n- data/insights/YYYY-MM-DD.json \u2014 Daily archives",
+      "todo": "# Apex Finance Agent \u2014 TODO\n\n## Phase 1: Mock Observer \u2014 COMPLETE \u2705\n\n- [x] FastAPI server on port 9002\n- [x] /health endpoint with memory + uptime\n- [x] Teams message handler via Homebase\n- [x] Heartbeat to Homebase every 5 minutes\n- [x] MOCK_MODE=true with hardcoded safety check\n- [x] READ_ONLY_MODE=true with hardcoded safety check\n- [x] Xero API client (mock responses)\n- [x] Halo PSA client (mock responses)\n- [x] Revenue leakage analyzer (5 detection types)\n- [x] Daily digest generator\n- [x] Weekly report generator\n- [x] /reports/latest endpoint\n- [x] /reports/daily endpoint\n- [x] /reports/weekly endpoint\n- [x] /analysis/leakage endpoint\n- [x] /analysis/billing-models endpoint\n- [x] /analysis/unbilled endpoint\n- [x] Switch LLM to Anthropic API (with OpenRouter fallback)\n- [x] Scheduled report generation (APScheduler)\n- [x] MS Teams webhook for report delivery\n- [x] Email report delivery (SMTP)\n- [x] Mock data generator with 12 Bermuda clients\n- [x] Billing model classifier\n\n---\n\n## Phase 2: Live Read-Only \u2014 IN PROGRESS \ud83d\udd04\n\n### Xero Integration\n- [ ] Complete Xero OAuth flow (exchange authorization code for tokens)\n- [ ] Store refresh token securely\n- [ ] Test token refresh cycle\n- [ ] Test live P&L reports\n- [ ] Test live invoice listing (all statuses)\n- [ ] Test live contact/client sync\n- [ ] Test bank transactions (for cash flow)\n\n### Halo PSA Integration\n- [ ] Verify client_secret in .env works\n- [ ] Test live timesheet entries\n- [ ] Test live ticket details\n- [ ] Test live client contracts\n- [ ] Test agent utilization data\n\n### Billing Analysis\n- [ ] Connect billing classifier to live data\n- [ ] Validate leakage detection vs Mary's manual reconciliation\n- [ ] Historical trend analysis with 6+ months data\n\n### Scheduled Reports\n- [ ] Enable daily digest at 07:00 UTC (3:00 AM ADT)\n- [ ] Enable weekly report Monday 07:00 UTC\n- [ ] Verify reports contain live data\n\n### Communication\n- [ ] Bot Framework reply flow for Teams responses\n\n### Validation\n- [ ] Confirm no false positives for 2 weeks\n- [ ] Document accuracy metrics in AUDIT-LOG.md\n\n---\n\n## Phase 3: Advisory Mode \u2014 PLANNED \ud83d\udccb\n\n- [ ] Recommend billing corrections\n- [ ] Flag unbilled hours for invoicing suggestions\n- [ ] Suggest AYCE repricing when consumption exceeds plan\n- [ ] Proactive alerts for revenue risks\n- [ ] AI-powered anomaly detection in timesheets\n- [ ] Contract renewal recommendations\n\n---\n\n## Phase 4: Supervised Execution \u2014 FUTURE \u23f3\n\n- [ ] Generate draft invoices for CEO review\n- [ ] Unbilled hours \u2192 invoice suggestions\n- [ ] Project milestone billing drafts\n- [ ] Test rollback capability\n\n---\n\n## Phase 5: Autonomous (Limited) \u2014 FUTURE \ud83d\udd2e\n\n- [ ] Automated recurring invoice generation\n- [ ] Payment reminder sequences\n- [ ] Standard billing corrections\n- [ ] Cash flow forecasting\n- [ ] Continuous Sentinel audit integration\n- [ ] Quarterly human review process\n\n## Halo Time Report (Feb 12, 2026)\n\n- [x] Deep dive into Halo time logging API model\n- [x] Build halo-time-report.py (financial lens)\n- [x] Revenue impact calculation (unlogged \u00d7 rate)\n- [x] Per-client billable hours breakdown\n- [x] Agent chargeable ratio tracking\n- [x] Week-over-week trend analysis\n- [x] Unbilled time exposure alerts\n- [ ] Integrate get_report_section() into financial-digest.py\n- [ ] Add cron schedule for standalone time report\n- [ ] Historical trend tracking (save weekly snapshots)\n\n## Time Dashboard API (Feb 12, 2026)\n\n- [x] Build time-dashboard-api.py (FastAPI on port 9010)\n- [x] GET /api/time/core5/daily \u2014 Today's hours per Core 5 agent\n- [x] GET /api/time/core5/weekly \u2014 This week's hours\n- [x] GET /api/time/core5/monthly \u2014 This month's hours\n- [x] GET /api/time/core5/detail/{agent_id} \u2014 Per-agent detail with entries\n- [x] POST /api/time/core5/review/{agent_id} \u2014 Toggle review status\n- [x] GET /api/time/core5/reviews \u2014 All review marks\n- [x] Systemd service (apex-time-dashboard.service)\n- [x] UFW rule for port 9010 from LAN\n- [x] Response caching (5 min TTL)\n- [x] Use /Timesheet for fast summary (not /Actions pagination)\n- [ ] Add authentication (API key or JWT)\n- [ ] Historical trend snapshots (save daily to DB)\n- [ ] Webhook alerts for zero-logging Core 5 members",
+      "changelog": "# Apex Finance Agent \u2014 Changelog\n\n## [1.2.0] \u2014 2026-02-08 (Overnight Build)\n\n### Added\n- **Mock Data Generator** (scripts/generate_mock_data.py)\n  - 12 realistic Bermuda MSP clients with billing models\n  - 6 months of P&L data\n  - 100+ timesheet entries\n  - 60+ invoices with various statuses\n  - Automatic leakage detection on generated data\n  - Contract rate cards for all clients\n\n- **Enhanced Revenue Leakage Analyzer**\n  - 5 detection types: UNBILLED_HOURS, AYCE_OVERUSE, PRICING_DEVIATION, STALE_TIMESHEET, MISSING_TIMESHEET\n  - Risk scoring (0-100) with levels: MINIMAL, LOW, MEDIUM, HIGH, CRITICAL\n  - Per-finding recommendations\n  - Filter by type or client\n\n- **Billing Model Classifier** (analysis/billing_classifier.py)\n  - Classifies clients as AYCE, AYCE+Hourly, or Hourly\n  - Detects model drift (overuse, underutilization, AYCE candidates)\n  - Generates billing recommendations\n\n- **Scheduled Reports** (APScheduler)\n  - Daily digest at 07:00 UTC (3:00 AM ADT)\n  - Weekly report Monday 07:00 UTC\n  - Leakage scan every 6 hours\n  - Auto-save to reports/ directory\n\n- **Report Delivery**\n  - Teams webhook via Homebase relay\n  - SMTP email to CEO\n\n### Changed\n- LLM backend now tries Anthropic API first, falls back to OpenRouter\n- All API endpoints return structured JSON with timestamps\n- Improved error handling across all modules\n\n### Fixed\n- Main.py now properly imports from analysis/ and reporting/ modules\n- Revenue leakage analyzer uses mock_data.json when available\n\n## [1.1.0] \u2014 2026-02-06\n\n### Added\n- API endpoints: /reports/latest, /reports/daily, /reports/weekly\n- Analysis endpoints: /analysis/leakage, /analysis/billing-models, /analysis/unbilled\n- Anthropic API integration with fallback\n- Heartbeat to Homebase every 5 minutes\n- Teams message handler\n\n### Changed\n- Upgraded to FastAPI with async handlers\n- Improved logging to logs/apex.log\n\n## [1.0.0] \u2014 2026-02-05\n\n### Added\n- Initial release\n- FastAPI server on port 9002\n- Health and status endpoints\n- Mock Xero client\n- Mock Halo PSA client\n- READ_ONLY_MODE and MOCK_MODE safety checks\n\n## [2026-02-12] Financial Digest Bug Fixes\n\n### Fixed\n- **Bug 1**: Cash double-counting - Bank accounts now deduplicated by AccountID\n- **Bug 2**: Credit cards as cash - Credit cards separated as liabilities, net cash calculated\n- **Bug 3**: AR aging split - Actionable AR (<90 days) vs Legacy AR (90+ days) with 61-90 day bucket\n- **Bug 4**: Xero Payments 500 error - Fixed date format to DateTime(year,month,day) instead of ISO string\n- **Bug 5**: Xero Aged Receivables 400 error - Corrected to use only date= parameter\n- **Bug 6**: Added Halo workforce utilization section with Core 5 team tracking\n\n### Added\n- `scripts/halo_time_helper.py` - Workforce utilization calculator\n- `integrations/xero_client.py::get_aged_receivables()` - Aged receivables report function\n- Cash position now shows bank accounts and credit cards separately\n- AR aging split into actionable (0-60d, 61-90d) vs legacy (90+d)\n- Workforce utilization with working days MTD and per-agent hour tracking\n\n### Changed\n- `scripts/financial-digest.py` - All 6 bug fixes integrated\n- `integrations/xero_client.py` - Date format fixes for API calls\n\n### Technical Details\n- Bank accounts deduplicated by AccountID to prevent double-counting\n- Credit card balances subtracted from bank total for net cash position\n- AR aging buckets: current, 30_days, 60_days, 61_90, 90_plus\n- Xero API date filters use DateTime(y,m,d) not ISO strings\n- Halo Timesheet API returns LIST not dict\n- Core 5 team: Ibrahim, Prabin, Mary, Haroon, DesRon",
       "todos_parsed": [
         {
           "text": "FastAPI server on port 9002",
@@ -2012,7 +2020,7 @@
       "git": {
         "status": "dirty",
         "branch": "main",
-        "last_commit": "b5d2b7e security: comprehensive .gitignore for credential protection (14 hours ago)",
+        "last_commit": "a47fb35 feat: Finance API router \u2014 7 endpoints for dashboard Phase 3 (4 hours ago)",
         "changes": [
           {
             "status": "M",
@@ -2067,20 +2075,12 @@
       ],
       "files": [
         "CHANGELOG.md",
-        "DEPLOYMENT.md",
         "RUNBOOK.md",
         "SECURITY.md",
         "TODO.md",
         "config/IDENTITY.md",
         "data/improvement-tracker.json",
-        "data/xero-snapshot-2026-02-10.json",
-        "data/xero-snapshot-2026-02-11.json",
-        "data/xero_tokens.json",
-        "reporting/__init__.py",
-        "reporting/daily_digest.py",
-        "reporting/financial_summary.py",
-        "reporting/monthly_package.py",
-        "reporting/weekly_report.py",
+        "data/xero-snapshot-2026-02-12.json",
         "reports/daily_20260208_054118.json",
         "reports/daily_20260208_110000.json",
         "reports/daily_20260208_132942.json",
@@ -2106,13 +2106,21 @@
         "reports/leakage_20260211_220005.json",
         "reports/leakage_20260212_040005.json",
         "reports/leakage_20260212_100005.json",
+        "reports/leakage_20260212_160005.json",
+        "reports/leakage_20260212_220010.json",
         "reports/weekly_20260208_054118.json",
         "reports/weekly_20260208_132942.json",
         "reports/weekly_20260208_133338.json",
         "reports/weekly_20260209_110000.json",
+        "scripts/finance_router.py",
         "scripts/financial-digest-v2.py",
         "scripts/financial-digest.py",
         "scripts/generate_mock_data.py",
+        "scripts/halo-time-report.py",
+        "scripts/halo_time_helper.py",
+        "scripts/insights-engine.py",
+        "scripts/insights_router.py",
+        "scripts/time-dashboard-api.py",
         "scripts/xero-authorize.py",
         "scripts/xero-refresh-token.py",
         "scripts/xero-sync.py"
@@ -2128,7 +2136,7 @@
       "ports": [
         9003
       ],
-      "scanned_at": "2026-02-12T14:38:45.199710+00:00",
+      "scanned_at": "2026-02-13T03:38:30.439599+00:00",
       "status": "ok",
       "issues": [
         {
@@ -2192,8 +2200,8 @@
           "status": "ok"
         }
       ],
-      "readme": "# Aegis \u2014 Infrastructure Intelligence Agent\n\n**Version:** 1.2.0\n**Host:** agents@192.168.65.241\n**Port:** 9003\n**Status:** MOCK MODE (Phase 1 Complete)\n\n---\n\n## Overview\n\nAegis is Rize Technology Group's infrastructure intelligence agent. It reads data from PRTG (network monitoring), Action1 (patch management), and Halo PSA (ticketing) to identify alert patterns, compliance gaps, and operational risks.\n\n**Phase 1 (Current):** Read-only observer with mock data \u2014 **COMPLETE**\n**Phase 2 (Planned):** Live PRTG, Action1, Halo read access. Daily/weekly reports.\n**Phase 3 (Future):** Advisory mode \u2014 recommends ticket responses, suggests remediation.\n\n---\n\n## Architecture\n\n```\naegis/\n\u251c\u2500\u2500 main.py                  # FastAPI server \u2014 endpoints, heartbeat, Teams handler\n\u251c\u2500\u2500 .env                     # Configuration (MOCK_MODE=true, READ_ONLY_MODE=true)\n\u251c\u2500\u2500 config.py                # Config loader\n\u251c\u2500\u2500 integrations/\n\u2502   \u251c\u2500\u2500 prtg_client.py       # PRTG \u2014 sensors, alerts, devices, history\n\u2502   \u251c\u2500\u2500 action1_client.py    # Action1 \u2014 endpoints, patches, compliance\n\u2502   \u251c\u2500\u2500 halo_client.py       # Halo PSA \u2014 tickets, SLA breaches\n\u2502   \u2514\u2500\u2500 homebase_client.py   # Homebase relay integration\n\u251c\u2500\u2500 intelligence/\n\u2502   \u251c\u2500\u2500 alert_correlator.py  # PRTG alert \u2194 Halo ticket matching\n\u2502   \u251c\u2500\u2500 pattern_detector.py  # Recurring pattern detection\n\u2502   \u251c\u2500\u2500 asset_tracker.py     # SSL/domain/license tracking\n\u2502   \u2514\u2500\u2500 anomaly_detector.py  # Anomaly detection\n\u251c\u2500\u2500 reporting/\n\u2502   \u251c\u2500\u2500 infrastructure_report.py  # Daily briefing + weekly compliance\n\u2502   \u251c\u2500\u2500 daily_briefing.py    # Detailed daily report generator\n\u2502   \u2514\u2500\u2500 templates/           # Report templates\n\u251c\u2500\u2500 monitor/\n\u2502   \u251c\u2500\u2500 synthetic_monitor.py # HTTP endpoint checks (every 5 min)\n\u2502   \u251c\u2500\u2500 login_monitor.py     # Login flow tests (every 15 min)\n\u2502   \u251c\u2500\u2500 browser_monitor.py   # Playwright browser tests (daily 6 AM UTC)\n\u2502   \u251c\u2500\u2500 config.json          # Endpoint configuration\n\u2502   \u251c\u2500\u2500 results.json         # Synthetic check results\n\u2502   \u251c\u2500\u2500 browser_results.json # Browser check results\n\u2502   \u2514\u2500\u2500 screenshots/         # Browser screenshots\n\u251c\u2500\u2500 reports/                 # Generated reports storage\n\u251c\u2500\u2500 logs/                    # Log files\n\u2514\u2500\u2500 docs/\n    \u251c\u2500\u2500 README.md, CLAUDE.md, TODO.md, CHANGELOG.md, PROJECT_PLAN.md\n```\n\n## Endpoints\n\n| Endpoint | Method | Description |\n|----------|--------|-------------|\n| /health | GET | Health check with memory/uptime |\n| /status | GET | Agent status + config (includes scheduler status) |\n| /api/teams/message | POST | Teams message handler |\n| /api/alerts/active | GET | Active PRTG alerts (mock data) |\n| /api/correlations | GET | Alert-to-ticket correlations |\n| /api/patterns | GET | Detected recurring patterns + recommendations |\n| /api/reports/daily | GET | Generate daily infrastructure briefing |\n| /api/reports/weekly | GET | Generate weekly compliance report |\n| /api/monitor/status | GET | Synthetic monitoring results |\n| /alerts/active | GET | (Legacy) Active PRTG alerts |\n| /correlations | GET | (Legacy) Alert-to-ticket correlations |\n| /patterns | GET | (Legacy) Detected patterns |\n| /reports/daily | GET | (Legacy) Daily briefing |\n| /reports/weekly | GET | (Legacy) Weekly compliance |\n| /infrastructure/summary | GET | Aggregated infrastructure health |\n| /compliance | GET | Patch compliance summary |\n| /assets | GET | Asset health (SSL, licenses, domains) |\n\n## LLM Integration\n\nAegis uses AI to respond to Teams messages:\n- **Primary:** Anthropic API (claude-sonnet-4-20250514)\n- **Fallback:** OpenRouter (anthropic/claude-opus-4)\n\n## Scheduled Tasks\n\n| Task | Schedule | Description |\n|------|----------|-------------|\n| Synthetic Monitor | Every 5 min | HTTP checks on all tunnel endpoints |\n| Login Monitor | Every 15 min | Login flow verification |\n| Browser Monitor | Daily 06:00 UTC | Playwright browser tests with screenshots |\n| Daily Briefing | 07:30 UTC | Infrastructure health report \u2192 Teams + email |\n| Weekly Compliance | Mon 08:00 UTC | Compliance report \u2192 Teams + email |\n| Heartbeat | Every 5 min | Status to Homebase with monitor summary |\n\n## Safety\n\n- **MOCK_MODE=true** \u2014 All integrations return mock data\n- **READ_ONLY_MODE=true** \u2014 Hardcoded startup check (agent refuses to start if false)\n- No write operations to PRTG, Action1, Halo, or any external API\n- Homebase monitors via heartbeat every 5 minutes\n- All API endpoints return mock/cached data only",
-      "todo": "# Aegis Infrastructure Agent \u2014 TODO\n\n## Phase 1: Mock Observer \u2014 COMPLETE \u2705\n\n- [x] FastAPI server on port 9003\n- [x] /health endpoint with memory + uptime\n- [x] Teams message handler via Homebase\n- [x] Heartbeat to Homebase every 5 minutes\n- [x] MOCK_MODE=true with hardcoded safety check\n- [x] READ_ONLY_MODE=true with hardcoded safety check\n- [x] PRTG API client (mock sensors, alerts, devices)\n- [x] Action1 API client (mock endpoints, patches, compliance)\n- [x] Halo PSA ticket client (mock tickets, SLA breaches)\n- [x] Alert correlator (PRTG alert \u2194 Halo ticket matching)\n- [x] Pattern detector (repeat offenders, flapping, concentration)\n- [x] Daily briefing generator\n- [x] Weekly compliance report generator\n- [x] /api/alerts/active endpoint\n- [x] /api/correlations endpoint\n- [x] /api/patterns endpoint\n- [x] /api/reports/daily and /api/reports/weekly endpoints\n- [x] /api/monitor/status endpoint (synthetic monitor results)\n- [x] Switch LLM to Anthropic API (with OpenRouter fallback)\n- [x] Scheduled report generation (APScheduler \u2014 daily 07:30 UTC, weekly Monday 08:00 UTC)\n- [x] MS Teams webhook for report delivery\n- [x] Heartbeat includes monitor summary (endpoints_healthy, endpoints_total)\n- [x] Synthetic monitor (HTTP checks every 5 minutes via cron)\n- [x] Login monitor (form POST tests every 15 minutes via cron)\n- [x] Browser monitor with Playwright (daily 06:00 UTC, screenshots, JS error detection)\n\n---\n\n## Phase 2: Live Read-Only \u2014 IN PROGRESS \ud83d\udd04\n\n### Integration Tasks\n- [ ] Connect to live PRTG (verify passhash works)\n- [ ] Connect to live Action1 (verify API key)\n- [ ] Connect to live Halo PSA (verify OAuth)\n\n### Asset Tracking\n- [ ] Build asset tracker (SSL certs, domains, licenses)\n- [ ] SSL certificate expiration monitoring\n- [ ] Domain registration expiration tracking\n- [ ] Software license renewal tracking\n\n### Scheduled Reports\n- [ ] Daily briefing at 07:00 UTC (3:00 AM ADT)\n- [ ] Weekly compliance report Monday 07:00 UTC\n\n### Communication\n- [ ] Bot Framework reply flow for Teams responses\n\n### Validation\n- [ ] Validate correlation accuracy vs Ibrahim's manual triage\n- [ ] Confirm no false positives for 2 weeks\n- [ ] Document accuracy metrics in AUDIT-LOG.md\n\n---\n\n## Phase 3: Advisory Mode \u2014 PLANNED \ud83d\udccb\n\n- [ ] Recommend ticket responses based on alert patterns\n- [ ] Suggest remediation steps for recurring issues\n- [ ] Proactive infrastructure risk alerts\n- [ ] Historical trend analysis and reporting\n- [ ] Anomaly detection for unusual patterns\n- [ ] Customer health scoring based on alert frequency\n\n---\n\n## Phase 4: Supervised Execution \u2014 FUTURE \u23f3\n\n- [ ] Acknowledge low-priority PRTG alerts (with approval)\n- [ ] Create Halo tickets from correlation data (with approval)\n- [ ] Schedule patch deployments (with approval)\n- [ ] Test rollback capability\n\n---\n\n## Phase 5: Autonomous (Limited) \u2014 FUTURE \ud83d\udd2e\n\n- [ ] Auto-acknowledge specific alert types\n- [ ] Auto-create tickets for known patterns\n- [ ] Auto-schedule routine patches\n- [ ] Continuous Sentinel audit integration\n- [ ] Quarterly human review process",
+      "readme": "# Aegis \u2014 Infrastructure Intelligence Agent\n\n**Version:** 1.2.0\n**Host:** agents@192.168.65.241\n**Port:** 9003\n**Status:** MOCK MODE (Phase 1 Complete)\n\n---\n\n## Overview\n\nAegis is Rize Technology Group's infrastructure intelligence agent. It reads data from PRTG (network monitoring), Action1 (patch management), and Halo PSA (ticketing) to identify alert patterns, compliance gaps, and operational risks.\n\n**Phase 1 (Current):** Read-only observer with mock data \u2014 **COMPLETE**\n**Phase 2 (Planned):** Live PRTG, Action1, Halo read access. Daily/weekly reports.\n**Phase 3 (Future):** Advisory mode \u2014 recommends ticket responses, suggests remediation.\n\n---\n\n## Architecture\n\n```\naegis/\n\u251c\u2500\u2500 main.py                  # FastAPI server \u2014 endpoints, heartbeat, Teams handler\n\u251c\u2500\u2500 .env                     # Configuration (MOCK_MODE=true, READ_ONLY_MODE=true)\n\u251c\u2500\u2500 config.py                # Config loader\n\u251c\u2500\u2500 integrations/\n\u2502   \u251c\u2500\u2500 prtg_client.py       # PRTG \u2014 sensors, alerts, devices, history\n\u2502   \u251c\u2500\u2500 action1_client.py    # Action1 \u2014 endpoints, patches, compliance\n\u2502   \u251c\u2500\u2500 halo_client.py       # Halo PSA \u2014 tickets, SLA breaches\n\u2502   \u2514\u2500\u2500 homebase_client.py   # Homebase relay integration\n\u251c\u2500\u2500 intelligence/\n\u2502   \u251c\u2500\u2500 alert_correlator.py  # PRTG alert \u2194 Halo ticket matching\n\u2502   \u251c\u2500\u2500 pattern_detector.py  # Recurring pattern detection\n\u2502   \u251c\u2500\u2500 asset_tracker.py     # SSL/domain/license tracking\n\u2502   \u2514\u2500\u2500 anomaly_detector.py  # Anomaly detection\n\u251c\u2500\u2500 reporting/\n\u2502   \u251c\u2500\u2500 infrastructure_report.py  # Daily briefing + weekly compliance\n\u2502   \u251c\u2500\u2500 daily_briefing.py    # Detailed daily report generator\n\u2502   \u2514\u2500\u2500 templates/           # Report templates\n\u251c\u2500\u2500 monitor/\n\u2502   \u251c\u2500\u2500 synthetic_monitor.py # HTTP endpoint checks (every 5 min)\n\u2502   \u251c\u2500\u2500 login_monitor.py     # Login flow tests (every 15 min)\n\u2502   \u251c\u2500\u2500 browser_monitor.py   # Playwright browser tests (daily 6 AM UTC)\n\u2502   \u251c\u2500\u2500 config.json          # Endpoint configuration\n\u2502   \u251c\u2500\u2500 results.json         # Synthetic check results\n\u2502   \u251c\u2500\u2500 browser_results.json # Browser check results\n\u2502   \u2514\u2500\u2500 screenshots/         # Browser screenshots\n\u251c\u2500\u2500 reports/                 # Generated reports storage\n\u251c\u2500\u2500 logs/                    # Log files\n\u2514\u2500\u2500 docs/\n    \u251c\u2500\u2500 README.md, CLAUDE.md, TODO.md, CHANGELOG.md, PROJECT_PLAN.md\n```\n\n## Endpoints\n\n| Endpoint | Method | Description |\n|----------|--------|-------------|\n| /health | GET | Health check with memory/uptime |\n| /status | GET | Agent status + config (includes scheduler status) |\n| /api/teams/message | POST | Teams message handler |\n| /api/alerts/active | GET | Active PRTG alerts (mock data) |\n| /api/correlations | GET | Alert-to-ticket correlations |\n| /api/patterns | GET | Detected recurring patterns + recommendations |\n| /api/reports/daily | GET | Generate daily infrastructure briefing |\n| /api/reports/weekly | GET | Generate weekly compliance report |\n| /api/monitor/status | GET | Synthetic monitoring results |\n| /alerts/active | GET | (Legacy) Active PRTG alerts |\n| /correlations | GET | (Legacy) Alert-to-ticket correlations |\n| /patterns | GET | (Legacy) Detected patterns |\n| /reports/daily | GET | (Legacy) Daily briefing |\n| /reports/weekly | GET | (Legacy) Weekly compliance |\n| /infrastructure/summary | GET | Aggregated infrastructure health |\n| /compliance | GET | Patch compliance summary |\n| /assets | GET | Asset health (SSL, licenses, domains) |\n\n## LLM Integration\n\nAegis uses AI to respond to Teams messages:\n- **Primary:** Anthropic API (claude-sonnet-4-20250514)\n- **Fallback:** OpenRouter (anthropic/claude-opus-4)\n\n## Scheduled Tasks\n\n| Task | Schedule | Description |\n|------|----------|-------------|\n| Synthetic Monitor | Every 5 min | HTTP checks on all tunnel endpoints |\n| Login Monitor | Every 15 min | Login flow verification |\n| Browser Monitor | Daily 06:00 UTC | Playwright browser tests with screenshots |\n| Daily Briefing | 07:30 UTC | Infrastructure health report \u2192 Teams + email |\n| Weekly Compliance | Mon 08:00 UTC | Compliance report \u2192 Teams + email |\n| Heartbeat | Every 5 min | Status to Homebase with monitor summary |\n\n## Safety\n\n- **MOCK_MODE=true** \u2014 All integrations return mock data\n- **READ_ONLY_MODE=true** \u2014 Hardcoded startup check (agent refuses to start if false)\n- No write operations to PRTG, Action1, Halo, or any external API\n- Homebase monitors via heartbeat every 5 minutes\n- All API endpoints return mock/cached data only\n\n\n## Halo Time Report \u2014 Operational Lens (Added Feb 12, 2026)\n\n**Script:** `scripts/halo-time-report.py`\n\n### Purpose\nGenerates a workforce utilization and compliance section for the daily operations report.\nAnalyzes Halo PSA timesheet data through an operational/capacity lens.\n\n### What it reports:\n- Team Summary (utilization rate, chargeable hours, unlogged gap)\n- Per-Agent Utilization (actual vs target hours, status icons)\n- Today's Logging Status (who has logged today)\n- Compliance Violators (zero-loggers alert)\n- Overworked/Underworked Detection (>45h or <10h flags)\n- Ticket Load vs Hours Correlation (tickets per agent vs time logged)\n- Week-over-Week Trend\n- Compliance Scorecard with letter grade\n\n### Usage:\n```bash\npython3 scripts/halo-time-report.py           # Print report\npython3 scripts/halo-time-report.py --json    # JSON output\n```\n\n### Import for briefing integration:\n```python\nfrom halo_time_report import get_report_section\nsection = get_report_section()\n```\n\n### Data Sources:\n- `/Timesheet` \u2014 Agent daily hours\n- `/Agent` \u2014 Full staff list with IDs\n- `/Tickets` \u2014 Open ticket counts per agent\n\n### Thresholds:\n- Overworked: >45h/week\n- Underworked: <10h/week (full-timers)\n- Utilization grades: Green \u226575%, Yellow \u226550%, Orange \u226525%, Red >0%, Black = 0\n- Overall grade: A (\u226580% compliance + \u226575% util) through D (Critical)\n\n\n## Time Compliance Check (Added Feb 12, 2026)\n\n**Script:** `scripts/time-compliance-check.py`\n\n### Purpose\nGenerates real-time compliance alerts for the Core 5 staff based on Halo PSA timesheet data. Detects under-logging, zero-hour days, and pace warnings.\n\n### Alert Types\n| Type | Severity | Trigger |\n|------|----------|---------|\n| zero_hours | Critical | 0 hours logged today (after 4 PM AST) |\n| low_utilization | Warning | Below 50% of weekly target by Wednesday |\n| pace_warning | Warning | Projected weekly total below 75% of target |\n| zero_week | Critical | 0 hours for entire week so far |\n\n### Usage\n```bash\n# Text output\npython3 scripts/time-compliance-check.py\n\n# JSON import\nfrom time_compliance_check import get_compliance_alerts, get_alert_text\nalerts = get_compliance_alerts()  # Returns dict with alerts + summary\ntext = get_alert_text()           # Returns formatted text\n```\n\n### Output Example\n```\n\u26a0\ufe0f TIME COMPLIANCE ALERTS\n   Week: 2026-02-09 to 2026-02-12\n   Alerts: 2 (0 critical, 2 warnings)\n\n   \ud83d\udfe1 LOW UTIL: Mary Ocoy \u2014 10.6h logged (44% of 24h target)\n   \ud83d\udfe1 LOW UTIL: DesRon deShield-Burchall \u2014 8.5h logged (35% of 24h target)\n\n   \ud83d\udcca PACE SUMMARY\n   \ud83d\udfe2 Ibrahim El Charif         |  18.1h (75%) | Projected: 22.6h/40h\n   \ud83d\udd34 Mary Ocoy                 |  10.6h (44%) | Projected: 13.2h/40h\n   \ud83d\udfe1 Prabin AT                 |  12.0h (50%) | Projected: 15.0h/40h\n   \ud83d\udfe2 Haroon Kareem             |  19.1h (79%) | Projected: 23.8h/40h\n   \ud83d\udd34 DesRon deShield-Burchall  |   8.5h (35%) | Projected: 10.6h/40h\n```",
+      "todo": "# Aegis Infrastructure Agent \u2014 TODO\n\n## Phase 1: Mock Observer \u2014 COMPLETE \u2705\n\n- [x] FastAPI server on port 9003\n- [x] /health endpoint with memory + uptime\n- [x] Teams message handler via Homebase\n- [x] Heartbeat to Homebase every 5 minutes\n- [x] MOCK_MODE=true with hardcoded safety check\n- [x] READ_ONLY_MODE=true with hardcoded safety check\n- [x] PRTG API client (mock sensors, alerts, devices)\n- [x] Action1 API client (mock endpoints, patches, compliance)\n- [x] Halo PSA ticket client (mock tickets, SLA breaches)\n- [x] Alert correlator (PRTG alert \u2194 Halo ticket matching)\n- [x] Pattern detector (repeat offenders, flapping, concentration)\n- [x] Daily briefing generator\n- [x] Weekly compliance report generator\n- [x] /api/alerts/active endpoint\n- [x] /api/correlations endpoint\n- [x] /api/patterns endpoint\n- [x] /api/reports/daily and /api/reports/weekly endpoints\n- [x] /api/monitor/status endpoint (synthetic monitor results)\n- [x] Switch LLM to Anthropic API (with OpenRouter fallback)\n- [x] Scheduled report generation (APScheduler \u2014 daily 07:30 UTC, weekly Monday 08:00 UTC)\n- [x] MS Teams webhook for report delivery\n- [x] Heartbeat includes monitor summary (endpoints_healthy, endpoints_total)\n- [x] Synthetic monitor (HTTP checks every 5 minutes via cron)\n- [x] Login monitor (form POST tests every 15 minutes via cron)\n- [x] Browser monitor with Playwright (daily 06:00 UTC, screenshots, JS error detection)\n\n---\n\n## Phase 2: Live Read-Only \u2014 IN PROGRESS \ud83d\udd04\n\n### Integration Tasks\n- [ ] Connect to live PRTG (verify passhash works)\n- [ ] Connect to live Action1 (verify API key)\n- [ ] Connect to live Halo PSA (verify OAuth)\n\n### Asset Tracking\n- [ ] Build asset tracker (SSL certs, domains, licenses)\n- [ ] SSL certificate expiration monitoring\n- [ ] Domain registration expiration tracking\n- [ ] Software license renewal tracking\n\n### Scheduled Reports\n- [ ] Daily briefing at 07:00 UTC (3:00 AM ADT)\n- [ ] Weekly compliance report Monday 07:00 UTC\n\n### Communication\n- [ ] Bot Framework reply flow for Teams responses\n\n### Validation\n- [ ] Validate correlation accuracy vs Ibrahim's manual triage\n- [ ] Confirm no false positives for 2 weeks\n- [ ] Document accuracy metrics in AUDIT-LOG.md\n\n---\n\n## Phase 3: Advisory Mode \u2014 PLANNED \ud83d\udccb\n\n- [ ] Recommend ticket responses based on alert patterns\n- [ ] Suggest remediation steps for recurring issues\n- [ ] Proactive infrastructure risk alerts\n- [ ] Historical trend analysis and reporting\n- [ ] Anomaly detection for unusual patterns\n- [ ] Customer health scoring based on alert frequency\n\n---\n\n## Phase 4: Supervised Execution \u2014 FUTURE \u23f3\n\n- [ ] Acknowledge low-priority PRTG alerts (with approval)\n- [ ] Create Halo tickets from correlation data (with approval)\n- [ ] Schedule patch deployments (with approval)\n- [ ] Test rollback capability\n\n---\n\n## Phase 5: Autonomous (Limited) \u2014 FUTURE \ud83d\udd2e\n\n- [ ] Auto-acknowledge specific alert types\n- [ ] Auto-create tickets for known patterns\n- [ ] Auto-schedule routine patches\n- [ ] Continuous Sentinel audit integration\n- [ ] Quarterly human review process\n\n## Halo Time Report (Feb 12, 2026)\n\n- [x] Build halo-time-report.py (operational lens)\n- [x] Per-agent utilization tracking\n- [x] Time logging compliance alerts (zero-loggers)\n- [x] Ticket load vs hours correlation\n- [x] Overworked/underworked detection\n- [x] Week-over-week trend analysis\n- [x] Compliance scorecard with letter grade\n- [x] Ticket counts per agent (via /Agent + /Tickets mapping)\n- [ ] Integrate get_report_section() into morning-briefing.py\n- [ ] Add cron schedule for standalone time report\n- [ ] Daily compliance email to managers\n\n## Time Compliance Check (Feb 12, 2026)\n\n- [x] Build time-compliance-check.py (Core 5 alerts)\n- [x] Zero-hours detection (critical, after 4 PM)\n- [x] Low utilization alerts (warning, by Wednesday)\n- [x] Pace warning alerts (projected miss)\n- [x] Zero-week detection (critical)\n- [x] JSON and text output modes\n- [x] Importable functions for morning-briefing.py integration\n- [ ] Integrate into morning-briefing.py (auto-include compliance section)\n- [ ] Add cron: run at 4 PM AST (20:00 UTC) daily for zero-hour check\n- [ ] Email alerts to managers for critical violations\n- [ ] Escalation to Cortex for persistent non-compliance",
       "changelog": "# Changelog \u2014 Aegis Infrastructure Agent\n\n## v1.2.0 \u2014 2026-02-08\n### Overnight Build \u2014 Phase 1 Complete\n- **New API Endpoints:**\n  - GET /api/alerts/active \u2014 Returns active PRTG alerts (mock data)\n  - GET /api/correlations \u2014 Returns PRTG alert \u2194 Halo ticket correlations\n  - GET /api/patterns \u2014 Returns recurring alert patterns with recommendations\n  - GET /api/reports/daily \u2014 Returns latest daily infrastructure briefing\n  - GET /api/reports/weekly \u2014 Returns latest weekly compliance report\n  - GET /api/monitor/status \u2014 Returns synthetic monitoring results\n\n- **LLM Integration:**\n  - Primary: Anthropic API (claude-sonnet-4-20250514)\n  - Fallback: OpenRouter (anthropic/claude-opus-4)\n  - Added ANTHROPIC_MODEL to .env\n\n- **Scheduled Reports:**\n  - APScheduler integrated for automated report generation\n  - Daily briefing at 07:30 UTC (3:30 AM ADT)\n  - Weekly compliance report Monday 08:00 UTC (4:00 AM ADT)\n  - Reports sent via Teams webhook + email (SMTP)\n\n- **Monitor Integration:**\n  - Heartbeat now includes monitor_summary, endpoints_healthy, endpoints_total\n  - /api/monitor/status exposes synthetic check results\n\n- **Browser Monitor (Playwright):**\n  - monitor/browser_monitor.py \u2014 Headless Chrome browser testing\n  - Takes screenshots of each endpoint (saved to monitor/screenshots/)\n  - Detects JS console errors\n  - Verifies page content rendered (not just 200 OK)\n  - Runs daily at 06:00 UTC via cron\n  - Auto-cleans screenshots older than 7 days\n\n## v1.1.0 \u2014 2026-02-07\n### Integration Stubs + Intelligence\n- integrations/prtg_client.py \u2014 PRTG API client with mock data (sensors, alerts, devices, history)\n- integrations/action1_client.py \u2014 Action1 RMM client with mock data (endpoints, patches, compliance)\n- integrations/halo_client.py \u2014 Halo PSA ticket client with mock data (tickets, SLA breaches)\n- intelligence/alert_correlator.py \u2014 PRTG alert \u2194 Halo ticket matching with confidence scoring\n- intelligence/pattern_detector.py \u2014 Recurring pattern detection (repeat offenders, flapping, concentration)\n- reporting/infrastructure_report.py \u2014 Daily briefing + weekly compliance report generator\n- Hardcoded READ_ONLY_MODE safety check at startup\n- MOCK_MODE fixed to true\n- Documentation: README.md, CLAUDE.md, TODO.md, CHANGELOG.md, PROJECT_PLAN.md\n\n## v1.0.0 \u2014 2026-02-06\n### Initial Deployment\n- FastAPI server on port 9003\n- /health endpoint\n- Teams message handler via Homebase\n- Heartbeat to Homebase\n- System prompt with Phase 1 restrictions",
       "todos_parsed": [
         {
@@ -2283,7 +2291,7 @@
       "git": {
         "status": "dirty",
         "branch": "main",
-        "last_commit": "368ccc3 security: comprehensive .gitignore for credential protection (14 hours ago)",
+        "last_commit": "368ccc3 security: comprehensive .gitignore for credential protection (27 hours ago)",
         "changes": [
           {
             "status": "M",
@@ -2323,7 +2331,7 @@
           },
           {
             "status": "M",
-            "file": "integrations/halo_client.py"
+            "file": "integrations/action1_client.py"
           }
         ],
         "uncommitted_count": 20
@@ -2348,7 +2356,6 @@
         "ROADMAP.md",
         "RUNBOOK.md",
         "SECURITY.md",
-        "SPEC.md",
         "TODO.md",
         "TROUBLESHOOTING.md",
         "browser-monitor.py",
@@ -2362,30 +2369,31 @@
         "connectors/sync_all.py",
         "data/action1-2026-02-10.json",
         "data/action1-2026-02-11.json",
+        "data/action1-2026-02-12.json",
+        "data/latest_monitor.json",
         "data/prtg-intel-2026-02-10.json",
         "data/prtg-intel-2026-02-11.json",
+        "data/prtg-intel-2026-02-12.json",
         "db/__init__.py",
         "db/models.py",
-        "intelligence/__init__.py",
-        "intelligence/aegis_analyzer.py",
         "main.py",
         "monitor/browser-results.json",
         "monitor/browser_monitor.py",
-        "monitor/browser_results.json",
         "monitor/config.json",
-        "monitor/login_monitor.py",
         "monitor/results.json",
         "monitor/strikes.json",
-        "monitor/synthetic_monitor.py",
+        "monitors/synthetic_monitor.py",
         "reporting/__init__.py",
         "reporting/asset_report.py",
         "reporting/compliance_report.py",
         "reporting/daily_briefing.py",
         "reporting/infrastructure_report.py",
         "scripts/action1-sync.py",
+        "scripts/halo-time-report.py",
         "scripts/monitor-3cx-sbc.py",
         "scripts/morning-briefing.py",
         "scripts/prtg-intelligence.py",
+        "scripts/time-compliance-check.py",
         "sync_engine.py"
       ],
       "health_score": 98
@@ -2399,7 +2407,7 @@
       "ports": [
         3000
       ],
-      "scanned_at": "2026-02-12T14:39:01.080858+00:00",
+      "scanned_at": "2026-02-13T03:38:44.451711+00:00",
       "status": "ok",
       "issues": [
         {
@@ -2528,7 +2536,7 @@
       "git": {
         "status": "clean",
         "branch": "main",
-        "last_commit": "129eafd Auto-backup: $(date \"+%Y-%m-%d %H:%M\") (10 days ago)",
+        "last_commit": "129eafd Auto-backup: $(date \"+%Y-%m-%d %H:%M\") (11 days ago)",
         "changes": [],
         "uncommitted_count": 0
       },
@@ -2600,13 +2608,13 @@
       "project": "BPS-AI",
       "server": "demos",
       "severity": "info",
-      "message": "13 uncommitted changes"
+      "message": "15 uncommitted changes"
     },
     {
       "project": "Premier EMR",
       "server": "demos",
       "severity": "info",
-      "message": "6 uncommitted changes"
+      "message": "8 uncommitted changes"
     },
     {
       "project": "Helios AI",
