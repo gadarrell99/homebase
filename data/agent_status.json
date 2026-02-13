@@ -1,22 +1,22 @@
 {
   "apex": {
     "status": "active",
-    "checked": "2026-02-13T03:30:06.866945"
+    "checked": "2026-02-13T19:15:07.289602"
   },
   "david": {
-    "status": "failed",
-    "checked": "2026-02-13T03:30:07.950388"
+    "status": "active",
+    "checked": "2026-02-13T19:15:08.319347"
   },
   "aegis": {
-    "status": "537659\n995982\n1695678\n1695702\n1696439\nactive",
-    "checked": "2026-02-13T03:30:08.957346"
+    "status": "537659\n2614955\n2650372\n2650385\n2650776\nactive",
+    "checked": "2026-02-13T19:15:09.166323"
   },
   "cortex": {
-    "status": "1696491\nactive",
-    "checked": "2026-02-13T03:30:09.797222"
+    "status": "2650826\nactive",
+    "checked": "2026-02-13T19:15:10.096963"
   },
   "sentinel": {
-    "status": "1696543\nactive",
-    "checked": "2026-02-13T03:30:10.696123"
+    "status": "2650876\nactive",
+    "checked": "2026-02-13T19:15:11.035522"
   }
 }

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "scanned_at": "2026-02-13T03:37:01.215494+00:00",
-    "project_count": 11,
+    "scanned_at": "2026-02-13T19:22:01.714326+00:00",
+    "project_count": 16,
     "scanner_version": "1.0.0"
   },
   "projects": [
@@ -15,7 +15,7 @@
         3001,
         8001
       ],
-      "scanned_at": "2026-02-13T03:37:01.215521+00:00",
+      "scanned_at": "2026-02-13T19:22:01.714350+00:00",
       "status": "ok",
       "issues": [
         {
@@ -170,7 +170,7 @@
       "git": {
         "status": "dirty",
         "branch": "main",
-        "last_commit": "42a8ad8 security: Block sensitive file access via Vite middleware (9 hours ago)",
+        "last_commit": "42a8ad8 security: Block sensitive file access via Vite middleware (25 hours ago)",
         "changes": [
           {
             "status": "M",
@@ -263,12 +263,12 @@
       "ports": [
         3000
       ],
-      "scanned_at": "2026-02-13T03:37:15.222144+00:00",
+      "scanned_at": "2026-02-13T19:22:16.035825+00:00",
       "status": "ok",
       "issues": [
         {
           "severity": "info",
-          "message": "15 uncommitted changes"
+          "message": "7 uncommitted changes"
         }
       ],
       "docs": [
@@ -328,9 +328,33 @@
         }
       ],
       "readme": "# BPS AI - Bermuda Police Services AI Case Management\n\n> **\ud83d\udcda Documentation Navigation**\n> This is the main README. See all documentation:\n> - [Project Plan](docs/PROJECT_PLAN.md) - Development roadmap\n> - [TODO Checklist](docs/TODO.md) - Complete task tracking\n> - [Technical Spec](docs/TECHNICAL_SPEC.md) - Architecture & stack\n> - [Design Spec](docs/DESIGN_SPEC.md) - UI/UX guidelines\n> - [Database Schema](docs/DATABASE_SCHEMA.md) - Data models\n> - [API Spec](docs/API_SPEC.md) - Endpoint documentation\n> - [Security](docs/SECURITY.md) - Auth & access control\n> - [Scraper Guide](docs/SCRAPER_GUIDE.md) - Data collection\n> - [RAG Architecture](docs/RAG_ARCHITECTURE.md) - AI research system\n> - [Changelog](CHANGELOG.md) - Version history\n\n---\n\n## Project Overview\n\nAI-powered case management and reporting system for Bermuda Police Services. Features multi-model AI report generation, internal affairs monitoring, and integrated legal/news research capabilities.\n\n**Client:** Bermuda Police Services  \n**Contact:** Alexander Rollin (arollin@bps.bm)  \n**Development:** Gadarrell / Rize Business Development  \n**Version:** 0.9.28\n\n---\n\n## Live Demo URLs\n\n| Environment | URL | Purpose |\n|-------------|-----|---------|\n| Main Application | https://bpsai.rize.bm/login | Officer & Admin login |\n| Internal Affairs | https://bpsai.rize.bm/ia-login | IA-specific login (separate system) |\n| SSH Access | https://bpsai-ssh.rize.bm | Browser-based SSH |\n\n---\n\n## Login Credentials (Demo)\n\n### Main Application (bpsai.rize.bm/login)\n\n| Role | Email | Password | Access Level |\n|------|-------|----------|--------------|\n| Superintendent | superintendent@bps.bm | BPSDemo2026\\! | Full admin, case management |\n| Inspector | inspector@bps.bm | BPSDemo2026\\! | Supervisory access |\n| Officer | officer@bps.bm | BPSDemo2026\\! | Standard officer |\n| Alex Rollin | arollin@bps.bm | BPSDemo2026\\! | Detective Sergeant (IA access) |\n\n### Internal Affairs Portal (bpsai.rize.bm/ia-login)\n\n| Role | Email | Password | Access Level |\n|------|-------|----------|--------------|\n| IA Admin | ia.admin@bps.bm | IAAdmin2026\\! | Full IA admin |\n| IA Supervisor | ia.supervisor@bps.bm | IASuper2026\\! | Supervisory |\n| IA Investigator | ia.investigator@bps.bm | IAInvest2026\\! | Investigation |\n| IA Analyst | ia.analyst@bps.bm | IAAnalyst2026\\! | Analysis only |\n\n---\n\n## Monitoring\n\nThis project is monitored by **Relay/Pulse** at 192.168.65.248\n\n| Check | Endpoint |\n|-------|----------|\n| Health | /api/health |\n| Pulse Dashboard | http://192.168.65.248:8000/api/pulse/status |\n\n---\n\n## Core Features\n\n### 1. Case Management\n- **3 Case Types:** Domestic Abuse, Gang/Drug, Traffic\n- Pre-filled forms with dropdowns\n- Voice dictation support\n- Extensible template architecture\n\n### 2. Multi-AI Report Generation\n| Model | Provider | Type |\n|-------|----------|------|\n| Claude | Anthropic | Cloud |\n| GPT-4 | OpenAI | Cloud |\n| Gemini | Google | Cloud |\n| Llama 3 8B | Ollama | Local |\n| Mistral 7B | Ollama | Local |\n\n### 3. Internal Affairs Module\n- Separate authentication & database\n- Officer activity monitoring\n- Full investigation workflow\n- Audit logging\n- Purple/dark theme for visual distinction\n\n### 4. Legal & News Research (RAG)\n- **Bermuda Laws Database** - 98 scraped laws (62 police-priority)\n- **News Archive** - 10 years from Royal Gazette & Bernews\n- Vector search for AI-enhanced research\n- AI Law Assistant for statute explanations\n\n### 5. Analytics Dashboard\n- Case statistics & trends\n- AI usage metrics\n- Officer activity reports\n\n---\n\n## Tech Stack\n\n| Layer | Technology |\n|-------|------------|\n| Frontend | Next.js 14, React, TypeScript, Tailwind CSS |\n| Backend | Next.js API Routes, Node.js |\n| Database | PostgreSQL 16 + pgvector |\n| ORM | Prisma |\n| Auth | NextAuth.js |\n| AI Cloud | Claude, OpenAI, Gemini APIs |\n| AI Local | Ollama (Llama 3, Mistral) |\n| Vector DB | pgvector (PostgreSQL extension) |\n| Scraping | Puppeteer, Cheerio |\n| Hosting | Hyper-V VM, Cloudflare Tunnel |\n\n---\n\n## Quick Start\n\n```bash\n# Clone repository\ngit clone https://github.com/gadarrell99/bps-ai.git\ncd bps-ai\n\n# Install dependencies\nnpm install\n\n# Set up environment\ncp .env.example .env\n# Edit .env with your API keys\n\n# Set up database\nnpm run db:setup\nnpm run db:seed\n\n# Start development server\nnpm run dev\n```\n\n---\n\n## Project Structure\n\n```\nbps-ai/\n\u251c\u2500\u2500 README.md                \u2190 You are here\n\u251c\u2500\u2500 CHANGELOG.md             # Version history\n\u251c\u2500\u2500 CLAUDE.md                # AI agent instructions\n\u251c\u2500\u2500 VERSION\n\u251c\u2500\u2500 docs/\n\u2502   \u251c\u2500\u2500 PROJECT_PLAN.md      # Development roadmap\n\u2502   \u251c\u2500\u2500 TODO.md              # Task checklist\n\u2502   \u251c\u2500\u2500 TECHNICAL_SPEC.md    # Architecture\n\u2502   \u251c\u2500\u2500 DESIGN_SPEC.md       # UI/UX guidelines\n\u2502   \u251c\u2500\u2500 DATABASE_SCHEMA.md   # Data models\n\u2502   \u251c\u2500\u2500 API_SPEC.md          # API documentation\n\u2502   \u251c\u2500\u2500 SECURITY.md          # Security specs\n\u2502   \u251c\u2500\u2500 SCRAPER_GUIDE.md     # Scraping documentation\n\u2502   \u2514\u2500\u2500 RAG_ARCHITECTURE.md  # RAG system design\n\u251c\u2500\u2500 src/\n\u2502   \u251c\u2500\u2500 app/                 # Next.js app router\n\u2502   \u251c\u2500\u2500 components/          # React components\n\u2502   \u251c\u2500\u2500 lib/                 # Utilities & services\n\u2502   \u2514\u2500\u2500 styles/              # CSS/Tailwind\n\u251c\u2500\u2500 scrapers/\n\u2502   \u251c\u2500\u2500 laws/                # Bermuda laws scraper\n\u2502   \u251c\u2500\u2500 news/                # News scrapers\n\u2502   \u2514\u2500\u2500 data/                # Scraped data output\n\u251c\u2500\u2500 prisma/\n\u2502   \u2514\u2500\u2500 schema.prisma        # Database schema\n\u2514\u2500\u2500 scripts/\n    \u2514\u2500\u2500 seed-users.js        # Database seeding\n```\n\n---\n\n## Key Contacts\n\n| Role | Name | Email |\n|------|------|-------|\n| Client | Alexander Rollin | arollin@bps.bm |\n| Developer | Gilbert Darrell | gadarrell@rize.bm |\n| Biz Dev | Sarah | (Rize) |\n\n---\n\n## License\n\nProprietary - Bermuda Police Services / Gadarrell / Rize\n\n---\n\n> **\ud83d\udcda Next Steps:** Review [PROJECT_PLAN.md](docs/PROJECT_PLAN.md) for the development timeline and [TODO.md](docs/TODO.md) for current tasks.",
-      "todo": "# BPS-AI TODO\n\n## Current Version: v0.9.30\n\n---\n\n## v0.9.30 - Feature Verification Push (2026-02-11)\n- [x] Demo login buttons: Superintendent, Inspector, Officer \u2014 all 3 verified via Playwright\n- [x] Cases data: 68 cases across 4 statuses (26 open, 20 in progress, 13 closed, 9 under review)\n- [x] IA access: arollin@bps.bm verified \u2014 logs in, reaches /ia-dashboard\n- [x] AI assistant: Ollama llama3:8b + mistral:7b running, /laws/assistant page loads with chat input\n- [x] Reports page: 11K chars, 4 reports in DB, analytics page loads\n- [x] Playwright 10-test suite: 10/10 PASSED\n- [x] Gitea issues closed: #2, #4, #10, #11, #12, #13, #14, #16, #17\n\n## v0.9.29 - Documentation & Credential Fixes (2026-02-10)\n- [x] Documentation updates, credential fixes, PM2 reset\n\n## v0.9.28 - CEO Visual Review Fixes (2026-02-10)\n- [x] Deleted 7 junk laws with UUID titles and 'unk' year from database\n- [x] Simplified login demo buttons: Superintendent, Inspector, Officer\n- [x] Created superintendent@bps.bm and inspector@bps.bm demo accounts\n- [x] Added Alexander Rollin (arollin@bps.bm) to Internal Affairs user table\n- [x] Login page now uses bermuda-police.png logo instead of SVG\n- [x] Fixed login loading state - button disabled when isLoading is true\n\n## v0.9.27 - Deep Dive Fixes (2026-02-10)\n- [x] One-click demo login buttons with column sorting\n- [x] Alex Rollin set to SUPERINTENDENT role\n- [x] Dashboard shows System Status instead of AI Models\n- [x] Fixed hydration errors in IA pages\n\n---\n\n## Open Issues (8 remaining)\n- [ ] #1: DROPDOWN: Fix big dropdown on Analysis Demo click\n- [ ] #3: SORTING: Case list sorting works correctly\n- [ ] #5: UI: Dark slate + gold theme consistent\n- [ ] #6: CONSOLE: No React hydration errors (#425/#422)\n- [ ] #7: UX: Multiple UI improvements from CEO walkthrough\n- [ ] #8: DOCS: All 5 standard docs current\n- [ ] #9: SECURITY: Serper key not hardcoded\n- [ ] #15: Voice dictation: Verify Whisper integration works\n\n## Known Issues / Future Work\n- [ ] Case detail URL shows UUID (by design \u2014 case number shown prominently in UI)\n- [ ] Logo: login page uses PNG instead of SVG for compatibility\n- [ ] IA system has separate user database \u2014 dual access requires both\n\n## Demo Accounts\nMain System:\n- superintendent@bps.bm / BPSDemo2026! (Superintendent)\n- inspector@bps.bm / BPSDemo2026! (Inspector)\n- officer@bps.bm / BPSDemo2026! (Officer)\n\nInternal Affairs:\n- ia.admin@bps.bm / BPSDemo2026!\n- ia.supervisor@bps.bm / BPSDemo2026!\n- ia.investigator@bps.bm / BPSDemo2026!\n- arollin@bps.bm / BPSDemo2026! (Investigator)",
+      "todo": "# BPS-AI TODO\n\n## Current Version: v0.9.31\n\n---\n\n## v0.9.31 - Gitea Issue Resolution (2026-02-13)\n- [x] #3: SORTING - Case list sorting verified working (client-side + server-side)\n- [x] #6: HYDRATION - Fixed React hydration errors by creating DateDisplay client component\n- [x] #8: DOCS - All 5 standard docs confirmed present (README, TODO, CHANGELOG, ARCHITECTURE, DEMO-SCRIPT)\n- [x] #9: SECURITY - Serper API key confirmed in .env, not hardcoded, .gitignore updated\n- [x] Updated profile page and IA investigation pages to use DateDisplay component\n- [x] Build and deployment successful\n\n## v0.9.30 - Feature Verification Push (2026-02-11)\n- [x] Demo login buttons: Superintendent, Inspector, Officer \u2014 all 3 verified via Playwright\n- [x] Cases data: 68 cases across 4 statuses (26 open, 20 in progress, 13 closed, 9 under review)\n- [x] IA access: arollin@bps.bm verified \u2014 logs in, reaches /ia-dashboard\n- [x] AI assistant: Ollama llama3:8b + mistral:7b running, /laws/assistant page loads with chat input\n- [x] Reports page: 11K chars, 4 reports in DB, analytics page loads\n- [x] Playwright 10-test suite: 10/10 PASSED\n- [x] Gitea issues closed: #2, #4, #10, #11, #12, #13, #14, #16, #17\n\n## v0.9.29 - Documentation & Credential Fixes (2026-02-10)\n- [x] Documentation updates, credential fixes, PM2 reset\n\n## v0.9.28 - CEO Visual Review Fixes (2026-02-10)\n- [x] Deleted 7 junk laws with UUID titles and 'unk' year from database\n- [x] Simplified login demo buttons: Superintendent, Inspector, Officer\n- [x] Created superintendent@bps.bm and inspector@bps.bm demo accounts\n- [x] Added Alexander Rollin (arollin@bps.bm) to Internal Affairs user table\n- [x] Login page now uses bermuda-police.png logo instead of SVG\n- [x] Fixed login loading state - button disabled when isLoading is true\n\n## v0.9.27 - Deep Dive Fixes (2026-02-10)\n- [x] One-click demo login buttons with column sorting\n- [x] Alex Rollin set to SUPERINTENDENT role\n- [x] Dashboard shows System Status instead of AI Models\n- [x] Fixed hydration errors in IA pages\n\n---\n\n## Open Issues (4 remaining)\n- [ ] #1: DROPDOWN: Fix big dropdown on Analysis Demo click\n- [ ] #5: UI: Dark slate + gold theme consistent\n- [ ] #7: UX: Multiple UI improvements from CEO walkthrough\n- [ ] #15: Voice dictation: Verify Whisper integration works\n\n## Closed Issues (4 resolved in v0.9.31)\n- [x] #3: SORTING - Case list sorting works correctly\n- [x] #6: CONSOLE - No React hydration errors (fixed with DateDisplay component)\n- [x] #8: DOCS - All 5 standard docs current\n- [x] #9: SECURITY - Serper key not hardcoded\n\n## Known Issues / Future Work\n- [ ] Case detail URL shows UUID (by design \u2014 case number shown prominently in UI)\n- [ ] Logo: login page uses PNG instead of SVG for compatibility\n- [ ] IA system has separate user database \u2014 dual access requires both\n\n## Demo Accounts\nMain System:\n- superintendent@bps.bm / BPSDemo2026! (Superintendent)\n- inspector@bps.bm / BPSDemo2026! (Inspector)\n- officer@bps.bm / BPSDemo2026! (Officer)\n\nInternal Affairs:\n- ia.admin@bps.bm / BPSDemo2026!\n- ia.supervisor@bps.bm / BPSDemo2026!\n- ia.investigator@bps.bm / BPSDemo2026!\n- arollin@bps.bm / BPSDemo2026! (Investigator)",
       "changelog": "## v0.9.30 (2026-02-11) \u2014 Feature Verification Push\n- Verified all 3 demo login buttons (Superintendent, Inspector, Officer) via Playwright\n- Verified 68 cases in database across 4 statuses \u2014 cases page shows 51 rows\n- Verified IA access for Alexander Rollin (arollin@bps.bm) \u2014 reaches /ia-dashboard\n- Verified AI assistant: Ollama llama3:8b responds, /laws/assistant page loads with chat input\n- Verified reports page (11K chars) and analytics page (10K chars)\n- Added Playwright 10-test suite: 10/10 PASSED (tests/bps-full.spec.js)\n- Closed 9 Gitea issues: #2, #4, #10, #11, #12, #13, #14, #16, #17\n\n## v0.9.28 (2026-02-10) \u2014 CEO Fixes\n- Deleted 7 junk laws with UUID titles and unknown years (20 clean laws remain)\n- Fixed login double-click bug (button + inputs disabled during isLoading)\n- Added Alexander Rollin (arollin@bps.bm) to Internal Affairs user table\n- Added 3 demo login buttons on login page (Superintendent, Inspector, Officer)\n- Fixed login page styling and error handling\n- Updated seed data with correct user accounts\n\n## v0.9.27 (2026-02-09) \u2014 Table Sorting & Polish\n- Added column sorting (asc/desc) to cases table\n- Updated dashboard layout\n- Sidebar navigation improvements\n- Reports client updates\n\n# Changelog\n## [0.9.22] - 2026-01-30\n\n### Added - AI Auto-Fill from Notes\n- **AI Extraction API**: POST /api/ai/extract-from-notes\n  - Uses Claude AI to extract structured case data from raw officer notes\n  - Extracts: Case Type, Date/Time, Location, Parties, Vehicles, Injuries, Description\n  - CRITICAL: AI NEVER fabricates data - only extracts explicitly stated information\n  - Returns summary: filled fields count, missing fields that need user input\n- **Auto-Fill Button**: New Case page now has \"Auto-Fill from Notes\" button\n  - Officers paste/dictate raw notes into text area\n  - Click button to have AI populate form fields\n  - Shows banner: \"AI filled X fields, please verify Y fields\"\n  - Missing fields highlighted for user attention\n- **Prominent Voice Input**: Large microphone button at top of New Case form\n  - Next to AI Assistant toggle\n  - Gold color, highly visible\n  - Pulses red when recording\n  - Voice transcription feeds into notes area\n\n## [0.9.21] - 2026-01-30\n\n### Added - Rize Website Link in Footer\n- Added clickable Rize Technologies link to main page footer\n- Added clickable Rize Technologies link to login page footer\n- Added clickable Rize Technologies link to IA login page footer\n- Links open https://rize.bm in new tab\n\n## [0.9.20] - 2026-01-30\n\n### Added - IA Audit Logs View\n- **API Endpoint**: GET /api/ia/audit-logs\n  - Query audit logs with filters (userId, action, resourceType, dateRange)\n  - Pagination support (limit, offset)\n  - Returns filter options for dropdowns\n- **IA Audit Logs Page**: /ia-audit-logs\n  - Table view: When, Who, Action, Resource, Details, From Where\n  - Filters: User, Action, Start Date, End Date\n  - Read-only (no edit/delete capability)\n\n## [0.9.19] - 2026-01-30\n\n### Added - Comprehensive Audit Logging (HOSPITAL-GRADE)\n- **AuditLog Table**: Created append-only audit_logs table\n  - Columns: userId, userEmail, action, resourceType, resourceId, details, ipAddress, userAgent, createdAt\n  - Indexes on: userId, resourceType+resourceId, action, createdAt\n- **Audit Service**: src/lib/audit.ts with logAudit() function\n  - Fire-and-forget logging (non-blocking)\n  - Supports VIEW_CASE, EDIT_CASE, VIEW_EVIDENCE, DOWNLOAD_EVIDENCE, etc.\n- **Case Routes**: Added audit logging to GET and PATCH handlers\n- **Evidence Routes**: Added audit logging to GET handler\n\n## [0.9.18] - 2026-01-30\n\n### Performance\n- **Login Speed Optimization**: Reduced login latency\n  - Made lastLoginAt update non-blocking (fire-and-forget)\n  - Login no longer waits for timestamp update to complete\n  - Estimated savings: ~50-100ms per login\n\n\n## [0.9.17] - 2026-01-29\n\n### Fixed\n- **PDF Export Route Error**: Fixed TypeScript error in /api/cases/[id]/pdf route\n  - Changed officer to assignedOfficer in Prisma include\n  - Updated officer name formatting to use firstName/lastName fields\n  - Root cause: Schema field name mismatch (officer vs assignedOfficer)\n\n### Verified\n- Case detail pages: All 10 tested cases render correctly\n- PDF export route: Builds without errors\n- Health check: OK\n- Database: 65 cases, 16 users\n- PM2 status: Online, no errors\n\n## [0.9.16] - 2026-01-29\n\n### Fixed\n- **Case Detail Page Error**: Fixed Something went wrong - Unexpected error occurred when viewing any case\n  - Root cause: Corrupted .next build directory missing prerender-manifest.json\n  - Cleared and rebuilt the production build\n  - Verified all manifest files regenerated correctly\n  - Restarted PM2 service\n\n### Verified\n- Health check: OK\n- Login page: Renders correctly\n- Case detail redirect: Working (307 to login for unauthenticated users)\n- PM2 status: Online\n\n## [0.9.15] - 2026-01-29\n\n### Added\n- **PDF Report Export** (lib/pdfService.ts)\n  - PDFKit dependency installed\n  - GET /api/cases/:id/pdf endpoint\n  - Report includes: case details, timeline, evidence list\n  - Auto-download with case number in filename\n  - Confidential footer\n\n### Added\n- **Email Notification System**: Automated email alerts for case events\n  - SMTP configuration via Office 365 (smtp.office365.com:587)\n  - Nodemailer integration for email sending\n  - Professional HTML email templates with BPS branding\n\n### Email Templates\n- **case-created.html**: Notification when new case assigned to officer\n- **case-updated.html**: Notification when case details changed\n- **evidence-added.html**: Notification when new evidence added to case\n\n### API Integration\n- POST /api/cases: Sends case-created email to assigned officer\n- PATCH /api/cases/[id]: Sends case-updated email on changes\n- POST /api/evidence: Sends evidence-added email to case owner\n\n### Technical\n- New library: src/lib/email.ts with sendEmail function\n- Template variables: recipientName, caseNumber, caseTitle, caseUrl, etc.\n- Async email sending (non-blocking for API responses)\n- SMTP config in .env: SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM\n\n## [0.9.23] - 2026-01-30\n\n### Added - Prominent Voice Input (Task 7)\n- Large microphone button at top of New Case form\n- Gold color, highly visible next to AI Assistant button\n- Pulses red when recording\n- Voice transcription feeds directly into notes area\n\n## [0.9.24] - 2026-01-30\n\n### Added - Column Customization (Task 8)\n- **Column Picker**: Dropdown button to show/hide columns on case list\n- Available columns: Case #, Title, Type, Status, Priority, Assigned To, Date, Parish, Complainant\n- **LocalStorage Persistence**: Column preferences saved in browser\n- Reset button to restore default columns\n- Footer shows visible column count\n\n## [0.9.25] - 2026-01-30\n\n### Changed - PDF Export Button (Task 9)\n- Made PDF Export button prominent with red background\n- Added PDF emoji icon for visibility\n- Shadow effect for visual prominence\n- Button visible at top of case detail page without scrolling\n\n## [0.9.26] - 2026-01-30\n\n### Changed - Renamed Reports to Case Review (Task 10)\n- Renamed 'Reports' to 'Case Review' in sidebar navigation\n- Updated page heading from 'Reports' to 'Case Review'\n- Updated statistics label from 'Total Reports' to 'Total Reviews'\n- All links and routes remain functional",
       "todos_parsed": [
+        {
+          "text": "#3: SORTING - Case list sorting verified working (client-side + server-side)",
+          "done": true
+        },
+        {
+          "text": "#6: HYDRATION - Fixed React hydration errors by creating DateDisplay client component",
+          "done": true
+        },
+        {
+          "text": "#8: DOCS - All 5 standard docs confirmed present (README, TODO, CHANGELOG, ARCHITECTURE, DEMO-SCRIPT)",
+          "done": true
+        },
+        {
+          "text": "#9: SECURITY - Serper API key confirmed in .env, not hardcoded, .gitignore updated",
+          "done": true
+        },
+        {
+          "text": "Updated profile page and IA investigation pages to use DateDisplay component",
+          "done": true
+        },
+        {
+          "text": "Build and deployment successful",
+          "done": true
+        },
         {
           "text": "Demo login buttons: Superintendent, Inspector, Officer \u2014 all 3 verified via Playwright",
           "done": true
@@ -386,82 +410,46 @@
         {
           "text": "Fixed login loading state - button disabled when isLoading is true",
           "done": true
-        },
-        {
-          "text": "One-click demo login buttons with column sorting",
-          "done": true
-        },
-        {
-          "text": "Alex Rollin set to SUPERINTENDENT role",
-          "done": true
-        },
-        {
-          "text": "Dashboard shows System Status instead of AI Models",
-          "done": true
-        },
-        {
-          "text": "Fixed hydration errors in IA pages",
-          "done": true
-        },
-        {
-          "text": "#1: DROPDOWN: Fix big dropdown on Analysis Demo click",
-          "done": false
-        },
-        {
-          "text": "#3: SORTING: Case list sorting works correctly",
-          "done": false
         }
       ],
-      "todos_open": 2,
-      "todos_done": 18,
+      "todos_open": 0,
+      "todos_done": 20,
       "version": "0.9.30",
       "git": {
         "status": "dirty",
         "branch": "main",
-        "last_commit": "1929818 fix: REQ-B001/B002/B004 test regressions \u2014 hydration wait, IA link selector, cases navigation (34 hours ago)",
+        "last_commit": "fb3de15 fix: BPS AI demo blockers \u2014 PDF export, login buttons, validation, audit logging (2 hours ago)",
         "changes": [
           {
             "status": "M",
-            "file": "ext.config.js"
+            "file": "ODO.md"
           },
           {
             "status": "M",
-            "file": "public/images/bps-icon.svg"
+            "file": "src/app/(ia)/ia-investigations/[id]/page.tsx"
           },
           {
             "status": "M",
-            "file": "src/app/layout.tsx"
+            "file": "src/app/profile/page.tsx"
           },
           {
-            "status": "M",
-            "file": "test-results/.last-run.json"
+            "status": "??",
+            "file": "next.config.js.bak.20260213"
           },
           {
-            "status": "D",
-            "file": "\"test-results/bps-tests-REQ-B001-Analysis-section-\\342\\200\\224-no-oversized-dropdown/error-context.md\""
+            "status": "??",
+            "file": "src/app/(ia)/ia-investigations/[id]/page.tsx.bak"
           },
           {
-            "status": "D",
-            "file": "test-results/bps-tests-REQ-B002-Demo-login-buttons-exist-and-work/error-context.md"
+            "status": "??",
+            "file": "src/app/profile/page.tsx.bak"
           },
           {
-            "status": "D",
-            "file": "test-results/bps-tests-REQ-B003-Case-list-sorting-works/error-context.md"
-          },
-          {
-            "status": "D",
-            "file": "test-results/bps-tests-REQ-B004-20-demo-cases-exist/error-context.md"
-          },
-          {
-            "status": "D",
-            "file": "test-results/bps-tests-REQ-B006-No-React-hydration-errors-in-console/error-context.md"
-          },
-          {
-            "status": "D",
-            "file": "test-results/bps-tests-REQ-B007-Pages-load-data-immediately/error-context.md"
+            "status": "??",
+            "file": "src/components/ui/DateDisplay.tsx"
           }
         ],
-        "uncommitted_count": 15
+        "uncommitted_count": 7
       },
       "ports_status": [
         {
@@ -535,12 +523,12 @@
         3004,
         5004
       ],
-      "scanned_at": "2026-02-13T03:37:29.439340+00:00",
+      "scanned_at": "2026-02-13T19:22:27.624476+00:00",
       "status": "ok",
       "issues": [
         {
           "severity": "info",
-          "message": "8 uncommitted changes"
+          "message": "5 uncommitted changes"
         }
       ],
       "docs": [
@@ -599,8 +587,8 @@
           "status": "ok"
         }
       ],
-      "readme": "# Premier Health EMR\n\n> Modern AI-powered Electronic Medical Records system built for Premier Health, Bermuda\n\n## Status: \u2705 Phase 1 Complete - MVP Deployed\n\n**Version:** v0.3.0  \n**Server:** 192.168.65.239 (premier-emr)  \n**Production URL:** https://emr.rize.bm  \n**SSH Access:** https://emr-ssh.rize.bm  \n**Homebase:** http://192.168.65.243:8000/projects\n\n---\n\n## Overview\n\nPremier Health EMR is a next-generation electronic medical records system designed specifically for the Bermuda healthcare market. Built with AI at its core\u2014not bolted on\u2014it features ambient clinical documentation, intelligent scheduling, HIPAA-compliant audit trails, and PIPA (Bermuda Personal Information Protection Act) compliance.\n\n### Key Differentiators\n\n| Feature | Premier EMR | Epic/Cerner/AthenaHealth |\n|---------|-------------|--------------------------|\n| **AI Integration** | Native (Claude API) | Bolted on |\n| **UX Philosophy** | Max 3 clicks to any action | Click-heavy, cluttered |\n| **Bermuda Compliance** | Built-in (PIPA + HIPAA) | Retrofitted |\n| **Offline Capability** | Yes (PWA) | No |\n| **Target Market** | Mid-market practices | Enterprise only |\n| **Cost** | Affordable | 00k+ implementations |\n\n---\n\n## Tech Stack\n\n| Component | Technology |\n|-----------|------------|\n| Backend | FastAPI (Python 3.12) |\n| Frontend | React + Vite + Tailwind CSS |\n| Database | PostgreSQL 16 |\n| Container | Docker + Docker Compose |\n| AI | Anthropic Claude API |\n| Tunnel | Cloudflare (emr.rize.bm) |\n| Server | Ubuntu 24.04 LTS on Hyper-V |\n| Monitoring | Homebase Dashboard |\n\n---\n\n## Quick Start\n\n### Prerequisites\n- Docker and Docker Compose installed\n- PostgreSQL 16 running\n- Node.js 24.x LTS\n\n### Development\n```bash\n# Clone the repository\ngit clone git@github.com:Rize-Technologies/premier-emr.git\ncd premier-emr\n\n# Copy environment variables\ncp .env.example .env\n# Edit .env with your credentials\n\n# Start services\ndocker compose up -d\n\n# Access the application\n# Frontend: http://localhost:3000\n# Backend API: http://localhost:5000/api\n# API Docs: http://localhost:5000/docs\n```\n\n### Production Deployment\n```bash\n# SSH to server\nssh emradmin@192.168.65.239\n\n# Run deploy script\n~/deploy.sh\n\n# Check status\ndocker compose ps\nsystemctl status cloudflared\n\n# Homebase check-in\n~/scripts/checkin.sh Premier-EMR 0.2.1 Deployment healthy\n```\n\n---\n\n## Architecture\n\n```\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502                     Cloudflare Tunnel                        \u2502\n\u2502               emr.rize.bm | emr-ssh.rize.bm                 \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                              \u2502\n                              \u25bc\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502                   Premier-EMR Server                         \u2502\n\u2502                    192.168.65.239                           \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                    \u2502                     \u2502\n                    \u25bc                     \u25bc\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502     React Frontend      \u2502  \u2502       FastAPI Backend           \u2502\n\u2502    (Port 3000)         \u2502  \u2502        (Port 5000)              \u2502\n\u2502                        \u2502  \u2502   \u2022 REST API                    \u2502\n\u2502  \u2022 Dashboard           \u2502  \u2502   \u2022 Claude AI Integration       \u2502\n\u2502  \u2022 Patient Chart       \u2502  \u2502   \u2022 HIPAA Audit Middleware      \u2502\n\u2502  \u2022 Scheduling          \u2502  \u2502   \u2022 JWT Authentication          \u2502\n\u2502  \u2022 AI Assistant        \u2502  \u2502                                 \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518  \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                                        \u2502\n                                        \u25bc\n                          \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n                          \u2502      PostgreSQL         \u2502\n                          \u2502    (premier_emr)       \u2502\n                          \u2502                        \u2502\n                          \u2502  \u2022 Patients (50)       \u2502\n                          \u2502  \u2022 Providers (5)       \u2502\n                          \u2502  \u2022 Appointments (200)  \u2502\n                          \u2502  \u2022 Clinical Notes      \u2502\n                          \u2502  \u2022 Prescriptions       \u2502\n                          \u2502  \u2022 Audit Logs          \u2502\n                          \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n```\n\n---\n\n## API Endpoints\n\n| Method | Endpoint | Description |\n|--------|----------|-------------|\n| POST | /api/auth/login | User authentication |\n| GET | /api/patients | List patients |\n| GET | /api/patients/{id}/chart | Full patient chart |\n| POST | /api/appointments | Create appointment |\n| POST | /api/clinical-notes/ai-generate | AI SOAP note |\n| GET | /api/dashboard/stats | Dashboard KPIs |\n| GET | /api/audit-log | HIPAA audit log |\n\nFull API documentation: https://emr.rize.bm/api/docs\n\n---\n\n## Current Features (v0.2.1)\n\n### Deployed \u2705\n- Patient management (CRUD)\n- Provider management\n- Appointment scheduling\n- Prescription tracking\n- AI-powered clinical notes\n- Dashboard with statistics\n- JWT authentication\n- HIPAA audit logging\n- Cloudflare tunnel\n- Homebase monitoring\n\n### In Development \ud83d\udd04\n- Provider availability management\n- Calendar views (day/week/month)\n- Unit tests\n- Clinical note signing workflow\n- Drug interaction alerts\n\n---\n\n## Compliance\n\n### HIPAA (US Healthcare)\n- All patient data encrypted at rest and in transit\n- Complete audit trail of all data access\n- Role-based access control (RBAC)\n- Automatic session timeout\n- Minimum necessary access principle\n\n### PIPA (Bermuda Data Protection)\n- Data residency in Bermuda\n- Consent tracking for data processing\n- Right to access/delete personal data\n- Breach notification procedures\n\n---\n\n## Monitoring\n\n### Homebase Dashboard\n- URL: http://192.168.65.243:8000/projects\n- Project: Premier-EMR\n- Status: Healthy \u2705\n- Version: 0.2.1\n\n### Service Status\n```bash\n# Check all containers\ndocker compose ps\n\n# Check cloudflared tunnel\nsystemctl status cloudflared\n\n# Check backend health\ncurl localhost:5000/api/health\n\n# Check frontend\ncurl localhost:3000\n```\n\n---\n\n## Contributing\n\n1. Create a feature branch: `git checkout -b feature/your-feature`\n2. Make changes following the coding standards\n3. Write tests for new functionality\n4. Update TODO.md and CHANGELOG.md\n5. Run ~/deploy.sh to deploy\n6. Check in to Homebase\n7. Create a pull request\n\n---\n\n## Support\n\n- **Internal:** artiedarrell@gmail.com\n- **Client:** Premier Health IT Department\n- **Homebase:** http://192.168.65.243:8000\n\n---\n\n## License\n\nProprietary - Rize Technologies Ltd. All rights reserved.\n\n---\n\n*Built with \u2764\ufe0f in Bermuda by Rize Technologies*",
-      "todo": "# Premier Health EMR - TODO\n\n> Priority: P0 = Critical, P1 = High, P2 = Medium, P3 = Low\n\n---\n\n## Phase 1 - Foundation \u2705 COMPLETED\n\n### P0 - Critical\n- [x] Server provisioning on Hyper-V (192.168.65.239)\n- [x] Ubuntu 24.04 installation and configuration\n- [x] Docker, Node.js, Python, PostgreSQL installation\n- [x] Project scaffolding and directory structure\n- [x] Project documentation (README, TODO, PROJECT_PLAN, CHANGELOG)\n- [x] Database schema design and migrations\n- [x] Authentication system (JWT + RBAC)\n- [x] HIPAA audit logging middleware\n- [x] Docker Compose stack (frontend, backend, db)\n- [x] Cloudflare tunnel setup (emr.rize.bm, emr-ssh.rize.bm)\n- [x] Homebase integration\n\n### P1 - High\n- [x] Patient CRUD operations\n- [x] Provider management\n- [x] Basic patient search functionality\n- [x] Docker Compose configuration\n- [x] React frontend scaffolding (Vite + Tailwind)\n- [x] AI-powered clinical note generation\n- [x] Dashboard with statistics\n- [x] Deploy script (~/deploy.sh)\n\n### P2 - Medium\n- [x] Login page UI\n- [x] Dashboard layout\n- [x] Patient list view\n- [ ] Unit tests setup\n\n---\n\n## Phase 2 - Clinical Features \ud83d\udfe1\n\n### P0 - Critical\n- [x] SOAP note templates \u2705\n- [x] AI-assisted note generation (Claude API) \u2705\n- [x] Clinical note signing workflow \u2705\n\n### P1 - High\n- [x] Prescription management\n- [x] Drug interaction alerts (basic) \u2705\n- [x] Allergy tracking (v0.3.0)\n- [x] Medication list\n\n### P2 - Medium\n- [x] Document upload (labs, imaging, referrals) \u2705\n- [ ] Clinical decision support alerts\n- [x] Vitals tracking (v0.3.0)\n- [x] Problem list management (v0.3.0)\n\n---\n\n## Phase 3 - Scheduling & Portal \ud83d\udfe1\n\n### P0 - Critical\n- [x] Appointment booking system\n- [x] Provider availability management \u2705\n- [x] Calendar views (day/week/month) \u2705\n\n### P1 - High\n- [x] Waitlist management \u2705\n- [ ] Appointment reminders (email)\n- [ ] Patient check-in workflow\n\n### P2 - Medium\n- [ ] SMS reminders integration\n- [ ] Patient portal (read-only)\n- [ ] Multi-location support\n- [ ] Recurring appointments\n\n---\n\n## Phase 4 - Analytics & Integrations \ud83d\udfe1\n\n### P0 - Critical\n- [x] Executive dashboard with KPIs\n- [ ] Patient volume metrics\n- [ ] Provider productivity reports\n\n### P1 - High\n- [ ] Predictive analytics (no-show risk)\n- [ ] HL7 FHIR compliance layer\n- [ ] Basic billing module\n\n### P2 - Medium\n- [ ] Lab integration APIs\n- [ ] Pharmacy integration\n- [ ] Insurance verification\n- [ ] Multi-currency support (BMD/USD)\n\n---\n\n## Phase 5 - Mobile & Offline \ud83d\udfe1\n\n### P0 - Critical\n- [ ] Progressive Web App (PWA) setup\n- [ ] Offline data persistence\n\n### P1 - High\n- [ ] Mobile-optimized clinical workflows\n- [ ] Push notifications\n\n### P2 - Medium\n- [ ] Offline appointment booking\n- [ ] Data sync conflict resolution\n\n---\n\n## Next Priorities\n\n### Immediate (Next Sprint)\n1. Provider availability management\n2. Calendar views (day/week/month)\n3. Unit tests setup\n4. Clinical note signing workflow\n5. Drug interaction alerts\n\n### Short-term (2-4 weeks)\n1. Document upload module\n2. Vitals tracking\n3. Appointment reminders\n4. Patient portal (read-only)\n\n---\n\n## Bugs \ud83d\udc1b\n\n*No bugs tracked yet*\n\n---\n\n## Technical Debt \ud83d\udd27\n\n- [ ] Add comprehensive error handling throughout backend\n- [ ] Implement request rate limiting\n- [ ] Add API versioning strategy\n- [ ] Database connection pooling optimization\n- [ ] Add end-to-end tests\n- [ ] CI/CD pipeline setup\n\n---\n\n## Documentation \ud83d\udcda\n\n- [x] README.md\n- [x] TODO.md\n- [x] PROJECT_PLAN.md\n- [x] CHANGELOG.md\n- [x] CLAUDE.md\n- [ ] API.md (OpenAPI spec)\n- [ ] ARCHITECTURE.md (detailed)\n- [ ] DEPLOYMENT.md\n- [ ] DEMO_SCRIPT.md\n\n---\n\n*Last updated: 2026-02-04 (v0.3.0)*",
+      "readme": "# Premier Health EMR\n\n> Modern AI-powered Electronic Medical Records system built for Premier Health, Bermuda\n\n## Status: \u2705 Phase 1 Complete - MVP Deployed\n\n**Version:** v0.4.0\n**Server:** 192.168.65.246 (demos)\n**Production URL:** https://emr.rize.bm\n**Homebase:** http://192.168.65.245:8000/projects\n\n---\n\n## Overview\n\nPremier Health EMR is a next-generation electronic medical records system designed specifically for the Bermuda healthcare market. Built with AI at its core\u2014not bolted on\u2014it features ambient clinical documentation, intelligent scheduling, HIPAA-compliant audit trails, and PIPA (Bermuda Personal Information Protection Act) compliance.\n\n### Key Differentiators\n\n| Feature | Premier EMR | Epic/Cerner/AthenaHealth |\n|---------|-------------|--------------------------|\n| **AI Integration** | Native (Claude API) | Bolted on |\n| **UX Philosophy** | Max 3 clicks to any action | Click-heavy, cluttered |\n| **Bermuda Compliance** | Built-in (PIPA + HIPAA) | Retrofitted |\n| **Offline Capability** | Yes (PWA) | No |\n| **Target Market** | Mid-market practices | Enterprise only |\n| **Cost** | Affordable | 00k+ implementations |\n\n---\n\n## Tech Stack\n\n| Component | Technology |\n|-----------|------------|\n| Backend | FastAPI (Python 3.12) |\n| Frontend | React + Vite + Tailwind CSS |\n| Database | PostgreSQL 16 |\n| Container | Docker + Docker Compose |\n| AI | Anthropic Claude API |\n| Tunnel | Cloudflare (emr.rize.bm) |\n| Server | Ubuntu 24.04 LTS on Hyper-V |\n| Monitoring | Homebase Dashboard |\n\n---\n\n## Quick Start\n\n### Prerequisites\n- Docker and Docker Compose installed\n- PostgreSQL 16 running\n- Node.js 24.x LTS\n\n### Development\n```bash\n# Clone the repository\ngit clone git@github.com:Rize-Technologies/premier-emr.git\ncd premier-emr\n\n# Copy environment variables\ncp .env.example .env\n# Edit .env with your credentials\n\n# Start services\ndocker compose up -d\n\n# Access the application\n# Frontend: http://localhost:3004\n# Backend API: http://localhost:5004/api\n# API Docs: http://localhost:5004/docs\n```\n\n### Production Deployment\n```bash\n# SSH to server\nssh demos@192.168.65.246\n\n# Run deploy script\n~/deploy.sh\n\n# Check status\ndocker compose ps\nsystemctl status cloudflared\n\n# Homebase check-in\n~/scripts/checkin.sh Premier-EMR 0.2.1 Deployment healthy\n```\n\n---\n\n## Architecture\n\n```\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502                     Cloudflare Tunnel                        \u2502\n\u2502               emr.rize.bm | emr-ssh.rize.bm                 \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                              \u2502\n                              \u25bc\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502                   Premier-EMR Server                         \u2502\n\u2502                    192.168.65.246                           \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                    \u2502                     \u2502\n                    \u25bc                     \u25bc\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502     React Frontend      \u2502  \u2502       FastAPI Backend           \u2502\n\u2502    (Port 3004)         \u2502  \u2502        (Port 5004)              \u2502\n\u2502                        \u2502  \u2502   \u2022 REST API                    \u2502\n\u2502  \u2022 Dashboard           \u2502  \u2502   \u2022 Claude AI Integration       \u2502\n\u2502  \u2022 Patient Chart       \u2502  \u2502   \u2022 HIPAA Audit Middleware      \u2502\n\u2502  \u2022 Scheduling          \u2502  \u2502   \u2022 JWT Authentication          \u2502\n\u2502  \u2022 AI Assistant        \u2502  \u2502                                 \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518  \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                                        \u2502\n                                        \u25bc\n                          \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n                          \u2502      PostgreSQL         \u2502\n                          \u2502    (premier_emr)       \u2502\n                          \u2502                        \u2502\n                          \u2502  \u2022 Patients (50)       \u2502\n                          \u2502  \u2022 Providers (5)       \u2502\n                          \u2502  \u2022 Appointments (200)  \u2502\n                          \u2502  \u2022 Clinical Notes      \u2502\n                          \u2502  \u2022 Prescriptions       \u2502\n                          \u2502  \u2022 Audit Logs          \u2502\n                          \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n```\n\n---\n\n## API Endpoints\n\n| Method | Endpoint | Description |\n|--------|----------|-------------|\n| POST | /api/auth/login | User authentication |\n| GET | /api/patients | List patients |\n| GET | /api/patients/{id}/chart | Full patient chart |\n| POST | /api/appointments | Create appointment |\n| POST | /api/clinical-notes/ai-generate | AI SOAP note |\n| GET | /api/dashboard/stats | Dashboard KPIs |\n| GET | /api/audit-log | HIPAA audit log |\n\nFull API documentation: https://emr.rize.bm/api/docs\n\n---\n\n## Current Features (v0.4.0)\n\n### Deployed \u2705\n- Patient management (CRUD)\n- Provider management\n- Appointment scheduling\n- Prescription tracking with drug interaction alerts\n- AI-powered clinical notes (SOAP generation via Claude)\n- Clinical note signing and co-signing workflow\n- Provider availability management\n- Calendar views (day/week/month)\n- Waitlist management\n- Document upload (labs, imaging, referrals)\n- Allergy tracking and vitals monitoring\n- Dashboard with statistics and KPIs\n- RBAC with 10 roles and 32 permissions\n- JWT authentication with 15-min HIPAA timeout\n- HIPAA audit logging\n- Cloudflare tunnel (emr.rize.bm)\n- Homebase monitoring\n\n### In Development \ud83d\udd04\n- Unit tests\n- Appointment reminders (email)\n- Patient check-in workflow\n\n---\n\n## Compliance\n\n### HIPAA (US Healthcare)\n- All patient data encrypted at rest and in transit\n- Complete audit trail of all data access\n- Role-based access control (RBAC)\n- Automatic session timeout\n- Minimum necessary access principle\n\n### PIPA (Bermuda Data Protection)\n- Data residency in Bermuda\n- Consent tracking for data processing\n- Right to access/delete personal data\n- Breach notification procedures\n\n---\n\n## Monitoring\n\n### Homebase Dashboard\n- URL: http://192.168.65.245:8000/projects\n- Project: Premier-EMR\n- Status: Healthy \u2705\n- Version: 0.4.0\n\n### Service Status\n```bash\n# Check all containers\ndocker compose ps\n\n# Check cloudflared tunnel\nsystemctl status cloudflared\n\n# Check backend health\ncurl localhost:5004/api/health\n\n# Check frontend\ncurl localhost:3004\n```\n\n---\n\n## Contributing\n\n1. Create a feature branch: `git checkout -b feature/your-feature`\n2. Make changes following the coding standards\n3. Write tests for new functionality\n4. Update TODO.md and CHANGELOG.md\n5. Run ~/deploy.sh to deploy\n6. Check in to Homebase\n7. Create a pull request\n\n---\n\n## Support\n\n- **Internal:** artiedarrell@gmail.com\n- **Client:** Premier Health IT Department\n- **Homebase:** http://192.168.65.245:8000\n\n---\n\n## License\n\nProprietary - Rize Technologies Ltd. All rights reserved.\n\n---\n\n*Built with \u2764\ufe0f in Bermuda by Rize Technologies*",
+      "todo": "# Premier Health EMR - TODO\n\n> Priority: P0 = Critical, P1 = High, P2 = Medium, P3 = Low\n\n---\n\n## Phase 1 - Foundation \u2705 COMPLETED\n\n### P0 - Critical\n- [x] Server provisioning on Hyper-V (192.168.65.239)\n- [x] Ubuntu 24.04 installation and configuration\n- [x] Docker, Node.js, Python, PostgreSQL installation\n- [x] Project scaffolding and directory structure\n- [x] Project documentation (README, TODO, PROJECT_PLAN, CHANGELOG)\n- [x] Database schema design and migrations\n- [x] Authentication system (JWT + RBAC)\n- [x] HIPAA audit logging middleware\n- [x] Docker Compose stack (frontend, backend, db)\n- [x] Cloudflare tunnel setup (emr.rize.bm, emr-ssh.rize.bm)\n- [x] Homebase integration\n\n### P1 - High\n- [x] Patient CRUD operations\n- [x] Provider management\n- [x] Basic patient search functionality\n- [x] Docker Compose configuration\n- [x] React frontend scaffolding (Vite + Tailwind)\n- [x] AI-powered clinical note generation\n- [x] Dashboard with statistics\n- [x] Deploy script (~/deploy.sh)\n\n### P2 - Medium\n- [x] Login page UI\n- [x] Dashboard layout\n- [x] Patient list view\n- [ ] Unit tests setup\n\n---\n\n## Phase 2 - Clinical Features \ud83d\udfe1\n\n### P0 - Critical\n- [x] SOAP note templates \u2705\n- [x] AI-assisted note generation (Claude API) \u2705\n- [x] Clinical note signing workflow \u2705\n\n### P1 - High\n- [x] Prescription management\n- [x] Drug interaction alerts (basic) \u2705\n- [x] Allergy tracking (v0.3.0)\n- [x] Medication list\n\n### P2 - Medium\n- [x] Document upload (labs, imaging, referrals) \u2705\n- [ ] Clinical decision support alerts\n- [x] Vitals tracking (v0.3.0)\n- [x] Problem list management (v0.3.0)\n\n---\n\n## Phase 3 - Scheduling & Portal \ud83d\udfe1\n\n### P0 - Critical\n- [x] Appointment booking system\n- [x] Provider availability management \u2705\n- [x] Calendar views (day/week/month) \u2705\n\n### P1 - High\n- [x] Waitlist management \u2705\n- [ ] Appointment reminders (email)\n- [ ] Patient check-in workflow\n\n### P2 - Medium\n- [ ] SMS reminders integration\n- [ ] Patient portal (read-only)\n- [ ] Multi-location support\n- [ ] Recurring appointments\n\n---\n\n## Phase 4 - Analytics & Integrations \ud83d\udfe1\n\n### P0 - Critical\n- [x] Executive dashboard with KPIs\n- [ ] Patient volume metrics\n- [ ] Provider productivity reports\n\n### P1 - High\n- [ ] Predictive analytics (no-show risk)\n- [ ] HL7 FHIR compliance layer\n- [ ] Basic billing module\n\n### P2 - Medium\n- [ ] Lab integration APIs\n- [ ] Pharmacy integration\n- [ ] Insurance verification\n- [ ] Multi-currency support (BMD/USD)\n\n---\n\n## Phase 5 - Mobile & Offline \ud83d\udfe1\n\n### P0 - Critical\n- [ ] Progressive Web App (PWA) setup\n- [ ] Offline data persistence\n\n### P1 - High\n- [ ] Mobile-optimized clinical workflows\n- [ ] Push notifications\n\n### P2 - Medium\n- [ ] Offline appointment booking\n- [ ] Data sync conflict resolution\n\n---\n\n## Next Priorities\n\n### Immediate (Next Sprint)\n1. Unit tests setup\n2. Appointment reminders (email)\n3. Patient check-in workflow\n\n### Short-term (2-4 weeks)\n1. Patient portal (read-only)\n2. Clinical decision support alerts\n3. Patient volume metrics\n\n---\n\n## Bugs \ud83d\udc1b\n\n*No bugs tracked yet*\n\n---\n\n## Technical Debt \ud83d\udd27\n\n- [ ] Add comprehensive error handling throughout backend\n- [ ] Implement request rate limiting\n- [ ] Add API versioning strategy\n- [ ] Database connection pooling optimization\n- [ ] Add end-to-end tests\n- [ ] CI/CD pipeline setup\n\n---\n\n## Documentation \ud83d\udcda\n\n- [x] README.md\n- [x] TODO.md\n- [x] PROJECT_PLAN.md\n- [x] CHANGELOG.md\n- [x] CLAUDE.md\n- [x] API.md (OpenAPI spec) \u2705\n- [x] ARCHITECTURE.md (detailed) \u2705\n- [x] DEPLOYMENT.md \u2705\n- [x] DEMO_SCRIPT.md \u2705\n\n---\n\n*Last updated: 2026-02-11 (v0.4.0)*",
       "changelog": "# Changelog - Premier Health EMR\n\n## [0.4.0] - 2026-02-06\n\n### Added\n\n### Added (continued)\n- **Document Upload Module**:\n  - POST /api/documents/upload - Upload with multipart form\n  - GET /api/documents/patient/{id} - List patient documents\n  - GET /api/documents/{id} - Get document metadata\n  - POST /api/documents/{id}/review - Mark as reviewed\n  - GET /api/documents/queue/pending-review - Review queue\n  - Supported types: PDF, JPG, PNG, DOC, DOCX, TXT\n  - SHA-256 hashing for integrity/deduplication\n  - HIPAA audit logging on all operations\n\n- **Waitlist Management**:\n  - POST /api/waitlist - Add patient to waitlist\n  - GET /api/waitlist - List waitlist by priority\n  - GET /api/waitlist/stats - Waitlist statistics\n  - POST /api/waitlist/{id}/contact - Record contact attempt\n  - POST /api/waitlist/{id}/schedule - Mark as scheduled\n  - Priority levels: Urgent, High, Normal, Low\n  - Preferred days/times tracking\n  - Contact attempt history\n\n- **Calendar API**: Day, week, month, upcoming views for appointment scheduling\n- **Provider Availability**: GET availability, PUT schedule management, POST time blocking\n- **SOAP Note Templates**: 6 clinical templates (General Visit, Follow-up, Acute Illness, Chronic Management, Preventive Care, Telehealth)\n- **Enhanced Signing Workflow**:\n  - Co-signature endpoint for supervising physicians\n  - Addendum creation for signed notes\n  - Unsigned notes queue\n  - Pending co-signature queue\n- **Drug Interaction Service**: Local database with 20+ critical interactions\n  - Severity levels: Contraindicated, Major, Moderate, Minor\n  - Drug class mapping (SSRIs, MAOIs, opioids, benzos, NSAIDs, etc.)\n  - Allergy cross-reactivity checking (penicillin, sulfa, NSAID)\n- **New API Endpoints**:\n  - `GET /api/calendar/day` - Day view\n  - `GET /api/calendar/week` - Week view\n  - `GET /api/calendar/month` - Month view\n  - `GET /api/calendar/upcoming` - Upcoming appointments\n  - `GET /api/calendar/stats` - Appointment statistics\n  - `GET /api/providers/{id}/availability` - Provider availability\n  - `PUT /api/providers/{id}/schedule` - Update weekly schedule\n  - `POST /api/providers/{id}/block-time` - Block time off\n  - `GET /api/clinical-notes/templates` - List SOAP templates\n  - `GET /api/clinical-notes/templates/{id}` - Get specific template\n  - `POST /api/clinical-notes/{id}/cosign` - Co-sign note\n  - `POST /api/clinical-notes/{id}/addendum` - Add addendum\n  - `GET /api/clinical-notes/queue/unsigned` - Unsigned notes queue\n  - `GET /api/clinical-notes/queue/pending-cosign` - Pending co-signature\n  - `POST /api/prescriptions/check-interactions` - Check drug interactions\n  - `GET /api/prescriptions/patient/{id}/check/{medication}` - Patient-specific check\n\n### Changed\n- Updated clinical notes model with enhanced signing workflow fields\n- Improved prescription workflow with integrated interaction checking\n\n# Premier Health EMR - Changelog\n\nAll notable changes to this project will be documented in this file.\n\nThe format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),\nand this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).\n\n---\n\n## [Unreleased]\n\n### Planned\n- Alembic migrations for schema versioning\n- Password reset flow\n- Patient portal integration\n- Lab results module\n- Provider availability management\n- Calendar views (day/week/month)\n- Unit tests\n\n---\n\n## [0.3.1] - 2026-02-04\n\n### Added - Role-Based Access Control (RBAC)\n- **Role Model**: 10 hierarchical roles with level-based permissions\n  - system_admin (100), practice_manager (90), physician (80)\n  - nurse_practitioner (75), registered_nurse (60), medical_assistant (50)\n  - billing_specialist (40), lab_technician (35), receptionist (30), read_only (10)\n- **Permission Model**: 32 granular permissions across resources\n  - system_settings:admin, users:manage, audit_log:read\n  - patients:create/read/update/delete, demographics:read/update\n  - appointments:create/read/update/delete\n  - clinical_notes:read/create/sign\n  - prescriptions:read/create/approve\n  - vitals:read/create, labs:order/read/enter_results\n  - billing:read/create/manage, reports:read/admin\n  - ai_assistant:use\n- **RBAC Middleware**: Permission-based route protection\n  - require_permission() - Single permission check\n  - require_any_permission() - Any of multiple permissions\n  - require_all_permissions() - All permissions required\n  - require_role_level() - Minimum hierarchy level check\n- **Roles API**: /api/roles endpoint for role management\n- **Enhanced Auth**: /me endpoint returns role_info and permissions array\n\n### Changed\n- Audit log routes now use require_audit_read permission\n- User model enhanced with role_id FK, has_permission(), get_role_level()\n\n### Security\n- Receptionist (level 30) blocked from audit-log (requires audit_log:read)\n- Practice Manager (level 90) granted audit access\n- All sensitive routes protected by permission middleware\n\n### Database\n- roles table: 10 roles with hierarchy levels\n- permissions table: 32 permissions\n- role_permissions junction table\n- users.role_id FK, users.password_changed_at columns\n- 4 new users: manager, billing, lab, np @premierhealth.bm\n\n---\n\n## [0.3.0] - 2026-02-04\n\n### Added - Data Model Enhancements\n- **Encounter Model**: New table linking appointments \u2192 notes \u2192 vitals \u2192 prescriptions per visit\n- **Allergy Model**: Proper relational table replacing JSON storage\n- **Problem Model**: Active diagnoses and conditions with ICD-10 codes\n- **Vitals Model**: Vital signs per encounter (BP, HR, RR, Temp, SpO2, Height, Weight, BMI)\n\n### Enhanced\n- **Patient Model**: Expanded demographics (address, insurance, emergency contacts)\n- **Appointment Model**: Enhanced status workflow with check-in tracking\n- **Clinical Note Model**: Signing workflow with co-sign and addendum support\n- **Prescription Model**: Enhanced tracking with discontinuation and controlled substance flags\n\n### Database\n- Migration script for v0.3.0 (migrate_v030.py)\n- Migrated 63 allergies from JSON to proper table\n- Created 73 problems, 69 encounters, 69 vitals records\n\n---\n\n## [0.2.1] - 2026-02-04\n\n### Added\n- **Cloudflare Tunnel**: Public access via emr.rize.bm and emr-ssh.rize.bm\n- **Homebase Integration**: Automatic health check-ins with status reporting\n- **Deploy Script**: Simple deployment script at ~/deploy.sh\n\n### Infrastructure\n- Cloudflared service installed and configured\n- Tunnel premier-emr (ID: c2b3d359-448f-4b3a-9e0e-d70bda5f2443)\n- DNS routing: emr.rize.bm \u2192 localhost:3000, emr-ssh.rize.bm \u2192 localhost:22\n- Homebase checkin script at ~/scripts/checkin.sh\n\n---\n\n## [0.2.0] - 2026-02-04\n\n### Added\n- **Docker Compose Stack**: Full containerized deployment (db, backend, frontend)\n- **PostgreSQL Database**: Schema with patients, providers, appointments, prescriptions, clinical_notes, audit_logs, users\n- **FastAPI Backend**: RESTful API on port 5000 with JWT authentication\n- **AI Integration**: Claude-powered clinical note generation and medical insights\n- **React Frontend**: Modern UI on port 3000\n- **Seed Data**: 50 patients, 5 providers, 200 appointments for testing\n\n---\n\n## [0.1.0] - 2026-02-04\n\n### Added\n- Initial project scaffolding\n- Server provisioned (192.168.65.239) with Docker, Node.js, Python 3.12, PostgreSQL 16\n\n---\n\n*Maintained by Rize Technologies*",
       "todos_parsed": [
         {
@@ -690,20 +678,8 @@
       "git": {
         "status": "dirty",
         "branch": "main",
-        "last_commit": "4a81291 RBAC seeded: 4 users, 10 roles, 32 permissions. Docker compose operational (5 days ago)",
+        "last_commit": "07b44b6 resolve CLAUDE.md merge conflict \u2014 accept remote (46 minutes ago)",
         "changes": [
-          {
-            "status": "M",
-            "file": "LAUDE.md"
-          },
-          {
-            "status": "M",
-            "file": "backend/app/main.py"
-          },
-          {
-            "status": "M",
-            "file": "frontend/index.html"
-          },
           {
             "status": "??",
             "file": "CLAUDE.md.bak.20260210"
@@ -725,7 +701,7 @@
             "file": "public/"
           }
         ],
-        "uncommitted_count": 8
+        "uncommitted_count": 5
       },
       "ports_status": [
         {
@@ -772,12 +748,12 @@
       "ports": [
         3005
       ],
-      "scanned_at": "2026-02-13T03:37:42.954576+00:00",
+      "scanned_at": "2026-02-13T19:22:38.930656+00:00",
       "status": "ok",
       "issues": [
         {
           "severity": "info",
-          "message": "20 uncommitted changes"
+          "message": "11 uncommitted changes"
         }
       ],
       "docs": [
@@ -927,50 +903,50 @@
       "git": {
         "status": "dirty",
         "branch": "main",
-        "last_commit": "57ad5a9 fix: CEO QA cycle \u2014 file downloads, email page, AI chat RAG, nginx routing (12 hours ago)",
+        "last_commit": "7ae95f9 Fix 6 failing Playwright tests: login timeouts, variable bug, favicon strict mode, chart selectors (4 hours ago)",
         "changes": [
           {
             "status": "M",
-            "file": "ackend/app/middleware/auth_middleware.py"
+            "file": "laywright.config.js"
+          },
+          {
+            "status": "D",
+            "file": "test-results/.last-run.json"
+          },
+          {
+            "status": "D",
+            "file": "test-results/helios-test-Helios-New-Frontend-5-Viewer-button---dashboard-retry1/error-context.md"
+          },
+          {
+            "status": "D",
+            "file": "test-results/helios-test-Helios-New-Frontend-5-Viewer-button---dashboard/error-context.md"
+          },
+          {
+            "status": "D",
+            "file": "test-results/helios-verify-Helios-Front-c3730-oard-shows-data-after-login-retry1/error-context.md"
+          },
+          {
+            "status": "D",
+            "file": "test-results/helios-verify-Helios-Front-c3730-oard-shows-data-after-login/error-context.md"
           },
           {
             "status": "M",
-            "file": "backend/app/routes/shared_files.py"
+            "file": "tests/helios-full.spec.js"
           },
           {
             "status": "M",
-            "file": "docker-compose.yml"
+            "file": "tests/helios-test.spec.js"
           },
           {
             "status": "M",
-            "file": "frontend.dead.1770758364/build/static/js/main.0ff94bc8.js"
+            "file": "tests/helios-verify.spec.js"
           },
           {
-            "status": "M",
-            "file": "frontend.dead.1770758364/src/Layouts/LayoutMenuData.js"
-          },
-          {
-            "status": "M",
-            "file": "frontend.dead.1770758364/src/Routes/allRoutes.js"
-          },
-          {
-            "status": "M",
-            "file": "frontend/index.html"
-          },
-          {
-            "status": "M",
-            "file": "frontend/nginx.conf"
-          },
-          {
-            "status": "M",
-            "file": "frontend/package-lock.json"
-          },
-          {
-            "status": "M",
-            "file": "frontend/package.json"
+            "status": "??",
+            "file": "test-results/helios-full-13-Clients-page-shows-clients/"
           }
         ],
-        "uncommitted_count": 20
+        "uncommitted_count": 11
       },
       "ports_status": [
         {
@@ -1015,7 +991,6 @@
         "package-lock.json",
         "package.json",
         "playwright.config.js",
-        "test-results/.last-run.json",
         "tests/helios-full.spec.js",
         "tests/helios-test.spec.js",
         "tests/helios-verify.spec.js",
@@ -1032,7 +1007,7 @@
       "ports": [
         8000
       ],
-      "scanned_at": "2026-02-13T03:37:57.478657+00:00",
+      "scanned_at": "2026-02-13T19:22:51.784709+00:00",
       "status": "ok",
       "issues": [
         {
@@ -1157,11 +1132,11 @@
       "git": {
         "status": "dirty",
         "branch": "master",
-        "last_commit": "fa48cd9 fix: nginx proxy config, all sub-pages now 200 (13 hours ago)",
+        "last_commit": "55643ad security: remove all .bak files from git tracking (includes .env.bak with Azure secrets) (3 minutes ago)",
         "changes": [
           {
             "status": "M",
-            "file": "LAUDE.md"
+            "file": "ackend/scripts/project-status-scanner.py"
           },
           {
             "status": "M",
@@ -1170,6 +1145,10 @@
           {
             "status": "M",
             "file": "cache/health.json"
+          },
+          {
+            "status": "M",
+            "file": "cache/last_stale_alert.txt"
           },
           {
             "status": "M",
@@ -1193,11 +1172,7 @@
           },
           {
             "status": "M",
-            "file": "data/agents.db"
-          },
-          {
-            "status": "M",
-            "file": "data/briefings.json"
+            "file": "data/agent_status.json"
           }
         ],
         "uncommitted_count": 20
@@ -1274,9 +1249,14 @@
         3002,
         3003
       ],
-      "scanned_at": "2026-02-13T03:37:57.586900+00:00",
+      "scanned_at": "2026-02-13T19:22:51.887030+00:00",
       "status": "ok",
-      "issues": [],
+      "issues": [
+        {
+          "severity": "info",
+          "message": "2 uncommitted changes"
+        }
+      ],
       "docs": [
         {
           "file": "README.md",
@@ -1392,11 +1372,20 @@
       "todos_done": 15,
       "version": "3.0.0",
       "git": {
-        "status": "clean",
+        "status": "dirty",
         "branch": "master",
-        "last_commit": "89f58c6 fix: systemd service for backend, CLAUDE.md update, .env port fix (6 hours ago)",
-        "changes": [],
-        "uncommitted_count": 0
+        "last_commit": "e02d813 feat: Wire real Halo PSA data into Nexus backend, replace mock/seed data (28 minutes ago)",
+        "changes": [
+          {
+            "status": "??",
+            "file": "backend/src/app.ts.bak.20260213-184049"
+          },
+          {
+            "status": "??",
+            "file": "test-results/"
+          }
+        ],
+        "uncommitted_count": 2
       },
       "ports_status": [
         {
@@ -1443,11 +1432,13 @@
         "frontend/postcss.config.js",
         "frontend/tailwind.config.js",
         "frontend/vite.config.ts",
+        "node_modules/.package-lock.json",
         "package-lock.json",
         "package.json",
+        "test-results/.last-run.json",
         "tsconfig.json"
       ],
-      "health_score": 100
+      "health_score": 98
     },
     {
       "name": "Dockyard WiFi",
@@ -1459,16 +1450,12 @@
         8080,
         8081
       ],
-      "scanned_at": "2026-02-13T03:37:57.723735+00:00",
+      "scanned_at": "2026-02-13T19:22:51.982520+00:00",
       "status": "ok",
       "issues": [
         {
           "severity": "warning",
           "message": "Missing required docs: DEPLOYMENT.md"
-        },
-        {
-          "severity": "info",
-          "message": "8 uncommitted changes"
         }
       ],
       "docs": [
@@ -1586,44 +1573,11 @@
       "todos_done": 20,
       "version": "1.8.0",
       "git": {
-        "status": "dirty",
+        "status": "clean",
         "branch": "main",
-        "last_commit": "17db722 fix: add missing initGatewayPanel JS function for admin Gateways tab (33 hours ago)",
-        "changes": [
-          {
-            "status": "M",
-            "file": "dmin/public/index.html"
-          },
-          {
-            "status": "M",
-            "file": "backend/public/index-new.html"
-          },
-          {
-            "status": "M",
-            "file": "backend/public/index.html"
-          },
-          {
-            "status": "M",
-            "file": "backend/public/pages/privacy.html"
-          },
-          {
-            "status": "M",
-            "file": "backend/public/pages/terms.html"
-          },
-          {
-            "status": "M",
-            "file": "backend/public/payment.html"
-          },
-          {
-            "status": "??",
-            "file": "admin/public/img/"
-          },
-          {
-            "status": "??",
-            "file": "backend/public/img/"
-          }
-        ],
-        "uncommitted_count": 8
+        "last_commit": "11b4444 fix: resolve Gitea #1-5 \u2014 image display, captive portal, payment form, security (39 minutes ago)",
+        "changes": [],
+        "uncommitted_count": 0
       },
       "ports_status": [
         {
@@ -1671,7 +1625,7 @@
         "package-lock.json",
         "package.json"
       ],
-      "health_score": 88
+      "health_score": 90
     },
     {
       "name": "David Bishop",
@@ -1682,7 +1636,7 @@
       "ports": [
         9001
       ],
-      "scanned_at": "2026-02-13T03:37:57.888112+00:00",
+      "scanned_at": "2026-02-13T19:22:52.114845+00:00",
       "status": "ok",
       "issues": [
         {
@@ -1865,7 +1819,7 @@
       "ports": [
         9002
       ],
-      "scanned_at": "2026-02-13T03:38:15.155495+00:00",
+      "scanned_at": "2026-02-13T19:23:11.228489+00:00",
       "status": "ok",
       "issues": [
         {
@@ -2020,7 +1974,7 @@
       "git": {
         "status": "dirty",
         "branch": "main",
-        "last_commit": "a47fb35 feat: Finance API router \u2014 7 endpoints for dashboard Phase 3 (4 hours ago)",
+        "last_commit": "a47fb35 feat: Finance API router \u2014 7 endpoints for dashboard Phase 3 (20 hours ago)",
         "changes": [
           {
             "status": "M",
@@ -2033,6 +1987,10 @@
           {
             "status": "M",
             "file": "CLAUDE.md"
+          },
+          {
+            "status": "M",
+            "file": "DASHBOARD.md"
           },
           {
             "status": "M",
@@ -2057,10 +2015,6 @@
           {
             "status": "M",
             "file": "analysis/billing_classifier.py"
-          },
-          {
-            "status": "M",
-            "file": "analysis/revenue_leakage.py"
           }
         ],
         "uncommitted_count": 20
@@ -2075,12 +2029,9 @@
       ],
       "files": [
         "CHANGELOG.md",
-        "RUNBOOK.md",
         "SECURITY.md",
         "TODO.md",
         "config/IDENTITY.md",
-        "data/improvement-tracker.json",
-        "data/xero-snapshot-2026-02-12.json",
         "reports/daily_20260208_054118.json",
         "reports/daily_20260208_110000.json",
         "reports/daily_20260208_132942.json",
@@ -2089,6 +2040,7 @@
         "reports/daily_20260210_110004.json",
         "reports/daily_20260211_110004.json",
         "reports/daily_20260212_110004.json",
+        "reports/daily_20260213_110005.json",
         "reports/leakage_20260208_100000.json",
         "reports/leakage_20260208_160000.json",
         "reports/leakage_20260208_220000.json",
@@ -2108,6 +2060,9 @@
         "reports/leakage_20260212_100005.json",
         "reports/leakage_20260212_160005.json",
         "reports/leakage_20260212_220010.json",
+        "reports/leakage_20260213_040007.json",
+        "reports/leakage_20260213_100009.json",
+        "reports/leakage_20260213_160008.json",
         "reports/weekly_20260208_054118.json",
         "reports/weekly_20260208_132942.json",
         "reports/weekly_20260208_133338.json",
@@ -2120,7 +2075,6 @@
         "scripts/halo_time_helper.py",
         "scripts/insights-engine.py",
         "scripts/insights_router.py",
-        "scripts/time-dashboard-api.py",
         "scripts/xero-authorize.py",
         "scripts/xero-refresh-token.py",
         "scripts/xero-sync.py"
@@ -2136,7 +2090,7 @@
       "ports": [
         9003
       ],
-      "scanned_at": "2026-02-13T03:38:30.439599+00:00",
+      "scanned_at": "2026-02-13T19:23:25.737031+00:00",
       "status": "ok",
       "issues": [
         {
@@ -2291,7 +2245,7 @@
       "git": {
         "status": "dirty",
         "branch": "main",
-        "last_commit": "368ccc3 security: comprehensive .gitignore for credential protection (27 hours ago)",
+        "last_commit": "368ccc3 security: comprehensive .gitignore for credential protection (2 days ago)",
         "changes": [
           {
             "status": "M",
@@ -2374,10 +2328,10 @@
         "data/prtg-intel-2026-02-10.json",
         "data/prtg-intel-2026-02-11.json",
         "data/prtg-intel-2026-02-12.json",
+        "data/prtg-intel-2026-02-13.json",
         "db/__init__.py",
         "db/models.py",
         "main.py",
-        "monitor/browser-results.json",
         "monitor/browser_monitor.py",
         "monitor/config.json",
         "monitor/results.json",
@@ -2399,6 +2353,822 @@
       "health_score": 98
     },
     {
+      "name": "Finance Dashboard",
+      "server": "rize-apps",
+      "type": "infrastructure",
+      "path": "/home/rizeadmin/finance-dashboard",
+      "domain": null,
+      "ports": [
+        9020
+      ],
+      "scanned_at": "2026-02-13T19:23:40.280886+00:00",
+      "status": "ok",
+      "issues": [
+        {
+          "severity": "warning",
+          "message": "Missing required docs: DEPLOYMENT.md"
+        }
+      ],
+      "docs": [
+        {
+          "file": "README.md",
+          "required": true,
+          "exists": true,
+          "status": "ok"
+        },
+        {
+          "file": "TODO.md",
+          "required": true,
+          "exists": true,
+          "status": "ok"
+        },
+        {
+          "file": "CHANGELOG.md",
+          "required": true,
+          "exists": true,
+          "status": "ok"
+        },
+        {
+          "file": "DEPLOYMENT.md",
+          "required": true,
+          "exists": false,
+          "status": "warning"
+        }
+      ],
+      "readme": "# Rize Finance Dashboard\n\nReal-time financial intelligence for Rize Technology Group.\n\n## Quick Access\n- **URL:** https://finance.rize.bm (Cloudflare Access)\n- **Frontend:** .245:9020 (React 18 + Vite 5 + Tailwind CSS)\n- **Backend API:** .241:9010 (Apex Time Dashboard + Finance Router)\n- **Service:** `sudo systemctl restart finance-dashboard`\n\n## Pages\n\n| Page | Route | Description |\n|------|-------|-------------|\n| Time Tracker | `/` | Core 5 team utilization, revenue, reviews |\n| Insights | `/insights` | Apex AI-generated financial insights |\n| Cash Position | `/cash` | Bank accounts, credit cards, net cash |\n| Revenue | `/revenue` | P&L breakdown, income categories, margins |\n| Receivables | `/receivables` | AR aging buckets, collection priority |\n| Invoices | `/invoices` | Filterable/sortable invoice table |\n\n## API Endpoints\n\n### Time Tracking (Phase 1)\n- `GET /api/time/core5/daily` \u2014 Today's data\n- `GET /api/time/core5/weekly` \u2014 Mon-today\n- `GET /api/time/core5/monthly` \u2014 MTD\n- `GET /api/time/core5/detail/{id}` \u2014 Per-agent with client breakdown\n- `POST /api/time/core5/review/{id}` \u2014 Toggle review\n- `GET /api/time/core5/reviews` \u2014 All reviews\n\n### Insights (Phase 2)\n- `GET /api/insights/current` \u2014 Latest insights\n- `GET /api/insights/summary` \u2014 Counts by severity\n\n### Finance (Phase 3)\n- `GET /api/finance/health` \u2014 Service status\n- `GET /api/finance/cash-position` \u2014 Bank accounts, credit cards, net cash\n- `GET /api/finance/revenue` \u2014 P&L with income lines, COGS, OpEx, net profit\n- `GET /api/finance/receivables` \u2014 Aging buckets, top overdue\n- `GET /api/finance/invoices` \u2014 Invoice list with filters, pagination\n- `GET /api/finance/payments` \u2014 Recent payments, 7/30 day totals\n- `GET /api/finance/snapshot` \u2014 Daily aggregate summary\n\n## Stack\n- React 18, Vite 5, Tailwind CSS 3, Recharts 2\n- react-router-dom (client-side routing)\n- lucide-react (icons)\n- Express 5 (production server + API proxy)\n- FastAPI (backend on .241)\n- Xero API (financial data via OAuth2)\n- Halo PSA (time tracking data)\n\n## Data Sources\n- **Xero:** Invoices, bank accounts, P&L, aged receivables (via daily snapshot)\n- **Halo PSA:** Timesheets, tickets, client data (live API)\n- **Apex Engine:** Financial insights (AI-generated, cron)\n\n## Development\n```bash\nnpm run dev    # Vite dev server with HMR\nnpm run build  # Production build\nnpm start      # Production server\n```",
+      "todo": "# Finance Dashboard TODO\n\n## Phase 1 \u2014 COMPLETE\n- [x] React + Vite + Tailwind frontend\n- [x] Core 5 person cards\n- [x] Team summary bar\n- [x] Period selector (daily/weekly/monthly)\n- [x] Review toggles\n- [x] Express production server\n- [x] Systemd service\n- [x] Cloudflare tunnel\n- [x] Git commit + push\n\n## Phase 2 \u2014 Apex Intelligence Layer \u2014 COMPLETE\n- [x] Insights engine (cron on .241)\n- [x] Insights API endpoints\n- [x] InsightsPanel frontend component\n- [x] Self-improvement loop\n\n## Phase 3 \u2014 Xero Financial Data \u2014 COMPLETE\n- [x] Cash position page (bank accounts, credit cards, net cash, pie chart)\n- [x] AR aging page (5 buckets, collection priority table, actionable/legacy split)\n- [x] Revenue page (P&L breakdown, income categories, net margin)\n- [x] Invoices page (filterable/sortable table, status badges, search)\n- [x] Finance API router (7 endpoints on .241:9010)\n- [x] Express proxy for /api/finance/*\n- [x] Sidebar navigation with 6 pages\n- [x] Dark theme (rize color palette)\n- [x] Pre-cached data pattern (show cached, refresh in background)\n\n## Phase 4 \u2014 Future\n- [ ] Cash flow chart (last 30 days inflows/outflows)\n- [ ] Revenue trend chart (monthly, last 12 months)\n- [ ] Client-level financial detail page\n- [ ] Xero bank balance integration (currently returns 0 \u2014 API limitation)\n- [ ] PDF export for financial reports\n- [ ] Mobile-responsive sidebar (hamburger menu)\n\n## Infrastructure\n- [ ] Add CNAME: finance.rize.bm \u2192 tunnel (NEEDS HUMAN)\n- [ ] Add Cloudflare Access policy (NEEDS HUMAN)\n- [ ] Fix Gitea repo visibility (chown bare repo)",
+      "changelog": "# Finance Dashboard Changelog\n\n## [1.2.0] \u2014 2026-02-12\n### Added\n- Cash Position page (/cash) \u2014 bank accounts, credit cards, net cash, pie chart\n- Accounts Receivable page (/receivables) \u2014 5 aging buckets, collection priority, actionable/legacy\n- Revenue page (/revenue) \u2014 P&L breakdown, income categories, COGS, OpEx, net margin\n- Invoices page (/invoices) \u2014 filterable/sortable table, status badges, search\n- 7 finance API endpoints on .241:9010 (/api/finance/*)\n- Sidebar navigation with react-router-dom (6 pages)\n- Express proxy for /api/finance/* to .241:9010\n- Pre-cached data pattern on all new pages\n\n### Changed\n- App architecture: single-page \u2192 multi-page with Layout + Sidebar\n- Added lucide-react and react-router-dom dependencies\n\n## [1.1.0] \u2014 2026-02-12\n### Added\n- Apex Intelligence Panel (Phase 2)\n- Insights API endpoints (/api/insights/*)\n- InsightsPanel component with filter/dismiss/approve\n\n## [1.0.0] \u2014 2026-02-12\n### Added\n- Core 5 Time Tracker dashboard\n- Person cards with utilization, revenue, review toggles\n- Team summary bar\n- Period selector (daily/weekly/monthly)\n- Express production server on port 9020\n- Systemd service (finance-dashboard.service)\n- Cloudflare tunnel (finance.rize.bm)",
+      "todos_parsed": [
+        {
+          "text": "React + Vite + Tailwind frontend",
+          "done": true
+        },
+        {
+          "text": "Core 5 person cards",
+          "done": true
+        },
+        {
+          "text": "Team summary bar",
+          "done": true
+        },
+        {
+          "text": "Period selector (daily/weekly/monthly)",
+          "done": true
+        },
+        {
+          "text": "Review toggles",
+          "done": true
+        },
+        {
+          "text": "Express production server",
+          "done": true
+        },
+        {
+          "text": "Systemd service",
+          "done": true
+        },
+        {
+          "text": "Cloudflare tunnel",
+          "done": true
+        },
+        {
+          "text": "Git commit + push",
+          "done": true
+        },
+        {
+          "text": "Insights engine (cron on .241)",
+          "done": true
+        },
+        {
+          "text": "Insights API endpoints",
+          "done": true
+        },
+        {
+          "text": "InsightsPanel frontend component",
+          "done": true
+        },
+        {
+          "text": "Self-improvement loop",
+          "done": true
+        },
+        {
+          "text": "Cash position page (bank accounts, credit cards, net cash, pie chart)",
+          "done": true
+        },
+        {
+          "text": "AR aging page (5 buckets, collection priority table, actionable/legacy split)",
+          "done": true
+        },
+        {
+          "text": "Revenue page (P&L breakdown, income categories, net margin)",
+          "done": true
+        },
+        {
+          "text": "Invoices page (filterable/sortable table, status badges, search)",
+          "done": true
+        },
+        {
+          "text": "Finance API router (7 endpoints on .241:9010)",
+          "done": true
+        },
+        {
+          "text": "Express proxy for /api/finance/*",
+          "done": true
+        },
+        {
+          "text": "Sidebar navigation with 6 pages",
+          "done": true
+        }
+      ],
+      "todos_open": 0,
+      "todos_done": 20,
+      "version": "1.2.0",
+      "git": {
+        "status": "clean",
+        "branch": "main",
+        "last_commit": "c3623f3 audit: Finance Dashboard \u2014 Playwright tests + all endpoints verified (16 hours ago)",
+        "changes": [],
+        "uncommitted_count": 0
+      },
+      "ports_status": [
+        {
+          "port": 9020,
+          "open": true,
+          "http_code": 200,
+          "healthy": true
+        }
+      ],
+      "files": [
+        "CHANGELOG.md",
+        "CLAUDE.md",
+        "README.md",
+        "TODO.md",
+        "node_modules/.package-lock.json",
+        "package-lock.json",
+        "package.json",
+        "postcss.config.js",
+        "tailwind.config.js",
+        "test-results/.last-run.json",
+        "vite.config.js"
+      ],
+      "health_score": 90
+    },
+    {
+      "name": "Sales Dashboard",
+      "server": "rize-apps",
+      "type": "infrastructure",
+      "path": "/home/rizeadmin/sales-dashboard",
+      "domain": null,
+      "ports": [
+        9030
+      ],
+      "scanned_at": "2026-02-13T19:23:40.422449+00:00",
+      "status": "ok",
+      "issues": [
+        {
+          "severity": "warning",
+          "message": "Missing required docs: TODO.md, CHANGELOG.md, DEPLOYMENT.md"
+        },
+        {
+          "severity": "info",
+          "message": "1 uncommitted changes"
+        }
+      ],
+      "docs": [
+        {
+          "file": "README.md",
+          "required": true,
+          "exists": true,
+          "status": "ok"
+        },
+        {
+          "file": "TODO.md",
+          "required": true,
+          "exists": false,
+          "status": "warning"
+        },
+        {
+          "file": "CHANGELOG.md",
+          "required": true,
+          "exists": false,
+          "status": "warning"
+        },
+        {
+          "file": "DEPLOYMENT.md",
+          "required": true,
+          "exists": false,
+          "status": "warning"
+        }
+      ],
+      "readme": "# React + Vite\n\nThis template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.\n\nCurrently, two official plugins are available:\n\n- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh\n- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh\n\n## React Compiler\n\nThe React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).\n\n## Expanding the ESLint configuration\n\nIf you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.",
+      "todo": null,
+      "changelog": null,
+      "todos_parsed": [],
+      "todos_open": 0,
+      "todos_done": 0,
+      "version": null,
+      "git": {
+        "status": "dirty",
+        "branch": "master",
+        "last_commit": "d12aaab Fix API proxy (pathFilter), add API Playwright tests (5 hours ago)",
+        "changes": [
+          {
+            "status": "M",
+            "file": "ite.config.js"
+          }
+        ],
+        "uncommitted_count": 1
+      },
+      "ports_status": [
+        {
+          "port": 9030,
+          "open": true,
+          "http_code": 200,
+          "healthy": true
+        }
+      ],
+      "files": [
+        "README.md",
+        "eslint.config.js",
+        "node_modules/.package-lock.json",
+        "package-lock.json",
+        "package.json",
+        "test-results/.last-run.json",
+        "vite.config.js"
+      ],
+      "health_score": 88
+    },
+    {
+      "name": "Cortex",
+      "server": "agents",
+      "type": "agent",
+      "path": "/home/agents/cortex",
+      "domain": null,
+      "ports": [
+        9101
+      ],
+      "scanned_at": "2026-02-13T19:23:40.575013+00:00",
+      "status": "ok",
+      "issues": [
+        {
+          "severity": "warning",
+          "message": "Missing required docs: SPEC.md, SECURITY.md, INTEGRATIONS.md, RUNBOOK.md, ESCALATION.md, AUDIT-LOG.md"
+        },
+        {
+          "severity": "info",
+          "message": "20 uncommitted changes"
+        },
+        {
+          "severity": "critical",
+          "message": "Port 9101 not responding"
+        }
+      ],
+      "docs": [
+        {
+          "file": "README.md",
+          "required": true,
+          "exists": true,
+          "status": "ok"
+        },
+        {
+          "file": "TODO.md",
+          "required": true,
+          "exists": true,
+          "status": "ok"
+        },
+        {
+          "file": "CHANGELOG.md",
+          "required": true,
+          "exists": true,
+          "status": "ok"
+        },
+        {
+          "file": "SPEC.md",
+          "required": true,
+          "exists": false,
+          "status": "warning"
+        },
+        {
+          "file": "SECURITY.md",
+          "required": true,
+          "exists": false,
+          "status": "warning"
+        },
+        {
+          "file": "INTEGRATIONS.md",
+          "required": true,
+          "exists": false,
+          "status": "warning"
+        },
+        {
+          "file": "RUNBOOK.md",
+          "required": true,
+          "exists": false,
+          "status": "warning"
+        },
+        {
+          "file": "ESCALATION.md",
+          "required": true,
+          "exists": false,
+          "status": "warning"
+        },
+        {
+          "file": "AUDIT-LOG.md",
+          "required": true,
+          "exists": false,
+          "status": "warning"
+        }
+      ],
+      "readme": "# Cortex \u2014 Fleet Intelligence & Automation Engine\n\n## Updated: 2026-02-11\n\n## Identity\n- **Name:** Cortex Intelligence Engine\n- **Role:** Fleet Leader \u2014 single point of command for Rize agent fleet\n- **Host:** 192.168.65.241 (Agents server), user: `agents`\n- **Gateway:** OpenClaw on port 9101 (WebSocket, loopback-only)\n- **Teams Webhook:** Port 3979 (`/api/messages`)\n- **Model:** anthropic/claude-sonnet-4-5-20250929\n- **Owner:** Rize Technology Group\n- **Status:** LIVE \u2014 running since Feb 11 08:17 AST\n\n## Architecture (Trinity)\n```\nCortex (LEADER) \u2194 Sentinel (SECURITY) \u2194 Homebase (DATABASE)\n```\n- **Cortex** = Nervous system \u2014 sees, thinks, predicts, dispatches\n- **Sentinel** = Immune system \u2014 validates, enforces, kills\n- **Homebase** = Display layer \u2014 stores data, serves dashboards\n- Security items from Sentinel get kicked TO Cortex. Cortex decides what happens next.\n- Only CEO (Artie) can authorize non-benign changes.\n- Full spec: `~/MASTER-OPERATIONS.md` on Talos\n\n## OpenClaw Gateway\n- **Service:** `systemctl --user status cortex-gateway` (agents user)\n- **Port 9101:** WebSocket gateway (loopback-bound, not externally accessible)\n- **Port 3979:** MS Teams webhook (externally accessible)\n- **Config:** `~/.openclaw/openclaw.json` (note: NOT `~/cortex/.openclaw/`)\n  - Actually lives at: `/home/agents/cortex/.openclaw/openclaw.json`\n- **System Prompt:** `/home/agents/cortex/.openclaw/system-prompt.md`\n- **Identity:** \"Cortex Intelligence Engine\" \ud83e\udde0\n- **Tools:** allow=[read, exec, sessions_send, web_search], deny=[write, edit, apply_patch, browser, canvas]\n- **Session:** dmScope=per-peer, dmPolicy=open\n- **Teams:** App ID 2191b537, Tenant 6dc52137\n- **Known Issue:** Graph API 403 on user resolution (insufficient privileges \u2014 cosmetic, Teams messaging works)\n\n### Restart Commands\n```bash\n# Normal restart\nssh agents@192.168.65.241 \"systemctl --user restart cortex-gateway\"\n\n# Check status\nssh agents@192.168.65.241 \"systemctl --user status cortex-gateway\"\nssh agents@192.168.65.241 \"ss -tlnp | grep -E '9101|3979'\"\n```\n\n## Directory Structure (Verified Feb 11)\n```\n~/cortex/\n\u251c\u2500\u2500 README.md                    # This file\n\u251c\u2500\u2500 CLAUDE.md                    # Agent operating rules\n\u251c\u2500\u2500 TODO.md                      # Task tracking\n\u251c\u2500\u2500 CHANGELOG.md                 # Version history\n\u251c\u2500\u2500 PROJECT_PLAN.md              # Phase roadmap\n\u251c\u2500\u2500 ROADMAP.md                   # High-level vision (709 bytes)\n\u251c\u2500\u2500 research_scout.py            # Intelligence filtering (standalone)\n\u251c\u2500\u2500 .env                         # API keys (chmod 600)\n\u251c\u2500\u2500 .openclaw/\n\u2502   \u251c\u2500\u2500 openclaw.json            # Gateway config (port 9101, Teams 3979)\n\u2502   \u251c\u2500\u2500 system-prompt.md         # Cortex identity and rules\n\u2502   \u251c\u2500\u2500 .env                     # OpenClaw env vars (chmod 600)\n\u2502   \u2514\u2500\u2500 workspace/               # OpenClaw working directory\n\u251c\u2500\u2500 knowledge/                   # Intelligence corpus (4 files, ~22KB)\n\u2502   \u251c\u2500\u2500 fleet-bible.md           # 9060 bytes \u2014 Complete fleet reference\n\u2502   \u251c\u2500\u2500 decision-engine.md       # 4478 bytes \u2014 Reasoning patterns\n\u2502   \u251c\u2500\u2500 openclaw-security-todo.md # 5202 bytes \u2014 OpenClaw hardening roadmap\n\u2502   \u2514\u2500\u2500 TODO.md                  # 3475 bytes \u2014 Knowledge gap tracking\n\u251c\u2500\u2500 scripts/                     # Operational scripts (14 files)\n\u2502   \u251c\u2500\u2500 service-watcher.py       # Every 5 min \u2014 health check all services\n\u2502   \u251c\u2500\u2500 fleet-maintenance.py     # 3 AM UTC \u2014 disk/memory/uptime\n\u2502   \u251c\u2500\u2500 config-validator.py      # 4 AM UTC \u2014 JSON config drift\n\u2502   \u251c\u2500\u2500 doc-audit.py             # (schedule unclear \u2014 see crons)\n\u2502   \u251c\u2500\u2500 path-validator.py        # (schedule unclear \u2014 see crons)\n\u2502   \u251c\u2500\u2500 security-monitor.py      # Hourly \u2014 key exposure, permissions\n\u2502   \u251c\u2500\u2500 daily-intelligence.py    # 7 AM UTC weekdays \u2014 email briefing\n\u2502   \u251c\u2500\u2500 gitea-auto-issue.py      # 12 PM UTC daily \u2014 scan + create issues\n\u2502   \u251c\u2500\u2500 cortex-coding-agent.py   # On-demand \u2014 code changes\n\u2502   \u251c\u2500\u2500 code-pm-cron.sh          # Hourly + daily \u2014 SSHs to Talos for Code PM\n\u2502   \u251c\u2500\u2500 build-runner.py          # Build queue runner\n\u2502   \u2514\u2500\u2500 nightly-security-scan.py # DISABLED (Sentinel handles this)\n\u251c\u2500\u2500 lib/                         # Relay migration modules (Feb 11)\n\u2502   \u251c\u2500\u2500 consensus.py             # 3267 bytes \u2014 Multi-model consensus\n\u2502   \u251c\u2500\u2500 usage_tracker.py         # 4109 bytes \u2014 API usage tracking\n\u2502   \u251c\u2500\u2500 providers/\n\u2502   \u2502   \u251c\u2500\u2500 base.py              # 850 bytes \u2014 Provider base class\n\u2502   \u2502   \u251c\u2500\u2500 claude.py            # 3962 bytes \u2014 Claude/Anthropic provider\n\u2502   \u2502   \u251c\u2500\u2500 gemini.py            # 3547 bytes \u2014 Google Gemini provider\n\u2502   \u2502   \u2514\u2500\u2500 openai_provider.py   # 3312 bytes \u2014 OpenAI provider\n\u2502   \u2514\u2500\u2500 utils/\n\u2502       \u2514\u2500\u2500 retry.py             # 3156 bytes \u2014 Retry/backoff utilities\n\u251c\u2500\u2500 data/                        # Runtime data (briefings, scans, state)\n\u2502   \u251c\u2500\u2500 daily-briefing-YYYY-MM-DD.json/md  # Generated daily\n\u2502   \u251c\u2500\u2500 security-scan-YYYY-MM-DD.json      # Generated daily at 3 AM\n\u2502   \u251c\u2500\u2500 gitea-issues-state.json            # Issue creation state\n\u2502   \u251c\u2500\u2500 improvement-tracker.json           # Self-improvement tracking\n\u2502   \u251c\u2500\u2500 build-queue.json                   # Build queue state\n\u2502   \u2514\u2500\u2500 service-state.json                 # Service watcher state\n\u251c\u2500\u2500 config/                      # Configuration files\n\u251c\u2500\u2500 research/                    # Research scout output\n\u251c\u2500\u2500 logs/                        # Script logs\n\u2514\u2500\u2500 .git/                        # Git repo (1 commit: 7bf2f4c)\n```\n\n### Code PM (Lives on Talos, triggered via SSH)\n```\nTalos:~/cortex/code-pm/           # 8 Python files + shell wrapper\n\u251c\u2500\u2500 cortex-pm.sh                  # Entry point\n\u251c\u2500\u2500 main.py, scanner.py, planner.py, dispatcher.py\n\u251c\u2500\u2500 verifier.py, notifier.py, state.py, config.py\n\u2514\u2500\u2500 state/pm.db                   # SQLite DB (149 tasks from 8 projects)\n\nTalos:~/cortex/best-practices/\n\u2514\u2500\u2500 PRACTICES.md                  # 2395 bytes \u2014 coding standards\n```\nCron on .241 \u2192 SSHs to Talos \u2192 runs code-pm (hourly scan, daily summary at 11 UTC)\n\n## Cron Schedule (agents user, .241)\nAll times UTC:\n| Schedule | Script | Description |\n|----------|--------|-------------|\n| */5 * * * * | service-watcher.py | Health check all services, 3-strike alerting |\n| 0 * * * * | security-monitor.py | API key exposure, permissions, logins |\n| 0 * * * * | code-pm-cron.sh loop | Hourly code scan (SSHs to Talos) |\n| 0 3 * * * | fleet-maintenance.py | Disk/memory/uptime checks |\n| 0 4 * * * | config-validator.py | JSON config drift detection |\n| 0 7 * * 1-5 | daily-intelligence.py | Email briefing to artiedarrell@gmail.com |\n| 0 11 * * * | code-pm-cron.sh daily | Daily PM summary (SSHs to Talos) |\n| 0 12 * * * | gitea-auto-issue.py | Scan + create Gitea issues |\n| 0 13 * * * | research_scout.py | Intelligence filtering |\n\n## Knowledge Base\n4 files deployed, 22.2 KB total. Target: 17 files (~95% coverage).\nMissing: clients.md, halo-psa.md, prtg-monitoring.md, cloudflare-tunnels.md, microsoft-365.md, and 8 more.\n\n## Homebase Integration\n- **Page:** `/cortex` on Homebase (552 lines, auto-refresh)\n- **APIs:** `/api/cortex/knowledge`, `/api/cortex/scripts`, `/api/cortex/status`\n- Data pushed from .241 scripts \u2192 cached on .245 \u2192 served by Homebase\n\n## Relay Migration (Feb 11)\n7 modules extracted from archived Relay project into `~/cortex/lib/`:\n- `consensus.py` \u2014 Multi-model voting/consensus\n- `usage_tracker.py` \u2014 API usage and cost tracking\n- `providers/claude.py` \u2014 Anthropic API wrapper\n- `providers/gemini.py` \u2014 Google Gemini wrapper\n- `providers/openai_provider.py` \u2014 OpenAI wrapper\n- `providers/base.py` \u2014 Abstract provider interface\n- `utils/retry.py` \u2014 Exponential backoff utilities\n\nThese modules are NOT yet integrated into Cortex's runtime. They exist as library code for future AI Spend model routing.\n\n## ChromaDB / Vector Memory\n**NOT INSTALLED.** ChromaDB is not available on .241. Vector memory planned for Phase 4.\n\n## Communication\n- Email: via `~/scripts/send-email.py` (sender: cortex@rize.bm, but falls back to dbishop since no mailbox)\n- Teams: Port 3979 webhook (requires Cloudflare tunnel + Azure messaging endpoint \u2014 NOT YET CONFIGURED)\n- Reports: Push to Homebase cache for dashboard display\n\n## Git\n- Remote: Gitea at http://192.168.65.245:3100/rize/cortex\n- Single commit: `7bf2f4c initial: Cortex intelligence engine codebase`\n- Branch: main",
+      "todo": "# Cortex TODO\n## Updated: 2026-02-11\n\n## Completed\n- [x] Phase 1: Project structure, basic scripts, cron scheduling\n- [x] Phase 2: 3-strike alerting, doc-audit, path-validator, security-monitor\n- [x] Phase 3: OpenClaw gateway on port 9101 with Teams webhook on 3979\n- [x] Knowledge base: fleet-bible.md, decision-engine.md (22KB total)\n- [x] System prompt v2.0 with reasoning patterns\n- [x] Sentinel enforcement playbooks + identity document\n- [x] service-watcher.py \u2014 every 5 min, 3-strike rule\n- [x] fleet-maintenance.py \u2014 3 AM UTC daily\n- [x] config-validator.py \u2014 4 AM UTC daily\n- [x] security-monitor.py \u2014 hourly\n- [x] daily-intelligence.py \u2014 7 AM UTC weekdays (emails artiedarrell@gmail.com)\n- [x] gitea-auto-issue.py \u2014 12 PM UTC daily\n- [x] cortex-coding-agent.py \u2014 deployed (on-demand)\n- [x] code-pm-cron.sh \u2014 hourly scan + daily summary (SSHs to Talos)\n- [x] Relay migration: 7 modules \u2192 ~/cortex/lib/\n- [x] Homebase /cortex page live (552 lines, 3 APIs)\n- [x] .env permissions hardened to 600\n- [x] Telemetry/update-check/bonjour disabled in OpenClaw\n\n## Blocked (Needs Human)\n- [ ] Cloudflare tunnel entry for cortexbot.rize.bm (DNS resolves, tunnel not configured in dashboard)\n- [ ] Azure messaging endpoint: https://cortexbot.rize.bm/api/messages (needs Azure Portal)\n- [ ] Graph API 403 on user resolution (needs Azure AD admin to grant User.Read.All)\n- [ ] Action1 API 403 (needs admin to grant endpoint permissions)\n\n## High Priority\n- [ ] Integrate lib/ modules into runtime (consensus, usage_tracker, providers)\n- [ ] Build model router API using lib/providers (AI Spend Phase 2)\n- [ ] Install ChromaDB for vector memory / incident history\n- [ ] Add cost logging to all agent API calls\n- [ ] Cross-agent correlation engine (real-time, not just hourly)\n\n## Medium Priority\n- [ ] Expand knowledge base: 4/17 files deployed (~23% coverage)\n  - Missing CRITICAL: clients.md, halo-psa.md\n  - Missing HIGH: prtg-monitoring.md\n  - Missing MEDIUM: cloudflare-tunnels.md, microsoft-365.md\n  - Missing LOW: 8 more topic files\n- [ ] Incident memory (SQLite) \u2014 remember past incidents for pattern matching\n- [ ] Capacity trending (7-day rolling average for predictions)\n- [ ] API key rotation strategy (90-day cycle)\n- [ ] Network segmentation review\n- [ ] Rate limiting on all agent API endpoints\n\n## Low Priority\n- [ ] Audit log shipping to central location\n- [ ] Local model deployment on Hyper-V (Ollama/Kimi)\n- [ ] Monthly spend tracking and budget alerts\n- [ ] Morning visual dashboard (beyond email)\n\n## Known Issues\n- Gateway port 9100 is NOT listening (config says 9101, which IS working)\n- Graph API returns 403 for user enumeration (cosmetic \u2014 Teams messaging still works)\n- cortex@rize.bm has no mailbox \u2014 emails fall back to dbishop@rize.bm sender\n- Code PM lives on Talos (~talosadmin/cortex/code-pm/), not on .241\n- Git repo has only 1 commit \u2014 many changes uncommitted",
+      "changelog": "# Cortex Changelog\n## Updated: 2026-02-11\n\n## [4.0.0] \u2014 2026-02-11\n### Added\n- OpenClaw gateway LIVE on port 9101 (systemd user service, auto-restart)\n- MS Teams webhook on port 3979 (dmPolicy=open, allowFrom=*)\n- Homebase /cortex page (552 lines, 3 APIs: knowledge, scripts, status)\n- Relay migration: 7 modules \u2192 ~/cortex/lib/ (providers, consensus, retry, usage_tracker)\n- Code PM: hourly scan + daily summary via SSH to Talos\n- gitea-auto-issue.py: scans security + code PM findings, creates Gitea issues\n- cortex-coding-agent.py: on-demand coding agent\n- daily-intelligence.py v2: comprehensive briefing with self-improvement section\n- Cortex designated as FLEET LEADER (Trinity Architecture)\n\n### Changed\n- Gateway port from 9100 \u2192 9101 (was conflicting)\n- Daily intelligence moved to 7 AM UTC weekdays (was 1 AM)\n- Nightly security scan DISABLED (Sentinel handles this now)\n- Email crons consolidated to 07:00-07:30 UTC window\n\n## [3.0.0] \u2014 2026-02-10\n### Added\n- Knowledge base: fleet-bible.md (9060 bytes \u2014 complete fleet reference)\n- Knowledge base: decision-engine.md (4478 bytes \u2014 reasoning patterns)\n- Enhanced system prompt v2.0 with knowledge references\n- Sentinel enforcement playbooks and identity document\n- security-monitor.py \u2014 hourly cron\n- Sentinel agent registry v2.0 with security profiles\n- .env permission hardening (600) across all agents/servers\n- OpenClaw config with API key (not yet binding at this point)\n- AI Spend Strategy documentation\n- knowledge/openclaw-security-todo.md \u2014 hardening roadmap\n- knowledge/TODO.md \u2014 knowledge gap tracking\n- OPENCLAW_DISABLE_TELEMETRY/UPDATE_CHECK/BONJOUR in .env\n\n### Changed\n- Cortex now has deep intelligence, not just scripts\n- System prompt includes correlation rules and priority matrix\n\n## [2.1.0] \u2014 2026-02-10\n### Added\n- doc-audit.py \u2014 documentation compliance checking\n- path-validator.py \u2014 project path validation\n- 3-strike alerting, recovery alerts, 20s timeouts\n\n## [2.0.0] \u2014 2026-02-09\n### Added\n- service-watcher.py \u2014 health check all services (every 5 min)\n- fleet-maintenance.py \u2014 disk/memory/uptime (3 AM UTC)\n- config-validator.py \u2014 JSON config drift (4 AM UTC)\n- research_scout.py \u2014 intelligence filtering\n- Email alerting via send-email.py\n- Cron scheduling for all scripts\n\n## [1.0.0] \u2014 2026-02-07\n### Added\n- Initial project structure and specification",
+      "todos_parsed": [
+        {
+          "text": "Phase 1: Project structure, basic scripts, cron scheduling",
+          "done": true
+        },
+        {
+          "text": "Phase 2: 3-strike alerting, doc-audit, path-validator, security-monitor",
+          "done": true
+        },
+        {
+          "text": "Phase 3: OpenClaw gateway on port 9101 with Teams webhook on 3979",
+          "done": true
+        },
+        {
+          "text": "Knowledge base: fleet-bible.md, decision-engine.md (22KB total)",
+          "done": true
+        },
+        {
+          "text": "System prompt v2.0 with reasoning patterns",
+          "done": true
+        },
+        {
+          "text": "Sentinel enforcement playbooks + identity document",
+          "done": true
+        },
+        {
+          "text": "service-watcher.py \u2014 every 5 min, 3-strike rule",
+          "done": true
+        },
+        {
+          "text": "fleet-maintenance.py \u2014 3 AM UTC daily",
+          "done": true
+        },
+        {
+          "text": "config-validator.py \u2014 4 AM UTC daily",
+          "done": true
+        },
+        {
+          "text": "security-monitor.py \u2014 hourly",
+          "done": true
+        },
+        {
+          "text": "daily-intelligence.py \u2014 7 AM UTC weekdays (emails artiedarrell@gmail.com)",
+          "done": true
+        },
+        {
+          "text": "gitea-auto-issue.py \u2014 12 PM UTC daily",
+          "done": true
+        },
+        {
+          "text": "cortex-coding-agent.py \u2014 deployed (on-demand)",
+          "done": true
+        },
+        {
+          "text": "code-pm-cron.sh \u2014 hourly scan + daily summary (SSHs to Talos)",
+          "done": true
+        },
+        {
+          "text": "Relay migration: 7 modules \u2192 ~/cortex/lib/",
+          "done": true
+        },
+        {
+          "text": "Homebase /cortex page live (552 lines, 3 APIs)",
+          "done": true
+        },
+        {
+          "text": ".env permissions hardened to 600",
+          "done": true
+        },
+        {
+          "text": "Telemetry/update-check/bonjour disabled in OpenClaw",
+          "done": true
+        },
+        {
+          "text": "Cloudflare tunnel entry for cortexbot.rize.bm (DNS resolves, tunnel not configured in dashboard)",
+          "done": false
+        },
+        {
+          "text": "Azure messaging endpoint: https://cortexbot.rize.bm/api/messages (needs Azure Portal)",
+          "done": false
+        }
+      ],
+      "todos_open": 2,
+      "todos_done": 18,
+      "version": "4.0.0",
+      "git": {
+        "status": "dirty",
+        "branch": "master",
+        "last_commit": "25b8957 security: comprehensive .gitignore for credential protection (2 days ago)",
+        "changes": [
+          {
+            "status": "M",
+            "file": "gitignore"
+          },
+          {
+            "status": "M",
+            "file": ".openclaw"
+          },
+          {
+            "status": "M",
+            "file": "CHANGELOG.md"
+          },
+          {
+            "status": "M",
+            "file": "CLAUDE.md"
+          },
+          {
+            "status": "M",
+            "file": "PROJECT_PLAN.md"
+          },
+          {
+            "status": "M",
+            "file": "README.md"
+          },
+          {
+            "status": "M",
+            "file": "TODO.md"
+          },
+          {
+            "status": "M",
+            "file": "logs/intelligence.log"
+          },
+          {
+            "status": "M",
+            "file": "logs/maintenance-cron.log"
+          },
+          {
+            "status": "M",
+            "file": "logs/maintenance.log"
+          }
+        ],
+        "uncommitted_count": 20
+      },
+      "ports_status": [
+        {
+          "port": 9101,
+          "open": false,
+          "http_code": 0,
+          "healthy": false
+        }
+      ],
+      "files": [
+        ".openclaw/msteams-conversations.json",
+        ".openclaw/openclaw.json",
+        "CHANGELOG.md",
+        "PROJECT_PLAN.md",
+        "README.md",
+        "ROADMAP.md",
+        "TODO.md",
+        "config/IDENTITY.md",
+        "config/SPEC.md",
+        "daily_reviews/nexus_review.py",
+        "data/build-queue.json",
+        "data/daily-briefing-2026-02-09.json",
+        "data/daily-briefing-2026-02-09.md",
+        "data/daily-briefing-2026-02-10.json",
+        "data/daily-briefing-2026-02-10.md",
+        "data/daily-briefing-2026-02-11.json",
+        "data/daily-briefing-2026-02-11.md",
+        "data/daily-briefing-2026-02-12.json",
+        "data/daily-briefing-2026-02-12.md",
+        "data/gitea-issues-state.json",
+        "data/improvement-tracker.json",
+        "data/security-scan-2026-02-09.json",
+        "data/security-scan-2026-02-10.json",
+        "data/security-scan-2026-02-11.json",
+        "data/service-state.json",
+        "data/vm-scan-2026-02-12.json",
+        "data/vm-scan-2026-02-13.json",
+        "knowledge/TODO.md",
+        "knowledge/decision-engine.md",
+        "knowledge/fleet-bible.md",
+        "knowledge/openclaw-security-todo.md",
+        "lib/consensus.py",
+        "lib/usage_tracker.py",
+        "research_scout.py",
+        "scripts/build-runner.py",
+        "scripts/collaborative-security-review.py",
+        "scripts/config-validator.py",
+        "scripts/cortex-coding-agent.py",
+        "scripts/daily-ceo-report.py",
+        "scripts/daily-intelligence.py",
+        "scripts/daily-plan-review.py",
+        "scripts/doc-audit.py",
+        "scripts/fleet-maintenance.py",
+        "scripts/gitea-auto-issue.py",
+        "scripts/infra-scan-15min.py",
+        "scripts/nightly-security-scan.py",
+        "scripts/path-validator.py",
+        "scripts/security-monitor.py",
+        "scripts/service-watcher.py",
+        "scripts/vm-resource-scan.py"
+      ],
+      "health_score": 63
+    },
+    {
+      "name": "Sentinel",
+      "server": "agents",
+      "type": "agent",
+      "path": "/home/agents/sentinel",
+      "domain": null,
+      "ports": [
+        9006
+      ],
+      "scanned_at": "2026-02-13T19:23:59.397179+00:00",
+      "status": "ok",
+      "issues": [
+        {
+          "severity": "warning",
+          "message": "Missing required docs: SPEC.md, SECURITY.md, INTEGRATIONS.md, RUNBOOK.md, ESCALATION.md, AUDIT-LOG.md"
+        },
+        {
+          "severity": "critical",
+          "message": "Port 9006 not responding"
+        }
+      ],
+      "docs": [
+        {
+          "file": "README.md",
+          "required": true,
+          "exists": true,
+          "status": "ok"
+        },
+        {
+          "file": "TODO.md",
+          "required": true,
+          "exists": true,
+          "status": "ok"
+        },
+        {
+          "file": "CHANGELOG.md",
+          "required": true,
+          "exists": true,
+          "status": "ok"
+        },
+        {
+          "file": "SPEC.md",
+          "required": true,
+          "exists": false,
+          "status": "warning"
+        },
+        {
+          "file": "SECURITY.md",
+          "required": true,
+          "exists": false,
+          "status": "warning"
+        },
+        {
+          "file": "INTEGRATIONS.md",
+          "required": true,
+          "exists": false,
+          "status": "warning"
+        },
+        {
+          "file": "RUNBOOK.md",
+          "required": true,
+          "exists": false,
+          "status": "warning"
+        },
+        {
+          "file": "ESCALATION.md",
+          "required": true,
+          "exists": false,
+          "status": "warning"
+        },
+        {
+          "file": "AUDIT-LOG.md",
+          "required": true,
+          "exists": false,
+          "status": "warning"
+        }
+      ],
+      "readme": "# Sentinel \u2014 Security Agent (CISO)\n\n**Version:** 1.0.0\n**Host:** agents@192.168.65.241\n**Gateway Port:** 9006\n**Status:** Active (OpenClaw gateway)\n\n## Role\nSentinel is Rize Technology Group's AI security officer (CISO agent).\nMonitors all agents, projects, and infrastructure for security issues.\nReports findings to Cortex (fleet leader) for decision-making.\n\n## Trinity Architecture\n```\nCortex (LEADER) <-> Sentinel (SECURITY) <-> Homebase (DATABASE)\n```\n- Sentinel detects threats and compliance violations\n- Findings forwarded to Cortex for prioritization\n- Only CEO (Artie) can authorize non-benign changes\n\n## Capabilities\n- Nightly fleet security audit (all 5 servers)\n- Interaction logging for all OpenClaw agents\n- Credential exposure scanning\n- Port/service exposure monitoring\n- Cloudflare tunnel security validation\n- Git secrets pre-push scanning\n- SSH configuration auditing\n- Red team exercises (automated penetration testing)\n- Daily interaction summaries\n- Collaborative security reviews with Cortex\n\n## Scripts\n\n| Script | Purpose | Schedule |\n|--------|---------|----------|\n| nightly-security-scan.py | Full fleet security scan | 3:05 AM AST daily |\n| nightly-audit.py | Targeted audit (tunnels, creds, ports) | 11 PM AST daily |\n| agent-health-audit.py | Agent service health checks | 6 AM UTC daily |\n| red-team-exercise.py | Automated penetration testing | 3:30 AM AST daily |\n| daily-interaction-summary.py | Summarize all agent interactions | 7 AM AST daily |\n| sentinel-code-review.py | Automated code security review | On-demand |\n| fleet-status.py | Fleet-wide status report | On-demand |\n| improvement-tracker.py | Track security improvements | On-demand |\n\n## Security Findings (Latest)\n- 3 CRITICAL findings\n- 22 HIGH findings (18 recurring)\n- 10 MEDIUM findings\n- Trend: HIGH findings increasing (+4 from last scan)\n\n## Email\n- sentinel@rize.bm \u2014 security alerts\n- Alerts sent to: artiedarrell@gmail.com, gadarrell@rize.bm\n\n## Interaction Logging\n- Shared library: /home/agents/shared/interaction_logger.py\n- Gateway hook: /home/agents/shared/gateway_logging_hook.py\n- Per-agent logs: /home/agents/{agent}/logs/interactions/{agent}-YYYY-MM-DD.jsonl\n- Daily summary cron: 7 AM AST\n\n## Location\n- Server: .241 (agents@192.168.65.241)\n- Home: /home/agents/sentinel/\n- OpenClaw config: /home/agents/sentinel/.openclaw/",
+      "todo": "# Sentinel \u2014 TODO\n\n## Completed\n- [x] Nightly security audit script (nightly-audit.py)\n- [x] Nightly fleet security scan (nightly-security-scan.py)\n- [x] Agent health audit (agent-health-audit.py)\n- [x] Red team exercise automation (red-team-exercise.py)\n- [x] Interaction logging across all agents\n- [x] Daily interaction summary\n- [x] Collaborative security review with Cortex\n- [x] Email capability (sentinel@rize.bm)\n- [x] OpenClaw gateway on port 9006\n- [x] Gateway logging hook\n- [x] Code review script\n- [x] Fleet status script\n- [x] Improvement tracker\n\n## In Progress\n- [ ] Remediate 18 recurring HIGH findings (not being fixed)\n- [ ] Reduce HIGH count from 22 back to <10\n- [ ] Add SSL certificate expiry monitoring\n\n## Backlog\n- [ ] Real-time alert on credential exposure (not just nightly)\n- [ ] Agent registry auto-update when new agents deploy\n- [ ] Automated remediation for critical findings (auto-fix .env permissions)\n- [ ] Integration with Homebase security dashboard\n- [ ] Weekly security summary email (in addition to nightly)\n- [ ] Audit trail for CEO-authorized changes\n- [ ] UFW rule enforcement scan\n- [ ] Halo PSA ticket creation for persistent findings\n- [ ] Escalation to Cortex for persistent non-compliance",
+      "changelog": "# Sentinel \u2014 Changelog\n\n## v1.0.0 \u2014 2026-02-08\n### Initial Deployment\n- Agent health audit script (agent-health-audit.py)\n- Fleet status script (fleet-status.py)\n- Improvement tracker (improvement-tracker.py)\n- Sentinel code review (sentinel-code-review.py)\n\n## v1.1.0 \u2014 2026-02-11\n### Security Scanning + Interaction Logging\n- Nightly security scan (nightly-security-scan.py) \u2014 full fleet scan\n- Nightly audit (nightly-audit.py) \u2014 tunnel, creds, ports, SSH, git\n- Red team exercise (red-team-exercise.py) \u2014 automated pentesting\n- Daily interaction summary (daily-interaction-summary.py)\n- Shared interaction logger + gateway logging hook\n- OpenClaw gateway on port 9006\n- Email capability (sentinel@rize.bm)\n- Collaborative security review with Cortex\n\n## v1.1.1 \u2014 2026-02-13\n### Documentation\n- Created README.md, TODO.md, CLAUDE.md, CHANGELOG.md\n- Documented all scripts, crons, and capabilities",
+      "todos_parsed": [
+        {
+          "text": "Nightly security audit script (nightly-audit.py)",
+          "done": true
+        },
+        {
+          "text": "Nightly fleet security scan (nightly-security-scan.py)",
+          "done": true
+        },
+        {
+          "text": "Agent health audit (agent-health-audit.py)",
+          "done": true
+        },
+        {
+          "text": "Red team exercise automation (red-team-exercise.py)",
+          "done": true
+        },
+        {
+          "text": "Interaction logging across all agents",
+          "done": true
+        },
+        {
+          "text": "Daily interaction summary",
+          "done": true
+        },
+        {
+          "text": "Collaborative security review with Cortex",
+          "done": true
+        },
+        {
+          "text": "Email capability (sentinel@rize.bm)",
+          "done": true
+        },
+        {
+          "text": "OpenClaw gateway on port 9006",
+          "done": true
+        },
+        {
+          "text": "Gateway logging hook",
+          "done": true
+        },
+        {
+          "text": "Code review script",
+          "done": true
+        },
+        {
+          "text": "Fleet status script",
+          "done": true
+        },
+        {
+          "text": "Improvement tracker",
+          "done": true
+        },
+        {
+          "text": "Remediate 18 recurring HIGH findings (not being fixed)",
+          "done": false
+        },
+        {
+          "text": "Reduce HIGH count from 22 back to <10",
+          "done": false
+        },
+        {
+          "text": "Add SSL certificate expiry monitoring",
+          "done": false
+        },
+        {
+          "text": "Real-time alert on credential exposure (not just nightly)",
+          "done": false
+        },
+        {
+          "text": "Agent registry auto-update when new agents deploy",
+          "done": false
+        },
+        {
+          "text": "Automated remediation for critical findings (auto-fix .env permissions)",
+          "done": false
+        },
+        {
+          "text": "Integration with Homebase security dashboard",
+          "done": false
+        }
+      ],
+      "todos_open": 7,
+      "todos_done": 13,
+      "version": "1.0.0",
+      "git": {
+        "status": "clean",
+        "branch": "unknown",
+        "last_commit": "unknown",
+        "changes": [],
+        "uncommitted_count": 0
+      },
+      "ports_status": [
+        {
+          "port": 9006,
+          "open": false,
+          "http_code": 0,
+          "healthy": false
+        }
+      ],
+      "files": [
+        ".openclaw/msteams-conversations.json",
+        ".openclaw/openclaw.json",
+        ".openclaw/update-check.json",
+        "CHANGELOG.md",
+        "CLAUDE.md",
+        "README.md",
+        "TODO.md",
+        "config/IDENTITY.md",
+        "data/fleet-status.json",
+        "data/improvement-tracker.json",
+        "reports/health-2026-02-08.json",
+        "reports/health-2026-02-09.json",
+        "reports/health-2026-02-10.json",
+        "reports/health-2026-02-11.json",
+        "reports/health-2026-02-12.json",
+        "reports/health-2026-02-13.json",
+        "scripts/agent-health-audit.py",
+        "scripts/daily-interaction-summary.py",
+        "scripts/fleet-status.py",
+        "scripts/improvement-tracker.py",
+        "scripts/nightly-audit.py",
+        "scripts/nightly-security-scan.py",
+        "scripts/red-team-exercise.py",
+        "scripts/sentinel-code-review.py"
+      ],
+      "health_score": 65
+    },
+    {
+      "name": "Cortex Command Center",
+      "server": "agents",
+      "type": "infrastructure",
+      "path": "/home/agents/cortex-command-center",
+      "domain": "cortex.rize.bm",
+      "ports": [
+        9200
+      ],
+      "scanned_at": "2026-02-13T19:24:15.960336+00:00",
+      "status": "ok",
+      "issues": [
+        {
+          "severity": "warning",
+          "message": "Missing required docs: TODO.md, CHANGELOG.md, DEPLOYMENT.md"
+        },
+        {
+          "severity": "critical",
+          "message": "Port 9200 not responding"
+        }
+      ],
+      "docs": [
+        {
+          "file": "README.md",
+          "required": true,
+          "exists": true,
+          "status": "ok"
+        },
+        {
+          "file": "TODO.md",
+          "required": true,
+          "exists": false,
+          "status": "warning"
+        },
+        {
+          "file": "CHANGELOG.md",
+          "required": true,
+          "exists": false,
+          "status": "warning"
+        },
+        {
+          "file": "DEPLOYMENT.md",
+          "required": true,
+          "exists": false,
+          "status": "warning"
+        }
+      ],
+      "readme": "## Cortex Command Center\n\nWeb-based C2 interface for the Rize AI fleet.\n\n### Access\n- URL: https://cortex.rize.bm (Cloudflare Access protected)\n- Internal: http://192.168.65.241:9200\n\n### Features\n- Fleet dashboard with agent status (David, Cortex, Apex, Aegis, Sentinel)\n- 3 Terminal tabs (xterm.js with PTY-backed WebSocket, SSH to Talos)\n- Task queue with approve/reject (Code PM database)\n- File upload (drag-and-drop, SCP to Talos)\n- Command execution (SSH to Talos or local)\n- Large text paste modal\n\n### Stack\n- FastAPI + Uvicorn\n- xterm.js (served locally, no CDN)\n- JetBrains Mono + IBM Plex Sans fonts (served locally)\n- WebSocket PTY for terminal (3 sessions via tmux)\n- All static assets local \u2014 zero external CDN calls\n\n### Service\n```bash\nsystemctl --user restart cortex-command-center\nsystemctl --user status cortex-command-center\n```\n\n### Endpoints\n- `/` \u2014 Frontend\n- `/health` \u2014 Health check\n- `/api/fleet-status` \u2014 Agent gateway health\n- `/api/tasks` \u2014 Code PM task list\n- `/api/tasks/summary` \u2014 Task counts\n- `/api/command` \u2014 Execute command on Talos/Agents\n- `/api/upload` \u2014 File upload\n- `/ws/terminal` \u2014 Terminal 1 WebSocket\n- `/ws/terminal2` \u2014 Terminal 2 WebSocket\n- `/ws/terminal3` \u2014 Terminal 3 WebSocket\n\n### Updated\n2026-02-12 \u2014 Removed CDN refs, added local fonts, Playwright tests 21/21 pass",
+      "todo": null,
+      "changelog": null,
+      "todos_parsed": [],
+      "todos_open": 0,
+      "todos_done": 0,
+      "version": null,
+      "git": {
+        "status": "clean",
+        "branch": "unknown",
+        "last_commit": "unknown",
+        "changes": [],
+        "uncommitted_count": 0
+      },
+      "ports_status": [
+        {
+          "port": 9200,
+          "open": false,
+          "http_code": 0,
+          "healthy": false
+        }
+      ],
+      "files": [
+        "README.md",
+        "app.py",
+        "node_modules/.package-lock.json",
+        "package-lock.json",
+        "package.json",
+        "uploads/playwright-1500-test.md",
+        "uploads/playwright-save-1500.md",
+        "uploads/playwright-test-1500.md",
+        "uploads/prompt-2026-02-12-162645.md",
+        "uploads/test-paste-feature.md"
+      ],
+      "health_score": 65
+    },
+    {
       "name": "BET Air Ambulance",
       "server": "vector",
       "type": "infrastructure",
@@ -2407,7 +3177,7 @@
       "ports": [
         3000
       ],
-      "scanned_at": "2026-02-13T03:38:44.451711+00:00",
+      "scanned_at": "2026-02-13T19:24:26.648039+00:00",
       "status": "ok",
       "issues": [
         {
@@ -2575,6 +3345,24 @@
       "message": "Port 9001 not responding"
     },
     {
+      "project": "Cortex",
+      "server": "agents",
+      "severity": "critical",
+      "message": "Port 9101 not responding"
+    },
+    {
+      "project": "Sentinel",
+      "server": "agents",
+      "severity": "critical",
+      "message": "Port 9006 not responding"
+    },
+    {
+      "project": "Cortex Command Center",
+      "server": "agents",
+      "severity": "critical",
+      "message": "Port 9200 not responding"
+    },
+    {
       "project": "BET Air Ambulance",
       "server": "vector",
       "severity": "critical",
@@ -2593,6 +3381,36 @@
       "message": "Missing required docs: SPEC.md, SECURITY.md, INTEGRATIONS.md, RUNBOOK.md, ESCALATION.md, AUDIT-LOG.md"
     },
     {
+      "project": "Finance Dashboard",
+      "server": "rize-apps",
+      "severity": "warning",
+      "message": "Missing required docs: DEPLOYMENT.md"
+    },
+    {
+      "project": "Sales Dashboard",
+      "server": "rize-apps",
+      "severity": "warning",
+      "message": "Missing required docs: TODO.md, CHANGELOG.md, DEPLOYMENT.md"
+    },
+    {
+      "project": "Cortex",
+      "server": "agents",
+      "severity": "warning",
+      "message": "Missing required docs: SPEC.md, SECURITY.md, INTEGRATIONS.md, RUNBOOK.md, ESCALATION.md, AUDIT-LOG.md"
+    },
+    {
+      "project": "Sentinel",
+      "server": "agents",
+      "severity": "warning",
+      "message": "Missing required docs: SPEC.md, SECURITY.md, INTEGRATIONS.md, RUNBOOK.md, ESCALATION.md, AUDIT-LOG.md"
+    },
+    {
+      "project": "Cortex Command Center",
+      "server": "agents",
+      "severity": "warning",
+      "message": "Missing required docs: TODO.md, CHANGELOG.md, DEPLOYMENT.md"
+    },
+    {
       "project": "BET Air Ambulance",
       "server": "vector",
       "severity": "warning",
@@ -2608,19 +3426,19 @@
       "project": "BPS-AI",
       "server": "demos",
       "severity": "info",
-      "message": "15 uncommitted changes"
+      "message": "7 uncommitted changes"
     },
     {
       "project": "Premier EMR",
       "server": "demos",
       "severity": "info",
-      "message": "8 uncommitted changes"
+      "message": "5 uncommitted changes"
     },
     {
       "project": "Helios AI",
       "server": "demos",
       "severity": "info",
-      "message": "20 uncommitted changes"
+      "message": "11 uncommitted changes"
     },
     {
       "project": "Homebase",
@@ -2629,10 +3447,10 @@
       "message": "20 uncommitted changes"
     },
     {
-      "project": "Dockyard WiFi",
+      "project": "Nexus",
       "server": "rize-apps",
       "severity": "info",
-      "message": "8 uncommitted changes"
+      "message": "2 uncommitted changes"
     },
     {
       "project": "Apex",
@@ -2645,12 +3463,24 @@
       "server": "agents",
       "severity": "info",
       "message": "20 uncommitted changes"
+    },
+    {
+      "project": "Sales Dashboard",
+      "server": "rize-apps",
+      "severity": "info",
+      "message": "1 uncommitted changes"
+    },
+    {
+      "project": "Cortex",
+      "server": "agents",
+      "severity": "info",
+      "message": "20 uncommitted changes"
     }
   ],
   "summary": {
-    "total": 11,
-    "healthy": 8,
-    "warning": 3,
+    "total": 16,
+    "healthy": 10,
+    "warning": 6,
     "critical": 0
   }
 }

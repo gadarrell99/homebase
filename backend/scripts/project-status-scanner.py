@@ -51,6 +51,28 @@ PROJECTS = [
      "path": "/home/agents/aegis", "type": "agent",
      "ports": [9003], "domain": None},
 
+
+    # Finance Dashboard (.245)
+    {"name": "Finance Dashboard", "server": "rize-apps", "ip": "localhost", "user": None,
+     "path": "/home/rizeadmin/finance-dashboard", "type": "infrastructure",
+     "ports": [9020], "domain": None},
+    # Sales Dashboard (.245 frontend + .241 API)
+    {"name": "Sales Dashboard", "server": "rize-apps", "ip": "localhost", "user": None,
+     "path": "/home/rizeadmin/sales-dashboard", "type": "infrastructure",
+     "ports": [9030], "domain": None},
+
+    # Cortex (.241)
+    {"name": "Cortex", "server": "agents", "ip": "192.168.65.241", "user": "agents",
+     "path": "/home/agents/cortex", "type": "agent",
+     "ports": [9101], "domain": None},
+    # Sentinel (.241)
+    {"name": "Sentinel", "server": "agents", "ip": "192.168.65.241", "user": "agents",
+     "path": "/home/agents/sentinel", "type": "agent",
+     "ports": [9006], "domain": None},
+    # Cortex Command Center (.241)
+    {"name": "Cortex Command Center", "server": "agents", "ip": "192.168.65.241", "user": "agents",
+     "path": "/home/agents/cortex-command-center", "type": "infrastructure",
+     "ports": [9200], "domain": "cortex.rize.bm"},
     # Vector server (.249)
     {"name": "BET Air Ambulance", "server": "vector", "ip": "192.168.65.249", "user": "betadmin",
      "path": "/home/betadmin/bet", "type": "infrastructure",

@@ -1,4 +1,125 @@
 {
-  "repos": [],
-  "synced": "2026-02-13T03:30:05.880121"
+  "repos": [
+    {
+      "name": "infrastructure",
+      "open_issues": 116,
+      "updated": "2026-02-11T13:06:25Z",
+      "stars": 0
+    },
+    {
+      "name": "dockyard",
+      "open_issues": 59,
+      "updated": "2026-02-13T16:50:17Z",
+      "stars": 0
+    },
+    {
+      "name": "homebase",
+      "open_issues": 48,
+      "updated": "2026-02-13T18:42:56Z",
+      "stars": 0
+    },
+    {
+      "name": "premier-emr",
+      "open_issues": 43,
+      "updated": "2026-02-11T21:10:08Z",
+      "stars": 0
+    },
+    {
+      "name": "talos",
+      "open_issues": 42,
+      "updated": "2026-02-11T01:31:10Z",
+      "stars": 0
+    },
+    {
+      "name": "apex",
+      "open_issues": 41,
+      "updated": "2026-02-11T01:49:15Z",
+      "stars": 0
+    },
+    {
+      "name": "aegis",
+      "open_issues": 34,
+      "updated": "2026-02-11T01:49:16Z",
+      "stars": 0
+    },
+    {
+      "name": "vector",
+      "open_issues": 33,
+      "updated": "2026-02-11T01:27:57Z",
+      "stars": 0
+    },
+    {
+      "name": "nexus",
+      "open_issues": 28,
+      "updated": "2026-02-13T18:56:19Z",
+      "stars": 0
+    },
+    {
+      "name": "finance-dashboard",
+      "open_issues": 26,
+      "updated": "2026-02-13T03:41:10Z",
+      "stars": 0
+    },
+    {
+      "name": "best-shipping",
+      "open_issues": 23,
+      "updated": "2026-02-11T01:49:50Z",
+      "stars": 0
+    },
+    {
+      "name": "helios",
+      "open_issues": 21,
+      "updated": "2026-02-12T15:12:29Z",
+      "stars": 0
+    },
+    {
+      "name": "bps-ai",
+      "open_issues": 19,
+      "updated": "2026-02-13T17:09:21Z",
+      "stars": 0
+    },
+    {
+      "name": "cortex",
+      "open_issues": 19,
+      "updated": "2026-02-11T21:06:39Z",
+      "stars": 0
+    },
+    {
+      "name": "david-bishop",
+      "open_issues": 9,
+      "updated": "2026-02-11T01:49:13Z",
+      "stars": 0
+    },
+    {
+      "name": "sales-dashboard",
+      "open_issues": 1,
+      "updated": "2026-02-13T16:50:15Z",
+      "stars": 0
+    },
+    {
+      "name": "beacon",
+      "open_issues": 0,
+      "updated": "2026-02-13T19:13:54Z",
+      "stars": 0
+    },
+    {
+      "name": "brfu-ticketing",
+      "open_issues": 0,
+      "updated": "2026-02-13T19:14:05Z",
+      "stars": 0
+    },
+    {
+      "name": "meridian",
+      "open_issues": 0,
+      "updated": "2026-02-13T19:11:57Z",
+      "stars": 0
+    },
+    {
+      "name": "sentinel",
+      "open_issues": 0,
+      "updated": "2026-02-10T21:33:28Z",
+      "stars": 0
+    }
+  ],
+  "synced": "2026-02-13T19:15:06.307951"
 }

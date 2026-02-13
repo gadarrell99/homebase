@@ -269,18 +269,99 @@
       "deadline": "2026-02-20",
       "days_remaining": 7,
       "totals": {
-        "open": 11,
-        "done": 10,
+        "open": 19,
+        "done": 12,
         "verified": 0,
         "blocked": 0,
-        "total": 21
+        "total": 31
       },
-      "percent_complete": 48,
+      "percent_complete": 39,
       "p0_status": {
         "open": 0,
         "total": 0
       },
       "requirements": [
+        {
+          "id": "GH-31",
+          "gitea_number": 31,
+          "status": "OPEN",
+          "description": "Move Serper API key from source code to .env",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/31"
+        },
+        {
+          "id": "GH-30",
+          "gitea_number": 30,
+          "status": "OPEN",
+          "description": "Required field validation before case save",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/30"
+        },
+        {
+          "id": "GH-29",
+          "gitea_number": 29,
+          "status": "OPEN",
+          "description": "Internal Affairs - no demo login button on front page",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/29"
+        },
+        {
+          "id": "GH-28",
+          "gitea_number": 28,
+          "status": "OPEN",
+          "description": "Case number mismatch - internal ID vs BPS number",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/28"
+        },
+        {
+          "id": "GH-27",
+          "gitea_number": 27,
+          "status": "OPEN",
+          "description": "Voice dictation missing fields and no validation",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/27"
+        },
+        {
+          "id": "GH-26",
+          "gitea_number": 26,
+          "status": "OPEN",
+          "description": "Audit and log ALL AI interactions",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/26"
+        },
+        {
+          "id": "GH-25",
+          "gitea_number": 25,
+          "status": "OPEN",
+          "description": "AI Law Assistant slow - 10 second response time",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/25"
+        },
+        {
+          "id": "GH-24",
+          "gitea_number": 24,
+          "status": "OPEN",
+          "description": "7 unknown laws with no title or year in laws table",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/24"
+        },
+        {
+          "id": "GH-23",
+          "gitea_number": 23,
+          "status": "OPEN",
+          "description": "Superintendent button text misaligned under star logo",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/23"
+        },
         {
           "id": "GH-21",
           "gitea_number": 21,
@@ -322,20 +403,6 @@
             "synced-from-todo"
           ],
           "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/19"
-        },
-        {
-          "id": "GH-18",
-          "gitea_number": 18,
-          "status": "OPEN",
-          "description": "[Bps-ai] CONSOLE: No React hydration errors (#425/#422)",
-          "priority": "P1",
-          "labels": [
-            "demo:bps",
-            "priority:medium",
-            "server:246",
-            "synced-from-todo"
-          ],
-          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/18"
         },
         {
           "id": "GH-15",
@@ -399,6 +466,29 @@
           "priority": "P1",
           "labels": [],
           "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/1"
+        },
+        {
+          "id": "GH-22",
+          "gitea_number": 22,
+          "status": "DONE",
+          "description": "CRITICAL: Export PDF downloads as JSON not PDF",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/22"
+        },
+        {
+          "id": "GH-18",
+          "gitea_number": 18,
+          "status": "DONE",
+          "description": "[Bps-ai] CONSOLE: No React hydration errors (#425/#422)",
+          "priority": "P1",
+          "labels": [
+            "demo:bps",
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/18"
         },
         {
           "id": "GH-17",
@@ -500,13 +590,13 @@
       "deadline": null,
       "days_remaining": null,
       "totals": {
-        "open": 34,
+        "open": 48,
         "done": 1,
         "verified": 0,
         "blocked": 0,
-        "total": 35
+        "total": 49
       },
-      "percent_complete": 3,
+      "percent_complete": 2,
       "p0_status": {
         "open": 6,
         "total": 6
@@ -584,6 +674,132 @@
             "ceo-feedback"
           ],
           "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/18"
+        },
+        {
+          "id": "GH-49",
+          "gitea_number": 49,
+          "status": "OPEN",
+          "description": "TODO items should sync bidirectionally with Gitea issues",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/49"
+        },
+        {
+          "id": "GH-48",
+          "gitea_number": 48,
+          "status": "OPEN",
+          "description": "Requirements tracker page empty",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/48"
+        },
+        {
+          "id": "GH-47",
+          "gitea_number": 47,
+          "status": "OPEN",
+          "description": "Backups never configured - no backup system",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/47"
+        },
+        {
+          "id": "GH-46",
+          "gitea_number": 46,
+          "status": "OPEN",
+          "description": "Rename CLI personas to Agents throughout UI",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/46"
+        },
+        {
+          "id": "GH-45",
+          "gitea_number": 45,
+          "status": "OPEN",
+          "description": "Credential verification system needed",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/45"
+        },
+        {
+          "id": "GH-44",
+          "gitea_number": 44,
+          "status": "OPEN",
+          "description": "Add Cloudflare tunnel status and data pull",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/44"
+        },
+        {
+          "id": "GH-43",
+          "gitea_number": 43,
+          "status": "OPEN",
+          "description": "Add daily research and email automation tracking",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/43"
+        },
+        {
+          "id": "GH-42",
+          "gitea_number": 42,
+          "status": "OPEN",
+          "description": "Cortex section needs actual useful content",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/42"
+        },
+        {
+          "id": "GH-41",
+          "gitea_number": 41,
+          "status": "OPEN",
+          "description": "Sentinel integration broken on Homebase",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/41"
+        },
+        {
+          "id": "GH-40",
+          "gitea_number": 40,
+          "status": "OPEN",
+          "description": "Switch to 3-wide card layout for projects and agents",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/40"
+        },
+        {
+          "id": "GH-39",
+          "gitea_number": 39,
+          "status": "OPEN",
+          "description": "Agent MDs and personality documents not accessible",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/39"
+        },
+        {
+          "id": "GH-38",
+          "gitea_number": 38,
+          "status": "OPEN",
+          "description": "Solstice project missing from project list",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/38"
+        },
+        {
+          "id": "GH-37",
+          "gitea_number": 37,
+          "status": "OPEN",
+          "description": "Missing project details for newly added entries",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/37"
+        },
+        {
+          "id": "GH-36",
+          "gitea_number": 36,
+          "status": "OPEN",
+          "description": "Agent cards not clickable - no navigation to agent detail",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/36"
         },
         {
           "id": "GH-35",
@@ -1197,11 +1413,11 @@
       "deadline": null,
       "days_remaining": null,
       "totals": {
-        "open": 40,
+        "open": 43,
         "done": 0,
         "verified": 0,
         "blocked": 0,
-        "total": 40
+        "total": 43
       },
       "percent_complete": 0,
       "p0_status": {
@@ -1209,6 +1425,33 @@
         "total": 0
       },
       "requirements": [
+        {
+          "id": "GH-43",
+          "gitea_number": 43,
+          "status": "OPEN",
+          "description": "Need commercial-ready name and branding",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/43"
+        },
+        {
+          "id": "GH-42",
+          "gitea_number": 42,
+          "status": "OPEN",
+          "description": "Add demo login buttons for quick access",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/42"
+        },
+        {
+          "id": "GH-41",
+          "gitea_number": 41,
+          "status": "OPEN",
+          "description": "Login page broken - cannot authenticate",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/41"
+        },
         {
           "id": "GH-40",
           "gitea_number": 40,
@@ -3801,11 +4044,11 @@
       "deadline": null,
       "days_remaining": null,
       "totals": {
-        "open": 32,
+        "open": 33,
         "done": 0,
         "verified": 0,
         "blocked": 0,
-        "total": 32
+        "total": 33
       },
       "percent_complete": 0,
       "p0_status": {
@@ -3813,6 +4056,19 @@
         "total": 0
       },
       "requirements": [
+        {
+          "id": "GH-33",
+          "gitea_number": 33,
+          "status": "OPEN",
+          "description": "[Security/HIGH] failed_logins: 207 failed SSH login attempts in auth.log",
+          "priority": "P1",
+          "labels": [
+            "automated",
+            "priority:high",
+            "security"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/33"
+        },
         {
           "id": "GH-32",
           "gitea_number": 32,
@@ -4254,9 +4510,9 @@
       "source": "gitea"
     }
   ],
-  "last_refresh": "2026-02-13T03:38:05.435631+00:00",
+  "last_refresh": "2026-02-13T19:23:05.681228+00:00",
   "source": "gitea",
   "project_count": 12,
-  "total_requirements": 321,
-  "total_open": 306
+  "total_requirements": 349,
+  "total_open": 332
 }

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-02-13T03:30:01Z",
+  "generated": "2026-02-13T18:30:01Z",
   "servers": [
     {
       "id": "helios",
@@ -22,7 +22,7 @@
       "ssh_url": "",
       "alive": true,
       "version": "",
-      "uptime": "up 5 days, 11 hours, 45 minutes",
+      "uptime": "up 6 days, 2 hours, 45 minutes",
       "disk": "",
       "memory": "",
       "services": "0 0"
@@ -48,7 +48,7 @@
       "ssh_url": "https://claude-dev-ssh.rize.bm",
       "alive": true,
       "version": "",
-      "uptime": "up 5 days, 11 hours, 45 minutes",
+      "uptime": "up 1 hour, 15 minutes",
       "disk": "",
       "memory": "",
       "services": "0 0"
@@ -61,10 +61,10 @@
       "ssh_url": "https://bpsai-ssh.rize.bm",
       "alive": true,
       "version": "",
-      "uptime": "up 5 days, 11 hours, 45 minutes",
+      "uptime": "up 1 hour, 13 minutes",
       "disk": "",
       "memory": "",
-      "services": "4"
+      "services": "0 0"
     },
     {
       "id": "nexus",
@@ -100,7 +100,7 @@
       "ssh_url": "https://vector-ssh.rize.bm",
       "alive": true,
       "version": "",
-      "uptime": "up 5 days, 11 hours, 45 minutes",
+      "uptime": "up 6 days, 2 hours, 45 minutes",
       "disk": "",
       "memory": "",
       "services": "0 0"
