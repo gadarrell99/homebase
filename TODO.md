@@ -1,9 +1,6 @@
 # Homebase TODO
 
 ## In Progress
-- [ ] Fleet page: add live disk/mem metrics from infra-scanner
-- [ ] Sentinel: integrate pipeline_monitor.py into 30-min checks
-- [ ] Infra Sheet: add credential reveal toggle
 
 ## Backlog
 - [ ] Agent dashboard pages: add real-time heartbeat display
@@ -14,6 +11,9 @@
 - [ ] Backups: add one-click backup trigger
 
 ## Completed
+- [x] Fleet page: live disk/mem metric bars from infra-scanner (2026-02-14)
+- [x] Sentinel: pipeline_monitor.py integrated into 30-min cron + API endpoints (2026-02-14)
+- [x] Infra Sheet: credential reveal/hide all toggle added (2026-02-14)
 - [x] Sentinel page caching: Instant loading via getCached pattern (2026-02-10)
 - [x] Project docs endpoint: /api/projects/{id}/docs now works for agents (Apex, Aegis, Cortex) (2026-02-10)
 - [x] Fleet click navigation: Clicking Apex/Aegis/Cortex navigates to project detail (2026-02-10)

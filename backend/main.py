@@ -3159,6 +3159,38 @@ async def sentinel_maintenance_log():
 
 
 # ============================================================================
+# SENTINEL PIPELINE MONITOR (Added 2026-02-14)
+# ============================================================================
+
+PIPELINE_REPORT_FILE = "/home/rizeadmin/homebase/data/pipeline-report.json"
+
+@app.get("/api/sentinel/pipeline")
+async def sentinel_pipeline_report():
+    """Get the latest pipeline health report from PipelineMonitor."""
+    try:
+        with open(PIPELINE_REPORT_FILE) as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {"status": "no_data", "message": "Pipeline monitor has not run yet. It runs every 30 minutes."}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
+
+@app.post("/api/sentinel/pipeline/run")
+async def sentinel_pipeline_run():
+    """Run pipeline health check on-demand."""
+    try:
+        from services.pipeline_monitor import PipelineMonitor
+        monitor = PipelineMonitor()
+        report = monitor.run_all_checks()
+        with open(PIPELINE_REPORT_FILE, "w") as f:
+            json.dump(report, f, indent=2)
+        return report
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================================
 # CORTEX INTERFACE APIs (Added 2026-02-11)
 # ============================================================================
 
