@@ -1,6 +1,6 @@
 {
   "meta": {
-    "scanned_at": "2026-02-14T14:12:01.319198+00:00",
+    "scanned_at": "2026-02-14T15:57:01.740614+00:00",
     "project_count": 16,
     "scanner_version": "1.0.0"
   },
@@ -15,7 +15,7 @@
         3001,
         8001
       ],
-      "scanned_at": "2026-02-14T14:12:01.319226+00:00",
+      "scanned_at": "2026-02-14T15:57:01.740666+00:00",
       "status": "ok",
       "issues": [],
       "docs": [
@@ -165,7 +165,7 @@
       "git": {
         "status": "clean",
         "branch": "main",
-        "last_commit": "ba67b9b chore: commit pending changes - CFO dashboard, customer features, branding, seed data, gitignore (53 minutes ago)",
+        "last_commit": "ba67b9b chore: commit pending changes - CFO dashboard, customer features, branding, seed data, gitignore (3 hours ago)",
         "changes": [],
         "uncommitted_count": 0
       },
@@ -217,9 +217,14 @@
       "ports": [
         3000
       ],
-      "scanned_at": "2026-02-14T14:12:16.362545+00:00",
+      "scanned_at": "2026-02-14T15:57:15.003617+00:00",
       "status": "ok",
-      "issues": [],
+      "issues": [
+        {
+          "severity": "info",
+          "message": "8 uncommitted changes"
+        }
+      ],
       "docs": [
         {
           "file": "README.md",
@@ -365,11 +370,44 @@
       "todos_done": 20,
       "version": "0.9.30",
       "git": {
-        "status": "clean",
+        "status": "dirty",
         "branch": "main",
-        "last_commit": "173b827 fix: remove PrismaAdapter, fix DB auth, enable debug logging (51 minutes ago)",
-        "changes": [],
-        "uncommitted_count": 0
+        "last_commit": "173b827 fix: remove PrismaAdapter, fix DB auth, enable debug logging (3 hours ago)",
+        "changes": [
+          {
+            "status": "M",
+            "file": "rc/app/cases/CasesListClient.tsx"
+          },
+          {
+            "status": "M",
+            "file": "src/app/layout.tsx"
+          },
+          {
+            "status": "M",
+            "file": "src/components/Dropdown.tsx"
+          },
+          {
+            "status": "M",
+            "file": "src/components/ui/DateDisplay.tsx"
+          },
+          {
+            "status": "M",
+            "file": "src/lib/auth.ts"
+          },
+          {
+            "status": "M",
+            "file": "styles/tokens/shadows.css"
+          },
+          {
+            "status": "M",
+            "file": "styles/tokens/spacing.css"
+          },
+          {
+            "status": "M",
+            "file": "styles/tokens/typography.css"
+          }
+        ],
+        "uncommitted_count": 8
       },
       "ports_status": [
         {
@@ -431,7 +469,7 @@
         "tsconfig.json",
         "verify_db.js"
       ],
-      "health_score": 100
+      "health_score": 98
     },
     {
       "name": "Premier EMR",
@@ -443,7 +481,7 @@
         3004,
         5004
       ],
-      "scanned_at": "2026-02-14T14:12:31.132295+00:00",
+      "scanned_at": "2026-02-14T15:57:28.485929+00:00",
       "status": "ok",
       "issues": [],
       "docs": [
@@ -593,7 +631,7 @@
       "git": {
         "status": "clean",
         "branch": "main",
-        "last_commit": "bb8b597 fix: Meridian Health login + demo quick-login buttons (19 hours ago)",
+        "last_commit": "bb8b597 fix: Meridian Health login + demo quick-login buttons (20 hours ago)",
         "changes": [],
         "uncommitted_count": 0
       },
@@ -642,12 +680,12 @@
       "ports": [
         3005
       ],
-      "scanned_at": "2026-02-14T14:12:46.761647+00:00",
+      "scanned_at": "2026-02-14T15:57:41.340009+00:00",
       "status": "ok",
       "issues": [
         {
           "severity": "info",
-          "message": "9 uncommitted changes"
+          "message": "1 uncommitted changes"
         }
       ],
       "docs": [
@@ -797,46 +835,14 @@
       "git": {
         "status": "dirty",
         "branch": "main",
-        "last_commit": "762a023 chore: auto-commit uncommitted changes 2026-02-13 (19 hours ago)",
+        "last_commit": "f833363 fix: remove --reload from backend for production stability (2 minutes ago)",
         "changes": [
           {
-            "status": "M",
-            "file": "ackend/app/routes/auth.py"
-          },
-          {
-            "status": "M",
-            "file": "backend/app/routes/documents.py"
-          },
-          {
-            "status": "M",
-            "file": "backend/app/routes/reports.py"
-          },
-          {
-            "status": "M",
-            "file": "playwright.config.js"
-          },
-          {
             "status": "D",
-            "file": "test-results/helios-full-13-Clients-page-shows-clients/error-context.md"
-          },
-          {
-            "status": "D",
-            "file": "test-results/helios-full-8-Document-detail-shows-content/error-context.md"
-          },
-          {
-            "status": "M",
-            "file": "tests/helios-full.spec.js"
-          },
-          {
-            "status": "M",
-            "file": "tests/helios-test.spec.js"
-          },
-          {
-            "status": "M",
-            "file": "tests/helios-verify.spec.js"
+            "file": "est-results/.last-run.json"
           }
         ],
-        "uncommitted_count": 9
+        "uncommitted_count": 1
       },
       "ports_status": [
         {
@@ -897,7 +903,7 @@
       "ports": [
         8000
       ],
-      "scanned_at": "2026-02-14T14:13:03.272307+00:00",
+      "scanned_at": "2026-02-14T15:57:55.461313+00:00",
       "status": "ok",
       "issues": [
         {
@@ -1022,15 +1028,23 @@
       "git": {
         "status": "dirty",
         "branch": "master",
-        "last_commit": "cd29c91 chore: add Property Rize, Bermuda College, Solstice Wellness, BRFU Ticketing, Beacon Real Estate to project-status.json (52 minutes ago)",
+        "last_commit": "9cbc30b feat: unified /api/tasks endpoint + Tasks UI page (2 hours ago)",
         "changes": [
           {
             "status": "M",
-            "file": "ache/deadlines.json"
+            "file": "ackend/main.py"
+          },
+          {
+            "status": "M",
+            "file": "cache/deadlines.json"
           },
           {
             "status": "M",
             "file": "cache/health.json"
+          },
+          {
+            "status": "M",
+            "file": "cache/last_stale_alert.txt"
           },
           {
             "status": "M",
@@ -1055,14 +1069,6 @@
           {
             "status": "M",
             "file": "data/agent_status.json"
-          },
-          {
-            "status": "M",
-            "file": "data/agents.db"
-          },
-          {
-            "status": "M",
-            "file": "data/cheat-sheet-full.json"
           }
         ],
         "uncommitted_count": 20
@@ -1139,7 +1145,7 @@
         3002,
         3003
       ],
-      "scanned_at": "2026-02-14T14:13:03.546589+00:00",
+      "scanned_at": "2026-02-14T15:57:55.666813+00:00",
       "status": "ok",
       "issues": [],
       "docs": [
@@ -1259,7 +1265,7 @@
       "git": {
         "status": "clean",
         "branch": "master",
-        "last_commit": "bf38088 fix: increase Express JSON body parser limit to 50mb (50 minutes ago)",
+        "last_commit": "bf38088 fix: increase Express JSON body parser limit to 50mb (3 hours ago)",
         "changes": [],
         "uncommitted_count": 0
       },
@@ -1326,12 +1332,16 @@
         8080,
         8081
       ],
-      "scanned_at": "2026-02-14T14:13:03.781547+00:00",
+      "scanned_at": "2026-02-14T15:57:55.812922+00:00",
       "status": "ok",
       "issues": [
         {
           "severity": "warning",
-          "message": "Missing required docs: DEPLOYMENT.md"
+          "message": "Missing required docs: TODO.md, CHANGELOG.md, DEPLOYMENT.md"
+        },
+        {
+          "severity": "info",
+          "message": "4 uncommitted changes"
         }
       ],
       "docs": [
@@ -1344,14 +1354,14 @@
         {
           "file": "TODO.md",
           "required": true,
-          "exists": true,
-          "status": "ok"
+          "exists": false,
+          "status": "warning"
         },
         {
           "file": "CHANGELOG.md",
           "required": true,
-          "exists": true,
-          "status": "ok"
+          "exists": false,
+          "status": "warning"
         },
         {
           "file": "DEPLOYMENT.md",
@@ -1360,148 +1370,56 @@
           "status": "warning"
         }
       ],
-      "readme": "# Dockyard WiFi Captive Portal\n\n## Project Overview\n\nA self-hosted captive portal system for the Royal Naval Dockyard in Bermuda. This system provides WiFi access to tourists and visitors through an ad-supported model with premium upgrade options.\n\n**Owner:** Rize Technologies Ltd  \n**Location:** Royal Naval Dockyard, Bermuda  \n**Launch Target:** February 28, 2026\n\n### Business Model\n\n1. **Free Tier (Ad-Supported):** Users watch a 30-second video ad to receive 1 hour of WiFi access. Limited to 1 hour free per day (resets at 12:01 AM).\n\n2. **Premium Passes:** Users can skip ads and get extended access:\n   - 6 hours: $4\n   - 24 hours: $7\n   - 72 hours: $12\n\n3. **Sponsorship Revenue:** Main sponsor banner on splash page (\"WiFi Brought to you by [Sponsor]\") plus video ad slots sold to local businesses.\n\n### Key Design Principles\n\n- **Self-Hosted:** No monthly SaaS fees, full data ownership\n- **PIPA Compliant:** Bermuda Personal Information Protection Act - explicit consent, opt-out options\n- **Mobile-First:** All user-facing pages optimized for smartphones\n- **Revenue-Focused:** Multiple monetization streams (ads, passes, sponsorships)\n- **Simple Stack:** Plain HTML/CSS/JavaScript, no complex frameworks\n\n---\n\n## Architecture\n```\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502                    Cloudflare Tunnels                           \u2502\n\u2502         dockyardwifi.rize.bm    dockyard-admin.rize.bm         \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                              \u2502\n                              \u25bc\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502                 Ubuntu 24.04 VM (192.168.65.252)                \u2502\n\u2502  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510  \u2502\n\u2502  \u2502   Backend   \u2502  \u2502    Admin    \u2502  \u2502 Postgres \u2502  \u2502  Redis   \u2502  \u2502\n\u2502  \u2502  Port 3000  \u2502  \u2502  Port 3001  \u2502  \u2502  Port    \u2502  \u2502  Port    \u2502  \u2502\n\u2502  \u2502  (Express)  \u2502  \u2502  (Express)  \u2502  \u2502  5432    \u2502  \u2502  6379    \u2502  \u2502\n\u2502  \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518  \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518  \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518  \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518  \u2502\n\u2502                      Docker Compose                             \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n```\n\n### Infrastructure\n\n- **Host Server:** Dell PowerEdge R720 running Windows Server 2022 with Hyper-V\n- **VM:** Ubuntu 24.04 LTS (4 vCPU, 8GB RAM, 100GB SSD)\n- **Containerization:** Docker Compose\n- **External Access:** Cloudflare Tunnels (zero-trust, no open ports)\n- **DNS:** Cloudflare (rize.bm domain)\n\n---\n\n## Tech Stack\n\n| Component | Technology | Purpose |\n|-----------|------------|---------|\n| Backend API | Node.js 20 + Express.js | User-facing API, session management |\n| Admin API | Node.js 20 + Express.js | Admin dashboard API |\n| Database | PostgreSQL 16 | Persistent data storage |\n| Cache | Redis 7 | Session caching (future) |\n| Frontend | Plain HTML/CSS/JavaScript | No build tools, simple deployment |\n| Email | Microsoft 365 SMTP | Reminder emails |\n| Tunnels | Cloudflare | Secure external access |\n\n---\n\n## Features\n\n### Completed \u2705\n\n#### User-Facing (Splash Page)\n- [x] Email capture with PIPA-compliant consent checkboxes\n- [x] Terms of Service and Privacy Policy links\n- [x] Video ad player with 30-second minimum watch time\n- [x] Skip button appears after 30 seconds for longer videos\n- [x] Session status display with countdown timer\n- [x] Warning state when session expires in <10 minutes\n- [x] Premium pass selection (6hr, 24hr, 72hr)\n- [x] Main sponsor banner (\"WiFi Brought to you by...\")\n- [x] \"Visit [Advertiser]\" button during video playback\n- [x] Mobile-responsive design with glassmorphism effects\n\n#### Session Management\n- [x] MAC address-based device tracking\n- [x] 1-hour free limit enforcement (no unlimited free via multiple ads)\n- [x] Session extension via additional ad views (disabled after 1hr limit)\n- [x] Session expiration and automatic cleanup\n- [x] Email reminders before session expiry (10min, 30min, 1hr, 2hr based on pass type)\n\n#### Admin Dashboard\n- [x] Real-time statistics (active sessions, views, completion rate, revenue)\n- [x] 9 tabs: Ad Rotation, Video Library, Sponsors, Sessions, Subscribers, Events, Pricing, Audit Log, Analytics, Settings\n- [x] Ad slot management (10 slots, assign videos, enable/disable)\n- [x] Video library with upload, edit, archive, restore\n- [x] Sponsor management with banner preview\n- [x] Active session view with terminate capability\n- [x] Subscriber export (CSV)\n- [x] Comprehensive audit logging\n- [x] Voucher generation and management\n- [x] Voucher stats (total, active, redeemed, fully used)\n- [x] CSV export of voucher codes\n\n#### Analytics & Tracking (Industry Standard)\n- [x] Impression tracking (page views)\n- [x] Click tracking (sponsor/ad clicks)\n- [x] Click-through rate (CTR) calculation\n- [x] Video quartile tracking (25%, 50%, 75%, 100%)\n- [x] Watch time tracking\n- [x] Unique viewer counts\n- [x] Device type detection (mobile/desktop)\n- [x] Daily/weekly/monthly breakdowns\n- [x] Per-sponsor and per-video metrics\n\n#### Email System\n- [x] Microsoft 365 SMTP integration\n- [x] Session expiry reminders\n- [x] Marketing opt-in tracking\n- [x] PIPA-compliant unsubscribe\n\n### Pending \ud83d\udd32\n\n- [ ] Payment processing (Authorize.net integration)\n- [ ] Network integration (RADIUS authentication)\n- [ ] DHCP integration (MAC address capture)\n- [ ] DNS hijack (redirect to captive portal)\n- [ ] Bandwidth limiting per session type\n- [ ] Social login (Facebook, Google)\n- [x] Voucher/coupon codes (v1.2.0)\n- [ ] Multi-language support\n\n---\n\n## Database Schema\n\n### Core Tables\n```sql\n-- User sessions (WiFi access)\nsessions (\n    id UUID PRIMARY KEY,\n    mac_address VARCHAR(50),\n    ip_address VARCHAR(50),\n    email VARCHAR(255),\n    device_type VARCHAR(50),\n    user_agent TEXT,\n    session_type VARCHAR(50),      -- 'free_ad', 'paid_6hr', 'paid_24hr', 'paid_72hr'\n    free_seconds_used INTEGER,     -- Track 1-hour free limit\n    started_at TIMESTAMP,\n    expires_at TIMESTAMP,\n    marketing_opt_in BOOLEAN,\n    reminder_sent_at TIMESTAMP,\n    created_at TIMESTAMP\n)\n\n-- Email subscribers (marketing list)\nemail_subscribers (\n    id UUID PRIMARY KEY,\n    email VARCHAR(255) UNIQUE,\n    marketing_opt_in BOOLEAN,\n    consent_timestamp TIMESTAMP,\n    source VARCHAR(100),\n    created_at TIMESTAMP\n)\n\n-- Ad video library\nad_videos (\n    id UUID PRIMARY KEY,\n    title VARCHAR(255),\n    filename VARCHAR(255),\n    video_path VARCHAR(500),\n    advertiser_name VARCHAR(255),\n    advertiser_url VARCHAR(500),\n    duration_seconds INTEGER,\n    total_views INTEGER,\n    total_completions INTEGER,\n    total_clicks INTEGER,\n    is_archived BOOLEAN,\n    created_at TIMESTAMP\n)\n\n-- Ad rotation slots (10 slots)\nad_slots (\n    slot_number INTEGER PRIMARY KEY,  -- 1-10\n    video_id UUID REFERENCES ad_videos(id),\n    is_active BOOLEAN,\n    created_at TIMESTAMP\n)\n\n-- Sponsor library\nsponsors (\n    id UUID PRIMARY KEY,\n    name VARCHAR(255),\n    logo_url VARCHAR(500),\n    website_url VARCHAR(500),\n    banner_url VARCHAR(500),\n    notes TEXT,\n    is_active BOOLEAN,\n    is_archived BOOLEAN,\n    total_impressions INTEGER,\n    total_clicks INTEGER,\n    created_at TIMESTAMP\n)\n\n-- Main sponsor slot\nsponsor_slot (\n    id INTEGER PRIMARY KEY,        -- Always 1\n    sponsor_id UUID REFERENCES sponsors(id),\n    is_active BOOLEAN,\n    updated_at TIMESTAMP\n)\n\n-- Ad impressions/events tracking\nad_impressions (\n    id UUID PRIMARY KEY,\n    ad_type VARCHAR(50),           -- 'main_sponsor', 'video_ad'\n    ad_id VARCHAR(100),\n    ad_name VARCHAR(255),\n    session_id UUID,\n    mac_address VARCHAR(50),\n    ip_address VARCHAR(50),\n    user_agent TEXT,\n    device_type VARCHAR(50),\n    event_type VARCHAR(50),        -- 'impression', 'click', 'view_start', 'view_25', 'view_50', 'view_75', 'view_complete'\n    view_duration_seconds INTEGER,\n    video_duration_seconds INTEGER,\n    created_at TIMESTAMP\n)\n\n-- Video ad events (legacy, still used)\nvideo_ad_events (\n    id UUID PRIMARY KEY,\n    session_id UUID,\n    ad_slot_id INTEGER,\n    event_type VARCHAR(50),\n    watch_duration_seconds INTEGER,\n    video_duration_seconds INTEGER,\n    completed BOOLEAN,\n    created_at TIMESTAMP\n)\n\n-- Pricing configuration\npricing_config (\n    id SERIAL PRIMARY KEY,\n    pass_type VARCHAR(50),\n    duration_hours INTEGER,\n    price_cents INTEGER,\n    is_active BOOLEAN,\n    display_order INTEGER\n)\n\n-- Payment transactions (future)\ntransactions (\n    id UUID PRIMARY KEY,\n    session_id UUID,\n    pass_type VARCHAR(50),\n    amount_cents INTEGER,\n    currency VARCHAR(10),\n    payment_method VARCHAR(50),\n    payment_status VARCHAR(50),\n    created_at TIMESTAMP\n)\n\n-- Audit log\naudit_log (\n    id UUID PRIMARY KEY,\n    user_email VARCHAR(255),\n    action VARCHAR(100),\n    entity_type VARCHAR(100),\n    entity_id VARCHAR(255),\n    old_values JSONB,\n    new_values JSONB,\n    ip_address VARCHAR(50),\n    created_at TIMESTAMP\n)\n```\n\n---\n\n## API Endpoints\n\n### Backend (Port 3000) - User-Facing\n\n| Method | Endpoint | Purpose |\n|--------|----------|---------|\n| POST | `/api/v1/sessions` | Create new session (on page load) |\n| GET | `/api/v1/sessions/check/:mac` | Check if device has active session |\n| POST | `/api/v1/sessions/:id/email` | Save email and consent |\n| POST | `/api/v1/sessions/:id/video-event` | Track video watch events |\n| GET | `/api/v1/next-video` | Get next video from rotation |\n| GET | `/api/v1/sponsor` | Get current main sponsor |\n| POST | `/api/v1/track` | Track ad impressions/clicks |\n| GET | `/api/v1/ad-stats/:type/:id` | Get ad performance stats |\n\n### Admin (Port 3001) - Dashboard\n\n| Method | Endpoint | Purpose |\n|--------|----------|---------|\n| GET | `/api/admin/stats` | Dashboard statistics |\n| GET | `/api/admin/ads` | Get ad rotation slots |\n| PUT | `/api/admin/ads/:slot` | Update ad slot |\n| GET | `/api/admin/ad-videos` | Get video library |\n| POST | `/api/admin/ad-videos` | Add video metadata |\n| PUT | `/api/admin/ad-videos/:id` | Update video |\n| POST | `/api/admin/ad-videos/:id/archive` | Archive video |\n| POST | `/api/admin/ad-videos/:id/restore` | Restore video |\n| POST | `/api/admin/upload-video` | Upload video file |\n| GET | `/api/admin/sponsors` | Get all sponsors |\n| POST | `/api/admin/sponsors` | Add sponsor |\n| PUT | `/api/admin/sponsors/:id` | Update sponsor |\n| PUT | `/api/admin/sponsors/:id/archive` | Archive sponsor |\n| PUT | `/api/admin/sponsors/:id/restore` | Restore sponsor |\n| GET | `/api/admin/sponsors/main` | Get main sponsor |\n| PUT | `/api/admin/sponsors/main/:id` | Set main sponsor |\n| GET | `/api/admin/sessions` | Get all sessions |\n| GET | `/api/admin/sessions/active` | Get active sessions |\n| POST | `/api/admin/sessions/:id/terminate` | Terminate session |\n| GET | `/api/admin/subscribers` | Get subscribers |\n| GET | `/api/admin/subscribers/export` | Export CSV |\n| GET | `/api/admin/events` | Get video events |\n| GET | `/api/admin/pricing` | Get pricing config |\n| GET | `/api/admin/audit-logs` | Get audit logs |\n| GET | `/api/admin/analytics/summary` | Analytics overview |\n| GET | `/api/admin/analytics/sponsor` | Sponsor analytics |\n| GET | `/api/admin/analytics/videos` | Video analytics |\n| GET | `/api/admin/analytics/events` | Recent events |\n| POST | `/api/admin/reset-stats` | Reset all statistics |\n\n---\n\n## File Structure\n```\ndockyard-wifi-portal/\n\u251c\u2500\u2500 docker-compose.yml          # Container orchestration\n\u251c\u2500\u2500 README.md                   # This file\n\u251c\u2500\u2500 CLAUDE_INSTRUCTIONS.md      # AI assistant guidelines\n\u2502\n\u251c\u2500\u2500 backend/                    # User-facing service\n\u2502   \u251c\u2500\u2500 Dockerfile\n\u2502   \u251c\u2500\u2500 package.json\n\u2502   \u251c\u2500\u2500 index.js               # Express server, all API routes\n\u2502   \u2514\u2500\u2500 public/\n\u2502       \u251c\u2500\u2500 index.html         # Splash page (main portal)\n\u2502       \u251c\u2500\u2500 pages/\n\u2502       \u2502   \u251c\u2500\u2500 terms.html     # Terms of Service\n\u2502       \u2502   \u2514\u2500\u2500 privacy.html   # Privacy Policy\n\u2502       \u2514\u2500\u2500 ads/               # Video files\n\u2502           \u2514\u2500\u2500 videos/        # Uploaded ad videos\n\u2502\n\u251c\u2500\u2500 admin/                      # Admin dashboard service\n\u2502   \u251c\u2500\u2500 Dockerfile\n\u2502   \u251c\u2500\u2500 package.json\n\u2502   \u251c\u2500\u2500 server.js              # Express server, admin API routes\n\u2502   \u2514\u2500\u2500 public/\n\u2502       \u2514\u2500\u2500 index.html         # Admin dashboard SPA\n\u2502\n\u2514\u2500\u2500 database/\n    \u2514\u2500\u2500 schema.sql             # Database schema\n```\n\n---\n\n## Session Flow\n\n### New User Flow\n```\n1. User connects to WiFi \u2192 Router redirects to portal\n2. GET / \u2192 Splash page loads\n3. POST /api/v1/sessions \u2192 Create session, get session ID\n4. GET /api/v1/sponsor \u2192 Load main sponsor banner (track impression)\n5. User enters email, checks consent boxes\n6. POST /api/v1/sessions/:id/email \u2192 Save email\n7. GET /api/v1/next-video \u2192 Get video to play\n8. User watches video (track: view_start, view_25, view_50, view_75)\n9. After 30 seconds \u2192 POST /api/v1/sessions/:id/video-event (complete)\n10. Session authorized for 1 hour\n11. Success screen shown\n12. User redirected to internet\n```\n\n### Returning User Flow\n```\n1. User connects to WiFi \u2192 Router redirects to portal\n2. GET / \u2192 Splash page loads\n3. POST /api/v1/sessions \u2192 Create/get session\n4. GET /api/v1/sessions/check/:mac \u2192 Check existing session\n5. If authorized \u2192 Show session status with countdown\n6. If expired \u2192 Show email form (or premium options if 1hr limit reached)\n```\n\n### 1-Hour Free Limit Logic\n```javascript\n// In video-event handler:\nif (session.free_seconds_used >= 3600) {\n    return { limit_reached: true, message: \"Free limit reached\" };\n}\n\n// Grant time (max 1 hour total)\nconst remaining = 3600 - session.free_seconds_used;\nconst grant = Math.min(3600, remaining); // Grant up to 1 hour, but not exceeding limit\nsession.free_seconds_used += grant;\nsession.expires_at = NOW() + grant seconds;\n```\n\n---\n\n## Email Reminder System\n\nThe backend runs a background job every 60 seconds checking for sessions that need reminders:\n```javascript\n// Reminder timing by session type:\n- free_ad:    10 minutes before expiry\n- paid_6hr:   30 minutes before expiry\n- paid_24hr:  60 minutes before expiry\n- paid_72hr:  120 minutes before expiry\n```\n\nEmail includes:\n- Time remaining\n- Link to buy premium pass\n- Unsubscribe link\n\n---\n\n## Analytics Metrics Explained\n\n### For Sponsors/Advertisers\n\n| Metric | Definition | Industry Standard |\n|--------|------------|-------------------|\n| Impressions | Number of times ad was displayed | Yes |\n| Clicks | Number of times ad was clicked | Yes |\n| CTR | Clicks \u00f7 Impressions \u00d7 100 | Yes |\n| Unique Viewers | Distinct devices that saw ad | Yes |\n\n### For Video Ads\n\n| Metric | Definition | Industry Standard |\n|--------|------------|-------------------|\n| View Start | Video started playing | Yes (MRC) |\n| View 25% | Watched 25% of video | Yes (MRC) |\n| View 50% | Watched 50% of video | Yes (MRC) |\n| View 75% | Watched 75% of video | Yes (MRC) |\n| View Complete | Watched 100% of video | Yes (MRC) |\n| Completion Rate | Completes \u00f7 Starts \u00d7 100 | Yes |\n| Avg Watch Time | Average seconds watched | Yes |\n\n*MRC = Media Rating Council standard for video ad measurement*\n\n---\n\n## Security Considerations\n\n### Implemented\n\n- [x] Cloudflare Tunnel (no exposed ports)\n- [x] Admin dashboard behind Cloudflare Access (SSO)\n- [x] SQL parameterized queries (no SQL injection)\n- [x] CORS configured\n- [x] Helmet.js security headers\n- [x] Audit logging for admin actions\n\n### Recommended (Future)\n\n- [ ] Rate limiting on API endpoints\n- [ ] CAPTCHA for form submissions\n- [ ] MAC address validation/sanitization\n- [ ] Session token encryption\n- [ ] Database connection pooling limits\n\n---\n\n## Deployment\n\n### Start Services\n```bash\ncd ~/dockyard-wifi-portal\ndocker-compose up -d\n```\n\n### Restart After Code Changes\n```bash\ndocker-compose restart backend admin\n```\n\n### View Logs\n```bash\ndocker-compose logs --tail 50 backend\ndocker-compose logs --tail 50 admin\n```\n\n### Database Access\n```bash\ndocker exec -it dockyard-postgres psql -U wifi_app -d dockyard_wifi",
-      "todo": "# Dockyard WiFi Portal - TODO List\n\n**Last Updated:** February 4, 2026\n\n---\n\n## \u2705 COMPLETED\n\n### Security\n- [x] Secrets moved to .env file (not in git)\n- [x] CORS restricted to specific origins\n- [x] CSP headers enabled (with scriptSrcAttr for inline handlers)\n- [x] Admin CSP media-src & CORS fix (v1.3.6) - admin video playback works\n- [x] Admin port locked to localhost only (127.0.0.1:3001)\n- [x] Server-side ad completion validation (nonce + timing)\n- [x] Free limit tracking (max 1 hour per device per day)\n- [x] Tester email bypass for testing\n- [x] Rate limiting (general: 100/15min, strict: 10/min, video: 5/min)\n- [x] Error sanitization (generic messages to clients, details logged - both backend & admin)\n- [x] Admin JWT validation (Cloudflare Access token verification)\n- [x] Input validation (email, MAC, UUID, string sanitization)\n- [x] Comprehensive audit logging (all admin actions tracked)\n\n### Session Management\n- [x] Session check endpoint (/api/v1/sessions/check/:mac)\n- [x] Active session display with countdown timer\n- [x] Free seconds tracking (free_seconds_used column)\n- [x] Persistent device ID (localStorage fallback for spoofed MACs)\n- [x] 1-hour daily free limit enforcement (resets at midnight)\n- [x] \"Free WiFi Limit Reached\" screen when limit hit\n- [x] Connection counters (total, free, paid per user)\n\n### Email System\n- [x] SMTP via Microsoft 365 (dockyard@rize.bm)\n- [x] Session expiry reminder emails\n- [x] Welcome email on first connection (with marketing opt-in)\n- [x] Follow-up email template (7 days after last connection)\n- [x] Unsubscribe endpoint (/api/v1/unsubscribe)\n- [x] Test email endpoint (/api/v1/test-emails)\n\n### Analytics & Tracking\n- [x] Ad impressions table\n- [x] Click tracking with CTR calculation\n- [x] Video quartile tracking (25%, 50%, 75%, 100%)\n- [x] Sponsor performance metrics\n- [x] Admin Analytics tab\n\n### Admin Dashboard\n- [x] 9 tabs: Ad Rotation, Videos, Sponsors, Sessions, Subscribers, Events, Pricing, Audit, Analytics, Settings\n- [x] Video upload and slot assignment\n- [x] Active session termination\n- [x] Subscriber export (CSV)\n- [x] Audit logging\n\n### UX Improvements\n\n### Documentation (v1.5.0)\n- [x] User Guide (docs/USER_GUIDE.md)\n- [x] Admin Guide (docs/ADMIN_GUIDE.md)\n- [x] Sponsor Onboarding Guide (docs/SPONSOR_ONBOARDING_GUIDE.md)\n\n### Video Playback (v1.5.0)\n- [x] Cross-browser video playback fixes\n- [x] Proper MIME type headers\n- [x] Enhanced video player with autoplay handling\n- [x] Video error recovery\n\n### Cookie Tracking (v1.5.0)\n- [x] Client-side free hour tracking via cookies\n- [x] Backup tracking independent of server\n- [x] Browser back button handling (returns to portal, not Google)\n- [x] \"Start Browsing\" button closes success screen properly\n\n---\n\n## \ud83d\udd04 IN PROGRESS\n\n### Email Design\n- [ ] Angel: Design branded HTML templates for all 4 emails (test emails sent to apelaez@rize.bm)\n\n### OAuth Integration (Feb 28 Deadline)\n- [x] Add Google/Facebook sign-in BUTTONS to portal UI (v1.4.0)\n- [ ] Facebook OAuth credentials (BLOCKED: awaiting business verification ~2 days)\n- [x] Build /privacy page (v1.4.6 - PIPA compliant)\n- [x] Build /terms page (v1.4.6)\n- [x] Build /api/auth/facebook/delete endpoint (v1.4.6)\n- [ ] Create 1024x1024 app icon for Facebook\n\n### Completed Jan 30\n- [x] Google OAuth - credentials added, app published in production\n- [x] Halo ticket created for Prabin to update GCP branding\n\n---\n\n## \ud83d\udccb TODO - HIGH PRIORITY\n\n### Payment Integration\n- [x] Authorize.net account setup (v1.6.0)\n- [x] Payment form on splash page (v1.6.0 - /upgrade page)\n- [x] Backend payment processing endpoint (v1.6.0)\n- [x] Transaction recording in database (v1.6.0)\n- [x] Receipt email on purchase (v1.6.0 - pending email template)\n- [x] Session upgrade on successful payment (v1.6.0)\n\n### Network Integration\n- [ ] Ubiquiti controller integration\n- [ ] RADIUS authentication\n- [ ] DHCP integration for MAC address capture\n- [ ] DNS hijack for captive portal redirect\n- [ ] Bandwidth limiting per session type\n\n---\n\n## \ud83d\udccb TODO - MEDIUM PRIORITY\n\n### User Experience\n- [x] Social login (Facebook, Google) - v1.4.0\n- [ ] Multi-language support\n- [x] Voucher/coupon codes (v1.2.0)\n\n### Admin Enhancements\n- [ ] PDF report generation\n- [ ] Scheduled report emails\n- [ ] A/B testing for ad creatives\n- [ ] Bulk video upload\n\n---\n\n## \ud83d\udccb TODO - LOW PRIORITY / FUTURE\n\n- [x] Mobile responsiveness fixes - v1.4.4\n- [ ] Mobile app for admin\n- [ ] Real-time dashboard websockets\n- [ ] Multiple location support\n- [ ] White-label capability\n\n---\n\n## \ud83d\udc1b KNOWN ISSUES\n\n1. **MAC addresses unreliable** - Browsers can't read real MAC; using localStorage device ID\n2. **Follow-up email timing** - Runs hourly; first emails won't send until 7 days after connections\n\n---\n\n## \ud83d\udcc5 DEADLINES\n\n- **Project Launch:** February 28, 2026\n- **Payment Integration:** Target mid-February\n- **Network Integration:** Requires coordination with dockyard IT\n\n---\n\n## Related Documentation\n\n| Document | Purpose |\n|----------|---------|\n| [README.md](README.md) | Technical overview and setup |\n| [DOCKYARD_WIFI_PROJECT_DOCUMENTATION.md](DOCKYARD_WIFI_PROJECT_DOCUMENTATION.md) | Complete project documentation for stakeholders |\n| [TODO.md](TODO.md) | Task tracking - completed and pending |\n| [HANDOFF_PROMPT.md](HANDOFF_PROMPT.md) | Session continuity for developers |\n| [CLAUDE_INSTRUCTIONS.md](CLAUDE_INSTRUCTIONS.md) | AI assistant guidelines |\n\n**Important:** Read all documentation files before making changes to understand the full project context.\n\n---\n\n## \ud83d\udd04 FRESHSALES CRM INTEGRATION\n\n### Completed \u2705\n- [x] FreshSales API connection working\n- [x] Auto-sync contacts on marketing opt-in\n- [x] Set subscription_status (1=subscribed, 2=unsubscribed)\n- [x] Add `dockyard-wifi` tag to all synced contacts\n- [x] Add lead source via cf_wifi_source field (\"Dockyard WiFi Portal\")\n- [x] Sync existing email_subscribers (batch sync completed Jan 27, 2026)\n- [x] Update contact on unsubscribe (syncs to FreshSales automatically)\n\n### Quick Wins (Ready to Implement)\n(All completed - see above)\n\n### Needs Angel/Admin Setup in FreshSales\n- [ ] Create \"Dockyard WiFi Portal\" lead source\n- [ ] Create custom fields: cf_first_wifi_visit, cf_last_wifi_visit, cf_wifi_pass_type\n- [ ] Create \"Dockyard WiFi 2026\" campaign (optional)\n- [ ] Decide: Portal sends emails vs FreshSales sends emails\n\n### Advanced (Future)\n- [ ] Log WiFi sessions as Sales Activities\n- [ ] Create Deals on pass purchases\n- [ ] Webhook: FreshSales \u2192 Portal for unsubscribes\n- [ ] Lifecycle stages (New \u2192 Engaged \u2192 Customer \u2192 Churned)\n\n### Files\n- `/backend/freshsalesService.js` - API wrapper\n- `/backend/index.js` - Auto-sync on opt-in (line ~250)\n\n### API Reference\n```\nDomain: rizetechnologies.myfreshworks.com\nAuth Header: Authorization: Token token=OT1axCqJZ33LA1FpVPSfpA\n```\n\n---\n\n## \ud83c\udd95 FROM FEB 2 MEETING (Libby/Sarah/Michael/Polina/Gilbert)\n\n### Captive Portal - Advertising Features\n- [ ] Video ad slots: 6x 30-second spots at $1,000 each (splash page)\n- [ ] Splash page sponsor banner for Main Sponsor ($20K package \u2014 details TBD)\n- [ ] Ad impression/performance analytics visible to advertisers\n- [ ] Backend portal already has video upload + analytics \u2014 verify sponsor reporting meets advertiser needs\n\n### Captive Portal - Email Automation (4 emails)\n- [x] Email 1: Auto sign-up welcome response (v1.5.0)\n- [x] Email 2: Session expiring reminder (v1.5.0)\n- [ ] Email 3: TBD \u2014 define purpose (follow-up offer? return visit promo?)\n- [ ] Email 4: TBD \u2014 define purpose (feedback survey? loyalty program?)\n- [ ] Email sponsorship pricing: define cost for sponsor placement in emails\n\n### B2B Pricing & Payment Plans\n- [ ] 1-year plan: less 5% Early Bird Discount\n- [ ] 6-month plan: pay during peak season (April-September)\n- [ ] 12-month plan: monthly payments + 5% admin fee\n- [ ] Build B2B payment/invoicing workflow (separate from B2C guest passes)\n- [ ] B2B sales PDF asset (Libby/Tuo creating)\n- [ ] B2B landing page (Libby/Tuo creating)\n\n### B2C Pricing (DECISION NEEDED)\n- [ ] Define WiFi hour pass price\n- [ ] Define 1-day pass price\n- [ ] Define 2-day pass price\n- [ ] Current pricing in admin: 6hr/$4, 24hr/$7, 72hr/$12 \u2014 confirm or update\n\n### Physical Signage & Assets (Libby/Tuo)\n- [x] QR codes for WiFi access - v1.5.0 (added to Admin Settings)\n- [ ] Digital screen content for existing Dockyard screens\n- [ ] Wall decal designs\n- [ ] Interrupter/lollipop signs\n- [ ] Ferry railing banners\n- [ ] TV screen and billboard locations (Libby sent internal doc Feb 2)\n\n### Hardware Deployment (End of February)\n- [ ] Raspberry Pi deployment for new digital screens\n- [ ] Deploy screens in customs area\n- [ ] Additional access points (Abraham/Ubiquiti \u2014 waiting)\n- [ ] Outdoor area coverage (goal: end of February)\n- [ ] Mall indoor coverage (goal: ready by February)\n\n### Network / QoS\n- [ ] Subscriber priority over guests in high-density areas\n- [ ] Bandwidth management per session type\n\n### Marketing & Promotion\n- [ ] Cruise ship staff engagement strategy (promote WiFi without conflicting with cruise lines)\n- [ ] Wayfinding signage for cruise ship passengers\n- [ ] Leverage existing customs screens for WiFi advertising\n- [ ] Email list monetization strategy (large volume expected from tourist captures)\n\n### Stakeholders\n- Libby Cook-Toppan (Tuo Collective) \u2014 Marketing/advertising lead\n- Sarah Manders (Rize) \u2014 Sales/signage coordination\n- Michael Branco (Celeste) \u2014 Network deployment\n- Polina Branco (Celeste) \u2014 Meeting coordination\n- Angel Pelaez (Rize) \u2014 Email template design",
-      "changelog": "## [1.8.0] - 2026-02-04\n\n### Added\n- **Payment Gateway Admin Panel**\n  - Multi-gateway support: Authorize.net (primary) + Stripe (backup)\n  - Credential management from admin dashboard (stored in DB, not .env)\n  - Test Connection button to verify credentials without processing charges\n  - Automatic failover after 3 consecutive gateway failures\n  - Gateway event log with success/failure/failover tracking\n\n- **QR Code System**\n  - QR code generation service for signage\n  - Printable poster (8.5x11) with branding and instructions\n  - Printable sticker sheet (9 per page for cutting)\n  - Downloadable PNG (1024px) and SVG formats\n  - QR API routes: /api/qr/image, /api/qr/poster, /api/qr/stickers\n\n- **Social Login Prep**\n  - Added Stripe env vars to docker-compose.yml\n  - Added Instagram OAuth env vars\n  - Social login buttons ready (pending Meta verification)\n\n### Technical\n- New tables: payment_gateways, payment_gateway_log\n- New services: gatewayManager.js, qrGenerator.js\n- New routes: gatewayRoutes.js, qrRoutes.js\n- Payment config now reads from DB via GatewayManager\n\n## [1.7.0] - 2026-02-04\n\n### Added\n- **Admin Settings Page**\n  - 54 configurable settings across 10 categories\n  - Categories: General, Free Tier, Payments, Video Ads, Email, Vouchers, Social Login, Branding, Sponsors, Network\n  - Collapsible category sections with toggle switches for booleans\n  - Bulk save functionality with change tracking\n  - Settings stored in new `settings` database table\n\n- **Settings API Routes**\n  - GET /api/admin/settings - Fetch all settings grouped by category\n  - GET /api/admin/settings/:key - Get single setting\n  - PUT /api/admin/settings/:key - Update single setting\n  - POST /api/admin/settings/bulk - Bulk update multiple settings\n\n### Fixed\n- **Docker Environment Variables**\n  - Fixed Authorize.net credentials not being passed to backend container\n  - Added AUTHORIZE_NET_API_LOGIN_ID, TRANSACTION_KEY, PUBLIC_CLIENT_KEY, ENV to docker-compose.yml\n  - Payment config endpoint now properly reflects configured state\n\n### Technical\n- New migration: backend/migrations/add_settings_table.sql\n- New route file: backend/routes/settingsRoutes.js\n- Settings JS functions added to admin dashboard\n- Audit logging for settings changes\n\n## [1.6.0] - 2026-02-04\n\n### Added\n- **Authorize.net Payment Integration (P0)**\n  - Accept.js for PCI-compliant card tokenization\n  - Payment plans: 6hr/$4, 24hr/$7, 72hr/$12\n  - Full payment lifecycle: charge, refund, void\n  - Payment page at /upgrade with responsive design\n  - Auto-select plan from URL query parameter\n  - Device ID tracking for payment association\n\n- **Admin Payments Tab**\n  - Revenue overview dashboard (30-day stats)\n  - Plan breakdown visualization (6hr, 24hr, 72hr counts)\n  - Filterable payments table with pagination\n  - Refund and void actions from admin UI\n  - CSV export of payment data\n  - Payment audit logging\n\n- **Database Schema**\n  - payments table with full transaction details\n  - payment_audit_log for action tracking\n  - daily_revenue for aggregated stats\n  - Auto-update trigger for daily revenue\n\n- **Security**\n  - CSP updated for Authorize.net Accept.js\n  - Card data never touches server (tokenization)\n  - Payment audit trail\n\n### Technical\n- Added authorizenet npm package\n- Created services/paymentConfig.js\n- Created services/paymentService.js\n- Created routes/paymentRoutes.js\n- Payment routes wired into Express app\n- Admin server payment endpoints added\n\n---\n\n## [1.5.0] - 2026-02-04\n\n### Added\n- **Video Playback Improvements (P1)**\n  - Added proper MIME type headers for MP4 videos\n  - Enhanced video element with better cross-browser attributes (playsinline, preload, muted autoplay)\n  - Added video error handling and recovery\n  - Added Accept-Ranges header for seeking support\n  - Fixed autoplay restrictions handling\n\n- **Cookie-based Free Hour Tracking (P1)**\n  - Added client-side free hour tracking via cookies\n  - Backup tracking independent of server-side validation\n  - Daily reset at midnight\n\n- **Email Templates (P1)**\n  - Added Purchase Confirmation email (Email 5)\n  - Added Feedback Survey email (Email 6)\n  - Updated test emails endpoint to include all 6 email types\n\n- **QR Code Generation (P1)**\n  - Added /api/v1/qrcode endpoint for PNG generation\n  - Added /api/v1/qrcode/download endpoint for print-ready downloads\n  - QR codes customizable by size (up to 2000px)\n  - QR code section added to Admin Settings page\n  - Branded colors (Dockyard blue #0077b6)\n\n- **Documentation Guides (P1)**\n  - Created docs/USER_GUIDE.md for public visitors\n  - Created docs/ADMIN_GUIDE.md for administrators\n  - Created docs/SPONSOR_ONBOARDING_GUIDE.md for advertisers\n\n### Verified\n- 30-second minimum video enforcement (server-side nonce + timing validation)\n- Video rotation logic (sequential slot cycling 1-10 with fallback)\n- Social login buttons (Google OAuth working, Facebook pending credentials)\n- Voucher system (already implemented in v1.2.0)\n\n### Technical\n- Added mime-types package for MIME detection\n- Added qrcode package for QR generation\n- Enhanced express.static configuration\n\n---\n\n## [1.4.7-docs] - 2026-02-03\n\n### Added\n- Updated TODO.md with all technical items from Feb 2 planning meeting\n- Added Phase 6 (Advertising & Monetization) to PROJECT_PLAN.md\n- B2B payment plans, B2C pricing decisions needed, physical signage, hardware deployment\n- Email automation sequence (4 emails), ad slot pricing, sponsor packages\n- Key stakeholder contacts added\n\n---\n\n## [1.4.6] - 2026-01-30\n\n### Added\n- **Facebook Data Deletion Endpoint** (Facebook App Review requirement)\n  - POST /api/auth/facebook/delete - Accepts signed_request from Facebook\n  - Parses and validates Facebook signed requests with HMAC-SHA256\n  - Deletes user data (email_subscribers, sessions) for Facebook ID\n  - Returns confirmation URL and code per Facebook spec\n  - GET /api/auth/facebook/deletion-status - User-facing status page\n  - Created data_deletion_requests table for audit trail\n\n### Changed\n- **Legal Pages Updated**: Updated effective dates to January 30, 2026\n  - /pages/privacy.html - PIPA-compliant privacy policy\n  - /pages/terms.html - Terms of Service with Bermuda jurisdiction\n\n---\n\n## [1.4.5] - 2026-01-30\n\n### Fixed\n- **OAuth Environment Variables**: Added OAuth config to docker-compose.yml\n  - GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET passed to backend container\n  - GOOGLE_CALLBACK_URL with default value\n  - FACEBOOK_APP_ID, FACEBOOK_APP_SECRET passed to backend container\n  - FACEBOOK_CALLBACK_URL with default value\n  - Google \"Sign in with Google\" button now visible on portal\n  - Facebook button remains hidden until credentials configured\n  - Cleaned up .env file (removed duplicate entries)\n\n---\n\n## [1.4.4] - 2026-01-30\n\n### Fixed\n- **Mobile Responsiveness** (Task 5)\n  - Added @media query for screens under 480px\n  - Increased tap targets to minimum 44px\n  - Buttons now min-height 48px on mobile\n  - Prevented horizontal scroll with overflow-x: hidden\n  - Video player scales to 50vh on mobile\n  - Improved checkbox tap targets\n  - Optimized font sizes and padding for small screens\n\n---\n\n## [1.4.3] - 2026-01-30\n\n### Added\n- **Admin Pricing Controls** (Task 4)\n  - Editable pricing in Admin dashboard\n  - PUT /api/admin/pricing/:id endpoint\n  - Edit modal for each price tier\n  - Configure: duration hours, price cents, active status\n  - Changes apply immediately to portal\n\n---\n\n## [1.4.2] - 2026-01-30\n\n### Added\n- **Sponsor Image Upload** (Task 3)\n  - File upload input in Add Sponsor form\n  - Accepts JPG, PNG, GIF, WebP (max 5MB)\n  - Stores in /uploads/sponsors/\n  - Preview after upload\n  - Backend: upload-sponsor-image endpoint\n\n---\n\n## [1.4.0] - 2026-01-30\n\n### Added\n- **Google OAuth Login** (Task 1)\n  - \"Sign in with Google\" button on portal\n  - Backend: googleAuthService.js enhanced\n  - Grants 1 hour free WiFi on successful auth\n  - Auto-hides if not configured\n\n- **Facebook OAuth Login** (Task 2)\n  - \"Sign in with Facebook\" button on portal\n  - Backend: facebookAuthService.js created\n  - Passport-facebook integration\n  - Handles case where Facebook doesnt share email\n\n### Configuration Required\nAdd to .env:\n- GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET\n- FACEBOOK_APP_ID, FACEBOOK_APP_SECRET\n\n---\n\n### Fixed\n- **CSP Headers Update**: Enhanced media-src directive for video playback\n  - Updated backend and admin CSP to include specific domain\n  - Added https://dockyardwifi.rize.bm to media-src\n  - Added https://dockyard-admin.rize.bm to CORS whitelist\n  - Ensures video playback works across all components\n\n## [1.3.5] - 2026-01-29\n### Changed\n- **Footer Link**: Made Rize Technologies clickable\n  - Links to https://rize.bm\n  - Opens in new tab\n  - White underlined styling to indicate clickability\n\n## [1.3.4] - 2026-01-29\n### Removed\n- **Reset Stats Button**: Removed from admin Analytics/Settings page\n  - Prevents accidental data loss\n  - Stats data is preserved and protected\n\n## [1.3.3] - 2026-01-29\n### Removed\n- **Multi-language Support**: Removed Spanish and Portuguese language options\n  - Removed language switcher UI from portal\n  - Removed i18n JavaScript code\n  - Deleted es.json and pt.json locale files\n  - Portal now displays English only as intended for launch\n\n## [1.3.2] - 2026-01-29\n### Fixed\n- **Voucher Time Addition**: Vouchers now ADD time instead of RESETTING session\n  - User with 50min remaining + 1hr voucher = 1hr 50min (was: reset to 59min)\n  - Checks if session is still active and adds duration to existing expiry\n  - If session expired, starts fresh from current time\n  - Updated success message to show total expiry time\n\n## [1.3.1] - 2026-01-29\n### Fixed\n- **CSP Headers for Admin Videos**: Added media-src directive to admin backend CSP\n  - Videos now play correctly in Admin Video Library and Add Rotation preview\n  - Allows media from self, https:, blob:, and data: sources\n  - Resolves Loading media violates Content Security Policy browser console errors\n\n## [1.3.0] - 2026-01-29\n### Added\n- **Multi-language Support**: Portal now supports English, Spanish, Portuguese\n  - Language switcher in top-right corner of portal card\n  - Translation files in /locales/ (en.json, es.json, pt.json)\n  - localStorage-based language preference persistence\n  - All UI strings translated including errors, buttons, labels\n  - data-i18n attributes for dynamic translation updates\n- Google OAuth foundation prepared (awaiting credentials)\n\n## [1.2.0] - 2026-01-28\n### Added\n- **Voucher/Coupon System**: Staff can generate vouchers for free WiFi access\n  - Admin dashboard Vouchers tab for generating and managing vouchers\n  - Support for free_hour (60 min) and free_day (24 hr) voucher types\n  - Single-use or multi-use vouchers with configurable usage limits\n  - Voucher expiration dates\n  - CSV export of voucher codes\n  - Voucher stats tracking (total, active, redeemed, fully used)\n- **User Voucher Redemption**: Users can redeem voucher codes on the splash page\n  - New voucher input field on the main portal",
-      "todos_parsed": [
-        {
-          "text": "Secrets moved to .env file (not in git)",
-          "done": true
-        },
-        {
-          "text": "CORS restricted to specific origins",
-          "done": true
-        },
-        {
-          "text": "CSP headers enabled (with scriptSrcAttr for inline handlers)",
-          "done": true
-        },
-        {
-          "text": "Admin CSP media-src & CORS fix (v1.3.6) - admin video playback works",
-          "done": true
-        },
-        {
-          "text": "Admin port locked to localhost only (127.0.0.1:3001)",
-          "done": true
-        },
-        {
-          "text": "Server-side ad completion validation (nonce + timing)",
-          "done": true
-        },
-        {
-          "text": "Free limit tracking (max 1 hour per device per day)",
-          "done": true
-        },
-        {
-          "text": "Tester email bypass for testing",
-          "done": true
-        },
-        {
-          "text": "Rate limiting (general: 100/15min, strict: 10/min, video: 5/min)",
-          "done": true
-        },
-        {
-          "text": "Error sanitization (generic messages to clients, details logged - both backend & admin)",
-          "done": true
-        },
-        {
-          "text": "Admin JWT validation (Cloudflare Access token verification)",
-          "done": true
-        },
-        {
-          "text": "Input validation (email, MAC, UUID, string sanitization)",
-          "done": true
-        },
-        {
-          "text": "Comprehensive audit logging (all admin actions tracked)",
-          "done": true
-        },
-        {
-          "text": "Session check endpoint (/api/v1/sessions/check/:mac)",
-          "done": true
-        },
-        {
-          "text": "Active session display with countdown timer",
-          "done": true
-        },
-        {
-          "text": "Free seconds tracking (free_seconds_used column)",
-          "done": true
-        },
-        {
-          "text": "Persistent device ID (localStorage fallback for spoofed MACs)",
-          "done": true
-        },
-        {
-          "text": "1-hour daily free limit enforcement (resets at midnight)",
-          "done": true
-        },
-        {
-          "text": "\"Free WiFi Limit Reached\" screen when limit hit",
-          "done": true
-        },
-        {
-          "text": "Connection counters (total, free, paid per user)",
-          "done": true
-        }
-      ],
+      "readme": "# dockyard\n\ndockyard project",
+      "todo": null,
+      "changelog": null,
+      "todos_parsed": [],
       "todos_open": 0,
-      "todos_done": 20,
-      "version": "1.8.0",
+      "todos_done": 0,
+      "version": null,
       "git": {
-        "status": "clean",
-        "branch": "main",
-        "last_commit": "11b4444 fix: resolve Gitea #1-5 \u2014 image display, captive portal, payment form, security (19 hours ago)",
-        "changes": [],
-        "uncommitted_count": 0
+        "status": "dirty",
+        "branch": "HEAD",
+        "last_commit": "bb5ef95 Initial commit (23 hours ago)",
+        "changes": [
+          {
+            "status": "??",
+            "file": ".env"
+          },
+          {
+            "status": "??",
+            "file": "admin/"
+          },
+          {
+            "status": "??",
+            "file": "backend/"
+          },
+          {
+            "status": "??",
+            "file": "node_modules/"
+          }
+        ],
+        "uncommitted_count": 4
       },
       "ports_status": [
         {
           "port": 8080,
           "open": true,
-          "http_code": 200,
+          "http_code": 404,
           "healthy": true
         },
         {
           "port": 8081,
           "open": true,
-          "http_code": 200,
+          "http_code": 404,
           "healthy": true
         }
       ],
       "files": [
-        "CHANGELOG.md",
-        "CLAUDE.md",
-        "CLAUDE_INSTRUCTIONS.md",
-        "DOCKYARD_WIFI_PROJECT_DOCUMENTATION.md",
-        "HANDOFF.md",
-        "HANDOFF_PROMPT.md",
-        "OAUTH-REQUIREMENTS.md",
-        "PROJECT_PLAN.md",
         "README.md",
-        "RELAY.md",
-        "TODO.md",
-        "admin/package-lock.json",
-        "admin/package.json",
-        "admin/server.js",
-        "admin/voucherService.js",
-        "backend/emailService.js",
-        "backend/facebookAuthService.js",
-        "backend/freshsalesService.js",
-        "backend/googleAuthService.js",
-        "backend/index.js",
-        "backend/package-lock.json",
-        "backend/package.json",
-        "backend/voucherService.js",
-        "docs/ADMIN_GUIDE.md",
-        "docs/PAYMENT_INTEGRATION.md",
-        "docs/SPONSOR_ONBOARDING_GUIDE.md",
-        "docs/USER_GUIDE.md",
-        "node_modules/.package-lock.json",
-        "package-lock.json",
-        "package.json"
+        "node_modules/.package-lock.json"
       ],
-      "health_score": 90
+      "health_score": 88
     },
     {
       "name": "David Bishop",
@@ -1512,7 +1430,7 @@
       "ports": [
         9001
       ],
-      "scanned_at": "2026-02-14T14:13:04.018352+00:00",
+      "scanned_at": "2026-02-14T15:57:55.970273+00:00",
       "status": "ok",
       "issues": [
         {
@@ -1695,7 +1613,7 @@
       "ports": [
         9002
       ],
-      "scanned_at": "2026-02-14T14:13:24.466020+00:00",
+      "scanned_at": "2026-02-14T15:58:13.658330+00:00",
       "status": "ok",
       "issues": [
         {
@@ -1966,7 +1884,7 @@
       "ports": [
         9003
       ],
-      "scanned_at": "2026-02-14T14:13:41.538250+00:00",
+      "scanned_at": "2026-02-14T15:58:27.489811+00:00",
       "status": "ok",
       "issues": [
         {
@@ -2205,11 +2123,11 @@
         "data/prtg-intel-2026-02-11.json",
         "data/prtg-intel-2026-02-12.json",
         "data/prtg-intel-2026-02-13.json",
+        "data/prtg-intel-2026-02-14.json",
         "db/__init__.py",
         "db/models.py",
         "main.py",
         "monitor/browser_monitor.py",
-        "monitor/config.json",
         "monitor/results.json",
         "monitor/strikes.json",
         "monitors/synthetic_monitor.py",
@@ -2237,7 +2155,7 @@
       "ports": [
         9020
       ],
-      "scanned_at": "2026-02-14T14:13:57.114688+00:00",
+      "scanned_at": "2026-02-14T15:58:41.447322+00:00",
       "status": "ok",
       "issues": [
         {
@@ -2362,7 +2280,7 @@
       "git": {
         "status": "clean",
         "branch": "main",
-        "last_commit": "c3623f3 audit: Finance Dashboard \u2014 Playwright tests + all endpoints verified (35 hours ago)",
+        "last_commit": "c3623f3 audit: Finance Dashboard \u2014 Playwright tests + all endpoints verified (2 days ago)",
         "changes": [],
         "uncommitted_count": 0
       },
@@ -2398,7 +2316,7 @@
       "ports": [
         9030
       ],
-      "scanned_at": "2026-02-14T14:13:57.208811+00:00",
+      "scanned_at": "2026-02-14T15:58:41.549363+00:00",
       "status": "ok",
       "issues": [
         {
@@ -2442,7 +2360,7 @@
       "git": {
         "status": "clean",
         "branch": "main",
-        "last_commit": "c36bb75 chore: auto-commit uncommitted changes 2026-02-13 (19 hours ago)",
+        "last_commit": "c36bb75 chore: auto-commit uncommitted changes 2026-02-13 (21 hours ago)",
         "changes": [],
         "uncommitted_count": 0
       },
@@ -2474,7 +2392,7 @@
       "ports": [
         9101
       ],
-      "scanned_at": "2026-02-14T14:13:57.295843+00:00",
+      "scanned_at": "2026-02-14T15:58:41.655917+00:00",
       "status": "ok",
       "issues": [
         {
@@ -2753,7 +2671,7 @@
       "ports": [
         9006
       ],
-      "scanned_at": "2026-02-14T14:14:16.254711+00:00",
+      "scanned_at": "2026-02-14T15:58:58.564484+00:00",
       "status": "ok",
       "issues": [
         {
@@ -2963,7 +2881,7 @@
       "ports": [
         9200
       ],
-      "scanned_at": "2026-02-14T14:14:36.159254+00:00",
+      "scanned_at": "2026-02-14T15:59:16.415949+00:00",
       "status": "ok",
       "issues": [
         {
@@ -3046,7 +2964,7 @@
       "ports": [
         3000
       ],
-      "scanned_at": "2026-02-14T14:14:48.152784+00:00",
+      "scanned_at": "2026-02-14T15:59:27.957888+00:00",
       "status": "ok",
       "issues": [
         {
@@ -3241,7 +3159,7 @@
       "project": "Dockyard WiFi",
       "server": "rize-apps",
       "severity": "warning",
-      "message": "Missing required docs: DEPLOYMENT.md"
+      "message": "Missing required docs: TODO.md, CHANGELOG.md, DEPLOYMENT.md"
     },
     {
       "project": "David Bishop",
@@ -3286,16 +3204,28 @@
       "message": "Missing required docs: DEPLOYMENT.md"
     },
     {
+      "project": "BPS-AI",
+      "server": "demos",
+      "severity": "info",
+      "message": "8 uncommitted changes"
+    },
+    {
       "project": "Helios AI",
       "server": "demos",
       "severity": "info",
-      "message": "9 uncommitted changes"
+      "message": "1 uncommitted changes"
     },
     {
       "project": "Homebase",
       "server": "rize-apps",
       "severity": "info",
       "message": "20 uncommitted changes"
+    },
+    {
+      "project": "Dockyard WiFi",
+      "server": "rize-apps",
+      "severity": "info",
+      "message": "4 uncommitted changes"
     },
     {
       "project": "Apex",
@@ -3318,8 +3248,8 @@
   ],
   "summary": {
     "total": 16,
-    "healthy": 11,
-    "warning": 5,
+    "healthy": 10,
+    "warning": 6,
     "critical": 0
   }
 }

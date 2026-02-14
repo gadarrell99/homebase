@@ -1,6 +1,27 @@
 {
   "briefings": [
     {
+      "date": "2026-02-14",
+      "generated_at": "15:00 UTC",
+      "sections": {
+        "weather": "Bermuda: Check weather.com for current conditions",
+        "sales": {
+          "status": "David offline"
+        },
+        "infrastructure": {
+          "uptime": "99.9%",
+          "alerts": 0,
+          "status": "All systems operational"
+        },
+        "agents": {
+          "all_healthy": true,
+          "healthy_count": 8,
+          "issues": []
+        },
+        "calendar": "Check Outlook for today's schedule"
+      }
+    },
+    {
       "date": "2026-02-13",
       "generated_at": "15:00 UTC",
       "sections": {

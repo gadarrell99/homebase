@@ -4044,11 +4044,11 @@
       "deadline": null,
       "days_remaining": null,
       "totals": {
-        "open": 33,
+        "open": 34,
         "done": 0,
         "verified": 0,
         "blocked": 0,
-        "total": 33
+        "total": 34
       },
       "percent_complete": 0,
       "p0_status": {
@@ -4056,6 +4056,19 @@
         "total": 0
       },
       "requirements": [
+        {
+          "id": "GH-34",
+          "gitea_number": 34,
+          "status": "OPEN",
+          "description": "[Security/HIGH] failed_logins: 232 failed SSH login attempts in auth.log",
+          "priority": "P1",
+          "labels": [
+            "automated",
+            "priority:high",
+            "security"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/vector/issues/34"
+        },
         {
           "id": "GH-33",
           "gitea_number": 33,
@@ -4679,9 +4692,9 @@
       "source": "gitea"
     }
   ],
-  "last_refresh": "2026-02-14T14:13:06.266301+00:00",
+  "last_refresh": "2026-02-14T16:03:05.593330+00:00",
   "source": "gitea",
   "project_count": 12,
-  "total_requirements": 361,
-  "total_open": 340
+  "total_requirements": 362,
+  "total_open": 341
 }

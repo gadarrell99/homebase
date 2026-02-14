@@ -1,1 +1,22 @@
-[]
+{
+  "alerts": [
+    {
+      "id": "alert-566514b6",
+      "timestamp": "2026-02-14T16:00:40.458365+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 12:00:40 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 4173ms\n   Error: HTTP 403\n   Error: Bad content detected: 'Blocked request'\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-f72a143e",
+      "timestamp": "2026-02-14T16:00:08.517305+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 12:00:08 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 148ms\n   Error: HTTP 403\n   Error: Bad content: 'Blocked request'\n\n",
+      "details": {},
+      "acknowledged": false
+    }
+  ]
+}

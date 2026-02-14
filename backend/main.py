@@ -2002,6 +2002,48 @@ async def sentinel_alerts():
 
     return {"alerts": sorted(alerts, key=lambda x: x.get("timestamp", ""), reverse=True)[:50]}
 
+
+@app.post("/api/sentinel/alerts")
+async def sentinel_create_alert(request: Request):
+    """Accept a new alert from Sentinel or other agents."""
+    import uuid
+    from datetime import datetime
+
+    body = await request.json()
+
+    # Build the alert record
+    alert = {
+        "id": body.get("id", f"alert-{uuid.uuid4().hex[:8]}"),
+        "timestamp": body.get("timestamp", datetime.utcnow().isoformat() + "Z"),
+        "severity": body.get("severity", "info"),
+        "source": body.get("source", "sentinel"),
+        "message": body.get("message", ""),
+        "details": body.get("details", {}),
+        "acknowledged": False
+    }
+
+    # Append to alerts.json
+    alerts_path = "/home/rizeadmin/homebase/data/alerts.json"
+    try:
+        with open(alerts_path, "r") as f:
+            alert_data = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        alert_data = {"alerts": []}
+
+    # Normalise: if the file was a bare list, wrap it
+    if isinstance(alert_data, list):
+        alert_data = {"alerts": alert_data}
+
+    alert_data.setdefault("alerts", []).insert(0, alert)
+
+    # Cap stored alerts at 500
+    alert_data["alerts"] = alert_data["alerts"][:500]
+
+    with open(alerts_path, "w") as f:
+        json.dump(alert_data, f, indent=2)
+
+    return {"stored": True, "alert": alert}
+
 @app.get("/api/sentinel/guardrails")
 async def sentinel_guardrails():
     """Get guardrail trigger logs."""
