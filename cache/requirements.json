@@ -5,7 +5,7 @@
       "slug": "helios",
       "url": "https://helios.rize.bm",
       "deadline": "2026-02-17",
-      "days_remaining": 4,
+      "days_remaining": 3,
       "totals": {
         "open": 21,
         "done": 4,
@@ -267,7 +267,7 @@
       "slug": "bps-ai",
       "url": "https://bpsai.rize.bm",
       "deadline": "2026-02-20",
-      "days_remaining": 7,
+      "days_remaining": 6,
       "totals": {
         "open": 19,
         "done": 12,
@@ -1413,13 +1413,13 @@
       "deadline": null,
       "days_remaining": null,
       "totals": {
-        "open": 43,
-        "done": 0,
+        "open": 39,
+        "done": 4,
         "verified": 0,
         "blocked": 0,
         "total": 43
       },
-      "percent_complete": 0,
+      "percent_complete": 9,
       "p0_status": {
         "open": 0,
         "total": 0
@@ -1451,58 +1451,6 @@
           "priority": "P1",
           "labels": [],
           "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/41"
-        },
-        {
-          "id": "GH-40",
-          "gitea_number": 40,
-          "status": "OPEN",
-          "description": "[Premier-emr] DEMO_SCRIPT.md",
-          "priority": "P1",
-          "labels": [
-            "priority:medium",
-            "server:246",
-            "synced-from-todo"
-          ],
-          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/40"
-        },
-        {
-          "id": "GH-39",
-          "gitea_number": 39,
-          "status": "OPEN",
-          "description": "[Premier-emr] DEPLOYMENT.md",
-          "priority": "P1",
-          "labels": [
-            "priority:medium",
-            "server:246",
-            "synced-from-todo"
-          ],
-          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/39"
-        },
-        {
-          "id": "GH-38",
-          "gitea_number": 38,
-          "status": "OPEN",
-          "description": "[Premier-emr] ARCHITECTURE.md (detailed)",
-          "priority": "P1",
-          "labels": [
-            "priority:medium",
-            "server:246",
-            "synced-from-todo"
-          ],
-          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/38"
-        },
-        {
-          "id": "GH-37",
-          "gitea_number": 37,
-          "status": "OPEN",
-          "description": "[Premier-emr] API.md (OpenAPI spec)",
-          "priority": "P1",
-          "labels": [
-            "priority:medium",
-            "server:246",
-            "synced-from-todo"
-          ],
-          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/37"
         },
         {
           "id": "GH-36",
@@ -1935,6 +1883,58 @@
           "priority": "P1",
           "labels": [],
           "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/1"
+        },
+        {
+          "id": "GH-40",
+          "gitea_number": 40,
+          "status": "DONE",
+          "description": "[Premier-emr] DEMO_SCRIPT.md",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/40"
+        },
+        {
+          "id": "GH-39",
+          "gitea_number": 39,
+          "status": "DONE",
+          "description": "[Premier-emr] DEPLOYMENT.md",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/39"
+        },
+        {
+          "id": "GH-38",
+          "gitea_number": 38,
+          "status": "DONE",
+          "description": "[Premier-emr] ARCHITECTURE.md (detailed)",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/38"
+        },
+        {
+          "id": "GH-37",
+          "gitea_number": 37,
+          "status": "DONE",
+          "description": "[Premier-emr] API.md (OpenAPI spec)",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/37"
         }
       ],
       "source": "gitea"
@@ -4495,24 +4495,193 @@
       "deadline": null,
       "days_remaining": null,
       "totals": {
-        "open": 0,
+        "open": 12,
         "done": 0,
         "verified": 0,
         "blocked": 0,
-        "total": 0
+        "total": 12
       },
       "percent_complete": 0,
       "p0_status": {
         "open": 0,
         "total": 0
       },
-      "requirements": [],
+      "requirements": [
+        {
+          "id": "GH-12",
+          "gitea_number": 12,
+          "status": "OPEN",
+          "description": "[Sentinel] Escalation to Cortex for persistent non-compliance",
+          "priority": "P1",
+          "labels": [
+            "agent:sentinel",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/sentinel/issues/12"
+        },
+        {
+          "id": "GH-11",
+          "gitea_number": 11,
+          "status": "OPEN",
+          "description": "[Sentinel] Halo PSA ticket creation for persistent findings",
+          "priority": "P1",
+          "labels": [
+            "agent:sentinel",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/sentinel/issues/11"
+        },
+        {
+          "id": "GH-10",
+          "gitea_number": 10,
+          "status": "OPEN",
+          "description": "[Sentinel] UFW rule enforcement scan",
+          "priority": "P1",
+          "labels": [
+            "agent:sentinel",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/sentinel/issues/10"
+        },
+        {
+          "id": "GH-9",
+          "gitea_number": 9,
+          "status": "OPEN",
+          "description": "[Sentinel] Audit trail for CEO-authorized changes",
+          "priority": "P1",
+          "labels": [
+            "agent:sentinel",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/sentinel/issues/9"
+        },
+        {
+          "id": "GH-8",
+          "gitea_number": 8,
+          "status": "OPEN",
+          "description": "[Sentinel] Weekly security summary email (in addition to nightly)",
+          "priority": "P1",
+          "labels": [
+            "agent:sentinel",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/sentinel/issues/8"
+        },
+        {
+          "id": "GH-7",
+          "gitea_number": 7,
+          "status": "OPEN",
+          "description": "[Sentinel] Integration with Homebase security dashboard",
+          "priority": "P1",
+          "labels": [
+            "agent:sentinel",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/sentinel/issues/7"
+        },
+        {
+          "id": "GH-6",
+          "gitea_number": 6,
+          "status": "OPEN",
+          "description": "[Sentinel] Automated remediation for critical findings (auto-fix .env permissions)",
+          "priority": "P1",
+          "labels": [
+            "agent:sentinel",
+            "priority:high",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/sentinel/issues/6"
+        },
+        {
+          "id": "GH-5",
+          "gitea_number": 5,
+          "status": "OPEN",
+          "description": "[Sentinel] Agent registry auto-update when new agents deploy",
+          "priority": "P1",
+          "labels": [
+            "agent:sentinel",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/sentinel/issues/5"
+        },
+        {
+          "id": "GH-4",
+          "gitea_number": 4,
+          "status": "OPEN",
+          "description": "[Sentinel] Real-time alert on credential exposure (not just nightly)",
+          "priority": "P1",
+          "labels": [
+            "agent:sentinel",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/sentinel/issues/4"
+        },
+        {
+          "id": "GH-3",
+          "gitea_number": 3,
+          "status": "OPEN",
+          "description": "[Sentinel] Add SSL certificate expiry monitoring",
+          "priority": "P1",
+          "labels": [
+            "agent:sentinel",
+            "priority:medium",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/sentinel/issues/3"
+        },
+        {
+          "id": "GH-2",
+          "gitea_number": 2,
+          "status": "OPEN",
+          "description": "[Sentinel] Reduce HIGH count from 22 back to <10",
+          "priority": "P1",
+          "labels": [
+            "agent:sentinel",
+            "priority:high",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/sentinel/issues/2"
+        },
+        {
+          "id": "GH-1",
+          "gitea_number": 1,
+          "status": "OPEN",
+          "description": "[Sentinel] Remediate 18 recurring HIGH findings (not being fixed)",
+          "priority": "P1",
+          "labels": [
+            "agent:sentinel",
+            "priority:high",
+            "server:241",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/sentinel/issues/1"
+        }
+      ],
       "source": "gitea"
     }
   ],
-  "last_refresh": "2026-02-13T19:23:05.681228+00:00",
+  "last_refresh": "2026-02-14T13:18:05.585474+00:00",
   "source": "gitea",
   "project_count": 12,
-  "total_requirements": 349,
-  "total_open": 332
+  "total_requirements": 361,
+  "total_open": 340
 }

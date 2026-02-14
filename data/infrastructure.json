@@ -3,7 +3,7 @@
         "last_updated": "2026-02-13T03:40:00Z",
         "updated_by": "cortex-overnight-run",
         "version": "2.1",
-        "updated": "2026-02-13T19:26:04.686160+00:00"
+        "updated": "2026-02-14T13:16:04.908031+00:00"
     },
     "servers": [
         {
@@ -27,13 +27,13 @@
             ],
             "live": {
                 "status": "ok",
-                "last_scan": "2026-02-13T19:26:02.118829+00:00",
-                "uptime": "6 days, 3 hours, 41 minutes",
+                "last_scan": "2026-02-14T13:16:02.404734+00:00",
+                "uptime": "6 days, 21 hours, 31 minutes",
                 "disk_pct": "32",
                 "mem_total": "7608",
-                "mem_used": "4939",
+                "mem_used": "2456",
                 "kernel": "6.8.0-100-generic",
-                "load": "3.52"
+                "load": "1.18"
             },
             "hyperv_name": "Talos"
         },
@@ -55,13 +55,13 @@
             ],
             "live": {
                 "status": "ok",
-                "last_scan": "2026-02-13T19:26:02.753068+00:00",
-                "uptime": "6 days, 3 hours, 41 minutes",
+                "last_scan": "2026-02-14T13:16:03.205756+00:00",
+                "uptime": "6 days, 21 hours, 31 minutes",
                 "disk_pct": "32",
                 "mem_total": "7863",
-                "mem_used": "3008",
+                "mem_used": "3546",
                 "kernel": "6.8.0-100-generic",
-                "load": "5.56"
+                "load": "5.12"
             },
             "hyperv_name": "Agents"
         },
@@ -92,13 +92,13 @@
             ],
             "live": {
                 "status": "ok",
-                "last_scan": "2026-02-13T19:26:02.753116+00:00",
-                "uptime": "2 hours, 10 minutes",
-                "disk_pct": "48",
-                "mem_total": "7819",
-                "mem_used": "2735",
+                "last_scan": "2026-02-14T13:16:03.205846+00:00",
+                "uptime": "20 hours, 0 minutes",
+                "disk_pct": "49",
+                "mem_total": "8187",
+                "mem_used": "2836",
                 "kernel": "6.8.0-100-generic",
-                "load": "0.62"
+                "load": "0.95"
             },
             "hyperv_name": "Rize-Apps"
         },
@@ -125,13 +125,13 @@
             ],
             "live": {
                 "status": "ok",
-                "last_scan": "2026-02-13T19:26:03.579109+00:00",
-                "uptime": "2 hours, 8 minutes",
+                "last_scan": "2026-02-14T13:16:04.023782+00:00",
+                "uptime": "19 hours, 58 minutes",
                 "disk_pct": "51",
-                "mem_total": "14821",
-                "mem_used": "3661",
+                "mem_total": "16145",
+                "mem_used": "3904",
                 "kernel": "6.8.0-100-generic",
-                "load": "0.53"
+                "load": "0.42"
             },
             "hyperv_name": "Demos"
         },
@@ -153,13 +153,13 @@
             ],
             "live": {
                 "status": "ok",
-                "last_scan": "2026-02-13T19:26:04.686099+00:00",
-                "uptime": "6 days, 3 hours, 41 minutes",
+                "last_scan": "2026-02-14T13:16:04.907970+00:00",
+                "uptime": "6 days, 21 hours, 31 minutes",
                 "disk_pct": "14",
-                "mem_total": "3397",
-                "mem_used": "1005",
+                "mem_total": "3409",
+                "mem_used": "985",
                 "kernel": "6.8.0-100-generic",
-                "load": "0.85"
+                "load": "0.26"
             },
             "hyperv_name": "bet-vector"
         }

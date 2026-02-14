@@ -1,6 +1,6 @@
 {
   "meta": {
-    "scanned_at": "2026-02-13T19:22:01.714326+00:00",
+    "scanned_at": "2026-02-14T13:12:01.267470+00:00",
     "project_count": 16,
     "scanner_version": "1.0.0"
   },
@@ -15,7 +15,7 @@
         3001,
         8001
       ],
-      "scanned_at": "2026-02-13T19:22:01.714350+00:00",
+      "scanned_at": "2026-02-14T13:12:01.267513+00:00",
       "status": "ok",
       "issues": [
         {
@@ -170,7 +170,7 @@
       "git": {
         "status": "dirty",
         "branch": "main",
-        "last_commit": "42a8ad8 security: Block sensitive file access via Vite middleware (25 hours ago)",
+        "last_commit": "42a8ad8 security: Block sensitive file access via Vite middleware (2 days ago)",
         "changes": [
           {
             "status": "M",
@@ -263,12 +263,12 @@
       "ports": [
         3000
       ],
-      "scanned_at": "2026-02-13T19:22:16.035825+00:00",
+      "scanned_at": "2026-02-14T13:12:16.378758+00:00",
       "status": "ok",
       "issues": [
         {
           "severity": "info",
-          "message": "7 uncommitted changes"
+          "message": "2 uncommitted changes"
         }
       ],
       "docs": [
@@ -418,38 +418,18 @@
       "git": {
         "status": "dirty",
         "branch": "main",
-        "last_commit": "fb3de15 fix: BPS AI demo blockers \u2014 PDF export, login buttons, validation, audit logging (2 hours ago)",
+        "last_commit": "970f60c polish: AI speed (Haiku), voice dictation (Whisper), case numbers (BPS-YYYY-NNNN) (17 hours ago)",
         "changes": [
           {
             "status": "M",
-            "file": "ODO.md"
-          },
-          {
-            "status": "M",
-            "file": "src/app/(ia)/ia-investigations/[id]/page.tsx"
-          },
-          {
-            "status": "M",
-            "file": "src/app/profile/page.tsx"
+            "file": "rc/lib/auth.ts"
           },
           {
             "status": "??",
-            "file": "next.config.js.bak.20260213"
-          },
-          {
-            "status": "??",
-            "file": "src/app/(ia)/ia-investigations/[id]/page.tsx.bak"
-          },
-          {
-            "status": "??",
-            "file": "src/app/profile/page.tsx.bak"
-          },
-          {
-            "status": "??",
-            "file": "src/components/ui/DateDisplay.tsx"
+            "file": "src/app/api/test-auth/"
           }
         ],
-        "uncommitted_count": 7
+        "uncommitted_count": 2
       },
       "ports_status": [
         {
@@ -523,14 +503,9 @@
         3004,
         5004
       ],
-      "scanned_at": "2026-02-13T19:22:27.624476+00:00",
+      "scanned_at": "2026-02-14T13:12:30.884354+00:00",
       "status": "ok",
-      "issues": [
-        {
-          "severity": "info",
-          "message": "5 uncommitted changes"
-        }
-      ],
+      "issues": [],
       "docs": [
         {
           "file": "README.md",
@@ -676,32 +651,11 @@
       "todos_done": 20,
       "version": "0.4.0",
       "git": {
-        "status": "dirty",
+        "status": "clean",
         "branch": "main",
-        "last_commit": "07b44b6 resolve CLAUDE.md merge conflict \u2014 accept remote (46 minutes ago)",
-        "changes": [
-          {
-            "status": "??",
-            "file": "CLAUDE.md.bak.20260210"
-          },
-          {
-            "status": "??",
-            "file": "PREMIER-EMR-REQUIREMENTS.md"
-          },
-          {
-            "status": "??",
-            "file": "backend/app/main.py.bak.20260212204300"
-          },
-          {
-            "status": "??",
-            "file": "frontend/public/"
-          },
-          {
-            "status": "??",
-            "file": "public/"
-          }
-        ],
-        "uncommitted_count": 5
+        "last_commit": "bb8b597 fix: Meridian Health login + demo quick-login buttons (18 hours ago)",
+        "changes": [],
+        "uncommitted_count": 0
       },
       "ports_status": [
         {
@@ -737,7 +691,7 @@
         "frontend/tailwind.config.js",
         "frontend/vite.config.js"
       ],
-      "health_score": 98
+      "health_score": 100
     },
     {
       "name": "Helios AI",
@@ -748,14 +702,9 @@
       "ports": [
         3005
       ],
-      "scanned_at": "2026-02-13T19:22:38.930656+00:00",
+      "scanned_at": "2026-02-14T13:12:47.300210+00:00",
       "status": "ok",
-      "issues": [
-        {
-          "severity": "info",
-          "message": "11 uncommitted changes"
-        }
-      ],
+      "issues": [],
       "docs": [
         {
           "file": "README.md",
@@ -901,52 +850,11 @@
       "todos_done": 20,
       "version": "2.4.0",
       "git": {
-        "status": "dirty",
+        "status": "clean",
         "branch": "main",
-        "last_commit": "7ae95f9 Fix 6 failing Playwright tests: login timeouts, variable bug, favicon strict mode, chart selectors (4 hours ago)",
-        "changes": [
-          {
-            "status": "M",
-            "file": "laywright.config.js"
-          },
-          {
-            "status": "D",
-            "file": "test-results/.last-run.json"
-          },
-          {
-            "status": "D",
-            "file": "test-results/helios-test-Helios-New-Frontend-5-Viewer-button---dashboard-retry1/error-context.md"
-          },
-          {
-            "status": "D",
-            "file": "test-results/helios-test-Helios-New-Frontend-5-Viewer-button---dashboard/error-context.md"
-          },
-          {
-            "status": "D",
-            "file": "test-results/helios-verify-Helios-Front-c3730-oard-shows-data-after-login-retry1/error-context.md"
-          },
-          {
-            "status": "D",
-            "file": "test-results/helios-verify-Helios-Front-c3730-oard-shows-data-after-login/error-context.md"
-          },
-          {
-            "status": "M",
-            "file": "tests/helios-full.spec.js"
-          },
-          {
-            "status": "M",
-            "file": "tests/helios-test.spec.js"
-          },
-          {
-            "status": "M",
-            "file": "tests/helios-verify.spec.js"
-          },
-          {
-            "status": "??",
-            "file": "test-results/helios-full-13-Clients-page-shows-clients/"
-          }
-        ],
-        "uncommitted_count": 11
+        "last_commit": "762a023 chore: auto-commit uncommitted changes 2026-02-13 (18 hours ago)",
+        "changes": [],
+        "uncommitted_count": 0
       },
       "ports_status": [
         {
@@ -996,7 +904,7 @@
         "tests/helios-verify.spec.js",
         "verify.py"
       ],
-      "health_score": 98
+      "health_score": 100
     },
     {
       "name": "Homebase",
@@ -1007,7 +915,7 @@
       "ports": [
         8000
       ],
-      "scanned_at": "2026-02-13T19:22:51.784709+00:00",
+      "scanned_at": "2026-02-14T13:13:02.840591+00:00",
       "status": "ok",
       "issues": [
         {
@@ -1132,11 +1040,15 @@
       "git": {
         "status": "dirty",
         "branch": "master",
-        "last_commit": "55643ad security: remove all .bak files from git tracking (includes .env.bak with Azure secrets) (3 minutes ago)",
+        "last_commit": "249fb35 chore: auto-commit uncommitted changes 2026-02-13 (18 hours ago)",
         "changes": [
           {
             "status": "M",
-            "file": "ackend/scripts/project-status-scanner.py"
+            "file": "ackend/main.py"
+          },
+          {
+            "status": "M",
+            "file": "backend/static/credentials.html"
           },
           {
             "status": "M",
@@ -1169,10 +1081,6 @@
           {
             "status": "M",
             "file": "data/3cx-status.json"
-          },
-          {
-            "status": "M",
-            "file": "data/agent_status.json"
           }
         ],
         "uncommitted_count": 20
@@ -1202,9 +1110,9 @@
         "data/backup-report.json",
         "data/backup-status.json",
         "data/briefings.json",
+        "data/credentials-registry.json",
         "data/discovery-queue.json",
         "data/fleet_status.json",
-        "data/gitea_repos.json",
         "data/infrastructure.json",
         "data/interaction-stats.json",
         "data/maintenance_queue.json",
@@ -1249,12 +1157,12 @@
         3002,
         3003
       ],
-      "scanned_at": "2026-02-13T19:22:51.887030+00:00",
+      "scanned_at": "2026-02-14T13:13:03.055804+00:00",
       "status": "ok",
       "issues": [
         {
           "severity": "info",
-          "message": "2 uncommitted changes"
+          "message": "1 uncommitted changes"
         }
       ],
       "docs": [
@@ -1374,18 +1282,14 @@
       "git": {
         "status": "dirty",
         "branch": "master",
-        "last_commit": "e02d813 feat: Wire real Halo PSA data into Nexus backend, replace mock/seed data (28 minutes ago)",
+        "last_commit": "f5d5dd9 chore: auto-commit uncommitted changes 2026-02-13 (18 hours ago)",
         "changes": [
           {
-            "status": "??",
-            "file": "backend/src/app.ts.bak.20260213-184049"
-          },
-          {
-            "status": "??",
-            "file": "test-results/"
+            "status": "M",
+            "file": "ackend/src/app.ts"
           }
         ],
-        "uncommitted_count": 2
+        "uncommitted_count": 1
       },
       "ports_status": [
         {
@@ -1450,7 +1354,7 @@
         8080,
         8081
       ],
-      "scanned_at": "2026-02-13T19:22:51.982520+00:00",
+      "scanned_at": "2026-02-14T13:13:03.273791+00:00",
       "status": "ok",
       "issues": [
         {
@@ -1575,7 +1479,7 @@
       "git": {
         "status": "clean",
         "branch": "main",
-        "last_commit": "11b4444 fix: resolve Gitea #1-5 \u2014 image display, captive portal, payment form, security (39 minutes ago)",
+        "last_commit": "11b4444 fix: resolve Gitea #1-5 \u2014 image display, captive portal, payment form, security (18 hours ago)",
         "changes": [],
         "uncommitted_count": 0
       },
@@ -1636,7 +1540,7 @@
       "ports": [
         9001
       ],
-      "scanned_at": "2026-02-13T19:22:52.114845+00:00",
+      "scanned_at": "2026-02-14T13:13:03.537135+00:00",
       "status": "ok",
       "issues": [
         {
@@ -1819,7 +1723,7 @@
       "ports": [
         9002
       ],
-      "scanned_at": "2026-02-13T19:23:11.228489+00:00",
+      "scanned_at": "2026-02-14T13:13:22.878086+00:00",
       "status": "ok",
       "issues": [
         {
@@ -1974,7 +1878,7 @@
       "git": {
         "status": "dirty",
         "branch": "main",
-        "last_commit": "a47fb35 feat: Finance API router \u2014 7 endpoints for dashboard Phase 3 (20 hours ago)",
+        "last_commit": "a47fb35 feat: Finance API router \u2014 7 endpoints for dashboard Phase 3 (2 days ago)",
         "changes": [
           {
             "status": "M",
@@ -2041,6 +1945,7 @@
         "reports/daily_20260211_110004.json",
         "reports/daily_20260212_110004.json",
         "reports/daily_20260213_110005.json",
+        "reports/daily_20260214_110006.json",
         "reports/leakage_20260208_100000.json",
         "reports/leakage_20260208_160000.json",
         "reports/leakage_20260208_220000.json",
@@ -2063,21 +1968,20 @@
         "reports/leakage_20260213_040007.json",
         "reports/leakage_20260213_100009.json",
         "reports/leakage_20260213_160008.json",
+        "reports/leakage_20260213_220008.json",
+        "reports/leakage_20260214_040008.json",
+        "reports/leakage_20260214_100009.json",
         "reports/weekly_20260208_054118.json",
         "reports/weekly_20260208_132942.json",
         "reports/weekly_20260208_133338.json",
         "reports/weekly_20260209_110000.json",
-        "scripts/finance_router.py",
         "scripts/financial-digest-v2.py",
         "scripts/financial-digest.py",
-        "scripts/generate_mock_data.py",
         "scripts/halo-time-report.py",
         "scripts/halo_time_helper.py",
         "scripts/insights-engine.py",
         "scripts/insights_router.py",
-        "scripts/xero-authorize.py",
-        "scripts/xero-refresh-token.py",
-        "scripts/xero-sync.py"
+        "scripts/xero-refresh-token.py"
       ],
       "health_score": 98
     },
@@ -2090,7 +1994,7 @@
       "ports": [
         9003
       ],
-      "scanned_at": "2026-02-13T19:23:25.737031+00:00",
+      "scanned_at": "2026-02-14T13:13:36.957206+00:00",
       "status": "ok",
       "issues": [
         {
@@ -2245,7 +2149,7 @@
       "git": {
         "status": "dirty",
         "branch": "main",
-        "last_commit": "368ccc3 security: comprehensive .gitignore for credential protection (2 days ago)",
+        "last_commit": "368ccc3 security: comprehensive .gitignore for credential protection (3 days ago)",
         "changes": [
           {
             "status": "M",
@@ -2361,7 +2265,7 @@
       "ports": [
         9020
       ],
-      "scanned_at": "2026-02-13T19:23:40.280886+00:00",
+      "scanned_at": "2026-02-14T13:13:54.053550+00:00",
       "status": "ok",
       "issues": [
         {
@@ -2486,7 +2390,7 @@
       "git": {
         "status": "clean",
         "branch": "main",
-        "last_commit": "c3623f3 audit: Finance Dashboard \u2014 Playwright tests + all endpoints verified (16 hours ago)",
+        "last_commit": "c3623f3 audit: Finance Dashboard \u2014 Playwright tests + all endpoints verified (34 hours ago)",
         "changes": [],
         "uncommitted_count": 0
       },
@@ -2522,16 +2426,12 @@
       "ports": [
         9030
       ],
-      "scanned_at": "2026-02-13T19:23:40.422449+00:00",
+      "scanned_at": "2026-02-14T13:13:54.144710+00:00",
       "status": "ok",
       "issues": [
         {
           "severity": "warning",
           "message": "Missing required docs: TODO.md, CHANGELOG.md, DEPLOYMENT.md"
-        },
-        {
-          "severity": "info",
-          "message": "1 uncommitted changes"
         }
       ],
       "docs": [
@@ -2568,16 +2468,11 @@
       "todos_done": 0,
       "version": null,
       "git": {
-        "status": "dirty",
+        "status": "clean",
         "branch": "master",
-        "last_commit": "d12aaab Fix API proxy (pathFilter), add API Playwright tests (5 hours ago)",
-        "changes": [
-          {
-            "status": "M",
-            "file": "ite.config.js"
-          }
-        ],
-        "uncommitted_count": 1
+        "last_commit": "fe4edd8 chore: auto-commit uncommitted changes 2026-02-13 (18 hours ago)",
+        "changes": [],
+        "uncommitted_count": 0
       },
       "ports_status": [
         {
@@ -2596,7 +2491,7 @@
         "test-results/.last-run.json",
         "vite.config.js"
       ],
-      "health_score": 88
+      "health_score": 90
     },
     {
       "name": "Cortex",
@@ -2607,7 +2502,7 @@
       "ports": [
         9101
       ],
-      "scanned_at": "2026-02-13T19:23:40.575013+00:00",
+      "scanned_at": "2026-02-14T13:13:54.238976+00:00",
       "status": "ok",
       "issues": [
         {
@@ -2770,7 +2665,7 @@
       "git": {
         "status": "dirty",
         "branch": "master",
-        "last_commit": "25b8957 security: comprehensive .gitignore for credential protection (2 days ago)",
+        "last_commit": "25b8957 security: comprehensive .gitignore for credential protection (3 days ago)",
         "changes": [
           {
             "status": "M",
@@ -2886,7 +2781,7 @@
       "ports": [
         9006
       ],
-      "scanned_at": "2026-02-13T19:23:59.397179+00:00",
+      "scanned_at": "2026-02-14T13:14:13.299739+00:00",
       "status": "ok",
       "issues": [
         {
@@ -3065,6 +2960,7 @@
         "CLAUDE.md",
         "README.md",
         "TODO.md",
+        "agent-registry.json",
         "config/IDENTITY.md",
         "data/fleet-status.json",
         "data/improvement-tracker.json",
@@ -3074,6 +2970,7 @@
         "reports/health-2026-02-11.json",
         "reports/health-2026-02-12.json",
         "reports/health-2026-02-13.json",
+        "reports/health-2026-02-14.json",
         "scripts/agent-health-audit.py",
         "scripts/daily-interaction-summary.py",
         "scripts/fleet-status.py",
@@ -3094,7 +2991,7 @@
       "ports": [
         9200
       ],
-      "scanned_at": "2026-02-13T19:24:15.960336+00:00",
+      "scanned_at": "2026-02-14T13:14:32.304926+00:00",
       "status": "ok",
       "issues": [
         {
@@ -3177,7 +3074,7 @@
       "ports": [
         3000
       ],
-      "scanned_at": "2026-02-13T19:24:26.648039+00:00",
+      "scanned_at": "2026-02-14T13:14:43.210208+00:00",
       "status": "ok",
       "issues": [
         {
@@ -3306,7 +3203,7 @@
       "git": {
         "status": "clean",
         "branch": "main",
-        "last_commit": "129eafd Auto-backup: $(date \"+%Y-%m-%d %H:%M\") (11 days ago)",
+        "last_commit": "129eafd Auto-backup: $(date \"+%Y-%m-%d %H:%M\") (12 days ago)",
         "changes": [],
         "uncommitted_count": 0
       },
@@ -3426,19 +3323,7 @@
       "project": "BPS-AI",
       "server": "demos",
       "severity": "info",
-      "message": "7 uncommitted changes"
-    },
-    {
-      "project": "Premier EMR",
-      "server": "demos",
-      "severity": "info",
-      "message": "5 uncommitted changes"
-    },
-    {
-      "project": "Helios AI",
-      "server": "demos",
-      "severity": "info",
-      "message": "11 uncommitted changes"
+      "message": "2 uncommitted changes"
     },
     {
       "project": "Homebase",
@@ -3450,7 +3335,7 @@
       "project": "Nexus",
       "server": "rize-apps",
       "severity": "info",
-      "message": "2 uncommitted changes"
+      "message": "1 uncommitted changes"
     },
     {
       "project": "Apex",
@@ -3465,12 +3350,6 @@
       "message": "20 uncommitted changes"
     },
     {
-      "project": "Sales Dashboard",
-      "server": "rize-apps",
-      "severity": "info",
-      "message": "1 uncommitted changes"
-    },
-    {
       "project": "Cortex",
       "server": "agents",
       "severity": "info",
@@ -3479,8 +3358,8 @@
   ],
   "summary": {
     "total": 16,
-    "healthy": 10,
-    "warning": 6,
+    "healthy": 11,
+    "warning": 5,
     "critical": 0
   }
 }

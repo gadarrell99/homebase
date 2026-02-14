@@ -15,13 +15,7 @@
     {
       "name": "homebase",
       "open_issues": 48,
-      "updated": "2026-02-13T18:42:56Z",
-      "stars": 0
-    },
-    {
-      "name": "premier-emr",
-      "open_issues": 43,
-      "updated": "2026-02-11T21:10:08Z",
+      "updated": "2026-02-13T19:26:23Z",
       "stars": 0
     },
     {
@@ -34,6 +28,12 @@
       "name": "apex",
       "open_issues": 41,
       "updated": "2026-02-11T01:49:15Z",
+      "stars": 0
+    },
+    {
+      "name": "premier-emr",
+      "open_issues": 39,
+      "updated": "2026-02-11T21:10:08Z",
       "stars": 0
     },
     {
@@ -51,7 +51,7 @@
     {
       "name": "nexus",
       "open_issues": 28,
-      "updated": "2026-02-13T18:56:19Z",
+      "updated": "2026-02-13T19:26:21Z",
       "stars": 0
     },
     {
@@ -85,6 +85,12 @@
       "stars": 0
     },
     {
+      "name": "sentinel",
+      "open_issues": 12,
+      "updated": "2026-02-10T21:33:28Z",
+      "stars": 0
+    },
+    {
       "name": "david-bishop",
       "open_issues": 9,
       "updated": "2026-02-11T01:49:13Z",
@@ -99,7 +105,7 @@
     {
       "name": "beacon",
       "open_issues": 0,
-      "updated": "2026-02-13T19:13:54Z",
+      "updated": "2026-02-13T19:26:04Z",
       "stars": 0
     },
     {
@@ -113,13 +119,7 @@
       "open_issues": 0,
       "updated": "2026-02-13T19:11:57Z",
       "stars": 0
-    },
-    {
-      "name": "sentinel",
-      "open_issues": 0,
-      "updated": "2026-02-10T21:33:28Z",
-      "stars": 0
     }
   ],
-  "synced": "2026-02-13T19:15:06.307951"
+  "synced": "2026-02-14T13:15:05.204840"
 }

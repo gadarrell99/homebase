@@ -1,9 +1,9 @@
 {
-  "last_sync": "2026-02-13T19:15:11.036477",
+  "last_sync": "2026-02-14T13:15:10.346489",
   "fleet_online": 5,
   "fleet_total": 5,
   "gitea_repos": 20,
-  "gitea_issues": 562,
+  "gitea_issues": 570,
   "agents_active": 5,
   "agents_total": 5
 }

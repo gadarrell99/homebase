@@ -1,41 +1,41 @@
 {
-  "timestamp": "2026-02-13T19:23:08.293195+00:00",
+  "timestamp": "2026-02-14T13:18:09.516809+00:00",
   "stale": [
     {
       "project": "Homebase",
       "issue": "#25",
       "title": "Global caching audit: Sentinel and other pages still making user wait for data",
-      "age_days": 2
+      "age_days": 3
     },
     {
       "project": "Homebase",
       "issue": "#22",
       "title": "gitea.rize.bm: DNS not resolving \u2014 needs Cloudflare CNAME record",
-      "age_days": 2
+      "age_days": 3
     },
     {
       "project": "Homebase",
       "issue": "#21",
       "title": "Requirements page: missing all agents \u2014 need Cortex, David, Apex, Aegis, Sentinel sections",
-      "age_days": 2
+      "age_days": 3
     },
     {
       "project": "Homebase",
       "issue": "#20",
       "title": "Requirements page: remove Tier 2/Tier 3 jargon \u2014 rename to Requirements Tracker",
-      "age_days": 2
+      "age_days": 3
     },
     {
       "project": "Homebase",
       "issue": "#19",
       "title": "Requirements page: missing shared navbar",
-      "age_days": 2
+      "age_days": 3
     },
     {
       "project": "Homebase",
       "issue": "#18",
       "title": "Sentinel page: nothing loads, not cached, takes forever",
-      "age_days": 2
+      "age_days": 3
     }
   ]
 }

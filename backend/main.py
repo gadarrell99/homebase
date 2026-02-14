@@ -396,6 +396,23 @@ async def get_infra_credentials():
         "ssh_fallback_hint": "See infrastructure.json for full details"
     }
 
+
+# ============== CREDENTIAL HEALTH ==============
+
+@app.get("/api/credential-health")
+async def get_credential_health():
+    """Returns redacted credential health status. No secrets exposed."""
+    import json as _json
+    registry_path = os.path.join(os.path.dirname(__file__), "..", "data", "credentials-registry.json")
+    try:
+        with open(registry_path, "r") as f:
+            registry = _json.load(f)
+        return registry
+    except FileNotFoundError:
+        return {"error": "Credential registry not synced yet", "summary": {"total_credentials": 0, "working": 0, "expired": 0, "invalid": 0, "unknown": 0}}
+    except Exception as e:
+        return {"error": str(e)}
+
 # ============== DISCOVERY ==============
 
 @app.get("/api/discovery/scan")

@@ -1,43 +1,47 @@
 {
-  "date": "2026-02-13",
+  "date": "2026-02-14",
   "agents": {
     "cortex": {
-      "total": 1,
+      "total": 2,
       "by_type": {
-        "teams_message": 1
+        "teams_message": 2
       },
       "by_user": {
-        "test@rize.bm": 1
+        "test@rize.bm": 1,
+        "Gilbert Darrell": 1
       },
       "errors": 0
     },
     "apex": {
-      "total": 1,
+      "total": 3,
       "by_type": {
-        "teams_message": 1
+        "teams_message": 3
       },
       "by_user": {
-        "test@rize.bm": 1
+        "test@rize.bm": 1,
+        "Gilbert Darrell": 2
       },
       "errors": 0
     },
     "aegis": {
-      "total": 1,
+      "total": 3,
       "by_type": {
-        "teams_message": 1
+        "teams_message": 3
       },
       "by_user": {
-        "test@rize.bm": 1
+        "test@rize.bm": 1,
+        "Gilbert Darrell": 2
       },
       "errors": 0
     },
     "sentinel": {
-      "total": 1,
+      "total": 2,
       "by_type": {
-        "teams_message": 1
+        "teams_message": 2
       },
       "by_user": {
-        "test@rize.bm": 1
+        "test@rize.bm": 1,
+        "Gilbert Darrell": 1
       },
       "errors": 0
     },
@@ -48,5 +52,5 @@
       "errors": 0
     }
   },
-  "total": 4
+  "total": 10
 }
