@@ -1,7 +1,7 @@
 {
   "meta": {
-    "scanned_at": "2026-02-14T13:12:01.267470+00:00",
-    "project_count": 16,
+    "scanned_at": "2026-02-14T13:20:36.398772+00:00",
+    "project_count": 21,
     "scanner_version": "1.0.0"
   },
   "projects": [
@@ -15,7 +15,7 @@
         3001,
         8001
       ],
-      "scanned_at": "2026-02-14T13:12:01.267513+00:00",
+      "scanned_at": "2026-02-14T13:17:02.075942+00:00",
       "status": "ok",
       "issues": [
         {
@@ -263,12 +263,12 @@
       "ports": [
         3000
       ],
-      "scanned_at": "2026-02-14T13:12:16.378758+00:00",
+      "scanned_at": "2026-02-14T13:17:16.510945+00:00",
       "status": "ok",
       "issues": [
         {
           "severity": "info",
-          "message": "2 uncommitted changes"
+          "message": "1 uncommitted changes"
         }
       ],
       "docs": [
@@ -423,13 +423,9 @@
           {
             "status": "M",
             "file": "rc/lib/auth.ts"
-          },
-          {
-            "status": "??",
-            "file": "src/app/api/test-auth/"
           }
         ],
-        "uncommitted_count": 2
+        "uncommitted_count": 1
       },
       "ports_status": [
         {
@@ -503,7 +499,7 @@
         3004,
         5004
       ],
-      "scanned_at": "2026-02-14T13:12:30.884354+00:00",
+      "scanned_at": "2026-02-14T13:17:29.330905+00:00",
       "status": "ok",
       "issues": [],
       "docs": [
@@ -702,9 +698,14 @@
       "ports": [
         3005
       ],
-      "scanned_at": "2026-02-14T13:12:47.300210+00:00",
+      "scanned_at": "2026-02-14T13:17:42.557343+00:00",
       "status": "ok",
-      "issues": [],
+      "issues": [
+        {
+          "severity": "info",
+          "message": "2 uncommitted changes"
+        }
+      ],
       "docs": [
         {
           "file": "README.md",
@@ -850,11 +851,20 @@
       "todos_done": 20,
       "version": "2.4.0",
       "git": {
-        "status": "clean",
+        "status": "dirty",
         "branch": "main",
         "last_commit": "762a023 chore: auto-commit uncommitted changes 2026-02-13 (18 hours ago)",
-        "changes": [],
-        "uncommitted_count": 0
+        "changes": [
+          {
+            "status": "D",
+            "file": "est-results/helios-full-13-Clients-page-shows-clients/error-context.md"
+          },
+          {
+            "status": "D",
+            "file": "test-results/helios-full-8-Document-detail-shows-content/error-context.md"
+          }
+        ],
+        "uncommitted_count": 2
       },
       "ports_status": [
         {
@@ -904,7 +914,7 @@
         "tests/helios-verify.spec.js",
         "verify.py"
       ],
-      "health_score": 100
+      "health_score": 98
     },
     {
       "name": "Homebase",
@@ -915,7 +925,7 @@
       "ports": [
         8000
       ],
-      "scanned_at": "2026-02-14T13:13:02.840591+00:00",
+      "scanned_at": "2026-02-14T13:17:56.272872+00:00",
       "status": "ok",
       "issues": [
         {
@@ -1157,7 +1167,7 @@
         3002,
         3003
       ],
-      "scanned_at": "2026-02-14T13:13:03.055804+00:00",
+      "scanned_at": "2026-02-14T13:17:56.325554+00:00",
       "status": "ok",
       "issues": [
         {
@@ -1354,7 +1364,7 @@
         8080,
         8081
       ],
-      "scanned_at": "2026-02-14T13:13:03.273791+00:00",
+      "scanned_at": "2026-02-14T13:17:56.397959+00:00",
       "status": "ok",
       "issues": [
         {
@@ -1479,7 +1489,7 @@
       "git": {
         "status": "clean",
         "branch": "main",
-        "last_commit": "11b4444 fix: resolve Gitea #1-5 \u2014 image display, captive portal, payment form, security (18 hours ago)",
+        "last_commit": "11b4444 fix: resolve Gitea #1-5 \u2014 image display, captive portal, payment form, security (19 hours ago)",
         "changes": [],
         "uncommitted_count": 0
       },
@@ -1540,7 +1550,7 @@
       "ports": [
         9001
       ],
-      "scanned_at": "2026-02-14T13:13:03.537135+00:00",
+      "scanned_at": "2026-02-14T13:17:56.473108+00:00",
       "status": "ok",
       "issues": [
         {
@@ -1723,7 +1733,7 @@
       "ports": [
         9002
       ],
-      "scanned_at": "2026-02-14T13:13:22.878086+00:00",
+      "scanned_at": "2026-02-14T13:18:16.926376+00:00",
       "status": "ok",
       "issues": [
         {
@@ -1994,7 +2004,7 @@
       "ports": [
         9003
       ],
-      "scanned_at": "2026-02-14T13:13:36.957206+00:00",
+      "scanned_at": "2026-02-14T13:18:30.573840+00:00",
       "status": "ok",
       "issues": [
         {
@@ -2265,7 +2275,7 @@
       "ports": [
         9020
       ],
-      "scanned_at": "2026-02-14T13:13:54.053550+00:00",
+      "scanned_at": "2026-02-14T13:18:44.673198+00:00",
       "status": "ok",
       "issues": [
         {
@@ -2426,7 +2436,7 @@
       "ports": [
         9030
       ],
-      "scanned_at": "2026-02-14T13:13:54.144710+00:00",
+      "scanned_at": "2026-02-14T13:18:44.795374+00:00",
       "status": "ok",
       "issues": [
         {
@@ -2502,7 +2512,7 @@
       "ports": [
         9101
       ],
-      "scanned_at": "2026-02-14T13:13:54.238976+00:00",
+      "scanned_at": "2026-02-14T13:18:44.906850+00:00",
       "status": "ok",
       "issues": [
         {
@@ -2781,7 +2791,7 @@
       "ports": [
         9006
       ],
-      "scanned_at": "2026-02-14T13:14:13.299739+00:00",
+      "scanned_at": "2026-02-14T13:19:01.307177+00:00",
       "status": "ok",
       "issues": [
         {
@@ -2991,7 +3001,7 @@
       "ports": [
         9200
       ],
-      "scanned_at": "2026-02-14T13:14:32.304926+00:00",
+      "scanned_at": "2026-02-14T13:19:19.758992+00:00",
       "status": "ok",
       "issues": [
         {
@@ -3074,7 +3084,7 @@
       "ports": [
         3000
       ],
-      "scanned_at": "2026-02-14T13:14:43.210208+00:00",
+      "scanned_at": "2026-02-14T13:19:29.322733+00:00",
       "status": "ok",
       "issues": [
         {
@@ -3232,6 +3242,164 @@
         "frontend/vite.config.js"
       ],
       "health_score": 65
+    },
+    {
+      "name": "Property Rize",
+      "server": "rize-apps",
+      "type": "infrastructure",
+      "path": "/home/rizeadmin/property-rize",
+      "domain": null,
+      "ports": [
+        8501
+      ],
+      "scanned_at": "2026-02-14T13:20:36.398772+00:00",
+      "status": "ok",
+      "issues": [],
+      "docs": [
+        {
+          "file": "README.md",
+          "required": true,
+          "exists": true,
+          "status": "ok"
+        },
+        {
+          "file": "TODO.md",
+          "required": true,
+          "exists": true,
+          "status": "ok"
+        },
+        {
+          "file": "CHANGELOG.md",
+          "required": true,
+          "exists": true,
+          "status": "ok"
+        },
+        {
+          "file": "CLAUDE.md",
+          "required": true,
+          "exists": true,
+          "status": "ok"
+        }
+      ],
+      "readme": "# Property Rize - Bermuda real estate investment analysis dashboard (Streamlit)",
+      "todo": "",
+      "changelog": "",
+      "todos_parsed": [],
+      "todos_open": 0,
+      "todos_done": 0,
+      "version": "1.0.0",
+      "git": {
+        "status": "clean",
+        "branch": "master",
+        "last_commit": "initial: Property Rize Streamlit dashboard",
+        "changes": []
+      }
+    },
+    {
+      "name": "Bermuda College",
+      "server": "demos",
+      "type": "demo",
+      "path": "/home/demos/bermuda-college",
+      "domain": null,
+      "ports": [],
+      "scanned_at": "2026-02-14T13:20:36.398772+00:00",
+      "status": "ok",
+      "issues": [],
+      "docs": [],
+      "readme": "# Bermuda College - Education portal demo",
+      "todo": "",
+      "changelog": "",
+      "todos_parsed": [],
+      "todos_open": 0,
+      "todos_done": 0,
+      "version": "0.1.0",
+      "git": {
+        "status": "unknown",
+        "branch": "main",
+        "last_commit": "",
+        "changes": []
+      }
+    },
+    {
+      "name": "Solstice Wellness",
+      "server": "demos",
+      "type": "demo",
+      "path": "/home/demos/solstice-wellness",
+      "domain": null,
+      "ports": [],
+      "scanned_at": "2026-02-14T13:20:36.398772+00:00",
+      "status": "ok",
+      "issues": [],
+      "docs": [],
+      "readme": "# Solstice Wellness - Wellness platform demo",
+      "todo": "",
+      "changelog": "",
+      "todos_parsed": [],
+      "todos_open": 0,
+      "todos_done": 0,
+      "version": "0.1.0",
+      "git": {
+        "status": "unknown",
+        "branch": "main",
+        "last_commit": "",
+        "changes": []
+      }
+    },
+    {
+      "name": "BRFU Ticketing",
+      "server": "demos",
+      "type": "demo",
+      "path": "/home/demos/brfu-ticketing",
+      "domain": null,
+      "ports": [
+        3007,
+        8003
+      ],
+      "scanned_at": "2026-02-14T13:20:36.398772+00:00",
+      "status": "ok",
+      "issues": [],
+      "docs": [],
+      "readme": "# BRFU Ticketing - Bermuda Rugby Football Union ticketing system",
+      "todo": "",
+      "changelog": "",
+      "todos_parsed": [],
+      "todos_open": 0,
+      "todos_done": 0,
+      "version": "0.1.0",
+      "git": {
+        "status": "unknown",
+        "branch": "main",
+        "last_commit": "",
+        "changes": []
+      }
+    },
+    {
+      "name": "Beacon Real Estate",
+      "server": "demos",
+      "type": "demo",
+      "path": "/home/demos/beacon-real-estate",
+      "domain": null,
+      "ports": [
+        3006,
+        8002
+      ],
+      "scanned_at": "2026-02-14T13:20:36.398772+00:00",
+      "status": "ok",
+      "issues": [],
+      "docs": [],
+      "readme": "# Beacon Real Estate - Real estate platform demo",
+      "todo": "",
+      "changelog": "",
+      "todos_parsed": [],
+      "todos_open": 0,
+      "todos_done": 0,
+      "version": "0.1.0",
+      "git": {
+        "status": "unknown",
+        "branch": "main",
+        "last_commit": "",
+        "changes": []
+      }
     }
   ],
   "issues": [
@@ -3321,6 +3489,12 @@
     },
     {
       "project": "BPS-AI",
+      "server": "demos",
+      "severity": "info",
+      "message": "1 uncommitted changes"
+    },
+    {
+      "project": "Helios AI",
       "server": "demos",
       "severity": "info",
       "message": "2 uncommitted changes"
