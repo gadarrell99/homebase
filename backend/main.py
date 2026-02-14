@@ -2880,6 +2880,70 @@ async def gitea_repos():
         return {"error": str(e), "repos": []}
 
 
+
+
+# ============== UNIFIED TASKS API ==============
+@app.get("/api/tasks")
+async def get_unified_tasks(
+    repo: str = Query(None, description="Filter by repo name"),
+    label: str = Query(None, description="Filter by label"),
+    state: str = Query("open", description="Issue state: open, closed, all"),
+    sort: str = Query("priority", description="Sort by: priority, updated, repo"),
+    limit: int = Query(100, description="Max results")
+):
+    """Unified task view across all Gitea repos with filtering and sorting."""
+    # Use the cached gitea issues data
+    if not GITEA_ISSUES_CACHE["data"] or (time.time() - GITEA_ISSUES_CACHE["timestamp"]) > GITEA_ISSUES_CACHE_TTL:
+        await gitea_all_issues()
+    
+    cached = GITEA_ISSUES_CACHE.get("data", {})
+    all_issues = cached.get("issues", [])
+    
+    # Filter by repo
+    if repo:
+        all_issues = [i for i in all_issues if repo.lower() in i.get("repo", "").lower()]
+    
+    # Filter by label
+    if label:
+        all_issues = [i for i in all_issues if label.lower() in [l.lower() for l in i.get("labels", [])]]
+    
+    # Filter by state (if not already filtered by the cache)
+    if state != "open":
+        # Cache only has open issues, so closed/all would need a fresh fetch
+        pass
+    
+    # Add numeric priority for sorting
+    priority_map = {"critical": 0, "high": 1, "medium": 2, "normal": 3, "low": 4}
+    for issue in all_issues:
+        issue["priority_num"] = priority_map.get(issue.get("priority", "normal"), 3)
+    
+    # Sort
+    if sort == "priority":
+        all_issues.sort(key=lambda x: (x.get("priority_num", 3), x.get("updated", "")))
+    elif sort == "updated":
+        all_issues.sort(key=lambda x: x.get("updated", ""), reverse=True)
+    elif sort == "repo":
+        all_issues.sort(key=lambda x: (x.get("repo", ""), x.get("priority_num", 3)))
+    
+    # Apply limit
+    all_issues = all_issues[:limit]
+    
+    # Clean up temp field
+    for issue in all_issues:
+        issue.pop("priority_num", None)
+    
+    # Get unique repos for filter dropdown
+    all_repos = list(set(i.get("repo", "").split("/")[-1] for i in cached.get("issues", [])))
+    all_repos.sort()
+    
+    return {
+        "total": len(all_issues),
+        "filters": {"repo": repo, "label": label, "state": state, "sort": sort},
+        "available_repos": all_repos,
+        "tasks": all_issues
+    }
+
+
 # ============================================================================
 # CLOUDFLARE API (Fixes #45 / HB-9)
 # ============================================================================

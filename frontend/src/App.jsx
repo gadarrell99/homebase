@@ -27,7 +27,7 @@ function NavLink({ to, children }) {
 }
 
 function Layout({ children }) {
-  return <div className="min-h-screen bg-slate-900 text-white"><nav className="bg-slate-800 border-b border-slate-700"><div className="max-w-7xl mx-auto px-6 py-4"><div className="flex items-center justify-between"><Link to="/" className="text-xl font-bold">Homebase</Link><div className="flex gap-2"><NavLink to="/">Servers</NavLink><NavLink to="/projects">Projects</NavLink><NavLink to="/metrics">Metrics</NavLink><NavLink to="/security">Security</NavLink><NavLink to="/discovery">Discovery</NavLink><NavLink to="/credentials">Credentials</NavLink><NavLink to="/settings">Settings</NavLink><NavLink to="/fleet-topology">🗺️ Fleet</NavLink><NavLink to="/sentinel">🛡️ Sentinel</NavLink><NavLink to="/agent-security">🔒 Security</NavLink></div></div></div></nav><main className="max-w-7xl mx-auto p-6">{children}</main></div>;
+  return <div className="min-h-screen bg-slate-900 text-white"><nav className="bg-slate-800 border-b border-slate-700"><div className="max-w-7xl mx-auto px-6 py-4"><div className="flex items-center justify-between"><Link to="/" className="text-xl font-bold">Homebase</Link><div className="flex gap-2"><NavLink to="/">Servers</NavLink><NavLink to="/projects">Projects</NavLink><NavLink to="/metrics">Metrics</NavLink><NavLink to="/security">Security</NavLink><NavLink to="/discovery">Discovery</NavLink><NavLink to="/credentials">Credentials</NavLink><NavLink to="/settings">Settings</NavLink><NavLink to="/fleet-topology">🗺️ Fleet</NavLink><NavLink to="/sentinel">🛡️ Sentinel</NavLink><NavLink to="/tasks">Tasks</NavLink><NavLink to="/agent-security">🔒 Security</NavLink></div></div></div></nav><main className="max-w-7xl mx-auto p-6">{children}</main></div>;
 }
 
 function ServerCard({ server }) {
@@ -1074,7 +1074,87 @@ function SentinelPage() {
     // Initialize global data cache on app mount
   useEffect(() => { initCache(); }, []);
   return (<BrowserRouter><Layout><Routes><Route path="/" element={<ServersPage />} /><Route path="/projects" element={<ProjectsPage />} /><Route path="/metrics" element={<MetricsPage />} /><Route path="/security" element={<SecurityPage />} /><Route path="/discovery" element={<DiscoveryPage />} /><Route path="/credentials" element={<CredentialsPage />} />
-          <Route path="/settings" element={<SettingsPage />} /><Route path="/agent-security" element={<AgentSecurityPage />} /><Route path="/agent-security/redteam" element={<RedTeamPage />} /><Route path="/fleet-topology" element={<FleetTopologyPage />} /><Route path="/sentinel" element={<SentinelPage />} /></Routes></Layout></BrowserRouter>);
+          <Route path="/settings" element={<SettingsPage />} /><Route path="/agent-security" element={<AgentSecurityPage />} /><Route path="/agent-security/redteam" element={<RedTeamPage />} /><Route path="/fleet-topology" element={<FleetTopologyPage />} /><Route path="/sentinel" element={<SentinelPage />} /><Route path="/tasks" element={<TasksPage />} /></Routes></Layout></BrowserRouter>);
 }
+
+
+function TasksPage() {
+  const [tasks, setTasks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [repoFilter, setRepoFilter] = useState("");
+  const [sortBy, setSortBy] = useState("priority");
+  const [repos, setRepos] = useState([]);
+  const [total, setTotal] = useState(0);
+
+  const fetchTasks = async () => {
+    try {
+      setLoading(true);
+      const params = new URLSearchParams({ sort: sortBy });
+      if (repoFilter) params.set("repo", repoFilter);
+      const res = await fetch("/api/tasks?" + params.toString());
+      const data = await res.json();
+      setTasks(data.tasks || []);
+      setTotal(data.total || 0);
+      setRepos(data.available_repos || []);
+    } catch (e) {
+      console.error("Failed to fetch tasks:", e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => { fetchTasks(); }, [repoFilter, sortBy]);
+
+  const priorityColors = { critical: "bg-red-600", high: "bg-orange-500", medium: "bg-yellow-500", normal: "bg-blue-400", low: "bg-gray-500" };
+  const repoShort = (r) => r ? r.split("/").pop() : "";
+
+  return (
+    <div className="space-y-4">
+      <div className="flex justify-between items-center">
+        <h1 className="text-2xl font-bold">Tasks ({total})</h1>
+        <div className="flex gap-3 items-center">
+          <select value={repoFilter} onChange={e => setRepoFilter(e.target.value)} className="bg-slate-700 text-white px-3 py-2 rounded text-sm border border-slate-600">
+            <option value="">All Repos</option>
+            {repos.map(r => <option key={r} value={r}>{r}</option>)}
+          </select>
+          <select value={sortBy} onChange={e => setSortBy(e.target.value)} className="bg-slate-700 text-white px-3 py-2 rounded text-sm border border-slate-600">
+            <option value="priority">Sort: Priority</option>
+            <option value="updated">Sort: Updated</option>
+            <option value="repo">Sort: Repo</option>
+          </select>
+          <button onClick={fetchTasks} className="bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded text-sm font-medium">Refresh</button>
+        </div>
+      </div>
+
+      {loading ? <div className="text-gray-400 text-center py-8">Loading tasks...</div> : (
+        <div className="bg-slate-800 rounded-lg border border-slate-700 overflow-hidden">
+          <table className="w-full text-sm">
+            <thead><tr className="text-left text-gray-400 border-b border-slate-700 bg-slate-800/50">
+              <th className="px-4 py-3">Priority</th>
+              <th className="px-4 py-3">Repo</th>
+              <th className="px-4 py-3">#</th>
+              <th className="px-4 py-3">Title</th>
+              <th className="px-4 py-3">Labels</th>
+              <th className="px-4 py-3">Assignee</th>
+              <th className="px-4 py-3">Updated</th>
+            </tr></thead>
+            <tbody>{tasks.map((t, i) => (
+              <tr key={i} className="border-b border-slate-700/50 hover:bg-slate-700/30 transition-colors">
+                <td className="px-4 py-2"><span className={`${priorityColors[t.priority] || "bg-gray-500"} px-2 py-0.5 rounded text-xs font-bold uppercase`}>{t.priority}</span></td>
+                <td className="px-4 py-2 text-gray-300">{repoShort(t.repo)}</td>
+                <td className="px-4 py-2 text-gray-400">#{t.number}</td>
+                <td className="px-4 py-2">{t.url ? <a href={t.url} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 hover:underline">{t.title}</a> : t.title}</td>
+                <td className="px-4 py-2">{(t.labels || []).map((l, j) => <span key={j} className="bg-slate-600 px-1.5 py-0.5 rounded text-xs mr-1">{l}</span>)}</td>
+                <td className="px-4 py-2 text-gray-400">{t.assignee || "-"}</td>
+                <td className="px-4 py-2 text-gray-500 text-xs">{t.updated ? new Date(t.updated).toLocaleDateString() : "-"}</td>
+              </tr>
+            ))}</tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  );
+}
+
 
 export default App;
