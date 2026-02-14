@@ -1,7 +1,7 @@
 {
   "meta": {
-    "scanned_at": "2026-02-14T13:20:36.398772+00:00",
-    "project_count": 21,
+    "scanned_at": "2026-02-14T14:12:01.319198+00:00",
+    "project_count": 16,
     "scanner_version": "1.0.0"
   },
   "projects": [
@@ -15,14 +15,9 @@
         3001,
         8001
       ],
-      "scanned_at": "2026-02-14T13:17:02.075942+00:00",
+      "scanned_at": "2026-02-14T14:12:01.319226+00:00",
       "status": "ok",
-      "issues": [
-        {
-          "severity": "info",
-          "message": "20 uncommitted changes"
-        }
-      ],
+      "issues": [],
       "docs": [
         {
           "file": "README.md",
@@ -168,52 +163,11 @@
       "todos_done": 10,
       "version": "1.0.0",
       "git": {
-        "status": "dirty",
+        "status": "clean",
         "branch": "main",
-        "last_commit": "42a8ad8 security: Block sensitive file access via Vite middleware (2 days ago)",
-        "changes": [
-          {
-            "status": "M",
-            "file": "ackend/__pycache__/config.cpython-312.pyc"
-          },
-          {
-            "status": "M",
-            "file": "backend/__pycache__/main.cpython-312.pyc"
-          },
-          {
-            "status": "M",
-            "file": "backend/api/__pycache__/dashboard.cpython-312.pyc"
-          },
-          {
-            "status": "M",
-            "file": "backend/api/__pycache__/shipments.cpython-312.pyc"
-          },
-          {
-            "status": "M",
-            "file": "backend/api/dashboard.py"
-          },
-          {
-            "status": "M",
-            "file": "backend/api/shipments.py"
-          },
-          {
-            "status": "M",
-            "file": "backend/best_shipping.db"
-          },
-          {
-            "status": "M",
-            "file": "backend/config.py"
-          },
-          {
-            "status": "M",
-            "file": "backend/main.py"
-          },
-          {
-            "status": "M",
-            "file": "frontend/index.html"
-          }
-        ],
-        "uncommitted_count": 20
+        "last_commit": "ba67b9b chore: commit pending changes - CFO dashboard, customer features, branding, seed data, gitignore (53 minutes ago)",
+        "changes": [],
+        "uncommitted_count": 0
       },
       "ports_status": [
         {
@@ -252,7 +206,7 @@
         "frontend/tailwind.config.js",
         "frontend/vite.config.js"
       ],
-      "health_score": 98
+      "health_score": 100
     },
     {
       "name": "BPS-AI",
@@ -263,14 +217,9 @@
       "ports": [
         3000
       ],
-      "scanned_at": "2026-02-14T13:17:16.510945+00:00",
+      "scanned_at": "2026-02-14T14:12:16.362545+00:00",
       "status": "ok",
-      "issues": [
-        {
-          "severity": "info",
-          "message": "1 uncommitted changes"
-        }
-      ],
+      "issues": [],
       "docs": [
         {
           "file": "README.md",
@@ -416,16 +365,11 @@
       "todos_done": 20,
       "version": "0.9.30",
       "git": {
-        "status": "dirty",
+        "status": "clean",
         "branch": "main",
-        "last_commit": "970f60c polish: AI speed (Haiku), voice dictation (Whisper), case numbers (BPS-YYYY-NNNN) (17 hours ago)",
-        "changes": [
-          {
-            "status": "M",
-            "file": "rc/lib/auth.ts"
-          }
-        ],
-        "uncommitted_count": 1
+        "last_commit": "173b827 fix: remove PrismaAdapter, fix DB auth, enable debug logging (51 minutes ago)",
+        "changes": [],
+        "uncommitted_count": 0
       },
       "ports_status": [
         {
@@ -487,7 +431,7 @@
         "tsconfig.json",
         "verify_db.js"
       ],
-      "health_score": 98
+      "health_score": 100
     },
     {
       "name": "Premier EMR",
@@ -499,7 +443,7 @@
         3004,
         5004
       ],
-      "scanned_at": "2026-02-14T13:17:29.330905+00:00",
+      "scanned_at": "2026-02-14T14:12:31.132295+00:00",
       "status": "ok",
       "issues": [],
       "docs": [
@@ -649,7 +593,7 @@
       "git": {
         "status": "clean",
         "branch": "main",
-        "last_commit": "bb8b597 fix: Meridian Health login + demo quick-login buttons (18 hours ago)",
+        "last_commit": "bb8b597 fix: Meridian Health login + demo quick-login buttons (19 hours ago)",
         "changes": [],
         "uncommitted_count": 0
       },
@@ -698,12 +642,12 @@
       "ports": [
         3005
       ],
-      "scanned_at": "2026-02-14T13:17:42.557343+00:00",
+      "scanned_at": "2026-02-14T14:12:46.761647+00:00",
       "status": "ok",
       "issues": [
         {
           "severity": "info",
-          "message": "2 uncommitted changes"
+          "message": "9 uncommitted changes"
         }
       ],
       "docs": [
@@ -853,18 +797,46 @@
       "git": {
         "status": "dirty",
         "branch": "main",
-        "last_commit": "762a023 chore: auto-commit uncommitted changes 2026-02-13 (18 hours ago)",
+        "last_commit": "762a023 chore: auto-commit uncommitted changes 2026-02-13 (19 hours ago)",
         "changes": [
           {
+            "status": "M",
+            "file": "ackend/app/routes/auth.py"
+          },
+          {
+            "status": "M",
+            "file": "backend/app/routes/documents.py"
+          },
+          {
+            "status": "M",
+            "file": "backend/app/routes/reports.py"
+          },
+          {
+            "status": "M",
+            "file": "playwright.config.js"
+          },
+          {
             "status": "D",
-            "file": "est-results/helios-full-13-Clients-page-shows-clients/error-context.md"
+            "file": "test-results/helios-full-13-Clients-page-shows-clients/error-context.md"
           },
           {
             "status": "D",
             "file": "test-results/helios-full-8-Document-detail-shows-content/error-context.md"
+          },
+          {
+            "status": "M",
+            "file": "tests/helios-full.spec.js"
+          },
+          {
+            "status": "M",
+            "file": "tests/helios-test.spec.js"
+          },
+          {
+            "status": "M",
+            "file": "tests/helios-verify.spec.js"
           }
         ],
-        "uncommitted_count": 2
+        "uncommitted_count": 9
       },
       "ports_status": [
         {
@@ -925,7 +897,7 @@
       "ports": [
         8000
       ],
-      "scanned_at": "2026-02-14T13:17:56.272872+00:00",
+      "scanned_at": "2026-02-14T14:13:03.272307+00:00",
       "status": "ok",
       "issues": [
         {
@@ -1050,27 +1022,15 @@
       "git": {
         "status": "dirty",
         "branch": "master",
-        "last_commit": "249fb35 chore: auto-commit uncommitted changes 2026-02-13 (18 hours ago)",
+        "last_commit": "cd29c91 chore: add Property Rize, Bermuda College, Solstice Wellness, BRFU Ticketing, Beacon Real Estate to project-status.json (52 minutes ago)",
         "changes": [
           {
             "status": "M",
-            "file": "ackend/main.py"
-          },
-          {
-            "status": "M",
-            "file": "backend/static/credentials.html"
-          },
-          {
-            "status": "M",
-            "file": "cache/deadlines.json"
+            "file": "ache/deadlines.json"
           },
           {
             "status": "M",
             "file": "cache/health.json"
-          },
-          {
-            "status": "M",
-            "file": "cache/last_stale_alert.txt"
           },
           {
             "status": "M",
@@ -1091,6 +1051,18 @@
           {
             "status": "M",
             "file": "data/3cx-status.json"
+          },
+          {
+            "status": "M",
+            "file": "data/agent_status.json"
+          },
+          {
+            "status": "M",
+            "file": "data/agents.db"
+          },
+          {
+            "status": "M",
+            "file": "data/cheat-sheet-full.json"
           }
         ],
         "uncommitted_count": 20
@@ -1167,14 +1139,9 @@
         3002,
         3003
       ],
-      "scanned_at": "2026-02-14T13:17:56.325554+00:00",
+      "scanned_at": "2026-02-14T14:13:03.546589+00:00",
       "status": "ok",
-      "issues": [
-        {
-          "severity": "info",
-          "message": "1 uncommitted changes"
-        }
-      ],
+      "issues": [],
       "docs": [
         {
           "file": "README.md",
@@ -1290,16 +1257,11 @@
       "todos_done": 15,
       "version": "3.0.0",
       "git": {
-        "status": "dirty",
+        "status": "clean",
         "branch": "master",
-        "last_commit": "f5d5dd9 chore: auto-commit uncommitted changes 2026-02-13 (18 hours ago)",
-        "changes": [
-          {
-            "status": "M",
-            "file": "ackend/src/app.ts"
-          }
-        ],
-        "uncommitted_count": 1
+        "last_commit": "bf38088 fix: increase Express JSON body parser limit to 50mb (50 minutes ago)",
+        "changes": [],
+        "uncommitted_count": 0
       },
       "ports_status": [
         {
@@ -1352,7 +1314,7 @@
         "test-results/.last-run.json",
         "tsconfig.json"
       ],
-      "health_score": 98
+      "health_score": 100
     },
     {
       "name": "Dockyard WiFi",
@@ -1364,7 +1326,7 @@
         8080,
         8081
       ],
-      "scanned_at": "2026-02-14T13:17:56.397959+00:00",
+      "scanned_at": "2026-02-14T14:13:03.781547+00:00",
       "status": "ok",
       "issues": [
         {
@@ -1550,7 +1512,7 @@
       "ports": [
         9001
       ],
-      "scanned_at": "2026-02-14T13:17:56.473108+00:00",
+      "scanned_at": "2026-02-14T14:13:04.018352+00:00",
       "status": "ok",
       "issues": [
         {
@@ -1733,7 +1695,7 @@
       "ports": [
         9002
       ],
-      "scanned_at": "2026-02-14T13:18:16.926376+00:00",
+      "scanned_at": "2026-02-14T14:13:24.466020+00:00",
       "status": "ok",
       "issues": [
         {
@@ -2004,7 +1966,7 @@
       "ports": [
         9003
       ],
-      "scanned_at": "2026-02-14T13:18:30.573840+00:00",
+      "scanned_at": "2026-02-14T14:13:41.538250+00:00",
       "status": "ok",
       "issues": [
         {
@@ -2275,7 +2237,7 @@
       "ports": [
         9020
       ],
-      "scanned_at": "2026-02-14T13:18:44.673198+00:00",
+      "scanned_at": "2026-02-14T14:13:57.114688+00:00",
       "status": "ok",
       "issues": [
         {
@@ -2400,7 +2362,7 @@
       "git": {
         "status": "clean",
         "branch": "main",
-        "last_commit": "c3623f3 audit: Finance Dashboard \u2014 Playwright tests + all endpoints verified (34 hours ago)",
+        "last_commit": "c3623f3 audit: Finance Dashboard \u2014 Playwright tests + all endpoints verified (35 hours ago)",
         "changes": [],
         "uncommitted_count": 0
       },
@@ -2436,7 +2398,7 @@
       "ports": [
         9030
       ],
-      "scanned_at": "2026-02-14T13:18:44.795374+00:00",
+      "scanned_at": "2026-02-14T14:13:57.208811+00:00",
       "status": "ok",
       "issues": [
         {
@@ -2479,8 +2441,8 @@
       "version": null,
       "git": {
         "status": "clean",
-        "branch": "master",
-        "last_commit": "fe4edd8 chore: auto-commit uncommitted changes 2026-02-13 (18 hours ago)",
+        "branch": "main",
+        "last_commit": "c36bb75 chore: auto-commit uncommitted changes 2026-02-13 (19 hours ago)",
         "changes": [],
         "uncommitted_count": 0
       },
@@ -2512,7 +2474,7 @@
       "ports": [
         9101
       ],
-      "scanned_at": "2026-02-14T13:18:44.906850+00:00",
+      "scanned_at": "2026-02-14T14:13:57.295843+00:00",
       "status": "ok",
       "issues": [
         {
@@ -2791,7 +2753,7 @@
       "ports": [
         9006
       ],
-      "scanned_at": "2026-02-14T13:19:01.307177+00:00",
+      "scanned_at": "2026-02-14T14:14:16.254711+00:00",
       "status": "ok",
       "issues": [
         {
@@ -3001,7 +2963,7 @@
       "ports": [
         9200
       ],
-      "scanned_at": "2026-02-14T13:19:19.758992+00:00",
+      "scanned_at": "2026-02-14T14:14:36.159254+00:00",
       "status": "ok",
       "issues": [
         {
@@ -3084,7 +3046,7 @@
       "ports": [
         3000
       ],
-      "scanned_at": "2026-02-14T13:19:29.322733+00:00",
+      "scanned_at": "2026-02-14T14:14:48.152784+00:00",
       "status": "ok",
       "issues": [
         {
@@ -3242,164 +3204,6 @@
         "frontend/vite.config.js"
       ],
       "health_score": 65
-    },
-    {
-      "name": "Property Rize",
-      "server": "rize-apps",
-      "type": "infrastructure",
-      "path": "/home/rizeadmin/property-rize",
-      "domain": null,
-      "ports": [
-        8501
-      ],
-      "scanned_at": "2026-02-14T13:20:36.398772+00:00",
-      "status": "ok",
-      "issues": [],
-      "docs": [
-        {
-          "file": "README.md",
-          "required": true,
-          "exists": true,
-          "status": "ok"
-        },
-        {
-          "file": "TODO.md",
-          "required": true,
-          "exists": true,
-          "status": "ok"
-        },
-        {
-          "file": "CHANGELOG.md",
-          "required": true,
-          "exists": true,
-          "status": "ok"
-        },
-        {
-          "file": "CLAUDE.md",
-          "required": true,
-          "exists": true,
-          "status": "ok"
-        }
-      ],
-      "readme": "# Property Rize - Bermuda real estate investment analysis dashboard (Streamlit)",
-      "todo": "",
-      "changelog": "",
-      "todos_parsed": [],
-      "todos_open": 0,
-      "todos_done": 0,
-      "version": "1.0.0",
-      "git": {
-        "status": "clean",
-        "branch": "master",
-        "last_commit": "initial: Property Rize Streamlit dashboard",
-        "changes": []
-      }
-    },
-    {
-      "name": "Bermuda College",
-      "server": "demos",
-      "type": "demo",
-      "path": "/home/demos/bermuda-college",
-      "domain": null,
-      "ports": [],
-      "scanned_at": "2026-02-14T13:20:36.398772+00:00",
-      "status": "ok",
-      "issues": [],
-      "docs": [],
-      "readme": "# Bermuda College - Education portal demo",
-      "todo": "",
-      "changelog": "",
-      "todos_parsed": [],
-      "todos_open": 0,
-      "todos_done": 0,
-      "version": "0.1.0",
-      "git": {
-        "status": "unknown",
-        "branch": "main",
-        "last_commit": "",
-        "changes": []
-      }
-    },
-    {
-      "name": "Solstice Wellness",
-      "server": "demos",
-      "type": "demo",
-      "path": "/home/demos/solstice-wellness",
-      "domain": null,
-      "ports": [],
-      "scanned_at": "2026-02-14T13:20:36.398772+00:00",
-      "status": "ok",
-      "issues": [],
-      "docs": [],
-      "readme": "# Solstice Wellness - Wellness platform demo",
-      "todo": "",
-      "changelog": "",
-      "todos_parsed": [],
-      "todos_open": 0,
-      "todos_done": 0,
-      "version": "0.1.0",
-      "git": {
-        "status": "unknown",
-        "branch": "main",
-        "last_commit": "",
-        "changes": []
-      }
-    },
-    {
-      "name": "BRFU Ticketing",
-      "server": "demos",
-      "type": "demo",
-      "path": "/home/demos/brfu-ticketing",
-      "domain": null,
-      "ports": [
-        3007,
-        8003
-      ],
-      "scanned_at": "2026-02-14T13:20:36.398772+00:00",
-      "status": "ok",
-      "issues": [],
-      "docs": [],
-      "readme": "# BRFU Ticketing - Bermuda Rugby Football Union ticketing system",
-      "todo": "",
-      "changelog": "",
-      "todos_parsed": [],
-      "todos_open": 0,
-      "todos_done": 0,
-      "version": "0.1.0",
-      "git": {
-        "status": "unknown",
-        "branch": "main",
-        "last_commit": "",
-        "changes": []
-      }
-    },
-    {
-      "name": "Beacon Real Estate",
-      "server": "demos",
-      "type": "demo",
-      "path": "/home/demos/beacon-real-estate",
-      "domain": null,
-      "ports": [
-        3006,
-        8002
-      ],
-      "scanned_at": "2026-02-14T13:20:36.398772+00:00",
-      "status": "ok",
-      "issues": [],
-      "docs": [],
-      "readme": "# Beacon Real Estate - Real estate platform demo",
-      "todo": "",
-      "changelog": "",
-      "todos_parsed": [],
-      "todos_open": 0,
-      "todos_done": 0,
-      "version": "0.1.0",
-      "git": {
-        "status": "unknown",
-        "branch": "main",
-        "last_commit": "",
-        "changes": []
-      }
     }
   ],
   "issues": [
@@ -3482,34 +3286,16 @@
       "message": "Missing required docs: DEPLOYMENT.md"
     },
     {
-      "project": "Best Shipping",
-      "server": "demos",
-      "severity": "info",
-      "message": "20 uncommitted changes"
-    },
-    {
-      "project": "BPS-AI",
-      "server": "demos",
-      "severity": "info",
-      "message": "1 uncommitted changes"
-    },
-    {
       "project": "Helios AI",
       "server": "demos",
       "severity": "info",
-      "message": "2 uncommitted changes"
+      "message": "9 uncommitted changes"
     },
     {
       "project": "Homebase",
       "server": "rize-apps",
       "severity": "info",
       "message": "20 uncommitted changes"
-    },
-    {
-      "project": "Nexus",
-      "server": "rize-apps",
-      "severity": "info",
-      "message": "1 uncommitted changes"
     },
     {
       "project": "Apex",
