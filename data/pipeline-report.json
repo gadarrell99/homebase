@@ -1,0 +1,56 @@
+{
+  "timestamp": "2026-02-14T17:30:02.561044+00:00",
+  "monitor": "pipeline",
+  "status": "healthy",
+  "findings": [
+    {
+      "check": "cortex_health",
+      "severity": "ok",
+      "message": "Cortex is healthy",
+      "detail": ""
+    },
+    {
+      "check": "audit_freshness",
+      "severity": "ok",
+      "message": "Last audit 15h ago \u2014 verdict: PRODUCTION READY",
+      "detail": ""
+    },
+    {
+      "check": "manifest_freshness",
+      "severity": "ok",
+      "message": "Manifest is 14h old, source: homebase",
+      "detail": ""
+    },
+    {
+      "check": "learning_log",
+      "severity": "ok",
+      "message": "Audit pipeline active within last 7 days",
+      "detail": ""
+    },
+    {
+      "check": "compile_regression",
+      "severity": "ok",
+      "message": "No compile failures in latest audit",
+      "detail": ""
+    },
+    {
+      "check": "safety_violations",
+      "severity": "ok",
+      "message": "All safety flags verified",
+      "detail": ""
+    },
+    {
+      "check": "homebase_api",
+      "severity": "ok",
+      "message": "Homebase API serving 5 servers",
+      "detail": ""
+    }
+  ],
+  "summary": {
+    "total_checks": 7,
+    "critical": 0,
+    "warning": 0,
+    "info": 0,
+    "healthy": 7
+  }
+}

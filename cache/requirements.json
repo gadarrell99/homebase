@@ -269,13 +269,13 @@
       "deadline": "2026-02-20",
       "days_remaining": 6,
       "totals": {
-        "open": 19,
-        "done": 12,
+        "open": 0,
+        "done": 31,
         "verified": 0,
         "blocked": 0,
         "total": 31
       },
-      "percent_complete": 39,
+      "percent_complete": 100,
       "p0_status": {
         "open": 0,
         "total": 0
@@ -284,7 +284,7 @@
         {
           "id": "GH-31",
           "gitea_number": 31,
-          "status": "OPEN",
+          "status": "DONE",
           "description": "Move Serper API key from source code to .env",
           "priority": "P1",
           "labels": [],
@@ -293,7 +293,7 @@
         {
           "id": "GH-30",
           "gitea_number": 30,
-          "status": "OPEN",
+          "status": "DONE",
           "description": "Required field validation before case save",
           "priority": "P1",
           "labels": [],
@@ -302,7 +302,7 @@
         {
           "id": "GH-29",
           "gitea_number": 29,
-          "status": "OPEN",
+          "status": "DONE",
           "description": "Internal Affairs - no demo login button on front page",
           "priority": "P1",
           "labels": [],
@@ -311,7 +311,7 @@
         {
           "id": "GH-28",
           "gitea_number": 28,
-          "status": "OPEN",
+          "status": "DONE",
           "description": "Case number mismatch - internal ID vs BPS number",
           "priority": "P1",
           "labels": [],
@@ -320,7 +320,7 @@
         {
           "id": "GH-27",
           "gitea_number": 27,
-          "status": "OPEN",
+          "status": "DONE",
           "description": "Voice dictation missing fields and no validation",
           "priority": "P1",
           "labels": [],
@@ -329,7 +329,7 @@
         {
           "id": "GH-26",
           "gitea_number": 26,
-          "status": "OPEN",
+          "status": "DONE",
           "description": "Audit and log ALL AI interactions",
           "priority": "P1",
           "labels": [],
@@ -338,7 +338,7 @@
         {
           "id": "GH-25",
           "gitea_number": 25,
-          "status": "OPEN",
+          "status": "DONE",
           "description": "AI Law Assistant slow - 10 second response time",
           "priority": "P1",
           "labels": [],
@@ -347,7 +347,7 @@
         {
           "id": "GH-24",
           "gitea_number": 24,
-          "status": "OPEN",
+          "status": "DONE",
           "description": "7 unknown laws with no title or year in laws table",
           "priority": "P1",
           "labels": [],
@@ -356,16 +356,25 @@
         {
           "id": "GH-23",
           "gitea_number": 23,
-          "status": "OPEN",
+          "status": "DONE",
           "description": "Superintendent button text misaligned under star logo",
           "priority": "P1",
           "labels": [],
           "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/23"
         },
         {
+          "id": "GH-22",
+          "gitea_number": 22,
+          "status": "DONE",
+          "description": "CRITICAL: Export PDF downloads as JSON not PDF",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/22"
+        },
+        {
           "id": "GH-21",
           "gitea_number": 21,
-          "status": "OPEN",
+          "status": "DONE",
           "description": "[Bps-ai] IA system has separate user database \u2014 dual access requires both",
           "priority": "P1",
           "labels": [
@@ -379,7 +388,7 @@
         {
           "id": "GH-20",
           "gitea_number": 20,
-          "status": "OPEN",
+          "status": "DONE",
           "description": "[Bps-ai] Logo: login page uses PNG instead of SVG for compatibility",
           "priority": "P1",
           "labels": [
@@ -393,7 +402,7 @@
         {
           "id": "GH-19",
           "gitea_number": 19,
-          "status": "OPEN",
+          "status": "DONE",
           "description": "[Bps-ai] Case detail URL shows UUID (by design \u2014 case number shown prominently in UI)",
           "priority": "P1",
           "labels": [
@@ -403,78 +412,6 @@
             "synced-from-todo"
           ],
           "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/19"
-        },
-        {
-          "id": "GH-15",
-          "gitea_number": 15,
-          "status": "OPEN",
-          "description": "Voice dictation: Verify Whisper integration works",
-          "priority": "P1",
-          "labels": [],
-          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/15"
-        },
-        {
-          "id": "REQ-B009",
-          "gitea_number": 9,
-          "status": "OPEN",
-          "description": "SECURITY: Serper key not hardcoded",
-          "priority": "P1",
-          "labels": [],
-          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/9"
-        },
-        {
-          "id": "REQ-B008",
-          "gitea_number": 8,
-          "status": "OPEN",
-          "description": "DOCS: All 5 standard docs current",
-          "priority": "P1",
-          "labels": [],
-          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/8"
-        },
-        {
-          "id": "REQ-B007",
-          "gitea_number": 7,
-          "status": "OPEN",
-          "description": "UX: Multiple UI improvements from CEO walkthrough",
-          "priority": "P1",
-          "labels": [],
-          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/7"
-        },
-        {
-          "id": "REQ-B005",
-          "gitea_number": 5,
-          "status": "OPEN",
-          "description": "UI: Dark slate + gold theme consistent",
-          "priority": "P1",
-          "labels": [],
-          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/5"
-        },
-        {
-          "id": "REQ-B003",
-          "gitea_number": 3,
-          "status": "OPEN",
-          "description": "SORTING: Case list sorting works correctly",
-          "priority": "P1",
-          "labels": [],
-          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/3"
-        },
-        {
-          "id": "REQ-B001",
-          "gitea_number": 1,
-          "status": "OPEN",
-          "description": "DROPDOWN: Fix big dropdown on Analysis Demo click",
-          "priority": "P1",
-          "labels": [],
-          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/1"
-        },
-        {
-          "id": "GH-22",
-          "gitea_number": 22,
-          "status": "DONE",
-          "description": "CRITICAL: Export PDF downloads as JSON not PDF",
-          "priority": "P1",
-          "labels": [],
-          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/22"
         },
         {
           "id": "GH-18",
@@ -507,6 +444,15 @@
           "priority": "P1",
           "labels": [],
           "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/16"
+        },
+        {
+          "id": "GH-15",
+          "gitea_number": 15,
+          "status": "DONE",
+          "description": "Voice dictation: Verify Whisper integration works",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/15"
         },
         {
           "id": "GH-14",
@@ -554,6 +500,33 @@
           "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/10"
         },
         {
+          "id": "REQ-B009",
+          "gitea_number": 9,
+          "status": "DONE",
+          "description": "SECURITY: Serper key not hardcoded",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/9"
+        },
+        {
+          "id": "REQ-B008",
+          "gitea_number": 8,
+          "status": "DONE",
+          "description": "DOCS: All 5 standard docs current",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/8"
+        },
+        {
+          "id": "REQ-B007",
+          "gitea_number": 7,
+          "status": "DONE",
+          "description": "UX: Multiple UI improvements from CEO walkthrough",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/7"
+        },
+        {
           "id": "REQ-B006",
           "gitea_number": 6,
           "status": "DONE",
@@ -561,6 +534,15 @@
           "priority": "P1",
           "labels": [],
           "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/6"
+        },
+        {
+          "id": "REQ-B005",
+          "gitea_number": 5,
+          "status": "DONE",
+          "description": "UI: Dark slate + gold theme consistent",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/5"
         },
         {
           "id": "REQ-B004",
@@ -572,6 +554,15 @@
           "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/4"
         },
         {
+          "id": "REQ-B003",
+          "gitea_number": 3,
+          "status": "DONE",
+          "description": "SORTING: Case list sorting works correctly",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/3"
+        },
+        {
           "id": "REQ-B002",
           "gitea_number": 2,
           "status": "DONE",
@@ -579,6 +570,15 @@
           "priority": "P1",
           "labels": [],
           "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/2"
+        },
+        {
+          "id": "REQ-B001",
+          "gitea_number": 1,
+          "status": "DONE",
+          "description": "DROPDOWN: Fix big dropdown on Analysis Demo click",
+          "priority": "P1",
+          "labels": [],
+          "gitea_url": "https://gitea.rize.bm/rize/bps-ai/issues/1"
         }
       ],
       "source": "gitea"
@@ -4692,9 +4692,9 @@
       "source": "gitea"
     }
   ],
-  "last_refresh": "2026-02-14T16:03:05.593330+00:00",
+  "last_refresh": "2026-02-14T17:48:05.418109+00:00",
   "source": "gitea",
   "project_count": 12,
   "total_requirements": 362,
-  "total_open": 341
+  "total_open": 322
 }

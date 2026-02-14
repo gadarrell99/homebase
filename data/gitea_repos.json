@@ -2,7 +2,7 @@
   "repos": [
     {
       "name": "infrastructure",
-      "open_issues": 116,
+      "open_issues": 120,
       "updated": "2026-02-11T13:06:25Z",
       "stars": 0
     },
@@ -15,7 +15,7 @@
     {
       "name": "homebase",
       "open_issues": 48,
-      "updated": "2026-02-14T14:22:20Z",
+      "updated": "2026-02-14T17:11:32Z",
       "stars": 0
     },
     {
@@ -44,38 +44,32 @@
     },
     {
       "name": "vector",
-      "open_issues": 33,
+      "open_issues": 34,
       "updated": "2026-02-11T01:27:57Z",
       "stars": 0
     },
     {
       "name": "nexus",
       "open_issues": 28,
-      "updated": "2026-02-14T13:23:17Z",
+      "updated": "2026-02-14T17:15:44Z",
       "stars": 0
     },
     {
       "name": "finance-dashboard",
       "open_issues": 26,
-      "updated": "2026-02-13T03:41:10Z",
+      "updated": "2026-02-14T17:20:00Z",
       "stars": 0
     },
     {
       "name": "best-shipping",
       "open_issues": 23,
-      "updated": "2026-02-14T13:19:11Z",
+      "updated": "2026-02-14T17:07:08Z",
       "stars": 0
     },
     {
       "name": "helios",
       "open_issues": 21,
       "updated": "2026-02-14T15:55:47Z",
-      "stars": 0
-    },
-    {
-      "name": "bps-ai",
-      "open_issues": 19,
-      "updated": "2026-02-13T17:09:21Z",
       "stars": 0
     },
     {
@@ -99,19 +93,25 @@
     {
       "name": "sales-dashboard",
       "open_issues": 1,
-      "updated": "2026-02-14T13:23:48Z",
+      "updated": "2026-02-14T17:11:09Z",
       "stars": 0
     },
     {
       "name": "beacon",
       "open_issues": 0,
-      "updated": "2026-02-13T19:26:04Z",
+      "updated": "2026-02-14T17:13:08Z",
+      "stars": 0
+    },
+    {
+      "name": "bps-ai",
+      "open_issues": 0,
+      "updated": "2026-02-14T17:13:23Z",
       "stars": 0
     },
     {
       "name": "brfu-ticketing",
       "open_issues": 0,
-      "updated": "2026-02-13T19:14:05Z",
+      "updated": "2026-02-14T17:18:20Z",
       "stars": 0
     },
     {
@@ -125,7 +125,13 @@
       "open_issues": 0,
       "updated": "2026-02-14T14:15:50Z",
       "stars": 0
+    },
+    {
+      "name": "solstice-wellness",
+      "open_issues": 0,
+      "updated": "2026-02-14T17:16:41Z",
+      "stars": 0
     }
   ],
-  "synced": "2026-02-14T16:00:05.332104"
+  "synced": "2026-02-14T17:45:05.500255"
 }

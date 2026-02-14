@@ -67,3 +67,6 @@ Cron: `*/15 * * * * cd /home/rizeadmin/homebase && python3 backend/auto_sync.py 
 - SSH timeout: 5 seconds per agent check
 - Curl timeout: 3 seconds per port check
 - Log: `logs/auto_sync.log`
+
+
+## MANDATORY: Every session must end with verify-fix-retest cycle. See ~/AUDIT-TEMPLATE.md on Talos. Trust no self-reports. curl every endpoint, run Playwright, test logins. Fix broken, retest, then report.
