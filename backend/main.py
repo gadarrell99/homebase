@@ -1035,6 +1035,92 @@ async def update_audit_fix_status(project: str, item_id: str, request: Request):
     
     return {"updated": True, "project": project, "item_id": item_id, "status": new_status}
 
+
+# ============== AUDIT RESULTS (Cortex Integration) ==============
+
+AUDIT_RESULTS_PATH = "/home/rizeadmin/homebase/data/audit-results.json"
+
+@app.post("/api/audit/results")
+async def post_audit_results(request: Request):
+    """Accept audit results from Cortex fleet audits.
+    
+    Expected payload:
+    {
+        "run_id": "audit-2026-02-15-030000",
+        "timestamp": "2026-02-15T03:00:00Z",
+        "agent": "cortex",
+        "projects": {
+            "project-name": {
+                "status": "pass|fail|warning",
+                "checks": [...],
+                "score": 85,
+                "issues": [...]
+            }
+        },
+        "summary": { "total": 10, "passed": 8, "failed": 1, "warnings": 1 }
+    }
+    """
+    data = await request.json()
+    
+    # Validate required fields
+    if not data.get("run_id"):
+        raise HTTPException(status_code=400, detail="run_id is required")
+    
+    # Load existing results
+    try:
+        with open(AUDIT_RESULTS_PATH) as f:
+            results = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        results = {"runs": [], "latest": None}
+    
+    # Add timestamp if not provided
+    from datetime import datetime, timezone
+    if "timestamp" not in data:
+        data["timestamp"] = datetime.now(timezone.utc).isoformat()
+    
+    # Store the result
+    data["received_at"] = datetime.now(timezone.utc).isoformat()
+    results["latest"] = data
+    
+    # Keep last 100 runs
+    results["runs"].insert(0, data)
+    results["runs"] = results["runs"][:100]
+    
+    with open(AUDIT_RESULTS_PATH, "w") as f:
+        json.dump(results, f, indent=2)
+    
+    return {"accepted": True, "run_id": data["run_id"], "stored_runs": len(results["runs"])}
+
+@app.get("/api/audit/results")
+async def get_audit_results(limit: int = Query(10, ge=1, le=100)):
+    """Get recent audit results."""
+    try:
+        with open(AUDIT_RESULTS_PATH) as f:
+            results = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {"runs": [], "latest": None}
+    
+    return {
+        "latest": results.get("latest"),
+        "runs": results.get("runs", [])[:limit],
+        "total_runs": len(results.get("runs", []))
+    }
+
+@app.get("/api/audit/results/{run_id}")
+async def get_audit_result_by_id(run_id: str):
+    """Get a specific audit result by run_id."""
+    try:
+        with open(AUDIT_RESULTS_PATH) as f:
+            results = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        raise HTTPException(status_code=404, detail="No audit results found")
+    
+    for run in results.get("runs", []):
+        if run.get("run_id") == run_id:
+            return run
+    
+    raise HTTPException(status_code=404, detail=f"Run {run_id} not found")
+
 # ============== BACKUP MONITOR ==============
 
 BACKUP_STATUS_PATH = "/home/rizeadmin/homebase/data/backup-status.json"
@@ -1631,8 +1717,8 @@ async def unfulfilled_requests(hours: int = 24):
 from services import research_scout
 
 @app.get("/api/research")
-async def get_research(status: str = 'new', limit: int = 50):
-    return research_scout.get_items(status, limit)
+async def get_research(status: str = 'new', limit: int = 50, date_from: str = None, date_to: str = None):
+    return research_scout.get_items(status, limit, date_from, date_to)
 
 @app.post("/api/research/scan")
 async def run_research_scan():

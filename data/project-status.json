@@ -1,6 +1,6 @@
 {
   "meta": {
-    "scanned_at": "2026-02-14T17:42:01.563528+00:00",
+    "scanned_at": "2026-02-15T03:42:01.653228+00:00",
     "project_count": 16,
     "scanner_version": "1.0.0"
   },
@@ -15,9 +15,14 @@
         3001,
         8001
       ],
-      "scanned_at": "2026-02-14T17:42:01.563568+00:00",
+      "scanned_at": "2026-02-15T03:42:01.653256+00:00",
       "status": "ok",
-      "issues": [],
+      "issues": [
+        {
+          "severity": "info",
+          "message": "1 uncommitted changes"
+        }
+      ],
       "docs": [
         {
           "file": "README.md",
@@ -163,11 +168,16 @@
       "todos_done": 10,
       "version": "1.0.0",
       "git": {
-        "status": "clean",
+        "status": "dirty",
         "branch": "main",
-        "last_commit": "c0102c8 fix: Cornell email typo + switch frontend to production build (35 minutes ago)",
-        "changes": [],
-        "uncommitted_count": 0
+        "last_commit": "c0102c8 fix: Cornell email typo + switch frontend to production build (11 hours ago)",
+        "changes": [
+          {
+            "status": "M",
+            "file": "LAUDE.md"
+          }
+        ],
+        "uncommitted_count": 1
       },
       "ports_status": [
         {
@@ -206,7 +216,7 @@
         "frontend/tailwind.config.js",
         "frontend/vite.config.js"
       ],
-      "health_score": 100
+      "health_score": 98
     },
     {
       "name": "BPS-AI",
@@ -217,7 +227,7 @@
       "ports": [
         3000
       ],
-      "scanned_at": "2026-02-14T17:42:16.171784+00:00",
+      "scanned_at": "2026-02-15T03:42:15.263359+00:00",
       "status": "ok",
       "issues": [
         {
@@ -282,87 +292,87 @@
         }
       ],
       "readme": "# BPS AI - Bermuda Police Services AI Case Management\n\n> **\ud83d\udcda Documentation Navigation**\n> This is the main README. See all documentation:\n> - [Project Plan](docs/PROJECT_PLAN.md) - Development roadmap\n> - [TODO Checklist](docs/TODO.md) - Complete task tracking\n> - [Technical Spec](docs/TECHNICAL_SPEC.md) - Architecture & stack\n> - [Design Spec](docs/DESIGN_SPEC.md) - UI/UX guidelines\n> - [Database Schema](docs/DATABASE_SCHEMA.md) - Data models\n> - [API Spec](docs/API_SPEC.md) - Endpoint documentation\n> - [Security](docs/SECURITY.md) - Auth & access control\n> - [Scraper Guide](docs/SCRAPER_GUIDE.md) - Data collection\n> - [RAG Architecture](docs/RAG_ARCHITECTURE.md) - AI research system\n> - [Changelog](CHANGELOG.md) - Version history\n\n---\n\n## Project Overview\n\nAI-powered case management and reporting system for Bermuda Police Services. Features multi-model AI report generation, internal affairs monitoring, and integrated legal/news research capabilities.\n\n**Client:** Bermuda Police Services  \n**Contact:** Alexander Rollin (arollin@bps.bm)  \n**Development:** Gadarrell / Rize Business Development  \n**Version:** 0.9.28\n\n---\n\n## Live Demo URLs\n\n| Environment | URL | Purpose |\n|-------------|-----|---------|\n| Main Application | https://bpsai.rize.bm/login | Officer & Admin login |\n| Internal Affairs | https://bpsai.rize.bm/ia-login | IA-specific login (separate system) |\n| SSH Access | https://bpsai-ssh.rize.bm | Browser-based SSH |\n\n---\n\n## Login Credentials (Demo)\n\n### Main Application (bpsai.rize.bm/login)\n\n| Role | Email | Password | Access Level |\n|------|-------|----------|--------------|\n| Superintendent | superintendent@bps.bm | BPSDemo2026\\! | Full admin, case management |\n| Inspector | inspector@bps.bm | BPSDemo2026\\! | Supervisory access |\n| Officer | officer@bps.bm | BPSDemo2026\\! | Standard officer |\n| Alex Rollin | arollin@bps.bm | BPSDemo2026\\! | Detective Sergeant (IA access) |\n\n### Internal Affairs Portal (bpsai.rize.bm/ia-login)\n\n| Role | Email | Password | Access Level |\n|------|-------|----------|--------------|\n| IA Admin | ia.admin@bps.bm | IAAdmin2026\\! | Full IA admin |\n| IA Supervisor | ia.supervisor@bps.bm | IASuper2026\\! | Supervisory |\n| IA Investigator | ia.investigator@bps.bm | IAInvest2026\\! | Investigation |\n| IA Analyst | ia.analyst@bps.bm | IAAnalyst2026\\! | Analysis only |\n\n---\n\n## Monitoring\n\nThis project is monitored by **Relay/Pulse** at 192.168.65.248\n\n| Check | Endpoint |\n|-------|----------|\n| Health | /api/health |\n| Pulse Dashboard | http://192.168.65.248:8000/api/pulse/status |\n\n---\n\n## Core Features\n\n### 1. Case Management\n- **3 Case Types:** Domestic Abuse, Gang/Drug, Traffic\n- Pre-filled forms with dropdowns\n- Voice dictation support\n- Extensible template architecture\n\n### 2. Multi-AI Report Generation\n| Model | Provider | Type |\n|-------|----------|------|\n| Claude | Anthropic | Cloud |\n| GPT-4 | OpenAI | Cloud |\n| Gemini | Google | Cloud |\n| Llama 3 8B | Ollama | Local |\n| Mistral 7B | Ollama | Local |\n\n### 3. Internal Affairs Module\n- Separate authentication & database\n- Officer activity monitoring\n- Full investigation workflow\n- Audit logging\n- Purple/dark theme for visual distinction\n\n### 4. Legal & News Research (RAG)\n- **Bermuda Laws Database** - 98 scraped laws (62 police-priority)\n- **News Archive** - 10 years from Royal Gazette & Bernews\n- Vector search for AI-enhanced research\n- AI Law Assistant for statute explanations\n\n### 5. Analytics Dashboard\n- Case statistics & trends\n- AI usage metrics\n- Officer activity reports\n\n---\n\n## Tech Stack\n\n| Layer | Technology |\n|-------|------------|\n| Frontend | Next.js 14, React, TypeScript, Tailwind CSS |\n| Backend | Next.js API Routes, Node.js |\n| Database | PostgreSQL 16 + pgvector |\n| ORM | Prisma |\n| Auth | NextAuth.js |\n| AI Cloud | Claude, OpenAI, Gemini APIs |\n| AI Local | Ollama (Llama 3, Mistral) |\n| Vector DB | pgvector (PostgreSQL extension) |\n| Scraping | Puppeteer, Cheerio |\n| Hosting | Hyper-V VM, Cloudflare Tunnel |\n\n---\n\n## Quick Start\n\n```bash\n# Clone repository\ngit clone https://github.com/gadarrell99/bps-ai.git\ncd bps-ai\n\n# Install dependencies\nnpm install\n\n# Set up environment\ncp .env.example .env\n# Edit .env with your API keys\n\n# Set up database\nnpm run db:setup\nnpm run db:seed\n\n# Start development server\nnpm run dev\n```\n\n---\n\n## Project Structure\n\n```\nbps-ai/\n\u251c\u2500\u2500 README.md                \u2190 You are here\n\u251c\u2500\u2500 CHANGELOG.md             # Version history\n\u251c\u2500\u2500 CLAUDE.md                # AI agent instructions\n\u251c\u2500\u2500 VERSION\n\u251c\u2500\u2500 docs/\n\u2502   \u251c\u2500\u2500 PROJECT_PLAN.md      # Development roadmap\n\u2502   \u251c\u2500\u2500 TODO.md              # Task checklist\n\u2502   \u251c\u2500\u2500 TECHNICAL_SPEC.md    # Architecture\n\u2502   \u251c\u2500\u2500 DESIGN_SPEC.md       # UI/UX guidelines\n\u2502   \u251c\u2500\u2500 DATABASE_SCHEMA.md   # Data models\n\u2502   \u251c\u2500\u2500 API_SPEC.md          # API documentation\n\u2502   \u251c\u2500\u2500 SECURITY.md          # Security specs\n\u2502   \u251c\u2500\u2500 SCRAPER_GUIDE.md     # Scraping documentation\n\u2502   \u2514\u2500\u2500 RAG_ARCHITECTURE.md  # RAG system design\n\u251c\u2500\u2500 src/\n\u2502   \u251c\u2500\u2500 app/                 # Next.js app router\n\u2502   \u251c\u2500\u2500 components/          # React components\n\u2502   \u251c\u2500\u2500 lib/                 # Utilities & services\n\u2502   \u2514\u2500\u2500 styles/              # CSS/Tailwind\n\u251c\u2500\u2500 scrapers/\n\u2502   \u251c\u2500\u2500 laws/                # Bermuda laws scraper\n\u2502   \u251c\u2500\u2500 news/                # News scrapers\n\u2502   \u2514\u2500\u2500 data/                # Scraped data output\n\u251c\u2500\u2500 prisma/\n\u2502   \u2514\u2500\u2500 schema.prisma        # Database schema\n\u2514\u2500\u2500 scripts/\n    \u2514\u2500\u2500 seed-users.js        # Database seeding\n```\n\n---\n\n## Key Contacts\n\n| Role | Name | Email |\n|------|------|-------|\n| Client | Alexander Rollin | arollin@bps.bm |\n| Developer | Gilbert Darrell | gadarrell@rize.bm |\n| Biz Dev | Sarah | (Rize) |\n\n---\n\n## License\n\nProprietary - Bermuda Police Services / Gadarrell / Rize\n\n---\n\n> **\ud83d\udcda Next Steps:** Review [PROJECT_PLAN.md](docs/PROJECT_PLAN.md) for the development timeline and [TODO.md](docs/TODO.md) for current tasks.",
-      "todo": "# BPS-AI TODO\n\n## Current Version: v0.9.31\n\n---\n\n## v0.9.31 - Gitea Issue Resolution (2026-02-13)\n- [x] #3: SORTING - Case list sorting verified working (client-side + server-side)\n- [x] #6: HYDRATION - Fixed React hydration errors by creating DateDisplay client component\n- [x] #8: DOCS - All 5 standard docs confirmed present (README, TODO, CHANGELOG, ARCHITECTURE, DEMO-SCRIPT)\n- [x] #9: SECURITY - Serper API key confirmed in .env, not hardcoded, .gitignore updated\n- [x] Updated profile page and IA investigation pages to use DateDisplay component\n- [x] Build and deployment successful\n\n## v0.9.30 - Feature Verification Push (2026-02-11)\n- [x] Demo login buttons: Superintendent, Inspector, Officer \u2014 all 3 verified via Playwright\n- [x] Cases data: 68 cases across 4 statuses (26 open, 20 in progress, 13 closed, 9 under review)\n- [x] IA access: arollin@bps.bm verified \u2014 logs in, reaches /ia-dashboard\n- [x] AI assistant: Ollama llama3:8b + mistral:7b running, /laws/assistant page loads with chat input\n- [x] Reports page: 11K chars, 4 reports in DB, analytics page loads\n- [x] Playwright 10-test suite: 10/10 PASSED\n- [x] Gitea issues closed: #2, #4, #10, #11, #12, #13, #14, #16, #17\n\n## v0.9.29 - Documentation & Credential Fixes (2026-02-10)\n- [x] Documentation updates, credential fixes, PM2 reset\n\n## v0.9.28 - CEO Visual Review Fixes (2026-02-10)\n- [x] Deleted 7 junk laws with UUID titles and 'unk' year from database\n- [x] Simplified login demo buttons: Superintendent, Inspector, Officer\n- [x] Created superintendent@bps.bm and inspector@bps.bm demo accounts\n- [x] Added Alexander Rollin (arollin@bps.bm) to Internal Affairs user table\n- [x] Login page now uses bermuda-police.png logo instead of SVG\n- [x] Fixed login loading state - button disabled when isLoading is true\n\n## v0.9.27 - Deep Dive Fixes (2026-02-10)\n- [x] One-click demo login buttons with column sorting\n- [x] Alex Rollin set to SUPERINTENDENT role\n- [x] Dashboard shows System Status instead of AI Models\n- [x] Fixed hydration errors in IA pages\n\n---\n\n## Open Issues (4 remaining)\n- [ ] #1: DROPDOWN: Fix big dropdown on Analysis Demo click\n- [ ] #5: UI: Dark slate + gold theme consistent\n- [ ] #7: UX: Multiple UI improvements from CEO walkthrough\n- [ ] #15: Voice dictation: Verify Whisper integration works\n\n## Closed Issues (4 resolved in v0.9.31)\n- [x] #3: SORTING - Case list sorting works correctly\n- [x] #6: CONSOLE - No React hydration errors (fixed with DateDisplay component)\n- [x] #8: DOCS - All 5 standard docs current\n- [x] #9: SECURITY - Serper key not hardcoded\n\n## Known Issues / Future Work\n- [ ] Case detail URL shows UUID (by design \u2014 case number shown prominently in UI)\n- [ ] Logo: login page uses PNG instead of SVG for compatibility\n- [ ] IA system has separate user database \u2014 dual access requires both\n\n## Demo Accounts\nMain System:\n- superintendent@bps.bm / BPSDemo2026! (Superintendent)\n- inspector@bps.bm / BPSDemo2026! (Inspector)\n- officer@bps.bm / BPSDemo2026! (Officer)\n\nInternal Affairs:\n- ia.admin@bps.bm / BPSDemo2026!\n- ia.supervisor@bps.bm / BPSDemo2026!\n- ia.investigator@bps.bm / BPSDemo2026!\n- arollin@bps.bm / BPSDemo2026! (Investigator)",
+      "todo": "# BPS-AI TODO\n\n## Current Version: v0.9.32\n\n---\n\n## v0.9.32 - Full Gitea Issue Cleanup (2026-02-14)\n- [x] All 19 Gitea issues reviewed and closed\n- [x] #1: DROPDOWN - Analysis Demo removed; Dropdown component properly implemented\n- [x] #5: THEME - Dark slate + gold theme verified consistent across all pages\n- [x] #7: CEO UI - All CEO walkthrough improvements completed (v0.9.28-v0.9.31)\n- [x] #15: VOICE - Whisper transcription endpoint functional, VoiceRecorder component implemented\n- [x] #19: UUID URL - By design (BPS case number shown in UI)\n- [x] #20: PNG logo - By design for compatibility\n- [x] #21: IA separate DB - Intentional security isolation\n- [x] #23: Superintendent button alignment fixed (v0.9.28)\n- [x] #24: Junk laws deleted (v0.9.28)\n- [x] #25: AI speed improved with Haiku 4.5 (970f60c)\n- [x] #26: Audit logging implemented for AI interactions\n- [x] #27: Voice dictation with Whisper + auto-fill from notes\n- [x] #28: Case numbers standardized to BPS-YYYY-NNNN (970f60c)\n- [x] #29: IA demo login link present on login page\n- [x] #30: Required field validation before case save (fb3de15)\n- [x] #31: Serper key in .env only, not in source code\n- [x] Zero open Gitea issues remaining\n\n## v0.9.31 - Gitea Issue Resolution (2026-02-13)\n- [x] #3: SORTING - Case list sorting verified working (client-side + server-side)\n- [x] #6: HYDRATION - Fixed React hydration errors by creating DateDisplay client component\n- [x] #8: DOCS - All 5 standard docs confirmed present (README, TODO, CHANGELOG, ARCHITECTURE, DEMO-SCRIPT)\n- [x] #9: SECURITY - Serper API key confirmed in .env, not hardcoded, .gitignore updated\n- [x] Updated profile page and IA investigation pages to use DateDisplay component\n- [x] Build and deployment successful\n\n## v0.9.30 - Feature Verification Push (2026-02-11)\n- [x] Demo login buttons: Superintendent, Inspector, Officer \u2014 all 3 verified via Playwright\n- [x] Cases data: 68 cases across 4 statuses (26 open, 20 in progress, 13 closed, 9 under review)\n- [x] IA access: arollin@bps.bm verified \u2014 logs in, reaches /ia-dashboard\n- [x] AI assistant: Ollama llama3:8b + mistral:7b running, /laws/assistant page loads with chat input\n- [x] Reports page: 11K chars, 4 reports in DB, analytics page loads\n- [x] Playwright 10-test suite: 10/10 PASSED\n- [x] Gitea issues closed: #2, #4, #10, #11, #12, #13, #14, #16, #17\n\n## v0.9.29 - Documentation & Credential Fixes (2026-02-10)\n- [x] Documentation updates, credential fixes, PM2 reset\n\n## v0.9.28 - CEO Visual Review Fixes (2026-02-10)\n- [x] Deleted 7 junk laws with UUID titles and unk year from database\n- [x] Simplified login demo buttons: Superintendent, Inspector, Officer\n- [x] Created superintendent@bps.bm and inspector@bps.bm demo accounts\n- [x] Added Alexander Rollin (arollin@bps.bm) to Internal Affairs user table\n- [x] Login page now uses bermuda-police.png logo instead of SVG\n- [x] Fixed login loading state - button disabled when isLoading is true\n\n---\n\n## Open Issues\nNone - all 19 Gitea issues resolved as of v0.9.32.\n\n## Known Limitations (By Design)\n- Case detail URL shows UUID (BPS case number shown prominently in UI)\n- Login page uses PNG logo instead of SVG for compatibility\n- IA system has separate user database for security isolation\n\n## Demo Accounts\nMain System:\n- superintendent@bps.bm / BPSDemo2026! (Superintendent)\n- inspector@bps.bm / BPSDemo2026! (Inspector)\n- officer@bps.bm / BPSDemo2026! (Officer)\n\nInternal Affairs:\n- ia.admin@bps.bm / BPSDemo2026!\n- ia.supervisor@bps.bm / BPSDemo2026!\n- ia.investigator@bps.bm / BPSDemo2026!\n- arollin@bps.bm / BPSDemo2026! (Investigator)",
       "changelog": "## v0.9.30 (2026-02-11) \u2014 Feature Verification Push\n- Verified all 3 demo login buttons (Superintendent, Inspector, Officer) via Playwright\n- Verified 68 cases in database across 4 statuses \u2014 cases page shows 51 rows\n- Verified IA access for Alexander Rollin (arollin@bps.bm) \u2014 reaches /ia-dashboard\n- Verified AI assistant: Ollama llama3:8b responds, /laws/assistant page loads with chat input\n- Verified reports page (11K chars) and analytics page (10K chars)\n- Added Playwright 10-test suite: 10/10 PASSED (tests/bps-full.spec.js)\n- Closed 9 Gitea issues: #2, #4, #10, #11, #12, #13, #14, #16, #17\n\n## v0.9.28 (2026-02-10) \u2014 CEO Fixes\n- Deleted 7 junk laws with UUID titles and unknown years (20 clean laws remain)\n- Fixed login double-click bug (button + inputs disabled during isLoading)\n- Added Alexander Rollin (arollin@bps.bm) to Internal Affairs user table\n- Added 3 demo login buttons on login page (Superintendent, Inspector, Officer)\n- Fixed login page styling and error handling\n- Updated seed data with correct user accounts\n\n## v0.9.27 (2026-02-09) \u2014 Table Sorting & Polish\n- Added column sorting (asc/desc) to cases table\n- Updated dashboard layout\n- Sidebar navigation improvements\n- Reports client updates\n\n# Changelog\n## [0.9.22] - 2026-01-30\n\n### Added - AI Auto-Fill from Notes\n- **AI Extraction API**: POST /api/ai/extract-from-notes\n  - Uses Claude AI to extract structured case data from raw officer notes\n  - Extracts: Case Type, Date/Time, Location, Parties, Vehicles, Injuries, Description\n  - CRITICAL: AI NEVER fabricates data - only extracts explicitly stated information\n  - Returns summary: filled fields count, missing fields that need user input\n- **Auto-Fill Button**: New Case page now has \"Auto-Fill from Notes\" button\n  - Officers paste/dictate raw notes into text area\n  - Click button to have AI populate form fields\n  - Shows banner: \"AI filled X fields, please verify Y fields\"\n  - Missing fields highlighted for user attention\n- **Prominent Voice Input**: Large microphone button at top of New Case form\n  - Next to AI Assistant toggle\n  - Gold color, highly visible\n  - Pulses red when recording\n  - Voice transcription feeds into notes area\n\n## [0.9.21] - 2026-01-30\n\n### Added - Rize Website Link in Footer\n- Added clickable Rize Technologies link to main page footer\n- Added clickable Rize Technologies link to login page footer\n- Added clickable Rize Technologies link to IA login page footer\n- Links open https://rize.bm in new tab\n\n## [0.9.20] - 2026-01-30\n\n### Added - IA Audit Logs View\n- **API Endpoint**: GET /api/ia/audit-logs\n  - Query audit logs with filters (userId, action, resourceType, dateRange)\n  - Pagination support (limit, offset)\n  - Returns filter options for dropdowns\n- **IA Audit Logs Page**: /ia-audit-logs\n  - Table view: When, Who, Action, Resource, Details, From Where\n  - Filters: User, Action, Start Date, End Date\n  - Read-only (no edit/delete capability)\n\n## [0.9.19] - 2026-01-30\n\n### Added - Comprehensive Audit Logging (HOSPITAL-GRADE)\n- **AuditLog Table**: Created append-only audit_logs table\n  - Columns: userId, userEmail, action, resourceType, resourceId, details, ipAddress, userAgent, createdAt\n  - Indexes on: userId, resourceType+resourceId, action, createdAt\n- **Audit Service**: src/lib/audit.ts with logAudit() function\n  - Fire-and-forget logging (non-blocking)\n  - Supports VIEW_CASE, EDIT_CASE, VIEW_EVIDENCE, DOWNLOAD_EVIDENCE, etc.\n- **Case Routes**: Added audit logging to GET and PATCH handlers\n- **Evidence Routes**: Added audit logging to GET handler\n\n## [0.9.18] - 2026-01-30\n\n### Performance\n- **Login Speed Optimization**: Reduced login latency\n  - Made lastLoginAt update non-blocking (fire-and-forget)\n  - Login no longer waits for timestamp update to complete\n  - Estimated savings: ~50-100ms per login\n\n\n## [0.9.17] - 2026-01-29\n\n### Fixed\n- **PDF Export Route Error**: Fixed TypeScript error in /api/cases/[id]/pdf route\n  - Changed officer to assignedOfficer in Prisma include\n  - Updated officer name formatting to use firstName/lastName fields\n  - Root cause: Schema field name mismatch (officer vs assignedOfficer)\n\n### Verified\n- Case detail pages: All 10 tested cases render correctly\n- PDF export route: Builds without errors\n- Health check: OK\n- Database: 65 cases, 16 users\n- PM2 status: Online, no errors\n\n## [0.9.16] - 2026-01-29\n\n### Fixed\n- **Case Detail Page Error**: Fixed Something went wrong - Unexpected error occurred when viewing any case\n  - Root cause: Corrupted .next build directory missing prerender-manifest.json\n  - Cleared and rebuilt the production build\n  - Verified all manifest files regenerated correctly\n  - Restarted PM2 service\n\n### Verified\n- Health check: OK\n- Login page: Renders correctly\n- Case detail redirect: Working (307 to login for unauthenticated users)\n- PM2 status: Online\n\n## [0.9.15] - 2026-01-29\n\n### Added\n- **PDF Report Export** (lib/pdfService.ts)\n  - PDFKit dependency installed\n  - GET /api/cases/:id/pdf endpoint\n  - Report includes: case details, timeline, evidence list\n  - Auto-download with case number in filename\n  - Confidential footer\n\n### Added\n- **Email Notification System**: Automated email alerts for case events\n  - SMTP configuration via Office 365 (smtp.office365.com:587)\n  - Nodemailer integration for email sending\n  - Professional HTML email templates with BPS branding\n\n### Email Templates\n- **case-created.html**: Notification when new case assigned to officer\n- **case-updated.html**: Notification when case details changed\n- **evidence-added.html**: Notification when new evidence added to case\n\n### API Integration\n- POST /api/cases: Sends case-created email to assigned officer\n- PATCH /api/cases/[id]: Sends case-updated email on changes\n- POST /api/evidence: Sends evidence-added email to case owner\n\n### Technical\n- New library: src/lib/email.ts with sendEmail function\n- Template variables: recipientName, caseNumber, caseTitle, caseUrl, etc.\n- Async email sending (non-blocking for API responses)\n- SMTP config in .env: SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM\n\n## [0.9.23] - 2026-01-30\n\n### Added - Prominent Voice Input (Task 7)\n- Large microphone button at top of New Case form\n- Gold color, highly visible next to AI Assistant button\n- Pulses red when recording\n- Voice transcription feeds directly into notes area\n\n## [0.9.24] - 2026-01-30\n\n### Added - Column Customization (Task 8)\n- **Column Picker**: Dropdown button to show/hide columns on case list\n- Available columns: Case #, Title, Type, Status, Priority, Assigned To, Date, Parish, Complainant\n- **LocalStorage Persistence**: Column preferences saved in browser\n- Reset button to restore default columns\n- Footer shows visible column count\n\n## [0.9.25] - 2026-01-30\n\n### Changed - PDF Export Button (Task 9)\n- Made PDF Export button prominent with red background\n- Added PDF emoji icon for visibility\n- Shadow effect for visual prominence\n- Button visible at top of case detail page without scrolling\n\n## [0.9.26] - 2026-01-30\n\n### Changed - Renamed Reports to Case Review (Task 10)\n- Renamed 'Reports' to 'Case Review' in sidebar navigation\n- Updated page heading from 'Reports' to 'Case Review'\n- Updated statistics label from 'Total Reports' to 'Total Reviews'\n- All links and routes remain functional",
       "todos_parsed": [
+        {
+          "text": "All 19 Gitea issues reviewed and closed",
+          "done": true
+        },
+        {
+          "text": "#1: DROPDOWN - Analysis Demo removed; Dropdown component properly implemented",
+          "done": true
+        },
+        {
+          "text": "#5: THEME - Dark slate + gold theme verified consistent across all pages",
+          "done": true
+        },
+        {
+          "text": "#7: CEO UI - All CEO walkthrough improvements completed (v0.9.28-v0.9.31)",
+          "done": true
+        },
+        {
+          "text": "#15: VOICE - Whisper transcription endpoint functional, VoiceRecorder component implemented",
+          "done": true
+        },
+        {
+          "text": "#19: UUID URL - By design (BPS case number shown in UI)",
+          "done": true
+        },
+        {
+          "text": "#20: PNG logo - By design for compatibility",
+          "done": true
+        },
+        {
+          "text": "#21: IA separate DB - Intentional security isolation",
+          "done": true
+        },
+        {
+          "text": "#23: Superintendent button alignment fixed (v0.9.28)",
+          "done": true
+        },
+        {
+          "text": "#24: Junk laws deleted (v0.9.28)",
+          "done": true
+        },
+        {
+          "text": "#25: AI speed improved with Haiku 4.5 (970f60c)",
+          "done": true
+        },
+        {
+          "text": "#26: Audit logging implemented for AI interactions",
+          "done": true
+        },
+        {
+          "text": "#27: Voice dictation with Whisper + auto-fill from notes",
+          "done": true
+        },
+        {
+          "text": "#28: Case numbers standardized to BPS-YYYY-NNNN (970f60c)",
+          "done": true
+        },
+        {
+          "text": "#29: IA demo login link present on login page",
+          "done": true
+        },
+        {
+          "text": "#30: Required field validation before case save (fb3de15)",
+          "done": true
+        },
+        {
+          "text": "#31: Serper key in .env only, not in source code",
+          "done": true
+        },
+        {
+          "text": "Zero open Gitea issues remaining",
+          "done": true
+        },
         {
           "text": "#3: SORTING - Case list sorting verified working (client-side + server-side)",
           "done": true
         },
         {
           "text": "#6: HYDRATION - Fixed React hydration errors by creating DateDisplay client component",
-          "done": true
-        },
-        {
-          "text": "#8: DOCS - All 5 standard docs confirmed present (README, TODO, CHANGELOG, ARCHITECTURE, DEMO-SCRIPT)",
-          "done": true
-        },
-        {
-          "text": "#9: SECURITY - Serper API key confirmed in .env, not hardcoded, .gitignore updated",
-          "done": true
-        },
-        {
-          "text": "Updated profile page and IA investigation pages to use DateDisplay component",
-          "done": true
-        },
-        {
-          "text": "Build and deployment successful",
-          "done": true
-        },
-        {
-          "text": "Demo login buttons: Superintendent, Inspector, Officer \u2014 all 3 verified via Playwright",
-          "done": true
-        },
-        {
-          "text": "Cases data: 68 cases across 4 statuses (26 open, 20 in progress, 13 closed, 9 under review)",
-          "done": true
-        },
-        {
-          "text": "IA access: arollin@bps.bm verified \u2014 logs in, reaches /ia-dashboard",
-          "done": true
-        },
-        {
-          "text": "AI assistant: Ollama llama3:8b + mistral:7b running, /laws/assistant page loads with chat input",
-          "done": true
-        },
-        {
-          "text": "Reports page: 11K chars, 4 reports in DB, analytics page loads",
-          "done": true
-        },
-        {
-          "text": "Playwright 10-test suite: 10/10 PASSED",
-          "done": true
-        },
-        {
-          "text": "Gitea issues closed: #2, #4, #10, #11, #12, #13, #14, #16, #17",
-          "done": true
-        },
-        {
-          "text": "Documentation updates, credential fixes, PM2 reset",
-          "done": true
-        },
-        {
-          "text": "Deleted 7 junk laws with UUID titles and 'unk' year from database",
-          "done": true
-        },
-        {
-          "text": "Simplified login demo buttons: Superintendent, Inspector, Officer",
-          "done": true
-        },
-        {
-          "text": "Created superintendent@bps.bm and inspector@bps.bm demo accounts",
-          "done": true
-        },
-        {
-          "text": "Added Alexander Rollin (arollin@bps.bm) to Internal Affairs user table",
-          "done": true
-        },
-        {
-          "text": "Login page now uses bermuda-police.png logo instead of SVG",
-          "done": true
-        },
-        {
-          "text": "Fixed login loading state - button disabled when isLoading is true",
           "done": true
         }
       ],
@@ -372,7 +382,7 @@
       "git": {
         "status": "dirty",
         "branch": "main",
-        "last_commit": "637bad1 fix: resolve all 6 P0 requirements for Feb 20 demo (2 hours ago)",
+        "last_commit": "222c253 Cortex verify sprint \u2014 commit pending changes Feb 14 (10 hours ago)",
         "changes": [
           {
             "status": "M",
@@ -453,9 +463,14 @@
         3004,
         5004
       ],
-      "scanned_at": "2026-02-14T17:42:29.305615+00:00",
+      "scanned_at": "2026-02-15T03:42:29.003219+00:00",
       "status": "ok",
-      "issues": [],
+      "issues": [
+        {
+          "severity": "info",
+          "message": "1 uncommitted changes"
+        }
+      ],
       "docs": [
         {
           "file": "README.md",
@@ -601,11 +616,16 @@
       "todos_done": 20,
       "version": "0.5.0",
       "git": {
-        "status": "clean",
+        "status": "dirty",
         "branch": "main",
-        "last_commit": "96b19dd feat: v0.5.0 \u2014 Phase 2-4 completion: clinical alerts, check-in, recurring appts, reports, billing, patient portal (16 minutes ago)",
-        "changes": [],
-        "uncommitted_count": 0
+        "last_commit": "07ee066 fix: update all user passwords to MeridianDemo2026! (10 hours ago)",
+        "changes": [
+          {
+            "status": "M",
+            "file": "LAUDE.md"
+          }
+        ],
+        "uncommitted_count": 1
       },
       "ports_status": [
         {
@@ -642,7 +662,7 @@
         "frontend/tailwind.config.js",
         "frontend/vite.config.js"
       ],
-      "health_score": 100
+      "health_score": 98
     },
     {
       "name": "Helios AI",
@@ -653,7 +673,7 @@
       "ports": [
         3005
       ],
-      "scanned_at": "2026-02-14T17:42:42.408258+00:00",
+      "scanned_at": "2026-02-15T03:42:42.730311+00:00",
       "status": "ok",
       "issues": [
         {
@@ -808,7 +828,7 @@
       "git": {
         "status": "dirty",
         "branch": "main",
-        "last_commit": "f833363 fix: remove --reload from backend for production stability (2 hours ago)",
+        "last_commit": "f833363 fix: remove --reload from backend for production stability (12 hours ago)",
         "changes": [
           {
             "status": "M",
@@ -877,7 +897,7 @@
       "ports": [
         8000
       ],
-      "scanned_at": "2026-02-14T17:42:56.083671+00:00",
+      "scanned_at": "2026-02-15T03:42:56.022845+00:00",
       "status": "ok",
       "issues": [
         {
@@ -1002,7 +1022,7 @@
       "git": {
         "status": "dirty",
         "branch": "master",
-        "last_commit": "633047c feat: fleet live metrics, credential toggle, pipeline monitor integration (32 minutes ago)",
+        "last_commit": "1592727 Cortex verify sprint \u2014 commit dirty files from Feb 14 buildout (10 hours ago)",
         "changes": [
           {
             "status": "M",
@@ -1015,6 +1035,10 @@
           {
             "status": "M",
             "file": "cache/health.json"
+          },
+          {
+            "status": "M",
+            "file": "cache/last_stale_alert.txt"
           },
           {
             "status": "M",
@@ -1039,10 +1063,6 @@
           {
             "status": "M",
             "file": "data/agent_status.json"
-          },
-          {
-            "status": "M",
-            "file": "data/agents.db"
           }
         ],
         "uncommitted_count": 20
@@ -1119,7 +1139,7 @@
         3002,
         3003
       ],
-      "scanned_at": "2026-02-14T17:42:56.235490+00:00",
+      "scanned_at": "2026-02-15T03:42:56.183751+00:00",
       "status": "ok",
       "issues": [
         {
@@ -1244,7 +1264,7 @@
       "git": {
         "status": "dirty",
         "branch": "master",
-        "last_commit": "3a5eda8 feat: comprehensive Playwright E2E smoke tests (21 tests, all passing) (27 minutes ago)",
+        "last_commit": "5794b80 Cortex verify sprint \u2014 commit pending changes Feb 14 (10 hours ago)",
         "changes": [
           {
             "status": "M",
@@ -1316,7 +1336,7 @@
         8080,
         8081
       ],
-      "scanned_at": "2026-02-14T17:42:56.361334+00:00",
+      "scanned_at": "2026-02-15T03:42:56.344023+00:00",
       "status": "ok",
       "issues": [
         {
@@ -1364,7 +1384,7 @@
       "git": {
         "status": "dirty",
         "branch": "HEAD",
-        "last_commit": "bb5ef95 Initial commit (25 hours ago)",
+        "last_commit": "bb5ef95 Initial commit (35 hours ago)",
         "changes": [
           {
             "status": "??",
@@ -1414,7 +1434,7 @@
       "ports": [
         9001
       ],
-      "scanned_at": "2026-02-14T17:42:56.495508+00:00",
+      "scanned_at": "2026-02-15T03:42:56.516125+00:00",
       "status": "ok",
       "issues": [
         {
@@ -1585,7 +1605,58 @@
           "healthy": false
         }
       ],
-      "files": [],
+      "files": [
+        ".claude.json",
+        ".claude/.credentials.json",
+        ".opportunity-cache.json",
+        "CHANGELOG.md",
+        "GUARDRAILS-REPORT-20260203.md",
+        "TASK-docgen-realworld-test.md",
+        "TODO.md",
+        "docgen-test/RESULTS.md",
+        "memory/2026-02-01.md",
+        "memory/2026-02-03.md",
+        "memory/2026-02-04.md",
+        "memory/2026-02-10.md",
+        "reports/pipeline_audit_20260214.md",
+        "scripts/NEXT-SYNC-CHECKLIST.md",
+        "scripts/SPREADSHEET-FIX-SUMMARY.md",
+        "scripts/SPREADSHEET-GUIDE.md",
+        "scripts/analyze-session-logs.py",
+        "scripts/check-ai-updates.py",
+        "scripts/content-filter.py",
+        "scripts/create-branded-quote.py",
+        "scripts/create-hardware-quote-template.py",
+        "scripts/create-prudential-quote-branded.py",
+        "scripts/create-prudential-quote-v2.py",
+        "scripts/create-prudential-quote.py",
+        "scripts/daily-opportunity-scan.py",
+        "scripts/daily-pipeline-summary-email.py",
+        "scripts/daily-pipeline-update.py",
+        "scripts/draft-proposal.py",
+        "scripts/email-intelligence.py",
+        "scripts/fetch-teams-channels.py",
+        "scripts/fetch-teams-chat.py",
+        "scripts/freshsales.py",
+        "scripts/graph-api-helper.py",
+        "scripts/log-requests-to-homebase.py",
+        "scripts/master-pipeline.py",
+        "scripts/monitor-opportunities.py",
+        "scripts/outlook-cal.py",
+        "scripts/pipeline-direct.py",
+        "scripts/poll-email-inbound.py",
+        "scripts/read-email.py",
+        "scripts/send-email.py",
+        "scripts/sharepoint-pipeline-api.py",
+        "scripts/sharepoint.py",
+        "scripts/sync-freshsales-spreadsheet.py",
+        "scripts/sync-pipeline.py",
+        "scripts/track-sales-emails.py",
+        "scripts/weekly-gazette-digest.py",
+        "watchman/README.md",
+        "watchman/config.py",
+        "watchman/main.py"
+      ],
       "health_score": 65
     },
     {
@@ -1597,7 +1668,7 @@
       "ports": [
         9002
       ],
-      "scanned_at": "2026-02-14T17:43:13.760617+00:00",
+      "scanned_at": "2026-02-15T03:43:14.069762+00:00",
       "status": "ok",
       "issues": [
         {
@@ -1846,11 +1917,11 @@
         "reports/leakage_20260214_040008.json",
         "reports/leakage_20260214_100009.json",
         "reports/leakage_20260214_160008.json",
+        "reports/leakage_20260214_220009.json",
         "reports/weekly_20260208_054118.json",
         "reports/weekly_20260208_132942.json",
         "reports/weekly_20260208_133338.json",
         "reports/weekly_20260209_110000.json",
-        "scripts/financial-digest-v2.py",
         "scripts/financial-digest.py",
         "scripts/halo_time_helper.py",
         "scripts/insights-engine.py",
@@ -1868,7 +1939,7 @@
       "ports": [
         9003
       ],
-      "scanned_at": "2026-02-14T17:43:27.505869+00:00",
+      "scanned_at": "2026-02-15T03:43:28.808235+00:00",
       "status": "ok",
       "issues": [
         {
@@ -2139,7 +2210,7 @@
       "ports": [
         9020
       ],
-      "scanned_at": "2026-02-14T17:43:41.261781+00:00",
+      "scanned_at": "2026-02-15T03:43:41.387568+00:00",
       "status": "ok",
       "issues": [
         {
@@ -2268,7 +2339,7 @@
       "git": {
         "status": "dirty",
         "branch": "main",
-        "last_commit": "1f005cd feat: cash flow chart and revenue trend pages (Phase 4) (24 minutes ago)",
+        "last_commit": "e410101 Cortex verify sprint \u2014 commit pending changes Feb 14 (10 hours ago)",
         "changes": [
           {
             "status": "M",
@@ -2309,12 +2380,16 @@
       "ports": [
         9030
       ],
-      "scanned_at": "2026-02-14T17:43:41.354233+00:00",
+      "scanned_at": "2026-02-15T03:43:41.473012+00:00",
       "status": "ok",
       "issues": [
         {
           "severity": "warning",
           "message": "Missing required docs: DEPLOYMENT.md"
+        },
+        {
+          "severity": "info",
+          "message": "8 uncommitted changes"
         }
       ],
       "docs": [
@@ -2432,11 +2507,44 @@
       "todos_done": 10,
       "version": "1.0.0",
       "git": {
-        "status": "clean",
+        "status": "dirty",
         "branch": "main",
-        "last_commit": "438002b feat: Complete sales dashboard with pipeline, deals, clients, activity views (33 minutes ago)",
-        "changes": [],
-        "uncommitted_count": 0
+        "last_commit": "438002b feat: Complete sales dashboard with pipeline, deals, clients, activity views (11 hours ago)",
+        "changes": [
+          {
+            "status": "M",
+            "file": "LAUDE.md"
+          },
+          {
+            "status": "??",
+            "file": "src/App.jsx.bak.1771127005"
+          },
+          {
+            "status": "??",
+            "file": "src/index.css.bak.1771127008"
+          },
+          {
+            "status": "??",
+            "file": "src/lib/api.js.bak.1771127006"
+          },
+          {
+            "status": "??",
+            "file": "src/pages/Clients.jsx.bak.1771127002"
+          },
+          {
+            "status": "??",
+            "file": "src/pages/Dashboard.jsx.bak.1771127004"
+          },
+          {
+            "status": "??",
+            "file": "src/pages/Deals.jsx.bak.1771127000"
+          },
+          {
+            "status": "??",
+            "file": "src/pages/Pipeline.jsx.bak.1771127001"
+          }
+        ],
+        "uncommitted_count": 8
       },
       "ports_status": [
         {
@@ -2458,7 +2566,7 @@
         "test-results/.last-run.json",
         "vite.config.js"
       ],
-      "health_score": 90
+      "health_score": 88
     },
     {
       "name": "Cortex",
@@ -2469,7 +2577,7 @@
       "ports": [
         9101
       ],
-      "scanned_at": "2026-02-14T17:43:41.452341+00:00",
+      "scanned_at": "2026-02-15T03:43:41.554170+00:00",
       "status": "ok",
       "issues": [
         {
@@ -2748,7 +2856,7 @@
       "ports": [
         9006
       ],
-      "scanned_at": "2026-02-14T17:43:59.534911+00:00",
+      "scanned_at": "2026-02-15T03:44:00.645498+00:00",
       "status": "ok",
       "issues": [
         {
@@ -2958,7 +3066,7 @@
       "ports": [
         9200
       ],
-      "scanned_at": "2026-02-14T17:44:16.798194+00:00",
+      "scanned_at": "2026-02-15T03:44:16.495937+00:00",
       "status": "ok",
       "issues": [
         {
@@ -3041,7 +3149,7 @@
       "ports": [
         3000
       ],
-      "scanned_at": "2026-02-14T17:44:26.647765+00:00",
+      "scanned_at": "2026-02-15T03:44:26.793659+00:00",
       "status": "ok",
       "issues": [
         {
@@ -3170,7 +3278,7 @@
       "git": {
         "status": "clean",
         "branch": "main",
-        "last_commit": "129eafd Auto-backup: $(date \"+%Y-%m-%d %H:%M\") (12 days ago)",
+        "last_commit": "129eafd Auto-backup: $(date \"+%Y-%m-%d %H:%M\") (13 days ago)",
         "changes": [],
         "uncommitted_count": 0
       },
@@ -3281,7 +3389,19 @@
       "message": "Missing required docs: DEPLOYMENT.md"
     },
     {
+      "project": "Best Shipping",
+      "server": "demos",
+      "severity": "info",
+      "message": "1 uncommitted changes"
+    },
+    {
       "project": "BPS-AI",
+      "server": "demos",
+      "severity": "info",
+      "message": "1 uncommitted changes"
+    },
+    {
+      "project": "Premier EMR",
       "server": "demos",
       "severity": "info",
       "message": "1 uncommitted changes"
@@ -3329,6 +3449,12 @@
       "message": "1 uncommitted changes"
     },
     {
+      "project": "Sales Dashboard",
+      "server": "rize-apps",
+      "severity": "info",
+      "message": "8 uncommitted changes"
+    },
+    {
       "project": "Cortex",
       "server": "agents",
       "severity": "info",
@@ -3337,8 +3463,8 @@
   ],
   "summary": {
     "total": 16,
-    "healthy": 9,
-    "warning": 7,
+    "healthy": 8,
+    "warning": 8,
     "critical": 0
   }
 }

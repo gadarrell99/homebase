@@ -75,7 +75,17 @@
     <div class="container">
         <div class="header">
             <h1>Research Scout</h1>
-            <button class="btn" onclick="runScan()">Run Scan Now</button>
+            <div style="display:flex;gap:0.75rem;align-items:center;">
+                <div style="display:flex;gap:0.5rem;align-items:center;">
+                    <label style="font-size:0.85rem;color:#94a3b8;">From:</label>
+                    <input type="date" id="date-from" style="background:#1e293b;border:1px solid #334155;color:#e2e8f0;padding:0.4rem 0.6rem;border-radius:0.25rem;font-size:0.85rem;">
+                    <label style="font-size:0.85rem;color:#94a3b8;">To:</label>
+                    <input type="date" id="date-to" style="background:#1e293b;border:1px solid #334155;color:#e2e8f0;padding:0.4rem 0.6rem;border-radius:0.25rem;font-size:0.85rem;">
+                    <button class="btn btn-sm" onclick="applyDateFilter()">Filter</button>
+                    <button class="btn btn-sm" style="background:#64748b;" onclick="clearDateFilter()">Clear</button>
+                </div>
+                <button class="btn" onclick="runScan()">Run Scan Now</button>
+            </div>
         </div>
         
         <div class="stats">
@@ -143,7 +153,12 @@
         async function loadStats() {
             const counts = {};
             for (const s of ['new', 'reviewed', 'implemented', 'dismissed']) {
-                const r = await fetch('/api/research?status=' + s + '&limit=1000');
+                let statUrl = '/api/research?status=' + s + '&limit=1000';
+                const df = document.getElementById('date-from')?.value;
+                const dt = document.getElementById('date-to')?.value;
+                if (df) statUrl += '&date_from=' + df;
+                if (dt) statUrl += '&date_to=' + dt;
+                const r = await fetch(statUrl);
                 const items = await r.json();
                 counts[s] = items.length;
             }
@@ -163,7 +178,12 @@
             container.innerHTML = '<div class="loading">Loading...</div>';
             
             try {
-                const resp = await fetch('/api/research?status=' + status);
+                let url = '/api/research?status=' + status;
+            const dateFrom = document.getElementById('date-from').value;
+            const dateTo = document.getElementById('date-to').value;
+            if (dateFrom) url += '&date_from=' + dateFrom;
+            if (dateTo) url += '&date_to=' + dateTo;
+            const resp = await fetch(url);
                 if (!resp.ok) throw new Error('API returned ' + resp.status);
                 const items = await resp.json();
                 
@@ -217,6 +237,18 @@
             loadStats();
         }
         
+        function applyDateFilter() {
+            loadItems(currentStatus);
+            loadStats();
+        }
+        
+        function clearDateFilter() {
+            document.getElementById('date-from').value = '';
+            document.getElementById('date-to').value = '';
+            loadItems(currentStatus);
+            loadStats();
+        }
+
         try {
             loadItems('new');
             loadStats();

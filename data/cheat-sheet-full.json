@@ -1,5 +1,5 @@
 {
-  "generated": "2026-02-14T17:30:01Z",
+  "generated": "2026-02-15T03:30:01Z",
   "servers": [
     {
       "id": "helios",
@@ -22,7 +22,7 @@
       "ssh_url": "",
       "alive": true,
       "version": "",
-      "uptime": "up 1 week, 1 hour, 45 minutes",
+      "uptime": "up 1 week, 11 hours, 45 minutes",
       "disk": "",
       "memory": "",
       "services": "0 0"
@@ -48,7 +48,7 @@
       "ssh_url": "https://claude-dev-ssh.rize.bm",
       "alive": true,
       "version": "",
-      "uptime": "up 1 day, 15 minutes",
+      "uptime": "up 1 day, 10 hours, 15 minutes",
       "disk": "",
       "memory": "",
       "services": "0 0"
@@ -61,7 +61,7 @@
       "ssh_url": "https://bpsai-ssh.rize.bm",
       "alive": true,
       "version": "",
-      "uptime": "up 1 day, 13 minutes",
+      "uptime": "up 1 day, 10 hours, 13 minutes",
       "disk": "",
       "memory": "",
       "services": "0 0"
@@ -100,7 +100,7 @@
       "ssh_url": "https://vector-ssh.rize.bm",
       "alive": true,
       "version": "",
-      "uptime": "up 1 week, 1 hour, 45 minutes",
+      "uptime": "up 1 week, 11 hours, 45 minutes",
       "disk": "",
       "memory": "",
       "services": "0 0"
@@ -203,7 +203,7 @@
   ],
   "status": {
     "security_score": 0,
-    "active_alerts": 20,
+    "active_alerts": 143,
     "open_audit_items": 6
   },
   "deadlines": [

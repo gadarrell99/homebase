@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-02-14T17:30:02.561044+00:00",
+  "timestamp": "2026-02-15T03:30:01.807250+00:00",
   "monitor": "pipeline",
   "status": "healthy",
   "findings": [
@@ -12,13 +12,13 @@
     {
       "check": "audit_freshness",
       "severity": "ok",
-      "message": "Last audit 15h ago \u2014 verdict: PRODUCTION READY",
+      "message": "Last audit 1h ago \u2014 verdict: PRODUCTION READY",
       "detail": ""
     },
     {
       "check": "manifest_freshness",
       "severity": "ok",
-      "message": "Manifest is 14h old, source: homebase",
+      "message": "Manifest is 0h old, source: homebase",
       "detail": ""
     },
     {

@@ -3,7 +3,7 @@
     {
       "name": "infrastructure",
       "open_issues": 120,
-      "updated": "2026-02-11T13:06:25Z",
+      "updated": "2026-02-15T02:53:16Z",
       "stars": 0
     },
     {
@@ -14,8 +14,8 @@
     },
     {
       "name": "homebase",
-      "open_issues": 48,
-      "updated": "2026-02-14T17:11:32Z",
+      "open_issues": 45,
+      "updated": "2026-02-14T17:49:30Z",
       "stars": 0
     },
     {
@@ -51,13 +51,13 @@
     {
       "name": "nexus",
       "open_issues": 28,
-      "updated": "2026-02-14T17:15:44Z",
+      "updated": "2026-02-14T17:49:08Z",
       "stars": 0
     },
     {
       "name": "finance-dashboard",
       "open_issues": 26,
-      "updated": "2026-02-14T17:20:00Z",
+      "updated": "2026-02-14T17:48:43Z",
       "stars": 0
     },
     {
@@ -76,6 +76,12 @@
       "name": "cortex",
       "open_issues": 19,
       "updated": "2026-02-11T21:06:39Z",
+      "stars": 0
+    },
+    {
+      "name": "property-rize",
+      "open_issues": 19,
+      "updated": "2026-02-14T14:15:50Z",
       "stars": 0
     },
     {
@@ -105,13 +111,13 @@
     {
       "name": "bps-ai",
       "open_issues": 0,
-      "updated": "2026-02-14T17:13:23Z",
+      "updated": "2026-02-14T17:49:25Z",
       "stars": 0
     },
     {
       "name": "brfu-ticketing",
       "open_issues": 0,
-      "updated": "2026-02-14T17:18:20Z",
+      "updated": "2026-02-14T17:48:49Z",
       "stars": 0
     },
     {
@@ -121,17 +127,11 @@
       "stars": 0
     },
     {
-      "name": "property-rize",
-      "open_issues": 0,
-      "updated": "2026-02-14T14:15:50Z",
-      "stars": 0
-    },
-    {
       "name": "solstice-wellness",
       "open_issues": 0,
-      "updated": "2026-02-14T17:16:41Z",
+      "updated": "2026-02-15T02:49:29Z",
       "stars": 0
     }
   ],
-  "synced": "2026-02-14T17:45:05.500255"
+  "synced": "2026-02-15T03:45:05.496456"
 }

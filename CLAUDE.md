@@ -70,3 +70,21 @@ Cron: `*/15 * * * * cd /home/rizeadmin/homebase && python3 backend/auto_sync.py 
 
 
 ## MANDATORY: Every session must end with verify-fix-retest cycle. See ~/AUDIT-TEMPLATE.md on Talos. Trust no self-reports. curl every endpoint, run Playwright, test logins. Fix broken, retest, then report.
+
+## If You Are About To...
+- Restart this service → STOP. CEO approval required.
+- Add endpoints not in TODO.md → STOP. Stick to the task.
+- Modify .env or credentials → STOP. CEO approval required.
+- Report "FIXED" or "DONE" → STOP. Show curl proof first.
+- Refactor or restructure code → STOP. One task at a time.
+- Modify Cloudflare tunnels → STOP. CEO approval required.
+
+
+## If You Are About To...
+- Restart this service → STOP. CEO approval required.
+- Add endpoints not in TODO.md → STOP. Stick to the task.
+- Modify .env or credentials → STOP. CEO approval required.
+- Report "FIXED" or "DONE" → STOP. Show curl proof first.
+- Refactor or restructure code → STOP. One task at a time.
+- Modify Cloudflare tunnels → STOP. CEO approval required.
+

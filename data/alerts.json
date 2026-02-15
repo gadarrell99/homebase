@@ -1,6 +1,1086 @@
 {
   "alerts": [
     {
+      "id": "alert-2fbb8e34",
+      "timestamp": "2026-02-15T03:20:04.117957+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 23:20:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 113ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-f1423453",
+      "timestamp": "2026-02-15T03:15:05.532890+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 23:15:05 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 143ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-04b1fc09",
+      "timestamp": "2026-02-15T03:10:03.690743+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 23:10:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 110ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-08e9785b",
+      "timestamp": "2026-02-15T03:05:04.195327+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 23:05:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 140ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-bfaa810a",
+      "timestamp": "2026-02-15T03:00:05.872674+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 23:00:05 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 113ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-58d2d250",
+      "timestamp": "2026-02-15T02:55:02.911652+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 22:55:02 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 145ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-72780e25",
+      "timestamp": "2026-02-15T02:50:03.621775+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 22:50:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 115ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-89869bd3",
+      "timestamp": "2026-02-15T02:45:04.301370+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 22:45:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 145ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-7eda6649",
+      "timestamp": "2026-02-15T02:40:03.945185+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 22:40:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 149ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-a94d9d8f",
+      "timestamp": "2026-02-15T02:35:03.620105+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 22:35:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 110ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-0b25b035",
+      "timestamp": "2026-02-15T02:30:05.303834+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 22:30:05 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 147ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-8a8f0fb5",
+      "timestamp": "2026-02-15T02:25:04.098293+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 22:25:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 167ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-4d5fcb31",
+      "timestamp": "2026-02-15T02:20:03.555853+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 22:20:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 136ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-39c2e41a",
+      "timestamp": "2026-02-15T02:15:05.595632+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 22:15:05 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 180ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-33950e45",
+      "timestamp": "2026-02-15T02:10:03.991391+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 22:10:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 152ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-d9380c87",
+      "timestamp": "2026-02-15T02:05:04.350050+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 22:05:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 135ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-735ae837",
+      "timestamp": "2026-02-15T02:00:27.265387+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 22:00:27 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 2620ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-47242b0d",
+      "timestamp": "2026-02-15T02:00:05.832855+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 22:00:05 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 175ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-24e56eae",
+      "timestamp": "2026-02-15T01:55:04.322739+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 21:55:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 156ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-96711427",
+      "timestamp": "2026-02-15T01:50:04.650526+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 21:50:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 133ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-7af5d102",
+      "timestamp": "2026-02-15T01:45:06.103029+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 21:45:05 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 157ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-af63a0b1",
+      "timestamp": "2026-02-15T01:40:03.346801+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 21:40:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 158ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-c10c74a5",
+      "timestamp": "2026-02-15T01:35:03.561067+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 21:35:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 119ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-83d4df2c",
+      "timestamp": "2026-02-15T01:30:05.930554+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 21:30:05 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 156ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-f6553547",
+      "timestamp": "2026-02-15T01:25:04.325987+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 21:25:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 146ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-627195c9",
+      "timestamp": "2026-02-15T01:20:04.986448+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 21:20:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 128ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-a46e872b",
+      "timestamp": "2026-02-15T01:15:05.456843+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 21:15:05 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 150ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-bdfdbcc4",
+      "timestamp": "2026-02-15T01:10:03.478252+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 21:10:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 157ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-3b3e9acb",
+      "timestamp": "2026-02-15T01:05:03.983903+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 21:05:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 140ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-3e3e9f92",
+      "timestamp": "2026-02-15T01:00:06.985099+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 21:00:06 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 146ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-ff47b2cc",
+      "timestamp": "2026-02-15T00:55:03.633249+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 20:55:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 138ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-acd7cfa1",
+      "timestamp": "2026-02-15T00:50:04.026267+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 20:50:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 132ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-faa95d2d",
+      "timestamp": "2026-02-15T00:45:04.540982+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 20:45:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 143ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-c9529605",
+      "timestamp": "2026-02-15T00:40:03.932798+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 20:40:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 156ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-f41a1edd",
+      "timestamp": "2026-02-15T00:35:03.010644+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 20:35:02 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 109ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-e354861c",
+      "timestamp": "2026-02-15T00:30:05.917478+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 20:30:05 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 161ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-9b1ce1a8",
+      "timestamp": "2026-02-15T00:25:04.541930+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 20:25:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 152ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-355fa09a",
+      "timestamp": "2026-02-15T00:20:04.320673+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 20:20:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 127ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-e937d193",
+      "timestamp": "2026-02-15T00:15:04.688547+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 20:15:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 146ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-29ed09aa",
+      "timestamp": "2026-02-15T00:10:03.812451+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 20:10:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 145ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-88fce1c8",
+      "timestamp": "2026-02-15T00:05:04.390913+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 20:05:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 124ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-656e687e",
+      "timestamp": "2026-02-15T00:00:38.393946+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 20:00:38 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 4568ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-7c4a2488",
+      "timestamp": "2026-02-15T00:00:07.025097+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 20:00:06 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 192ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-4c5c900e",
+      "timestamp": "2026-02-14T23:55:05.079084+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 19:55:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 158ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-ba116499",
+      "timestamp": "2026-02-14T23:50:04.058107+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 19:50:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 125ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-3b85d39a",
+      "timestamp": "2026-02-14T23:45:04.257376+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 19:45:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 166ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-40f97c9a",
+      "timestamp": "2026-02-14T23:40:10.192447+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 19:40:09 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 150ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-7d133496",
+      "timestamp": "2026-02-14T23:35:03.496704+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 19:35:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 130ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-bc83532e",
+      "timestamp": "2026-02-14T23:30:04.658757+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 19:30:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 138ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-6233ed15",
+      "timestamp": "2026-02-14T23:25:04.158003+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 19:25:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 145ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-d84e3fd2",
+      "timestamp": "2026-02-14T23:20:02.836993+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 19:20:02 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 126ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-fb0a0495",
+      "timestamp": "2026-02-14T23:15:05.056239+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 19:15:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 159ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-7e58287a",
+      "timestamp": "2026-02-14T23:10:03.931072+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 19:10:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 154ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-37d61b41",
+      "timestamp": "2026-02-14T23:05:04.982818+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 19:05:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 173ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-a46d7f21",
+      "timestamp": "2026-02-14T23:00:07.276010+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 19:00:06 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 182ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-9bfb66ba",
+      "timestamp": "2026-02-14T22:55:03.206076+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 18:55:02 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 113ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-03af6eda",
+      "timestamp": "2026-02-14T22:50:04.430823+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 18:50:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 151ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-62ac4175",
+      "timestamp": "2026-02-14T22:45:04.128674+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 18:45:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 147ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-aa9cddad",
+      "timestamp": "2026-02-14T22:40:03.343548+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 18:40:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 149ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-61c4c4a7",
+      "timestamp": "2026-02-14T22:35:03.943242+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 18:35:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 128ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-1b48441f",
+      "timestamp": "2026-02-14T22:30:04.247246+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 18:30:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 147ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-110e503b",
+      "timestamp": "2026-02-14T22:25:03.972308+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 18:25:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 144ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-117be50f",
+      "timestamp": "2026-02-14T22:20:03.372368+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 18:20:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 122ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-a10c1eb8",
+      "timestamp": "2026-02-14T22:15:05.723003+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 18:15:05 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 134ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-ec7d0737",
+      "timestamp": "2026-02-14T22:10:03.822568+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 18:10:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 157ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-f6bdc8d5",
+      "timestamp": "2026-02-14T22:05:05.083954+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 18:05:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 126ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-8fc4a76d",
+      "timestamp": "2026-02-14T22:00:51.114852+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 18:00:50 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 3498ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-40ddc231",
+      "timestamp": "2026-02-14T22:00:06.933661+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 18:00:06 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 140ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-e91a6fcd",
+      "timestamp": "2026-02-14T21:55:04.024454+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 17:55:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 141ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-460ed987",
+      "timestamp": "2026-02-14T21:50:03.732528+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 17:50:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 139ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-8d0010b2",
+      "timestamp": "2026-02-14T21:45:03.811004+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 17:45:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 114ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-5ee21646",
+      "timestamp": "2026-02-14T21:40:04.321381+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 17:40:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 148ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-e94ee385",
+      "timestamp": "2026-02-14T21:35:03.433848+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 17:35:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 124ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-d11c2e6b",
+      "timestamp": "2026-02-14T21:30:04.693814+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 17:30:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 151ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-1dc29dfe",
+      "timestamp": "2026-02-14T21:25:03.631620+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 17:25:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 145ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-3aab8ea0",
+      "timestamp": "2026-02-14T21:20:03.075071+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 17:20:02 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 115ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-dc520257",
+      "timestamp": "2026-02-14T21:15:05.577198+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 17:15:05 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 150ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-44bdb0c7",
+      "timestamp": "2026-02-14T21:10:04.324945+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 17:10:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 156ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-a19831d5",
+      "timestamp": "2026-02-14T21:05:03.455953+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 17:05:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 130ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-2dd03463",
+      "timestamp": "2026-02-14T21:00:05.259619+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 17:00:05 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 169ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-b7c78fa3",
+      "timestamp": "2026-02-14T20:55:03.566544+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 16:55:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 159ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-88c197d9",
+      "timestamp": "2026-02-14T20:50:03.903237+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 16:50:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 132ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-e82e18e5",
+      "timestamp": "2026-02-14T20:45:04.321989+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 16:45:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 147ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-854111b1",
+      "timestamp": "2026-02-14T20:40:03.444713+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 16:40:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 166ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-b8bd8932",
+      "timestamp": "2026-02-14T20:35:03.305792+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 16:35:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 118ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-94458439",
+      "timestamp": "2026-02-14T20:30:05.317837+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 16:30:05 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 148ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-5f8206cd",
+      "timestamp": "2026-02-14T20:25:03.571904+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 16:25:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 149ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-4a1e9358",
+      "timestamp": "2026-02-14T20:20:03.615518+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 16:20:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 116ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-f3e5f282",
+      "timestamp": "2026-02-14T20:15:05.133965+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 16:15:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 153ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-bb3defd6",
+      "timestamp": "2026-02-14T20:10:04.219716+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 16:10:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 164ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-0a79840b",
+      "timestamp": "2026-02-14T20:05:04.100042+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 16:05:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 119ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-d1c107c8",
+      "timestamp": "2026-02-14T20:00:32.841272+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 16:00:32 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 2579ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-ad726f73",
+      "timestamp": "2026-02-14T20:00:07.344765+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 16:00:07 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 156ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-aaed826b",
+      "timestamp": "2026-02-14T19:55:03.836257+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 15:55:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 158ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-5f9930c9",
+      "timestamp": "2026-02-14T19:50:03.515631+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 15:50:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 115ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-4a98a140",
+      "timestamp": "2026-02-14T19:45:04.767868+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 15:45:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 140ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-00e08ac5",
+      "timestamp": "2026-02-14T19:40:03.514586+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 15:40:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 149ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-2d781c63",
+      "timestamp": "2026-02-14T19:35:03.651075+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 15:35:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 119ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-d2448fd7",
+      "timestamp": "2026-02-14T19:30:05.562218+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 15:30:05 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 148ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-65815588",
+      "timestamp": "2026-02-14T19:25:03.680552+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 15:25:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 150ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-82c2cd14",
+      "timestamp": "2026-02-14T19:20:03.498289+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 15:20:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 125ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-2781d6b2",
+      "timestamp": "2026-02-14T19:15:05.190703+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 15:15:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 172ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-ba3e7861",
+      "timestamp": "2026-02-14T19:10:04.940796+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 15:10:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 149ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-170641a9",
+      "timestamp": "2026-02-14T19:05:03.534480+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 15:05:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 126ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-0d312286",
+      "timestamp": "2026-02-14T19:00:06.733117+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 15:00:06 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 140ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-3333e32b",
+      "timestamp": "2026-02-14T18:55:04.570496+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 14:55:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 147ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-31cc2d6c",
+      "timestamp": "2026-02-14T18:50:04.147471+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 14:50:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 126ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-5fcf47cf",
+      "timestamp": "2026-02-14T18:45:04.998595+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 14:45:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 150ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-7b35b851",
+      "timestamp": "2026-02-14T18:40:04.615978+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 14:40:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 160ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-0a21ac31",
+      "timestamp": "2026-02-14T18:35:04.028218+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 14:35:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 115ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-705f4c08",
+      "timestamp": "2026-02-14T18:30:04.979255+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 14:30:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 142ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-652c6cc6",
+      "timestamp": "2026-02-14T18:25:03.876432+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 14:25:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 126ms\n   Error: HTTP 502\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-2244b696",
+      "timestamp": "2026-02-14T18:20:03.456809+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 14:20:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 123ms\n   Error: HTTP 403\n   Error: Bad content: 'Blocked request'\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-22633bc4",
+      "timestamp": "2026-02-14T18:15:05.468805+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 14:15:05 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 158ms\n   Error: HTTP 403\n   Error: Bad content: 'Blocked request'\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-50415f66",
+      "timestamp": "2026-02-14T18:10:04.471627+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 14:10:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 159ms\n   Error: HTTP 403\n   Error: Bad content: 'Blocked request'\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-fc95a23a",
+      "timestamp": "2026-02-14T18:05:03.939325+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 14:05:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 120ms\n   Error: HTTP 403\n   Error: Bad content: 'Blocked request'\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-cef47aae",
+      "timestamp": "2026-02-14T18:00:49.506669+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 14:00:49 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 1909ms\n   Error: HTTP 403\n   Error: Bad content detected: 'Blocked request'\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-0bf4c93f",
+      "timestamp": "2026-02-14T18:00:08.067020+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 14:00:07 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 190ms\n   Error: HTTP 403\n   Error: Bad content: 'Blocked request'\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-077cb00b",
+      "timestamp": "2026-02-14T17:55:04.903807+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 13:55:04 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 168ms\n   Error: HTTP 403\n   Error: Bad content: 'Blocked request'\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
+      "id": "alert-e4bfa7b1",
+      "timestamp": "2026-02-14T17:50:03.519946+00:00",
+      "severity": "high",
+      "source": "aegis_browser_monitor",
+      "message": "\ud83d\udea8 AEGIS SYNTHETIC MONITOR \u2014 1 ENDPOINT(S) DOWN\nTime: 2026-02-14 13:50:03 AST\n\n\u274c Bermuda College (https://bermudacollege.rize.bm)\n   Status: down | Response: 153ms\n   Error: HTTP 403\n   Error: Bad content: 'Blocked request'\n\n",
+      "details": {},
+      "acknowledged": false
+    },
+    {
       "id": "alert-089e701d",
       "timestamp": "2026-02-14T17:45:03.080903+00:00",
       "severity": "high",

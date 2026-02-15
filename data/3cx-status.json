@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-02-14 13:15:03",
+  "timestamp": "2026-02-14 23:15:03",
   "results": [
     {
       "name": "Forensica",
@@ -9,7 +9,7 @@
           "check": "reachable",
           "status": "PASS",
           "http_code": 200,
-          "ms": 938
+          "ms": 356
         },
         {
           "check": "ssl",
@@ -25,7 +25,7 @@
           "check": "reachable",
           "status": "PASS",
           "http_code": 200,
-          "ms": 380
+          "ms": 286
         },
         {
           "check": "ssl",
@@ -41,7 +41,7 @@
           "check": "reachable",
           "status": "FAIL",
           "http_code": 400,
-          "ms": 97
+          "ms": 91
         }
       ]
     },
@@ -53,7 +53,7 @@
           "check": "reachable",
           "status": "PASS",
           "http_code": 200,
-          "ms": 326
+          "ms": 252
         },
         {
           "check": "ssl",
@@ -69,7 +69,7 @@
           "check": "reachable",
           "status": "PASS",
           "http_code": 200,
-          "ms": 277
+          "ms": 242
         },
         {
           "check": "ssl",
@@ -85,7 +85,7 @@
           "check": "reachable",
           "status": "PASS",
           "http_code": 200,
-          "ms": 331
+          "ms": 252
         },
         {
           "check": "ssl",
@@ -101,7 +101,7 @@
           "check": "reachable",
           "status": "PASS",
           "http_code": 200,
-          "ms": 336
+          "ms": 232
         },
         {
           "check": "ssl",

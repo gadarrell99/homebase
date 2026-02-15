@@ -5,7 +5,7 @@
       "slug": "helios",
       "url": "https://helios.rize.bm",
       "deadline": "2026-02-17",
-      "days_remaining": 3,
+      "days_remaining": 2,
       "totals": {
         "open": 21,
         "done": 4,
@@ -267,7 +267,7 @@
       "slug": "bps-ai",
       "url": "https://bpsai.rize.bm",
       "deadline": "2026-02-20",
-      "days_remaining": 6,
+      "days_remaining": 5,
       "totals": {
         "open": 0,
         "done": 31,
@@ -590,13 +590,13 @@
       "deadline": null,
       "days_remaining": null,
       "totals": {
-        "open": 48,
-        "done": 1,
+        "open": 45,
+        "done": 4,
         "verified": 0,
         "blocked": 0,
         "total": 49
       },
-      "percent_complete": 2,
+      "percent_complete": 8,
       "p0_status": {
         "open": 6,
         "total": 6
@@ -880,45 +880,6 @@
           "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/30"
         },
         {
-          "id": "GH-29",
-          "gitea_number": 29,
-          "status": "OPEN",
-          "description": "[Homebase] Infra Sheet: add credential reveal toggle",
-          "priority": "P1",
-          "labels": [
-            "priority:medium",
-            "server:245",
-            "synced-from-todo"
-          ],
-          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/29"
-        },
-        {
-          "id": "GH-28",
-          "gitea_number": 28,
-          "status": "OPEN",
-          "description": "[Homebase] Sentinel: integrate pipeline_monitor.py into 30-min checks",
-          "priority": "P1",
-          "labels": [
-            "priority:medium",
-            "server:245",
-            "synced-from-todo"
-          ],
-          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/28"
-        },
-        {
-          "id": "GH-27",
-          "gitea_number": 27,
-          "status": "OPEN",
-          "description": "[Homebase] Fleet page: add live disk/mem metrics from infra-scanner",
-          "priority": "P1",
-          "labels": [
-            "priority:medium",
-            "server:245",
-            "synced-from-todo"
-          ],
-          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/27"
-        },
-        {
           "id": "GH-26",
           "gitea_number": 26,
           "status": "OPEN",
@@ -1094,6 +1055,45 @@
           "priority": "P1",
           "labels": [],
           "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/1"
+        },
+        {
+          "id": "GH-29",
+          "gitea_number": 29,
+          "status": "DONE",
+          "description": "[Homebase] Infra Sheet: add credential reveal toggle",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:245",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/29"
+        },
+        {
+          "id": "GH-28",
+          "gitea_number": 28,
+          "status": "DONE",
+          "description": "[Homebase] Sentinel: integrate pipeline_monitor.py into 30-min checks",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:245",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/28"
+        },
+        {
+          "id": "GH-27",
+          "gitea_number": 27,
+          "status": "DONE",
+          "description": "[Homebase] Fleet page: add live disk/mem metrics from infra-scanner",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:245",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/homebase/issues/27"
         },
         {
           "id": "REQ-H020",
@@ -1414,17 +1414,30 @@
       "days_remaining": null,
       "totals": {
         "open": 39,
-        "done": 4,
+        "done": 5,
         "verified": 0,
         "blocked": 0,
-        "total": 43
+        "total": 44
       },
-      "percent_complete": 9,
+      "percent_complete": 11,
       "p0_status": {
         "open": 0,
         "total": 0
       },
       "requirements": [
+        {
+          "id": "GH-44",
+          "gitea_number": 44,
+          "status": "OPEN",
+          "description": "[Premier-emr] Migrate datetime.utcnow() to timezone-aware datetime.now(UTC)",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/44"
+        },
         {
           "id": "GH-43",
           "gitea_number": 43,
@@ -1791,19 +1804,6 @@
           "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/11"
         },
         {
-          "id": "GH-10",
-          "gitea_number": 10,
-          "status": "OPEN",
-          "description": "[Premier-emr] Unit tests setup",
-          "priority": "P1",
-          "labels": [
-            "priority:medium",
-            "server:246",
-            "synced-from-todo"
-          ],
-          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/10"
-        },
-        {
           "id": "REQ-E009",
           "gitea_number": 9,
           "status": "OPEN",
@@ -1935,6 +1935,19 @@
             "synced-from-todo"
           ],
           "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/37"
+        },
+        {
+          "id": "GH-10",
+          "gitea_number": 10,
+          "status": "DONE",
+          "description": "[Premier-emr] Unit tests setup",
+          "priority": "P1",
+          "labels": [
+            "priority:medium",
+            "server:246",
+            "synced-from-todo"
+          ],
+          "gitea_url": "https://gitea.rize.bm/rize/premier-emr/issues/10"
         }
       ],
       "source": "gitea"
@@ -4692,9 +4705,9 @@
       "source": "gitea"
     }
   ],
-  "last_refresh": "2026-02-14T17:48:05.418109+00:00",
+  "last_refresh": "2026-02-15T03:48:05.252730+00:00",
   "source": "gitea",
   "project_count": 12,
-  "total_requirements": 362,
-  "total_open": 322
+  "total_requirements": 363,
+  "total_open": 319
 }

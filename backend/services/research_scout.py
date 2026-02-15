@@ -142,13 +142,23 @@ def save_item(source, title, url, summary, relevance_score):
     db.close()
     return item_id
 
-def get_items(status='new', limit=50):
-    """Get research items by status"""
+def get_items(status='new', limit=50, date_from=None, date_to=None):
+    """Get research items by status, optionally filtered by date range"""
     db = get_db()
-    rows = db.execute(
-        'SELECT * FROM research_items WHERE status = ? ORDER BY relevance_score DESC, discovered_at DESC LIMIT ?',
-        (status, limit)
-    ).fetchall()
+    query = 'SELECT * FROM research_items WHERE status = ?'
+    params = [status]
+    
+    if date_from:
+        query += ' AND discovered_at >= ?'
+        params.append(date_from)
+    if date_to:
+        query += ' AND discovered_at <= ?'
+        params.append(date_to + ' 23:59:59' if len(date_to) == 10 else date_to)
+    
+    query += ' ORDER BY relevance_score DESC, discovered_at DESC LIMIT ?'
+    params.append(limit)
+    
+    rows = db.execute(query, params).fetchall()
     db.close()
     return [dict(r) for r in rows]
 
