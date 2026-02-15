@@ -1,5 +1,10 @@
 # Homebase Changelog
 
+## v1.5.0 (2026-02-15)
+- **AUDIT RESULTS API**: POST/GET /api/audit/results for Cortex fleet audit integration
+- **RESEARCH SCOUT DATE FILTER**: From/To date range filtering in UI and API
+- **AGENT HEARTBEAT DISPLAY**: Real-time heartbeat status on Agents page with 30s auto-refresh
+
 ## v1.4.0 (2026-02-09)
 - **PROJECT DOCS VIEWER**: View project README/TODO/CHANGELOG from Homebase
 - NEW: GET /api/projects/{id}/docs endpoint for direct docs access

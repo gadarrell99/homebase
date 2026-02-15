@@ -3,9 +3,9 @@
 ## In Progress
 
 ## Backlog
-- [ ] Agent dashboard pages: add real-time heartbeat display
-- [ ] Research Scout: filter by date range
-- [ ] Audit results endpoint: POST /api/audit/results for Cortex
+- [x] Agent dashboard pages: add real-time heartbeat display (2026-02-15)
+- [x] Research Scout: filter by date range (2026-02-15)
+- [x] Audit results endpoint: POST /api/audit/results for Cortex (2026-02-15)
 - [ ] Mindmap: auto-generate from infrastructure.json agents
 - [ ] Settings: add maintenance window scheduling
 - [ ] Backups: add one-click backup trigger
